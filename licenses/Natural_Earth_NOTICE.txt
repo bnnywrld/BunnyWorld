@@ -1,0 +1,12 @@
+Natural Earth map units and populated-place coordinates
+https://www.naturalearthdata.com/
+https://github.com/nvkelso/natural-earth-vector
+
+Natural Earth data is public domain. No permission is needed to use it.
+The bundled inputs retain geographic coordinate values and selected properties;
+unused descriptive metadata was removed. The game's scenario ownership and
+population come from the supplied Millennium Dawn: Bunny scenario, not Natural
+Earth's contemporary demographic estimates.
+
+Layers: ne_10m_admin_0_map_units; ne_10m_populated_places_simple; ne_10m_admin_1_states_provinces.
+Retrieved 13 October 2026. See tools/cartography for offline build inputs.

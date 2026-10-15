@@ -1,0 +1,19 @@
+{
+  "source": "ESA CCI Land Cover v2.0.7, year 2000",
+  "source_resolution_m": 300,
+  "prepared_resolution": [
+    8192,
+    4096
+  ],
+  "access": "Official UCL/ESA viewer WMS; classification colours decoded using its published legend; spatially sampled for globe rendering",
+  "urls": [
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C0%2C-90%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-90%2C0%2C0%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=0%2C0%2C90%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=90%2C0%2C180%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C-90%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-90%2C-90%2C0%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=0%2C-90%2C90%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=90%2C-90%2C180%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
+  ]
+}

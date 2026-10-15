@@ -1,0 +1,10 @@
+{
+  "border_band": "Finite inward bands at international borders and ocean coasts, narrowed on small country/island components; no interior wash or lake bands",
+  "urban_ground": "Four broad blocks in ~15 km world-projected tile; width calibrated to displayed models",
+  "trial_channels": [
+    "Amazonas",
+    "Nile"
+  ],
+  "riverbed_pixels": 1313,
+  "aland_new_coastal_water_pixels": 0
+}

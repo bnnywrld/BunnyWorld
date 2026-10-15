@@ -1,0 +1,884 @@
+{
+  "resolution": [
+    16384,
+    8192
+  ],
+  "geographic_divisions": 4530,
+  "name_matches": 1036,
+  "custom_local_splits": [
+    {
+      "division": "Hovedstaden",
+      "region_ids": [
+        4,
+        3
+      ]
+    },
+    {
+      "division": "Sja\u00e6lland",
+      "region_ids": [
+        4,
+        5
+      ]
+    },
+    {
+      "division": "Nord-Kivu",
+      "region_ids": [
+        309,
+        20,
+        311
+      ]
+    },
+    {
+      "division": "Al Quassim",
+      "region_ids": [
+        176,
+        174
+      ]
+    },
+    {
+      "division": "Timbuktu",
+      "region_ids": [
+        366,
+        187
+      ]
+    },
+    {
+      "division": "Aleppo",
+      "region_ids": [
+        566,
+        191,
+        575
+      ]
+    },
+    {
+      "division": "Abyan",
+      "region_ids": [
+        198,
+        200
+      ]
+    },
+    {
+      "division": "Nugaal",
+      "region_ids": [
+        928,
+        238
+      ]
+    },
+    {
+      "division": "Coast",
+      "region_ids": [
+        245,
+        241
+      ]
+    },
+    {
+      "division": "Kusini-Pemba",
+      "region_ids": [
+        253,
+        257
+      ]
+    },
+    {
+      "division": "Northern Cape",
+      "region_ids": [
+        278,
+        276
+      ]
+    },
+    {
+      "division": "Masvingo",
+      "region_ids": [
+        290,
+        291
+      ]
+    },
+    {
+      "division": "Katanga",
+      "region_ids": [
+        306,
+        307
+      ]
+    },
+    {
+      "division": "Orientale",
+      "region_ids": [
+        312,
+        314
+      ]
+    },
+    {
+      "division": "Odessa",
+      "region_ids": [
+        695,
+        333
+      ]
+    },
+    {
+      "division": "Souss - Massa - Dra\u00e2",
+      "region_ids": [
+        376,
+        378
+      ]
+    },
+    {
+      "division": "Ajdabiya",
+      "region_ids": [
+        579,
+        397
+      ]
+    },
+    {
+      "division": "Punjab",
+      "region_ids": [
+        573,
+        417,
+        563
+      ]
+    },
+    {
+      "division": "F.A.T.A.",
+      "region_ids": [
+        594,
+        419
+      ]
+    },
+    {
+      "division": "Ladakh",
+      "region_ids": [
+        993,
+        428
+      ]
+    },
+    {
+      "division": "Rajasthan",
+      "region_ids": [
+        984,
+        432
+      ]
+    },
+    {
+      "division": "Beijing",
+      "region_ids": [
+        547,
+        434
+      ]
+    },
+    {
+      "division": "Shandong",
+      "region_ids": [
+        544,
+        435
+      ]
+    },
+    {
+      "division": "Gujarat",
+      "region_ids": [
+        987,
+        436
+      ]
+    },
+    {
+      "division": "Delhi",
+      "region_ids": [
+        431,
+        440
+      ]
+    },
+    {
+      "division": "Uttar Pradesh",
+      "region_ids": [
+        444,
+        445
+      ]
+    },
+    {
+      "division": "Sikkim",
+      "region_ids": [
+        982,
+        455
+      ]
+    },
+    {
+      "division": "Odisha",
+      "region_ids": [
+        456,
+        459,
+        989
+      ]
+    },
+    {
+      "division": "Karnataka",
+      "region_ids": [
+        467,
+        461
+      ]
+    },
+    {
+      "division": "Tamil Nadu",
+      "region_ids": [
+        462,
+        464
+      ]
+    },
+    {
+      "division": "Maharashtra",
+      "region_ids": [
+        469,
+        470
+      ]
+    },
+    {
+      "division": "Ash Sharqiyah South",
+      "region_ids": [
+        183,
+        486
+      ]
+    },
+    {
+      "division": "Taitung",
+      "region_ids": [
+        599,
+        491
+      ]
+    },
+    {
+      "division": "Sagaing",
+      "region_ids": [
+        505,
+        497
+      ]
+    },
+    {
+      "division": "Shan",
+      "region_ids": [
+        930,
+        498,
+        931
+      ]
+    },
+    {
+      "division": "Chin",
+      "region_ids": [
+        499,
+        500
+      ]
+    },
+    {
+      "division": "Paracel Islands",
+      "region_ids": [
+        813,
+        526
+      ]
+    },
+    {
+      "division": "Guangdong",
+      "region_ids": [
+        534,
+        532
+      ]
+    },
+    {
+      "division": "Jiangsu",
+      "region_ids": [
+        541,
+        536
+      ]
+    },
+    {
+      "division": "Kosrae",
+      "region_ids": [
+        821,
+        546,
+        1117
+      ]
+    },
+    {
+      "division": "Yap",
+      "region_ids": [
+        819,
+        551,
+        1116
+      ]
+    },
+    {
+      "division": "Ningxia",
+      "region_ids": [
+        1072,
+        559
+      ]
+    },
+    {
+      "division": "Homs (Hims)",
+      "region_ids": [
+        188,
+        561
+      ]
+    },
+    {
+      "division": "North Darfur",
+      "region_ids": [
+        224,
+        576
+      ]
+    },
+    {
+      "division": "Sichuan",
+      "region_ids": [
+        586,
+        585
+      ]
+    },
+    {
+      "division": "Aswan",
+      "region_ids": [
+        1198,
+        590
+      ]
+    },
+    {
+      "division": "Xinjiang",
+      "region_ids": [
+        592,
+        591
+      ]
+    },
+    {
+      "division": "Shabeellaha Hoose",
+      "region_ids": [
+        240,
+        593,
+        1223,
+        1224
+      ]
+    },
+    {
+      "division": "Northern",
+      "region_ids": [
+        221,
+        614
+      ]
+    },
+    {
+      "division": "Yamaguchi",
+      "region_ids": [
+        611,
+        619
+      ]
+    },
+    {
+      "division": "Kagoshima",
+      "region_ids": [
+        609,
+        620
+      ]
+    },
+    {
+      "division": "Miyazaki",
+      "region_ids": [
+        609,
+        621
+      ]
+    },
+    {
+      "division": "Maluku Utara",
+      "region_ids": [
+        639,
+        634,
+        635
+      ]
+    },
+    {
+      "division": "Ninawa",
+      "region_ids": [
+        166,
+        641
+      ]
+    },
+    {
+      "division": "Ingush",
+      "region_ids": [
+        1126,
+        673
+      ]
+    },
+    {
+      "division": "Buryat",
+      "region_ids": [
+        1070,
+        686
+      ]
+    },
+    {
+      "division": "Sakha (Yakutia)",
+      "region_ids": [
+        689,
+        688
+      ]
+    },
+    {
+      "division": "Sakhalin",
+      "region_ids": [
+        691,
+        690,
+        1168
+      ]
+    },
+    {
+      "division": "Donets'k",
+      "region_ids": [
+        1030,
+        693
+      ]
+    },
+    {
+      "division": "Mtskheta-Mtianeti",
+      "region_ids": [
+        707,
+        705
+      ]
+    },
+    {
+      "division": "Kakheti",
+      "region_ids": [
+        707,
+        708
+      ]
+    },
+    {
+      "division": "Papua",
+      "region_ids": [
+        636,
+        734,
+        1185,
+        1226
+      ]
+    },
+    {
+      "division": "Ninh Thu\u1eadn",
+      "region_ids": [
+        519,
+        801
+      ]
+    },
+    {
+      "division": "Labuan",
+      "region_ids": [
+        525,
+        816
+      ]
+    },
+    {
+      "division": "Savoie",
+      "region_ids": [
+        62,
+        857
+      ]
+    },
+    {
+      "division": "Northern Bahr el Ghazal",
+      "region_ids": [
+        226,
+        923
+      ]
+    },
+    {
+      "division": "Eastern Equatoria",
+      "region_ids": [
+        227,
+        925
+      ]
+    },
+    {
+      "division": "Eastern",
+      "region_ids": [
+        242,
+        926
+      ]
+    },
+    {
+      "division": "Eastern Darfur",
+      "region_ids": [
+        224,
+        927
+      ]
+    },
+    {
+      "division": "Kalimantan Barat",
+      "region_ids": [
+        640,
+        936
+      ]
+    },
+    {
+      "division": "Somaliland",
+      "region_ids": [
+        237,
+        937,
+        938
+      ]
+    },
+    {
+      "division": "Okinawa",
+      "region_ids": [
+        618,
+        939
+      ]
+    },
+    {
+      "division": "Coquimbo",
+      "region_ids": [
+        468,
+        942
+      ]
+    },
+    {
+      "division": "Alpes-Maritimes",
+      "region_ids": [
+        1000,
+        946
+      ]
+    },
+    {
+      "division": "Forl\u00ec-Cesena",
+      "region_ids": [
+        265,
+        948
+      ]
+    },
+    {
+      "division": "H\u00e9rault",
+      "region_ids": [
+        61,
+        961
+      ]
+    },
+    {
+      "division": "Bayern",
+      "region_ids": [
+        43,
+        964
+      ]
+    },
+    {
+      "division": "Liege",
+      "region_ids": [
+        52,
+        965
+      ]
+    },
+    {
+      "division": "Nordrhein-Westfalen",
+      "region_ids": [
+        39,
+        966
+      ]
+    },
+    {
+      "division": "Hiiraan",
+      "region_ids": [
+        240,
+        975
+      ]
+    },
+    {
+      "division": "Madhya Pradesh",
+      "region_ids": [
+        438,
+        985,
+        986
+      ]
+    },
+    {
+      "division": "Telangana",
+      "region_ids": [
+        458,
+        990
+      ]
+    },
+    {
+      "division": "Ar Raqqah",
+      "region_ids": [
+        192,
+        994
+      ]
+    },
+    {
+      "division": "Central River",
+      "region_ids": [
+        365,
+        1002
+      ]
+    },
+    {
+      "division": "Wake Atoll",
+      "region_ids": [
+        823,
+        1010
+      ]
+    },
+    {
+      "division": "Pingtung",
+      "region_ids": [
+        599,
+        1015
+      ]
+    },
+    {
+      "division": "Para\u00edba",
+      "region_ids": [
+        1028,
+        1029
+      ]
+    },
+    {
+      "division": "Kvemo Kartli",
+      "region_ids": [
+        707,
+        1033
+      ]
+    },
+    {
+      "division": "Ardebil",
+      "region_ids": [
+        407,
+        1039
+      ]
+    },
+    {
+      "division": "Niassa",
+      "region_ids": [
+        1050,
+        1049
+      ]
+    },
+    {
+      "division": "Una-Sana",
+      "region_ids": [
+        1054,
+        1051
+      ]
+    },
+    {
+      "division": "Novosibirsk",
+      "region_ids": [
+        680,
+        1064
+      ]
+    },
+    {
+      "division": "Kemerovo",
+      "region_ids": [
+        1066,
+        1065
+      ]
+    },
+    {
+      "division": "Yevrey",
+      "region_ids": [
+        687,
+        1068
+      ]
+    },
+    {
+      "division": "Luhans'k",
+      "region_ids": [
+        1030,
+        1075,
+        1076
+      ]
+    },
+    {
+      "division": "Ta`izz",
+      "region_ids": [
+        197,
+        1077
+      ]
+    },
+    {
+      "division": "At-Ta'mim",
+      "region_ids": [
+        165,
+        1078
+      ]
+    },
+    {
+      "division": "Liaoning",
+      "region_ids": [
+        552,
+        1095
+      ]
+    },
+    {
+      "division": "Heilongjiang",
+      "region_ids": [
+        555,
+        1096,
+        1097
+      ]
+    },
+    {
+      "division": "Incheon",
+      "region_ids": [
+        604,
+        1099
+      ]
+    },
+    {
+      "division": "Al Kufrah",
+      "region_ids": [
+        1100,
+        1101
+      ]
+    },
+    {
+      "division": "Al Isma`iliyah",
+      "region_ids": [
+        214,
+        1102
+      ]
+    },
+    {
+      "division": "Hadramawt",
+      "region_ids": [
+        199,
+        1105
+      ]
+    },
+    {
+      "division": "Hormozgan",
+      "region_ids": [
+        978,
+        1119
+      ]
+    },
+    {
+      "division": "Najran",
+      "region_ids": [
+        1081,
+        1120
+      ]
+    },
+    {
+      "division": "Mariy-El",
+      "region_ids": [
+        1134,
+        1135
+      ]
+    },
+    {
+      "division": "South Khorasan",
+      "region_ids": [
+        402,
+        1151
+      ]
+    },
+    {
+      "division": "Nimroz",
+      "region_ids": [
+        415,
+        1152
+      ]
+    },
+    {
+      "division": "New Brunswick",
+      "region_ids": [
+        761,
+        1159
+      ]
+    },
+    {
+      "division": "Qu\u00e9bec",
+      "region_ids": [
+        763,
+        1160
+      ]
+    },
+    {
+      "division": "Gao",
+      "region_ids": [
+        1164,
+        1165,
+        1167
+      ]
+    },
+    {
+      "division": "F.C.T.",
+      "region_ids": [
+        422,
+        1171
+      ]
+    },
+    {
+      "division": "Moskva",
+      "region_ids": [
+        652,
+        1189
+      ]
+    },
+    {
+      "division": "Murzuq",
+      "region_ids": [
+        920,
+        1202
+      ]
+    },
+    {
+      "division": "Ghat",
+      "region_ids": [
+        918,
+        1204
+      ]
+    },
+    {
+      "division": "Paktika",
+      "region_ids": [
+        414,
+        1207
+      ]
+    },
+    {
+      "division": "Kandahar",
+      "region_ids": [
+        412,
+        1208
+      ]
+    },
+    {
+      "division": "Banaadir",
+      "region_ids": [
+        240,
+        1222
+      ]
+    },
+    {
+      "division": "Northern Samar",
+      "region_ids": [
+        737,
+        1232
+      ]
+    },
+    {
+      "division": "Surigao del Sur",
+      "region_ids": [
+        738,
+        1235
+      ]
+    }
+  ],
+  "tiny_footprints": [
+    424,
+    488,
+    624,
+    824,
+    827,
+    1241,
+    51,
+    929
+  ],
+  "additional_footprints": [],
+  "Crimea_region": 669,
+  "Sevastopol_region": 1112,
+  "Crimea_owner": "UKR",
+  "population": 6144737528,
+  "limits": "Natural Earth admin-1 divisions merged to MD region IDs; custom regions use local clipped splits and tiny bases/islands use small footprints"
+}

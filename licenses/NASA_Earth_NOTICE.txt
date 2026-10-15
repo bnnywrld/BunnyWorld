@@ -1,0 +1,14 @@
+NASA Earth Observatory Blue Marble Next Generation, July 2004 daytime topography.
+Reto Stockli and Robert Simmon, using MODIS imagery/topographic shading.
+https://science.nasa.gov/earth/earth-observatory/blue-marble-next-generation/base-topography/
+
+Eight 21600x21600 500m quadrants: A1, B1, C1, D1, A2, B2, C2, D2.
+Official URL pattern (replace A1):
+https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography/july/world.topo.200407.3x21600x21600.A1.jpg
+
+0.1.6 effective detail 65536x32768 (~611.5m equatorial); 2048 JPEG tiles,
+1024px at quality 88. Overview 8192x4096, S3TC/mipmapped. Prepared assets
+included. Original quadrants can be downloaded to regenerate via build_terrain_016.py.
+Static natural daytime reference; imagery year does not determine game control.
+Use guidance: https://www.nasa.gov/nasa-brand-center/images-and-media/
+NASA credit applies to geographic imagery; no NASA endorsement implied.

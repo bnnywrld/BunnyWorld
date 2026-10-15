@@ -1,0 +1,33 @@
+{
+  "version": "0.1.9",
+  "country_repaired_pixels": {
+    "AFG": 94,
+    "AGL": 202,
+    "AUS": 3,
+    "AZE": 22,
+    "EGY": 288,
+    "IRQ": 1,
+    "ITA": 25,
+    "MAU": 322,
+    "NEP": 61,
+    "SOV": 501
+  },
+  "provinces": {
+    "count": 15350,
+    "city_provinces": 1718,
+    "target_rural_area_km2": 10000.0,
+    "encoding_limited_states": [
+      "Western Australia"
+    ],
+    "coincident_city_centers": [
+      "Adapazar\u0131",
+      "Kansas City"
+    ]
+  },
+  "oceans": {
+    "zones": 118,
+    "excluded_inland_water_pixels": 129435,
+    "central_arctic_min_latitude": 82,
+    "coastal_arctic_min_latitude": 70
+  }
+}

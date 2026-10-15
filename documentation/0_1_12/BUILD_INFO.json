@@ -1,0 +1,172 @@
+{
+  "version": "0.1.12",
+  "engine": "Godot 4.5.1 stable",
+  "scenario_id": "bunny_world_2000_0_1_12_r2",
+  "save_schema": 8,
+  "new_campaign_required": true,
+  "counts": {
+    "countries": 223,
+    "states": 1235,
+    "provinces": 40031,
+    "urban_provinces": 2220,
+    "city_metropolitan_groups": 1557,
+    "landmarks": 8,
+    "ocean_zones": 118,
+    "population": 6144737528,
+    "cities_placed": 1735
+  },
+  "starting_values": {
+    "political_power": 100,
+    "stability": 0.65,
+    "war_support": 0.5
+  },
+  "scenery_limits": {
+    "buildings": 384,
+    "clusters": 32,
+    "whole_metropolitan_buildings": 40,
+    "fade_start": 1.18,
+    "fade_full": 1.08,
+    "growth_enabled": false
+  },
+  "population_method": "Historical 2000 GHSL resident grid reconciled to supplied country totals; geographic state totals rebuilt; whole urban province counts include countryside; one remaining pool per state. Modelled estimates, not exact municipal censuses.",
+  "country_totals_preserved": true,
+  "province_geometry_preserved": false,
+  "native_windows_tested": false,
+  "release_files": {
+    "BunnyWorld.exe": {
+      "bytes": 96621056,
+      "sha256": "8c27275bffac96dc7e3b4d345397a8d40e85aae7af5bf863fcfeba344db29e17"
+    },
+    "BunnyWorld.pck": {
+      "bytes": 297547820,
+      "sha256": "c733eb956124bfbf5625a738fea712be9189ceea9d0b2887ee02d5ca96dc400b"
+    }
+  },
+  "source_assets": {
+    "assets/region_ids_0.png": {
+      "bytes": 1155951,
+      "sha256": "9c78d79db3d8bfc57bb63828958764732cf3a8f6df85014c68f10c3fb159a5d8"
+    },
+    "assets/region_ids_1.png": {
+      "bytes": 1986045,
+      "sha256": "7aaaae057e9be13a57c35834ec3135829e37039d5a66bff5effc37b9bb7ebdeb"
+    },
+    "assets/region_ids_2.png": {
+      "bytes": 531182,
+      "sha256": "e61dab79981625849caea789d9617dffbbee994b849d864c00b7666d433ea26c"
+    },
+    "assets/region_ids_3.png": {
+      "bytes": 664665,
+      "sha256": "0ef3fcbb1a53c6ccf7f74c5590075b51bcdea6c25c8ec2c2d881ae64f78ea873"
+    },
+    "assets/relief_data.bin": {
+      "bytes": 67108864,
+      "sha256": "2b9aed295c517bb986f22a828dffb8378c5969ef54dbd30e6a6029275e423180"
+    },
+    "assets/relief_data.png": {
+      "bytes": 16315184,
+      "sha256": "6fa684c33beb86aff342f95c05f826a89f9022e1a8ad5e1fb27b1e0bbf2fd3f9"
+    },
+    "data/cities.json": {
+      "bytes": 488776,
+      "sha256": "18f520efe16cfb410843b5d8d9117cfd5b231838a4103f2bfbc130619af0de49"
+    },
+    "data/microstate_geometry.json": {
+      "bytes": 4521,
+      "sha256": "90d1673ffd181b3d382b9714bad3a9e51caaeb434e24fd9b30ad37a553a2bddc"
+    },
+    "data/provinces.json": {
+      "bytes": 9977908,
+      "sha256": "e6a631ddd6824812c8c7dffcec87967a25c9d290bd73fe4e82d00f20e8759952"
+    },
+    "data/relief.json": {
+      "bytes": 954,
+      "sha256": "7fc23f02624c43e18800cdca1066fba5b4df502b063dc75aed42427b17e01602"
+    },
+    "data/urban_population.json": {
+      "bytes": 958480,
+      "sha256": "38558974357f68cdde22c99db8acdf6d0e79dcf6dc6142c3f5dff05cf82466a0"
+    },
+    "data/urban_scenery.json": {
+      "bytes": 918979,
+      "sha256": "eaece8eb3c40fb7e7b13fff4cc5f32dfe2a58a915e06320fe33929a6de976a61"
+    },
+    "data/world.json": {
+      "bytes": 1373259,
+      "sha256": "18902215499f587f93babc02a3557ee15736d9bd1ad9a8580d1f1a1c7faac6e8"
+    },
+    "scripts/main.gd": {
+      "bytes": 119671,
+      "sha256": "d9f71e3e0e268e687e903d86e70f1b8dba86e05590c7eb22ccb98c188ca50caf"
+    },
+    "scripts/microstate.gdshaderinc": {
+      "bytes": 1137,
+      "sha256": "6adce2c951bda96e668a9e45e2479a1233810420b939e9cdc37449dfeea5cff8"
+    },
+    "scripts/place_catalog.gd": {
+      "bytes": 4959,
+      "sha256": "a4716c3421a8cbf64d8a243c7ddd850bf973109db6cdabd99156dd90f1dae11a"
+    },
+    "scripts/planet.gdshader": {
+      "bytes": 7998,
+      "sha256": "df4bf8f677bb5931b30358ee3da55e4891c8b2040930c18f71521de9ba86fbe6"
+    },
+    "scripts/urban_scenery.gd": {
+      "bytes": 11574,
+      "sha256": "c02f102aca46edc4ea930b0d3ce6b09d132c5339110c579e4ebdb7674ebdd553"
+    },
+    "scripts/urban_scenery.gdshader": {
+      "bytes": 723,
+      "sha256": "196a4279d247acfc2a4fc2c6003078db325f2f3b382f599526ccec2e5ae1e598"
+    },
+    "scripts/world_state.gd": {
+      "bytes": 19905,
+      "sha256": "6bcd73a0d1c2dbe26f107d86ab3612e240c951e8f56b6e8384fe49b9c302eed1"
+    }
+  },
+  "validation": "Source accounting, placement, search, geometry, model, relations, rights and cache tests pass. Exact final exported Windows PCK runs UI smoke and ten visual/settings checks under Linux Godot/Mesa Compatibility. Native Windows execution remains untested.",
+  "built_at_utc": "2026-10-14T12:38:46.915135+00:00",
+  "revision": 2,
+  "province_ids_preserved": true,
+  "territorial_rights_preserved": true,
+  "geometry_changes": "Vatican footprint corrected with a subpixel reference polygon; coarse patch restored to Italy. Shore elevation tapered; geographical coast/lake mask retained.",
+  "microstate_geometry": {
+    "previous_atlas_pixels": 25,
+    "identity_pixels": 1,
+    "nominal_area_km2": 0.44,
+    "reference_vertices": 60,
+    "restored_host_provinces": [
+      821,
+      826
+    ],
+    "province_count": 40031,
+    "state_count": 1235
+  },
+  "shore_relief": {
+    "source": "NOAA NCEI ETOPO 2022 ice-surface elevation; 60 arc-second source sampled every third cell through NOAA ERDDAP.",
+    "doi": "10.25921/fd45-gt74",
+    "source_url": "https://oceanwatch.pifsc.noaa.gov/erddap/griddap/ETOPO_2022_v1_60s.nc?z[0:3:10799][0:3:21599]",
+    "prepared_resolution": [
+      8192,
+      4096
+    ],
+    "source_sample_arc_minutes": 3,
+    "radial_displacement_scale": 0.008,
+    "land_lift": 1.25e-05,
+    "height_exaggeration": 4.0,
+    "maximum_displacement": 0.004605813883244991,
+    "maximum_source_meters": 7316.0,
+    "cpu_binary_bytes": 67108864,
+    "land_geometry": "Lower gentle land lift and smooth shoreline taper; accepted geographic land/lake mask retained.",
+    "prepared_source_sha256": "2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5",
+    "land_lift_meters": 79.6375,
+    "coastal_feather": "Smoothstep from half a prepared pixel to 4.5 pixels inland; water retains zero displacement.",
+    "revision": "0.1.12-r2"
+  },
+  "population_totals": {
+    "global": 6144737528,
+    "urban": 2869634552,
+    "shared": 3275102976,
+    "all_country_totals_preserved": true
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "countries": 223,
+  "regions": 1250,
+  "population": 6144737528,
+  "organizations": {
+    "EU": 15,
+    "NATO": 19,
+    "ASEAN": 10,
+    "ECOWAS": 15,
+    "WTO": 130,
+    "G7": 7,
+    "CSTO": 6
+  },
+  "diagnostics": [],
+  "limits": [
+    "No startup scripted effects are executed.",
+    "Population is the starting history seed.",
+    "Natural Earth admin-1 divisions merged to MD region IDs; custom regions use local clipped splits and tiny bases/islands use small footprints",
+    "Economy/AI/voting/projects are not simulated."
+  ]
+}

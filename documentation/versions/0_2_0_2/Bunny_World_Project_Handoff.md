@@ -1,0 +1,19 @@
+# BunnyWorld 0.2.0.2 — current project handoff
+
+Continue from the 0.2.0.2 prepared source archive accompanying this document. The baseline was the user's accepted 0.2.0.1 standalone source, SHA-256 b0723ff5b1f7ed2d3a65dd00d8cb14b4133cc67234706e781dc3fda20366111f. Original project attachments labelled 0.1 are historical and must not replace this source.
+
+This patch implements the approved detailed terrain, stronger relief, independent coast/Antarctic coverage, dry-biome colours, irregular Millennium Dawn province geography, wider/more rivers and expanded spaced city scenery. See RELEASE_NOTES.md for exact counts and tradeoffs, DEVELOPMENT.md for regeneration, DATA_SOURCES.md for provenance, TEST_RESULTS.md for validation and BUILD_INFO.json for build identity.
+
+Important preferences: Windows 10/11 standalone ZIP; extract and run a uniquely versioned EXE. Budget approximately 500 MB runtime. Every version starts a fresh campaign; do not add old-save migration without an explicit request. Keep same-version save/load. Population growth and annual building expansion remain postponed. No source paragraphs in normal demographic panels. Keep national/State accounts, controls, rights, finances, World Ledger and tension foundation.
+
+Province identities were intentionally rebuilt. Accepted country/State ownership, cores, claims, building values and population totals are unchanged. The new source map is registered to the accepted State mask, including local/polar/coastal adjustments; it is not a direct spherical wrap or an exact copy of every source pixel. Seventeen tiny reference land definitions do not survive registration. Cities and district/metropolitan population groups follow the new provinces; countryside in an urban province belongs to that city group, and non-city provinces share their State pool.
+
+Runtime terrain uses one fixed, eight-layer compressed texture array and one reusable 27,985-vertex detail grid. Balanced/High use 4096 materials, Light 2048; texture quality changes on restart. All city meshes prepare at startup and remain cached. Camera travel must never decode geographic imagery, replace texture slots or rebuild terrain/city meshes. Scenery growth remains false.
+
+Relief uses scale .016 and exaggeration 8, while the base land lift stays about 80 m. GPU and CPU share exactly the same height channels. Independent physical land coverage restores Antarctic terrain without invented political ownership. Preserve tiny enclaves and the Suez 69↔100, Panama 53↔107, Bosporus 240↔241 and Dardanelles 241↔214 links. Inland lakes stay excluded from sea zones.
+
+City layouts are offline street blocks with displayed-footprint spacing, landmark grounds and river clearance. Models retain the enlarged height style, with narrower landmark horizontal proportions. Keep labels on cities; landmark search remains available. Tests compare exact State/country invariants against the accepted baseline and independently check building/landmark/river geometry.
+
+Use the clean official Godot 4.5.1 Windows template, never a prior exported game EXE. Embed the current pack. Validate the PE pack section/footer, every embedded file digest, actual loaded version, full scene and downloaded final bytes. Automated scene checks use Linux Godot/Mesa; native Windows performance still requires the user's new-patch test.
+
+Next work should respond to the user's test of 0.2.0.2. Do not start a different version or simulation system just because it appears in historical roadmap files. Remaining limitations: sampled macro geography/elevation, representative rather than geographically unique surface photos, approximate population/city boundaries, regional arid tint rather than a climate simulation, simplified river/strait courses, and deferred growth/naval-access mechanics.

@@ -1,0 +1,15 @@
+European Commission Joint Research Centre — GHSL, GHS-POP R2023A
+Schiavina, Marcello; Freire, Sergio; Carioli, Alessandra; MacManus, Kytt (2023).
+GHS-POP R2023A — GHS population grid multitemporal (1975–2030).
+DOI: 10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE
+https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php
+2000 epoch, EPSG:4326, 30 arc-seconds, V1-0.
+
+Reuse is authorised with acknowledgment of the source (European Commission GHSL download conditions).
+Province aggregation and country-total reconciliation are BunnyWorld derived estimates; do not imply Commission endorsement or exact municipal census boundaries.
+The original raster is a build input and is not distributed in the game. The source includes prepared per-province aggregates, checksum/provenance and the reproducible preparation script.
+
+Landmark geometry is original simplified procedural geometry written for BunnyWorld. No external 3D models or monument photographs are used. Coordinates and dimensions are approximate; display scale is intentionally exaggerated.
+Natural Earth point names/locations remain public-domain cartographic input. Metropolitan/district naming anchors are curated descriptive coverage aids and are not official boundary geometry.
+
+Modern country labels on city references are resolved to the scenario’s actual starting province controller before grouping residents. Landmark national associations retain their monument country even where enlarged microstate control footprints overlap their coordinates.

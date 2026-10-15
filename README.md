@@ -1,13 +1,15 @@
-> **Git checkout:** see [SOURCE_CONTROL.md](SOURCE_CONTROL.md) to restore the external map/texture assets before opening Godot. Normal Windows ZIP testing needs no setup.
+> **Git working baseline: 0.2.0.5.** After a fresh checkout, run `python tools/restore_repository_assets.py` once, then open `project.godot` in Godot 4.5.1. All prepared assets are included; see [SOURCE_CONTROL.md](SOURCE_CONTROL.md). Windows ZIP testing needs no setup.
 
-# Bunny World 0.2.0.4
+# Bunny World 0.2.0.5
 
-Windows 10/11 x64 standalone. Extract the complete ZIP into a fresh folder and run **BunnyWorld_0_2_0_4.exe**. The complete game is embedded; no editor or installer is needed. Start a fresh campaign.
+Windows 10/11 x64 standalone. Extract into a fresh folder and run **BunnyWorld_0_2_0_5.exe**. No editor, installer or separate game pack is required. Start a fresh campaign.
 
-This release refines the interface on the complete 0.2.0.3 terrain/world baseline. National stats have individual boxes above the flag and larger aligned navigation buttons. The name/playing-as text and bottom bar are removed. State and province details open in a narrow drawer to the right of diplomacy (or beside your own country panel). Close it with ×. Hover tooltips fit their text, search uses a magnifying glass, clock controls are compact, and capital labels appear at a closer zoom.
+The globe now fills the window, including wide/maximized layouts. Compact control boxes remain attached to the top edge: national stats and navigation on the left; clock/session controls on the right; map mode and search together below. Large top-bar numbers are abbreviated; hover for exact values.
 
-Controls: right-drag to rotate; mouse wheel to zoom; left click to inspect; Space to pause/resume; 1–4 for speed; Ctrl+F or the magnifying glass to find places; F to focus; F5/F9 to save/load; F11 fullscreen; Escape menu. Click your flag for country control. Planned national mechanics remain disabled as before.
+Country panels show outlook followed by one national demographics pie with Age / Religion / Education / Activity selectors. Selecting a State opens a wider, half-height territory drawer beside the country panel: right of your own panel, left of foreign diplomacy. Its chart covers the selected State. Click the attached arrow to slide it behind the country panel; click the remaining handle to reopen it. Scroll for province details, cores and claims.
 
-Graphics quality selects a fixed Light 2048 or Balanced/High 4096 material library at launch. Travel reuses resident textures and prepared scenery. Initial loading can take time. No old-save migration is provided.
+Economy and Construction replace Budget and National projects. Production, Diplomacy, Trade, Military, Intelligence and Space Exploration appear as disabled Planned buttons; this patch does not add their simulation systems.
 
-See RELEASE_NOTES.md and TEST_RESULTS.md. Source users: open project.godot with Godot 4.5.1 stable, GL Compatibility. Prepared runtime assets are included; full geographic regeneration remains documented in documentation/versions/0_2_0_3/DEVELOPMENT.md.
+Controls: right-drag rotate; wheel zoom; left click inspect; Space pause/resume; 1–4 speed; Ctrl+F/search icon find places; F focus; F5/F9 save/load; F11 fullscreen; Escape menu. Click your flag for country control.
+
+Initial loading prepares resident terrain and scenery. Graphics quality selects Light 2048 or Balanced/High 4096 material libraries at launch. Travel reuses prepared resources. See RELEASE_NOTES.md and TEST_RESULTS.md. Source users: Godot 4.5.1 stable, GL Compatibility; prepared runtime assets are included. No old-save migration has been added.

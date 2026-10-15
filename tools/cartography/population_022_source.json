@@ -1,0 +1,12 @@
+{
+  "epoch": 2000,
+  "source": "European Commission JRC GHS-POP R2023A, year 2000, WGS84 30 arc-seconds",
+  "doi": "10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE",
+  "url": "https://human-settlement.emergency.copernicus.eu/ghs_pop2023.php",
+  "download_url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2000_GLOBE_R2023A_4326_30ss/V1-0/GHS_POP_E2000_GLOBE_R2023A_4326_30ss_V1_0.zip",
+  "raster_sha256": "d0d871bdb2d9050d24ed92184fb839da5ae868d466cdea5e74a0e9e7d8fb523a",
+  "prepared_sha256": "8b3edc7e60dcde81c9887358aef385aed179b83844f4be6e64b1034cc2e55f64",
+  "dense_settlement_threshold_people_km2": 1000,
+  "method": "Sum resident grid cells by game province at cell centres. Scale all province shares within each state to the existing scenario total; retain the non-city shares in a single state pool.",
+  "accuracy": "Modelled year-2000 estimates, not municipal census counts. Game provinces include surrounding countryside and do not reproduce census or district boundaries."
+}

@@ -1,0 +1,34 @@
+# Godot's regenerated editor/import cache
+.godot/
+# Exported games and release archives
+/build_outputs/
+/build/
+/release/
+/deliverables/
+/bunny_world*.zip
+*.exe
+*.pck
+# Generated from lossless repository parts; run the restore script once
+/assets/land_boundaries.res
+/assets/materials/terrain_materials.bwm
+/assets/materials/terrain_materials_high.bwm
+/assets/province_boundaries.res
+/assets/relief_data.bin
+/assets/relief_data.png
+/assets/sea_boundaries.res
+/assets/terrain_color.png
+/assets/terrain_color_seed_0202.png
+/assets/terrain_types.png
+/tools/cartography/etopo_021.npz
+/tools/cartography/geographic_subdivisions.geojson
+/tools/cartography/gshhg_high.zip
+/tools/cartography/myanmar_townships.geojson
+/tools/cartography/natural_earth_map_units.geojson
+/tools/cartography/province_seed_020.json
+/tools/cartography/waterways_0201.bin
+# Local tooling and operating-system files
+__pycache__/
+*.py[cod]
+*.restore-tmp
+.DS_Store
+Thumbs.db

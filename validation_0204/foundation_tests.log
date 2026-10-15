@@ -1,0 +1,17 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+PASS all State populations preserved
+PASS Japan total preserved
+PASS city areas + remainder pools counted once
+PASS three age groups
+PASS retirement-age residents represented
+PASS Japan named-variable Treasury imported in USD
+PASS Japan named-variable Debt imported in USD
+PASS GDP-per-capita units verified
+PASS retirement threshold reclassifies without population growth
+PASS ownership transfer aggregates resident profiles
+PASS whole-person largest remainder
+PASS same-version save
+PASS same-version load
+PASS tension and history persisted
+PASS starting finances persisted

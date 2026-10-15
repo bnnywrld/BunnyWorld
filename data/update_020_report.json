@@ -1,0 +1,926 @@
+{
+  "version": "0.1.10",
+  "islands": {
+    "karafuto_state": 680,
+    "south_chishima_state": 1152,
+    "north_chishima_state": 1235,
+    "returned_to_karafuto_pixels": 1784,
+    "removed_from_karafuto_pixels": 7,
+    "north_south_gap_latitude": 45.5
+  },
+  "provinces": {
+    "count": 45107,
+    "target_area_km2": 3000.0,
+    "city_containing_provinces": 1568,
+    "cities_placed": 1725,
+    "skipped_city_markers": [
+      "Duhok",
+      "Irbil",
+      "As Sulaymaniyah",
+      "Kandahar",
+      "Banda Aceh",
+      "Gaza City",
+      "Herat",
+      "Sevastopol",
+      "Simferopol",
+      "Jaffna"
+    ],
+    "per_country": {
+      "ABK": {
+        "count": 3,
+        "median_area_km2": 2701.49
+      },
+      "ACE": {
+        "count": 20,
+        "median_area_km2": 3237.04
+      },
+      "AFG": {
+        "count": 62,
+        "median_area_km2": 3167.34
+      },
+      "AFR": {
+        "count": 12,
+        "median_area_km2": 3028.43
+      },
+      "AGL": {
+        "count": 83,
+        "median_area_km2": 3246.94
+      },
+      "AIA": {
+        "count": 1,
+        "median_area_km2": 23.92
+      },
+      "ALB": {
+        "count": 10,
+        "median_area_km2": 2892.27
+      },
+      "ALG": {
+        "count": 772,
+        "median_area_km2": 3004.47
+      },
+      "ANT": {
+        "count": 1,
+        "median_area_km2": 731.24
+      },
+      "ARG": {
+        "count": 929,
+        "median_area_km2": 3047.42
+      },
+      "ARM": {
+        "count": 9,
+        "median_area_km2": 3086.97
+      },
+      "AST": {
+        "count": 2596,
+        "median_area_km2": 3056.43
+      },
+      "AUS": {
+        "count": 29,
+        "median_area_km2": 2900.95
+      },
+      "AZE": {
+        "count": 24,
+        "median_area_km2": 3041.64
+      },
+      "BAH": {
+        "count": 8,
+        "median_area_km2": 2968.93
+      },
+      "BAN": {
+        "count": 48,
+        "median_area_km2": 2871.11
+      },
+      "BAR": {
+        "count": 1,
+        "median_area_km2": 547.59
+      },
+      "BEL": {
+        "count": 11,
+        "median_area_km2": 2785.4
+      },
+      "BEN": {
+        "count": 39,
+        "median_area_km2": 3014.02
+      },
+      "BFA": {
+        "count": 92,
+        "median_area_km2": 3033.92
+      },
+      "BHR": {
+        "count": 1,
+        "median_area_km2": 984.22
+      },
+      "BHU": {
+        "count": 13,
+        "median_area_km2": 3016.86
+      },
+      "BLR": {
+        "count": 69,
+        "median_area_km2": 3003.26
+      },
+      "BLZ": {
+        "count": 8,
+        "median_area_km2": 3196.68
+      },
+      "BOL": {
+        "count": 362,
+        "median_area_km2": 3047.66
+      },
+      "BOS": {
+        "count": 17,
+        "median_area_km2": 3421.77
+      },
+      "BOT": {
+        "count": 194,
+        "median_area_km2": 3023.27
+      },
+      "BRA": {
+        "count": 2848,
+        "median_area_km2": 3036.47
+      },
+      "BRM": {
+        "count": 161,
+        "median_area_km2": 2976.21
+      },
+      "BRU": {
+        "count": 2,
+        "median_area_km2": 3238.51
+      },
+      "BUL": {
+        "count": 38,
+        "median_area_km2": 3091.31
+      },
+      "BUR": {
+        "count": 8,
+        "median_area_km2": 3070.16
+      },
+      "CAM": {
+        "count": 156,
+        "median_area_km2": 3045.86
+      },
+      "CAN": {
+        "count": 3270,
+        "median_area_km2": 3057.55
+      },
+      "CAR": {
+        "count": 208,
+        "median_area_km2": 3057.16
+      },
+      "CBD": {
+        "count": 61,
+        "median_area_km2": 3022.25
+      },
+      "CDI": {
+        "count": 106,
+        "median_area_km2": 3046.8
+      },
+      "CHA": {
+        "count": 423,
+        "median_area_km2": 3061.03
+      },
+      "CHE": {
+        "count": 5,
+        "median_area_km2": 3097.25
+      },
+      "CHI": {
+        "count": 3136,
+        "median_area_km2": 3042.4
+      },
+      "CHL": {
+        "count": 268,
+        "median_area_km2": 3095.7
+      },
+      "CNG": {
+        "count": 115,
+        "median_area_km2": 3030.32
+      },
+      "COL": {
+        "count": 382,
+        "median_area_km2": 3106.52
+      },
+      "COM": {
+        "count": 2,
+        "median_area_km2": 1147.27
+      },
+      "COS": {
+        "count": 18,
+        "median_area_km2": 2965.19
+      },
+      "CRO": {
+        "count": 20,
+        "median_area_km2": 2957.85
+      },
+      "CUB": {
+        "count": 41,
+        "median_area_km2": 3331.23
+      },
+      "CYP": {
+        "count": 2,
+        "median_area_km2": 3166.32
+      },
+      "CZE": {
+        "count": 26,
+        "median_area_km2": 2974.95
+      },
+      "DEN": {
+        "count": 15,
+        "median_area_km2": 2965.03
+      },
+      "DJI": {
+        "count": 8,
+        "median_area_km2": 2799.8
+      },
+      "DMI": {
+        "count": 1,
+        "median_area_km2": 945.82
+      },
+      "DOM": {
+        "count": 17,
+        "median_area_km2": 2885.64
+      },
+      "DRC": {
+        "count": 561,
+        "median_area_km2": 3041.59
+      },
+      "ECU": {
+        "count": 86,
+        "median_area_km2": 3050.47
+      },
+      "EGU": {
+        "count": 10,
+        "median_area_km2": 2969.01
+      },
+      "EGY": {
+        "count": 336,
+        "median_area_km2": 3039.5
+      },
+      "ELS": {
+        "count": 7,
+        "median_area_km2": 2928.89
+      },
+      "ENG": {
+        "count": 108,
+        "median_area_km2": 2952.9
+      },
+      "ERI": {
+        "count": 43,
+        "median_area_km2": 3177.68
+      },
+      "EST": {
+        "count": 16,
+        "median_area_km2": 2904.53
+      },
+      "ETH": {
+        "count": 376,
+        "median_area_km2": 3060.92
+      },
+      "FAO": {
+        "count": 1,
+        "median_area_km2": 2136.23
+      },
+      "FIJ": {
+        "count": 8,
+        "median_area_km2": 1319.11
+      },
+      "FIN": {
+        "count": 109,
+        "median_area_km2": 3004.4
+      },
+      "FRA": {
+        "count": 235,
+        "median_area_km2": 3018.13
+      },
+      "FYR": {
+        "count": 8,
+        "median_area_km2": 3232.16
+      },
+      "GAB": {
+        "count": 88,
+        "median_area_km2": 3065.2
+      },
+      "GAH": {
+        "count": 76,
+        "median_area_km2": 3114.82
+      },
+      "GAM": {
+        "count": 4,
+        "median_area_km2": 2656.55
+      },
+      "GEO": {
+        "count": 20,
+        "median_area_km2": 3117.4
+      },
+      "GER": {
+        "count": 122,
+        "median_area_km2": 2945.92
+      },
+      "GRA": {
+        "count": 1,
+        "median_area_km2": 695.86
+      },
+      "GRE": {
+        "count": 49,
+        "median_area_km2": 3075.23
+      },
+      "GRN": {
+        "count": 734,
+        "median_area_km2": 3051.36
+      },
+      "GUA": {
+        "count": 37,
+        "median_area_km2": 2978.17
+      },
+      "GUB": {
+        "count": 12,
+        "median_area_km2": 3270.79
+      },
+      "GUI": {
+        "count": 83,
+        "median_area_km2": 3060.34
+      },
+      "GUY": {
+        "count": 71,
+        "median_area_km2": 2993.63
+      },
+      "HAI": {
+        "count": 10,
+        "median_area_km2": 2779.14
+      },
+      "HAM": {
+        "count": 1,
+        "median_area_km2": 413.62
+      },
+      "HEZ": {
+        "count": 1,
+        "median_area_km2": 2089.91
+      },
+      "HKG": {
+        "count": 1,
+        "median_area_km2": 1970.09
+      },
+      "HLS": {
+        "count": 1,
+        "median_area_km2": 111.38
+      },
+      "HOL": {
+        "count": 13,
+        "median_area_km2": 2771.88
+      },
+      "HON": {
+        "count": 38,
+        "median_area_km2": 3269.27
+      },
+      "HUN": {
+        "count": 32,
+        "median_area_km2": 2965.92
+      },
+      "ICE": {
+        "count": 36,
+        "median_area_km2": 3062.26
+      },
+      "IEK": {
+        "count": 1,
+        "median_area_km2": 2219.69
+      },
+      "IND": {
+        "count": 656,
+        "median_area_km2": 3217.66
+      },
+      "IRE": {
+        "count": 25,
+        "median_area_km2": 2975.69
+      },
+      "IRQ": {
+        "count": 134,
+        "median_area_km2": 3009.51
+      },
+      "ISR": {
+        "count": 9,
+        "median_area_km2": 2950.91
+      },
+      "ITA": {
+        "count": 102,
+        "median_area_km2": 3000.11
+      },
+      "JAM": {
+        "count": 4,
+        "median_area_km2": 3552.72
+      },
+      "JAP": {
+        "count": 133,
+        "median_area_km2": 3181.34
+      },
+      "JOR": {
+        "count": 29,
+        "median_area_km2": 3058.67
+      },
+      "JUB": {
+        "count": 17,
+        "median_area_km2": 2967.37
+      },
+      "KAC": {
+        "count": 30,
+        "median_area_km2": 2985.44
+      },
+      "KAR": {
+        "count": 9,
+        "median_area_km2": 3060.94
+      },
+      "KAZ": {
+        "count": 883,
+        "median_area_km2": 3044.8
+      },
+      "KEN": {
+        "count": 192,
+        "median_area_km2": 3149.73
+      },
+      "KOR": {
+        "count": 38,
+        "median_area_km2": 3186.55
+      },
+      "KOS": {
+        "count": 4,
+        "median_area_km2": 2743.53
+      },
+      "KUR": {
+        "count": 7,
+        "median_area_km2": 3056.5
+      },
+      "KUW": {
+        "count": 6,
+        "median_area_km2": 3282.15
+      },
+      "KYR": {
+        "count": 65,
+        "median_area_km2": 3027.71
+      },
+      "LAO": {
+        "count": 77,
+        "median_area_km2": 3019.09
+      },
+      "LAT": {
+        "count": 21,
+        "median_area_km2": 3004.16
+      },
+      "LBA": {
+        "count": 544,
+        "median_area_km2": 3036.23
+      },
+      "LEB": {
+        "count": 3,
+        "median_area_km2": 2289.4
+      },
+      "LES": {
+        "count": 10,
+        "median_area_km2": 3099.93
+      },
+      "LIB": {
+        "count": 24,
+        "median_area_km2": 3076.61
+      },
+      "LIT": {
+        "count": 22,
+        "median_area_km2": 2895.76
+      },
+      "LUR": {
+        "count": 8,
+        "median_area_km2": 3052.75
+      },
+      "LUX": {
+        "count": 1,
+        "median_area_km2": 2604.65
+      },
+      "MAC": {
+        "count": 1,
+        "median_area_km2": 105.28
+      },
+      "MAD": {
+        "count": 201,
+        "median_area_km2": 3038.36
+      },
+      "MAL": {
+        "count": 421,
+        "median_area_km2": 3046.18
+      },
+      "MAU": {
+        "count": 348,
+        "median_area_km2": 3027.52
+      },
+      "MAY": {
+        "count": 114,
+        "median_area_km2": 3061.14
+      },
+      "MEX": {
+        "count": 661,
+        "median_area_km2": 3093.34
+      },
+      "MIC": {
+        "count": 6,
+        "median_area_km2": 156.79
+      },
+      "MLC": {
+        "count": 169,
+        "median_area_km2": 3030.17
+      },
+      "MLD": {
+        "count": 2,
+        "median_area_km2": 2826.89
+      },
+      "MLT": {
+        "count": 1,
+        "median_area_km2": 479.59
+      },
+      "MLV": {
+        "count": 11,
+        "median_area_km2": 2856.66
+      },
+      "MLW": {
+        "count": 32,
+        "median_area_km2": 3258.43
+      },
+      "MNT": {
+        "count": 5,
+        "median_area_km2": 2972.62
+      },
+      "MON": {
+        "count": 518,
+        "median_area_km2": 3103.6
+      },
+      "MOR": {
+        "count": 199,
+        "median_area_km2": 3023.33
+      },
+      "MOZ": {
+        "count": 263,
+        "median_area_km2": 3040.28
+      },
+      "MRT": {
+        "count": 1,
+        "median_area_km2": 2649.89
+      },
+      "NAM": {
+        "count": 276,
+        "median_area_km2": 3024.92
+      },
+      "NCY": {
+        "count": 1,
+        "median_area_km2": 3652.58
+      },
+      "NEP": {
+        "count": 26,
+        "median_area_km2": 2911.97
+      },
+      "NGR": {
+        "count": 395,
+        "median_area_km2": 3041.19
+      },
+      "NIC": {
+        "count": 41,
+        "median_area_km2": 3086.46
+      },
+      "NIG": {
+        "count": 303,
+        "median_area_km2": 3029.54
+      },
+      "NKO": {
+        "count": 41,
+        "median_area_km2": 3143.96
+      },
+      "NKR": {
+        "count": 6,
+        "median_area_km2": 2649.19
+      },
+      "NPM": {
+        "count": 24,
+        "median_area_km2": 2840.43
+      },
+      "NRY": {
+        "count": 141,
+        "median_area_km2": 3131.48
+      },
+      "NZL": {
+        "count": 96,
+        "median_area_km2": 3203.86
+      },
+      "OMA": {
+        "count": 105,
+        "median_area_km2": 3101.77
+      },
+      "PAK": {
+        "count": 295,
+        "median_area_km2": 3025.96
+      },
+      "PAL": {
+        "count": 2,
+        "median_area_km2": 2690.42
+      },
+      "PAN": {
+        "count": 27,
+        "median_area_km2": 2993.82
+      },
+      "PAP": {
+        "count": 165,
+        "median_area_km2": 3343.48
+      },
+      "PAR": {
+        "count": 134,
+        "median_area_km2": 3008.04
+      },
+      "PER": {
+        "count": 544,
+        "median_area_km2": 3012.7
+      },
+      "PHI": {
+        "count": 112,
+        "median_area_km2": 2949.33
+      },
+      "PMR": {
+        "count": 1,
+        "median_area_km2": 623.46
+      },
+      "POL": {
+        "count": 104,
+        "median_area_km2": 3004.74
+      },
+      "POR": {
+        "count": 32,
+        "median_area_km2": 2991.93
+      },
+      "PRU": {
+        "count": 433,
+        "median_area_km2": 3051.41
+      },
+      "PUK": {
+        "count": 6,
+        "median_area_km2": 2852.84
+      },
+      "PUN": {
+        "count": 71,
+        "median_area_km2": 3136.74
+      },
+      "QAT": {
+        "count": 4,
+        "median_area_km2": 3744.97
+      },
+      "RAJ": {
+        "count": 1066,
+        "median_area_km2": 3072.11
+      },
+      "RCD": {
+        "count": 43,
+        "median_area_km2": 3139.72
+      },
+      "ROM": {
+        "count": 79,
+        "median_area_km2": 3033.4
+      },
+      "RWA": {
+        "count": 8,
+        "median_area_km2": 2879.5
+      },
+      "SAF": {
+        "count": 408,
+        "median_area_km2": 3033.16
+      },
+      "SAM": {
+        "count": 1,
+        "median_area_km2": 3469.35
+      },
+      "SAO": {
+        "count": 1,
+        "median_area_km2": 1352.0
+      },
+      "SAU": {
+        "count": 647,
+        "median_area_km2": 3018.76
+      },
+      "SEN": {
+        "count": 67,
+        "median_area_km2": 2991.02
+      },
+      "SER": {
+        "count": 25,
+        "median_area_km2": 3223.63
+      },
+      "SEY": {
+        "count": 1,
+        "median_area_km2": 1490.5
+      },
+      "SHA": {
+        "count": 30,
+        "median_area_km2": 3058.58
+      },
+      "SHN": {
+        "count": 23,
+        "median_area_km2": 2934.05
+      },
+      "SIA": {
+        "count": 176,
+        "median_area_km2": 3063.99
+      },
+      "SIE": {
+        "count": 12,
+        "median_area_km2": 2984.62
+      },
+      "SIN": {
+        "count": 1,
+        "median_area_km2": 759.61
+      },
+      "SLO": {
+        "count": 16,
+        "median_area_km2": 3066.65
+      },
+      "SLV": {
+        "count": 7,
+        "median_area_km2": 3171.5
+      },
+      "SML": {
+        "count": 57,
+        "median_area_km2": 2978.99
+      },
+      "SNA": {
+        "count": 7,
+        "median_area_km2": 2470.1
+      },
+      "SOL": {
+        "count": 14,
+        "median_area_km2": 1015.49
+      },
+      "SOM": {
+        "count": 30,
+        "median_area_km2": 3012.86
+      },
+      "SOO": {
+        "count": 1,
+        "median_area_km2": 3253.73
+      },
+      "SOV": {
+        "count": 5614,
+        "median_area_km2": 3063.11
+      },
+      "SPR": {
+        "count": 174,
+        "median_area_km2": 3004.74
+      },
+      "SRI": {
+        "count": 9,
+        "median_area_km2": 3067.96
+      },
+      "SSU": {
+        "count": 210,
+        "median_area_km2": 3028.03
+      },
+      "STK": {
+        "count": 1,
+        "median_area_km2": 445.63
+      },
+      "STL": {
+        "count": 1,
+        "median_area_km2": 813.08
+      },
+      "STV": {
+        "count": 1,
+        "median_area_km2": 763.44
+      },
+      "SUD": {
+        "count": 623,
+        "median_area_km2": 3058.78
+      },
+      "SUR": {
+        "count": 48,
+        "median_area_km2": 3001.0
+      },
+      "SWA": {
+        "count": 6,
+        "median_area_km2": 2926.77
+      },
+      "SWE": {
+        "count": 150,
+        "median_area_km2": 3007.43
+      },
+      "SWI": {
+        "count": 15,
+        "median_area_km2": 2906.14
+      },
+      "SWS": {
+        "count": 37,
+        "median_area_km2": 3015.82
+      },
+      "SYR": {
+        "count": 64,
+        "median_area_km2": 2959.55
+      },
+      "TAI": {
+        "count": 16,
+        "median_area_km2": 2734.95
+      },
+      "TAJ": {
+        "count": 47,
+        "median_area_km2": 3135.61
+      },
+      "TAL": {
+        "count": 154,
+        "median_area_km2": 3040.05
+      },
+      "TML": {
+        "count": 13,
+        "median_area_km2": 3068.82
+      },
+      "TNZ": {
+        "count": 299,
+        "median_area_km2": 3043.02
+      },
+      "TOG": {
+        "count": 19,
+        "median_area_km2": 2931.27
+      },
+      "TON": {
+        "count": 1,
+        "median_area_km2": 2150.71
+      },
+      "TRI": {
+        "count": 2,
+        "median_area_km2": 3000.16
+      },
+      "TRK": {
+        "count": 156,
+        "median_area_km2": 3072.49
+      },
+      "TUL": {
+        "count": 1,
+        "median_area_km2": 450.18
+      },
+      "TUN": {
+        "count": 53,
+        "median_area_km2": 3016.38
+      },
+      "TUR": {
+        "count": 261,
+        "median_area_km2": 3020.91
+      },
+      "UAE": {
+        "count": 25,
+        "median_area_km2": 3408.65
+      },
+      "UGA": {
+        "count": 69,
+        "median_area_km2": 3096.69
+      },
+      "UKR": {
+        "count": 199,
+        "median_area_km2": 2951.54
+      },
+      "UNI": {
+        "count": 336,
+        "median_area_km2": 3023.19
+      },
+      "URG": {
+        "count": 58,
+        "median_area_km2": 3156.96
+      },
+      "USA": {
+        "count": 3142,
+        "median_area_km2": 3044.97
+      },
+      "UZB": {
+        "count": 138,
+        "median_area_km2": 3070.26
+      },
+      "VAN": {
+        "count": 5,
+        "median_area_km2": 2112.8
+      },
+      "VEN": {
+        "count": 308,
+        "median_area_km2": 3064.47
+      },
+      "VER": {
+        "count": 2,
+        "median_area_km2": 2746.15
+      },
+      "VIE": {
+        "count": 115,
+        "median_area_km2": 3113.7
+      },
+      "WAA": {
+        "count": 6,
+        "median_area_km2": 2784.06
+      },
+      "YEM": {
+        "count": 153,
+        "median_area_km2": 3105.88
+      },
+      "ZAM": {
+        "count": 249,
+        "median_area_km2": 3049.21
+      },
+      "ZIM": {
+        "count": 130,
+        "median_area_km2": 3062.55
+      }
+    },
+    "millennium_dawn_land_provinces": 13222,
+    "previous_land_provinces": 15350,
+    "largest_state_province_count": 851
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "source": "NOAA NCEI ETOPO 2022 ice-surface elevation; 60 arc-second source sampled every third cell through NOAA ERDDAP.",
+  "doi": "10.25921/fd45-gt74",
+  "source_url": "https://oceanwatch.pifsc.noaa.gov/erddap/griddap/ETOPO_2022_v1_60s.nc?z[0:3:10799][0:3:21599]",
+  "prepared_resolution": [
+    8192,
+    4096
+  ],
+  "source_sample_arc_minutes": 3,
+  "radial_displacement_scale": 0.016,
+  "land_lift": 1.25e-05,
+  "height_exaggeration": 8.0,
+  "maximum_displacement": 0.009199127554893494,
+  "maximum_source_meters": 7316.0,
+  "cpu_binary_bytes": 67108864,
+  "land_geometry": "Independent physical mask, signed-distance shore coverage, unassigned Antarctic terrain restored",
+  "prepared_source_sha256": "2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5",
+  "land_lift_meters": 79.6375,
+  "coastal_feather": "Smoothstep from half a prepared pixel to 4.5 pixels inland; water retains zero displacement.",
+  "revision": "0.2.0.3",
+  "antarctica_pixels": 3452448,
+  "trial_riverbeds": {
+    "rivers": [
+      "Amazonas",
+      "Nile"
+    ],
+    "maximum_display_depression_m": 48,
+    "width": "Smooth broad profile, limited by 8192\u00d74096 prepared elevation; lowland reaches only",
+    "runtime_work": "None: baked into shared CPU/GPU relief"
+  }
+}

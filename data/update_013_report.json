@@ -1,0 +1,666 @@
+{
+  "cities": 1735,
+  "lake_features": 1355,
+  "statistics_coverage": {
+    "ABK": [
+      "gdp_per_capita_usd"
+    ],
+    "ACE": [
+      "gdp_per_capita_usd"
+    ],
+    "AFG": [
+      "gdp_per_capita_usd"
+    ],
+    "AFR": [
+      "gdp_per_capita_usd"
+    ],
+    "AGL": [
+      "gdp_per_capita_usd"
+    ],
+    "AIA": [
+      "gdp_per_capita_usd"
+    ],
+    "ALB": [
+      "gdp_per_capita_usd"
+    ],
+    "ALG": [
+      "gdp_per_capita_usd"
+    ],
+    "ANT": [
+      "gdp_per_capita_usd"
+    ],
+    "ARG": [
+      "gdp_per_capita_usd"
+    ],
+    "ARM": [
+      "gdp_per_capita_usd"
+    ],
+    "AST": [
+      "gdp_per_capita_usd"
+    ],
+    "AUS": [
+      "gdp_per_capita_usd"
+    ],
+    "AZE": [
+      "gdp_per_capita_usd"
+    ],
+    "BAH": [
+      "gdp_per_capita_usd"
+    ],
+    "BAN": [
+      "gdp_per_capita_usd"
+    ],
+    "BAR": [
+      "gdp_per_capita_usd"
+    ],
+    "BEL": [
+      "gdp_per_capita_usd"
+    ],
+    "BEN": [
+      "gdp_per_capita_usd"
+    ],
+    "BFA": [
+      "gdp_per_capita_usd"
+    ],
+    "BHR": [
+      "gdp_per_capita_usd"
+    ],
+    "BHU": [
+      "gdp_per_capita_usd"
+    ],
+    "BLR": [
+      "gdp_per_capita_usd"
+    ],
+    "BLZ": [
+      "gdp_per_capita_usd"
+    ],
+    "BOL": [
+      "gdp_per_capita_usd"
+    ],
+    "BOS": [
+      "war_support",
+      "gdp_per_capita_usd"
+    ],
+    "BOT": [
+      "gdp_per_capita_usd"
+    ],
+    "BRA": [
+      "gdp_per_capita_usd"
+    ],
+    "BRM": [
+      "gdp_per_capita_usd"
+    ],
+    "BRU": [
+      "gdp_per_capita_usd"
+    ],
+    "BUL": [
+      "gdp_per_capita_usd"
+    ],
+    "BUR": [
+      "gdp_per_capita_usd"
+    ],
+    "CAM": [
+      "gdp_per_capita_usd"
+    ],
+    "CAN": [
+      "gdp_per_capita_usd"
+    ],
+    "CAR": [
+      "gdp_per_capita_usd"
+    ],
+    "CBD": [
+      "gdp_per_capita_usd"
+    ],
+    "CDI": [
+      "gdp_per_capita_usd"
+    ],
+    "CHA": [
+      "gdp_per_capita_usd"
+    ],
+    "CHE": [
+      "gdp_per_capita_usd"
+    ],
+    "CHI": [
+      "gdp_per_capita_usd"
+    ],
+    "CHL": [
+      "gdp_per_capita_usd"
+    ],
+    "CNG": [
+      "gdp_per_capita_usd"
+    ],
+    "COL": [
+      "gdp_per_capita_usd"
+    ],
+    "COM": [
+      "gdp_per_capita_usd"
+    ],
+    "COS": [
+      "gdp_per_capita_usd"
+    ],
+    "CRO": [
+      "gdp_per_capita_usd"
+    ],
+    "CUB": [
+      "gdp_per_capita_usd"
+    ],
+    "CYP": [
+      "gdp_per_capita_usd"
+    ],
+    "CZE": [
+      "gdp_per_capita_usd"
+    ],
+    "DEN": [
+      "gdp_per_capita_usd"
+    ],
+    "DJI": [
+      "gdp_per_capita_usd"
+    ],
+    "DMI": [
+      "gdp_per_capita_usd"
+    ],
+    "DOM": [
+      "gdp_per_capita_usd"
+    ],
+    "DRC": [
+      "gdp_per_capita_usd"
+    ],
+    "ECU": [
+      "gdp_per_capita_usd"
+    ],
+    "EGU": [
+      "gdp_per_capita_usd"
+    ],
+    "EGY": [
+      "gdp_per_capita_usd"
+    ],
+    "ELS": [
+      "gdp_per_capita_usd"
+    ],
+    "ENG": [
+      "gdp_per_capita_usd"
+    ],
+    "ERI": [
+      "gdp_per_capita_usd"
+    ],
+    "EST": [
+      "gdp_per_capita_usd"
+    ],
+    "ETH": [
+      "gdp_per_capita_usd"
+    ],
+    "FAO": [
+      "gdp_per_capita_usd"
+    ],
+    "FIJ": [
+      "gdp_per_capita_usd"
+    ],
+    "FIN": [
+      "gdp_per_capita_usd"
+    ],
+    "FRA": [
+      "gdp_per_capita_usd"
+    ],
+    "FYR": [
+      "gdp_per_capita_usd"
+    ],
+    "GAB": [
+      "gdp_per_capita_usd"
+    ],
+    "GAH": [
+      "gdp_per_capita_usd"
+    ],
+    "GAM": [
+      "gdp_per_capita_usd"
+    ],
+    "GEO": [],
+    "GER": [
+      "gdp_per_capita_usd"
+    ],
+    "GRA": [
+      "gdp_per_capita_usd"
+    ],
+    "GRE": [],
+    "GRN": [
+      "gdp_per_capita_usd"
+    ],
+    "GUA": [
+      "gdp_per_capita_usd"
+    ],
+    "GUB": [
+      "gdp_per_capita_usd"
+    ],
+    "GUI": [
+      "gdp_per_capita_usd"
+    ],
+    "GUY": [
+      "gdp_per_capita_usd"
+    ],
+    "HAI": [
+      "gdp_per_capita_usd"
+    ],
+    "HAM": [
+      "gdp_per_capita_usd"
+    ],
+    "HEZ": [
+      "gdp_per_capita_usd"
+    ],
+    "HKG": [
+      "gdp_per_capita_usd"
+    ],
+    "HLS": [
+      "gdp_per_capita_usd"
+    ],
+    "HOL": [
+      "gdp_per_capita_usd"
+    ],
+    "HON": [
+      "gdp_per_capita_usd"
+    ],
+    "HUN": [
+      "gdp_per_capita_usd"
+    ],
+    "ICE": [
+      "gdp_per_capita_usd"
+    ],
+    "IEK": [
+      "gdp_per_capita_usd"
+    ],
+    "IND": [
+      "gdp_per_capita_usd"
+    ],
+    "IRE": [
+      "gdp_per_capita_usd"
+    ],
+    "IRQ": [
+      "gdp_per_capita_usd"
+    ],
+    "ISR": [
+      "gdp_per_capita_usd"
+    ],
+    "ITA": [
+      "gdp_per_capita_usd"
+    ],
+    "JAM": [
+      "gdp_per_capita_usd"
+    ],
+    "JAP": [
+      "gdp_per_capita_usd"
+    ],
+    "JOR": [
+      "gdp_per_capita_usd"
+    ],
+    "JUB": [
+      "gdp_per_capita_usd"
+    ],
+    "KAC": [
+      "gdp_per_capita_usd"
+    ],
+    "KAR": [
+      "gdp_per_capita_usd"
+    ],
+    "KAZ": [
+      "gdp_per_capita_usd"
+    ],
+    "KEN": [
+      "gdp_per_capita_usd"
+    ],
+    "KOR": [
+      "gdp_per_capita_usd"
+    ],
+    "KOS": [
+      "gdp_per_capita_usd"
+    ],
+    "KUR": [
+      "gdp_per_capita_usd"
+    ],
+    "KUW": [
+      "gdp_per_capita_usd"
+    ],
+    "KYR": [
+      "gdp_per_capita_usd"
+    ],
+    "LAO": [
+      "gdp_per_capita_usd"
+    ],
+    "LAT": [
+      "gdp_per_capita_usd"
+    ],
+    "LBA": [
+      "gdp_per_capita_usd"
+    ],
+    "LEB": [
+      "gdp_per_capita_usd"
+    ],
+    "LES": [
+      "gdp_per_capita_usd"
+    ],
+    "LIB": [
+      "gdp_per_capita_usd"
+    ],
+    "LIT": [
+      "gdp_per_capita_usd"
+    ],
+    "LUR": [
+      "gdp_per_capita_usd"
+    ],
+    "LUX": [
+      "gdp_per_capita_usd"
+    ],
+    "MAC": [
+      "gdp_per_capita_usd"
+    ],
+    "MAD": [
+      "gdp_per_capita_usd"
+    ],
+    "MAL": [
+      "gdp_per_capita_usd"
+    ],
+    "MAU": [
+      "gdp_per_capita_usd"
+    ],
+    "MAY": [
+      "gdp_per_capita_usd"
+    ],
+    "MEX": [
+      "gdp_per_capita_usd"
+    ],
+    "MIC": [
+      "gdp_per_capita_usd"
+    ],
+    "MLC": [],
+    "MLD": [
+      "gdp_per_capita_usd"
+    ],
+    "MLT": [
+      "gdp_per_capita_usd"
+    ],
+    "MLV": [
+      "gdp_per_capita_usd"
+    ],
+    "MLW": [
+      "gdp_per_capita_usd"
+    ],
+    "MNT": [
+      "gdp_per_capita_usd"
+    ],
+    "MON": [
+      "gdp_per_capita_usd"
+    ],
+    "MOR": [
+      "gdp_per_capita_usd"
+    ],
+    "MOZ": [
+      "gdp_per_capita_usd"
+    ],
+    "MRT": [
+      "gdp_per_capita_usd"
+    ],
+    "NAM": [
+      "gdp_per_capita_usd"
+    ],
+    "NCY": [
+      "gdp_per_capita_usd"
+    ],
+    "NEP": [
+      "gdp_per_capita_usd"
+    ],
+    "NGR": [
+      "gdp_per_capita_usd"
+    ],
+    "NIC": [
+      "gdp_per_capita_usd"
+    ],
+    "NIG": [
+      "gdp_per_capita_usd"
+    ],
+    "NKO": [
+      "gdp_per_capita_usd"
+    ],
+    "NKR": [
+      "gdp_per_capita_usd"
+    ],
+    "NPM": [
+      "gdp_per_capita_usd"
+    ],
+    "NRY": [
+      "gdp_per_capita_usd"
+    ],
+    "NZL": [
+      "gdp_per_capita_usd"
+    ],
+    "OMA": [
+      "gdp_per_capita_usd"
+    ],
+    "PAK": [
+      "gdp_per_capita_usd"
+    ],
+    "PAL": [
+      "gdp_per_capita_usd"
+    ],
+    "PAN": [
+      "gdp_per_capita_usd"
+    ],
+    "PAP": [
+      "gdp_per_capita_usd"
+    ],
+    "PAR": [
+      "gdp_per_capita_usd"
+    ],
+    "PER": [
+      "gdp_per_capita_usd"
+    ],
+    "PHI": [],
+    "PMR": [
+      "gdp_per_capita_usd"
+    ],
+    "POL": [
+      "gdp_per_capita_usd"
+    ],
+    "POR": [
+      "gdp_per_capita_usd"
+    ],
+    "PRU": [
+      "gdp_per_capita_usd"
+    ],
+    "PUK": [
+      "gdp_per_capita_usd"
+    ],
+    "PUN": [
+      "gdp_per_capita_usd"
+    ],
+    "QAT": [
+      "gdp_per_capita_usd"
+    ],
+    "RAJ": [
+      "gdp_per_capita_usd"
+    ],
+    "RCD": [
+      "gdp_per_capita_usd"
+    ],
+    "ROM": [
+      "gdp_per_capita_usd"
+    ],
+    "RWA": [
+      "gdp_per_capita_usd"
+    ],
+    "SAF": [
+      "gdp_per_capita_usd"
+    ],
+    "SAM": [
+      "gdp_per_capita_usd"
+    ],
+    "SAO": [
+      "gdp_per_capita_usd"
+    ],
+    "SAU": [
+      "gdp_per_capita_usd"
+    ],
+    "SEN": [
+      "gdp_per_capita_usd"
+    ],
+    "SER": [
+      "gdp_per_capita_usd"
+    ],
+    "SEY": [
+      "gdp_per_capita_usd"
+    ],
+    "SHA": [
+      "gdp_per_capita_usd"
+    ],
+    "SHN": [
+      "gdp_per_capita_usd"
+    ],
+    "SIA": [
+      "gdp_per_capita_usd"
+    ],
+    "SIE": [
+      "gdp_per_capita_usd"
+    ],
+    "SIN": [
+      "gdp_per_capita_usd"
+    ],
+    "SLO": [
+      "gdp_per_capita_usd"
+    ],
+    "SLV": [
+      "gdp_per_capita_usd"
+    ],
+    "SML": [
+      "gdp_per_capita_usd"
+    ],
+    "SNA": [
+      "gdp_per_capita_usd"
+    ],
+    "SOL": [
+      "gdp_per_capita_usd"
+    ],
+    "SOM": [
+      "gdp_per_capita_usd"
+    ],
+    "SOO": [
+      "gdp_per_capita_usd"
+    ],
+    "SOV": [
+      "gdp_per_capita_usd"
+    ],
+    "SPR": [
+      "gdp_per_capita_usd"
+    ],
+    "SRI": [
+      "gdp_per_capita_usd"
+    ],
+    "SSU": [
+      "gdp_per_capita_usd"
+    ],
+    "STK": [
+      "gdp_per_capita_usd"
+    ],
+    "STL": [
+      "gdp_per_capita_usd"
+    ],
+    "STV": [
+      "gdp_per_capita_usd"
+    ],
+    "SUD": [
+      "gdp_per_capita_usd"
+    ],
+    "SUR": [
+      "gdp_per_capita_usd"
+    ],
+    "SWA": [
+      "gdp_per_capita_usd"
+    ],
+    "SWE": [
+      "gdp_per_capita_usd"
+    ],
+    "SWI": [
+      "gdp_per_capita_usd"
+    ],
+    "SWS": [
+      "gdp_per_capita_usd"
+    ],
+    "SYR": [
+      "gdp_per_capita_usd"
+    ],
+    "TAI": [
+      "gdp_per_capita_usd"
+    ],
+    "TAJ": [
+      "gdp_per_capita_usd"
+    ],
+    "TAL": [
+      "gdp_per_capita_usd"
+    ],
+    "TML": [],
+    "TNZ": [
+      "gdp_per_capita_usd"
+    ],
+    "TOG": [
+      "gdp_per_capita_usd"
+    ],
+    "TON": [
+      "gdp_per_capita_usd"
+    ],
+    "TRI": [
+      "gdp_per_capita_usd"
+    ],
+    "TRK": [
+      "gdp_per_capita_usd"
+    ],
+    "TUL": [
+      "gdp_per_capita_usd"
+    ],
+    "TUN": [
+      "gdp_per_capita_usd"
+    ],
+    "TUR": [
+      "gdp_per_capita_usd"
+    ],
+    "UAE": [
+      "gdp_per_capita_usd"
+    ],
+    "UGA": [
+      "gdp_per_capita_usd"
+    ],
+    "UKR": [
+      "gdp_per_capita_usd"
+    ],
+    "UNI": [
+      "gdp_per_capita_usd"
+    ],
+    "URG": [
+      "gdp_per_capita_usd"
+    ],
+    "USA": [
+      "gdp_per_capita_usd"
+    ],
+    "UZB": [
+      "gdp_per_capita_usd"
+    ],
+    "VAN": [
+      "gdp_per_capita_usd"
+    ],
+    "VEN": [
+      "gdp_per_capita_usd"
+    ],
+    "VER": [
+      "gdp_per_capita_usd"
+    ],
+    "VIE": [
+      "gdp_per_capita_usd"
+    ],
+    "WAA": [
+      "gdp_per_capita_usd"
+    ],
+    "YEM": [
+      "gdp_per_capita_usd"
+    ],
+    "ZAM": [
+      "gdp_per_capita_usd"
+    ],
+    "ZIM": [
+      "gdp_per_capita_usd"
+    ]
+  }
+}

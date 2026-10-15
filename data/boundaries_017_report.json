@@ -1,0 +1,12 @@
+{
+  "land": {
+    "paths": 28716,
+    "vertices": 824648,
+    "triangles": 767216
+  },
+  "sea": {
+    "paths": 1304,
+    "vertices": 93324,
+    "triangles": 90716
+  }
+}

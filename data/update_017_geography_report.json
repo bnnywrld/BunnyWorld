@@ -1,0 +1,939 @@
+{
+  "regions": 1234,
+  "mod_states": 1250,
+  "provinces": 15642,
+  "land_adjacency_edges": 42017,
+  "population": 6144737528,
+  "rights_profiles": 419,
+  "countries_with_claims": [
+    "AFG",
+    "ARG",
+    "ARM",
+    "AZE",
+    "BOL",
+    "CHI",
+    "DRC",
+    "IND",
+    "ISR",
+    "JAP",
+    "KAM",
+    "KEN",
+    "KHA",
+    "MAY",
+    "MOR",
+    "PHI",
+    "PUN",
+    "RWA",
+    "RYU",
+    "SER",
+    "SML",
+    "SOV",
+    "SPR",
+    "SSU",
+    "SUD",
+    "TAI",
+    "TAJ",
+    "TAL",
+    "TIB",
+    "TIM",
+    "TUR",
+    "UGA",
+    "UZB",
+    "VEN",
+    "VIE"
+  ],
+  "per_country": {
+    "ABK": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "ACE": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "AFG": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "AFR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "AGL": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "AIA": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "ALB": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "ALG": {
+      "mod": 10,
+      "geographic": 10
+    },
+    "ANT": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "ARG": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "ARM": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "AST": {
+      "mod": 11,
+      "geographic": 11
+    },
+    "AUS": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "AZE": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "BAH": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "BAN": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "BAR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "BEL": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "BEN": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "BFA": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "BHR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "BHU": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "BLR": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "BLZ": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "BOL": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "BOS": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "BOT": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "BRA": {
+      "mod": 25,
+      "geographic": 25
+    },
+    "BRM": {
+      "mod": 7,
+      "geographic": 7
+    },
+    "BRU": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "BUL": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "BUR": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "CAM": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "CAN": {
+      "mod": 13,
+      "geographic": 13
+    },
+    "CAR": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "CBD": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "CDI": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "CHA": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "CHE": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "CHI": {
+      "mod": 43,
+      "geographic": 39
+    },
+    "CHL": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "CNG": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "COL": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "COM": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "COS": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "CRO": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "CUB": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "CYP": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "CZE": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "DEN": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "DJI": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "DMI": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "DOM": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "DRC": {
+      "mod": 10,
+      "geographic": 10
+    },
+    "ECU": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "EGU": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "EGY": {
+      "mod": 11,
+      "geographic": 11
+    },
+    "ELS": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "ENG": {
+      "mod": 35,
+      "geographic": 35
+    },
+    "ERI": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "EST": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "ETH": {
+      "mod": 7,
+      "geographic": 7
+    },
+    "FAO": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "FIJ": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "FIN": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "FRA": {
+      "mod": 32,
+      "geographic": 32
+    },
+    "FYR": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GAB": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GAH": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "GAM": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GEO": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "GER": {
+      "mod": 17,
+      "geographic": 17
+    },
+    "GRA": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "GRE": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "GRN": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "GUA": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GUB": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GUI": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "GUY": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "HAI": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "HAM": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "HEZ": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "HKG": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "HLS": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "HOL": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "HON": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "HUN": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "ICE": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "IEK": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "IND": {
+      "mod": 17,
+      "geographic": 16
+    },
+    "IRE": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "IRQ": {
+      "mod": 15,
+      "geographic": 15
+    },
+    "ISR": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "ITA": {
+      "mod": 17,
+      "geographic": 17
+    },
+    "JAM": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "JAP": {
+      "mod": 13,
+      "geographic": 13
+    },
+    "JOR": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "JUB": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "KAC": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "KAR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "KAZ": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "KEN": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "KOR": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "KOS": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "KUR": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "KUW": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "KYR": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "LAO": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "LAT": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "LBA": {
+      "mod": 15,
+      "geographic": 14
+    },
+    "LEB": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "LES": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "LIB": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "LIT": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "LUR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "LUX": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "MAC": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "MAD": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "MAL": {
+      "mod": 9,
+      "geographic": 9
+    },
+    "MAU": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "MAY": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "MEX": {
+      "mod": 13,
+      "geographic": 13
+    },
+    "MIC": {
+      "mod": 7,
+      "geographic": 6
+    },
+    "MLC": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "MLD": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "MLT": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "MLV": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "MLW": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "MNT": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "MON": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "MOR": {
+      "mod": 11,
+      "geographic": 11
+    },
+    "MOZ": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "MRT": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "NAM": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "NCY": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "NEP": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "NGR": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "NIC": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "NIG": {
+      "mod": 7,
+      "geographic": 7
+    },
+    "NKO": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "NKR": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "NPM": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "NRY": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "NZL": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "OMA": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "PAK": {
+      "mod": 12,
+      "geographic": 12
+    },
+    "PAL": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "PAN": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "PAP": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "PAR": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "PER": {
+      "mod": 28,
+      "geographic": 28
+    },
+    "PHI": {
+      "mod": 20,
+      "geographic": 20
+    },
+    "PMR": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "POL": {
+      "mod": 13,
+      "geographic": 13
+    },
+    "POR": {
+      "mod": 7,
+      "geographic": 7
+    },
+    "PRU": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "PUK": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "PUN": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "QAT": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "RAJ": {
+      "mod": 45,
+      "geographic": 39
+    },
+    "RCD": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "ROM": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "RWA": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SAF": {
+      "mod": 9,
+      "geographic": 9
+    },
+    "SAM": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SAO": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SAU": {
+      "mod": 10,
+      "geographic": 10
+    },
+    "SEN": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "SER": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "SEY": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SHA": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SHN": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SIA": {
+      "mod": 5,
+      "geographic": 5
+    },
+    "SIE": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SIN": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SLO": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SLV": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SML": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "SNA": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "SOL": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SOM": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SOO": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SOV": {
+      "mod": 84,
+      "geographic": 83
+    },
+    "SPR": {
+      "mod": 20,
+      "geographic": 20
+    },
+    "SRI": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SSU": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "STK": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "STL": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "STV": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SUD": {
+      "mod": 10,
+      "geographic": 10
+    },
+    "SUR": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "SWA": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SWE": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "SWI": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "SWS": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "SYR": {
+      "mod": 15,
+      "geographic": 13
+    },
+    "TAI": {
+      "mod": 11,
+      "geographic": 11
+    },
+    "TAJ": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "TAL": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "TML": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "TNZ": {
+      "mod": 11,
+      "geographic": 11
+    },
+    "TOG": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "TON": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "TRI": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "TRK": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "TUL": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "TUN": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "TUR": {
+      "mod": 18,
+      "geographic": 18
+    },
+    "UAE": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "UGA": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "UKR": {
+      "mod": 29,
+      "geographic": 29
+    },
+    "UNI": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "URG": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "USA": {
+      "mod": 64,
+      "geographic": 64
+    },
+    "UZB": {
+      "mod": 3,
+      "geographic": 3
+    },
+    "VAN": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "VEN": {
+      "mod": 6,
+      "geographic": 6
+    },
+    "VER": {
+      "mod": 1,
+      "geographic": 1
+    },
+    "VIE": {
+      "mod": 8,
+      "geographic": 8
+    },
+    "WAA": {
+      "mod": 2,
+      "geographic": 2
+    },
+    "YEM": {
+      "mod": 13,
+      "geographic": 13
+    },
+    "ZAM": {
+      "mod": 4,
+      "geographic": 4
+    },
+    "ZIM": {
+      "mod": 3,
+      "geographic": 3
+    }
+  }
+}

@@ -1,0 +1,36 @@
+BunnyWorld 0.1.6 geographic inputs and derived data (including 0.1.5 control seed)
+
+GSHHG 2.3.7 high-resolution shorelines and lakes
+Paul Wessel (University of Hawaii) and Walter H. F. Smith (NOAA), with contributors.
+https://www.soest.hawaii.edu/pwessel/gshhg/
+https://github.com/GenericMappingTools/gshhg-gmt/releases/tag/2.3.7
+Retrieved gshhg-shp-2.3.7.zip. High-resolution GSHHS levels 1–5 selected.
+LGPL v3 or later. Full selected input geometry, original data license and the
+LGPL/GPL notices accompany the source. No GSHHG political border layer is used.
+Derived map IDs retain the game scenario's political data.
+
+Natural Earth admin-1, map-unit, disputed-area, lakes and city reference data
+https://www.naturalearthdata.com/
+Public domain. Data derived from Natural Earth vector repository. Disputed-area
+outlines are geographic reference, not automatic modern control assignments.
+
+Myanmar township geometry: geoBoundaries gbOpen MMR ADM3
+Boundary sources: The Myanmar Analytics Project, USAID.
+https://www.geoboundaries.org/api/current/gbOpen/MMR/ADM3/
+CC BY 4.0: https://creativecommons.org/licenses/by/4.0/
+The full metadata is bundled as tools/cartography/myanmar_source.json. Township
+polygons are merged as a geographic proxy for Northern Wa's core; no 2008 legal
+status or 2024 Hopang transfer is assigned to January 2000.
+
+Control proxies
+Upper Kodori, Akhalgori and Georgian village corridors before the 2008 war use
+explicit approximate polygons. They are not measured ceasefire-line data.
+Sources and coordinates: tools/cartography/control_2000_overrides.geojson.
+UNOMIG background; Secretary-General report S/2000/39; OSCE/ODIHR 2008 report.
+The southern Wa footprint is likewise an approximate scenario control polygon,
+constrained to Burmese land. It is not a whole administrative township.
+
+Province cells
+Deterministic gameplay cells clipped inside native Natural Earth regions, using
+fresh IDs for the 0.1.6 layout. These are newly generated gameplay
+geometry, not real-world administrative subdivisions or exact HOI4 outlines.

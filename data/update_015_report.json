@@ -1,0 +1,23 @@
+{
+  "shoreline_vertices": 1924130,
+  "resolution": [
+    16384,
+    8192
+  ],
+  "provinces": 13391,
+  "land_adjacency_edges": 36180,
+  "corrected_regions": [
+    763,
+    762,
+    1159,
+    1160,
+    705,
+    706,
+    497,
+    931
+  ],
+  "province_geometry": "Deterministic gameplay cells clipped to geographic regions, retaining original MD province IDs. No demographic data. Not administrative or historical HOI4 province boundaries.",
+  "georgia_control_limit": "Pre-2008 Georgian-controlled Upper Kodori, Akhalgori and village corridors preserved through explicit geographic proxies, not precise surveyed lines.",
+  "wa_boundary_limit": "Northern core township union excluding later Hopang control; southern control perimeter is an approximate geographic proxy.",
+  "terrain": "NASA Blue Marble July 2004, static daytime topography, 16384x8192; geography reference, not 2000 political control"
+}

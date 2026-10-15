@@ -1,0 +1,127 @@
+{
+  "version": "0.2.0.3",
+  "representative_buildings": 114191,
+  "clusters": 2233,
+  "landmarks": 8,
+  "minimum_displayed_gap_km": 0.25,
+  "capacity_limited_clusters": [
+    {
+      "cluster": 169000,
+      "target": 186,
+      "placed": 147
+    },
+    {
+      "cluster": 462600,
+      "target": 140,
+      "placed": 95
+    },
+    {
+      "cluster": 516400,
+      "target": 108,
+      "placed": 107
+    },
+    {
+      "cluster": 777500,
+      "target": 28,
+      "placed": 14
+    },
+    {
+      "cluster": 778600,
+      "target": 42,
+      "placed": 35
+    },
+    {
+      "cluster": 153800,
+      "target": 5,
+      "placed": 1
+    },
+    {
+      "cluster": 153900,
+      "target": 3,
+      "placed": 1
+    },
+    {
+      "cluster": 154000,
+      "target": 7,
+      "placed": 2
+    },
+    {
+      "cluster": 154200,
+      "target": 45,
+      "placed": 6
+    },
+    {
+      "cluster": 154300,
+      "target": 28,
+      "placed": 12
+    },
+    {
+      "cluster": 40200,
+      "target": 64,
+      "placed": 24
+    },
+    {
+      "cluster": 292700,
+      "target": 48,
+      "placed": 14
+    },
+    {
+      "cluster": 645000,
+      "target": 32,
+      "placed": 22
+    },
+    {
+      "cluster": 419700,
+      "target": 32,
+      "placed": 29
+    },
+    {
+      "cluster": 543800,
+      "target": 16,
+      "placed": 6
+    },
+    {
+      "cluster": 1151900,
+      "target": 16,
+      "placed": 0
+    },
+    {
+      "cluster": 495400,
+      "target": 60,
+      "placed": 52
+    },
+    {
+      "cluster": 55000,
+      "target": 21,
+      "placed": 7
+    },
+    {
+      "cluster": 55200,
+      "target": 11,
+      "placed": 7
+    },
+    {
+      "cluster": 1077700,
+      "target": 40,
+      "placed": 24
+    },
+    {
+      "cluster": 165300,
+      "target": 80,
+      "placed": 49
+    },
+    {
+      "cluster": 154100,
+      "target": 2,
+      "placed": 1
+    },
+    {
+      "cluster": 1261600,
+      "target": 40,
+      "placed": 10
+    }
+  ],
+  "layout": "Shared street-block orientation, avenues and empty plazas; landmark grounds reserved",
+  "river_clearance_km": 1.9,
+  "runtime_regeneration": false
+}

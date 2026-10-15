@@ -1,0 +1,356 @@
+{
+  "version": "0.2.0.5",
+  "files": [
+    {
+      "path": "assets/land_boundaries.res",
+      "bytes": 42264948,
+      "sha256": "4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "08b71c010ba16e7922e82748b94061eaead4753e51b3695241b91979608335b1"
+        },
+        {
+          "path": "repository_assets/4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc.zlib.part001",
+          "bytes": 3239802,
+          "sha256": "93c29adea6305faf9209dd7c746299a589bcacc78f21e147618c0bb928ff84a0"
+        }
+      ]
+    },
+    {
+      "path": "assets/materials/terrain_materials.bwm",
+      "bytes": 22369860,
+      "sha256": "779fff23fa83d46853f986993f33356b230b55ff869feb0f4432abc17cbce37f",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/779fff23fa83d46853f986993f33356b230b55ff869feb0f4432abc17cbce37f.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "703eef6c15f1550705d87eb77be483a2faac198fc6dada76b1de64b5687b67c5"
+        },
+        {
+          "path": "repository_assets/779fff23fa83d46853f986993f33356b230b55ff869feb0f4432abc17cbce37f.zlib.part001",
+          "bytes": 8388608,
+          "sha256": "c3fd11664798f453aebf7e775cc04693857ff61c1cd98cf173a68e40940cb612"
+        },
+        {
+          "path": "repository_assets/779fff23fa83d46853f986993f33356b230b55ff869feb0f4432abc17cbce37f.zlib.part002",
+          "bytes": 2275800,
+          "sha256": "5151b23f2eb09566ae6f8da3a89f2a9ccfab9719f4aecacdf6d609fc6bfc5588"
+        }
+      ]
+    },
+    {
+      "path": "assets/materials/terrain_materials_high.bwm",
+      "bytes": 89478724,
+      "sha256": "971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "06a54fd082c0587ce36b8e348b3112cfbc75f4b5c3459ebd26213e60c579918b"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part001",
+          "bytes": 8388608,
+          "sha256": "ac771c83f9ea115a7ea575d7a70d87a3d5d5cd2d08ad664fedbe7048b5fbb7ec"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part002",
+          "bytes": 8388608,
+          "sha256": "f966c080e26ab035b03b3c836d1105b1e877ffeb3c7d9e5e3b7d50ffc4d71a55"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part003",
+          "bytes": 8388608,
+          "sha256": "7713f4f90af4278139ad2b3b4cf5a6230ff4401814813bc67f4d45aa54f32d74"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part004",
+          "bytes": 8388608,
+          "sha256": "cf5f4cea64b77a5ce0870b00f0d07c11fbafd431703950b38e9516b3dc17618d"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part005",
+          "bytes": 8388608,
+          "sha256": "92230e4522507205d7e4d7826cc578aef3a11d38fe37cf93d9379a1b6ac78182"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part006",
+          "bytes": 8388608,
+          "sha256": "bb315723ce8d451d0ea07245db598d95c9fa3c08fa79a9b0c7b543ec1b61e3b4"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part007",
+          "bytes": 8388608,
+          "sha256": "47e0e743ad249d7af54e81f444ec72153456d9f785dc8090f9a9f4660fc2154a"
+        },
+        {
+          "path": "repository_assets/971ae2983b1861ec6bb5549a1703316bc361a79019a7fdd5e51154e26d001da4.zlib.part008",
+          "bytes": 6506869,
+          "sha256": "c6351fa433662829e4f0bd474dc2ca1040154d00c49e8a0311df34287ec41397"
+        }
+      ]
+    },
+    {
+      "path": "assets/province_boundaries.res",
+      "bytes": 41083868,
+      "sha256": "562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "76ed906e97abf690f30bec6f64d4527ee99415af80803fc8c151aecc7ac8726b"
+        },
+        {
+          "path": "repository_assets/562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a.zlib.part001",
+          "bytes": 2925153,
+          "sha256": "e3530d624c22c99198f79d2d192f3ac8e2ae0fe88f3947598dbca7ddf89f6b4b"
+        }
+      ]
+    },
+    {
+      "path": "assets/relief_data.bin",
+      "bytes": 67108864,
+      "sha256": "8dbac71d64bfa13d827e56d29b5328ec4d21f49cbbbfea0d5c83bea914a2d2c0",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/8dbac71d64bfa13d827e56d29b5328ec4d21f49cbbbfea0d5c83bea914a2d2c0.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "778e31236511e1e526de6f76ba1cdecadd9e6e5e145c8227dd91917d1e53ffa4"
+        },
+        {
+          "path": "repository_assets/8dbac71d64bfa13d827e56d29b5328ec4d21f49cbbbfea0d5c83bea914a2d2c0.zlib.part001",
+          "bytes": 8216931,
+          "sha256": "1ec7cf5d2c1b69579c388dc8582b3760bcb667c24ec816d46504744c9fc33b20"
+        }
+      ]
+    },
+    {
+      "path": "assets/relief_data.png",
+      "bytes": 20647572,
+      "sha256": "5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "1306953d535424b95dce3c0b841e135d82809d102be4800e6cc510cd0d3913eb"
+        },
+        {
+          "path": "repository_assets/5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab.zlib.part001",
+          "bytes": 8388608,
+          "sha256": "166c84913940cf50bdb0f191fbe6c702520cf22b3705c3c89b274bb679a9d181"
+        },
+        {
+          "path": "repository_assets/5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab.zlib.part002",
+          "bytes": 3713434,
+          "sha256": "d1180496812ac999c9be39a2e1ce233f8ea1c4a1c9a1bd7288d9a97b4d5f0ad9"
+        }
+      ]
+    },
+    {
+      "path": "assets/sea_boundaries.res",
+      "bytes": 14713468,
+      "sha256": "7440882a799475f1b31be77f6ca27145936ed8d2f3c9a52c84571ec2a6a56a74",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/7440882a799475f1b31be77f6ca27145936ed8d2f3c9a52c84571ec2a6a56a74.zlib.part000",
+          "bytes": 4083742,
+          "sha256": "3e09691c4685803cd5480acd095fc33d90e98e3dc71aa19b6933a3da915407ca"
+        }
+      ]
+    },
+    {
+      "path": "assets/terrain_color.png",
+      "bytes": 13630001,
+      "sha256": "21f3afb9bd24f94246cc3a83acebfccb3dc5f0e12bc8f7745dbbf1a849e670c5",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/21f3afb9bd24f94246cc3a83acebfccb3dc5f0e12bc8f7745dbbf1a849e670c5.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "32ad7fd3fa99352b0975c34bc44e8bf3715b8418fc613c7a4098e64df1092626"
+        },
+        {
+          "path": "repository_assets/21f3afb9bd24f94246cc3a83acebfccb3dc5f0e12bc8f7745dbbf1a849e670c5.zlib.part001",
+          "bytes": 5030633,
+          "sha256": "f11a570b9d50c3532ffa91c8df34ec984cfe11fe3b0f9950393700206ffcf7b1"
+        }
+      ]
+    },
+    {
+      "path": "assets/terrain_color_seed_0202.png",
+      "bytes": 13882217,
+      "sha256": "8e0e8638d79648a37558353f9c124d9de515cc8faa830a1808d5ac6e927c648c",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/8e0e8638d79648a37558353f9c124d9de515cc8faa830a1808d5ac6e927c648c.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "787f44a05c572fb91d5dffa2b5cb13ff6acbb80f7ccac57295fee05d974a05af"
+        },
+        {
+          "path": "repository_assets/8e0e8638d79648a37558353f9c124d9de515cc8faa830a1808d5ac6e927c648c.zlib.part001",
+          "bytes": 5334375,
+          "sha256": "c0c9ef630206775a65a39a39676d3b0b360c803046c18810e206b176184d649b"
+        }
+      ]
+    },
+    {
+      "path": "assets/terrain_types.png",
+      "bytes": 9723198,
+      "sha256": "bba51296a899d795be1375f714d662237941be824fc664eda74b91f2f85bcd49",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/bba51296a899d795be1375f714d662237941be824fc664eda74b91f2f85bcd49.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "310b004de56142d4a105c7a3cea96d958a089aa094a624d3a10833804fcdd06e"
+        },
+        {
+          "path": "repository_assets/bba51296a899d795be1375f714d662237941be824fc664eda74b91f2f85bcd49.zlib.part001",
+          "bytes": 1202219,
+          "sha256": "982f9371394fcbde0bb82c7fd31eed5cdc1b2fb7eed220904967669a53d3e9e5"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/etopo_021.npz",
+      "bytes": 49920706,
+      "sha256": "2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "51154bc9d0fefa9a17f9ac258274ecd610d5e62b482f08dfd705a4344a7e1135"
+        },
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part001",
+          "bytes": 8388608,
+          "sha256": "952781cf85fd070b54235fec68379aa6646326d12fa5c630e7bc0c33faa5c5df"
+        },
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part002",
+          "bytes": 8388608,
+          "sha256": "15722b6294503d54fe633a412771a579944f64640f5a0f2b645ee77c585be79f"
+        },
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part003",
+          "bytes": 8388608,
+          "sha256": "13c6a21f9549c1d0bfc97efbbf710fde09d96f4f49db513c691b416f55d6f46c"
+        },
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part004",
+          "bytes": 8388608,
+          "sha256": "f9d62d455c28f796ba31e088b00dd6a745831cad799bfda4264ead98a8502f62"
+        },
+        {
+          "path": "repository_assets/2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5.zlib.part005",
+          "bytes": 7989585,
+          "sha256": "b659c42690564731302c1b29663373ac862abc664973eec687ff8826e195cba6"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/geographic_subdivisions.geojson",
+      "bytes": 31539678,
+      "sha256": "559de1b54adcec2f58ddda475a7e041080b0f36cfead30a658ab7a077c339e65",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/559de1b54adcec2f58ddda475a7e041080b0f36cfead30a658ab7a077c339e65.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "8c779271a370475a3d08fd86c1ddb8b3e99cb9148cee0f659db4182cec6f4c65"
+        },
+        {
+          "path": "repository_assets/559de1b54adcec2f58ddda475a7e041080b0f36cfead30a658ab7a077c339e65.zlib.part001",
+          "bytes": 2035796,
+          "sha256": "85f141fc9a5cebb0aff2cd7afcd78b21de79aa569504fac4456b849c1112afcd"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/gshhg_high.zip",
+      "bytes": 20328717,
+      "sha256": "dce92fba7e00d59272354d217fa9c92aeb3d0cee1b86629e7a6307c29a5b7dc4",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/dce92fba7e00d59272354d217fa9c92aeb3d0cee1b86629e7a6307c29a5b7dc4.zlib.part000",
+          "bytes": 8388608,
+          "sha256": "5c1e33060ccb82646c790b3f834c5e02a9c1ed3c3ded7f163f599d841ed5d144"
+        },
+        {
+          "path": "repository_assets/dce92fba7e00d59272354d217fa9c92aeb3d0cee1b86629e7a6307c29a5b7dc4.zlib.part001",
+          "bytes": 8388608,
+          "sha256": "6693f08125d3c30a5e8ed9248a696e1098d1787bb920d30d16e157122b326108"
+        },
+        {
+          "path": "repository_assets/dce92fba7e00d59272354d217fa9c92aeb3d0cee1b86629e7a6307c29a5b7dc4.zlib.part002",
+          "bytes": 2426788,
+          "sha256": "8c28743ef097ee4f795c82775417fb65636053491c2bb8675483452d2e89851b"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/myanmar_townships.geojson",
+      "bytes": 8603775,
+      "sha256": "072df2522f0b9b3678a327f4b685c2683df64e17e68c5cca96331a18d3287b44",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/072df2522f0b9b3678a327f4b685c2683df64e17e68c5cca96331a18d3287b44.zlib.part000",
+          "bytes": 2839806,
+          "sha256": "a6da48c89eb6ea1303240e58da45418992f0e038e51754b072efa61d3d754470"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/natural_earth_map_units.geojson",
+      "bytes": 12580087,
+      "sha256": "a5c7ba944877fabf8d6ec155cfa95886f88b2b348cfc82ed4cb07f2295f492e5",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/a5c7ba944877fabf8d6ec155cfa95886f88b2b348cfc82ed4cb07f2295f492e5.zlib.part000",
+          "bytes": 4501749,
+          "sha256": "433bcb35a41e1156d5a43f4a23a498d4496b48e9d8ebf6dea1880d1699aedba3"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/province_seed_020.json",
+      "bytes": 9475689,
+      "sha256": "96921c0d60f71a8f877af6fe6e3cc93f3661d9895d17b37963f5c758459fc57e",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/96921c0d60f71a8f877af6fe6e3cc93f3661d9895d17b37963f5c758459fc57e.zlib.part000",
+          "bytes": 1729463,
+          "sha256": "cd9f1e2154076aabc172df36ea458440329e42d725bd05d6dce4720c1c561201"
+        }
+      ]
+    },
+    {
+      "path": "tools/cartography/waterways_0201.bin",
+      "bytes": 13635088,
+      "sha256": "474fe71c2f7b32945edae5386c011aef0e7f6d20954b16112a4a79c75e780dbe",
+      "encoding": "zlib",
+      "parts": [
+        {
+          "path": "repository_assets/474fe71c2f7b32945edae5386c011aef0e7f6d20954b16112a4a79c75e780dbe.zlib.part000",
+          "bytes": 3359972,
+          "sha256": "826b0cad19124437f7e889e755e50a43c7caf5a02f37ec69283af701da3475bb"
+        }
+      ]
+    }
+  ]
+}

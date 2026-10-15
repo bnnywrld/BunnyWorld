@@ -1,0 +1,10 @@
+Vatican City boundary reference
+geoBoundaries gbOpen VAT ADM0, boundaryID VAT-ADM0-52476719
+https://www.geoboundaries.org/api/current/gbOpen/VAT/ADM0/
+https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/VAT/ADM0/geoBoundaries-VAT-ADM0.geojson
+Provider metadata: geoBoundaries, Wikimedia Commons; public-domain source flag-map geometry. Boundary year represented: 2017. Source metadata and full GeoJSON are bundled in tools/cartography/vatican_reference_022r2*; the derived simplified polygon preserves the source's geographic scale. geoBoundaries database attribution: William & Mary geoLab / geoBoundaries (Runfola et al.).
+
+This is an approximate geographic reference, not an exact legal/cadastral border. Its measured polygon area differs from the official stated territorial area. The province area label uses the Vatican State's stated 0.44 km²:
+https://vaticanstate.va/en/state-and-government/general-informations/geography.html
+
+Game colouring, ray picking and border drawing share the same derived polygon; the coarse atlas identity pixel does not enlarge the visible or clickable country. No new country or territorial claim is added.

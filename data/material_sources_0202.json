@@ -1,0 +1,62 @@
+{
+  "aerial_sand": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "421927b11af0314bb237cc584f89aaf0",
+    "metadata_url": "https://api.polyhaven.com/files/aerial_sand",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "aerial_grass_rock": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "dc4dbd56d49f3278d1fcde8e58159a84",
+    "metadata_url": "https://api.polyhaven.com/files/aerial_grass_rock",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "rocky_terrain": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "be72bdc58766671c1f7f20e010d36f09",
+    "metadata_url": "https://api.polyhaven.com/files/rocky_terrain",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "snow_field_aerial": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "57b60bd359038d085f1dcbd7d6ad03c2",
+    "metadata_url": "https://api.polyhaven.com/files/snow_field_aerial",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "sparse_grass": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "569f9a6a0cf566c88d281bc81f832e97",
+    "metadata_url": "https://api.polyhaven.com/files/sparse_grass",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "brown_mud_dry": {
+    "width": 4096,
+    "height": 4096,
+    "md5": "38e71eb35e2ab4100f7e9f3cd4e16e66",
+    "metadata_url": "https://api.polyhaven.com/files/brown_mud_dry",
+    "license": "CC0 1.0",
+    "native_photo": true
+  },
+  "forest_master": {
+    "native_size": [
+      1254,
+      1254
+    ],
+    "prepared_size": [
+      4096,
+      4096
+    ],
+    "native_photo": false,
+    "source": "Built-in image generation, full-frame woodland canopy; resized offline"
+  }
+}

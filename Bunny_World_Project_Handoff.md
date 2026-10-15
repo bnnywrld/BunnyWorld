@@ -1,0 +1,17 @@
+# BunnyWorld 0.2.0.5 handoff
+
+Use bunny_world_v0_2_0_5_source_STANDALONE.zip for future work and bunny_world_v0_2_0_5_windows_STANDALONE.zip for Windows testing. Historical 0.1 project attachments are references, not the current baseline. Windows 10/11 x64, download/extract/run; year-2000 scenario.
+
+The user approved the 0.2.0.5 UI design in this chat. Top controls remain attached to the top edge in compact boxes, with the globe behind them. Stats/navigation sit left; clock/session right; map picker/search together below right. Abbreviated figures retain exact hover values. Expand aspect handling fills wide/maximized windows.
+
+Territory drawer is 300 pixels wide, half-height at the bottom, right of own-country control and left of foreign diplomacy. Its attached arrow slides the drawer behind its parent while retaining a reversed handle. National and State panels each show one pie with Age/Religion/Education/Activity selectors. Outlook comes before national demographics. Country charts are national-only; territory charts are State-only. State demographics remain estimates from existing profiles; unknown data/denominators must not be fabricated.
+
+Budget is now Economy; National projects is Construction. Production, Diplomacy, Trade, Military, Intelligence and Space Exploration are disabled Planned buttons. The working header demographics shortcut opens the inline national profile. This patch does not implement those planned simulation systems.
+
+Implementation: scripts/main.gd owns viewport/overlay/drawer layout; scripts/foundation_ui.gd owns stat/navigation controls; scripts/compact_demographics.gd supplies inline charts. New icons are authored SVGs. tests/ui_0205_tests.gd exercises the current UI. Use managed Window.size for resize tests; raw DisplayServer changes did not resize the managed viewport in this test environment.
+
+Application/EXE version is 0.2.0.5; unchanged data scenario is bunny_world_2000_0_2_0_3, save schema 10. Counts stay 223 countries, 1,233 States, 13,481 provinces and 6,144,737,528 residents. All baseline data/assets and simulation/terrain/demographic model scripts are preserved. Read RELEASE_NOTES.md, DEVELOPMENT.md, TEST_RESULTS.md and BUILD_INFO.json. Text QA evidence is under validation_0205. The final exported pack passed rendered UI/full-smoke and integrity checks with matching Linux Godot; native Windows testing remains for the user.
+
+Standing rules: smooth travel takes priority; longer startup is acceptable. Preserve the resident eight-layer material array, fixed terrain grid and cached city meshes. No camera-triggered geographic decoding/uploads, grid rebuilding or scenery regeneration. Budget about 500 MB runtime; distinguish runtime/ZIP/VRAM. No demographic or annual scenery growth yet. No old-save migration or compatibility work unless explicitly requested; the user tests fresh campaigns. Current one-chart selectors supersede the former normal-panel four-chart presentation; the detailed legacy dialog remains internally for diagnostics.
+
+Geography/river/terrain limitations are retained from 0.2.0.3: approximate source registration, coast/elevation sampling, province population estimates, representative scenery/materials and limited trial river channels. Geographic regeneration notes remain under documentation/versions/0_2_0_3. Continue from the user's test feedback instead of starting unrelated roadmap patches.

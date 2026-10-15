@@ -1,0 +1,1135 @@
+{
+  "source": "World Bank corporate-secretariat membership register, July 2020; IBRD dates, January 2000 cutoff, FRY activity correction",
+  "records": [
+    {
+      "name": "Afghanistan",
+      "date": "1955-07-14",
+      "tag": "AFG"
+    },
+    {
+      "name": "Albania",
+      "date": "1991-10-15",
+      "tag": "ALB"
+    },
+    {
+      "name": "Algeria",
+      "date": "1963-09-26",
+      "tag": "ALG"
+    },
+    {
+      "name": "Angola",
+      "date": "1989-09-19",
+      "tag": "AGL"
+    },
+    {
+      "name": "Antigua and Barbuda",
+      "date": "1983-09-22",
+      "tag": "ANT"
+    },
+    {
+      "name": "Argentina",
+      "date": "1956-09-20",
+      "tag": "ARG"
+    },
+    {
+      "name": "Armenia",
+      "date": "1992-09-16",
+      "tag": "ARM"
+    },
+    {
+      "name": "Australia",
+      "date": "1947-08-05",
+      "tag": "AST"
+    },
+    {
+      "name": "Austria",
+      "date": "1948-08-27",
+      "tag": "AUS"
+    },
+    {
+      "name": "Azerbaijan",
+      "date": "1992-09-18",
+      "tag": "AZE"
+    },
+    {
+      "name": "Bahamas, The",
+      "date": "1973-08-21",
+      "tag": "BAH"
+    },
+    {
+      "name": "Bahrain",
+      "date": "1972-09-15",
+      "tag": "BHR"
+    },
+    {
+      "name": "Bangladesh",
+      "date": "1972-08-17",
+      "tag": "BAN"
+    },
+    {
+      "name": "Barbados",
+      "date": "1974-09-12",
+      "tag": "BAR"
+    },
+    {
+      "name": "Belarus",
+      "date": "1992-07-10",
+      "tag": "BLR"
+    },
+    {
+      "name": "Belgium",
+      "date": "1945-12-27",
+      "tag": "BEL"
+    },
+    {
+      "name": "Belize",
+      "date": "1982-03-19",
+      "tag": "BLZ"
+    },
+    {
+      "name": "Benin",
+      "date": "1963-07-10",
+      "tag": "BEN"
+    },
+    {
+      "name": "Bhutan",
+      "date": "1981-09-28",
+      "tag": "BHU"
+    },
+    {
+      "name": "Bolivia",
+      "date": "1945-12-27",
+      "tag": "BOL"
+    },
+    {
+      "name": "Bosnia and Herzegovina",
+      "date": "1993-02-25",
+      "tag": "BOS"
+    },
+    {
+      "name": "Botswana",
+      "date": "1968-07-24",
+      "tag": "BOT"
+    },
+    {
+      "name": "Brazil",
+      "date": "1946-01-14",
+      "tag": "BRA"
+    },
+    {
+      "name": "Brunei Darussalam",
+      "date": "1995-10-10",
+      "tag": "BRU"
+    },
+    {
+      "name": "Bulgaria",
+      "date": "1990-09-25",
+      "tag": "BUL"
+    },
+    {
+      "name": "Burkina Faso",
+      "date": "1963-05-02",
+      "tag": "BFA"
+    },
+    {
+      "name": "Burundi",
+      "date": "1963-09-28",
+      "tag": "BUR"
+    },
+    {
+      "name": "Cabo Verde",
+      "date": "1978-11-20",
+      "tag": "VER"
+    },
+    {
+      "name": "Cambodia",
+      "date": "1970-07-22",
+      "tag": "CBD"
+    },
+    {
+      "name": "Cameroon",
+      "date": "1963-07-10",
+      "tag": "CAM"
+    },
+    {
+      "name": "Canada",
+      "date": "1945-12-27",
+      "tag": "CAN"
+    },
+    {
+      "name": "Central African Republic",
+      "date": "1963-07-10",
+      "tag": "CAR"
+    },
+    {
+      "name": "Chad",
+      "date": "1963-07-10",
+      "tag": "CHA"
+    },
+    {
+      "name": "Chile",
+      "date": "1945-12-31",
+      "tag": "CHL"
+    },
+    {
+      "name": "China",
+      "date": "1945-12-27",
+      "tag": "CHI"
+    },
+    {
+      "name": "Colombia",
+      "date": "1946-12-24",
+      "tag": "COL"
+    },
+    {
+      "name": "Comoros",
+      "date": "1976-10-28",
+      "tag": "COM"
+    },
+    {
+      "name": "Congo, Democratic Republic of",
+      "date": "1963-09-28",
+      "tag": "DRC"
+    },
+    {
+      "name": "Congo, Republic of",
+      "date": "1963-07-10",
+      "tag": "CNG"
+    },
+    {
+      "name": "Costa Rica",
+      "date": "1946-01-08",
+      "tag": "COS"
+    },
+    {
+      "name": "Cote d'Ivoire",
+      "date": "1963-03-11",
+      "tag": "CDI"
+    },
+    {
+      "name": "Croatia",
+      "date": "1993-02-25",
+      "tag": "CRO"
+    },
+    {
+      "name": "Cyprus",
+      "date": "1961-12-21",
+      "tag": "CYP"
+    },
+    {
+      "name": "Czech Republic",
+      "date": "1993-01-01",
+      "tag": "CZE"
+    },
+    {
+      "name": "Denmark",
+      "date": "1946-03-30",
+      "tag": "DEN"
+    },
+    {
+      "name": "Djibouti",
+      "date": "1980-10-01",
+      "tag": "DJI"
+    },
+    {
+      "name": "Dominica",
+      "date": "1980-09-29",
+      "tag": "DMI"
+    },
+    {
+      "name": "Dominican Republic",
+      "date": "1945-12-28",
+      "tag": "DOM"
+    },
+    {
+      "name": "Ecuador",
+      "date": "1945-12-28",
+      "tag": "ECU"
+    },
+    {
+      "name": "Egypt, Arab Republic of",
+      "date": "1945-12-27",
+      "tag": "EGY"
+    },
+    {
+      "name": "El Salvador",
+      "date": "1946-03-14",
+      "tag": "ELS"
+    },
+    {
+      "name": "Equatorial Guinea",
+      "date": "1970-07-01",
+      "tag": "EGU"
+    },
+    {
+      "name": "Eritrea",
+      "date": "1994-07-06",
+      "tag": "ERI"
+    },
+    {
+      "name": "Estonia",
+      "date": "1992-06-23",
+      "tag": "EST"
+    },
+    {
+      "name": "Eswatini",
+      "date": "1969-09-22",
+      "tag": "SWA"
+    },
+    {
+      "name": "Ethiopia",
+      "date": "1945-12-27",
+      "tag": "ETH"
+    },
+    {
+      "name": "Fiji",
+      "date": "1971-05-28",
+      "tag": "FIJ"
+    },
+    {
+      "name": "Finland",
+      "date": "1948-01-14",
+      "tag": "FIN"
+    },
+    {
+      "name": "France",
+      "date": "1945-12-27",
+      "tag": "FRA"
+    },
+    {
+      "name": "Gabon",
+      "date": "1963-09-10",
+      "tag": "GAB"
+    },
+    {
+      "name": "Gambia, The",
+      "date": "1967-10-18",
+      "tag": "GAM"
+    },
+    {
+      "name": "Georgia",
+      "date": "1992-08-07",
+      "tag": "GEO"
+    },
+    {
+      "name": "Germany",
+      "date": "1952-08-14",
+      "tag": "GER"
+    },
+    {
+      "name": "Ghana",
+      "date": "1957-09-20",
+      "tag": "GAH"
+    },
+    {
+      "name": "Greece",
+      "date": "1945-12-27",
+      "tag": "GRE"
+    },
+    {
+      "name": "Grenada",
+      "date": "1975-08-27",
+      "tag": "GRA"
+    },
+    {
+      "name": "Guatemala",
+      "date": "1945-12-28",
+      "tag": "GUA"
+    },
+    {
+      "name": "Guinea",
+      "date": "1963-09-28",
+      "tag": "GUI"
+    },
+    {
+      "name": "Guinea-Bissau",
+      "date": "1977-03-24",
+      "tag": "GUB"
+    },
+    {
+      "name": "Guyana",
+      "date": "1966-09-26",
+      "tag": "GUY"
+    },
+    {
+      "name": "Haiti",
+      "date": "1953-09-08",
+      "tag": "HAI"
+    },
+    {
+      "name": "Honduras",
+      "date": "1945-12-27",
+      "tag": "HON"
+    },
+    {
+      "name": "Hungary",
+      "date": "1982-07-07",
+      "tag": "HUN"
+    },
+    {
+      "name": "Iceland",
+      "date": "1945-12-27",
+      "tag": "ICE"
+    },
+    {
+      "name": "India",
+      "date": "1945-12-27",
+      "tag": "RAJ"
+    },
+    {
+      "name": "Indonesia",
+      "date": "1967-04-13",
+      "tag": "IND"
+    },
+    {
+      "name": "Iran, Islamic Republic of",
+      "date": "1945-12-29",
+      "tag": "PER"
+    },
+    {
+      "name": "Iraq",
+      "date": "1945-12-27",
+      "tag": "IRQ"
+    },
+    {
+      "name": "Ireland",
+      "date": "1957-08-08",
+      "tag": "IRE"
+    },
+    {
+      "name": "Israel",
+      "date": "1954-07-12",
+      "tag": "ISR"
+    },
+    {
+      "name": "Italy",
+      "date": "1947-03-27",
+      "tag": "ITA"
+    },
+    {
+      "name": "Jamaica",
+      "date": "1963-02-21",
+      "tag": "JAM"
+    },
+    {
+      "name": "Japan",
+      "date": "1952-08-13",
+      "tag": "JAP"
+    },
+    {
+      "name": "Jordan",
+      "date": "1952-08-29",
+      "tag": "JOR"
+    },
+    {
+      "name": "Kazakhstan",
+      "date": "1992-07-23",
+      "tag": "KAZ"
+    },
+    {
+      "name": "Kenya",
+      "date": "1964-02-03",
+      "tag": "KEN"
+    },
+    {
+      "name": "Kiribati",
+      "date": "1986-09-29",
+      "tag": null
+    },
+    {
+      "name": "Korea, Republic of",
+      "date": "1955-08-26",
+      "tag": "KOR"
+    },
+    {
+      "name": "Kosovo",
+      "date": "2009-06-29",
+      "tag": "KOS"
+    },
+    {
+      "name": "Kuwait",
+      "date": "1962-09-13",
+      "tag": "KUW"
+    },
+    {
+      "name": "Kyrgyz Republic",
+      "date": "1992-09-18",
+      "tag": "KYR"
+    },
+    {
+      "name": "Lao People's Democratic Republic",
+      "date": "1961-07-05",
+      "tag": "LAO"
+    },
+    {
+      "name": "Latvia",
+      "date": "1992-08-11",
+      "tag": "LAT"
+    },
+    {
+      "name": "Lebanon",
+      "date": "1947-04-14",
+      "tag": "LEB"
+    },
+    {
+      "name": "Lesotho",
+      "date": "1968-07-25",
+      "tag": "LES"
+    },
+    {
+      "name": "Liberia",
+      "date": "1962-03-28",
+      "tag": "LIB"
+    },
+    {
+      "name": "Libya",
+      "date": "1958-09-17",
+      "tag": "LBA"
+    },
+    {
+      "name": "Lithuania",
+      "date": "1992-07-06",
+      "tag": "LIT"
+    },
+    {
+      "name": "Luxembourg",
+      "date": "1945-12-27",
+      "tag": "LUX"
+    },
+    {
+      "name": "Madagascar",
+      "date": "1963-09-25",
+      "tag": "MAD"
+    },
+    {
+      "name": "Malawi",
+      "date": "1965-07-19",
+      "tag": "MLW"
+    },
+    {
+      "name": "Malaysia",
+      "date": "1958-03-07",
+      "tag": "MAY"
+    },
+    {
+      "name": "Maldives",
+      "date": "1978-01-13",
+      "tag": "MLD"
+    },
+    {
+      "name": "Mali",
+      "date": "1963-09-27",
+      "tag": "MAL"
+    },
+    {
+      "name": "Malta",
+      "date": "1983-09-26",
+      "tag": "MLT"
+    },
+    {
+      "name": "Marshall Islands",
+      "date": "1992-05-21",
+      "tag": null
+    },
+    {
+      "name": "Mauritania",
+      "date": "1963-09-10",
+      "tag": "MAU"
+    },
+    {
+      "name": "Mauritius",
+      "date": "1968-09-23",
+      "tag": "MRT"
+    },
+    {
+      "name": "Mexico",
+      "date": "1945-12-31",
+      "tag": "MEX"
+    },
+    {
+      "name": "Micronesia, Federated States of",
+      "date": "1993-06-24",
+      "tag": "MIC"
+    },
+    {
+      "name": "Moldova",
+      "date": "1992-08-12",
+      "tag": "MLV"
+    },
+    {
+      "name": "Mongolia",
+      "date": "1991-02-14",
+      "tag": "MON"
+    },
+    {
+      "name": "Montenegro",
+      "date": "2007-01-18",
+      "tag": "MNT"
+    },
+    {
+      "name": "Morocco",
+      "date": "1958-04-25",
+      "tag": "MOR"
+    },
+    {
+      "name": "Mozambique",
+      "date": "1984-09-24",
+      "tag": "MOZ"
+    },
+    {
+      "name": "Myanmar",
+      "date": "1952-01-03",
+      "tag": "BRM"
+    },
+    {
+      "name": "Namibia",
+      "date": "1990-09-25",
+      "tag": "NAM"
+    },
+    {
+      "name": "Nauru",
+      "date": "2016-04-12",
+      "tag": null
+    },
+    {
+      "name": "Nepal",
+      "date": "1961-09-06",
+      "tag": "NEP"
+    },
+    {
+      "name": "Netherlands",
+      "date": "1945-12-27",
+      "tag": "HOL"
+    },
+    {
+      "name": "New Zealand",
+      "date": "1961-08-31",
+      "tag": "NZL"
+    },
+    {
+      "name": "Nicaragua",
+      "date": "1946-03-14",
+      "tag": "NIC"
+    },
+    {
+      "name": "Niger",
+      "date": "1963-04-24",
+      "tag": "NGR"
+    },
+    {
+      "name": "Nigeria",
+      "date": "1961-03-30",
+      "tag": "NIG"
+    },
+    {
+      "name": "North Macedonia",
+      "date": "1993-02-25",
+      "tag": "FYR"
+    },
+    {
+      "name": "Norway",
+      "date": "1945-12-27",
+      "tag": "NRY"
+    },
+    {
+      "name": "Oman",
+      "date": "1971-12-23",
+      "tag": "OMA"
+    },
+    {
+      "name": "Pakistan",
+      "date": "1950-07-11",
+      "tag": "PAK"
+    },
+    {
+      "name": "Palau",
+      "date": "1997-12-16",
+      "tag": null
+    },
+    {
+      "name": "Panama",
+      "date": "1946-03-14",
+      "tag": "PAN"
+    },
+    {
+      "name": "Papua New Guinea",
+      "date": "1975-10-09",
+      "tag": "PAP"
+    },
+    {
+      "name": "Paraguay",
+      "date": "1945-12-28",
+      "tag": "PAR"
+    },
+    {
+      "name": "Peru",
+      "date": "1945-12-31",
+      "tag": "PRU"
+    },
+    {
+      "name": "Philippines",
+      "date": "1945-12-27",
+      "tag": "PHI"
+    },
+    {
+      "name": "Poland",
+      "date": "1946-01-10",
+      "tag": "POL"
+    },
+    {
+      "name": "Portugal",
+      "date": "1961-03-29",
+      "tag": "POR"
+    },
+    {
+      "name": "Qatar",
+      "date": "1972-09-25",
+      "tag": "QAT"
+    },
+    {
+      "name": "Romania",
+      "date": "1972-12-15",
+      "tag": "ROM"
+    },
+    {
+      "name": "Russian Federation",
+      "date": "1992-06-16",
+      "tag": "SOV"
+    },
+    {
+      "name": "Rwanda",
+      "date": "1963-09-30",
+      "tag": "RWA"
+    },
+    {
+      "name": "Samoa",
+      "date": "1974-06-28",
+      "tag": "SAM"
+    },
+    {
+      "name": "San Marino",
+      "date": "2000-09-21",
+      "tag": null
+    },
+    {
+      "name": "Sao Tome and Principe",
+      "date": "1977-09-30",
+      "tag": "SAO"
+    },
+    {
+      "name": "Saudi Arabia",
+      "date": "1957-08-26",
+      "tag": "SAU"
+    },
+    {
+      "name": "Senegal",
+      "date": "1962-08-31",
+      "tag": "SEN"
+    },
+    {
+      "name": "Serbia",
+      "date": "1993-02-25",
+      "tag": "SER"
+    },
+    {
+      "name": "Seychelles",
+      "date": "1980-09-29",
+      "tag": "SEY"
+    },
+    {
+      "name": "Sierra Leone",
+      "date": "1962-09-10",
+      "tag": "SIE"
+    },
+    {
+      "name": "Singapore",
+      "date": "1966-08-03",
+      "tag": "SIN"
+    },
+    {
+      "name": "Slovak Republic",
+      "date": "1993-01-01",
+      "tag": "SLO"
+    },
+    {
+      "name": "Slovenia",
+      "date": "1993-02-25",
+      "tag": "SLV"
+    },
+    {
+      "name": "Solomon Islands",
+      "date": "1978-09-22",
+      "tag": "SOL"
+    },
+    {
+      "name": "Somalia",
+      "date": "1962-08-31",
+      "tag": "SOM"
+    },
+    {
+      "name": "South Africa",
+      "date": "1945-12-27",
+      "tag": "SAF"
+    },
+    {
+      "name": "South Sudan",
+      "date": "2012-04-18",
+      "tag": "SSU"
+    },
+    {
+      "name": "Spain",
+      "date": "1958-09-15",
+      "tag": "SPR"
+    },
+    {
+      "name": "Sri Lanka",
+      "date": "1950-08-29",
+      "tag": "SRI"
+    },
+    {
+      "name": "St. Kitts and Nevis",
+      "date": "1984-08-15",
+      "tag": "STK"
+    },
+    {
+      "name": "St. Lucia",
+      "date": "1980-06-27",
+      "tag": "STL"
+    },
+    {
+      "name": "St. Vincent and the Grenadines",
+      "date": "1982-08-31",
+      "tag": "STV"
+    },
+    {
+      "name": "Sudan",
+      "date": "1957-09-05",
+      "tag": "SUD"
+    },
+    {
+      "name": "Suriname",
+      "date": "1978-06-27",
+      "tag": "SUR"
+    },
+    {
+      "name": "Sweden",
+      "date": "1951-08-31",
+      "tag": "SWE"
+    },
+    {
+      "name": "Switzerland",
+      "date": "1992-05-29",
+      "tag": "SWI"
+    },
+    {
+      "name": "Syrian Arab Republic",
+      "date": "1947-04-10",
+      "tag": "SYR"
+    },
+    {
+      "name": "Tajikistan",
+      "date": "1993-06-04",
+      "tag": "TAJ"
+    },
+    {
+      "name": "Tanzania",
+      "date": "1962-09-10",
+      "tag": "TNZ"
+    },
+    {
+      "name": "Thailand",
+      "date": "1949-05-03",
+      "tag": "SIA"
+    },
+    {
+      "name": "Timor-Leste",
+      "date": "2002-07-23",
+      "tag": "IND"
+    },
+    {
+      "name": "Togo",
+      "date": "1962-08-01",
+      "tag": "TOG"
+    },
+    {
+      "name": "Tonga",
+      "date": "1985-09-13",
+      "tag": "TON"
+    },
+    {
+      "name": "Trinidad and Tobago",
+      "date": "1963-09-16",
+      "tag": "TRI"
+    },
+    {
+      "name": "Tunisia",
+      "date": "1958-04-14",
+      "tag": "TUN"
+    },
+    {
+      "name": "Turkey",
+      "date": "1947-03-11",
+      "tag": "TUR"
+    },
+    {
+      "name": "Turkmenistan",
+      "date": "1992-09-22",
+      "tag": "TRK"
+    },
+    {
+      "name": "Tuvalu",
+      "date": "2010-06-24",
+      "tag": "TUL"
+    },
+    {
+      "name": "Uganda",
+      "date": "1963-09-27",
+      "tag": "UGA"
+    },
+    {
+      "name": "Ukraine",
+      "date": "1992-09-03",
+      "tag": "UKR"
+    },
+    {
+      "name": "United Arab Emirates",
+      "date": "1972-09-22",
+      "tag": "UAE"
+    },
+    {
+      "name": "United Kingdom",
+      "date": "1945-12-27",
+      "tag": "ENG"
+    },
+    {
+      "name": "United States",
+      "date": "1945-12-27",
+      "tag": "USA"
+    },
+    {
+      "name": "Uruguay",
+      "date": "1946-03-11",
+      "tag": "URG"
+    },
+    {
+      "name": "Uzbekistan",
+      "date": "1992-09-21",
+      "tag": "UZB"
+    },
+    {
+      "name": "Vanuatu",
+      "date": "1981-09-28",
+      "tag": "VAN"
+    },
+    {
+      "name": "Venezuela, Republica Bolivariana de",
+      "date": "1946-12-30",
+      "tag": "VEN"
+    },
+    {
+      "name": "Vietnam",
+      "date": "1956-09-21",
+      "tag": "VIE"
+    },
+    {
+      "name": "Yemen, Republic of",
+      "date": "1969-10-03",
+      "tag": "YEM"
+    },
+    {
+      "name": "Zambia",
+      "date": "1965-09-23",
+      "tag": "ZAM"
+    },
+    {
+      "name": "Zimbabwe",
+      "date": "1980-09-29",
+      "tag": "ZIM"
+    }
+  ],
+  "represented_2000": [
+    "AFG",
+    "AGL",
+    "ALB",
+    "ALG",
+    "ANT",
+    "ARG",
+    "ARM",
+    "AST",
+    "AUS",
+    "AZE",
+    "BAH",
+    "BAN",
+    "BAR",
+    "BEL",
+    "BEN",
+    "BFA",
+    "BHR",
+    "BHU",
+    "BLR",
+    "BLZ",
+    "BOL",
+    "BOS",
+    "BOT",
+    "BRA",
+    "BRM",
+    "BRU",
+    "BUL",
+    "BUR",
+    "CAM",
+    "CAN",
+    "CAR",
+    "CBD",
+    "CDI",
+    "CHA",
+    "CHI",
+    "CHL",
+    "CNG",
+    "COL",
+    "COM",
+    "COS",
+    "CRO",
+    "CYP",
+    "CZE",
+    "DEN",
+    "DJI",
+    "DMI",
+    "DOM",
+    "DRC",
+    "ECU",
+    "EGU",
+    "EGY",
+    "ELS",
+    "ENG",
+    "ERI",
+    "EST",
+    "ETH",
+    "FIJ",
+    "FIN",
+    "FRA",
+    "FYR",
+    "GAB",
+    "GAH",
+    "GAM",
+    "GEO",
+    "GER",
+    "GRA",
+    "GRE",
+    "GUA",
+    "GUB",
+    "GUI",
+    "GUY",
+    "HAI",
+    "HOL",
+    "HON",
+    "HUN",
+    "ICE",
+    "IND",
+    "IRE",
+    "IRQ",
+    "ISR",
+    "ITA",
+    "JAM",
+    "JAP",
+    "JOR",
+    "KAZ",
+    "KEN",
+    "KOR",
+    "KUW",
+    "KYR",
+    "LAO",
+    "LAT",
+    "LBA",
+    "LEB",
+    "LES",
+    "LIB",
+    "LIT",
+    "LUX",
+    "MAD",
+    "MAL",
+    "MAU",
+    "MAY",
+    "MEX",
+    "MIC",
+    "MLD",
+    "MLT",
+    "MLV",
+    "MLW",
+    "MON",
+    "MOR",
+    "MOZ",
+    "MRT",
+    "NAM",
+    "NEP",
+    "NGR",
+    "NIC",
+    "NIG",
+    "NRY",
+    "NZL",
+    "OMA",
+    "PAK",
+    "PAN",
+    "PAP",
+    "PAR",
+    "PER",
+    "PHI",
+    "POL",
+    "POR",
+    "PRU",
+    "QAT",
+    "RAJ",
+    "ROM",
+    "RWA",
+    "SAF",
+    "SAM",
+    "SAO",
+    "SAU",
+    "SEN",
+    "SEY",
+    "SIA",
+    "SIE",
+    "SIN",
+    "SLO",
+    "SLV",
+    "SOL",
+    "SOM",
+    "SOV",
+    "SPR",
+    "SRI",
+    "STK",
+    "STL",
+    "STV",
+    "SUD",
+    "SUR",
+    "SWA",
+    "SWE",
+    "SWI",
+    "SYR",
+    "TAJ",
+    "TNZ",
+    "TOG",
+    "TON",
+    "TRI",
+    "TRK",
+    "TUN",
+    "TUR",
+    "UAE",
+    "UGA",
+    "UKR",
+    "URG",
+    "USA",
+    "UZB",
+    "VAN",
+    "VEN",
+    "VER",
+    "VIE",
+    "YEM",
+    "ZAM",
+    "ZIM"
+  ],
+  "unrepresented_2000": [
+    "Kiribati",
+    "Marshall Islands",
+    "Palau"
+  ]
+}

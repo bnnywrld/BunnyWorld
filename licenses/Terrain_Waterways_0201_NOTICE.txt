@@ -1,0 +1,14 @@
+Terrain and waterways provenance for BunnyWorld 0.2.0.1
+
+Land-cover placement: ESA CCI Land Cover v2.0.7, year 2000. Credit: ESA / ESA CCI Land Cover Project, led by UCL-Geomatics (Belgium).
+Official viewer: https://maps.elie.ucl.ac.be/CCI/viewer/index.php
+The public WMS categorical palette was sampled at 8192 x 4096, then decoded using the viewer's published class legend. This is a prepared rendering product, not the original 300 m dataset. Eight material families merge several LCCS classes. Exact requests and legend are bundled under tools/cartography/landcover_0201_source.json and landcover_0201_legend.js. Consult the original project's data-use terms for redistribution of its original products.
+
+Elevation: existing NOAA ETOPO 2022 prepared relief, retaining previous feathered coasts and four-times height exaggeration. DOI: 10.25921/fd45-gt74.
+
+River courses: Natural Earth 1:10m Rivers + Lake Centerlines, public domain. Selected named features with scalerank 0–3 and featurecla River; lake centre lines excluded. Natural Earth source GeoJSON is bundled. https://www.naturalearthdata.com/downloads/10m-physical-vectors/10m-rivers-lake-centerlines/
+
+Canals/straits: approximate authored gameplay centre lines and explicitly linked neighbouring sea zones; not navigation charts or surveyed boundaries.
+
+Material art: new built-in image generation, 14 October 2026. The original unmodified 2x2 atlas is assets/materials/resident_master_0201.png. Build code extracts woodland, desert, countryside and rock surfaces and prepares periodic runtime materials. Detailed material patterns are representative and do not define geographical boundaries.
+Prompt: high-resolution 2x2 aerial ground atlas, woodland canopy / desert dunes / agricultural countryside / exposed rock, flat diffuse light, no labels, borders, buildings or geographic outlines, natural colours and fine detail.

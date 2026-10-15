@@ -1,0 +1,903 @@
+{
+  "before": 45107,
+  "after": 40031,
+  "removed_cells": 5076,
+  "remote_clusters": 1152,
+  "eligible_remote_cells": 6511,
+  "protected_city_provinces": 1568,
+  "per_country": {
+    "ABK": {
+      "before": 3,
+      "after": 3
+    },
+    "ACE": {
+      "before": 20,
+      "after": 20
+    },
+    "AFG": {
+      "before": 62,
+      "after": 62
+    },
+    "AFR": {
+      "before": 12,
+      "after": 12
+    },
+    "AGL": {
+      "before": 83,
+      "after": 83
+    },
+    "AIA": {
+      "before": 1,
+      "after": 1
+    },
+    "ALB": {
+      "before": 10,
+      "after": 10
+    },
+    "ALG": {
+      "before": 772,
+      "after": 339
+    },
+    "ANT": {
+      "before": 1,
+      "after": 1
+    },
+    "ARG": {
+      "before": 929,
+      "after": 929
+    },
+    "ARM": {
+      "before": 9,
+      "after": 9
+    },
+    "AST": {
+      "before": 2596,
+      "after": 1805
+    },
+    "AUS": {
+      "before": 29,
+      "after": 29
+    },
+    "AZE": {
+      "before": 24,
+      "after": 24
+    },
+    "BAH": {
+      "before": 8,
+      "after": 8
+    },
+    "BAN": {
+      "before": 48,
+      "after": 48
+    },
+    "BAR": {
+      "before": 1,
+      "after": 1
+    },
+    "BEL": {
+      "before": 11,
+      "after": 11
+    },
+    "BEN": {
+      "before": 39,
+      "after": 39
+    },
+    "BFA": {
+      "before": 92,
+      "after": 92
+    },
+    "BHR": {
+      "before": 1,
+      "after": 1
+    },
+    "BHU": {
+      "before": 13,
+      "after": 13
+    },
+    "BLR": {
+      "before": 69,
+      "after": 69
+    },
+    "BLZ": {
+      "before": 8,
+      "after": 8
+    },
+    "BOL": {
+      "before": 362,
+      "after": 362
+    },
+    "BOS": {
+      "before": 17,
+      "after": 17
+    },
+    "BOT": {
+      "before": 194,
+      "after": 194
+    },
+    "BRA": {
+      "before": 2848,
+      "after": 2848
+    },
+    "BRM": {
+      "before": 161,
+      "after": 161
+    },
+    "BRU": {
+      "before": 2,
+      "after": 2
+    },
+    "BUL": {
+      "before": 38,
+      "after": 38
+    },
+    "BUR": {
+      "before": 8,
+      "after": 8
+    },
+    "CAM": {
+      "before": 156,
+      "after": 156
+    },
+    "CAN": {
+      "before": 3270,
+      "after": 2701
+    },
+    "CAR": {
+      "before": 208,
+      "after": 208
+    },
+    "CBD": {
+      "before": 61,
+      "after": 61
+    },
+    "CDI": {
+      "before": 106,
+      "after": 106
+    },
+    "CHA": {
+      "before": 423,
+      "after": 334
+    },
+    "CHE": {
+      "before": 5,
+      "after": 5
+    },
+    "CHI": {
+      "before": 3136,
+      "after": 3136
+    },
+    "CHL": {
+      "before": 268,
+      "after": 268
+    },
+    "CNG": {
+      "before": 115,
+      "after": 115
+    },
+    "COL": {
+      "before": 382,
+      "after": 382
+    },
+    "COM": {
+      "before": 2,
+      "after": 2
+    },
+    "COS": {
+      "before": 18,
+      "after": 18
+    },
+    "CRO": {
+      "before": 20,
+      "after": 20
+    },
+    "CUB": {
+      "before": 41,
+      "after": 41
+    },
+    "CYP": {
+      "before": 2,
+      "after": 2
+    },
+    "CZE": {
+      "before": 26,
+      "after": 26
+    },
+    "DEN": {
+      "before": 15,
+      "after": 15
+    },
+    "DJI": {
+      "before": 8,
+      "after": 8
+    },
+    "DMI": {
+      "before": 1,
+      "after": 1
+    },
+    "DOM": {
+      "before": 17,
+      "after": 17
+    },
+    "DRC": {
+      "before": 561,
+      "after": 561
+    },
+    "ECU": {
+      "before": 86,
+      "after": 86
+    },
+    "EGU": {
+      "before": 10,
+      "after": 10
+    },
+    "EGY": {
+      "before": 336,
+      "after": 226
+    },
+    "ELS": {
+      "before": 7,
+      "after": 7
+    },
+    "ENG": {
+      "before": 108,
+      "after": 108
+    },
+    "ERI": {
+      "before": 43,
+      "after": 43
+    },
+    "EST": {
+      "before": 16,
+      "after": 16
+    },
+    "ETH": {
+      "before": 376,
+      "after": 376
+    },
+    "FAO": {
+      "before": 1,
+      "after": 1
+    },
+    "FIJ": {
+      "before": 8,
+      "after": 8
+    },
+    "FIN": {
+      "before": 109,
+      "after": 109
+    },
+    "FRA": {
+      "before": 235,
+      "after": 235
+    },
+    "FYR": {
+      "before": 8,
+      "after": 8
+    },
+    "GAB": {
+      "before": 88,
+      "after": 88
+    },
+    "GAH": {
+      "before": 76,
+      "after": 76
+    },
+    "GAM": {
+      "before": 4,
+      "after": 4
+    },
+    "GEO": {
+      "before": 20,
+      "after": 20
+    },
+    "GER": {
+      "before": 122,
+      "after": 122
+    },
+    "GRA": {
+      "before": 1,
+      "after": 1
+    },
+    "GRE": {
+      "before": 49,
+      "after": 49
+    },
+    "GRN": {
+      "before": 734,
+      "after": 290
+    },
+    "GUA": {
+      "before": 37,
+      "after": 37
+    },
+    "GUB": {
+      "before": 12,
+      "after": 12
+    },
+    "GUI": {
+      "before": 83,
+      "after": 83
+    },
+    "GUY": {
+      "before": 71,
+      "after": 71
+    },
+    "HAI": {
+      "before": 10,
+      "after": 10
+    },
+    "HAM": {
+      "before": 1,
+      "after": 1
+    },
+    "HEZ": {
+      "before": 1,
+      "after": 1
+    },
+    "HKG": {
+      "before": 1,
+      "after": 1
+    },
+    "HLS": {
+      "before": 1,
+      "after": 1
+    },
+    "HOL": {
+      "before": 13,
+      "after": 13
+    },
+    "HON": {
+      "before": 38,
+      "after": 38
+    },
+    "HUN": {
+      "before": 32,
+      "after": 32
+    },
+    "ICE": {
+      "before": 36,
+      "after": 36
+    },
+    "IEK": {
+      "before": 1,
+      "after": 1
+    },
+    "IND": {
+      "before": 656,
+      "after": 656
+    },
+    "IRE": {
+      "before": 25,
+      "after": 25
+    },
+    "IRQ": {
+      "before": 134,
+      "after": 134
+    },
+    "ISR": {
+      "before": 9,
+      "after": 9
+    },
+    "ITA": {
+      "before": 102,
+      "after": 102
+    },
+    "JAM": {
+      "before": 4,
+      "after": 4
+    },
+    "JAP": {
+      "before": 133,
+      "after": 133
+    },
+    "JOR": {
+      "before": 29,
+      "after": 29
+    },
+    "JUB": {
+      "before": 17,
+      "after": 17
+    },
+    "KAC": {
+      "before": 30,
+      "after": 30
+    },
+    "KAR": {
+      "before": 9,
+      "after": 9
+    },
+    "KAZ": {
+      "before": 883,
+      "after": 883
+    },
+    "KEN": {
+      "before": 192,
+      "after": 192
+    },
+    "KOR": {
+      "before": 38,
+      "after": 38
+    },
+    "KOS": {
+      "before": 4,
+      "after": 4
+    },
+    "KUR": {
+      "before": 7,
+      "after": 7
+    },
+    "KUW": {
+      "before": 6,
+      "after": 6
+    },
+    "KYR": {
+      "before": 65,
+      "after": 65
+    },
+    "LAO": {
+      "before": 77,
+      "after": 77
+    },
+    "LAT": {
+      "before": 21,
+      "after": 21
+    },
+    "LBA": {
+      "before": 544,
+      "after": 173
+    },
+    "LEB": {
+      "before": 3,
+      "after": 3
+    },
+    "LES": {
+      "before": 10,
+      "after": 10
+    },
+    "LIB": {
+      "before": 24,
+      "after": 24
+    },
+    "LIT": {
+      "before": 22,
+      "after": 22
+    },
+    "LUR": {
+      "before": 8,
+      "after": 8
+    },
+    "LUX": {
+      "before": 1,
+      "after": 1
+    },
+    "MAC": {
+      "before": 1,
+      "after": 1
+    },
+    "MAD": {
+      "before": 201,
+      "after": 201
+    },
+    "MAL": {
+      "before": 421,
+      "after": 289
+    },
+    "MAU": {
+      "before": 348,
+      "after": 160
+    },
+    "MAY": {
+      "before": 114,
+      "after": 114
+    },
+    "MEX": {
+      "before": 661,
+      "after": 661
+    },
+    "MIC": {
+      "before": 6,
+      "after": 6
+    },
+    "MLC": {
+      "before": 169,
+      "after": 169
+    },
+    "MLD": {
+      "before": 2,
+      "after": 2
+    },
+    "MLT": {
+      "before": 1,
+      "after": 1
+    },
+    "MLV": {
+      "before": 11,
+      "after": 11
+    },
+    "MLW": {
+      "before": 32,
+      "after": 32
+    },
+    "MNT": {
+      "before": 5,
+      "after": 5
+    },
+    "MON": {
+      "before": 518,
+      "after": 388
+    },
+    "MOR": {
+      "before": 199,
+      "after": 199
+    },
+    "MOZ": {
+      "before": 263,
+      "after": 263
+    },
+    "MRT": {
+      "before": 1,
+      "after": 1
+    },
+    "NAM": {
+      "before": 276,
+      "after": 276
+    },
+    "NCY": {
+      "before": 1,
+      "after": 1
+    },
+    "NEP": {
+      "before": 26,
+      "after": 26
+    },
+    "NGR": {
+      "before": 395,
+      "after": 272
+    },
+    "NIC": {
+      "before": 41,
+      "after": 41
+    },
+    "NIG": {
+      "before": 303,
+      "after": 303
+    },
+    "NKO": {
+      "before": 41,
+      "after": 41
+    },
+    "NKR": {
+      "before": 6,
+      "after": 6
+    },
+    "NPM": {
+      "before": 24,
+      "after": 24
+    },
+    "NRY": {
+      "before": 141,
+      "after": 141
+    },
+    "NZL": {
+      "before": 96,
+      "after": 96
+    },
+    "OMA": {
+      "before": 105,
+      "after": 105
+    },
+    "PAK": {
+      "before": 295,
+      "after": 295
+    },
+    "PAL": {
+      "before": 2,
+      "after": 2
+    },
+    "PAN": {
+      "before": 27,
+      "after": 27
+    },
+    "PAP": {
+      "before": 165,
+      "after": 165
+    },
+    "PAR": {
+      "before": 134,
+      "after": 134
+    },
+    "PER": {
+      "before": 544,
+      "after": 544
+    },
+    "PHI": {
+      "before": 112,
+      "after": 112
+    },
+    "PMR": {
+      "before": 1,
+      "after": 1
+    },
+    "POL": {
+      "before": 104,
+      "after": 104
+    },
+    "POR": {
+      "before": 32,
+      "after": 32
+    },
+    "PRU": {
+      "before": 433,
+      "after": 433
+    },
+    "PUK": {
+      "before": 6,
+      "after": 6
+    },
+    "PUN": {
+      "before": 71,
+      "after": 71
+    },
+    "QAT": {
+      "before": 4,
+      "after": 4
+    },
+    "RAJ": {
+      "before": 1066,
+      "after": 1066
+    },
+    "RCD": {
+      "before": 43,
+      "after": 43
+    },
+    "ROM": {
+      "before": 79,
+      "after": 79
+    },
+    "RWA": {
+      "before": 8,
+      "after": 8
+    },
+    "SAF": {
+      "before": 408,
+      "after": 408
+    },
+    "SAM": {
+      "before": 1,
+      "after": 1
+    },
+    "SAO": {
+      "before": 1,
+      "after": 1
+    },
+    "SAU": {
+      "before": 647,
+      "after": 647
+    },
+    "SEN": {
+      "before": 67,
+      "after": 67
+    },
+    "SER": {
+      "before": 25,
+      "after": 25
+    },
+    "SEY": {
+      "before": 1,
+      "after": 1
+    },
+    "SHA": {
+      "before": 30,
+      "after": 30
+    },
+    "SHN": {
+      "before": 23,
+      "after": 23
+    },
+    "SIA": {
+      "before": 176,
+      "after": 176
+    },
+    "SIE": {
+      "before": 12,
+      "after": 12
+    },
+    "SIN": {
+      "before": 1,
+      "after": 1
+    },
+    "SLO": {
+      "before": 16,
+      "after": 16
+    },
+    "SLV": {
+      "before": 7,
+      "after": 7
+    },
+    "SML": {
+      "before": 57,
+      "after": 57
+    },
+    "SNA": {
+      "before": 7,
+      "after": 7
+    },
+    "SOL": {
+      "before": 14,
+      "after": 14
+    },
+    "SOM": {
+      "before": 30,
+      "after": 30
+    },
+    "SOO": {
+      "before": 1,
+      "after": 1
+    },
+    "SOV": {
+      "before": 5614,
+      "after": 3976
+    },
+    "SPR": {
+      "before": 174,
+      "after": 174
+    },
+    "SRI": {
+      "before": 9,
+      "after": 9
+    },
+    "SSU": {
+      "before": 210,
+      "after": 210
+    },
+    "STK": {
+      "before": 1,
+      "after": 1
+    },
+    "STL": {
+      "before": 1,
+      "after": 1
+    },
+    "STV": {
+      "before": 1,
+      "after": 1
+    },
+    "SUD": {
+      "before": 623,
+      "after": 565
+    },
+    "SUR": {
+      "before": 48,
+      "after": 48
+    },
+    "SWA": {
+      "before": 6,
+      "after": 6
+    },
+    "SWE": {
+      "before": 150,
+      "after": 150
+    },
+    "SWI": {
+      "before": 15,
+      "after": 15
+    },
+    "SWS": {
+      "before": 37,
+      "after": 37
+    },
+    "SYR": {
+      "before": 64,
+      "after": 64
+    },
+    "TAI": {
+      "before": 16,
+      "after": 16
+    },
+    "TAJ": {
+      "before": 47,
+      "after": 47
+    },
+    "TAL": {
+      "before": 154,
+      "after": 154
+    },
+    "TML": {
+      "before": 13,
+      "after": 13
+    },
+    "TNZ": {
+      "before": 299,
+      "after": 299
+    },
+    "TOG": {
+      "before": 19,
+      "after": 19
+    },
+    "TON": {
+      "before": 1,
+      "after": 1
+    },
+    "TRI": {
+      "before": 2,
+      "after": 2
+    },
+    "TRK": {
+      "before": 156,
+      "after": 156
+    },
+    "TUL": {
+      "before": 1,
+      "after": 1
+    },
+    "TUN": {
+      "before": 53,
+      "after": 53
+    },
+    "TUR": {
+      "before": 261,
+      "after": 261
+    },
+    "UAE": {
+      "before": 25,
+      "after": 25
+    },
+    "UGA": {
+      "before": 69,
+      "after": 69
+    },
+    "UKR": {
+      "before": 199,
+      "after": 199
+    },
+    "UNI": {
+      "before": 336,
+      "after": 336
+    },
+    "URG": {
+      "before": 58,
+      "after": 58
+    },
+    "USA": {
+      "before": 3142,
+      "after": 3142
+    },
+    "UZB": {
+      "before": 138,
+      "after": 138
+    },
+    "VAN": {
+      "before": 5,
+      "after": 5
+    },
+    "VEN": {
+      "before": 308,
+      "after": 308
+    },
+    "VER": {
+      "before": 2,
+      "after": 2
+    },
+    "VIE": {
+      "before": 115,
+      "after": 115
+    },
+    "WAA": {
+      "before": 6,
+      "after": 6
+    },
+    "YEM": {
+      "before": 153,
+      "after": 153
+    },
+    "ZAM": {
+      "before": 249,
+      "after": 249
+    },
+    "ZIM": {
+      "before": 130,
+      "after": 130
+    }
+  },
+  "limits": "State-level population density and bundled city/coastal buffers are conservative proxies, not a detailed population-density grid."
+}

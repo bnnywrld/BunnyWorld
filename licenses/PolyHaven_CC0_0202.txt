@@ -1,0 +1,8 @@
+Poly Haven texture assets used in BunnyWorld 0.2.0.2:
+aerial_sand, aerial_grass_rock, rocky_terrain, snow_field_aerial,
+sparse_grass, brown_mud_dry.
+
+These assets are licensed CC0 1.0 Universal by Poly Haven.
+License information: https://polyhaven.com/license
+CC0: https://creativecommons.org/publicdomain/zero/1.0/
+Only texture asset images are incorporated; website content is not included.

@@ -1,0 +1,43 @@
+{
+  "source": "ESA CCI Land Cover v2.0.7, year 2000",
+  "source_resolution_m": 300,
+  "prepared_resolution": [
+    8192,
+    4096
+  ],
+  "access": "Official UCL/ESA viewer WMS; classification colours decoded using its published legend; spatially sampled for globe rendering",
+  "urls": [
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C0%2C-90%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-90%2C0%2C0%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=0%2C0%2C90%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=90%2C0%2C180%2C90&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-180%2C-90%2C-90%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=-90%2C-90%2C0%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=0%2C-90%2C90%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE",
+    "https://maps.elie.ucl.ac.be/cgi-bin/mapserv?map=%2Fmaps_server%2FCCI%2Fmapfiles%2Flc2000_v207.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=lc2000_v2&STYLES=&SRS=EPSG%3A4326&BBOX=90%2C-90%2C180%2C0&WIDTH=2048&HEIGHT=2048&FORMAT=image%2Fpng&TRANSPARENT=FALSE"
+  ],
+  "version": "0.2.0.3",
+  "rendering": "Resident geographical layers and eight fixed compressed material layers; no geographic image-tile streaming",
+  "materials": [
+    "Temperate forest",
+    "Evergreen / tropical forest",
+    "Cropland",
+    "Sand / sparse dry ground",
+    "Grass / shrubland",
+    "Rock",
+    "Snow / ice",
+    "Wetland"
+  ],
+  "material_size": 4096,
+  "art_source": "Native 4K CC0 Poly Haven surface photos, new full-frame canopy master and offline crop pattern",
+  "geographic_mask_sha256": "8cf5d4ea0fc8542d4dd0dd3f39706099bdc0662ee3fcdab55d7e1aa8b5922fb5",
+  "legacy_jpeg_tiles_used": false,
+  "material_library_bytes": 22369860,
+  "runtime_geographic_tile_uploads": 0,
+  "detail_mesh_builds": 1,
+  "light_material_size": 2048,
+  "antarctica_physical_coverage": true,
+  "regional_dryness": "Biome-limited regional arid albedo adjustment; preserves forest classes",
+  "repetition_control": "Deterministic two-patch offsets and quarter-turn variation with explicit gradients and fixed residency",
+  "urban_ground": "World-projected streets calibrated to displayed building scale"
+}

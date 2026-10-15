@@ -1,0 +1,14 @@
+BunnyWorld 0.1.6 organization graphics
+
+19 original SVG game UI symbols using recognizable motifs and consistent styling.
+They are not official historical logo reproductions. Organization names/marks
+identify their respective organizations; no endorsement implied.
+Geographic silhouettes: public-domain Natural Earth. Outlined lettering: DejaVu
+Sans Bold; copyright/license in DejaVu_FONT_LICENSE.txt. Generator:
+tools/build_symbols_016.py. Lossless 256px imports shared by all UI buttons.
+Previous small raster organization graphics are replaced.
+
+Artwork is separate from January-2000 membership data. Sources/limitations remain
+on organization records in world.json and bundled membership preparation inputs.
+
+0.1.7: 17 organization graphics supplied by the user in organizations.zip. Original SVG retained; raster resized losslessly to PNG. Original fallback graphics remain for G7 and IBRD. Supplied AU emblem used for OAU visual only. No claim of ownership over supplied organization insignia.

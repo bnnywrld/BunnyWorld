@@ -1,0 +1,17 @@
+{
+  "land": {
+    "paths": 29231,
+    "vertices": 845726,
+    "triangles": 787264
+  },
+  "sea": {
+    "paths": 8432,
+    "vertices": 285196,
+    "triangles": 268332
+  },
+  "province": {
+    "paths": 122374,
+    "vertices": 850914,
+    "triangles": 606166
+  }
+}

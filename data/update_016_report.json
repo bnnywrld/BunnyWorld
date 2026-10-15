@@ -1,0 +1,11 @@
+{
+  "version": "0.1.6",
+  "regions": 4609,
+  "native_divisions": 4596,
+  "provinces": 15186,
+  "adjacency_edges": 40656,
+  "large_lakes": 156,
+  "population": 6144737528,
+  "source_country_control": "0.1.5 geographic 2000 control, including Crimea and explicit Georgian/Wa proxies",
+  "allocation": "Country totals conserved; regional numbers allocated by latitude-weighted source-region overlap, approximate"
+}

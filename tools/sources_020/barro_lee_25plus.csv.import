@@ -1,0 +1,17 @@
+[remap]
+
+importer="csv_translation"
+type="Translation"
+uid="uid://bm44w02w4hq0d"
+
+[deps]
+
+files=["res://tools/sources_020/barro_lee_25plus.country.translation", "res://tools/sources_020/barro_lee_25plus.year.translation", "res://tools/sources_020/barro_lee_25plus.sex.translation", "res://tools/sources_020/barro_lee_25plus.agefrom.translation", "res://tools/sources_020/barro_lee_25plus.ageto.translation", "res://tools/sources_020/barro_lee_25plus.lu.translation", "res://tools/sources_020/barro_lee_25plus.lp.translation", "res://tools/sources_020/barro_lee_25plus.lpc.translation", "res://tools/sources_020/barro_lee_25plus.ls.translation", "res://tools/sources_020/barro_lee_25plus.lsc.translation", "res://tools/sources_020/barro_lee_25plus.lh.translation", "res://tools/sources_020/barro_lee_25plus.lhc.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.pop.translation", "res://tools/sources_020/barro_lee_25plus.WBcode.translation", "res://tools/sources_020/barro_lee_25plus.region.translation"]
+
+source_file="res://tools/sources_020/barro_lee_25plus.csv"
+dest_files=["res://tools/sources_020/barro_lee_25plus.country.translation", "res://tools/sources_020/barro_lee_25plus.year.translation", "res://tools/sources_020/barro_lee_25plus.sex.translation", "res://tools/sources_020/barro_lee_25plus.agefrom.translation", "res://tools/sources_020/barro_lee_25plus.ageto.translation", "res://tools/sources_020/barro_lee_25plus.lu.translation", "res://tools/sources_020/barro_lee_25plus.lp.translation", "res://tools/sources_020/barro_lee_25plus.lpc.translation", "res://tools/sources_020/barro_lee_25plus.ls.translation", "res://tools/sources_020/barro_lee_25plus.lsc.translation", "res://tools/sources_020/barro_lee_25plus.lh.translation", "res://tools/sources_020/barro_lee_25plus.lhc.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.yr.translation", "res://tools/sources_020/barro_lee_25plus.pop.translation", "res://tools/sources_020/barro_lee_25plus.WBcode.translation", "res://tools/sources_020/barro_lee_25plus.region.translation"]
+
+[params]
+
+compress=true
+delimiter=0

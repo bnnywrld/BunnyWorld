@@ -1,0 +1,39 @@
+{
+  "version": "0.1.8",
+  "uniform_base_stats": {
+    "stability": 0.65,
+    "war_support": 0.5
+  },
+  "active_countries": 223,
+  "country_registry": 469,
+  "restored_original_logos": [
+    "EU",
+    "NATO",
+    "ASEAN",
+    "ECOWAS",
+    "WTO",
+    "CSTO",
+    "OAU",
+    "ARAB",
+    "GCC",
+    "CIS",
+    "APEC",
+    "OECD",
+    "OPEC",
+    "MERCOSUR",
+    "NAFTA",
+    "OSCE",
+    "IMF"
+  ],
+  "asean_original_size": [
+    1280,
+    854
+  ],
+  "asean_compact_region": [
+    352,
+    139,
+    575,
+    575
+  ],
+  "mod_sha256": "555d5400e2a477088de24e2114284122442be37e38bf8cc5daea094c52852871"
+}

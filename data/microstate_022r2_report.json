@@ -1,0 +1,12 @@
+{
+  "previous_atlas_pixels": 25,
+  "identity_pixels": 1,
+  "nominal_area_km2": 0.44,
+  "reference_vertices": 60,
+  "restored_host_provinces": [
+    821,
+    826
+  ],
+  "province_count": 40031,
+  "state_count": 1235
+}

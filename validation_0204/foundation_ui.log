@@ -1,0 +1,43 @@
+Godot Engine v4.5.1.stable.official.f62fdbde1 - https://godotengine.org
+
+STARTUP_PROGRESS 20 Preparing world and interface
+STARTUP_PROGRESS 40 Preparing terrain and waterways
+STARTUP_PROGRESS 65 Preparing cities and landmarks
+STARTUP_PROGRESS 65 Preparing cities and landmarks
+STARTUP_PROGRESS 66 Preparing cities and landmarks
+STARTUP_PROGRESS 67 Preparing cities and landmarks
+STARTUP_PROGRESS 68 Preparing cities and landmarks
+STARTUP_PROGRESS 69 Preparing cities and landmarks
+STARTUP_PROGRESS 70 Preparing cities and landmarks
+STARTUP_PROGRESS 71 Preparing cities and landmarks
+STARTUP_PROGRESS 72 Preparing cities and landmarks
+STARTUP_PROGRESS 73 Preparing cities and landmarks
+STARTUP_PROGRESS 73 Preparing cities and landmarks
+STARTUP_PROGRESS 74 Preparing cities and landmarks
+STARTUP_PROGRESS 75 Preparing cities and landmarks
+STARTUP_PROGRESS 76 Preparing cities and landmarks
+STARTUP_PROGRESS 77 Preparing cities and landmarks
+STARTUP_PROGRESS 78 Preparing cities and landmarks
+STARTUP_PROGRESS 79 Preparing cities and landmarks
+STARTUP_PROGRESS 80 Preparing cities and landmarks
+STARTUP_PROGRESS 81 Preparing cities and landmarks
+STARTUP_PROGRESS 82 Preparing cities and landmarks
+STARTUP_PROGRESS 82 Preparing cities and landmarks
+STARTUP_PROGRESS 83 Preparing cities and landmarks
+STARTUP_PROGRESS 84 Preparing cities and landmarks
+SCENERY_PREPARED clusters=2233 landmarks=8 size_multiplier=3.0
+STARTUP_PROGRESS 90 Preparing graphics
+STARTUP_PROGRESS 100 Ready
+PASS country toolbar available
+PASS Research clearly planned
+PASS icon bar Treasury
+PASS demographics pauses campaign
+PASS all four demographic charts together
+PASS two-column demographic grid
+PASS State scope selectable
+PASS modal restores previous pause
+PASS all countries in Ledger
+PASS numeric descending population
+PASS numeric ascending population
+PASS Ledger country search
+PASS tension baseline and honest empty history

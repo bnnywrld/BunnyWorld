@@ -1,0 +1,10 @@
+# Preserve the tested baseline bytes, including supplied SVG line endings.
+* -text
+*.bwm binary
+*.zlib binary
+*.bin binary
+*.res binary
+*.png binary
+*.jpg binary
+*.npz binary
+*.zip binary
