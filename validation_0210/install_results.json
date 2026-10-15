@@ -1,0 +1,8 @@
+{
+  "baseline_commit": "cb61e7c3db749ca079ee1aa077395143af215bdb",
+  "overlay_file_hashes": "pass",
+  "fresh_asset_restore": "pass",
+  "clean_editor_import": "pass",
+  "resource_load": "pass",
+  "reported_game_errors": 0
+}

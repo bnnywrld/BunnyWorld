@@ -1,4 +1,4 @@
-# Geography country counts — 0.2.0.9
+# Geography country counts — 0.2.0.10
 
 Country-wide caps are superseded by the explicit mainland, overseas and disputed-area rules and user-requested consolidations.
 
@@ -82,7 +82,7 @@ Country-wide caps are superseded by the explicit mainland, overseas and disputed
 | Guatemala | GUA | 2 | 2 |
 | Guinea | GUI | 2 | 2 |
 | Guinea-Bissau | GUB | 2 | 2 |
-| Guyana | GUY | 2 | 3 |
+| Guyana | GUY | 2 | 2 |
 | Haiti | HAI | 2 | 2 |
 | Hezbollah | HEZ | 1 | 2 |
 | Honduras | HON | 2 | 2 |
@@ -90,7 +90,7 @@ Country-wide caps are superseded by the explicit mainland, overseas and disputed
 | Hungary | HUN | 4 | 4 |
 | Iceland | ICE | 1 | 1 |
 | India | RAJ | 45 | 48 |
-| Indonesia | IND | 17 | 29 |
+| Indonesia | IND | 17 | 26 |
 | Iran | PER | 28 | 33 |
 | Iraq | IRQ | 15 | 18 |
 | Ireland | IRE | 3 | 3 |

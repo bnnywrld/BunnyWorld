@@ -1,21 +1,14 @@
-# BunnyWorld 0.2.0.9 — second geography correction pass
+# BunnyWorld 0.2.0.10
 
-Applies the 23 follow-up corrections to delivered version 0.2.0.8.
+Source patch for GitHub 0.2.0.9. Close Godot, extract into the project folder and replace included files, run Prepare_BunnyWorld.bat, then open project.godot and start fresh.
 
-- Kashmir/Ladakh fragments and local controller footprints corrected.
-- Oversized Ghazni and eastern Ukrainian provinces subdivided; broader Syrian
-  regions and improved province density.
-- Requested Hebei, Sinai, Basque, Lower Amur and Åland province transfers.
-- Croatia, Uruguay, Austria, Venezuela and Georgia receive coherent mainland
-  subdivisions; Transnistria and Solomon Islands each become one state.
-- Philippine state fragments consolidated; Kalimantan, Riau Islands and North
-  Sumatra reorganized. Sakhalin/Kuril membership corrected; Stanovoy separated.
-- Cornwall/Devon merged. Pacific sea-region artifacts and the Niue/Chatham
-  label mismatch corrected.
+- Merge the four central/southern Kalimantan states into Central–South Kalimantan.
+- Merge Courantyne Headwaters into Mahaica-Berbice.
+- Remove West Polynesia’s southern arm; reconnect Tasman Sea and fix a tiny detached Tasman shard.
+- Redraw 215 provinces in the newly densified Afghan, Ukrainian and Syrian states using terrain/river guidance.
+- Rebuild border shading, including Sweden/Åland, and all border meshes.
+- Stop UI scrolling/camera input from reaching the globe beneath panels.
 
-Full changes and test order: documentation/GEOGRAPHY_0209.md.
-The Russian historical divisions remain approximate at game scale.
+Full changes, validation limits and test order: documentation/GEOGRAPHY_0210.md.
 
-Apply to your 0.2.0.8 source folder. Close Godot, extract and replace included
-files, run Prepare_BunnyWorld.bat, then open project.godot and start fresh.
-No Windows executable is included. No GitHub update is required.
+The reported 32 debugger entries could not be reproduced and are not claimed fixed. Capture_Debug_Log.bat can collect a log if they persist. No Windows EXE is included; upload to GitHub after testing.

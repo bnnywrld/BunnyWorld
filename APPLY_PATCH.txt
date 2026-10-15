@@ -1,13 +1,11 @@
-BUNNYWORLD 0.2.0.9 — CHANGED FILES PATCH
+BunnyWorld 0.2.0.10 — changed files for 0.2.0.9
 
-Requires your 0.2.0.8 SOURCE folder.
-1. Close Godot.
-2. Extract into the folder containing project.godot and replace included files.
-3. Run Prepare_BunnyWorld.bat; wait for Geography bundle verified: 0.2.0.9.
-4. Open project.godot and start a NEW campaign.
+1. CLOSE GODOT.
+2. Extract this ZIP into your 0.2.0.9 project folder, beside project.godot.
+3. Replace the included files.
+4. Run Prepare_BunnyWorld.bat and confirm it reports 0.2.0.10.
+5. Open project.godot, wait for imports, and start a fresh campaign.
 
-No GitHub update required. No packaged Windows EXE included.
-
-Full list of 23 corrections and test order: documentation/GEOGRAPHY_0209.md
-Validation: 38,828 geography checks and 105 engine checks passed.
-The Russian historical regional divisions remain approximate at game scale.
+Test order: documentation/GEOGRAPHY_0210.md.
+This source patch does not contain a new Windows executable.
+The 32 reported debugger entries were not reproduced; see the guide for log capture.

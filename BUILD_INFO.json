@@ -1,14 +1,14 @@
 {
-  "version": "0.2.0.9",
-  "scenario_id": "bunny_world_2000_0_2_0_9",
+  "version": "0.2.0.10",
+  "scenario_id": "bunny_world_2000_0_2_0_10",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_version": "0.2.0.8",
+  "baseline_version": "0.2.0.9",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
   "countries": 223,
-  "states": 1364,
+  "states": 1360,
   "land_provinces": 13594,
   "md_land_provinces": 13221,
   "population": 6144737528,
@@ -19,12 +19,19 @@
     "New Stanovoy/Amur division follows terrain-guided geographic grouping; not an archival Manchurian treaty border."
   ],
   "validation": {
-    "geography_checks": 38828,
+    "geography_checks": 38846,
     "geography_failures": 0,
     "independent_coordinate_probes": 84,
-    "engine_integration_checks": 105,
-    "engine_integration_failures": 0,
+    "headless_integration_checks": 134,
+    "headless_integration_failures": 0,
     "prepared_resources": "verified",
-    "province_connectivity": "pass"
-  }
+    "province_connectivity": "pass",
+    "tasman_and_west_polynesia_connectivity": "one wrapped component each",
+    "graphical_integration_checks": 134,
+    "graphical_integration_failures": 0,
+    "game_errors_in_graphical_run": 0
+  },
+  "baseline_commit": "cb61e7c3db749ca079ee1aa077395143af215bdb",
+  "graphical_linux_tested": true,
+  "debugger_issue_status": "Reported 32 entries not reproduced; exact user log needed if persistent."
 }

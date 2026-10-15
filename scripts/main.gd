@@ -423,6 +423,7 @@ func _build_interface() -> void:
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(body)
 	control_panel = PanelContainer.new()
+	control_panel.mouse_force_pass_scroll_events = false
 	control_panel.custom_minimum_size.x = 310
 	control_panel.add_theme_stylebox_override("panel", _panel_style(Color("102332")))
 	# Own-country panel is attached over the viewport below.
@@ -541,11 +542,13 @@ func _build_interface() -> void:
 	legend.add_theme_color_override("font_outline_color", Color("081421"))
 	legend.add_theme_constant_override("outline_size", 4)
 	right_panel = PanelContainer.new()
+	right_panel.mouse_force_pass_scroll_events = false
 	right_panel.custom_minimum_size.x = 310
 	right_panel.add_theme_stylebox_override("panel", _panel_style(Color("102332")))
 	view_container.add_child(right_panel)
 	view_container.add_child(control_panel)
 	territory_panel = PanelContainer.new()
+	territory_panel.mouse_force_pass_scroll_events = false
 	territory_panel.name = "TerritoryDrawer"
 	territory_panel.clip_contents = true
 	territory_panel.add_theme_stylebox_override("panel", _button_style(Color("102332")))
@@ -1403,7 +1406,24 @@ func _province_at(position: Vector2) -> int:
 	var pid := int(round(pixel.r * 255.0)) + int(round(pixel.g * 255.0)) * 256
 	return pid if state.provinces.has(str(pid)) else 0
 
+func _ui_blocks_globe(position: Vector2) -> bool:
+	# GUI events use viewport-local coordinates. A wheel event can bubble from
+	# a child even when its panel uses MOUSE_FILTER_STOP, unless forced scroll
+	# propagation is disabled. Also guard the camera when a drag enters a panel.
+	var point := view_container.get_global_transform() * position
+	for panel: Control in [control_panel, right_panel, territory_panel, territory_handle, clock_box, map_box, selection_box, top_left_box]:
+		if panel == null or not panel.is_visible_in_tree() or not panel.get_global_rect().has_point(point):
+			continue
+		if panel == territory_panel and (not territory_clip.visible or not territory_clip.get_global_rect().has_point(point)):
+			continue
+		return true
+	return false
+
 func _globe_input(event: InputEvent) -> void:
+	if event is InputEventMouse and _ui_blocks_globe(event.position):
+		dragging = false
+		rotation_velocity = Vector2.ZERO
+		return
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP and event.pressed:
 			distance = maxf(1.015, 1.0 + (distance - 1.0) * 0.82)
@@ -1793,6 +1813,7 @@ func _run_smoke_test() -> void:
 	var zoom_event := InputEventMouseButton.new()
 	zoom_event.button_index = MOUSE_BUTTON_WHEEL_UP
 	zoom_event.pressed = true
+	zoom_event.position = view_container.size * 0.5
 	for i: int in 40:
 		_globe_input(zoom_event)
 	_smoke_check(checks, is_equal_approx(distance, 1.015), "is_equal_approx(distance, 1.015)")
@@ -2405,6 +2426,7 @@ func _overlay_panel() -> PanelContainer:
 	var panel := PanelContainer.new()
 	panel.add_theme_stylebox_override("panel", _button_style(Color("102332"), 6))
 	panel.mouse_filter = Control.MOUSE_FILTER_STOP
+	panel.mouse_force_pass_scroll_events = false
 	game_ui.add_child(panel)
 	return panel
 
@@ -2420,6 +2442,7 @@ func _configure_overlay_layout() -> void:
 	top_left_box.position = Vector2(8, 0)
 	stats_row.reparent(top_left_box)
 	var navigation_box := PanelContainer.new()
+	navigation_box.mouse_force_pass_scroll_events = false
 	navigation_box.add_theme_stylebox_override("panel", _button_style(Color("102332"), 6))
 	navigation_box.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	top_left_box.add_child(navigation_box)

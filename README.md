@@ -1,19 +1,21 @@
-# BunnyWorld 0.2.0.9
+# BunnyWorld 0.2.0.10
 
 Godot 4.5.1 **Standard**, GL Compatibility; Windows 10/11 x64. The current development baseline is `main`.
+
+This 0.2.0.10 ZIP applies directly over 0.2.0.9. See [patch changes and test order](documentation/GEOGRAPHY_0210.md).
 
 ## Update and run
 
 1. Close Godot and the running game.
 2. In GitHub Desktop, select `main`, Fetch origin and Pull origin.
-3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for **Geography bundle verified: 0.2.0.9** and successful preparation.
+3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for **Geography bundle verified: 0.2.0.10** and successful preparation.
 4. Open `project.godot` in Godot, let imports finish, and press F5. Start a **fresh campaign**.
 
 The preparation helper uses installed Python 3, restores prepared resources, refreshes known older border files automatically, and verifies the matching map/data/border bundle. It stops on unknown custom resource edits or mixed versions. Alternative: `python tools/restore_repository_assets.py`. Export templates are not needed to run the project in the editor.
 
 ## Current geography
 
-223 retained starting country owners, **1,405 States**, **13,261 land provinces**. The original MD archive has 1,250 States and 13,221 real land provinces (dummy ID zero, sea zones and lakes excluded). Natural Earth supplies the geographic boundaries; MD supplies country budgets, regional naming hints and province density guidance. [Country comparison](GEOGRAPHY_COUNTRY_COUNTS.md).
+223 retained starting country owners, **1,360 States**, **13,594 land provinces**. The original MD archive has 1,250 States and 13,221 real land provinces (dummy ID zero, sea zones and lakes excluded). Natural Earth supplies the geographic boundaries; MD supplies country budgets, regional naming hints and province density guidance. [Country comparison](GEOGRAPHY_COUNTRY_COUNTS.md).
 
 All 99 Natural Earth disputed/breakaway source identities map to protected State coverage. Nested claims and neighboring disputed islands can share a protected State as documented in the comparison. Future-dispute boundaries retain January-2000 scenario owners and existing starting cores/claims; reserving the geometry does not activate a later dispute.
 
