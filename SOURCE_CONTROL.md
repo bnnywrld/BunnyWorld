@@ -1,6 +1,6 @@
-# BunnyWorld 0.2.0.6 geography candidate
+# Working baseline: BunnyWorld 0.2.0.6
 
-The completed geography patch is saved on its own GitHub branch. The accepted 0.2.0.5 baseline remains on main until user testing establishes the next working baseline.
+On 15 October 2026, the user selected geography-0.2.0.6 as the working baseline. main now includes that branch's complete geography update and remains the repository's default branch. The original geography branch and the 0.2.0.5 commit history are preserved. Use main for normal development and testing; this promotion does not establish native Windows validation beyond the tests recorded in TEST_RESULTS.md.
 
 This source includes Godot code, scenario data, prepared resources, generation scripts and validation evidence. After checkout, run `python tools/restore_repository_assets.py` once, then open project.godot in Godot 4.5.1 stable. The restore script checks compressed parts and restored SHA-256 hashes. No Git LFS setup or external terrain downloads are needed.
 
