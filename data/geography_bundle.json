@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0.7",
+  "scenario": "bunny_world_2000_0_2_0_7",
+  "states": 1405,
+  "land_provinces": 13261,
+  "files": {
+    "data/world.json": "e20cdad1be8d7658a7677908c419cfb9b03ce1193004efd1ae648abd2763ce9f",
+    "data/provinces.json": "4bef662aa51b40dea36aa4653df26c66d3b04667c7ecac6748ca439722d10634",
+    "data/cities.json": "2815f6c45a0ba9802430bca616cd28d6d07a1697f43201b88725e5cf2aa58ee1",
+    "data/microstate_geometry.json": "a03a902bd4914f978ee9be7ba7615f7235a89140256efb7b288659f19a3ecf90",
+    "data/urban_population.json": "ee3c958a437bf0f69bd97d9879b5a0a1f96a7b8bb15eb96602a9721611fd372b",
+    "data/urban_scenery.json": "4f44b761546244fe63fec5d9df6a6de5176b62ad32153db0d0d0822dbf2ad0cf",
+    "assets/province_index.png": "4ce241806b6436ccb9ae02f862622c2a150e0bf35f0af26652150b0c7b9e812d",
+    "assets/land_boundaries.res": "05934b0528b064ece6e77d4045d1cf9c7932122546db2602f11f83dee6b0ffb5",
+    "assets/province_boundaries.res": "bfbb71a7b7d0b515147f2ef96198aaf67e49440cd66702df6745ead2ef6d525b",
+    "assets/region_ids_0.png": "6fb04efacb28db5e4301743d9bcf9aa7850b1c078778d2818edc15b6ab5f99d2",
+    "assets/region_ids_1.png": "de37e410250f63a09881d5ca4980ef08dfa364175c971135eb663f3f3a9c9748",
+    "assets/region_ids_2.png": "5e642388664f88b8b9cf4993fb8bb79e1f39fac8e7438c8476df5331b524c45f",
+    "assets/region_ids_3.png": "d46854b6354d780344aeb2043ba5db00f890181a51a1b84b77ecf3e0104e63a8"
+  }
+}

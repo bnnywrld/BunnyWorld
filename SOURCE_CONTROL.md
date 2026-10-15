@@ -1,11 +1,11 @@
-# Working baseline: BunnyWorld 0.2.0.6
+# Working baseline: BunnyWorld 0.2.0.7
 
-On 15 October 2026, the user selected geography-0.2.0.6 as the working baseline. main now includes that branch's complete geography update and remains the repository's default branch. The original geography branch and the 0.2.0.5 commit history are preserved. Use main for normal development and testing; this promotion does not establish native Windows validation beyond the tests recorded in TEST_RESULTS.md.
+Use `main`. The 0.2.0.6 geography branch and earlier baselines remain in git history. This update contains source, prepared resources, factual MD budgets, generation tools and validation evidence; it does not include an exported Windows executable.
 
-This source includes Godot code, scenario data, prepared resources, generation scripts and validation evidence. After checkout, run `python tools/restore_repository_assets.py` once, then open project.godot in Godot 4.5.1 stable. The restore script checks compressed parts and restored SHA-256 hashes. No Git LFS setup or external terrain downloads are needed.
+After pulling with Godot closed, double-click **Prepare_BunnyWorld.bat**, then open the project with Godot 4.5.1 Standard. The command-line equivalent is `python tools/restore_repository_assets.py`.
 
-Large prepared files are losslessly stored under repository_assets, indexed by ASSET_RESTORE.json. Deliberate resource rebuilds must update their parts/hashes and verify restoration. Windows EXEs, ZIPs and import caches are not source-control items.
+Large resources are stored as checksum-verified lossless parts under repository_assets, indexed by ASSET_RESTORE.json. Known previous-version hashes allow safe automatic border-resource updates without --force. Unknown custom resource edits stop preparation; preserve those before deliberately using --force. The final geography bundle verifies current project version, runtime data, identity textures and border resources together. Godot's import cache is regenerated locally.
 
-Application 0.2.0.6; scenario bunny_world_2000_0_2_0_6; 223 countries, 2,107 States and 9,194 provinces. Existing country population/building totals remain bookkeeping. New local demographics are not refined. No old-save migration is authorized.
+No Git LFS, external asset downloads or Python geographic libraries are needed for normal testing. Python 3's standard library suffices for preparation. Regeneration dependencies are listed in DEVELOPMENT.md. Do not commit EXEs, ZIPs, editor caches or local saves. Offline validation pictures do not need their Godot-generated .png.import metadata tracked.
 
-See DEVELOPMENT.md for the ordered geographic regeneration commands. The old bookkeeping/masks needed by the new build scripts are retained in tools/cartography/baseline_0205, with their original blob contents preserved. No MD province bitmap is used for new geometry. TEST_RESULTS.md and validation_0206 contain current validation evidence.
+Fresh campaigns only. Local demographic refinement, physical graphics changes and save migration are outside this patch.

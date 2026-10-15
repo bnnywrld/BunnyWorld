@@ -64,6 +64,8 @@ p[a==8191]=65535
 for i in range(4):
     q=p[i//2*4096:(i//2+1)*4096,i%2*8192:(i%2+1)*8192]
     Image.fromarray(np.stack([(q&255).astype(np.uint8),(q>>8).astype(np.uint8),np.zeros_like(q,np.uint8)],-1)).save(ROOT/'assets'/f'region_ids_{i}.png')
+if w.get('version')=='0.2.0.7':np.savez_compressed(SRC/'province_atlas_0207.npz',provinces=p*(a!=8191))
 write('world',w);write('provinces',ps)
-r=json.load(open(ROOT/'data/geography_0206_report.json'));r.update(provinces=len(ps),native_connectivity_repairs={'reassigned_pixels':changed,'split_pieces':split,'tiny_provinces_absorbed':tiny});write('geography_0206_report',r)
+report_name='geography_0207_report' if w.get('version')=='0.2.0.7' else 'geography_0206_report'
+r=json.load(open(ROOT/'data'/f'{report_name}.json'));r.update(provinces=len(ps),native_connectivity_repairs={'reassigned_pixels':changed,'split_pieces':split,'tiny_provinces_absorbed':tiny});write(report_name,r)
 print('NATIVE_CONNECTIVITY_COMPLETE',r['native_connectivity_repairs'],flush=True)

@@ -243,7 +243,7 @@ def build_states():
     write('geography_0206_report',report)
     print('STATES_COMPLETE',len(records),flush=True)
 
-def build_provinces(limit=None):
+def build_provinces(limit=None, budgets=None):
     world=json.load(open(ROOT/'data/world.json'));a=np.load(SRC/'grouped_atlas_022r2.npz')['regions']
     admin=np.load(SRC/'admin_atlas_0206.npz')['admin'];boxes=find_objects(a,max_label=8191)
     elev=np.load(SRC/'etopo_021.npz')['meters'];types=np.asarray(Image.open(ROOT/'assets/terrain_types.png'))[:,:,0]
@@ -273,7 +273,7 @@ def build_provinces(limit=None):
         if limit and state['owner'] not in sample_states:continue
         bb=boxes[sid-1];yy,xx=np.nonzero(a[bb]==sid);yy+=bb[0].start;xx+=bb[1].start
         focus,lon0,lat0=center(yy,xx);area=float(AREA[yy].sum())
-        if area<1200 or len(xx)<50:
+        if (area<1200 or len(xx)<50) and (budgets is None or budgets[sid]<=1):
             codes=np.ones(len(xx),np.int32);count=1;gridstep=0
         else:
             # Work in kilometres on a local equal-area projection. Native
@@ -307,6 +307,7 @@ def build_provinces(limit=None):
             target[(state['owner']=='GRN')&(dcity>120)]=350000
             target[(dcity>300)&(~barren)&(abs(lat)<62)]=50000
             count=max(1,min(220,int(round(np.sum(AREA[yy]/target)))))
+            if budgets is not None:count=budgets[sid]
             points=np.column_stack([px,py]);samples=np.arange(0,len(xx),max(1,len(xx)//18000));sp=points[samples]
             importance=np.sqrt(16000/target[samples]);seeds=[]
             # Settlement seeds are separated by at least ~30 km. Closely packed
@@ -315,7 +316,8 @@ def build_provinces(limit=None):
             for c in sorted(city_by_state[sid],key=lambda c:-c.get('population_rank',0)):
                 cx,cy=c['map_pixel'];qlon=(cx+.5)/W*360-180;qlat=90-(cy+.5)/H*180;q=np.array(proj.transform(qlon,qlat))
                 if all(np.linalg.norm(q-points[j])>=30 for j in seeds):seeds.append(int(localtree.query(q)[1]))
-            count=max(count,len(seeds));count=min(count,240)
+            count=max(count,len(seeds)) if budgets is None else budgets[sid]
+            if budgets is None:count=min(count,240)
             seeds=seeds[:count]
             if not seeds:seeds=[int(localtree.query(points.mean(0))[1])]
             dist=np.min(np.sum((sp[:,None,:]-points[seeds][None,:,:])**2,axis=2),axis=1)
@@ -363,6 +365,7 @@ def build_provinces(limit=None):
     write('microstate_geometry',micro);write('cities',cities);write('world',world);write('provinces',ps)
     np.savez_compressed(SRC/'province_atlas_022r2.npz',provinces=atlas)
     np.savez_compressed(SRC/'province_atlas_0206.npz',provinces=atlas)
+    if budgets is not None:np.savez_compressed(SRC/'province_atlas_0207.npz',provinces=atlas)
     index=np.zeros((65536,3),np.uint8)
     for p in ps.values():index[p['id'],:2]=[p['region']&255,p['region']>>8]
     index[65535,:2]=[255,31];Image.fromarray(index.reshape(256,256,3)).save(ROOT/'assets/province_index.png')
@@ -370,7 +373,8 @@ def build_provinces(limit=None):
     for i in range(4):
         q=atlas[i//2*4096:(i//2+1)*4096,i%2*8192:(i%2+1)*8192]
         Image.fromarray(np.stack([(q&255).astype(np.uint8),(q>>8).astype(np.uint8),np.zeros_like(q,np.uint8)],-1)).save(ROOT/'assets'/f'region_ids_{i}.png')
-    r=json.load(open(ROOT/'data/geography_0206_report.json'));r.update(provinces=len(ps),province_generation=report);write('geography_0206_report',r)
+    report_name='geography_0207_report' if budgets is not None else 'geography_0206_report'
+    r=json.load(open(ROOT/'data'/f'{report_name}.json'));r.update(provinces=len(ps),province_generation=report);write(report_name,r)
     print('PROVINCES_COMPLETE',len(ps),flush=True)
 
 if __name__=='__main__':

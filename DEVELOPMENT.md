@@ -1,34 +1,37 @@
-# Developing BunnyWorld 0.2.0.6
+# Developing BunnyWorld 0.2.0.7
 
-Godot 4.5.1 stable, GL Compatibility. Application 0.2.0.6; scenario `bunny_world_2000_0_2_0_6`; same-version save schema remains 10. Fresh campaigns only. No save migration is authorized.
+Baseline: `main` 0.2.0.6 (`47d553c`), Godot 4.5.1 Standard, GL Compatibility. The accepted country/coast mask and resident terrain/camera/scenery architecture are retained. No Windows export is part of the normal source-update workflow.
 
-The complete 0.2.0.5 source/resources were the baseline. Terrain, resident materials, fixed surface grid, camera and scenery architecture are retained. Existing scenery positions are retained; only geography links change. The only rendering code fix outside map resources guards pie charts against zero-radius/full-circle/tiny degenerate polygons.
+## Geography rules
 
-## Geographic regeneration
+Original MD January-2000 state history and definition.csv are the count authority. Exclude dummy ID 0, sea and lake entries: 1,250 States and 13,221 land provinces. Every country has MD <= new State count <= floor(1.2 * MD), with at most one recorded extra State for an important geographic area in a small country. Natural Earth ADM1 units are grouped along shared boundaries, prioritizing MD regional-name hints and source administrative groups. A terrain-guided Bavaria/Franken subdivision is needed to meet Germany's MD minimum of 17.
 
-Restore repository assets first. Python dependencies: numpy, Pillow, scipy, rasterio, shapely, pyproj, scikit-image; matplotlib for previews. Old masks/bookkeeping are in tools/cartography/baseline_0205. Raw geographic subdivisions, elevation, rivers and classification inputs are bundled through repository restoration. No MD province bitmap is used.
+Natural Earth disputed polygons reserve State boundaries with the existing scenario controller. Small secondary country intersections caused by source generalization are removed. A >95% protected-country coverage absorbs unprotected coastline fringes. Sapodilla/Southern Belize, the two Danube islands, and the nested Jerusalem features use explicit protected groupings to respect strict budgets; each source identity is retained. This is geographic preparation, not an implementation of future dispute activation/events.
 
-Run in this order:
+Province budgets use original MD land counts per country and geographically registered MD province centres as smoothed distribution hints. No MD boundary shape is reused. Independent provinces grow on local Lambert equal-area grids with settlement, relief, river and administrative guidance. Every State has at least one province; substantial separate islands can require additional seeds. Native atlas repair removes slivers and disconnected pieces on the same landmass.
 
-1. `python tools/build_geography_0206.py states`
-2. `python tools/coarsen_states_0206.py`
-3. `python tools/build_geography_0206.py provinces`
-4. `python tools/repair_province_fragments_0206.py`
+## Regeneration
+
+Python dependencies: numpy, Pillow, scipy, rasterio, shapely, pyproj, scikit-image; matplotlib for offline QA. Prepared input datasets are bundled; restore them first. `tools/md_geography_reference.py path/to/bunnyversion.zip` rebuilds the factual MD reference when needed. The original archive is read only.
+
+Run sequentially:
+
+1. `python tools/build_states_0207.py`
+2. `python tools/build_provinces_0207.py`
+3. `python tools/repair_province_fragments_0206.py`
+4. `python tools/finalize_geography_0207.py` (atomic, verified runtime identity textures)
 5. `python tools/link_geography_0206.py`
 6. `python tools/build_boundaries_021.py`
-7. `godot --headless --path . --script tools/compile_boundaries.gd`
-8. `godot --headless --path . --editor --import`
+7. `godot --headless --path . --script tools/compile_boundaries.gd -- land`
+8. `godot --headless --path . --script tools/compile_boundaries.gd -- province`
+9. `python tools/package_repository_geography.py`
+10. `python tools/restore_repository_assets.py --verify-only`
+11. `godot --headless --path . --editor --import --quit`
 
-Province generation uses a local Lambert azimuthal equal-area projection for each State, kilometre distances, administrative/river barriers, relief and separated settlement seeds. The 16384×8192 latitude/longitude atlas is the final storage format. Connectivity repair operates within each State/landmass; separate islands may legitimately share a province.
+Close any Godot editor/importer while regenerating. Earlier numbered helper/atlas names remain internal compatibility paths; current final province data are also saved as province_atlas_0207.npz. Do not run the old State coarsener after the budgeted State build.
 
-Country control is copied from the accepted baseline. Administrative intersections are grouped within each controller. Small source-border differences are assigned to neighboring geographic units of the same controller. No per-State rectangle fitting or MD geometry warping remains. Contemporary administrative divisions supply geographic shapes, not a claim of exact January-2000 administrative organization.
+Country totals are transferred for bookkeeping. Local demographic estimates are deferred. No old-save migration is authorized.
 
-Minimal existing population/building totals are transferred to keep model/UI contracts valid. Local demographic accuracy is deferred.
+## Focused checks
 
-## Validation and export
-
-Run geography_0206_tests.py, model_tests.gd, foundation_tests.gd, territorial_rights_tests.gd, resource_load_tests.gd, ui_0206_tests.gd and geography_0206_ui_tests.gd. BUNNY_VALIDATION_DIR controls integration report output. The 58-check UI regression skips screenshots on the headless display server while retaining layout/control assertions.
-
-preview_geography_0206.py renders the exact categorical atlas in regional and orthographic views. These are offline map diagnostics, not native Windows screenshots.
-
-Export using tools/build_windows.py, the clean official Godot 4.5.1 Windows x64 release template and --embed-pck. Validate PE/footer/directory and embedded project identity; rerun integration tests against the actual exported executable using the matching Linux runtime. Native Windows rendering and hardware performance remain user testing.
+`python tests/geography_0207_tests.py`; `python tests/asset_restore_tests.py`; the existing model, foundation and territorial-rights GDScript suites; resource_load_tests.gd; geography_0207_ui_tests.gd and ui_0207_tests.gd. Set BUNNY_VALIDATION_DIR to record engine integration results. Headless assertions cannot validate native Windows rendering/performance. `python tools/preview_geography_0207.py` gives offline regional/orthographic views of the exact final atlas.

@@ -1,11 +1,11 @@
-# BunnyWorld 0.2.0.6 — Geographic States and Provinces
+# BunnyWorld 0.2.0.7 — MD-scale geographic States and provinces
 
-- Replace MD province bitmap registration with real geographic administrative shapes and independent province generation.
-- Build 2,107 States, consolidating small subdivisions, enclaves and island groups.
-- Build 9,194 provinces on local equal-area grids, guided by administrative edges, settlements, relief and rivers. Sparse desert and polar interiors use much larger cells.
-- Retain all 223 scenario countries and their accepted territorial coverage.
-- Repair native-texture fragments, regenerate identity textures and border meshes, and reconnect capitals, search, cities and territory inspection.
-- Retain national population/building totals only as runtime bookkeeping. Local demographic refinement is deferred. No save migration is added.
-- Retain the 0.2.0.5 interface and terrain graphics. Guard chart drawing against degenerate full-circle or tiny slices exposed by small States.
+- Extract country State budgets from all 1,250 MD State files, and count 13,221 actual land provinces separately from seas/lakes/dummy ID zero.
+- Rebuild 1,405 geographic States under the strict MD-to-120% limits, with recorded single-State small-country exceptions.
+- Build 13,261 independent land provinces using MD country/density budgets and geographic settlement/terrain/river guidance. No MD boundary geometry is copied.
+- Reserve coverage for all 99 Natural Earth disputed/breakaway feature identities; retain 2000 controllers and starting rights. Some nested/adjacent claim areas share protected States, documented in GEOGRAPHY_COUNTRY_COUNTS.md.
+- Regenerate matching identity textures and State/province border meshes, relink capitals, cities, scenery and territory inspection; preserve national population/building totals.
+- Search recognizes the original geographic subdivision names inside grouped States.
+- Add one-click preparation, automatic refresh of known older border resources, and matching-bundle verification to prevent stale borders after updates.
 
-Use a fresh extraction and new campaign. Natural Earth administrative boundaries are geographic references; they do not reproduce every year-2000 administrative institution. Existing scenario controllers remain authoritative.
+Update from GitHub with Godot closed, run Prepare_BunnyWorld.bat, then start a fresh campaign. Local demographics and physical graphics remain deferred. This is a source update for editor testing, with no new Windows executable.

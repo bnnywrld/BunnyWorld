@@ -1,15 +1,32 @@
-# BunnyWorld 0.2.0.6 — Geographic States and Provinces
+# BunnyWorld 0.2.0.7
 
-Windows 10/11 x64 standalone. Extract the entire ZIP into a fresh folder and run **BunnyWorld_0_2_0_6.exe**. No editor, installer or separate pack is needed. Start a fresh campaign.
+Godot 4.5.1 **Standard**, GL Compatibility; Windows 10/11 x64. The current development baseline is `main`.
 
-This release replaces distorted MD-derived subdivisions with real geographic administrative boundaries grouped into **2,107 States** and **9,194 independently generated provinces**. All **223 existing countries** retain their accepted scenario territory.
+## Update and run
 
-Small neighboring administrative units and island groups are consolidated. US states, German federal States and Polish voivodeships remain recognizable. Provinces use local equal-area calculations, administrative boundaries, settlements, relief and rivers. Sparse desert and polar interiors have much larger provinces. The political map remains the clearest testing mode.
+1. Close Godot and the running game.
+2. In GitHub Desktop, select `main`, Fetch origin and Pull origin.
+3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for **Geography bundle verified: 0.2.0.7** and successful preparation.
+4. Open `project.godot` in Godot, let imports finish, and press F5. Start a **fresh campaign**.
 
-Local demographics have not been refined. National totals are retained for the running game; local allocations are temporary. Modern administrative data supplies geographic reference shapes; existing year-2000 country control remains authoritative. This is not an exact historical administrative atlas for January 2000.
+The preparation helper uses installed Python 3, restores prepared resources, refreshes known older border files automatically, and verifies the matching map/data/border bundle. It stops on unknown custom resource edits or mixed versions. Alternative: `python tools/restore_repository_assets.py`. Export templates are not needed to run the project in the editor.
 
-The 0.2.0.5 interface is retained: compact controls attached to the top, a half-height territory drawer with an attached collapse arrow, inline demographic selectors and wide-window support. Terrain artwork and rendering architecture are unchanged.
+## Current geography
 
-Controls: right-drag rotate; wheel zoom; left click inspect; Space pause/resume; 1–4 speed; Ctrl+F/search icon find places; F focus; F5/F9 save/load; F11 fullscreen; Escape menu. Click your flag for country control.
+223 retained starting country owners, **1,405 States**, **13,261 land provinces**. The original MD archive has 1,250 States and 13,221 real land provinces (dummy ID zero, sea zones and lakes excluded). Natural Earth supplies the geographic boundaries; MD supplies country budgets, regional naming hints and province density guidance. [Country comparison](GEOGRAPHY_COUNTRY_COUNTS.md).
 
-Source checkout: run `python tools/restore_repository_assets.py`, then open `project.godot` in Godot 4.5.1 stable. All prepared resources are included through lossless repository parts. See DEVELOPMENT.md and TEST_RESULTS.md.
+All 99 Natural Earth disputed/breakaway source identities map to protected State coverage. Nested claims and neighboring disputed islands can share a protected State as documented in the comparison. Future-dispute boundaries retain January-2000 scenario owners and existing starting cores/claims; reserving the geometry does not activate a later dispute.
+
+National population/building totals are retained. New local demographic refinement and old-save migration remain deferred. Physical graphics are unchanged. No Windows executable is built for this source update.
+
+## Test order
+
+1. Political map: Egypt, Algeria and Nigeria. Check State counts/shapes and aligned black borders.
+2. Close zoom: South Korea/Japan, then Europe, India, eastern China and the US. Compare useful province density.
+3. Zoom out over the Sahara, Siberia and Greenland; sparse areas should have larger cells.
+4. Inspect Crimea and the Donetsk/Luhansk reserved territories (Ukraine at startup), then Golan Heights, Aksai Chin, Transnistria and Northern Cyprus.
+5. Select States/provinces, search for places, rotate/zoom, and collapse/reopen the territory drawer. Report a country/place, screenshot, zoom/map mode and any slowdown or error.
+
+Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu. F5 in the **editor** starts the project.
+
+Technical checks and limits are in TEST_RESULTS.md. Native Windows visual/performance testing belongs to the user.

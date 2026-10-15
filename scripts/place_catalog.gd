@@ -23,7 +23,7 @@ func initialize(world: RefCounted, cities: Array, scenery: Dictionary) -> void:
 		_append({"kind":"Country","name":country["name"],"country":tag,"uv":Vector2(float(country["map_center"][0]),float(country["map_center"][1])),"state":0,"province":0},str(country["name"]),tag)
 	for sid: String in world.regions:
 		var region: Dictionary = world.regions[sid]
-		_append({"kind":"State","name":region["name"],"country":region["owner"],"uv":Vector2(float(region["map_center"][0]),float(region["map_center"][1])),"state":int(sid),"province":0},str(world.countries.get(region["owner"],{}).get("name","")))
+		_append({"kind":"State","name":region["name"],"country":region["owner"],"uv":Vector2(float(region["map_center"][0]),float(region["map_center"][1])),"state":int(sid),"province":0},str(world.countries.get(region["owner"],{}).get("name",""))," ".join(PackedStringArray(region.get("geographic_divisions",[])))+" "+str(region.get("protected_territory_name","")))
 	var clusters_by_province: Dictionary = {}
 	var group_focus: Dictionary = {}
 	for cluster: Dictionary in scenery.get("clusters",[]):

@@ -78,7 +78,7 @@ for kind in ['clusters','landmarks']:
         if kind=='clusters' and gid:groups[gid]['representative_buildings']+=len(record['instances'])
         if kind=='landmarks':record['country']=world['regions'][str(ps[str(pid)]['region'])]['owner']
 
-account={'epoch':2000,'source':{'method':'Temporary area allocation of retained scenario totals; local demographic refinement deferred in 0.2.0.6.'},'groups':groups,'states':{},'growth_enabled':False,'country_reconciliation_factors':{},'population_scope':'Temporary geometry-patch bookkeeping, not revised local demographic estimates.'}
+account={'epoch':2000,'source':{'method':'Temporary area allocation of retained scenario totals; local demographic refinement deferred.'},'groups':groups,'states':{},'growth_enabled':False,'country_reconciliation_factors':{},'population_scope':'Temporary geometry-patch bookkeeping, not revised local demographic estimates.'}
 for key,state in world['regions'].items():
     ids=state['provinces'];values=alloc(state['population'],[ps[str(i)]['area_km2'] for i in ids])
     urban=[];shared=[]
@@ -92,6 +92,6 @@ for key,state in world['regions'].items():
     account['states'][key]={'state':int(key),'population_2000':state['population'],'urban_provinces':urban,'shared_provinces':shared,'urban_population_2000':urbanpop,'shared_population_2000':state['population']-urbanpop,'raw_grid_population':0,'state_reconciliation_factor':1,'fallback_area_allocation':True}
 for c in cities:c['population_2000']=ps[str(c['province_id'])]['population_2000'] if c['province_id'] else None
 for g in groups.values():g['settlement_population_2000']=g['population_2000'];g['provinces']=sorted(set(g['provinces']))
-scene['version']='0.2.0.6'
+scene['version']=world['version']
 write('world',world);write('provinces',ps);write('cities',cities);write('urban_population',account);write('urban_scenery',scene)
 print('GEOGRAPHIC_LINKS_COMPLETE',len(ps),'provinces',len(cities),'cities',len(groups),'retained city groups',flush=True)
