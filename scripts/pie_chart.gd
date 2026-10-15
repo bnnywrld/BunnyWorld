@@ -16,6 +16,7 @@ func configure(values: Dictionary) -> void:
 func _draw() -> void:
 	var center := size / 2
 	var radius := minf(size.x, size.y) * .45
+	if radius <= .1: return
 	var total := 0
 	for v: Variant in counts.values(): total += int(v)
 	if total == 0:
@@ -26,6 +27,13 @@ func _draw() -> void:
 		var fraction := float(counts[key]) / total
 		if fraction <= 0: continue
 		var end := angle + fraction * TAU
+		if fraction >= .999999:
+			draw_circle(center, radius, colors[key])
+			angle = end
+			continue
+		if fraction < .000001:
+			angle = end
+			continue
 		var points := PackedVector2Array([center])
 		var segments := maxi(2, int(ceil(fraction * 90)))
 		for i: int in segments + 1: points.append(center + Vector2.from_angle(lerpf(angle, end, float(i)/segments))*radius)

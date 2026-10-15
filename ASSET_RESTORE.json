@@ -1,21 +1,21 @@
 {
-  "version": "0.2.0.5",
+  "version": "0.2.0.6",
   "files": [
     {
       "path": "assets/land_boundaries.res",
-      "bytes": 42264948,
-      "sha256": "4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc",
+      "bytes": 44801996,
+      "sha256": "62f6404af8ac5492a93244184b114064a4b27b0c227055128075ae64302d4bcb",
       "encoding": "zlib",
       "parts": [
         {
-          "path": "repository_assets/4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc.zlib.part000",
+          "path": "repository_assets/62f6404af8ac5492a93244184b114064a4b27b0c227055128075ae64302d4bcb.zlib.part000",
           "bytes": 8388608,
-          "sha256": "08b71c010ba16e7922e82748b94061eaead4753e51b3695241b91979608335b1"
+          "sha256": "5cd517e05e4d908e2546be9c6d0e99c925ea2e53ff332abe8c4198991e69d7fb"
         },
         {
-          "path": "repository_assets/4dc50c3f81ec159b7a3158d1f6980f6d39f40c140afb6f220ee91eaa470162bc.zlib.part001",
-          "bytes": 3239802,
-          "sha256": "93c29adea6305faf9209dd7c746299a589bcacc78f21e147618c0bb928ff84a0"
+          "path": "repository_assets/62f6404af8ac5492a93244184b114064a4b27b0c227055128075ae64302d4bcb.zlib.part001",
+          "bytes": 3927880,
+          "sha256": "aed3a0720ae6c379e486d05e9dcf0960c64e6e65c4f7436228398ab569ce5815"
         }
       ]
     },
@@ -97,19 +97,14 @@
     },
     {
       "path": "assets/province_boundaries.res",
-      "bytes": 41083868,
-      "sha256": "562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a",
+      "bytes": 23198796,
+      "sha256": "c171d8879f1ab1b5690c93fbcafdaeb40d56f0d5c37d0f9f57dc808aac435e78",
       "encoding": "zlib",
       "parts": [
         {
-          "path": "repository_assets/562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a.zlib.part000",
-          "bytes": 8388608,
-          "sha256": "76ed906e97abf690f30bec6f64d4527ee99415af80803fc8c151aecc7ac8726b"
-        },
-        {
-          "path": "repository_assets/562a8ad9f9d798aeb2bfc53d32c359f04802798e3316df738e1ca7dfe26e759a.zlib.part001",
-          "bytes": 2925153,
-          "sha256": "e3530d624c22c99198f79d2d192f3ac8e2ae0fe88f3947598dbca7ddf89f6b4b"
+          "path": "repository_assets/c171d8879f1ab1b5690c93fbcafdaeb40d56f0d5c37d0f9f57dc808aac435e78.zlib.part000",
+          "bytes": 6465672,
+          "sha256": "f16ff59488f12da7badec0f7d70e9a378b02ac5b2f2c1150b1102ec0f1a01cf7"
         }
       ]
     },

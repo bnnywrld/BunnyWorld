@@ -40,3 +40,11 @@ River courses remain Natural Earth 1:10m public-domain data, now named River fea
 ## 0.2.0.3 preparation
 
 The same supplied province bitmap is registered with 1,171 matched settlement/reference anchors, with rejected ambiguous matches recorded. Targeted State corrections and density-assisted province consolidation are documented in geography_0203_report.json. JRC year-2000 residents now provide individual estimates for every province, reconciled to State totals. Original State/country account totals are preserved, with Quebec accounts combined. Local Åland coast adaptation uses the retained GSHHG source and a minimum game-scale water separation. Compact hover flags derive from the existing supplied flag pages. No new terrain photographs or larger global imagery were added.
+
+## 0.2.0.6 geographic replacement
+
+State boundaries use the bundled Natural Earth 1:10m geographic subdivisions, grouped through larger named regions and adjacent small-unit unions. https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/ . Natural Earth is public-domain geographic reference data; its contemporary administrative organization is not an exact January-2000 administrative atlas. The accepted 0.2.0.5 country-control mask remains authoritative.
+
+Province generation is independent of the MD province bitmap. Existing Natural Earth rivers, NOAA ETOPO relief, ESA CCI land classification and settlement reference points guide offline growth on local Lambert azimuthal equal-area grids. Kilometre distances and spherical areas replace uncorrected flat texture distances. Prepared shapes are gameplay approximations, not municipal or census districts.
+
+Local demographic refinement is explicitly deferred. Existing national totals are preserved, with temporary overlap/area allocations solely to maintain runtime contracts. Existing population source notices remain historical attribution, not a claim that GHSL was newly aggregated over this map.

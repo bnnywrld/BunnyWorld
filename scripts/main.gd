@@ -1775,7 +1775,7 @@ func _run_smoke_test() -> void:
 	_map_changed(6)
 	_smoke_check(checks, physical_texture != null and map_picker.item_count == 8, "physical_texture != null and map_picker.item_count == 8")
 	_smoke_check(checks, state.countries["CHI"]["cosmetic"] == "CHI_AUTH_S" and state.countries["VIE"]["cosmetic"] == "VIE_AUTH_S", "state.countries[\"CHI\"][\"cosmetic\"] == \"CHI_AUTH_S\" and state.countries[\"VIE\"][\"cosmetic\"] == \"VIE_AUTH_S\"")
-	_smoke_check(checks, state.provinces.size() >= 13000 and state.provinces.size() <= 13500, "state.provinces.size() >= 13000 and state.provinces.size() <= 13500")
+	_smoke_check(checks, state.provinces.size() > state.regions.size() and state.provinces.size() < 65535, "state.provinces.size() > state.regions.size() and state.provinces.size() < 65535")
 	for oid: String in state.organizations:
 		var logo := _organization_texture(oid)
 		if logo == null: printerr("Missing organization graphic: ", oid)

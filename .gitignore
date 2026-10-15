@@ -32,3 +32,11 @@ __pycache__/
 *.restore-tmp
 .DS_Store
 Thumbs.db
+
+# Reproducible geographic intermediates
+/tools/cartography/rivers_0206.npy
+/tools/cartography/prototype_0206.npz
+/tools/cartography/land_boundaries_021.bin
+/tools/cartography/sea_boundaries_021.bin
+/tools/cartography/province_boundaries_021.bin
+/data/prototype_0206_provinces.json
