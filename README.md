@@ -1,4 +1,4 @@
-# BunnyWorld 0.2.0.7
+# BunnyWorld 0.2.0.9
 
 Godot 4.5.1 **Standard**, GL Compatibility; Windows 10/11 x64. The current development baseline is `main`.
 
@@ -6,7 +6,7 @@ Godot 4.5.1 **Standard**, GL Compatibility; Windows 10/11 x64. The current devel
 
 1. Close Godot and the running game.
 2. In GitHub Desktop, select `main`, Fetch origin and Pull origin.
-3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for **Geography bundle verified: 0.2.0.7** and successful preparation.
+3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for **Geography bundle verified: 0.2.0.9** and successful preparation.
 4. Open `project.godot` in Godot, let imports finish, and press F5. Start a **fresh campaign**.
 
 The preparation helper uses installed Python 3, restores prepared resources, refreshes known older border files automatically, and verifies the matching map/data/border bundle. It stops on unknown custom resource edits or mixed versions. Alternative: `python tools/restore_repository_assets.py`. Export templates are not needed to run the project in the editor.
@@ -30,3 +30,5 @@ National population/building totals are retained. New local demographic refineme
 Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu. F5 in the **editor** starts the project.
 
 Technical checks and limits are in TEST_RESULTS.md. Native Windows visual/performance testing belongs to the user.
+
+The full geography correction list and test order are in [documentation/GEOGRAPHY_0209.md](documentation/GEOGRAPHY_0209.md). The Russian historical cuts remain approximations at game scale.

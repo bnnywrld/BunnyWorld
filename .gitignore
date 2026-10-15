@@ -44,3 +44,6 @@ Thumbs.db
 # Offline QA pictures do not need editor import metadata in source control.
 /validation_*/**/*.png.import
 *.prepare-tmp
+/.geography_0208_baseline/
+
+/.geography_0209_baseline/

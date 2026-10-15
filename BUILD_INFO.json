@@ -1,33 +1,30 @@
 {
-  "version": "0.2.0.7",
-  "scenario_id": "bunny_world_2000_0_2_0_7",
+  "version": "0.2.0.9",
+  "scenario_id": "bunny_world_2000_0_2_0_9",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_commit": "47d553cfa5037fe1686665304a771059ac252d20",
+  "baseline_version": "0.2.0.8",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
   "countries": 223,
-  "states": 1405,
-  "land_provinces": 13261,
-  "md_states": 1250,
+  "states": 1364,
+  "land_provinces": 13594,
   "md_land_provinces": 13221,
   "population": 6144737528,
   "local_demographic_refinement": "deferred",
-  "validation": {
-    "geography_checks": 45364,
-    "geography_failures": 0,
-    "integration_checks": 66,
-    "integration_failures": 0,
-    "ui_checks": 58,
-    "ui_failures": 0,
-    "model_foundation_rights": "pass",
-    "resource_loading": "pass",
-    "asset_restore_regressions": "pass",
-    "matching_geography_bundle": "pass"
-  },
   "limits": [
-    "Headless engine checks and offline geographic previews; Windows appearance/performance require user testing.",
-    "Nested or adjacent claim identities share some protected States as documented."
-  ]
+    "Karelian Isthmus uses an authored coarse pre-1940-border guide, clipped to Leningrad.",
+    "Northern Khabarovsk uses an authored Uda/Stanovoy transition guide; no archival treaty geometry is asserted.",
+    "New Stanovoy/Amur division follows terrain-guided geographic grouping; not an archival Manchurian treaty border."
+  ],
+  "validation": {
+    "geography_checks": 38828,
+    "geography_failures": 0,
+    "independent_coordinate_probes": 84,
+    "engine_integration_checks": 105,
+    "engine_integration_failures": 0,
+    "prepared_resources": "verified",
+    "province_connectivity": "pass"
+  }
 }

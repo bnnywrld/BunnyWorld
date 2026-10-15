@@ -1,11 +1,21 @@
-# BunnyWorld 0.2.0.7 — MD-scale geographic States and provinces
+# BunnyWorld 0.2.0.9 — second geography correction pass
 
-- Extract country State budgets from all 1,250 MD State files, and count 13,221 actual land provinces separately from seas/lakes/dummy ID zero.
-- Rebuild 1,405 geographic States under the strict MD-to-120% limits, with recorded single-State small-country exceptions.
-- Build 13,261 independent land provinces using MD country/density budgets and geographic settlement/terrain/river guidance. No MD boundary geometry is copied.
-- Reserve coverage for all 99 Natural Earth disputed/breakaway feature identities; retain 2000 controllers and starting rights. Some nested/adjacent claim areas share protected States, documented in GEOGRAPHY_COUNTRY_COUNTS.md.
-- Regenerate matching identity textures and State/province border meshes, relink capitals, cities, scenery and territory inspection; preserve national population/building totals.
-- Search recognizes the original geographic subdivision names inside grouped States.
-- Add one-click preparation, automatic refresh of known older border resources, and matching-bundle verification to prevent stale borders after updates.
+Applies the 23 follow-up corrections to delivered version 0.2.0.8.
 
-Update from GitHub with Godot closed, run Prepare_BunnyWorld.bat, then start a fresh campaign. Local demographics and physical graphics remain deferred. This is a source update for editor testing, with no new Windows executable.
+- Kashmir/Ladakh fragments and local controller footprints corrected.
+- Oversized Ghazni and eastern Ukrainian provinces subdivided; broader Syrian
+  regions and improved province density.
+- Requested Hebei, Sinai, Basque, Lower Amur and Åland province transfers.
+- Croatia, Uruguay, Austria, Venezuela and Georgia receive coherent mainland
+  subdivisions; Transnistria and Solomon Islands each become one state.
+- Philippine state fragments consolidated; Kalimantan, Riau Islands and North
+  Sumatra reorganized. Sakhalin/Kuril membership corrected; Stanovoy separated.
+- Cornwall/Devon merged. Pacific sea-region artifacts and the Niue/Chatham
+  label mismatch corrected.
+
+Full changes and test order: documentation/GEOGRAPHY_0209.md.
+The Russian historical divisions remain approximate at game scale.
+
+Apply to your 0.2.0.8 source folder. Close Godot, extract and replace included
+files, run Prepare_BunnyWorld.bat, then open project.godot and start fresh.
+No Windows executable is included. No GitHub update is required.
