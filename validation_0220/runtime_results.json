@@ -1,0 +1,30 @@
+{
+  "checks": [
+    "PASS no ownership-dependent prepared masks",
+    "PASS no pre-State/province highlight masks",
+    "PASS old 204MB land selection pack retired",
+    "PASS verified raw categorical textures shared with picking",
+    "PASS actual State selected sumatra",
+    "PASS selection uses live mapping sumatra",
+    "PASS actual State selected cyprus",
+    "PASS selection uses live mapping cyprus",
+    "PASS actual State selected korea",
+    "PASS selection uses live mapping korea",
+    "PASS State ownership transfer succeeds",
+    "PASS political ownership visibly changes automatically",
+    "PASS ownership transfer loads no geography masks",
+    "PASS ownership transfer leaves membership geometry unchanged",
+    "PASS ownership transfer builds no terrain meshes",
+    "PASS State ownership can transfer back",
+    "PASS political colour returns after ownership restored",
+    "PASS physical national edge shading responds to new ownership",
+    "PASS State merge only updates small membership lookup",
+    "PASS camera motion does not decode/upload geography",
+    "PASS camera motion does not rebuild country names",
+    "PASS country names remain enabled",
+    "PASS sea selection retained"
+  ],
+  "failures": 0,
+  "native_windows_tested": false,
+  "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)"
+}

@@ -1,5 +1,5 @@
-Bunny World 0.2.0.15 — changed files over 0.2.0.14
-Close Godot and back up your folder. Extract and replace files.
-Run Prepare_BunnyWorld.bat IN THE GAME FOLDER to install the updated border resources.
-Open project.godot with Godot 4.5.1. Start a FRESH campaign.
-See documentation/PATCH_0215.md for changes, audit limits and test order.
+BunnyWorld 0.2.0.20 combined changed-files source patch over 0.2.0.18 or 0.2.0.19.
+Includes all 55 State changes and map performance improvements.
+Close Godot and the game. Extract beside project.godot, replace included files.
+Run Prepare_BunnyWorld.bat, reopen Godot, F5, and start a fresh campaign.
+No Windows executable is included. See documentation/PATCH_0220.md.

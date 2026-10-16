@@ -60,7 +60,8 @@ vec3 map_data(vec2 uv){
  return floor(data*255.0+.5);
 }
 float province_at(vec2 uv){vec3 d=map_data(uv);return resolve_micro_province(uv,d.r+d.g*256.0);}
-float region_at(vec2 uv){float pid=province_at(uv);vec3 d=floor(texture(province_index,vec2((mod(pid,256.0)+.5)/256.0,(floor(pid/256.0)+.5)/256.0)).rgb*255.0+.5);return d.r+d.g*256.0;}
+float province_region(float pid){vec3 d=floor(texture(province_index,vec2((mod(pid,256.0)+.5)/256.0,(floor(pid/256.0)+.5)/256.0)).rgb*255.0+.5);return d.r+d.g*256.0;}
+float region_at(vec2 uv){return province_region(province_at(uv));}
 vec2 lookup(float id){return vec2((id+.5)/palette_width,.5);}
 float owner_at(float id){vec3 d=texture(owners,lookup(id)).rgb;return floor(d.r*255.0+.5)+floor(d.g*255.0+.5)*256.0;}
 vec4 color_at(vec2 uv,vec3 water){float id=region_at(uv);return id<.5?vec4(water,0.0):vec4(texture(colors,lookup(id)).rgb,1.0);}
@@ -184,7 +185,7 @@ void fragment(){
  float facing=clamp(dot(normalize(NORMAL),normalize(VIEW)),0.0,1.0);
  vec3 water=mix(vec3(.025,.105,.18),vec3(.075,.27,.39),facing);
  float passage_id=water_passage(uv);
- float pid=passage_id>0.0?0.0:province_at(uv);float region=passage_id>0.0?0.0:region_at(uv);float owner=owner_at(region);
+ float pid=passage_id>0.0?0.0:province_at(uv);float region=passage_id>0.0?0.0:province_region(pid);float owner=owner_at(region);
  MapCoverage coverage=map_coverage(uv,pid,region,owner);
  bool chosen=inspection_active&&owner>0.0&&owner==selected_country;
  vec2 texel=1.0/map_resolution;vec2 pixel=uv*map_resolution-.5;vec2 origin=(floor(pixel)+.5)*texel;vec2 blend=fract(pixel);
@@ -192,7 +193,10 @@ void fragment(){
  // Physical terrain uses the prepared coast field, so it no longer needs
  // four province/region/palette decodes just to reconstruct land coverage.
  vec4 surface=vec4(water,0.0);
- if(!physical_mode){
+ // Political land already has its final colour from the shared curve field.
+ // Its four legacy palette reconstructions were immediately overwritten.
+ if(!physical_mode&&!information_mode&&region>.5)surface=vec4(coverage.tint,1.0);
+ else if(!physical_mode){
  vec4 c00=color_at(mix(origin,uv-dx-dy,far_filter),water);vec4 c10=color_at(mix(origin+vec2(texel.x,0),uv+dx-dy,far_filter),water);
  vec4 c01=color_at(mix(origin+vec2(0,texel.y),uv-dx+dy,far_filter),water);vec4 c11=color_at(mix(origin+texel,uv+dx+dy,far_filter),water);
  blend=mix(blend,vec2(.5),far_filter);surface=mix(mix(c00,c10,blend.x),mix(c01,c11,blend.x),blend.y);

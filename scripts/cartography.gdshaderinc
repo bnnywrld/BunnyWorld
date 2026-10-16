@@ -53,6 +53,10 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  vec2 size=vec2(textureSize(boundary_pairs,0));
  vec2 origin=(floor(uv*size-.5)+.5)/size;
  vec4 p00=texture(boundary_pairs,origin);
+ float hint=texture(boundary_hint,uv).r;
+ // Empty pair cells cannot enter the curve branch; outside the conservative
+ // junction hint the old path returns the categorical result as well.
+ if(hint<=.001&&all(equal(p00,vec4(0.0))))return c;
  vec4 p10=texture(boundary_pairs,origin+vec2(1.0/size.x,0.0));
  vec4 p01=texture(boundary_pairs,origin+vec2(0.0,1.0/size.y));
  vec4 p11=texture(boundary_pairs,origin+1.0/size);
@@ -94,11 +98,11 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  }
  // Conservative fallback at multi-province junctions and subpixel islands.
  // This uses current membership as well; no old State masks are involved.
- if(texture(boundary_hint,uv).r>.001){
+ if(hint>.001){
   highp vec2 at=pixel-.5,cell=floor(at),f=fract(at);
   vec4 wx=cubic_weights(f.x),wy=cubic_weights(f.y);
   vec4 dwx=cubic_derivative(f.x),dwy=cubic_derivative(f.y);
-  float countries[16];float amounts[16];vec2 gradients[16];vec3 tints[16];int count=0;
+  float countries[16];float amounts[16];vec2 gradients[16];float tint_states[16];int count=0;
   float own_value=0.0,state_value=0.0,province_value=0.0,sh=0.0,ph=0.0;
   vec2 own_grad=vec2(0.0),state_grad=vec2(0.0),province_grad=vec2(0.0),sg=vec2(0.0),pg=vec2(0.0);
   bool other_state=false,other_province=false;
@@ -115,7 +119,7 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
    if(p>.5&&p!=pid&&s==sid)other_province=true;
    if(o>.5){
     int found=-1;for(int j=0;j<16;j++){if(j>=count)break;if(countries[j]==o){found=j;break;}}
-    if(found<0){found=count;countries[count]=o;amounts[count]=0.0;gradients[count]=vec2(0.0);tints[count]=texture(colors,lookup(s)).rgb;count++;}
+    if(found<0){found=count;countries[count]=o;amounts[count]=0.0;gradients[count]=vec2(0.0);tint_states[count]=s;count++;}
     amounts[found]+=w;gradients[found]+=g;
    }
   }
@@ -124,7 +128,7 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
   for(int j=0;j<16;j++){
    if(j>=count)break;
    float a=resolved_coverage(amounts[j],gradients[j],screen_dx,screen_dy);
-   tint+=tints[j]*a;total+=a;
+   tint+=texture(colors,lookup(tint_states[j])).rgb*a;total+=a;
    if(countries[j]==selected_country)ch=a;
    if(countries[j]==hovered_country)hh=a;
   }
@@ -133,7 +137,7 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
   // weights there rather than inventing a fourth owner or punching a hole.
   else if(count>0){
    total=0.0;tint=vec3(0.0);ch=0.0;hh=0.0;
-   for(int j=0;j<16;j++){if(j>=count)break;float a=max(amounts[j],0.0);tint+=tints[j]*a;total+=a;if(countries[j]==selected_country)ch=a;if(countries[j]==hovered_country)hh=a;}
+   for(int j=0;j<16;j++){if(j>=count)break;float a=max(amounts[j],0.0);tint+=texture(colors,lookup(tint_states[j])).rgb*a;total+=a;if(countries[j]==selected_country)ch=a;if(countries[j]==hovered_country)hh=a;}
    c.tint=tint/max(total,.000001);c.country_hit=ch/max(total,.000001);c.hover_hit=hh/max(total,.000001);
   }
   c.state_hit=resolved_coverage(sh,sg,screen_dx,screen_dy);

@@ -20,7 +20,8 @@ paths=contours(s,sorted(map(int,w['regions']))+[8191],1)
 micro=json.loads((ROOT/'data/microstate_geometry.json').read_text());sid=micro['state'];paths=[p for p in paths if p[2]!=sid and p[3]!=sid];points=np.asarray(micro['polygon_uv']+[micro['polygon_uv'][0]]);paths.append((points[:,0],points[:,1],sid,micro['host_state'],0))
 expected={tuple(sorted((int(k),n)))for k,r in w['regions'].items()for n in r['neighbors']}
 paths,extra=ensure_edges(s,paths,expected,0)
-report={'land':mesh(paths,'land_boundaries_021'),'land_short_edge_segments_restored':extra};del paths,s
+report={'land':mesh(paths,'land_boundaries_021'),'land_short_edge_segments_restored':extra}
+report['micro']=mesh([p for p in paths if p[2]==sid or p[3]==sid],'micro_boundaries_021');del paths,s
 paths=contours(a,sorted(map(int,ps)),1);paths=[(x,y,l,r,2)for x,y,l,r,_ in paths if r>0 and str(r)in ps and ps[str(l)]['region']==ps[str(r)]['region']]
 expected={(p['id'],n)for p in ps.values()for n in p['neighbors']if p['id']<n and p['region']==ps[str(n)]['region']}
 paths,extra=ensure_edges(a,paths,expected,2);report['province_short_edge_segments_restored']=extra

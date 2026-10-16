@@ -1,0 +1,65 @@
+{
+  "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+  "viewport": [
+    960,
+    600
+  ],
+  "measurement": "Production map renderer, rotating camera; 12 measured frames per fixed view, Linux software rendering. Not native Windows FPS.",
+  "cases": [
+    {
+      "case": "minsk_political",
+      "before_ms": 310.908,
+      "after_ms": 145.699,
+      "frame_time_reduction_percent": 53.1,
+      "primitives_before": 2208168,
+      "primitives_after": 844810,
+      "image_mean_channel_difference": 0.0057,
+      "image_pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "case": "israel_political",
+      "before_ms": 326.9,
+      "after_ms": 160.303,
+      "frame_time_reduction_percent": 51.0,
+      "primitives_before": 2208168,
+      "primitives_after": 844810,
+      "image_mean_channel_difference": 0.0,
+      "image_pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "case": "sumatra_physical",
+      "before_ms": 387.632,
+      "after_ms": 151.013,
+      "frame_time_reduction_percent": 61.0,
+      "primitives_before": 2208168,
+      "primitives_after": 844810,
+      "image_mean_channel_difference": 0.0316,
+      "image_pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "case": "vatican_political",
+      "before_ms": 247.939,
+      "after_ms": 145.113,
+      "frame_time_reduction_percent": 41.5,
+      "primitives_before": 2208168,
+      "primitives_after": 844930,
+      "image_mean_channel_difference": 0.0031,
+      "image_pixels_changed_over_8": 3,
+      "pixels": 576000
+    },
+    {
+      "case": "asia_political",
+      "before_ms": 369.579,
+      "after_ms": 285.196,
+      "frame_time_reduction_percent": 22.8,
+      "primitives_before": 2152872,
+      "primitives_after": 1543866,
+      "image_mean_channel_difference": 0.0094,
+      "image_pixels_changed_over_8": 0,
+      "pixels": 576000
+    }
+  ]
+}

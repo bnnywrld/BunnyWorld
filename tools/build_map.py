@@ -4,7 +4,7 @@ Ownership is intentionally NOT an input to any prepared visual shape.
 Usage: python tools/build_map.py [--check] [--godot /path/to/godot]
 """
 from pathlib import Path
-import argparse,json,hashlib,zlib,io,subprocess,shutil,sys
+import argparse,json,hashlib,zlib,io,subprocess,shutil,sys,re
 R=Path(__file__).resolve().parents[1];OUT=R/'assets/display'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def inputs(ps):
@@ -19,7 +19,7 @@ def sea_pack():
  (OUT/'sea_coverage.bwd').write_bytes(out.getvalue());target.write_text(json.dumps({'format':'RH','data_file':'sea_coverage.bwd','seas':records},separators=(',',':')))
 def main():
  ap=argparse.ArgumentParser(description=__doc__);ap.add_argument('--check',action='store_true');ap.add_argument('--godot');ap.add_argument('--force',action='store_true');args=ap.parse_args()
- ps=json.loads((R/'data/provinces.json').read_text());world=json.loads((R/'data/world.json').read_text());source=inputs(ps);cp=OUT/'map_contract.json';old=json.loads(cp.read_text())if cp.exists()else{}
+ ps=json.loads((R/'data/provinces.json').read_text());world=json.loads((R/'data/world.json').read_text());version=re.search(r'config/version="([^"]+)"',(R/'project.godot').read_text()).group(1);source=inputs(ps);cp=OUT/'map_contract.json';old=json.loads(cp.read_text())if cp.exists()else{}
  members={}
  for k,p in ps.items():members.setdefault(str(p['region']),[]).append(int(k))
  for sid,s in world['regions'].items():
@@ -70,12 +70,12 @@ def main():
  for p in ps.values():i=int(p['id']);sid=int(p['region']);lut[i//256,i%256]=[sid&255,sid>>8,int(p.get('local_index',0))&255]
  old_png=np.asarray(Image.open(R/'assets/province_index.png').convert('RGB'))
  if not np.array_equal(old_png,lut):Image.fromarray(lut).save(R/'assets/province_index.png')
- resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res']
+ resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res','assets/micro_boundaries.res']
  decoded=[hashlib.sha256(Image.open(R/f'assets/region_ids_{i}.png').convert('RGB').tobytes()).hexdigest()for i in range(4)]
- contract={'schema':1,'version':'0.2.0.18','geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}
+ contract={'schema':1,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}
  cp.write_text(json.dumps(contract,separators=(',',':'))+'\n')
  active=resources+['assets/display/map_contract.json','assets/display/country_glyphs.png','assets/display/country_glyphs.json','assets/display/FONT_LICENSE.txt','assets/display/tiny_land_bits.bwd']
- bundle={'version':'0.2.0.18','geography_version':world['version'],'files':{n:sha(R/n)for n in active}}
+ bundle={'version':version,'geography_version':world['version'],'files':{n:sha(R/n)for n in active}}
  (OUT/'BUNDLE.json').write_text(json.dumps(bundle,indent=2)+'\n')
  geo_path=R/'data/geography_bundle.json'
  if geo_path.exists():

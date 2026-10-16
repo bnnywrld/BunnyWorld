@@ -1,0 +1,11 @@
+{
+  "data/world.json": true,
+  "data/provinces.json": true,
+  "data/cities.json": true,
+  "data/urban_scenery.json": true,
+  "data/urban_population.json": true,
+  "assets/region_ids_0.png": true,
+  "assets/region_ids_1.png": true,
+  "assets/region_ids_2.png": true,
+  "assets/region_ids_3.png": true
+}

@@ -1,3 +1,11 @@
+# Bunny World 0.2.0.20
+
+Combined changed-files patch over **0.2.0.18 or 0.2.0.19**: includes all 55 State requests plus map renderer optimisation. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. No executable is included. See [changes, measurements and test order](documentation/PATCH_0220.md).
+
+# Bunny World 0.2.0.19
+
+Apply over 0.2.0.18, run **Prepare_BunnyWorld.bat**, then start a fresh campaign. See [all 55 State changes and test order](documentation/PATCH_0219.md). This checkpoint preserves the 0.2.0.18 renderer; performance work follows separately.
+
 # Bunny World 0.2.0.15
 
 State corrections and worldwide audit. Overlay on 0.2.0.14, run Prepare_BunnyWorld.bat, then start a fresh campaign. See [patch notes and audit scope](documentation/PATCH_0215.md).

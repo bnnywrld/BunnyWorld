@@ -116,6 +116,7 @@ var hover_country: String = ""
 var hover_flags: Dictionary = {}
 var hover_panel: PanelContainer
 var border_materials: Array[ShaderMaterial] = []
+var border_meshes: Dictionary = {}
 var waterways_material: ShaderMaterial
 var sea_image: Image
 var sound_player: AudioStreamPlayer
@@ -748,6 +749,15 @@ func _build_planet() -> void:
 		border_mesh.material_override = material
 		border_materials.append(material)
 		planet.add_child(border_mesh)
+		border_meshes[kind] = border_mesh
+	# Close views use the shared curve field. Only the subpixel enclave needs
+	# its ribbon, so draw its tiny prebuilt mesh instead of the entire globe.
+	var micro_border := MeshInstance3D.new()
+	micro_border.mesh = load("res://assets/micro_boundaries.res")
+	micro_border.material_override = border_materials[0]
+	planet.add_child(micro_border)
+	border_meshes["micro"] = micro_border
+	_update_border_visibility()
 	var waterways := MeshInstance3D.new()
 	waterways.mesh = load("res://assets/waterways.res")
 	var water_material := ShaderMaterial.new()
@@ -882,6 +892,16 @@ func _update_selection_shader() -> void:
 	planet_material.set_shader_parameter("inspection_active", inspection_active)
 	planet_material.set_shader_parameter("selected_region", float(state.selected_region))
 	planet_material.set_shader_parameter("selected_province", float(state.selected_province))
+	_update_border_visibility()
+
+func _update_border_visibility() -> void:
+	if border_meshes.is_empty(): return
+	# Match the existing shader's exact zero-opacity ranges. Visibility changes
+	# submit no geometry and never generate or load new meshes on camera travel.
+	border_meshes["land"].visible = distance > 1.45
+	border_meshes["micro"].visible = distance <= 1.45
+	border_meshes["province"].visible = inspection_active and state.selected_region > 0 and distance > 1.45 and distance < 1.52
+	border_meshes["sea"].visible = distance < 2.8 or state.selected_sea > 0
 
 func _search_changed(value: String) -> void:
 	list_filter = value.strip_edges().to_lower()
@@ -1481,6 +1501,7 @@ func _focus_country(tag: String, animated: bool = true) -> void:
 
 func _update_camera_pose() -> void:
 	if camera == null: return
+	_update_border_visibility()
 	var key: Array = [distance, planet.global_transform if planet != null else Transform3D()]
 	if key == last_camera_view: return
 	last_camera_view = key

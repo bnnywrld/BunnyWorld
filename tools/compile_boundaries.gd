@@ -1,8 +1,13 @@
 extends SceneTree
 
 func _initialize() -> void:
-	for kind: String in ["land", "sea", "province"]:
+	for kind: String in ["land", "sea", "province", "micro"]:
 		if not OS.get_cmdline_user_args().is_empty() and kind != OS.get_cmdline_user_args()[0]:
+			continue
+		# Geography edits rebuild land and province lines. The unchanged sea
+		# mesh is restored from the repository; its authoring binary is optional.
+		if kind == "sea" and not FileAccess.file_exists("res://tools/cartography/sea_boundaries_021.bin"):
+			assert(ResourceLoader.exists("res://assets/sea_boundaries.res"))
 			continue
 		var file := FileAccess.open("res://tools/cartography/%s_boundaries_021.bin" % kind, FileAccess.READ)
 		var vertices_count := file.get_32()

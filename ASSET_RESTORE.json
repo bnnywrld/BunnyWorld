@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0.17",
+  "version": "0.2.0.19",
   "files": [
     {
       "path": "assets/materials/terrain_materials.bwm",
@@ -328,40 +328,41 @@
     },
     {
       "path": "assets/land_boundaries.res",
-      "bytes": 11044490,
-      "sha256": "247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22",
+      "bytes": 11017821,
+      "sha256": "b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da",
       "encoding": "zlib",
       "parts": [
         {
-          "path": "repository_assets/247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22.zlib.part000",
+          "path": "repository_assets/b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da.zlib.part000",
           "bytes": 2097152,
-          "sha256": "d2fb8db1dda79f42517990df46933b8f570dd76cbcc85324674702aace82c25e"
+          "sha256": "7b0f8ddf33eb737a1b2caece7c6002f864cad10fa2ae3ffb48135e24a0cc1240"
         },
         {
-          "path": "repository_assets/247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22.zlib.part001",
+          "path": "repository_assets/b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da.zlib.part001",
           "bytes": 2097152,
-          "sha256": "dd4023997e50dad78de3de4812ae6bb56de95bcaceaaf1bc060976ff890bf3c9"
+          "sha256": "51b8a9c797c3cb2a2795423c5deb0af97b5b587eb4d1d182aaeefb7c70e423b8"
         },
         {
-          "path": "repository_assets/247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22.zlib.part002",
+          "path": "repository_assets/b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da.zlib.part002",
           "bytes": 2097152,
-          "sha256": "84b6f16a508ebc90e62ceb5809ae58773c34546a673f676d8b3e340ac84eeea7"
+          "sha256": "2472b1fa8af01192c517931bf430ca9c11f6b466a62c4ec14d6ce605333e9cae"
         },
         {
-          "path": "repository_assets/247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22.zlib.part003",
+          "path": "repository_assets/b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da.zlib.part003",
           "bytes": 2097152,
-          "sha256": "7b1465ea8c372fc74b4920364f152dc76150bbef15f0f6d446855c4b6bfcc6df"
+          "sha256": "f46a199baa470b2bc49f454c255461006f0849b03706c9373df74cf63c3fbb21"
         },
         {
-          "path": "repository_assets/247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22.zlib.part004",
-          "bytes": 1289352,
-          "sha256": "b674922d7feef117875bf4284c2faf15701a2991067dd648e3ec432a1de796b1"
+          "path": "repository_assets/b469f0ae66e1e20b4cdb6d3cefd0808f8b63b39a58778e8504d500942b68a8da.zlib.part004",
+          "bytes": 1248101,
+          "sha256": "01285c1fc29736361866d3ba7a0086e72c46c4e9ce13b80a255af7270e4b49f2"
         }
       ],
       "previous_sha256": [
         "05934b0528b064ece6e77d4045d1cf9c7932122546db2602f11f83dee6b0ffb5",
         "072df2522f0b9b3678a327f4b685c2683df64e17e68c5cca96331a18d3287b44",
         "21f3afb9bd24f94246cc3a83acebfccb3dc5f0e12bc8f7745dbbf1a849e670c5",
+        "247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22",
         "2ad911f4f9cbcac0a749974f18e057793343dda7d240470af6da9de0fa7628a5",
         "474fe71c2f7b32945edae5386c011aef0e7f6d20954b16112a4a79c75e780dbe",
         "4af342b06dc54adf291cb79c34c975fb4e698f5c848c744fbea1010e695236cf",
@@ -392,29 +393,29 @@
     },
     {
       "path": "assets/province_boundaries.res",
-      "bytes": 9293999,
-      "sha256": "ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108",
+      "bytes": 9315747,
+      "sha256": "63552cfaf29de871b764b00c68ede61ae63b173da21b97d042cbc91d3e2c39de",
       "encoding": "zlib",
       "parts": [
         {
-          "path": "repository_assets/ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108.zlib.part000",
+          "path": "repository_assets/63552cfaf29de871b764b00c68ede61ae63b173da21b97d042cbc91d3e2c39de.zlib.part000",
           "bytes": 2097152,
-          "sha256": "d2e2174b3b6a6d79c18653129771a787212fd2732748d09814625bc67ac6f4f6"
+          "sha256": "5f726800db18474c9c29a0c487062d38c723aa486c461871cd01b27d16d6be6a"
         },
         {
-          "path": "repository_assets/ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108.zlib.part001",
+          "path": "repository_assets/63552cfaf29de871b764b00c68ede61ae63b173da21b97d042cbc91d3e2c39de.zlib.part001",
           "bytes": 2097152,
-          "sha256": "8837eabf6bce69e50f4177d4c1ab2c3f303300d2c4216543bf94ac0e880e6f3b"
+          "sha256": "32f72f0d88864ffe7db63bea0831f3d48a887a175264a16c94a5ce12d08face7"
         },
         {
-          "path": "repository_assets/ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108.zlib.part002",
+          "path": "repository_assets/63552cfaf29de871b764b00c68ede61ae63b173da21b97d042cbc91d3e2c39de.zlib.part002",
           "bytes": 2097152,
-          "sha256": "ba3106952c1c1a82c82834f2a82935f809d111d386ac6f065ce35df37119e195"
+          "sha256": "7dbc57dcf6e05934aee3a9ed7d476374118080c20a1a12622ebb83a839529e1d"
         },
         {
-          "path": "repository_assets/ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108.zlib.part003",
-          "bytes": 1838851,
-          "sha256": "f4402076c39813a7b6d78e113b0b148ddf0b089185f81ddf11e64c1564ea1441"
+          "path": "repository_assets/63552cfaf29de871b764b00c68ede61ae63b173da21b97d042cbc91d3e2c39de.zlib.part003",
+          "bytes": 1866403,
+          "sha256": "a180c68bf73ebc6154ce71b3741ff24e86018f8757aaf54e27eb1ac14194f5ab"
         }
       ],
       "previous_sha256": [
@@ -446,6 +447,7 @@
         "c8e825b41df3fe264f206b13174019c76baaa91b5ca53b09ac3004546d4ce6a6",
         "cfe0330fdef52dff31c69ad1e699dd8026b7a3cc373704d8414445478cf4d26d",
         "dce92fba7e00d59272354d217fa9c92aeb3d0cee1b86629e7a6307c29a5b7dc4",
+        "ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108",
         "f2f65dd8239b2dc2cb6633d67be1d9b202d697d325b4f2f570d47ed242c91269"
       ]
     }
