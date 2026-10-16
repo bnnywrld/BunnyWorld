@@ -55,7 +55,7 @@ func state_metrics(world: WorldState, sid: int) -> Dictionary:
 		meta["counts"] = allocate(denominator, shares)
 		meta["denominator"] = denominator
 		metrics[key] = meta
-	return {"population": total, "metrics": metrics, "retirement_age": retirement, "scope": region["name"], "allocation": world.population_allocation(sid)}
+	return {"population": total, "metrics": metrics, "retirement_age": retirement, "scope": region["name"]}
 
 func country_metrics(world: WorldState, tag: String) -> Dictionary:
 	var result := {"population": 0, "metrics": {}, "scope": world.countries.get(tag, {}).get("name", tag), "retirement_age": 65, "urban": 0, "shared": 0}
@@ -65,8 +65,6 @@ func country_metrics(world: WorldState, tag: String) -> Dictionary:
 		if world.regions[sid]["owner"] != tag: continue
 		var entry := state_metrics(world, int(sid))
 		result["population"] += int(entry["population"])
-		result["urban"] += int(entry["allocation"].get("urban", 0))
-		result["shared"] += int(entry["allocation"].get("shared", 0))
 		for key: String in entry["metrics"]:
 			var dest: Dictionary = result["metrics"][key]
 			var source: Dictionary = entry["metrics"][key]

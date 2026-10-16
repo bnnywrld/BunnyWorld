@@ -21,7 +21,8 @@ void vertex(){
  extent=selected>.5?2.6:1.35;vec4 p=PROJECTION_MATRIX*MODELVIEW_MATRIX*vec4(VERTEX,1.0),q=PROJECTION_MATRIX*MODELVIEW_MATRIX*vec4(ahead,1.0);vec2 line=normalize(q.xy/max(q.w,.00001)-p.xy/max(p.w,.00001));POSITION=p;POSITION.xy+=vec2(-line.y,line.x)*UV.x*extent*2.0/VIEWPORT_SIZE*p.w;
 }
 void fragment(){
- float fade=1.0-smoothstep(1.10,1.24,camera_distance);if(facing<.012||fade<=0.0||parent_owner<.5||(inspection_active&&parent_owner!=selected_country))discard;
+ float fade=1.0-smoothstep(1.10,1.24,camera_distance);if(selected>.5)discard;
+ if(facing<.012||fade<=0.0||parent_owner<.5||(inspection_active&&parent_owner!=selected_country))discard;
  float px=abs(UV.x)*extent,aa=max(fwidth(px)*.65,.4),hw=selected>.5?1.0:.58;float outer=1.0-smoothstep(hw-aa,hw+aa,px);float inner=1.0-smoothstep(max(.1,hw-.45)-aa,max(.1,hw-.45)+aa,px);
  vec3 color=mix(vec3(.045,.075,.08),physical_mode?vec3(.30,.35,.31):vec3(.45,.48,.43),inner);if(selected>.5)color=mix(vec3(.10,.24,.25),vec3(.75,.87,.81),inner);ALBEDO=color;ALPHA=outer*fade*(selected>.5?.9:.32)*smoothstep(.012,.08,facing);
 }

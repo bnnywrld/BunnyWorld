@@ -1,14 +1,14 @@
 {
-  "version": "0.2.0.12",
-  "scenario_id": "bunny_world_2000_0_2_0_10",
+  "version": "0.2.0.14",
+  "scenario_id": "bunny_world_2000_0_2_0_14",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_version": "0.2.0.11",
+  "baseline_version": "0.2.0.13",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
   "countries": 223,
-  "states": 1360,
+  "states": 1355,
   "land_provinces": 13594,
   "md_land_provinces": 13221,
   "population": 6144737528,
@@ -18,29 +18,26 @@
     "Northern Khabarovsk uses an authored Uda/Stanovoy transition guide; no archival treaty geometry is asserted.",
     "New Stanovoy/Amur division follows terrain-guided geographic grouping; not an archival Manchurian treaty border."
   ],
-  "graphical_linux_tested": true,
+  "graphical_linux_tested": false,
   "debugger_issue_status": "Reported 32 entries not reproduced; exact user log needed if persistent.",
-  "geography_version": "0.2.0.10",
+  "geography_version": "0.2.0.14",
   "visual_update": true,
-  "map_data_changed": false,
+  "map_data_changed": true,
   "visual_limits": [
-    "Fine coast/border alignment artifacts remain at extreme zoom.",
-    "Tiny/crowded country labels cull at some views.",
-    "Native Windows/GPU performance unverified."
+    "Native Windows GPU performance requires player testing.",
+    "Visual smoothing does not change categorical picking IDs.",
+    "Dynamic city growth and resource deposits remain planned.",
+    "63 States use an explicit administrative anchor where no settlement was resolved."
   ],
-  "display_version": "0.2.0.12",
-  "repository_base_commit": "952c03aef5a324f2bf590f0f2ef39bddbdb87335",
-  "base_patch_sha256": "c4dc9708bf43bf4c444cac82c1771660195a4ebbda9f39b44d0653e807ae45f0",
+  "display_version": "0.2.0.14",
+  "repository_base_commit": "1c35216a1ff9c780a506a343a28539ffbc13f6d7",
+  "base_patch_sha256": "e6029226a8c55dc6572e344c6d3db39f536bade044a9aafd5b62058e0ec85084",
   "validation": {
-    "headless_interface_checks": 172,
-    "graphical_interface_checks": 173,
-    "prepared_display_checks": 55782,
-    "failures": 0,
-    "original_geography_files_unchanged": 397,
-    "cpu_label_legacy_median_ms": 44.977,
-    "cpu_label_forced_visibility_median_ms": 0.444,
-    "cpu_label_forced_visibility_p95_ms": 0.795,
-    "frame_sweep_conclusive_for_native_gpu": false,
-    "clean_overlay_install": "pass"
-  }
+    "runtime_checks": 31,
+    "runtime_failures": 0,
+    "display": "headless",
+    "data_integrity": "pass; all State/province/sea SDF records decompressed and checked",
+    "native_windows_tested": false
+  },
+  "rebuild": true
 }

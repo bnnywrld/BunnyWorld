@@ -12,6 +12,8 @@ func _draw() -> void:
 				var angle := -PI / 2.0 + i * PI / 5.0
 				star.append(p + Vector2(cos(angle), sin(angle)) * (6.0 if i % 2 == 0 else 2.7))
 			draw_colored_polygon(star, Color("ffdc80"))
+		elif marker.get("state_capital",false):
+			draw_colored_polygon(PackedVector2Array([p+Vector2(0,-4),p+Vector2(4,0),p+Vector2(0,4),p+Vector2(-4,0)]),Color("76cbb5"))
 		else:
 			draw_circle(p, 3.6, Color("091421"))
 			draw_circle(p, 2.1, Color("edf4f6"))

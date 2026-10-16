@@ -114,6 +114,7 @@ func _build_geometry() -> void:
   var scale: float = minf(lengths[-1]*.9/maxf(total,1.0),sqrt(float(entry["area"]))/6371.0*.22/64.0)
   entry["world_height"] = 64.0*scale
   entry["index"] = index
+  var entry_start:=vertices.size()
   var cursor: float = (lengths[-1]-total*scale)*.5
   for letter: String in entry["text"]:
    var glyph: Dictionary = glyphs[letter]
@@ -127,6 +128,15 @@ func _build_geometry() -> void:
      identifiers.append(Vector2((float(index)+.5)/256.0,64.0*scale))
     for offset: int in [0,2,1,1,2,3]: indices.append(base+offset)
    cursor += (float(glyph["advance"])+float(atlas["tracking"]))*scale
+  # Collision checks use the baked text footprint, not the much longer
+  # geographic fitting path. No font measurement is needed while moving.
+  var footprint:=PackedVector3Array()
+  var quads: int=(vertices.size()-entry_start)/4
+  for fraction: float in [0.0,.25,.5,.75,1.0]:
+   var quad:=mini(quads-1,int(fraction*quads))
+   if quad>=0:
+    for corner: int in 4:footprint.append(vertices[entry_start+quad*4+corner])
+  entry["footprint"]=footprint
  var arrays := []
  arrays.resize(Mesh.ARRAY_MAX)
  arrays[Mesh.ARRAY_VERTEX] = vertices
@@ -144,7 +154,20 @@ func _build_geometry() -> void:
  visibility_texture = ImageTexture.create_from_image(visibility_image)
  label_material = ShaderMaterial.new()
  label_material.shader = preload("res://scripts/country_labels.gdshader")
- label_material.set_shader_parameter("glyph_atlas",load("res://assets/display/country_glyphs.png"))
+ # Upload explicit coverage channels once; never depend on an editor's imported
+ # PNG alpha/cache or on an installed system font.
+ var source:=FileAccess.open("res://assets/display/country_glyph_mask.bwd",FileAccess.READ)
+ if source==null:
+  push_error("Country label coverage is missing; run Prepare_BunnyWorld.bat.")
+  return
+ var width:=source.get_32();var height:=source.get_32()
+ var raw:=source.get_buffer(source.get_length()-8).decompress(width*height*3,FileAccess.COMPRESSION_DEFLATE)
+ if raw.size()!=width*height*3:
+  push_error("Country label coverage is damaged.")
+  return
+ var image:=Image.create_from_data(width,height,false,Image.FORMAT_RGB8,raw)
+ image.generate_mipmaps()
+ label_material.set_shader_parameter("glyph_atlas",ImageTexture.create_from_image(image))
  label_material.set_shader_parameter("label_visibility",visibility_texture)
  label_material.render_priority = 30
  label_mesh.material_override = label_material
@@ -189,15 +212,14 @@ func update_view(force: bool = false) -> void:
   if host.camera.is_position_behind(anchor) or anchor.normalized().dot((host.camera.global_position-anchor).normalized()) < .25: continue
   var screen_height: float = entry["world_height"]*host.view_container.size.y/(2.0*tan(deg_to_rad(host.camera.fov)*.5)*maxf(.01,host.camera.global_position.distance_to(anchor)))
   if screen_height < 7.0: continue
-  var path: PackedVector3Array = entry["path"]
   var rect := Rect2(host.camera.unproject_position(anchor)*ratio,Vector2.ZERO)
   var valid := true
-  for i: int in [0,12,36,48]:
-   var point: Vector3 = host.planet.global_transform*path[i]
+  for local: Vector3 in entry["footprint"]:
+   var point: Vector3 = host.planet.global_transform*local
    if host.camera.is_position_behind(point) or point.normalized().dot((host.camera.global_position-point).normalized()) < .12: valid=false;break
    rect=rect.expand(host.camera.unproject_position(point)*ratio)
   if not valid: continue
-  rect=rect.grow(screen_height*.7+2.0)
+  rect=rect.grow(3.0)
   if not Rect2(Vector2(6,0),size-Vector2(12,6)).encloses(rect): continue
   var blocked := false
   for previous: Rect2 in occupied:

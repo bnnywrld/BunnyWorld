@@ -1,0 +1,19 @@
+{
+	"checks": [
+		"PASS names stay enabled",
+		"PASS country labels use runtime coverage texture",
+		"PASS territory drawer wider at 1440",
+		"PASS state heading pinned outside scrolling content",
+		"PASS StateBuildings section exists",
+		"PASS StateResources section exists",
+		"PASS StateInfrastructure section exists",
+		"PASS SelectedProvince section exists",
+		"PASS heading remains pinned during scroll",
+		"PASS drawer fits 1100-width window",
+		"PASS drawer retains usable compact width",
+		"PASS inventory needs no horizontal scroll",
+		"PASS wide drawer collapses with handle accessible"
+	],
+	"failures": 0,
+	"renderer": "llvmpipe (LLVM 20.1.2, 256 bits)"
+}

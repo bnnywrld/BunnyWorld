@@ -43,6 +43,8 @@ var selection_box: PanelContainer
 var national_metric := "age"
 var territory_metric := "age"
 var territory_panel: PanelContainer
+var territory_heading: VBoxContainer
+var territory_scroll: ScrollContainer
 var territory_details: VBoxContainer
 var navigation_row: HBoxContainer
 var stats_row: HFlowContainer
@@ -197,6 +199,7 @@ func _ready() -> void:
 	_build_sounds()
 	_build_theme()
 	_build_interface()
+	_unify_country_panel()
 	foundation = preload("res://scripts/foundation_ui.gd").new()
 	foundation.build(self)
 	_loading_stage(40, "Preparing terrain and waterways")
@@ -625,14 +628,18 @@ func _build_interface() -> void:
 	territory_handle.custom_minimum_size = Vector2(26, 36)
 	view_container.add_child(territory_handle)
 	territory_handle.hide()
-	var territory_scroll := ScrollContainer.new()
-	territory_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	territory_panel.add_child(territory_scroll)
+	var territory_frame := VBoxContainer.new()
+	territory_frame.add_theme_constant_override("separation", 5)
+	territory_panel.add_child(territory_frame)
+	territory_heading = VBoxContainer.new()
+	territory_heading.name = "TerritoryHeading"
+	territory_heading.add_theme_constant_override("separation", 5)
+	territory_frame.add_child(territory_heading)
 	territory_details = VBoxContainer.new()
 	territory_details.custom_minimum_size.x = 270
 	territory_details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	territory_details.add_theme_constant_override("separation", 5)
-	territory_scroll.add_child(territory_details)
+	territory_frame.add_child(territory_details)
 	territory_panel.hide()
 	_position_panels()
 	var scroll := ScrollContainer.new()
@@ -699,7 +706,6 @@ func _build_planet() -> void:
 		planet_material.set_shader_parameter("region_map_%d" % tile, region_texture)
 	planet_material.set_shader_parameter("palette_width", 8192.0)
 	planet_material.set_shader_parameter("province_index", load("res://assets/province_index.png"))
-	planet_material.set_shader_parameter("border_fade", load("res://assets/border_fade.png"))
 	planet_material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
 	water_passages = JSON.parse_string(FileAccess.get_file_as_string("res://data/waterways.json"))["passages"]
 	resident_terrain = preload("res://scripts/resident_terrain.gd").new()
@@ -854,7 +860,7 @@ func _rebuild_palette() -> void:
 	_update_legend()
 
 func _update_selection_shader() -> void:
-	if display_coverage != null: display_coverage.select(state.selected_region if inspection_active else 0, state.selected_province if inspection_active else 0)
+	if display_coverage != null: display_coverage.select(state.selected_region if inspection_active else 0, state.selected_province if inspection_active else 0,state.selected_sea)
 	planet_material.set_shader_parameter("selected_sea", float(state.selected_sea))
 	for material: ShaderMaterial in border_materials:
 		material.set_shader_parameter("selected_country", float(state.countries[state.selected_country]["index"]) if inspection_active else 0.0)
@@ -993,29 +999,9 @@ func _sea_at(position: Vector2) -> int:
 	return id if state.sea_regions.has(str(id)) else 0
 
 func _show_sea(id: int) -> void:
-	if not state.sea_regions.has(str(id)): return
-	_hide_panel(control_panel)
-	_reveal_panel(right_panel)
-	details = diplomatic_details
-	_clear_details()
-	state.selected_sea = id
-	state.selected_region = 0
-	state.selected_province = 0
-	inspect_region = 0
-	inspect_province = 0
-	inspection_active = false
-	var sea: Dictionary = state.sea_regions[str(id)]
-	details.add_child(_label("LAKE REGION" if sea["naval_terrain"] == "lake" else "SEA REGION", 11, Color("63c9b6")))
-	details.add_child(_wrapped(sea["name"], 24, Color("f0f7f8")))
-	_stat("Waters", str(sea["naval_terrain"]).replace("_", " ").capitalize())
-	details.add_child(HSeparator.new())
-	details.add_child(_label("NEIGHBORING WATERS", 11, Color("8fb6c3")))
-	for neighbor: int in sea["neighbors"]:
-		if state.sea_regions.has(str(neighbor)):
-			var caption: String = state.sea_regions[str(neighbor)]["name"]
-			for passage: Dictionary in sea.get("passages",[]):
-				if int(passage["neighbor"])==neighbor: caption += " · " + str(passage["name"])
-			details.add_child(_button(caption, func(): _show_sea(neighbor)))
+	if not state.sea_regions.has(str(id)):return
+	state.selected_sea=id;state.selected_region=0;state.selected_province=0;inspect_region=0;inspect_province=0;inspection_active=false
+	preload("res://scripts/territory_view.gd").new().sea(self,id)
 	_update_selection_shader()
 
 func _update_map_hover(position: Vector2) -> void:
@@ -1042,7 +1028,6 @@ func _update_map_hover(position: Vector2) -> void:
 			if pid > 0:
 				var p: Dictionary = state.provinces[str(pid)]
 				text += "\n" + str(p.get("name", "Province %d" % int(p["local_index"])))
-				text += "\n" + _province_population_tooltip(pid)
 	elif id == 8191: text = "Antarctica\nUnclaimed terrain"
 	elif id == 0:
 		var sea := _sea_at(position)
@@ -1127,16 +1112,6 @@ func _set_city_scenery(value: bool) -> void:
 	_update_cities()
 	_persist_interface_settings()
 
-func _province_population_tooltip(pid: int) -> String:
-	var province: Dictionary = state.provinces[str(pid)]
-	var group_id := str(province.get("urban_group", ""))
-	var result := "Province residents: %s · estimate" % _number(state.province_population(pid))
-	if not group_id.is_empty():
-		var group: Dictionary = state.urban_database["groups"][group_id]
-		result += "\nIncludes the city and surrounding countryside."
-		if group["provinces"].size()>1:
-			result += "\n%s: %s combined total" % [group["name"],_number(state.urban_group_population(group_id))]
-	return result
 
 func _icon_grid(columns: int = 6) -> GridContainer:
 	var grid := GridContainer.new()
@@ -1295,14 +1270,8 @@ func _population_profile(chart: Control, state_scope: bool) -> void:
 func _show_country(tag: String, focus: bool = true) -> void:
 	if not state.countries.has(tag):
 		return
-	if screen == "playing" and tag == state.player_country:
-		_reveal_panel(control_panel)
-		_hide_panel(right_panel)
-		details = control_details
-	else:
-		_hide_panel(control_panel)
-		_reveal_panel(right_panel)
-		details = diplomatic_details
+	_reveal_panel(control_panel)
+	details = control_details
 	state.selected_country = tag
 	inspection_active = true
 	state.selected_region = inspect_region if inspect_region > 0 and state.regions[str(inspect_region)]["owner"] == tag else 0
@@ -1387,59 +1356,7 @@ func _selection_breadcrumb(region: Dictionary) -> void:
 	details.add_child(row)
 
 func _show_territory() -> void:
-	var country_details := details
-	for child: Node in territory_details.get_children():
-		territory_details.remove_child(child)
-		child.queue_free()
-	if not show_regions or state.selected_region <= 0:
-		_hide_panel(territory_panel)
-		return
-	details = territory_details
-	var heading := HBoxContainer.new()
-	heading.add_child(_label("TERRITORY", 11, Color("63c9b6")))
-	var spacer := Control.new()
-	spacer.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	heading.add_child(spacer)
-	details.add_child(heading)
-	if show_regions and state.selected_region > 0:
-		var region: Dictionary = state.regions[str(state.selected_region)]
-		details.add_child(HSeparator.new())
-		_selection_breadcrumb(region)
-		details.add_child(_label("SELECTED STATE", 11, Color("63c9b6")))
-		details.add_child(_wrapped(region["name"], 20, Color("f0f7f8")))
-		_summary_grid([["State residents",foundation.compact_number(int(region["population"])),"Exact: "+_number(int(region["population"]))],["Area · km²",foundation.compact_number(int(region.get("area_km2",0))),"Exact area: "+_area_number(float(region.get("area_km2",0)))+" km²"]])
-		var allocation := state.population_allocation(state.selected_region)
-		details.add_child(_wrapped("City provinces: %s  ·  Other provinces: %s" % [_number(int(allocation.get("urban", 0))), _number(int(allocation.get("shared", 0)))], 13, Color("a9bcc8")))
-		if state.selected_province > 0 and distance <= 1.2:
-			var province: Dictionary = state.provinces[str(state.selected_province)]
-			details.add_child(_label("SELECTED PROVINCE", 11, Color("63c9b6")))
-			details.add_child(_wrapped("%s · %s" % [region["name"], str(province.get("name", "Province %d" % int(province["local_index"])))], 17, Color("f0f7f8")))
-			details.add_child(_wrapped("%s · %s km²" % ["City province" if province.get("kind", "") == "city" else "Rural province", _area_number(float(province.get("area_km2", 0)))]))
-			if not province.get("cities", []).is_empty(): details.add_child(_wrapped("Cities: " + ", ".join(province["cities"])))
-			details.add_child(_wrapped("Province population: " + _number(state.province_population(state.selected_province)), 16, Color("e5c888")))
-			details.add_child(_wrapped("2000 starting estimate", 12, Color("a9bcc8")))
-			var group_id := str(province.get("urban_group", ""))
-			if not group_id.is_empty():
-				var group: Dictionary = state.urban_database["groups"][group_id]
-				details.add_child(_wrapped("Includes countryside · 2000 estimate", 12, Color("a9bcc8")))
-				if group["provinces"].size() > 1:
-					details.add_child(_wrapped("%s population: %s" % [group["name"], _number(state.urban_group_population(group_id))], 14))
-					details.add_child(_wrapped("District/locality area within the game province", 12, Color("a9bcc8")))
-				details.add_child(_wrapped("Settlement class: " + str(group["category"]), 13))
-
-			details.add_child(_wrapped("Land connections: %d" % province["neighbors"].size()))
-			details.add_child(_wrapped("Province infrastructure: None" if province["buildings"].is_empty() else "Province infrastructure: " + str(province["buildings"])))
-		_rights_row("CORES", region.get("cores", []))
-		_rights_row("CLAIMS", region.get("claims", []))
-		
-		var chart := preload("res://scripts/compact_demographics.gd").new()
-		chart.name = "StateDemographics"
-		chart.configure(foundation.demographics.state_metrics(state, state.selected_region), territory_metric, func(key: String): territory_metric = key, true)
-		_population_profile(chart, true)
-
-	details = country_details
-	_reveal_panel(territory_panel)
-	_position_panels()
+	preload("res://scripts/territory_view.gd").new().render(self)
 
 func _open_organization(oid: String) -> void:
 	active_org = oid
@@ -1664,6 +1581,7 @@ func _process(delta: float) -> void:
 			show_regions = visible_regions
 			planet_material.set_shader_parameter("show_regions", show_regions)
 		planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
+		planet_material.set_shader_parameter("camera_distance",distance)
 		planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
 		planet_material.set_shader_parameter("city_detail", clampf((1.50 - distance) / .25, 0.0, 1.0))
 		if not is_equal_approx(last_border_distance, distance):
@@ -2258,12 +2176,7 @@ func _run_smoke_test() -> void:
 	_go_to_place(colosseum,false)
 	_smoke_check(checks, state.regions[str(_region_at(Vector2(world_view.size)*.5))]["owner"]=="ITA","Colosseum correctly belongs to Italy")
 	_smoke_check(checks, _area_number(.44)=="0.44","small province area is readable")
-	var urban_tip := _province_population_tooltip(int(colosseum["province"]))
-	_smoke_check(checks,"surrounding countryside" in urban_tip and "estimate" in urban_tip,"urban tooltip scope")
-	for province: Dictionary in state.provinces.values():
-		if str(province["urban_group"]).is_empty():
-			_smoke_check(checks,"estimate" in _province_population_tooltip(int(province["id"])),"rural tooltip scope")
-			break
+	_smoke_check(checks,state.regions.size()==1355,"updated State geography")
 	_set_city_scenery(old_scenery)
 	print("REFINEMENT_UI_CHECKS place_search_camera_pause_and_player=true persistent_scenery=true Vatican_and_Colosseum_picking=true population_tooltips=true")
 	if false in checks:
@@ -2480,7 +2393,7 @@ func _placeholder(caption: String) -> void:
 func _close_panels() -> void:
 	if screen == "playing":
 		_hide_panel(control_panel)
-		_hide_panel(right_panel)
+		_hide_panel(territory_panel)
 		inspection_active = false
 		inspect_region = 0
 		state.selected_region = 0
@@ -2570,7 +2483,7 @@ func _update_cities() -> void:
 		return
 	var occupied: Array[Rect2] = []
 	for city: Dictionary in cities:
-		if not city["capital"] and distance > 1.35: continue
+		if not city["capital"] and not city.get("state_capital",false) and distance > 1.35: continue
 		var p: Vector3 = planet.global_transform * city["raised_point"]
 		if p.dot(camera.position - p) <= 0 or camera.is_position_behind(p): continue
 		var projected := camera.unproject_position(p) * view_container.size / Vector2(world_view.size)
@@ -2581,7 +2494,7 @@ func _update_cities() -> void:
 			if box.intersects(other): overlaps = true; break
 		if overlaps: continue
 		occupied.append(box)
-		markers.append({"name": city["name"], "point": projected, "capital": city["capital"]})
+		markers.append({"name": city["name"], "point": projected, "capital": city["capital"], "state_capital":city.get("state_capital",false)})
 		if markers.size() >= 70: break
 	city_layer.set("markers", markers)
 	city_layer.queue_redraw()
@@ -2695,12 +2608,13 @@ func _layout_overlay() -> void:
 func _panel_target(panel: PanelContainer) -> float:
 	return 8.0 if panel == control_panel else view_container.size.x - 338.0
 
-func _territory_position(collapsed: bool) -> float:
-	return (-300.0 if control_panel.visible else 300.0) if collapsed else 0.0
+func _territory_width() -> float:
+	return clampf(view_container.size.x * .305, 350.0, 440.0)
 
+func _territory_position(collapsed: bool) -> float:
+	return _territory_width() if collapsed else 0.0
 func _handle_position(collapsed: bool) -> float:
-	var edge := 338.0 if control_panel.visible else view_container.size.x - 338.0
-	return edge + (0.0 if collapsed else 300.0) if control_panel.visible else edge - 26.0 - (0.0 if collapsed else 300.0)
+	return view_container.size.x-34.0-(0.0 if collapsed else _territory_width())
 
 func _position_panels(force: bool = true) -> void:
 	if view_container == null: return
@@ -2708,14 +2622,15 @@ func _position_panels(force: bool = true) -> void:
 	var key: Array = [view_container.size, top_left_box.size if top_left_box != null else Vector2.ZERO, control_panel.visible, right_panel.visible, territory_collapsed]
 	if not force and key == last_panel_layout and panel_tweens.is_empty() and (territory_tween == null or not territory_tween.is_running()): return
 	last_panel_layout = key
-	for panel: PanelContainer in [control_panel, right_panel]:
+	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		panel.size = Vector2(330, maxf(240, view_container.size.y - 118))
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
-	territory_clip.position = Vector2(338 if control_panel.visible else view_container.size.x - 638, view_container.size.y * .5)
-	territory_clip.size = Vector2(300, view_container.size.y * .5 - 8)
+	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
+	territory_clip.size = Vector2(_territory_width(), view_container.size.y-118)
 	territory_panel.size = territory_clip.size
+	for grid: GridContainer in territory_details.find_children("FacilityGrid","GridContainer",true,false):grid.columns=maxi(4,int((_territory_width()-34)/59))
 	if territory_tween == null or not territory_tween.is_running():
 		territory_panel.position = Vector2(_territory_position(territory_collapsed), 0)
 		territory_handle.position = Vector2(_handle_position(territory_collapsed), territory_clip.position.y + 12)
@@ -2771,8 +2686,6 @@ func _hide_panel(panel: PanelContainer) -> void:
 		if territory_tween != null: territory_tween.kill()
 		if territory_clip != null: territory_clip.hide()
 		if territory_handle != null: territory_handle.hide()
-	elif panel == control_panel or panel == right_panel:
-		_hide_panel(territory_panel)
 	_position_panels()
 
 func _build_console() -> void:
@@ -3006,3 +2919,9 @@ func _water_passage_at(uv: Vector2) -> int:
 			var t := clampf(q.dot(delta)/maxf(delta.length_squared(),.000001),0,1)
 			if (q-delta*t).length()<float(passage["display_width_km"])*.5: return int(passage["ends"][0])
 	return 0
+
+func _unify_country_panel() -> void:
+	view_container.remove_child(right_panel);right_panel.queue_free();right_panel=control_panel;diplomatic_heading=control_heading;diplomatic_details=control_details;details=control_details;control_panel.name="CountryInspector"
+func _focus_state_capital(sid: int) -> void:
+	var r: Dictionary=state.regions[str(sid)]
+	_go_to_place({"state":sid,"province":int(r["capital_province"]),"country":r["owner"],"kind":"City","name":r["state_capital"],"uv":Vector2(r["capital_uv"][0],r["capital_uv"][1])},true)

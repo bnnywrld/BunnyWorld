@@ -1,7 +1,7 @@
 class_name WorldState
 extends RefCounted
 
-const SAVE_VERSION := 10
+const SAVE_VERSION := 11
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}
@@ -11,7 +11,6 @@ var organizations: Dictionary = {}
 var provinces: Dictionary = {}
 var province_database: Dictionary = {}
 var urban_database: Dictionary = {}
-var population_cache: Dictionary = {}
 var selected_province: int = 0
 var sea_regions: Dictionary = {}
 var selected_sea: int = 0
@@ -48,7 +47,6 @@ func reset() -> void:
 	regions = database["regions"].duplicate(true)
 	organizations = database["organizations"].duplicate(true)
 	provinces = province_database.duplicate(true)
-	population_cache = {}
 	selected_province = 0
 	selected_sea = 0
 	relation_offsets = {}
@@ -135,46 +133,6 @@ func country_color(tag: String) -> Array:
 func province_owner(id: int) -> String:
 	var province: Dictionary = provinces.get(str(id), {})
 	return str(regions.get(str(int(province.get("region", 0))), {}).get("owner", ""))
-
-func population_allocation(region_id: int) -> Dictionary:
-	var sid := str(region_id)
-	if not regions.has(sid): return {}
-	var total := int(regions[sid]["population"])
-	if population_cache.has(sid) and int(population_cache[sid]["total"]) == total: return population_cache[sid]
-	var record: Dictionary = urban_database["states"][sid]
-	var starting := int(record["population_2000"])
-	var ids: Array = regions[sid]["provinces"]
-	var shares: Dictionary = {}
-	var fractions: Array[Dictionary] = []
-	var used := 0
-	for pid: Variant in ids:
-		var p: Dictionary = provinces[str(int(pid))]
-		var weight := float(p["population_2000"]) if starting > 0 else 1.0
-		var exact := weight * float(total) / (float(starting) if starting > 0 else float(ids.size()))
-		var value := int(floor(exact))
-		shares[str(int(pid))] = value
-		used += value
-		fractions.append({"id":str(int(pid)),"fraction":exact-value})
-	fractions.sort_custom(func(a: Dictionary,b: Dictionary): return a["fraction"] > b["fraction"])
-	for i: int in maxi(0,total-used):
-		var key: String = fractions[i % fractions.size()]["id"]
-		shares[key] = int(shares[key])+1
-	var urban := 0
-	for pid: Variant in record["urban_provinces"]: urban += int(shares.get(str(int(pid)),0))
-	var result := {"total":total,"urban":urban,"shared":total-urban,"provinces":shares,"shared_province_count":record["shared_provinces"].size()}
-	population_cache[sid] = result
-	return result
-
-func province_population(id: int) -> int:
-	var province: Dictionary = provinces.get(str(id),{})
-	if province.is_empty(): return -1
-	return int(population_allocation(int(province["region"])).get("provinces",{}).get(str(id),0))
-
-func urban_group_population(group_id: String) -> int:
-	var total := 0
-	for pid: Variant in urban_database.get("groups", {}).get(group_id, {}).get("provinces", []):
-		total += maxi(0, province_population(int(pid)))
-	return total
 
 func memberships(tag: String) -> Array[String]:
 	var result: Array[String] = []

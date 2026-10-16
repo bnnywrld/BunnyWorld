@@ -1,0 +1,16 @@
+{
+	"cached": {
+		"maximum_us": 1643,
+		"median_us": 1,
+		"p95_us": 16
+	},
+	"forced_visibility": {
+		"maximum_us": 948,
+		"median_us": 510,
+		"p95_us": 726
+	},
+	"measurement": "CPU label updates with names enabled; not game FPS",
+	"no_coverage_uploads": true,
+	"no_geography_reads": true,
+	"no_geometry_rebuild": true
+}

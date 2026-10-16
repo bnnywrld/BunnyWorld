@@ -7,11 +7,16 @@ var cache: Dictionary = {}
 var upload_count := 0
 var last_state := -1
 var last_province := -1
+var last_sea := -1
 var coast_index: Dictionary
 var coast_pack: FileAccess
 var coast_key := ""
 func initialize(target: ShaderMaterial) -> void:
  material=target
+ var shading:=FileAccess.open("res://assets/display/country_border_shade.bwd",FileAccess.READ)
+ var sw:=shading.get_32();var sh:=shading.get_32()
+ var sb:=shading.get_buffer(shading.get_length()-8).decompress(sw*sh,FileAccess.COMPRESSION_DEFLATE)
+ material.set_shader_parameter("border_fade",ImageTexture.create_from_image(Image.create_from_data(sw,sh,false,Image.FORMAT_R8,sb)))
  coast_index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/local_coasts.json"))
  coast_pack=FileAccess.open("res://assets/display/local_coasts.bwd",FileAccess.READ)
  index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/selection_distance.json"))
@@ -24,12 +29,14 @@ func initialize(target: ShaderMaterial) -> void:
  var tw:=tiny.get_32();var th:=tiny.get_32()
  var tb:=tiny.get_buffer(tiny.get_length()-8).decompress(tw*th,FileAccess.COMPRESSION_DEFLATE)
  material.set_shader_parameter("tiny_land_bits",ImageTexture.create_from_image(Image.create_from_data(tw,th,false,Image.FORMAT_R8,tb)))
-func select(state: int, province: int) -> void:
+func select(state: int, province: int, sea: int=0) -> void:
  if state!=last_state:
   _set_tile("state",state,"states");last_state=state
  if province!=last_province:
   _set_tile("province",province,"provinces");last_province=province
- _set_local_coast(state,province)
+ if sea!=last_sea:
+  _set_tile("sea",sea,"seas");last_sea=sea
+ if state>0 or province>0:_set_local_coast(state,province)
 func _set_tile(prefix: String, id: int, scope: String) -> void:
  var key:=scope+":"+str(id)
  if id<=0 or not index[scope].has(str(id)):

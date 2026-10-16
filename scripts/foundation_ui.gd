@@ -92,13 +92,17 @@ func build(main: Control) -> void:
 	var bar: HFlowContainer = host.stats_row
 	bar.add_theme_constant_override("h_separation",3)
 	for entry: Array in [["political_power","Political power"],["stability","Stability"],["war_support","War support"],["treasury","Treasury"],["debt","Debt"],["population","Population"],["economy","GDP"],["economy","GDP per capita"]]:
+		if entry[1] in ["Treasury", "Population"]:
+			var divider := VSeparator.new()
+			divider.custom_minimum_size = Vector2(4, 22)
+			bar.add_child(divider)
 		var cell := HBoxContainer.new()
-		cell.add_theme_constant_override("separation", 5)
+		cell.add_theme_constant_override("separation", 4)
 		cell.alignment = BoxContainer.ALIGNMENT_CENTER
 		var box := PanelContainer.new()
 		var style: StyleBoxFlat = host._button_style(Color("102332"), 5)
-		style.content_margin_left = 5
-		style.content_margin_right = 5
+		style.content_margin_left = 4
+		style.content_margin_right = 4
 		style.content_margin_top = 2
 		style.content_margin_bottom = 2
 		box.add_theme_stylebox_override("panel", style)
@@ -111,6 +115,7 @@ func build(main: Control) -> void:
 		cell.add_child(icon)
 		var label: Label = host._label("—",13)
 		label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		cell.add_child(label)
 		bar.add_child(box)
 		indicators[entry[1]] = {"cell": box, "label": label, "icon": icon}
@@ -122,7 +127,7 @@ func build(main: Control) -> void:
 func refresh_active_section() -> void:
 	if demographic_button == null: return
 	var chart: Node = host.control_details.get_node_or_null("NationalDemographics")
-	demographic_button.set_pressed_no_signal(host.control_panel.visible and chart != null and chart.visible)
+	demographic_button.set_pressed_no_signal(host.control_panel.visible and host.state.selected_country==host.state.player_country and chart != null and chart.visible)
 
 func open_country_demographics() -> void:
 	host.national_profile_expanded = true

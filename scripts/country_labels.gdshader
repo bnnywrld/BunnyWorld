@@ -1,11 +1,13 @@
 shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_never, depth_test_disabled;
-uniform sampler2D glyph_atlas : source_color, filter_linear_mipmap, repeat_disable;
+uniform sampler2D glyph_atlas : filter_linear_mipmap, repeat_disable;
 uniform sampler2D label_visibility : filter_nearest, repeat_disable;
 uniform float camera_distance=3.0;
 varying float label_alpha;
 varying vec3 radial;
+varying vec2 atlas_uv;
 void vertex(){
+ atlas_uv=UV;
  vec3 eye=(MODELVIEW_MATRIX*vec4(VERTEX,1.0)).xyz;
  float height=UV2.y*abs(PROJECTION_MATRIX[1][1])*VIEWPORT_SIZE.y/(2.0*max(.01,-eye.z));
  float visible=textureLod(label_visibility,vec2(UV2.x,.5),0.0).r;
@@ -14,8 +16,9 @@ void vertex(){
  radial=normalize(mat3(MODELVIEW_MATRIX)*normalize(VERTEX));
 }
 void fragment(){
- vec4 glyph=texture(glyph_atlas,UV);
+ vec3 glyph=texture(glyph_atlas,atlas_uv).rgb;
+ if(glyph.r<.003)discard;
  float facing=dot(normalize(radial),normalize(VIEW));
- ALBEDO=glyph.rgb*vec3(.94,.92,.86);
- ALPHA=glyph.a*label_alpha*smoothstep(.10,.25,facing);
+ ALBEDO=vec3(pow(glyph.g,2.2))*vec3(.94,.92,.86);
+ ALPHA=glyph.r*label_alpha*smoothstep(.10,.25,facing);
 }
