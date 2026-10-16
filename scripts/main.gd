@@ -1338,8 +1338,8 @@ func _selection_breadcrumb(region: Dictionary) -> void:
 	row.name = "SelectionBreadcrumb"
 	row.add_theme_constant_override("separation", 2)
 	var tag: String = region["owner"]
-	var country := _button(str(state.countries[tag]["name"]), func(): inspect_region=0; inspect_province=0; _show_country(tag,false), "Show country overview")
-	var state_button := _button(str(region["name"]), func(): inspect_province=0; _show_country(tag,false), "Show selected State")
+	var country := _button(str(state.countries[tag]["name"]), func(): _show_country_states(tag), "Browse this country's States")
+	var state_button := _button(str(region["name"]), func(): _open_country_state(int(region["id"])), "Show selected State")
 	for button: Button in [country,state_button]:
 		button.add_theme_font_size_override("font_size",11)
 		button.clip_text=true; button.custom_minimum_size.x=82
@@ -1357,6 +1357,21 @@ func _selection_breadcrumb(region: Dictionary) -> void:
 
 func _show_territory() -> void:
 	preload("res://scripts/territory_view.gd").new().render(self)
+
+func _show_country_states(tag: String) -> void:
+	preload("res://scripts/territory_view.gd").new().country_states(self,tag)
+
+func _open_country_state(id: int) -> void:
+	if not state.regions.has(str(id)): return
+	inspect_region=id
+	inspect_province=0
+	state.selected_country=state.regions[str(id)]["owner"]
+	state.selected_region=id
+	state.selected_province=0
+	state.selected_sea=0
+	inspection_active=true
+	_update_selection_shader()
+	_show_territory()
 
 func _open_organization(oid: String) -> void:
 	active_org = oid

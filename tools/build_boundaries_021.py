@@ -37,11 +37,8 @@ def contours(atlas,ids,scale,water=False):
                 neighbor=int(other[start])
                 if neighbor!=sid and (neighbor==0 or sid<neighbor):
                     pts=np.column_stack([xx[start:end+1],yy[start:end+1]])
-                    simple=np.asarray(LineString(pts).simplify(.8,preserve_topology=False).coords)
-                    if len(simple)>=6:
-                        left=simple[:-1]*.75+simple[1:]*.25;right=simple[:-1]*.25+simple[1:]*.75
-                        smooth=np.empty((len(left)*2,2));smooth[::2]=left;smooth[1::2]=right
-                        simple=np.vstack([simple[:1],smooth,simple[-1:]])
+                    from display_shape_0215 import smooth
+                    simple=smooth(np.asarray(LineString(pts).simplify(.8,preserve_topology=False).coords))
                     if len(simple)>1:paths.append((simple[:,0]/ww,simple[:,1]/hh,sid,neighbor,1 if water else 0))
                 start=end
         if sid%250==0:print('Boundary contours',sid,'paths',len(paths),flush=True)
@@ -53,7 +50,7 @@ def mesh(paths,name):
         # Simplification is planar. Long latitude/longitude runs need extra
         # vertices before spherical projection; otherwise a ribbon becomes a
         # chord through the planet and no longer follows the categorical atlas.
-        points=np.column_stack([x,y]);step=np.max(np.abs(np.diff(points,axis=0))*np.array([2048,1024]),axis=1)
+        points=np.column_stack([x,y])+np.array([.5/W,.5/H])*(2 if kind==1 else 1);step=np.max(np.abs(np.diff(points,axis=0))*np.array([2048,1024]),axis=1)
         pieces=[]
         for j,n in enumerate(np.maximum(1,np.ceil(step).astype(int))):
             t=np.arange(n,dtype=float)/n

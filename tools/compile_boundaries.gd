@@ -35,7 +35,7 @@ func _initialize() -> void:
 		arrays[Mesh.ARRAY_INDEX] = indices
 		var mesh := ArrayMesh.new()
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-		var result := ResourceSaver.save(mesh, "res://assets/%s_boundaries.res" % kind)
+		var result := ResourceSaver.save(mesh, "res://assets/%s_boundaries.res" % kind, ResourceSaver.FLAG_COMPRESS)
 		if result != OK:
 			printerr("Boundary mesh could not be saved: ", kind, " ", result)
 			quit(1); return

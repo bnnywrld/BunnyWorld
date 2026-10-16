@@ -1,50 +1,6 @@
 {
-  "version": "0.2.0.14",
+  "version": "0.2.0.16",
   "files": [
-    {
-      "path": "assets/land_boundaries.res",
-      "bytes": 41576140,
-      "sha256": "81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76",
-      "encoding": "zlib",
-      "parts": [
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part000",
-          "bytes": 2097152,
-          "sha256": "b54749b9d1fabb852fc6f09d0acd75da6e2b4aab41676ac588e6bd69c762ac96"
-        },
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part001",
-          "bytes": 2097152,
-          "sha256": "1589babbd7fb43775d97b2c2452f4e1a2affeb9a1ab9165dc471dca0691b959a"
-        },
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part002",
-          "bytes": 2097152,
-          "sha256": "d02ca0913d0865f8de5c80545af5da875ef9a36fa0de50cb8b58f965bbf94fd3"
-        },
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part003",
-          "bytes": 2097152,
-          "sha256": "7a41b6fbe569a0477b6e7a8d7b8f2f53aeb21379b0ab2be7df65879cdea958da"
-        },
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part004",
-          "bytes": 2097152,
-          "sha256": "018bfb5b85012319488c3259fc8bfdf51b4e5e567e8c340c0ed4896e79d309fd"
-        },
-        {
-          "path": "repository_assets/81e1bfce5f35d4f39452a27a0d44e8b0cfa037ce7db2ca1d8945799e2d00be76.zlib.part005",
-          "bytes": 1007783,
-          "sha256": "941f0d9d2bddd31325426e1112b5d25cf67b6a28c0a2f65eab5e17ac57f55c82"
-        }
-      ],
-      "previous_sha256": [
-        "05934b0528b064ece6e77d4045d1cf9c7932122546db2602f11f83dee6b0ffb5",
-        "4d31d6d0819ba06dedf6ea7654418077e9e8c10b190be9165fb37d0d4a286540",
-        "5ad5839b39732fc602acd416e9b148859ab4439c90c07a541deefb7ce4364994",
-        "62f6404af8ac5492a93244184b114064a4b27b0c227055128075ae64302d4bcb"
-      ]
-    },
     {
       "path": "assets/materials/terrain_materials.bwm",
       "bytes": 22369860,
@@ -119,46 +75,6 @@
           "bytes": 6506869,
           "sha256": "c6351fa433662829e4f0bd474dc2ca1040154d00c49e8a0311df34287ec41397"
         }
-      ]
-    },
-    {
-      "path": "assets/province_boundaries.res",
-      "bytes": 34892084,
-      "sha256": "5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32",
-      "encoding": "zlib",
-      "parts": [
-        {
-          "path": "repository_assets/5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32.zlib.part000",
-          "bytes": 2097152,
-          "sha256": "d6b03bb263fc23aff757ec0ee130fa898bbfa8016aa28ba2951c18566c3d5689"
-        },
-        {
-          "path": "repository_assets/5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32.zlib.part001",
-          "bytes": 2097152,
-          "sha256": "a6792e69a89b37a190222d0859cf1453bb71af1c2e5839ecb11e7bf84c3a983b"
-        },
-        {
-          "path": "repository_assets/5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32.zlib.part002",
-          "bytes": 2097152,
-          "sha256": "036aef77680c451ce24a45954090f87ea4f274e0dd2e16a7fbf0797a118e8236"
-        },
-        {
-          "path": "repository_assets/5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32.zlib.part003",
-          "bytes": 2097152,
-          "sha256": "9994f5841108eca96e2d6a13f64a6f87f07a89774b912fc194dd9aa72ba91b88"
-        },
-        {
-          "path": "repository_assets/5bbf6d4668e8fb84f1e9b94b23bd70eb3e89cdfa5e398a526832772c22cd5f32.zlib.part004",
-          "bytes": 1297940,
-          "sha256": "63f4542b03826c089f06fc059ac3a29fc4ebe3971f80b5570c7e36a9b80d6672"
-        }
-      ],
-      "previous_sha256": [
-        "7c2e071665f67ba51b6b194fa6565b1a4d4cb91d31513662b43ac968c9ead6de",
-        "7d6f4a3816fcbf750000de864df42e6b13c3603a2531cc64d3683f55fb7a8737",
-        "bfbb71a7b7d0b515147f2ef96198aaf67e49440cd66702df6745ead2ef6d525b",
-        "c171d8879f1ab1b5690c93fbcafdaeb40d56f0d5c37d0f9f57dc808aac435e78",
-        "dea603b52e70e9d8c572f8206d1ab689b902618da2c543fa0a970b524f6e79b0"
       ]
     },
     {

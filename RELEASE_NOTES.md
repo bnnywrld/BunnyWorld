@@ -1,44 +1,80 @@
-# Bunny World 0.2.0.14
+# Bunny World 0.2.0.15 — State corrections and map audit
 
-Rebuilt source patch for the working 0.2.0.13 installation. This is a new rebuild, not a recovered copy of the lost original archive. Godot 4.5.1. Start a fresh campaign.
-
-## Install
-
-Close Godot. Back up your working 0.2.0.13 folder. Extract this ZIP into that folder and replace matching files. Run Prepare_BunnyWorld.bat if needed, then open project.godot. This patch contains changed files; it is not a standalone game or Windows executable.
-
-## Interface
-
-Country Control and Diplomacy share the left inspector and show domestic or foreign content as appropriate. State and sea information has an independent right inspector. The State inspector has no scroll container; population, area, capital, province count, slots, buildings, infrastructure and resources have compact sections. Capital names focus the map. Buildings use cached placeholder icons and counts; infrastructure types use levels out of 10. Ordinary slot capacity increases with population and never discards the existing inventory. Resource deposits are explicitly unavailable until authored.
-
-Province population estimates and the 2000 starting-estimate line are removed. State population is authoritative. City scenery uses normalized State weights and a capital preference as groundwork for future growth; demographic growth and automatic city expansion are not implemented here.
-
-## Map and cities
-
-Prepared distance fields now drive close-view selected fill and outlines from the same coverage. This includes sea selection, coast clipping and the merged States. Existing country-name meshes remain cached and enabled; camera motion does not rebuild names or decode selection geography. Small differences at categorical picking boundaries remain possible because smoothing is visual.
-
-Every State has a capital focus. The largest available mapped settlement by source rank is used for 1,292 States; 63 unresolved or remote States retain an explicitly labelled administrative anchor. 603 city markers and 554 capital scenery clusters were added. GeoNames ranks select settlements, not year-2000 local population. Decorative building instances decrease from 114,191 to 85,643, with offsets compressed to 88%. Functional building inventories are retained; infrastructure levels are capped at 10.
+Apply this changed-files patch over working **0.2.0.14**. Close Godot, back up the folder, extract and replace files, then run **Prepare_BunnyWorld.bat in the game folder** so the updated border resources are restored. Open project.godot with Godot 4.5.1 and start a **fresh campaign**. No Windows executable is included. Offline generation tools are supplied for development; players do not need to run them.
 
 ## State changes
 
-| Removed / consolidated State | Destination |
-| --- | --- |
-| Korean Demilitarized Zone (North) | Kangwon |
-| Southern DMZ | Gangwon |
-| Samdu Valleys; Himachal Pradesh – Tirpani Valleys | Himachal Pradesh |
-| Toba; Southern North Sumatra; Northern Sumatra | North Sumatra |
-| Chișinău; Bălți | Chișinău–Bălți |
-| Mainland pieces formerly in Åland | Southwest Finland |
+- The former Korean DMZ strip provinces and UNDOF strip province are dissolved into closest adjacent same-controller provinces. The long selectable strip shapes and their obsolete IDs are gone.
+- UNDOF Zone is removed as a State. Its existing bookkeeping is incorporated into Southern Syria.
+- Jersey/Sark become one **Channel Islands** State; island provinces remain distinct.
+- The tiny Arctic State called Krasnoyarsk was a footprint of **Uyedineniya Island**, not the city. It is incorporated into Krasnoyarsk Krai, retaining the island province.
+- The previous South Sumatra / Lampung State also contained Banten, Jakarta and West Java. It is separated into **South Sumatra–Lampung** and **Western Java**, using existing province footprints. Retained State population and inventories are apportioned by existing province area; country totals are unchanged. This is bookkeeping, not a revised local demographic estimate.
+- Czech labels now describe the actual administrative unions: Western and Southern Bohemia, Northeastern Bohemia, Moravia–Silesia, Central Bohemia–Vysočina. Prague and Brno no longer appear under the wrong historic-region labels. Existing province footprints are retained.
+- Incorrect inherited names are corrected in Kazakhstan, Afghanistan, Estonia, Mexico, Nigeria, Sudan, Tunisia, Yemen and Finland. Cornwall's actual Devon/Cornwall union is named explicitly. Full mappings follow below.
+- Existing capital-city coordinates are used to correct country-capital State references where unambiguous, including Tokyo, Seoul, Canberra, Washington and Jakarta. Starting country ownership is preserved.
 
-Åland retains only original Province 6 (ID 3865). Each former DMZ strip is consolidated whole into its same-owner adjoining State. World and country population totals are conserved. Result: 1,355 States and 13,594 provinces.
+## Selection and borders
 
-## Before / after player checklist
+The old smoothing could remove a quarter of a long segment at a corner. Selection contours now preserve substantial geometric corners and bound incidental smoothing to less than half a source pixel. All State/province/sea selection fields are rebuilt from current categorical IDs. This is display preparation, not a general province redraw.
 
-1. Open Japan near Tokyo: select State, province, then Coast of Japan. Compare fill edges and coast lines at close zoom. Rotate and zoom with names enabled.
-2. Open a densely built State: check the right inspector at 1100×700 and a larger resolution. All State sections should fit without scrolling. The mouse wheel over UI must not zoom the map.
-3. Select your country, then another country: the left inspector should switch domestic/diplomatic content while the State inspector remains independent.
-4. Check Åland Province 6, Southwest Finland, North Sumatra, Moldova, Himachal Pradesh and both former DMZ strips.
-5. Verify State capital focus, province count, building slots and infrastructure n/10. Check cities look denser with fewer decorative buildings.
+State and internal province meshes are regenerated together. Former State boundaries that are now internal province boundaries are included, and very short real adjacencies omitted by contour extraction are restored. Province borders remain visible slightly farther out. Countries with straight borders retain their genuine corners.
 
-## Attribution and limits
+Country names stay enabled and retain the cached rendering from 0.2.0.13. Camera movement does not rebuild label meshes or decode/upload selection geography. Native Windows GPU performance still requires player testing.
 
-Additional settlement coordinates/ranks: GeoNames, https://www.geonames.org/ and https://download.geonames.org/export/dump/ — retrieved 16 October 2026, CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). Modern ranks do not assert historical population accuracy. Existing map/font/source attribution remains in the repository. Icons remain placeholders.
+## Audit scope and limits
+
+The machine-readable worldwide report is `validation_0215/state_audit.json`. It records State identities, source subdivision unions, city-name mismatches, disconnected components, selection-mask coverage and actual province counts. All State/province/sea field records and all internal province adjacency edges are validated separately.
+
+This is a worldwide automated audit with focused review of findings, not a historical certification of every boundary. Real archipelagos, enclaves, separated administrative pieces and accepted scenario control can explain disconnected footprints and are not erased merely to make shapes contiguous. Name heuristics can flag legitimate regional names that differ from ADM1 names; those flags are not automatically treated as defects.
+
+Three coarse reference-overlap flags remain for the Bahamas, Riau Islands and Southwest Finland. Their audit samples include land absent from the generalized ADM1 source; a detailed coastline comparison remains appropriate. Their ownership and accepted land footprints are retained. Very small States below the coarse audit grid are covered by full-resolution identity/field integrity checks rather than a fabricated coarse overlap percentage.
+
+**Turku:** the stored city position is already 60.45148° N, 22.26869° E, matching GeoNames 633679, and lies in Southwest Finland. It is not relocated to an invented coordinate. The reported visual misplacement was not reproduced as a data-coordinate error.
+
+## Province work deferred
+
+The full province shape/density redesign is deliberately separate. Central Denmark genuinely has 1 province, Southern Denmark 12, and North Rhine-Westphalia 4; this is not just hidden linework. These examples are recorded in the audit for the next patch. No general subdivision, smoothing or density redistribution is applied here. The only province geometry changes are the specifically requested strip dissolutions.
+
+## Test order
+
+1. North Dakota and a rectangular Australian State: select/deselect and change zoom. Corners should remain aligned with the State footprint.
+2. North Sumatra: inspect the full State and its provinces; check all land portions and internal borders.
+3. Both former Korean DMZ strips and the former Syrian UNDOF strip: no long separate strip provinces or strip States should remain.
+4. Channel Islands, Prague/Brno, Astana/Qaraghandy, Devon/Cornwall, Uyedineniya/Krasnoyarsk Krai, and the Sumatra/Western Java split.
+5. Verify country-capital State labels, names enabled during rotation/zoom, State panel without scrolling, and wheel blocking over UI.
+
+## Corrected names
+
+| Country | Previous | Corrected |
+| --- | --- | --- |
+| CZE | Sumava | Western and Southern Bohemia |
+| CZE | Bohemia | Northeastern Bohemia |
+| CZE | Czech Silesia | Moravia–Silesia |
+| CZE | Moravia | Central Bohemia–Vysočina |
+| KAZ | Kyzylorda | Jambyl–Turkistan |
+| KAZ | Kostanay / Akmola | Akmola–Kostanay–North Kazakhstan |
+| KAZ | Astana | Karaganda–Kyzylorda |
+| AFG | Badakhshan | Herat |
+| EST | Tartu | Southern Estonia |
+| EST | Lääne | Harju–Lääne–Pärnu |
+| EST | Harju | Eastern Estonia |
+| MEX | Guanajuato | San Luis Potosí–Zacatecas |
+| NIG | Sokoto | Kebbi–Niger |
+| NIG | Kano — North | Sokoto–Zamfara |
+| NIG | Kano — South | Kano–Kaduna–Katsina |
+| SUD | Khartoum | Kassala–Al Qadarif |
+| SUD | White Nile | Khartoum–White Nile |
+| TUN | Gabès | Central Tunisia |
+| YEM | Taiz | Al Hudaydah–Al Mahwit–Raymah |
+| FIN | Lappi | Kainuu–Northern Ostrobothnia |
+| ENG | Cornwall | Devon and Cornwall |
+
+## Reference sources
+
+- Natural Earth ADM1: https://www.naturalearthdata.com/downloads/10m-cultural-vectors/10m-admin-1-states-provinces/ — the supplied geographic_subdivisions.geojson, not an assertion that all current subdivisions existed in 2000.
+- GeoNames settlement coordinates and island gazetteer, CC BY 4.0: https://www.geonames.org/ and https://download.geonames.org/export/dump/.
+- Turku: https://www.geonames.org/633679/turku.html; https://www.turku.fi/en/about-turku/maps-and-geographic-information.
+- Czech regional reference: https://csu.gov.cz/kraje-spolecne/territorial-units.
+- Kazakhstan regional reference: https://stat.gov.kz/en/region/.
+
+The accepted scenario country footprint and all country population totals are conserved. Dynamic city growth, resource deposits, political-system content and save compatibility are outside this patch.

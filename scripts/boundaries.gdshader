@@ -22,16 +22,11 @@ varying flat float extent;
 varying flat float opacity;
 varying vec3 sphere_point;
 varying float facing;
-float current_state(float id){
- if(id==738.0)return 732.0;if(id==1753.0)return 1568.0;
- if(id==926.0||id==928.0)return 894.0;
- if(id==1814.0)return 1813.0;if(id==685.0)return 687.0;return id;
-}
 float owner(float id){vec3 d=texture(owners,vec2((id+.5)/palette_width,.5)).rgb;return floor(d.r*255.0+.5)+floor(d.g*255.0+.5)*256.0;}
 void vertex(){
  vec3 radial=normalize(VERTEX);vec2 geo=vec2(fract(atan(radial.x,radial.z)/6.28318530718+.5),acos(clamp(radial.y,-1.0,1.0))/3.14159265359);VERTEX=radial*(1.000004+border_relief(geo));sphere_point=VERTEX;
  vec3 eye=(MODELVIEW_MATRIX*vec4(VERTEX,1.0)).xyz;facing=dot(normalize(mat3(MODELVIEW_MATRIX)*radial),normalize(-eye));
- kind=UV.y;float left=floor(UV2.x+.5),right=floor(UV2.y+.5);if(kind<.5){left=current_state(left);right=current_state(right);}float lo=owner(left),ro=owner(right);bool national=lo!=ro;bool coast=left<.5||right<.5;
+ kind=UV.y;float left=floor(UV2.x+.5),right=floor(UV2.y+.5);float lo=owner(left),ro=owner(right);bool national=lo!=ro;bool coast=left<.5||right<.5;
  selected=(inspection_active&&selected_country>0.0&&national&&(lo==selected_country||ro==selected_country))?1.0:0.0;
  if(kind>.5)selected=(selected_sea>0.0&&(left==selected_sea||right==selected_sea))?2.0:0.0;
  else if(show_regions&&selected_region>0.0&&(left==selected_region||right==selected_region))selected=2.0;

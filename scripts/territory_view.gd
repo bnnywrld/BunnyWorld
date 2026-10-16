@@ -20,7 +20,7 @@ func inventory(body: VBoxContainer,records: Dictionary,levels: bool) -> void:
   var count:=text(str(int(records[id]))+("/10" if levels else ""),11,Color("eee4cd"));count.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;row.add_child(count);tile.tooltip_text=Facilities.caption(id)+": "+str(int(records[id]))+(" / 10 levels" if levels else " buildings");grid.add_child(tile)
  if grid.get_child_count()==0:body.add_child(text("No recorded facilities"))
 func render(main: Control) -> void:
- host=main;clear(host.territory_heading);clear(host.territory_details)
+ host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_SHRINK_BEGIN
  if host.state.selected_region<=0:host._hide_panel(host.territory_panel);return
  var r: Dictionary=host.state.regions[str(host.state.selected_region)];var before: VBoxContainer=host.details;host.details=host.territory_heading;host._selection_breadcrumb(r);host.territory_heading.add_child(text(str(r["name"]),21,Color("f0eee2")));host.details=host.territory_details
  var summary:=HBoxContainer.new();summary.name="StateSummary";summary.add_child(text(host.foundation.compact_number(r["population"])+" residents",17,Color("eee4cd")));summary.add_child(text(host.foundation.compact_number(int(r["area_km2"]))+" km²",14));host.territory_details.add_child(summary)
@@ -40,4 +40,21 @@ func sea(main: Control,id: int) -> void:
  for n: int in r["neighbors"]:
   if not host.state.sea_regions.has(str(n)):continue
   var button: Button=host._button(host.state.sea_regions[str(n)]["name"],func():host._show_sea(n));button.add_theme_font_size_override("font_size",11);button.clip_text=true;button.custom_minimum_size.x=130;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;grid.add_child(button)
+ host._reveal_panel(host.territory_panel);host._position_panels()
+
+func country_states(main: Control,tag: String) -> void:
+ host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ var country: Dictionary=host.state.countries[tag]
+ host.territory_heading.add_child(text(str(country["name"]),21,Color("f0eee2")))
+ var ids: Array=[]
+ for r: Dictionary in host.state.regions.values():
+  if r["owner"]==tag:ids.append(int(r["id"]))
+ ids.sort_custom(func(a: int,b: int):return str(host.state.regions[str(a)]["name"]).naturalnocasecmp_to(str(host.state.regions[str(b)]["name"]))<0)
+ var heading:=text(str(ids.size())+" States · select a State to inspect",12);heading.name="CountryStatesHeading";host.territory_heading.add_child(heading)
+ var scroll:=ScrollContainer.new();scroll.name="CountryStatesList";scroll.horizontal_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;scroll.size_flags_vertical=Control.SIZE_EXPAND_FILL;scroll.mouse_force_pass_scroll_events=false;host.territory_details.add_child(scroll)
+ var list:=VBoxContainer.new();list.size_flags_horizontal=Control.SIZE_EXPAND_FILL;list.add_theme_constant_override("separation",4);scroll.add_child(list)
+ for id: int in ids:
+  var r: Dictionary=host.state.regions[str(id)]
+  var button: Button=host._button(str(r["name"])+"   ·   "+host.foundation.compact_number(r["population"]),func():host._open_country_state(id),"Capital: "+str(r["state_capital"])+" · "+str(r["provinces"].size())+" provinces")
+  button.name="State_"+str(id);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.clip_text=true;button.custom_minimum_size.y=38;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;button.add_theme_font_size_override("font_size",13);list.add_child(button)
  host._reveal_panel(host.territory_panel);host._position_panels()

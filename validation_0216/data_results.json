@@ -1,0 +1,115 @@
+{
+  "passed": true,
+  "states": 1352,
+  "provinces": 13590,
+  "cyprus_one_state_one_province": true,
+  "only_former_cyprus_buffer_pixels_changed": 146,
+  "country_population_totals_conserved": true,
+  "selection_fields_decoded": 15062,
+  "sumatra_all_provinces": [
+    {
+      "province": 4647,
+      "selection_coverage": 1.0,
+      "pixels": 1089,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4653,
+      "selection_coverage": 1.0,
+      "pixels": 1107,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4654,
+      "selection_coverage": 0.9982993197278912,
+      "pixels": 588,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4655,
+      "selection_coverage": 1.0,
+      "pixels": 1561,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4661,
+      "selection_coverage": 0.9950310559006211,
+      "pixels": 805,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4664,
+      "selection_coverage": 0.9973045822102425,
+      "pixels": 371,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4671,
+      "selection_coverage": 0.9984126984126984,
+      "pixels": 630,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4676,
+      "selection_coverage": 0.9974391805377721,
+      "pixels": 781,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4680,
+      "selection_coverage": 0.9993489583333334,
+      "pixels": 1536,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4684,
+      "selection_coverage": 0.9968976215098242,
+      "pixels": 967,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4686,
+      "selection_coverage": 1.0,
+      "pixels": 1211,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 4690,
+      "selection_coverage": 1.0,
+      "pixels": 549,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 13882,
+      "selection_coverage": 0.9375,
+      "pixels": 64,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 13885,
+      "selection_coverage": 0.9411764705882353,
+      "pixels": 17,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 13889,
+      "selection_coverage": 1.0,
+      "pixels": 488,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 13890,
+      "selection_coverage": 0.9969512195121951,
+      "pixels": 328,
+      "missing_interior_pixels": 0
+    },
+    {
+      "province": 13892,
+      "selection_coverage": 1.0,
+      "pixels": 581,
+      "missing_interior_pixels": 0
+    }
+  ],
+  "sumatra_internal_borders_verified": 21,
+  "all_internal_province_borders_verified": 22881
+}

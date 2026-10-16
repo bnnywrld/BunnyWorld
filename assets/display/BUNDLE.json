@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0.14",
-  "geography_version": "0.2.0.14",
+  "version": "0.2.0.16",
+  "geography_version": "0.2.0.16",
   "files": {
     "assets/display/FONT_LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
     "assets/display/coast_distance.bwd": "78716a5fdde6755110d630936ccc7d3a53819c10e7e41b802adad250d20f45da",
     "assets/display/country_glyphs.json": "fb83c780857b64beee7940d6141cbc3d19af0a5e33d7ad8b7eb32ac608d22077",
     "assets/display/country_glyphs.png": "1982e43e244033e721fb8fdb062416efec291fd8352c6e1722a41191c3f0504d",
     "assets/display/local_coasts.bwd": "0f359c3681b669ab011b16aeff6434d593c243a337582a764d5ca8b4dd77a29a",
-    "assets/display/local_coasts.json": "df80374148fa01da1af85557d0982e337859e272239a06dc15a73fa23f51c46d",
-    "assets/display/selection_distance.bwd": "59ea0723e3d2492baa566ff82354b433a20444dc5d2a93fac24e5182d4bd92f4",
-    "assets/display/selection_distance.json": "81e6d004729589af98836625032fac668e9ac937a942e5f23da4063c176e958b",
+    "assets/display/local_coasts.json": "32356f14cd484fa063e349b423d1a9c0b564b5cffd376170ce662802b564ba67",
+    "assets/display/selection_distance.bwd": "7ab8a65730e8fbdfd4236596aeff57958f483524a409b687d4de108397cf1432",
+    "assets/display/selection_distance.json": "d4fc9196c037d856d9ae89f0aa418b965767fa3b1d9bf34f18321b1b1ed48e92",
     "assets/display/tiny_land_bits.bwd": "f7f2224db2822056dead4a581e6231a8bf16274c62f36c5308466af6dc1e8d52",
     "assets/display/country_glyph_mask.bwd": "1276e727c1598b9984b29d598af0657a00919f277836b2cdad31fe3dff429163",
     "assets/display/country_border_shade.bwd": "60b77484cf81c68e36fcaa65be338da075726b7431b91cca195407bd6f66a790"

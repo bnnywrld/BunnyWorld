@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0.14",
-  "scenario_id": "bunny_world_2000_0_2_0_14",
+  "version": "0.2.0.16",
+  "scenario_id": "bunny_world_2000_0_2_0_16",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_version": "0.2.0.13",
+  "baseline_version": "0.2.0.15",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
   "countries": 223,
-  "states": 1355,
-  "land_provinces": 13594,
+  "states": 1352,
+  "land_provinces": 13590,
   "md_land_provinces": 13221,
   "population": 6144737528,
   "local_demographic_refinement": "deferred",
@@ -18,26 +18,27 @@
     "Northern Khabarovsk uses an authored Uda/Stanovoy transition guide; no archival treaty geometry is asserted.",
     "New Stanovoy/Amur division follows terrain-guided geographic grouping; not an archival Manchurian treaty border."
   ],
-  "graphical_linux_tested": false,
+  "graphical_linux_tested": true,
   "debugger_issue_status": "Reported 32 entries not reproduced; exact user log needed if persistent.",
-  "geography_version": "0.2.0.14",
+  "geography_version": "0.2.0.16",
   "visual_update": true,
   "map_data_changed": true,
   "visual_limits": [
-    "Native Windows GPU performance requires player testing.",
-    "Visual smoothing does not change categorical picking IDs.",
-    "Dynamic city growth and resource deposits remain planned.",
-    "63 States use an explicit administrative anchor where no settlement was resolved."
+    "Native Windows hardware performance not benchmarked.",
+    "General province shape/density redesign and updated State populations deferred."
   ],
-  "display_version": "0.2.0.14",
+  "display_version": "0.2.0.16",
   "repository_base_commit": "1c35216a1ff9c780a506a343a28539ffbc13f6d7",
-  "base_patch_sha256": "e6029226a8c55dc6572e344c6d3db39f536bade044a9aafd5b62058e0ec85084",
+  "base_patch_sha256": "65aa0653e3267eb80fd6bc326a64dca93eeca137957ba41b330d9ca95527bae8",
   "validation": {
-    "runtime_checks": 31,
+    "runtime_checks": 43,
     "runtime_failures": 0,
-    "display": "headless",
-    "data_integrity": "pass; all State/province/sea SDF records decompressed and checked",
+    "display": "X11",
+    "data_integrity": "pass",
+    "selection_fields_decoded": 15062,
+    "sumatra_provinces_verified": 17,
+    "sumatra_internal_edges_verified": 21,
+    "installed_overlay_verified": true,
     "native_windows_tested": false
-  },
-  "rebuild": true
+  }
 }

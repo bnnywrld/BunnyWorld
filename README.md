@@ -1,3 +1,7 @@
+# Bunny World 0.2.0.15
+
+State corrections and worldwide audit. Overlay on 0.2.0.14, run Prepare_BunnyWorld.bat, then start a fresh campaign. See [patch notes and audit scope](documentation/PATCH_0215.md).
+
 # Bunny World 0.2.0.14
 
 Rebuilt patch over 0.2.0.13. See [patch notes](documentation/PATCH_0214.md) for installation, changes and test checklist. A fresh campaign is required.

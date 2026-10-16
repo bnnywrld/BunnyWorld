@@ -1,7 +1,7 @@
 class_name WorldState
 extends RefCounted
 
-const SAVE_VERSION := 11
+const SAVE_VERSION := 13
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}

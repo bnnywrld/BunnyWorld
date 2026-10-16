@@ -1,9 +1,9 @@
-# 0.2.0.14 validation
+# 0.2.0.16 validation
 
-Godot 4.5.1, headless. 31 runtime checks passed. No native Windows test or hardware GPU benchmark was performed.
+43 graphical Godot 4.5.1 runtime checks passed with zero failures and no script/shader errors. The tests ran from an independent installed update over the previous data/scripts and border resources, with a clean Godot import. Prepared asset and bundle verification passed. Rendering used Linux OpenGL compatibility / Mesa software rendering; native Windows GPU performance was not benchmarked.
 
-Data validation passed: 1,355 States, 13,594 provinces, complete State/province/sea distance-field records, capitals attached to their State, country/world population conservation, infrastructure caps, ordinary inventory capacity, 85,643 decorative buildings and normalized visual weights.
+Data checks passed: 223 countries, 1,352 States, 13,590 provinces. Only the 146 former Cyprus buffer-zone pixels changed province ID. Every country population total is conserved. All 15,062 selection fields decode correctly. Every one of North Sumatra’s 17 provinces has complete State coverage away from the subpixel outer edge (zero missing interior pixels); all 21 internal adjacency boundaries are present. All 22,881 internal province adjacency boundaries globally are represented in the rebuilt mesh.
 
-Country names stay enabled. Camera movement does not change label geometry-build counts or upload selection fields. The State panel fits at 1100×700 without a scroll. UI wheel blocking and fresh-version save/load passed.
+Country breadcrumb navigation, all owned States in the list, large-country list scrolling, unchanged left panel, return to State overview without a scroll, UI wheel blocking, compact layout, Cyprus merge, save/load and country names enabled passed. Camera movement leaves selection-upload and label-geometry-build counters unchanged.
 
-The right inspector and smoothing require visual confirmation on the player’s Windows GPU. Dynamic city growth and resource deposits are not implemented.
+General province redesign and demographic refinement are deferred.

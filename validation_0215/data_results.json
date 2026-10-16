@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "countries": 223,
+  "states": 1353,
+  "provinces": 13591,
+  "distance_fields_validated": 15064,
+  "strip_provinces_removed": [
+    5500,
+    6633,
+    10335
+  ],
+  "country_ownership_unchanged": true,
+  "country_population_totals_unchanged": true,
+  "all_internal_province_edges_present": true,
+  "north_dakota_coverage_before": 0.9478260869565217,
+  "north_dakota_coverage_after": 0.9985507246376811,
+  "scenery_instances_unchanged": 85643
+}

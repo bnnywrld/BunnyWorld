@@ -1,4 +1,5 @@
-Bunny World 0.2.0.14 — changed files over 0.2.0.13.
-Close Godot; back up the working folder; extract here and replace matching files.
-Run Prepare_BunnyWorld.bat if needed; open project.godot with Godot 4.5.1.
-Start a FRESH campaign. No executable is included. See documentation/PATCH_0214.md.
+Bunny World 0.2.0.15 — changed files over 0.2.0.14
+Close Godot and back up your folder. Extract and replace files.
+Run Prepare_BunnyWorld.bat IN THE GAME FOLDER to install the updated border resources.
+Open project.godot with Godot 4.5.1. Start a FRESH campaign.
+See documentation/PATCH_0215.md for changes, audit limits and test order.
