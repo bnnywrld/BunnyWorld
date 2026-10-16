@@ -1,17 +1,21 @@
 {
-  "version": "0.2.0.16",
-  "geography_version": "0.2.0.16",
+  "version": "0.2.0.18",
+  "geography_version": "0.2.0.17",
   "files": {
-    "assets/display/FONT_LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
-    "assets/display/coast_distance.bwd": "78716a5fdde6755110d630936ccc7d3a53819c10e7e41b802adad250d20f45da",
-    "assets/display/country_glyphs.json": "fb83c780857b64beee7940d6141cbc3d19af0a5e33d7ad8b7eb32ac608d22077",
+    "assets/display/boundary_hint.bwd": "89b22c414d3fa82f9e4ae3b42a7b1dcc294ade11db2f84cdb078cfbab6473861",
+    "assets/display/boundary_pairs.bwd": "c8f5724ca59cccaa1dc6e3c8b2ca534a41d94262ca9d70e0be904f48dab4907d",
+    "assets/display/boundary_distance.bwd": "b3f57fce76f5513c7dc6426b2417e2862f511767d7045e185c16040e8e45f9bd",
+    "assets/display/sea_coverage.json": "f34631883ef53061ea2b38956510ec512c269cb7f54a9e532b02f21cdec03b3a",
+    "assets/display/sea_coverage.bwd": "8e9593db98dc56822a31632e5484a1f9a2df2fabda0d954384f06acde7b4592d",
+    "assets/display/coast_distance_0217.bwd": "9eba0e9e1637ea01f74558e1f58689623dfeb8c4f945790a5abda82d2c9e765f",
+    "assets/display/local_coasts.json": "cfad0b87a19262b17c67b038632e426b4110ec53da50dd44236c3ffe693d3cfb",
+    "assets/display/local_coasts.bwd": "27c10b84370b1f4de8d67759bf295d911a5868207e4a95ffdbcae42f81cfbebb",
+    "assets/land_boundaries.res": "247b7804570207f4126869d006d1d65c683e5536d4cbef9d2c7666b8fce64a22",
+    "assets/province_boundaries.res": "ecee33daedc54415a106f1ea397077289c480d52bd8aa31ee8f1e0827c114108",
+    "assets/display/map_contract.json": "47fcb9e39543be33ba1cee083b4fa61fa0112953bb6fe23e1f2df69d227465ea",
     "assets/display/country_glyphs.png": "1982e43e244033e721fb8fdb062416efec291fd8352c6e1722a41191c3f0504d",
-    "assets/display/local_coasts.bwd": "0f359c3681b669ab011b16aeff6434d593c243a337582a764d5ca8b4dd77a29a",
-    "assets/display/local_coasts.json": "32356f14cd484fa063e349b423d1a9c0b564b5cffd376170ce662802b564ba67",
-    "assets/display/selection_distance.bwd": "7ab8a65730e8fbdfd4236596aeff57958f483524a409b687d4de108397cf1432",
-    "assets/display/selection_distance.json": "d4fc9196c037d856d9ae89f0aa418b965767fa3b1d9bf34f18321b1b1ed48e92",
-    "assets/display/tiny_land_bits.bwd": "f7f2224db2822056dead4a581e6231a8bf16274c62f36c5308466af6dc1e8d52",
-    "assets/display/country_glyph_mask.bwd": "1276e727c1598b9984b29d598af0657a00919f277836b2cdad31fe3dff429163",
-    "assets/display/country_border_shade.bwd": "60b77484cf81c68e36fcaa65be338da075726b7431b91cca195407bd6f66a790"
+    "assets/display/country_glyphs.json": "fb83c780857b64beee7940d6141cbc3d19af0a5e33d7ad8b7eb32ac608d22077",
+    "assets/display/FONT_LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
+    "assets/display/tiny_land_bits.bwd": "f7f2224db2822056dead4a581e6231a8bf16274c62f36c5308466af6dc1e8d52"
   }
 }

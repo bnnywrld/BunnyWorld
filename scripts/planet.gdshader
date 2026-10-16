@@ -12,6 +12,7 @@ uniform sampler2DArray terrain_materials : source_color, filter_linear_mipmap_an
 uniform sampler2D terrain_types : filter_nearest, repeat_enable;
 uniform sampler2D terrain_color : source_color, filter_linear_mipmap, repeat_enable;
 varying vec3 geographic_normal;
+varying vec2 cartography_uv;
 uniform vec2 detail_center=vec2(0.0);
 uniform vec2 detail_span=vec2(0.0);
 varying flat float patch_surface;
@@ -28,12 +29,6 @@ uniform sampler2D sea_coverage : filter_linear, repeat_disable;
 uniform vec4 sea_coverage_rect=vec4(0.0);
 uniform bool sea_coverage_enabled=false;
 uniform float camera_distance=3.65;
-uniform sampler2D state_coverage : filter_linear, repeat_disable;
-uniform sampler2D province_coverage : filter_linear, repeat_disable;
-uniform vec4 state_coverage_rect=vec4(0.0);
-uniform vec4 province_coverage_rect=vec4(0.0);
-uniform bool state_coverage_enabled=false;
-uniform bool province_coverage_enabled=false;
 uniform sampler2D colors : source_color, filter_nearest;
 uniform sampler2D owners : filter_nearest;
 uniform sampler2D sea_map : filter_nearest, repeat_disable;
@@ -48,7 +43,6 @@ uniform bool inspection_active=false;
 uniform float province_opacity=0.0;
 uniform bool physical_mode=false;
 uniform bool information_mode=false;
-uniform sampler2D border_fade : filter_linear, repeat_enable;
 uniform sampler2D urban_density : filter_linear_mipmap, repeat_enable;
 uniform sampler2D urban_material : source_color, filter_linear_mipmap, repeat_enable;
 uniform float city_detail=0.0;
@@ -70,48 +64,13 @@ float region_at(vec2 uv){float pid=province_at(uv);vec3 d=floor(texture(province
 vec2 lookup(float id){return vec2((id+.5)/palette_width,.5);}
 float owner_at(float id){vec3 d=texture(owners,lookup(id)).rgb;return floor(d.r*255.0+.5)+floor(d.g*255.0+.5)*256.0;}
 vec4 color_at(vec2 uv,vec3 water){float id=region_at(uv);return id<.5?vec4(water,0.0):vec4(texture(colors,lookup(id)).rgb,1.0);}
-// Reconstruct country coverage, never interpolate numeric ownership IDs.
-// Cubic coverage is evaluated only in the narrow national border band.
 vec4 cubic_weights(float t){float q=t*t,r=q*t;return vec4(-.5*t+q-.5*r,1.0-2.5*q+1.5*r,.5*t+2.0*q-1.5*r,-.5*q+.5*r);}
-vec3 national_color(vec2 uv,vec3 fallback,out float selected_hit,out float hovered_hit){
- vec2 texel=1.0/map_resolution,at=uv*map_resolution-.5,origin=(floor(at)+.5)*texel;
- vec2 f=fract(at);
- float ids[4];float own[4];
- ids[0]=region_at(origin);ids[1]=region_at(origin+vec2(texel.x,0.0));
- ids[2]=region_at(origin+vec2(0.0,texel.y));ids[3]=region_at(origin+texel);
- for(int i=0;i<4;i++)own[i]=owner_at(ids[i]);
- float a=0.0,b=0.0,oa=0.0,ob=0.0;
- for(int i=0;i<4;i++){if(own[i]>0.0){if(oa<.5){a=ids[i];oa=own[i];}else if(own[i]!=oa){b=ids[i];ob=own[i];}}}
- if(oa<.5){selected_hit=0.0;hovered_hit=0.0;return fallback;}
- float weight=1.0;bool junction=false;
- for(int i=0;i<4;i++)if(own[i]>0.0&&own[i]!=oa&&own[i]!=ob)junction=true;
- vec3 result=texture(colors,lookup(a)).rgb;
- if(ob>0.0&&!junction){
-  vec4 wx=cubic_weights(f.x),wy=cubic_weights(f.y);float coverage=0.0;
-  for(int y=0;y<4;y++)for(int x=0;x<4;x++){
-   float o=owner_at(region_at(origin+vec2(float(x-1),float(y-1))*texel));
-   coverage+=wx[x]*wy[y]*(o==oa||o<.5?1.0:0.0);
-  }
-  float aa=max(fwidth(coverage)*.65,.003);
-  weight=smoothstep(.5-aa,.5+aa,coverage);
-  result=mix(texture(colors,lookup(b)).rgb,result,weight);
- }
- selected_hit=(oa==selected_country?weight:0.0)+(ob==selected_country?1.0-weight:0.0);
- hovered_hit=(oa==hovered_country?weight:0.0)+(ob==hovered_country?1.0-weight:0.0);
- if(junction){
-  // Three-country junctions retain all contributors, without selecting a
-  // nonexistent owner between encoded values.
-  vec4 weights=vec4((1.0-f.x)*(1.0-f.y),f.x*(1.0-f.y),(1.0-f.x)*f.y,f.x*f.y);
-  float total=0.0;result=vec3(0.0);selected_hit=0.0;hovered_hit=0.0;
-  for(int i=0;i<4;i++)if(own[i]>0.0){result+=texture(colors,lookup(ids[i])).rgb*weights[i];total+=weights[i];selected_hit+=(own[i]==selected_country?weights[i]:0.0);hovered_hit+=(own[i]==hovered_country?weights[i]:0.0);}
-  result/=max(total,.00001);selected_hit/=max(total,.00001);hovered_hit/=max(total,.00001);
- }
- return result;
-}
+#include "res://scripts/cartography.gdshaderinc"
 float relief(vec2 uv){vec2 d=textureLod(relief_data,vec2(fract(uv.x),clamp(uv.y,0.0,1.0)),0.0).rg;return(dot(d,vec2(255.0,65280.0))/65535.0)*.016;}
 void vertex(){
  patch_surface=UV2.x;
  if(patch_surface>.5){UV=detail_center+(UV*2.0-1.0)*detail_span;UV.y=clamp(UV.y,.000001,.999999);}
+ cartography_uv=UV;
  float lon=(UV.x-.5)*6.28318530718,lat=(.5-UV.y)*3.14159265359;
  vec3 n=vec3(cos(lat)*sin(lon),sin(lat),cos(lat)*cos(lon));
  geographic_normal=n;
@@ -197,9 +156,16 @@ float small_land_at(vec2 pixel){
 }
 float coverage_alpha(float d){float aa=max(fwidth(d)*.65,1.0/255.0);return smoothstep(.5-aa,.5+aa,d);}
 float tile_value(sampler2D field,vec4 rect,vec2 uv){
- vec2 local=vec2(fract(uv.x-rect.x+1.0),uv.y-rect.y)/max(rect.zw,vec2(.0000001));
+ highp vec2 relative=uv-rect.xy;
+ if(relative.x<0.0)relative.x+=1.0;
+ highp vec2 local=relative/max(rect.zw,vec2(.0000001));
  if(any(lessThan(local,vec2(0.0)))||any(greaterThan(local,vec2(1.0))))return 0.0;
  return texture(field,local).r;
+}
+float ocean_sample(vec2 uv){vec2 id=texture(sea_map,vec2(fract(uv.x),clamp(uv.y,0.0,1.0))).rg;return id.x+id.y>.001?1.0:0.0;}
+float ocean_nearby(vec2 uv){
+ vec2 step=1.0/vec2(textureSize(sea_map,0));
+ return max(ocean_sample(uv),max(max(ocean_sample(uv+vec2(step.x,0.0)),ocean_sample(uv-vec2(step.x,0.0))),max(ocean_sample(uv+vec2(0.0,step.y)),ocean_sample(uv-vec2(0.0,step.y)))));
 }
 float field_pixels(float v){return(v-.5)/max(fwidth(v),.00001);}
 vec3 field_ink(vec3 base,float pixels,float width,vec3 ink,float strength){
@@ -212,13 +178,14 @@ vec3 field_ink(vec3 base,float pixels,float width,vec3 ink,float strength){
  return mix(base,ink,glow*strength);
 }
 void fragment(){
- vec2 uv=vec2(fract(UV.x),clamp(UV.y,.000001,.999999));
+ highp vec2 uv=vec2(fract(cartography_uv.x),clamp(cartography_uv.y,.000001,.999999));
  vec2 delta=vec2(abs(fract(uv.x-detail_center.x+.5)-.5),abs(uv.y-detail_center.y));
  if(patch_surface<.5&&detail_span.x>0.0&&all(lessThan(delta,detail_span*.985)))discard;
  float facing=clamp(dot(normalize(NORMAL),normalize(VIEW)),0.0,1.0);
  vec3 water=mix(vec3(.025,.105,.18),vec3(.075,.27,.39),facing);
  float passage_id=water_passage(uv);
- float region=passage_id>0.0?0.0:region_at(uv);float owner=owner_at(region);
+ float pid=passage_id>0.0?0.0:province_at(uv);float region=passage_id>0.0?0.0:region_at(uv);float owner=owner_at(region);
+ MapCoverage coverage=map_coverage(uv,pid,region,owner);
  bool chosen=inspection_active&&owner>0.0&&owner==selected_country;
  vec2 texel=1.0/map_resolution;vec2 pixel=uv*map_resolution-.5;vec2 origin=(floor(pixel)+.5)*texel;vec2 blend=fract(pixel);
  vec2 dx=dFdx(uv)*.3*far_filter;vec2 dy=dFdy(uv)*.3*far_filter;
@@ -236,7 +203,9 @@ void fragment(){
 
  float coast_value=texture(coast_distance,uv).r;
  if(local_coast_enabled&&city_detail>.001){
-  vec2 at=vec2(fract(uv.x-local_coast_rect.x+1.0),uv.y-local_coast_rect.y)/local_coast_rect.zw;
+  highp vec2 coast_delta=uv-local_coast_rect.xy;
+  if(coast_delta.x<0.0)coast_delta.x+=1.0;
+  highp vec2 at=coast_delta/local_coast_rect.zw;
   if(all(greaterThanEqual(at,vec2(0.0)))&&all(lessThanEqual(at,vec2(1.0)))){
    vec2 edge=min(at,1.0-at)*local_coast_rect.zw*map_resolution;
    float local_blend=smoothstep(0.0,3.0,min(edge.x,edge.y))*city_detail;
@@ -272,14 +241,11 @@ void fragment(){
   if(nearby<.5)nearby=region_at(uv-vec2(0.0,texel.y));
   land_color=nearby>.5?texture(colors,lookup(nearby)).rgb:water;
  }
- float national_band=texture(border_fade,uv).r;
- float selected_hit=display_owner==selected_country?1.0:0.0;
- float hovered_hit=display_owner==hovered_country?1.0:0.0;
- vec3 country_tint=land_color;
- if(!information_mode&&(!physical_mode||national_band>.002)){
-  country_tint=national_color(uv,land_color,selected_hit,hovered_hit);
-  if(!physical_mode)land_color=country_tint;
- }
+ float selected_hit=coverage.country_hit;
+ float hovered_hit=coverage.hover_hit;
+ vec3 country_tint=coverage.tint;
+ float national_band=coverage.national_edge?1.0-smoothstep(1.5,10.0,abs(coverage.country_distance)):0.0;
+ if(!physical_mode&&!information_mode&&region>.5)land_color=country_tint;
  vec3 base=mix(water,land_color,land_coverage);
  if(physical_mode){
   vec3 earth=texture(terrain_color,uv).rgb;
@@ -339,8 +305,10 @@ void fragment(){
   float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72))),-.75,1.0);
   base*=.70+.32*smoothstep(-.5,.9,sun);
   float haze=pow(1.0-facing,2.8)*.29;base=mix(base,vec3(.18,.35,.49),haze);
-  if(national_band>.002&&land_coverage>.001){
-   base=mix(base,country_tint,national_band*.20*border_strength*land_coverage);
+  float coastal_band=1.0-smoothstep(1.5,10.0,abs(field_pixels(coast_value)));
+  float political_band=max(national_band*.20,coastal_band*.12);
+  if(political_band>.002&&land_coverage>.001){
+   base=mix(base,country_tint,political_band*border_strength*land_coverage);
   }
  }
  // Visible country/region/coast boundaries use subpixel GPU ribbons. Picking
@@ -348,32 +316,43 @@ void fragment(){
  if(inspection_active&&!information_mode){base=mix(base,vec3(.93,.85,.65),(physical_mode?.055:.09)*selected_hit*land_coverage);}
  float near=1.0-smoothstep(1.45,1.65,camera_distance);
  float coast_px=field_pixels(coast_value);
- float sh=state_coverage_enabled?tile_value(state_coverage,state_coverage_rect,uv):0.0;
- float ph=province_coverage_enabled?tile_value(province_coverage,province_coverage_rect,uv):0.0;
+ float ocean_coast=(abs(coast_px)<8.0||selected_sea>0.0)?ocean_nearby(uv):1.0;
  float wh=sea_coverage_enabled?tile_value(sea_coverage,sea_coverage_rect,uv):0.0;
- if(inspection_active&&state_coverage_enabled){
-  float hit=coverage_alpha(sh);
-  if(abs(region-micro_region)<.5)hit=abs(selected_region-micro_region)<.5?1.0:0.0;
-  base=mix(base,vec3(.64,.82,.79),.13*hit*land_coverage);
-  base=field_ink(base,field_pixels(sh),2.0,vec3(.70,.82,.79),near*smoothstep(1.5,3.0,coast_px));
+ // All close-view land lines and fills resolve the same live membership.
+ float inland=smoothstep(1.5,3.0,coast_px);
+ bool selected_state=inspection_active&&selected_region>0.0;
+ bool selected_prov=inspection_active&&selected_province>0.0&&province_opacity>0.0;
+ if(selected_state)base=mix(base,vec3(.64,.82,.79),.13*coverage.state_hit*land_coverage);
+ if(hovered_country>0.0)base=mix(base,vec3(.88,.87,.72),.055*hover_amount*hovered_hit*(1.0-selected_hit)*land_coverage);
+ if(selected_prov)base=mix(base,vec3(.9,.98,1.0),.07*province_opacity*coverage.province_hit*land_coverage);
+ float state_fade=(1.0-smoothstep(1.42,1.72,camera_distance))*.52;
+ if(!show_regions||(inspection_active&&owner!=selected_country))state_fade=0.0;
+ if(coverage.national_edge){
+  vec3 ink=inspection_active&&(coverage.country_hit>.001)?vec3(.90,.81,.58):vec3(.44,.48,.46);
+  base=field_ink(base,coverage.country_distance,3.2,ink,near*inland);
+ }else if(coverage.state_edge){
+  base=field_ink(base,coverage.state_distance,1.75,vec3(.34,.39,.36),near*state_fade*inland);
+ }else if(coverage.province_edge){
+  float fade=1.0-smoothstep(1.18,1.35,camera_distance);
+  if(selected_state&&region==selected_region)fade=max(fade,1.0-smoothstep(1.36,1.52,camera_distance));
+  if(inspection_active&&owner!=selected_country)fade=0.0;
+  base=field_ink(base,coverage.province_distance,1.2,vec3(.30,.35,.31),near*fade*.52*inland);
  }
- if(hovered_country>0.0){base=mix(base,vec3(.88,.87,.72),.055*hover_amount*hovered_hit*(1.0-selected_hit)*land_coverage);}
- if(province_opacity>0.0&&province_coverage_enabled){
-  float hit=coverage_alpha(ph);
-  if(abs(region-micro_region)<.5)hit=abs(selected_province-micro_province)<.5?1.0:0.0;
-  base=mix(base,vec3(.9,.98,1.0),.07*province_opacity*hit*land_coverage);
-  base=field_ink(base,field_pixels(ph),1.5,vec3(.75,.87,.81),province_opacity*smoothstep(1.5,3.0,coast_px));
- }
+ if(selected_state)base=field_ink(base,coverage.selected_state_distance,2.0,vec3(.70,.82,.79),near*inland);
+ if(selected_prov)base=field_ink(base,coverage.selected_province_distance,1.5,vec3(.75,.87,.81),province_opacity*near*inland);
  if(selected_sea>0.0&&sea_coverage_enabled){
-  float hit=passage_id==selected_sea?1.0:coverage_alpha(wh);
+  float hit=passage_id==selected_sea?1.0:coverage_alpha(wh)*ocean_coast;
   base=mix(base,vec3(.16,.45,.56),.25*hit*(1.0-land_coverage));
-  base=field_ink(base,field_pixels(wh),2.0,vec3(.70,.82,.79),near*(1.0-smoothstep(-3.0,-1.5,coast_px)));
+  base=field_ink(base,field_pixels(wh),2.0,vec3(.70,.82,.79),near*ocean_coast*(1.0-smoothstep(-3.0,-1.5,coast_px)));
  }
  // The exact same prepared coastline clips colour and selection and draws
  // its outline; no second independent polyline can drift offshore.
  vec3 coast_ink=vec3(.34,.39,.36);float coast_width=3.2;
  if(chosen){coast_ink=vec3(.90,.81,.58);coast_width=2.6;}
- if((inspection_active&&state_coverage_enabled&&sh>.30)||(province_opacity>0.0&&ph>.30)||(selected_sea>0.0&&wh>.30)){coast_ink=vec3(.70,.82,.79);coast_width=2.0;}
- base=field_ink(base,coast_px,coast_width,coast_ink,near*(physical_mode?.8:1.0));
+ if((selected_state&&coverage.state_hit>.30)||(selected_prov&&coverage.province_hit>.30)||(selected_sea>0.0&&wh>.30)){coast_ink=vec3(.70,.82,.79);coast_width=2.0;}
+ // Inland lakes retain water, but never acquire a sea-region or national
+ // selection outline. Thin muted shore ink avoids bright inland blotches.
+ if(ocean_coast<.5){coast_ink=vec3(.22,.30,.29);coast_width=1.1;}
+ base=field_ink(base,coast_px,coast_width,coast_ink,near*(ocean_coast<.5?.45:(physical_mode?.8:1.0)));
  ALBEDO=base;
 }

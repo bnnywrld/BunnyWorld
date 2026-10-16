@@ -1,0 +1,105 @@
+{
+  "version": "0.2.0.18",
+  "runtime": {
+    "checks": [
+      "PASS no ownership-dependent prepared masks",
+      "PASS no pre-State/province highlight masks",
+      "PASS old 204MB land selection pack retired",
+      "PASS verified raw categorical textures shared with picking",
+      "PASS actual State selected sumatra",
+      "PASS selection uses live mapping sumatra",
+      "PASS actual State selected cyprus",
+      "PASS selection uses live mapping cyprus",
+      "PASS actual State selected korea",
+      "PASS selection uses live mapping korea",
+      "PASS State ownership transfer succeeds",
+      "PASS political ownership visibly changes automatically",
+      "PASS ownership transfer loads no geography masks",
+      "PASS ownership transfer leaves membership geometry unchanged",
+      "PASS ownership transfer builds no terrain meshes",
+      "PASS State ownership can transfer back",
+      "PASS political colour returns after ownership restored",
+      "PASS physical national edge shading responds to new ownership",
+      "PASS State merge only updates small membership lookup",
+      "PASS camera motion does not decode/upload geography",
+      "PASS camera motion does not rebuild country names",
+      "PASS country names remain enabled",
+      "PASS sea selection retained"
+    ],
+    "failures": 0,
+    "native_windows_tested": false,
+    "renderer": "llvmpipe (LLVM 20.1.2, 256 bits)"
+  },
+  "spatial": {
+    "passed": true,
+    "geography_unchanged_from_0217": true,
+    "countries": 227,
+    "states": 1305,
+    "provinces": 13312,
+    "spatial_cases": [
+      {
+        "state": 1813,
+        "merge_with": [],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      },
+      {
+        "state": 253,
+        "merge_with": [],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      },
+      {
+        "state": 1569,
+        "merge_with": [],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      },
+      {
+        "state": 1568,
+        "merge_with": [],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      },
+      {
+        "state": 1811,
+        "merge_with": [],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      },
+      {
+        "state": 1813,
+        "merge_with": [
+          486
+        ],
+        "missing_deep_interior_cells": 0,
+        "ghost_exterior_cells": 0
+      }
+    ],
+    "national_classification_cells_changed_on_transfer": 633,
+    "distance_field_finite": true,
+    "universal_fields_gpu_bytes": 201326592,
+    "hint_gpu_bytes": 33554432,
+    "native_windows_tested": false
+  },
+  "boundary_generation": {
+    "sampled_cells": 5080042,
+    "oriented_distance_checks": 3837615,
+    "orientation_errors_in_accepted_samples": 0,
+    "ambiguous_samples_using_categorical_fallback": 51977,
+    "gpu_bytes": 201326592,
+    "curve_paths": 72749
+  },
+  "final_render_fixture": {
+    "states": [
+      1813,
+      253,
+      1569,
+      464
+    ],
+    "exact_subpixel_enclave_pick": true,
+    "shader_errors": 0
+  },
+  "asset_contract": "pass",
+  "prepared_assets": "pass"
+}

@@ -1,7 +1,8 @@
 class_name WorldState
 extends RefCounted
+signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 13
+const SAVE_VERSION := 14
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}
@@ -144,7 +145,10 @@ func memberships(tag: String) -> Array[String]:
 func transfer_region(id: int, new_owner: String) -> bool:
 	if not regions.has(str(id)) or not countries.has(new_owner):
 		return false
+	var old_owner: String=regions[str(id)]["owner"]
+	if old_owner==new_owner:return true
 	regions[str(id)]["owner"] = new_owner
+	territory_changed.emit(id,old_owner,new_owner)
 	return true
 
 func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:

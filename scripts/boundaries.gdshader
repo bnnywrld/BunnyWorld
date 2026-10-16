@@ -9,6 +9,7 @@ uniform sampler2D relief_data : filter_linear, repeat_enable;
 #include "res://scripts/border_surface.gdshaderinc"
 uniform float palette_width=8192.0;
 uniform float selected_country=0.0;
+uniform float micro_region=-1.0;
 uniform float selected_region=0.0;
 uniform float selected_sea=0.0;
 uniform bool inspection_active=false;
@@ -38,7 +39,8 @@ void vertex(){
  float analytic=1.0-smoothstep(1.45,1.65,camera_distance);
  if(kind<.5){
   if(left==right)opacity=0.0;
-  if(coast||(inspection_active&&selected_region>0.0&&(left==selected_region||right==selected_region)))opacity*=1.0-analytic;
+  if(left!=micro_region&&right!=micro_region)opacity*=1.0-analytic;
+
  }else{
   if(left<.5||right<.5)opacity=0.0;
   if(selected_sea>0.0&&(left==selected_sea||right==selected_sea))opacity*=1.0-analytic;

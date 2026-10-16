@@ -60,6 +60,9 @@ var overlay_screen := ""
 var last_panel_layout: Array = []
 var last_city_view: Array = []
 var last_camera_view: Array = []
+var tiny_state_markers: Control
+var map_rendering: RefCounted
+var ownership_visual_dirty := false
 var display_coverage: RefCounted
 var control_details: VBoxContainer
 var title_label: Label
@@ -194,6 +197,7 @@ func _ready() -> void:
 		add_child(error)
 		return
 	state.initialize(raw)
+	state.territory_changed.connect(func(_id: int,_old: String,_new: String): ownership_visual_dirty=true)
 	_loading_stage(20, "Preparing world and interface")
 	await get_tree().process_frame
 	_build_sounds()
@@ -208,6 +212,9 @@ func _ready() -> void:
 	_build_planet()
 	_rebuild_palette()
 	country_label_layer.configure(self)
+	tiny_state_markers=preload("res://scripts/tiny_state_markers.gd").new()
+	view_container.add_child(tiny_state_markers)
+	tiny_state_markers.configure(self)
 	_update_country_list()
 	_show_country(state.selected_country, false)
 	_focus_country(state.selected_country, false)
@@ -697,15 +704,13 @@ func _build_planet() -> void:
 	planet_material = ShaderMaterial.new()
 	planet_material.shader = load("res://scripts/planet.gdshader")
 	_configure_microstate()
-	for tile: int in range(4):
-		var region_texture: Texture2D = load("res://assets/region_ids_%d.png" % tile)
-		var region_image := region_texture.get_image()
-		if region_image.is_compressed():
-			region_image.decompress()
-		region_images.append(region_image)
-		planet_material.set_shader_parameter("region_map_%d" % tile, region_texture)
+	map_rendering=preload("res://scripts/map_rendering.gd").new()
+	map_rendering.initialize(state.provinces)
+	region_images=map_rendering.region_images
+	for tile: int in 4:
+		planet_material.set_shader_parameter("region_map_%d"%tile,map_rendering.region_textures[tile])
 	planet_material.set_shader_parameter("palette_width", 8192.0)
-	planet_material.set_shader_parameter("province_index", load("res://assets/province_index.png"))
+	planet_material.set_shader_parameter("province_index",map_rendering.province_texture)
 	planet_material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
 	water_passages = JSON.parse_string(FileAccess.get_file_as_string("res://data/waterways.json"))["passages"]
 	resident_terrain = preload("res://scripts/resident_terrain.gd").new()
@@ -730,10 +735,14 @@ func _build_planet() -> void:
 	for kind: String in ["land", "sea", "province"]:
 		var border_mesh := MeshInstance3D.new()
 		border_mesh.mesh = load("res://assets/%s_boundaries.res" % kind)
+		if kind!="sea":
+			assert(str(border_mesh.mesh.get_meta("geography_version",""))==str(state.database["version"]),"Outdated "+kind+" borders: close Godot and run Prepare_BunnyWorld.bat")
+			assert(str(border_mesh.mesh.get_meta("province_sha256",""))==FileAccess.get_sha256("res://data/provinces.json"),"Border geometry differs from province membership. Rebuild the map.")
 		var material := ShaderMaterial.new()
 		material.shader = load("res://scripts/provinces.gdshader" if kind == "province" else "res://scripts/boundaries.gdshader")
-		if kind == "province": material.set_shader_parameter("province_index", load("res://assets/province_index.png"))
-		for tile: int in range(4): material.set_shader_parameter("region_map_%d" % tile, load("res://assets/region_ids_%d.png" % tile))
+		if kind=="land":material.set_shader_parameter("micro_region",float(micro_geometry.get("state",-1)))
+		if kind == "province": material.set_shader_parameter("province_index",map_rendering.province_texture)
+		for tile: int in range(4): material.set_shader_parameter("region_map_%d" % tile,map_rendering.region_textures[tile])
 		material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
 		material.set_shader_parameter("camera_distance", distance)
 		border_mesh.material_override = material
@@ -1372,6 +1381,33 @@ func _open_country_state(id: int) -> void:
 	inspection_active=true
 	_update_selection_shader()
 	_show_territory()
+	_focus_state(id)
+
+func _focus_state(id: int) -> void:
+	var region: Dictionary=state.regions[str(id)]
+	var points: Array[Vector2]=[]
+	var anchor:=Vector3.ZERO
+	for pid: int in region["provinces"]:
+		var p: Dictionary=state.provinces[str(pid)]
+		var uv:=Vector2(p["map_center"][0],p["map_center"][1])
+		points.append(uv)
+		anchor+=ReliefSurface.unit_point(uv)*maxf(1.0,float(p["area_km2"]))
+	var center:=ReliefSurface.uv_of(anchor.normalized())
+	var radius:=sqrt(maxf(1.0,float(region["area_km2"]))/PI)/6371.0
+	for uv: Vector2 in points:
+		radius=maxf(radius,acos(clampf(ReliefSurface.unit_point(center).dot(ReliefSurface.unit_point(uv)),-1,1)))
+	# Leave room for both inspectors, and fit the State rather than its capital.
+	var available:=maxf(.25,1.0-2.0*_territory_width()/maxf(1.0,size.x))
+	var horizontal:=2.0*atan(tan(deg_to_rad(camera.fov)*.5)*view_container.size.x/maxf(1.0,view_container.size.y)*available)
+	var fit_angle:=maxf(.06,minf(deg_to_rad(camera.fov),horizontal)*.38)
+	var target_distance:=clampf(1.0+sin(minf(radius+.012,1.4))/tan(fit_angle),1.06,3.2)
+	var target:=Vector3(clampf((.5-center.y)*PI,-1.5,1.5),-(center.x-.5)*TAU,0)
+	target.y=planet.rotation.y+wrapf(target.y-planet.rotation.y,-PI,PI)
+	rotation_velocity=Vector2.ZERO
+	if focus_tween!=null:focus_tween.kill()
+	focus_tween=create_tween().set_parallel(true)
+	focus_tween.tween_property(planet,"rotation",target,.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	focus_tween.tween_property(self,"distance",target_distance,.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func _open_organization(oid: String) -> void:
 	active_org = oid
@@ -1513,12 +1549,18 @@ func _map_pixel_at(position: Vector2) -> Color:
 	return pixel
 
 func _region_at(position: Vector2) -> int:
+	if tiny_state_markers!=null:
+		var marker: int=tiny_state_markers.province_at(position)
+		if marker>0:return int(state.provinces[str(marker)]["region"])
 	var pixel := _map_pixel_at(position)
 	var pid := int(round(pixel.r * 255.0)) + int(round(pixel.g * 255.0)) * 256
 	if pid == 65535: return 8191
 	return int(state.provinces.get(str(pid), {}).get("region", 0))
 
 func _province_at(position: Vector2) -> int:
+	if tiny_state_markers!=null:
+		var marker: int=tiny_state_markers.province_at(position)
+		if marker>0:return marker
 	var pixel := _map_pixel_at(position)
 	var pid := int(round(pixel.r * 255.0)) + int(round(pixel.g * 255.0)) * 256
 	return pid if state.provinces.has(str(pid)) else 0
@@ -1585,6 +1627,11 @@ func _globe_input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	if not boot_complete: return
+	if ownership_visual_dirty:
+		ownership_visual_dirty=false
+		_rebuild_palette()
+		_update_country_bar()
+		if country_label_layer!=null:country_label_layer.refresh_if_changed()
 	if hover_panel != null:
 		if foundation != null and foundation.modals_visible() or dragging or screen == "menu" or console != null and console.visible or game_menu != null and game_menu.visible or save_dialog != null and save_dialog.visible or load_dialog != null and load_dialog.visible or overwrite_dialog != null and overwrite_dialog.visible:
 			hover_panel.hide()
@@ -1620,6 +1667,7 @@ func _process(delta: float) -> void:
 		_update_cities()
 		if urban_scenery != null: urban_scenery.update_view(camera, distance, city_scenery_enabled and screen != "menu", delta)
 		if country_label_layer != null: country_label_layer.update_view()
+		if tiny_state_markers!=null:tiny_state_markers.update_view()
 		planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
 		planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 		planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))

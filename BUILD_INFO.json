@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0.16",
-  "scenario_id": "bunny_world_2000_0_2_0_16",
+  "version": "0.2.0.18",
+  "scenario_id": "bunny_world_2000_0_2_0_17",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_version": "0.2.0.15",
+  "baseline_version": "0.2.0.17",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
-  "countries": 223,
-  "states": 1352,
-  "land_provinces": 13590,
+  "countries": 227,
+  "states": 1305,
+  "land_provinces": 13312,
   "md_land_provinces": 13221,
   "population": 6144737528,
   "local_demographic_refinement": "deferred",
@@ -20,25 +20,38 @@
   ],
   "graphical_linux_tested": true,
   "debugger_issue_status": "Reported 32 entries not reproduced; exact user log needed if persistent.",
-  "geography_version": "0.2.0.16",
+  "geography_version": "0.2.0.17",
   "visual_update": true,
-  "map_data_changed": true,
+  "map_data_changed": false,
   "visual_limits": [
-    "Native Windows hardware performance not benchmarked.",
-    "General province shape/density redesign and updated State populations deferred."
+    "Native Windows/GPU performance and the reported Windows-only discrepancy still require user testing.",
+    "Geography, population and province density unchanged.",
+    "Province-level war occupation is outside this rendering patch."
   ],
-  "display_version": "0.2.0.16",
-  "repository_base_commit": "1c35216a1ff9c780a506a343a28539ffbc13f6d7",
-  "base_patch_sha256": "65aa0653e3267eb80fd6bc326a64dca93eeca137957ba41b330d9ca95527bae8",
+  "display_version": "0.2.0.18",
+  "repository_base_commit": "ab4ddf45548f2a0ec929eb535f660b2d4188d6b5",
+  "base_patch_sha256": "e8707e181e1330156059097f30786361790a88c42cf70ecb7422b6d1c2fc3a4f",
   "validation": {
-    "runtime_checks": 43,
+    "runtime_checks": 23,
     "runtime_failures": 0,
-    "display": "X11",
     "data_integrity": "pass",
-    "selection_fields_decoded": 15062,
-    "sumatra_provinces_verified": 17,
-    "sumatra_internal_edges_verified": 21,
-    "installed_overlay_verified": true,
-    "native_windows_tested": false
+    "spatial_cases": 6,
+    "native_windows_tested": false,
+    "adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+    "final_render_fixture": [
+      1813,
+      253,
+      1569,
+      464
+    ],
+    "asset_contract": "pass"
+  },
+  "rendering": {
+    "country_edge_shading": "live ownership",
+    "state_selection": "live province membership",
+    "country_border_geometry": "ownership-independent province-pair curve field",
+    "geography_version": "0.2.0.17",
+    "universal_field_gpu_mib": 192,
+    "boundary_hint_gpu_mib": 32
   }
 }

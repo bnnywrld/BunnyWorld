@@ -80,6 +80,11 @@ def main():
             if not path.is_file() or digest(path.read_bytes()) != expected:
                 raise SystemExit('Display bundle mismatch: ' + name)
         print('Display bundle verified:', display['version'])
+    map_contract = root / 'assets/display/map_contract.json'
+    if map_contract.is_file():
+        import subprocess
+        import sys
+        subprocess.run([sys.executable, str(root / 'tools/build_map.py'), '--check'], check=True)
     app_version = project_version.group(1) if bundle_path.is_file() and project_version else manifest['version']
     print('Prepared repository assets are ready for BunnyWorld ' + app_version + ' (geography ' + manifest['version'] + '). Open project.godot with Godot 4.5.1 stable.')
 

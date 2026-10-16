@@ -35,6 +35,9 @@ func _initialize() -> void:
 		arrays[Mesh.ARRAY_INDEX] = indices
 		var mesh := ArrayMesh.new()
 		mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
+		var world: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/world.json"))
+		mesh.set_meta("geography_version",world["version"])
+		mesh.set_meta("province_sha256",FileAccess.get_sha256("res://data/provinces.json"))
 		var result := ResourceSaver.save(mesh, "res://assets/%s_boundaries.res" % kind, ResourceSaver.FLAG_COMPRESS)
 		if result != OK:
 			printerr("Boundary mesh could not be saved: ", kind, " ", result)

@@ -24,7 +24,9 @@ void vertex(){
 }
 void fragment(){
  float fade=1.0-smoothstep(1.18,1.35,camera_distance);
+ float analytic=1.0-smoothstep(1.45,1.65,camera_distance);
  if(inspection_active&&parent_region==selected_region)fade=max(fade,1.0-smoothstep(1.36,1.52,camera_distance));if(selected>.5)discard;
+ fade*=1.0-analytic;
  if(facing<.012||fade<=0.0||parent_owner<.5||(inspection_active&&parent_owner!=selected_country))discard;
  float px=abs(UV.x)*extent,aa=max(fwidth(px)*.65,.4),hw=selected>.5?1.0:.58;float outer=1.0-smoothstep(hw-aa,hw+aa,px);float inner=1.0-smoothstep(max(.1,hw-.45)-aa,max(.1,hw-.45)+aa,px);
  vec3 color=mix(vec3(.045,.075,.08),physical_mode?vec3(.30,.35,.31):vec3(.45,.48,.43),inner);if(selected>.5)color=mix(vec3(.10,.24,.25),vec3(.75,.87,.81),inner);ALBEDO=color;ALPHA=outer*fade*(parent_region==selected_region?.52:.32)*smoothstep(.012,.08,facing);

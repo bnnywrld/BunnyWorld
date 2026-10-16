@@ -1,5 +1,5 @@
 extends RefCounted
-# Prepared visual coverage only; never used for simulation or map picking.
+# Sea/coast coverage only. Land selection resolves live membership in shader.
 var material: ShaderMaterial
 var index: Dictionary
 var pack: FileAccess
@@ -13,27 +13,35 @@ var coast_pack: FileAccess
 var coast_key := ""
 func initialize(target: ShaderMaterial) -> void:
  material=target
- var shading:=FileAccess.open("res://assets/display/country_border_shade.bwd",FileAccess.READ)
- var sw:=shading.get_32();var sh:=shading.get_32()
- var sb:=shading.get_buffer(shading.get_length()-8).decompress(sw*sh,FileAccess.COMPRESSION_DEFLATE)
- material.set_shader_parameter("border_fade",ImageTexture.create_from_image(Image.create_from_data(sw,sh,false,Image.FORMAT_R8,sb)))
+ var hint:=FileAccess.open("res://assets/display/boundary_hint.bwd",FileAccess.READ)
+ var hw:=hint.get_32();var hh:=hint.get_32()
+ var hb:=hint.get_buffer(hint.get_length()-8).decompress(hw*hh,FileAccess.COMPRESSION_DEFLATE)
+ assert(hb.size()==hw*hh,"Invalid boundary acceleration field")
+ material.set_shader_parameter("boundary_hint",ImageTexture.create_from_image(Image.create_from_data(hw,hh,false,Image.FORMAT_R8,hb)))
+ for record: Array in [["boundary_pairs",Image.FORMAT_RGBA8,4],["boundary_distance",Image.FORMAT_RH,2]]:
+  var field:=FileAccess.open("res://assets/display/"+record[0]+".bwd",FileAccess.READ)
+  var width:=field.get_32();var height:=field.get_32()
+  var raw:=field.get_buffer(field.get_length()-8).decompress(width*height*int(record[2]),FileAccess.COMPRESSION_DEFLATE)
+  assert(raw.size()==width*height*int(record[2]),"Invalid universal boundary field")
+  material.set_shader_parameter(record[0],ImageTexture.create_from_image(Image.create_from_data(width,height,false,record[1],raw)))
  coast_index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/local_coasts.json"))
  coast_pack=FileAccess.open("res://assets/display/local_coasts.bwd",FileAccess.READ)
- index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/selection_distance.json"))
- pack=FileAccess.open("res://assets/display/selection_distance.bwd",FileAccess.READ)
- var coast:=FileAccess.open("res://assets/display/coast_distance.bwd",FileAccess.READ)
+ index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/sea_coverage.json"))
+ pack=FileAccess.open("res://assets/display/"+str(index["data_file"]),FileAccess.READ)
+ var coast:=FileAccess.open("res://assets/display/coast_distance_0217.bwd",FileAccess.READ)
  var width:=coast.get_32();var height:=coast.get_32()
- var bytes:=coast.get_buffer(coast.get_length()-8).decompress(width*height,FileAccess.COMPRESSION_DEFLATE)
- material.set_shader_parameter("coast_distance",ImageTexture.create_from_image(Image.create_from_data(width,height,false,Image.FORMAT_R8,bytes)))
+ var bytes:=coast.get_buffer(coast.get_length()-8).decompress(width*height*2,FileAccess.COMPRESSION_DEFLATE)
+ assert(bytes.size()==width*height*2,"Invalid current coast field")
+ material.set_shader_parameter("coast_distance",ImageTexture.create_from_image(Image.create_from_data(width,height,false,Image.FORMAT_RH,bytes)))
  var tiny:=FileAccess.open("res://assets/display/tiny_land_bits.bwd",FileAccess.READ)
  var tw:=tiny.get_32();var th:=tiny.get_32()
  var tb:=tiny.get_buffer(tiny.get_length()-8).decompress(tw*th,FileAccess.COMPRESSION_DEFLATE)
  material.set_shader_parameter("tiny_land_bits",ImageTexture.create_from_image(Image.create_from_data(tw,th,false,Image.FORMAT_R8,tb)))
 func select(state: int, province: int, sea: int=0) -> void:
  if state!=last_state:
-  _set_tile("state",state,"states");last_state=state
+  last_state=state
  if province!=last_province:
-  _set_tile("province",province,"provinces");last_province=province
+  last_province=province
  if sea!=last_sea:
   _set_tile("sea",sea,"seas");last_sea=sea
  if state>0 or province>0:_set_local_coast(state,province)
@@ -45,8 +53,9 @@ func _set_tile(prefix: String, id: int, scope: String) -> void:
  if not cache.has(key):
   var record: Array=index[scope][str(id)]
   pack.seek(int(record[4]))
-  var bytes:=pack.get_buffer(int(record[5])).decompress(int(record[6])*int(record[7]),FileAccess.COMPRESSION_DEFLATE)
-  var texture:=ImageTexture.create_from_image(Image.create_from_data(int(record[6]),int(record[7]),false,Image.FORMAT_R8,bytes))
+  var bytes:=pack.get_buffer(int(record[5])).decompress(int(record[6])*int(record[7])*2,FileAccess.COMPRESSION_DEFLATE)
+  assert(bytes.size()==int(record[6])*int(record[7])*2,"Invalid selection field "+key)
+  var texture:=ImageTexture.create_from_image(Image.create_from_data(int(record[6]),int(record[7]),false,Image.FORMAT_RH,bytes))
   # Keep bounded memory while switching between provinces; no camera uploads.
   if cache.size()>=12:cache.erase(cache.keys()[0])
   cache[key]={"texture":texture,"rect":Vector4(record[0],record[1],record[2],record[3])}
@@ -69,9 +78,10 @@ func _set_local_coast(state: int, province: int) -> void:
  if not cache.has(key):
   var record: Array=coast_index[scope][str(id)]
   coast_pack.seek(int(record[4]))
-  var raw:=coast_pack.get_buffer(int(record[5])).decompress(int(record[6])*int(record[7]),FileAccess.COMPRESSION_DEFLATE)
+  var raw:=coast_pack.get_buffer(int(record[5])).decompress(int(record[6])*int(record[7])*2,FileAccess.COMPRESSION_DEFLATE)
+  assert(raw.size()==int(record[6])*int(record[7])*2,"Invalid coast field "+key)
   if cache.size()>=12:cache.erase(cache.keys()[0])
-  cache[key]={"texture":ImageTexture.create_from_image(Image.create_from_data(int(record[6]),int(record[7]),false,Image.FORMAT_R8,raw)),"rect":Vector4(record[0],record[1],record[2],record[3])}
+  cache[key]={"texture":ImageTexture.create_from_image(Image.create_from_data(int(record[6]),int(record[7]),false,Image.FORMAT_RH,raw)),"rect":Vector4(record[0],record[1],record[2],record[3])}
  material.set_shader_parameter("local_coast",cache[key]["texture"])
  material.set_shader_parameter("local_coast_rect",cache[key]["rect"])
  material.set_shader_parameter("local_coast_enabled",true)
