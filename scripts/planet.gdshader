@@ -19,11 +19,24 @@ varying vec3 radial_world;
 varying vec3 east_world;
 varying vec3 north_world;
 const vec2 map_resolution=vec2(16384.0,8192.0);
+uniform sampler2D local_coast : filter_linear, repeat_disable;
+uniform vec4 local_coast_rect=vec4(0.0);
+uniform bool local_coast_enabled=false;
+uniform sampler2D tiny_land_bits : filter_nearest, repeat_disable;
+uniform sampler2D coast_distance : filter_linear, repeat_enable;
+uniform sampler2D state_coverage : filter_linear, repeat_disable;
+uniform sampler2D province_coverage : filter_linear, repeat_disable;
+uniform vec4 state_coverage_rect=vec4(0.0);
+uniform vec4 province_coverage_rect=vec4(0.0);
+uniform bool state_coverage_enabled=false;
+uniform bool province_coverage_enabled=false;
 uniform sampler2D colors : source_color, filter_nearest;
 uniform sampler2D owners : filter_nearest;
 uniform sampler2D sea_map : filter_nearest, repeat_disable;
 uniform float palette_width=8192.0;
 uniform float selected_country=0.0;
+uniform float hovered_country=0.0;
+uniform float hover_amount=0.0;
 uniform float selected_region=0.0;
 uniform float selected_province=0.0;
 uniform float selected_sea=0.0;
@@ -134,6 +147,18 @@ vec3 biome_at(vec2 uv){
  }
  return vec3(first,second,next/max(best+next,.00001));
 }
+float small_land_at(vec2 pixel){
+ pixel=vec2(mod(pixel.x+map_resolution.x,map_resolution.x),clamp(pixel.y,0.0,map_resolution.y-1.0));
+ vec2 bit_uv=(vec2(floor(pixel.x/8.0),pixel.y)+.5)/vec2(2048.0,8192.0);
+ uint bits=uint(floor(texture(tiny_land_bits,bit_uv).r*255.0+.5));
+ return float((bits>>uint(mod(pixel.x,8.0)))&uint(1));
+}
+float coverage_alpha(float d){float aa=max(fwidth(d)*.65,1.0/255.0);return smoothstep(.5-aa,.5+aa,d);}
+float tile_coverage(sampler2D field,vec4 rect,vec2 uv){
+ vec2 local=vec2(fract(uv.x-rect.x+1.0),uv.y-rect.y)/max(rect.zw,vec2(.0000001));
+ if(any(lessThan(local,vec2(0.0)))||any(greaterThan(local,vec2(1.0))))return 0.0;
+ return coverage_alpha(texture(field,local).r);
+}
 void fragment(){
  vec2 uv=vec2(fract(UV.x),clamp(UV.y,.000001,.999999));
  vec2 delta=vec2(abs(fract(uv.x-detail_center.x+.5)-.5),abs(uv.y-detail_center.y));
@@ -145,13 +170,45 @@ void fragment(){
  bool chosen=inspection_active&&owner>0.0&&owner==selected_country;
  vec2 texel=1.0/map_resolution;vec2 pixel=uv*map_resolution-.5;vec2 origin=(floor(pixel)+.5)*texel;vec2 blend=fract(pixel);
  vec2 dx=dFdx(uv)*.3*far_filter;vec2 dy=dFdy(uv)*.3*far_filter;
+ // Physical terrain uses the prepared coast field, so it no longer needs
+ // four province/region/palette decodes just to reconstruct land coverage.
+ vec4 surface=vec4(water,0.0);
+ if(!physical_mode){
  vec4 c00=color_at(mix(origin,uv-dx-dy,far_filter),water);vec4 c10=color_at(mix(origin+vec2(texel.x,0),uv+dx-dy,far_filter),water);
  vec4 c01=color_at(mix(origin+vec2(0,texel.y),uv-dx+dy,far_filter),water);vec4 c11=color_at(mix(origin+texel,uv+dx+dy,far_filter),water);
- blend=mix(blend,vec2(.5),far_filter);vec4 surface=mix(mix(c00,c10,blend.x),mix(c01,c11,blend.x),blend.y);
+ blend=mix(blend,vec2(.5),far_filter);surface=mix(mix(c00,c10,blend.x),mix(c01,c11,blend.x),blend.y);
  if(passage_id>0.0)surface=vec4(water,0.0);
  // Subpixel enclaves cannot rely on four coarse atlas samples for their fill.
  if(abs(region-micro_region)<.5){surface=vec4(texture(colors,lookup(region)).rgb,1.0);}
- vec3 base=surface.rgb;
+ }
+
+ float coast_value=texture(coast_distance,uv).r;
+ if(local_coast_enabled&&city_detail>.001){
+  vec2 at=vec2(fract(uv.x-local_coast_rect.x+1.0),uv.y-local_coast_rect.y)/local_coast_rect.zw;
+  if(all(greaterThanEqual(at,vec2(0.0)))&&all(lessThanEqual(at,vec2(1.0)))){
+   vec2 edge=min(at,1.0-at)*local_coast_rect.zw*map_resolution;
+   float local_blend=smoothstep(0.0,3.0,min(edge.x,edge.y))*city_detail;
+   coast_value=mix(coast_value,texture(local_coast,at).r,local_blend);
+  }
+ }
+ float land_coverage=coverage_alpha(coast_value);
+ if(land_coverage<.999&&region>0.0&&small_land_at(floor(uv*map_resolution))>.5){
+  vec2 pixel=uv*map_resolution-.5,corner=floor(pixel),weight=fract(pixel);
+  float row0=mix(small_land_at(corner),small_land_at(corner+vec2(1.0,0.0)),weight.x);
+  float row1=mix(small_land_at(corner+vec2(0.0,1.0)),small_land_at(corner+vec2(1.0)),weight.x);
+  land_coverage=max(land_coverage,coverage_alpha(mix(row0,row1,weight.y)));
+ }
+ if(passage_id>0.0)land_coverage=0.0;
+ if(abs(region-micro_region)<.5)land_coverage=1.0;
+ vec3 land_color=clamp((surface.rgb-water*(1.0-surface.a))/max(.0001,surface.a),vec3(0.0),vec3(1.0));
+ if(surface.a<.001&&land_coverage>.001&&!physical_mode){
+  float nearby=region_at(uv+vec2(texel.x,0.0));
+  if(nearby<.5)nearby=region_at(uv-vec2(texel.x,0.0));
+  if(nearby<.5)nearby=region_at(uv+vec2(0.0,texel.y));
+  if(nearby<.5)nearby=region_at(uv-vec2(0.0,texel.y));
+  land_color=nearby>.5?texture(colors,lookup(nearby)).rgb:water;
+ }
+ vec3 base=mix(water,land_color,land_coverage);
  if(physical_mode){
   vec3 earth=texture(terrain_color,uv).rgb;
   vec3 types=biome_at(uv);
@@ -201,26 +258,31 @@ void fragment(){
    vec3 city=mix(vec3(.33,.35,.32),blocks*.9+vec3(.05),.86);
    earth=mix(earth,city,urban*.78);
   }
-  float coast=texture(relief_data,uv).a;
-  float edge=max(fwidth(coast)*.75,.008);
-  float physical_land=smoothstep(.5-edge,.5+edge,coast);
+  // Reconstruct the same four categorical samples used by political fill.
+  // A screen-footprint AA band avoids the coarser physical mask halo.
+  float physical_land=land_coverage;
   if(passage_id>0.0)physical_land=0.0;
   if(abs(region-micro_region)<.5)physical_land=1.0;
   base=mix(water,earth,physical_land);
   float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72))),-.75,1.0);
   base*=.70+.32*smoothstep(-.5,.9,sun);
   float haze=pow(1.0-facing,2.8)*.29;base=mix(base,vec3(.18,.35,.49),haze);
-  if(owner>0.0){float band=texture(border_fade,uv).r;float amount=band*.48*border_strength;base=mix(base,texture(colors,lookup(region)).rgb,amount);}
+  if(owner>0.0){float band=texture(border_fade,uv).r;float amount=band*.20*border_strength*land_coverage;base=mix(base,texture(colors,lookup(region)).rgb,amount);}
  }
  // Visible country/region/coast boundaries use subpixel GPU ribbons. Picking
  // always reads the discrete ID atlas, independently of visual antialiasing.
- if(chosen&&!information_mode){base=mix(base,vec3(1.0,.78,.35),physical_mode?.10:.25);}
- if(inspection_active&&selected_region>0.0&&selected_region==region&&show_regions){base=mix(base,vec3(.28,.88,.95),.13);}
- bool regional_scope=!inspection_active||chosen;
- if(province_opacity>0.0&&owner>0.0&&regional_scope){
-  float province=province_at(uv);
-  if(province==selected_province){base=mix(base,vec3(.9,.98,1.0),.12*province_opacity);}
+ if(chosen&&!information_mode){base=mix(base,vec3(.93,.85,.65),(physical_mode?.055:.09)*land_coverage);}
+ if(inspection_active&&state_coverage_enabled&&show_regions){
+  float hit=tile_coverage(state_coverage,state_coverage_rect,uv);
+  if(abs(region-micro_region)<.5)hit=abs(selected_region-micro_region)<.5?1.0:0.0;
+  base=mix(base,vec3(.64,.82,.79),.075*hit*land_coverage);
  }
- if(region<.5&&selected_sea>0.0){vec3 d=floor(texture(sea_map,uv).rgb*255.0+.5);float sea=passage_id>0.0?passage_id:d.r+d.g*256.0;if(sea==selected_sea){base=mix(base,vec3(.16,.45,.56),.25);}}
+ if(owner>0.0&&owner==hovered_country&&!chosen){base=mix(base,vec3(.88,.87,.72),.055*hover_amount*land_coverage);}
+ if(province_opacity>0.0&&province_coverage_enabled){
+  float hit=tile_coverage(province_coverage,province_coverage_rect,uv);
+  if(abs(region-micro_region)<.5)hit=abs(selected_province-micro_province)<.5?1.0:0.0;
+  base=mix(base,vec3(.9,.98,1.0),.12*province_opacity*hit*land_coverage);
+ }
+ if(region<.5&&selected_sea>0.0){vec3 d=floor(texture(sea_map,uv).rgb*255.0+.5);float sea=passage_id>0.0?passage_id:d.r+d.g*256.0;if(sea==selected_sea){base=mix(base,vec3(.16,.45,.56),.25*(1.0-land_coverage));}}
  ALBEDO=base;
 }

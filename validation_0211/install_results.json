@@ -1,0 +1,11 @@
+{
+  "base_commit": "952c03aef5a324f2bf590f0f2ef39bddbdb87335",
+  "clean_git_archive": true,
+  "patch_hashes_match": true,
+  "fresh_resource_restore": "pass",
+  "geography_bundle": "0.2.0.10",
+  "application_version": "0.2.0.11",
+  "clean_editor_import": "pass",
+  "resource_load": "pass",
+  "errors": 0
+}

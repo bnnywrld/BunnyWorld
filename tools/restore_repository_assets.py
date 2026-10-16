@@ -51,14 +51,37 @@ def main():
     if bundle_path.is_file():
         bundle = json.loads(bundle_path.read_text())
         project_version = re.search(r'^\s*config/version\s*=\s*"([^"]+)"', (root / 'project.godot').read_text(), re.M)
-        if not project_version or project_version.group(1) != bundle['version']:
-            raise SystemExit('Project version differs from the geography bundle. Finish pulling the update before opening Godot.')
+        info_path = root / 'BUILD_INFO.json'
+        info = json.loads(info_path.read_text()) if info_path.is_file() else {}
+        if info.get('geography_version') is not None:
+            app_matches = project_version and info.get('version') == project_version.group(1) and info['geography_version'] == bundle['version']
+        else:
+            app_matches = project_version and project_version.group(1) == bundle['version']
+        if not app_matches:
+            raise SystemExit('Project version differs from its declared geography bundle. Finish applying the update before opening Godot.')
         for name, expected in bundle['files'].items():
             path = root / name
             if not path.is_file() or digest(path.read_bytes()) != expected:
                 raise SystemExit('Geography bundle mismatch: ' + name + '. Finish pulling the update, close Godot, then run preparation again.')
         print('Geography bundle verified:', bundle['version'])
-    print('Prepared repository assets are ready for ' + manifest['version'] + '. Open project.godot with Godot 4.5.1 stable.')
+    display_path = root / 'assets/display/BUNDLE.json'
+    build_info_path = root / 'BUILD_INFO.json'
+    display_info = json.loads(build_info_path.read_text()) if build_info_path.is_file() else {}
+    if display_info.get('display_version'):
+        if not display_path.is_file():
+            raise SystemExit('Display bundle is missing. Finish applying the visual update.')
+        display = json.loads(display_path.read_text())
+        if display.get('version') != display_info['display_version']:
+            raise SystemExit('Display bundle version mismatch. Finish applying the visual update.')
+        if display.get('geography_version') != display_info.get('geography_version', manifest['version']):
+            raise SystemExit('Display bundle targets a different geography version.')
+        for name, expected in display['files'].items():
+            path = root / name
+            if not path.is_file() or digest(path.read_bytes()) != expected:
+                raise SystemExit('Display bundle mismatch: ' + name)
+        print('Display bundle verified:', display['version'])
+    app_version = project_version.group(1) if bundle_path.is_file() and project_version else manifest['version']
+    print('Prepared repository assets are ready for BunnyWorld ' + app_version + ' (geography ' + manifest['version'] + '). Open project.godot with Godot 4.5.1 stable.')
 
 
 if __name__ == '__main__':

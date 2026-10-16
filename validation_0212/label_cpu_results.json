@@ -1,0 +1,20 @@
+{
+	"current": {
+		"maximum_us": 774,
+		"median_us": 1,
+		"p95_us": 9
+	},
+	"current_forced_visibility": {
+		"maximum_us": 2199,
+		"median_us": 444,
+		"p95_us": 795
+	},
+	"legacy_0211": {
+		"maximum_us": 63634,
+		"median_us": 44977,
+		"p95_us": 55112
+	},
+	"measurement": "label update CPU time; camera-path replay, no GPU timing claim",
+	"platform": "Linux",
+	"rendering": "headless"
+}

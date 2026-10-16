@@ -9,7 +9,7 @@ func configure(values: Dictionary) -> void:
 	for key: String in counts:
 		colors[key] = Color("647681") if key == "Unknown" or key == "Other / unspecified" else PALETTE[index % PALETTE.size()]
 		index += 1
-	custom_minimum_size = Vector2(120, 120)
+	custom_minimum_size = Vector2(86, 86)
 	mouse_filter = Control.MOUSE_FILTER_STOP
 	mouse_exited.connect(func(): hovered = ""; queue_redraw())
 	queue_redraw()

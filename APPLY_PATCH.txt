@@ -1,11 +1,12 @@
-BunnyWorld 0.2.0.10 — changed files for 0.2.0.9
+BunnyWorld 0.2.0.12 — changed files for 0.2.0.11
 
-1. CLOSE GODOT.
-2. Extract this ZIP into your 0.2.0.9 project folder, beside project.godot.
+1. CLOSE GODOT and the running game.
+2. Extract this ZIP beside project.godot in your working 0.2.0.11 folder.
 3. Replace the included files.
-4. Run Prepare_BunnyWorld.bat and confirm it reports 0.2.0.10.
+4. Run Prepare_BunnyWorld.bat.
+   Expected: app 0.2.0.12 / geography 0.2.0.10 / display 0.2.0.12.
 5. Open project.godot, wait for imports, and start a fresh campaign.
 
-Test order: documentation/GEOGRAPHY_0210.md.
-This source patch does not contain a new Windows executable.
-The 32 reported debugger entries were not reproduced; see the guide for log capture.
+Aa toggles country names. Names now have fixed sizes on the globe.
+Guide and test order: documentation/VISUAL_0212.md.
+No Windows executable or save-compatibility migration is included.

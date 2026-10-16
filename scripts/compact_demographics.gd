@@ -59,7 +59,7 @@ func select_metric(key: String) -> void:
 	pie.set_script(Pie)
 	pie.name = "Pie"
 	pie.configure(metric.get("counts", {}))
-	pie.custom_minimum_size = Vector2(106, 106)
+	pie.custom_minimum_size = Vector2(86, 86)
 	pie.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(pie)
 	var legend := VBoxContainer.new()

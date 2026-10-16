@@ -48,6 +48,17 @@ var navigation_row: HBoxContainer
 var stats_row: HFlowContainer
 var control_panel: PanelContainer
 var diplomatic_details: VBoxContainer
+var control_heading: VBoxContainer
+var diplomatic_heading: VBoxContainer
+var command_frame: PanelContainer
+var command_stack: VBoxContainer
+var overlay_layout_dirty := true
+var overlay_size := Vector2.ZERO
+var overlay_screen := ""
+var last_panel_layout: Array = []
+var last_city_view: Array = []
+var last_camera_view: Array = []
+var display_coverage: RefCounted
 var control_details: VBoxContainer
 var title_label: Label
 var subtitle_label: Label
@@ -55,6 +66,14 @@ var stats_label: Label
 var game_menu: AcceptDialog
 var cities: Array = []
 var city_layer: Control
+var country_label_layer: Control
+var country_labels_enabled := true
+var country_labels_button: Button
+var national_profile_expanded := false
+var territory_profile_expanded := false
+var hover_owner := 0.0
+var hover_blend := 0.0
+var last_border_distance := -1.0
 var city_timer: float = 0.0
 var city_scenery_enabled := true
 var graphics_setting := 0
@@ -185,6 +204,7 @@ func _ready() -> void:
 	relief_surface = Surface.new()
 	_build_planet()
 	_rebuild_palette()
+	country_label_layer.configure(self)
 	_update_country_list()
 	_show_country(state.selected_country, false)
 	_focus_country(state.selected_country, false)
@@ -280,10 +300,13 @@ func _ready() -> void:
 
 func _panel_style(color: Color, radius: int = 12, border: Color = Color("223b4c")) -> StyleBoxFlat:
 	var style := StyleBoxFlat.new()
-	style.bg_color = color
+	style.bg_color = color.lerp(Color("101e27"), .28)
 	style.border_color = border
 	style.set_border_width_all(1)
-	style.set_corner_radius_all(radius)
+	style.set_corner_radius_all(mini(radius, 4))
+	style.shadow_color = Color(0.01, 0.02, 0.025, 0.34)
+	style.shadow_size = 5
+	style.shadow_offset = Vector2(0, 3)
 	style.content_margin_left = 16
 	style.content_margin_right = 16
 	style.content_margin_top = 14
@@ -301,6 +324,21 @@ func _button_style(color: Color, radius: int = 7, border: Color = Color("294657"
 func _build_theme() -> void:
 	var t := Theme.new()
 	t.default_font_size = 15
+	var tooltip_style := _panel_style(Color("101f29"), 3, Color("62706b"))
+	tooltip_style.shadow_size = 4
+	t.set_stylebox("panel", "TooltipPanel", tooltip_style)
+	t.set_color("font_color", "TooltipLabel", Color("e9e6d8"))
+	t.set_font_size("font_size", "TooltipLabel", 13)
+	t.set_color("font_disabled_color", "Button", Color("71848a"))
+	var rule := StyleBoxLine.new()
+	rule.color = Color("35454b")
+	rule.thickness = 1
+	t.set_stylebox("separator", "HSeparator", rule)
+	var scroll_ink := StyleBoxFlat.new()
+	scroll_ink.bg_color = Color("53646a")
+	scroll_ink.set_corner_radius_all(3)
+	t.set_stylebox("grabber", "VScrollBar", scroll_ink)
+	t.set_stylebox("grabber_highlight", "VScrollBar", scroll_ink)
 	t.set_color("font_color", "Label", Color("d5e4ec"))
 	t.set_color("font_color", "Button", Color("c6dce4"))
 	t.set_color("font_hover_color", "Button", Color("ffffff"))
@@ -423,13 +461,22 @@ func _build_interface() -> void:
 	body.size_flags_vertical = Control.SIZE_EXPAND_FILL
 	root.add_child(body)
 	control_panel = PanelContainer.new()
+	control_panel.set_script(preload("res://scripts/briefing_frame.gd"))
 	control_panel.mouse_force_pass_scroll_events = false
 	control_panel.custom_minimum_size.x = 310
 	control_panel.add_theme_stylebox_override("panel", _panel_style(Color("102332")))
 	# Own-country panel is attached over the viewport below.
 	var control_scroll := ScrollContainer.new()
 	control_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	control_panel.add_child(control_scroll)
+	var control_frame := VBoxContainer.new()
+	control_frame.add_theme_constant_override("separation", 8)
+	control_panel.add_child(control_frame)
+	control_heading = VBoxContainer.new()
+	control_heading.name = "PinnedHeading"
+	control_frame.add_child(control_heading)
+	control_scroll.name = "CountryScroll"
+	control_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	control_frame.add_child(control_scroll)
 	control_details = VBoxContainer.new()
 	control_details.custom_minimum_size.x = 270
 	control_details.add_theme_constant_override("separation", 6)
@@ -491,6 +538,12 @@ func _build_interface() -> void:
 	map_bar.add_child(spacer)
 	var find_button := _icon_button("Find a city, state, country or landmark · Ctrl+F", load("res://assets/ui/search.svg"), _open_place_search, Vector2(36, 32))
 	find_button.name = "FindPlace"
+	country_labels_button = _button("Aa", _toggle_country_labels, "Show or hide country names on the map")
+	country_labels_button.name = "CountryLabelsToggle"
+	country_labels_button.toggle_mode = true
+	country_labels_button.button_pressed = country_labels_enabled
+	country_labels_button.custom_minimum_size = Vector2(34, 32)
+	map_bar.add_child(country_labels_button)
 	map_bar.add_child(find_button)
 	view_container = SubViewportContainer.new()
 	view_container.stretch = true
@@ -506,6 +559,12 @@ func _build_interface() -> void:
 	world_view.handle_input_locally = false
 	world_view.msaa_3d = [Viewport.MSAA_2X, Viewport.MSAA_DISABLED, Viewport.MSAA_4X][graphics_setting]
 	view_container.add_child(world_view)
+	country_label_layer = Control.new()
+	country_label_layer.name = "CountryNames"
+	country_label_layer.set_script(preload("res://scripts/country_labels.gd"))
+	country_label_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	country_label_layer.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	view_container.add_child(country_label_layer)
 	city_layer = Control.new()
 	city_layer.set_script(load("res://scripts/city_overlay.gd"))
 	city_layer.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -542,12 +601,14 @@ func _build_interface() -> void:
 	legend.add_theme_color_override("font_outline_color", Color("081421"))
 	legend.add_theme_constant_override("outline_size", 4)
 	right_panel = PanelContainer.new()
+	right_panel.set_script(preload("res://scripts/briefing_frame.gd"))
 	right_panel.mouse_force_pass_scroll_events = false
 	right_panel.custom_minimum_size.x = 310
 	right_panel.add_theme_stylebox_override("panel", _panel_style(Color("102332")))
 	view_container.add_child(right_panel)
 	view_container.add_child(control_panel)
 	territory_panel = PanelContainer.new()
+	territory_panel.set_script(preload("res://scripts/briefing_frame.gd"))
 	territory_panel.mouse_force_pass_scroll_events = false
 	territory_panel.name = "TerritoryDrawer"
 	territory_panel.clip_contents = true
@@ -576,7 +637,15 @@ func _build_interface() -> void:
 	_position_panels()
 	var scroll := ScrollContainer.new()
 	scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	right_panel.add_child(scroll)
+	var diplomacy_frame := VBoxContainer.new()
+	diplomacy_frame.add_theme_constant_override("separation", 8)
+	right_panel.add_child(diplomacy_frame)
+	diplomatic_heading = VBoxContainer.new()
+	diplomatic_heading.name = "PinnedHeading"
+	diplomacy_frame.add_child(diplomatic_heading)
+	scroll.name = "CountryScroll"
+	scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	diplomacy_frame.add_child(scroll)
 	details = VBoxContainer.new()
 	details.custom_minimum_size.x = 270
 	details.add_theme_constant_override("separation", 6)
@@ -635,6 +704,8 @@ func _build_planet() -> void:
 	water_passages = JSON.parse_string(FileAccess.get_file_as_string("res://data/waterways.json"))["passages"]
 	resident_terrain = preload("res://scripts/resident_terrain.gd").new()
 	resident_terrain.initialize(planet_material, graphics_setting == 1)
+	display_coverage = preload("res://scripts/display_coverage.gd").new()
+	display_coverage.initialize(planet_material)
 	physical_texture = load("res://assets/terrain_color.png")
 	mesh.material_override = planet_material
 	detail_patch = MeshInstance3D.new()
@@ -658,6 +729,7 @@ func _build_planet() -> void:
 		if kind == "province": material.set_shader_parameter("province_index", load("res://assets/province_index.png"))
 		for tile: int in range(4): material.set_shader_parameter("region_map_%d" % tile, load("res://assets/region_ids_%d.png" % tile))
 		material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
+		material.set_shader_parameter("camera_distance", distance)
 		border_mesh.material_override = material
 		border_materials.append(material)
 		planet.add_child(border_mesh)
@@ -717,6 +789,7 @@ func _sphere_mesh(segments: int, rings: int) -> ArrayMesh:
 	return mesh
 
 func _rebuild_palette() -> void:
+	if country_label_layer != null and country_label_layer.preparation_runs>0: country_label_layer.refresh_if_changed()
 	var color_image := Image.create(8192, 1, false, Image.FORMAT_RGBA8)
 	var owner_image := Image.create(8192, 1, false, Image.FORMAT_RGBA8)
 	color_image.fill(OCEAN)
@@ -781,6 +854,7 @@ func _rebuild_palette() -> void:
 	_update_legend()
 
 func _update_selection_shader() -> void:
+	if display_coverage != null: display_coverage.select(state.selected_region if inspection_active else 0, state.selected_province if inspection_active else 0)
 	planet_material.set_shader_parameter("selected_sea", float(state.selected_sea))
 	for material: ShaderMaterial in border_materials:
 		material.set_shader_parameter("selected_country", float(state.countries[state.selected_country]["index"]) if inspection_active else 0.0)
@@ -818,6 +892,9 @@ func _country_item_selected(index: int) -> void:
 		_show_country(country_tags[index], true)
 
 func _clear_details() -> void:
+	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
+	if pinned != null:
+		for child: Node in pinned.get_children(): pinned.remove_child(child); child.queue_free()
 	opinion_labels.clear()
 	for child: Node in details.get_children():
 		details.remove_child(child)
@@ -943,7 +1020,7 @@ func _show_sea(id: int) -> void:
 
 func _update_map_hover(position: Vector2) -> void:
 	if dragging or screen == "menu":
-		hover_panel.hide(); return
+		hover_panel.hide(); hover_owner = 0.0; return
 	var id := _region_at(position)
 	var text := ""
 	var hover_tag := ""
@@ -970,6 +1047,7 @@ func _update_map_hover(position: Vector2) -> void:
 	elif id == 0:
 		var sea := _sea_at(position)
 		if sea > 0: text = str(state.sea_regions[str(sea)]["name"]) + "\nSea region"
+	hover_owner = float(state.countries[hover_tag]["index"]) if not hover_tag.is_empty() else 0.0
 	if text.is_empty():
 		hover_panel.hide(); return
 	var flag_key := ""
@@ -1026,6 +1104,7 @@ func _build_sounds() -> void:
 			city_scenery_enabled = bool(saved.get("city_scenery", true))
 			graphics_setting = clampi(int(saved.get("graphics", 0)), 0, 2)
 			frame_setting = clampi(int(saved.get("frame_limit", 0)), 0, 1)
+			country_labels_enabled = bool(saved.get("country_labels", true))
 	Engine.max_fps = 60 if frame_setting == 0 else 30
 
 func _play_ui(id: String) -> void:
@@ -1039,7 +1118,7 @@ func _save_sound_setting(value: bool) -> void:
 
 func _persist_interface_settings() -> void:
 	var file := FileAccess.open("user://interface_settings.json", FileAccess.WRITE)
-	if file != null: file.store_string(JSON.stringify({"sounds":sound_enabled,"city_scenery":city_scenery_enabled,"graphics":graphics_setting,"frame_limit":frame_setting}))
+	if file != null: file.store_string(JSON.stringify({"sounds":sound_enabled,"city_scenery":city_scenery_enabled,"graphics":graphics_setting,"frame_limit":frame_setting,"country_labels":country_labels_enabled}))
 
 func _set_city_scenery(value: bool) -> void:
 	city_scenery_enabled = value
@@ -1074,10 +1153,6 @@ func _organization_light_background(oid: String) -> bool:
 func _icon_button(caption: String, texture: Texture2D, action: Callable, icon_size: Vector2 = Vector2(43, 36), light_background: bool = false) -> Button:
 	var button := Button.new()
 	button.custom_minimum_size = icon_size
-	if light_background:
-		button.add_theme_stylebox_override("normal", _panel_style(Color("e6edf1"), 7, Color("718995")))
-		button.add_theme_stylebox_override("hover", _panel_style(Color("f5faf7"), 7, Color("4fbaaa")))
-		button.add_theme_stylebox_override("pressed", _panel_style(Color("cbe6da"), 7, Color("4fbaaa")))
 	button.tooltip_text = caption
 	button.pressed.connect(func(): _play_ui("select"))
 	button.pressed.connect(action)
@@ -1088,7 +1163,19 @@ func _icon_button(caption: String, texture: Texture2D, action: Callable, icon_si
 		image.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		image.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		image.mouse_filter = Control.MOUSE_FILTER_IGNORE
-		button.add_child(image)
+		var image_parent: Control = button
+		if light_background:
+			var plate := PanelContainer.new()
+			plate.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			var plate_style := StyleBoxFlat.new()
+			plate_style.bg_color = Color("e5eae7")
+			plate_style.set_corner_radius_all(2)
+			plate.add_theme_stylebox_override("panel", plate_style)
+			button.add_child(plate)
+			plate.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+			plate.offset_left=5; plate.offset_right=-5; plate.offset_top=5; plate.offset_bottom=-5
+			image_parent = plate
+		image_parent.add_child(image)
 		image.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 		image.offset_left = 3
 		image.offset_right = -3
@@ -1142,6 +1229,69 @@ func _refresh_opinions() -> void:
 		label.tooltip_text = relationship + "\n" + ("\n".join(reasons) if not reasons.is_empty() else "No diplomatic opinion modifiers. Neutral: 0.")
 	opinion_labels = valid
 
+func _toggle_country_labels() -> void:
+	country_labels_enabled = not country_labels_enabled
+	country_labels_button.set_pressed_no_signal(country_labels_enabled)
+	country_label_layer.last_view = ""
+	country_label_layer.update_view()
+	_persist_interface_settings()
+
+func _briefing_section(caption: String) -> void:
+	var row := HBoxContainer.new()
+	row.add_theme_constant_override("separation", 9)
+	row.add_child(_label(caption.to_upper(), 11, Color("b5a680")))
+	var rule := HSeparator.new()
+	rule.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	rule.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+	row.add_child(rule)
+	details.add_child(row)
+
+func _summary_grid(rows: Array) -> void:
+	var grid := GridContainer.new()
+	grid.name = "CountrySummary"
+	grid.columns = 2
+	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	grid.add_theme_constant_override("h_separation", 6)
+	grid.add_theme_constant_override("v_separation", 6)
+	for row: Array in rows:
+		var cell := PanelContainer.new()
+		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		cell.mouse_force_pass_scroll_events = false
+		var style := _button_style(Color("0c1922"), 3, Color("2b3d44"))
+		style.shadow_size = 0
+		style.content_margin_left = 9; style.content_margin_right = 9
+		style.content_margin_top = 8; style.content_margin_bottom = 8
+		cell.add_theme_stylebox_override("panel", style)
+		var box := VBoxContainer.new()
+		box.add_theme_constant_override("separation", 2)
+		cell.add_child(box)
+		var caption := _label(str(row[0]).to_upper(), 10, Color("8fa5aa"))
+		caption.clip_text = true
+		box.add_child(caption)
+		var value := _label(str(row[1]), 20, Color("e9e6d7"))
+		value.clip_text = true
+		box.add_child(value)
+		cell.tooltip_text = str(row[2]) if row.size()>2 else str(row[0])+": "+str(row[1])
+		grid.add_child(cell)
+	details.add_child(grid)
+
+func _population_profile(chart: Control, state_scope: bool) -> void:
+	var expanded: bool = territory_profile_expanded if state_scope else national_profile_expanded
+	var button := _button(("▾  " if expanded else "▸  ")+"Population profile", func(): pass, "Age, religion, education and economic activity")
+	button.name = "StateProfileToggle" if state_scope else "NationalProfileToggle"
+	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
+	button.toggle_mode = true
+	button.set_pressed_no_signal(expanded)
+	button.pressed.connect(func():
+		chart.visible = button.button_pressed
+		button.text = ("▾  " if chart.visible else "▸  ")+"Population profile"
+		if state_scope: territory_profile_expanded = chart.visible
+		else: national_profile_expanded = chart.visible
+		if foundation != null: foundation.refresh_active_section())
+	details.add_child(button)
+	chart.visible = expanded
+	details.add_child(chart)
+
 func _show_country(tag: String, focus: bool = true) -> void:
 	if not state.countries.has(tag):
 		return
@@ -1164,29 +1314,29 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	details.add_child(_label("COUNTRY CONTROL" if screen == "playing" and tag == state.player_country else "DIPLOMACY / INFORMATION", 11, Color("63c9b6")))
 	_entity_heading(c["name"], flags.resolve(tag, str(c.get("cosmetic", "")), c["outlook"]))
 	details.add_child(_wrapped(c["outlook"], 14, Color("e5c888")))
+	var values: Dictionary = c.get("starting_stats", {})
+	var per_capita := float(values.get("gdp_per_capita_usd", 0))
+	_briefing_section("National overview")
+	_summary_grid([
+		["Population", foundation.compact_number(int(metrics["population"])), "Residents: "+_number(int(metrics["population"]))],
+		["GDP", foundation.money(per_capita*float(metrics["population"])), "GDP: $"+_number(int(per_capita*float(metrics["population"])))],
+		["GDP / person", foundation.compact_money(per_capita), "GDP per capita: $"+_number(int(per_capita))],
+		["Stability", "%.0f%%" % (float(values.get("stability",.65))*100)],
+		["Political power", "%.0f" % float(values.get("political_power",100))],
+		["War support", "%.0f%%" % (float(values.get("war_support",.5))*100)]])
+	var capital: String = str(int(c["capital"]))
+	details.add_child(_wrapped("%d states  ·  Capital state: %s" % [metrics["regions"].size(), state.regions.get(capital,{}).get("name","Unknown")],12,Color("93a8aa")))
+	if screen == "playing" and tag != state.player_country:
+		_briefing_section("Diplomatic relations")
+		_opinion_stat(state.player_country, tag)
+		_opinion_stat(tag, state.player_country)
 	var chart := preload("res://scripts/compact_demographics.gd").new()
 	chart.name = "NationalDemographics"
 	chart.configure(foundation.demographics.country_metrics(state, tag), national_metric, func(key: String): national_metric = key, false)
-	details.add_child(chart)
-	if screen == "playing" and tag != state.player_country:
-		_opinion_stat(state.player_country, tag)
-		_opinion_stat(tag, state.player_country)
+	_population_profile(chart, false)
 	_show_territory()
 
-	details.add_child(HSeparator.new())
-	_stat("Population", _number(int(metrics["population"])))
-	_stat("States", str(metrics["regions"].size()))
-	var values: Dictionary = c.get("starting_stats", {})
-	var per_capita := float(values.get("gdp_per_capita_usd", 0))
-	_stat("GDP", "$%.1f billion" % (per_capita * float(metrics["population"]) / 1000000000.0) if per_capita > 0 else "Unavailable")
-	_stat("GDP per capita", "$" + _number(int(per_capita)) if per_capita > 0 else "Unavailable")
-	for field: String in ["political_power", "stability", "war_support"]:
-		if values.has(field): _stat(field.replace("_", " "), "%.0f%%" % (float(values[field]) * 100) if field != "political_power" else str(values[field]))
-	var capital: String = str(int(c["capital"]))
-	if state.regions.has(capital):
-		_stat("Capital state", state.regions[capital]["name"])
-	details.add_child(HSeparator.new())
-	details.add_child(_label("ORGANIZATIONS", 11, Color("63c9b6")))
+	_briefing_section("Organizations")
 	var memberships := state.memberships(tag)
 	if memberships.is_empty():
 		details.add_child(_wrapped("No memberships listed."))
@@ -1196,12 +1346,12 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	details.add_child(HSeparator.new())
 	if screen == "playing":
 		if tag == state.player_country:
-			details.add_child(_label("GOVERNMENT", 11, Color("63c9b6")))
+			_briefing_section("Government")
 			var government: Dictionary = c.get("government", {})
 			details.add_child(_wrapped(str(government.get("party", "")) if not str(government.get("party", "")).is_empty() else str(c["outlook"])))
 			details.add_child(_wrapped("Government institutions and reforms arrive in 0.2.1–0.2.2.",12))
 		else:
-			details.add_child(_label("DIPLOMATIC ACTIONS", 11, Color("63c9b6")))
+			_briefing_section("Diplomatic actions")
 			for action: String in ["Improve relations", "Offer treaty", "Trade agreement", "Diplomatic support", "Declare war"]:
 				_placeholder(action)
 	if map_mode == 7: _rebuild_palette()
@@ -1212,6 +1362,29 @@ func _show_country(tag: String, focus: bool = true) -> void:
 		country_list.ensure_current_is_visible()
 	if focus:
 		_focus_country(tag)
+	if foundation != null: foundation.refresh_active_section()
+
+func _selection_breadcrumb(region: Dictionary) -> void:
+	var row := HBoxContainer.new()
+	row.name = "SelectionBreadcrumb"
+	row.add_theme_constant_override("separation", 2)
+	var tag: String = region["owner"]
+	var country := _button(str(state.countries[tag]["name"]), func(): inspect_region=0; inspect_province=0; _show_country(tag,false), "Show country overview")
+	var state_button := _button(str(region["name"]), func(): inspect_province=0; _show_country(tag,false), "Show selected State")
+	for button: Button in [country,state_button]:
+		button.add_theme_font_size_override("font_size",11)
+		button.clip_text=true; button.custom_minimum_size.x=82
+		button.size_flags_horizontal=Control.SIZE_EXPAND_FILL
+	row.add_child(country)
+	row.add_child(_label("›",12,Color("b5a680")))
+	row.add_child(state_button)
+	if state.selected_province>0 and distance<=1.2:
+		row.add_child(_label("›",12,Color("b5a680")))
+		var province: Dictionary=state.provinces[str(state.selected_province)]
+		var current := _label("Province "+str(int(province.get("local_index",state.selected_province))),11,Color("e9dfc3"))
+		current.tooltip_text=str(province.get("name","Selected province"))
+		row.add_child(current)
+	details.add_child(row)
 
 func _show_territory() -> void:
 	var country_details := details
@@ -1231,13 +1404,10 @@ func _show_territory() -> void:
 	if show_regions and state.selected_region > 0:
 		var region: Dictionary = state.regions[str(state.selected_region)]
 		details.add_child(HSeparator.new())
+		_selection_breadcrumb(region)
 		details.add_child(_label("SELECTED STATE", 11, Color("63c9b6")))
 		details.add_child(_wrapped(region["name"], 20, Color("f0f7f8")))
-		details.add_child(_wrapped("State population: " + _number(int(region["population"]))))
-		var chart := preload("res://scripts/compact_demographics.gd").new()
-		chart.name = "StateDemographics"
-		chart.configure(foundation.demographics.state_metrics(state, state.selected_region), territory_metric, func(key: String): territory_metric = key, true)
-		details.add_child(chart)
+		_summary_grid([["State residents",foundation.compact_number(int(region["population"])),"Exact: "+_number(int(region["population"]))],["Area · km²",foundation.compact_number(int(region.get("area_km2",0))),"Exact area: "+_area_number(float(region.get("area_km2",0)))+" km²"]])
 		var allocation := state.population_allocation(state.selected_region)
 		details.add_child(_wrapped("City provinces: %s  ·  Other provinces: %s" % [_number(int(allocation.get("urban", 0))), _number(int(allocation.get("shared", 0)))], 13, Color("a9bcc8")))
 		if state.selected_province > 0 and distance <= 1.2:
@@ -1262,6 +1432,11 @@ func _show_territory() -> void:
 		_rights_row("CORES", region.get("cores", []))
 		_rights_row("CLAIMS", region.get("claims", []))
 		
+		var chart := preload("res://scripts/compact_demographics.gd").new()
+		chart.name = "StateDemographics"
+		chart.configure(foundation.demographics.state_metrics(state, state.selected_region), territory_metric, func(key: String): territory_metric = key, true)
+		_population_profile(chart, true)
+
 	details = country_details
 	_reveal_panel(territory_panel)
 	_position_panels()
@@ -1300,6 +1475,7 @@ func _show_organization() -> void:
 	details.add_child(_wrapped("Budgets, proposals and shared projects will arrive in the next development stages.", 13))
 
 func _map_changed(index: int) -> void:
+	overlay_layout_dirty = true
 	_play_ui("click")
 	map_mode = index
 	map_picker.select(index)
@@ -1314,6 +1490,7 @@ func _map_changed(index: int) -> void:
 		_show_country(state.selected_country, false)
 
 func _organization_changed(index: int) -> void:
+	overlay_layout_dirty = true
 	_play_ui("click")
 	active_org = org_ids[index]
 	_rebuild_palette()
@@ -1336,6 +1513,9 @@ func _focus_country(tag: String, animated: bool = true) -> void:
 
 func _update_camera_pose() -> void:
 	if camera == null: return
+	var key: Array = [distance, planet.global_transform if planet != null else Transform3D()]
+	if key == last_camera_view: return
+	last_camera_view = key
 	if planet == null:
 		camera.position = Vector3(0, 0, distance)
 		return
@@ -1354,6 +1534,8 @@ func _update_detail_patch() -> void:
 	if distance >= 1.4 or screen == "menu":
 		if detail_patch != null: detail_patch.hide()
 		planet_material.set_shader_parameter("detail_span", Vector2.ZERO)
+		if detail_span != Vector2.ZERO:
+			for material: ShaderMaterial in border_materials: material.set_shader_parameter("detail_span",Vector2.ZERO)
 		detail_span = Vector2.ZERO
 		return
 	var center := Surface.uv_of(planet.global_transform.basis.inverse() * Vector3.BACK)
@@ -1365,6 +1547,9 @@ func _update_detail_patch() -> void:
 	detail_patch.show()
 	planet_material.set_shader_parameter("detail_center", center)
 	planet_material.set_shader_parameter("detail_span", span)
+	for material: ShaderMaterial in border_materials:
+		material.set_shader_parameter("detail_center",center)
+		material.set_shader_parameter("detail_span",span)
 
 func _uv_at(position: Vector2) -> Vector2:
 	var inverse := planet.global_transform.affine_inverse()
@@ -1481,12 +1666,15 @@ func _process(delta: float) -> void:
 		planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
 		planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
 		planet_material.set_shader_parameter("city_detail", clampf((1.50 - distance) / .25, 0.0, 1.0))
-		for material: ShaderMaterial in border_materials:
-			material.set_shader_parameter("show_regions", show_regions)
-			material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / .08, 0.0, 1.0))
-			material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / .15, 0.0, 1.0))
-			material.set_shader_parameter("strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
-			material.set_shader_parameter("sea_opacity", clampf((2.75 - distance) / .55, 0.0, 1.0) * .40)
+		if not is_equal_approx(last_border_distance, distance):
+			for material: ShaderMaterial in border_materials:
+				material.set_shader_parameter("show_regions", show_regions)
+				material.set_shader_parameter("camera_distance", distance)
+			last_border_distance = distance
+		var target_hover := 1.0 if hover_panel.visible and hover_owner>0.0 and not dragging else 0.0
+		hover_blend = move_toward(hover_blend, target_hover, delta*7.0)
+		planet_material.set_shader_parameter("hovered_country", hover_owner if target_hover>0.0 else 0.0)
+		planet_material.set_shader_parameter("hover_amount", hover_blend)
 		if not dragging and screen != "menu" and not console.visible:
 			planet.rotation.y += rotation_velocity.x * delta
 			planet.rotation.x = clampf(planet.rotation.x + rotation_velocity.y * delta, -1.5, 1.5)
@@ -1498,10 +1686,11 @@ func _process(delta: float) -> void:
 		waterways_material.set_shader_parameter("camera_distance",distance)
 		_update_cities()
 		if urban_scenery != null: urban_scenery.update_view(camera, distance, city_scenery_enabled and screen != "menu", delta)
+		if country_label_layer != null: country_label_layer.update_view()
 		planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
 		planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 		planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))
-		_position_panels()
+		_position_panels(false)
 		planet_material.set_shader_parameter("terrain_mix", clampf((2.0 - distance) / 0.35, 0, 1) if map_mode == 6 else 0.0)
 	if screen == "playing" and not state.database.is_empty() and state.advance(delta):
 		_update_clock()
@@ -1517,6 +1706,7 @@ func _toggle_pause() -> void:
 	_update_clock()
 
 func _update_clock() -> void:
+	overlay_layout_dirty = true
 	date_text.text = state.date_label().replace("January", "Jan").replace("February", "Feb").replace("March", "Mar").replace("April", "Apr").replace("June", "Jun").replace("July", "Jul").replace("August", "Aug").replace("September", "Sep").replace("October", "Oct").replace("November", "Nov").replace("December", "Dec")
 	date_text.tooltip_text = state.date_label()
 	pause_button.text = "▶" if state.paused else "Ⅱ"
@@ -2320,6 +2510,7 @@ func _update_country_bar() -> void:
 	var gdp := "$%.1fB" % (per_capita * population / 1000000000.0) if per_capita > 0 else "—"
 	stats_label.text = "Political power: %s    Stability: %s    War support: %s    Population: %s    GDP: %s    GDP / capita: %s" % [pp, stability, support, _number(population), gdp, "$" + _number(int(per_capita)) if per_capita > 0 else "—"]
 	if foundation != null: foundation.update_bar()
+	overlay_layout_dirty = true
 	stats_label.tooltip_text = "Population follows state ownership. Other values are starting scenario figures. GDP is derived from population × GDP per capita. — means unavailable."
 
 func _build_game_menu() -> void:
@@ -2369,6 +2560,9 @@ func _open_game_menu() -> void:
 	game_menu.popup_centered(Vector2i(400, 515))
 
 func _update_cities() -> void:
+	var key: Array = [planet.global_transform, camera.global_transform, view_container.size, screen]
+	if key == last_city_view: return
+	last_city_view = key
 	var markers: Array[Dictionary] = []
 	if distance > 1.65 or screen == "menu":
 		city_layer.set("markers", markers)
@@ -2393,7 +2587,11 @@ func _update_cities() -> void:
 	city_layer.queue_redraw()
 
 func _entity_heading(caption: String, texture: Texture2D, organization: bool = false) -> void:
+	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
+	if details.get_child_count() > 0 and details.get_child(0) is Label:
+		details.get_child(0).reparent(pinned)
 	var row := HBoxContainer.new()
+	row.name = "EntityHeading"
 	if texture != null:
 		var icon := TextureRect.new()
 		icon.texture = texture
@@ -2420,7 +2618,8 @@ func _entity_heading(caption: String, texture: Texture2D, organization: bool = f
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 	row.add_child(_button("×", func(): _hide_panel(control_panel); _hide_panel(right_panel); inspection_active = false; _update_selection_shader(), "Close country information"))
-	details.add_child(row)
+	pinned.add_child(row)
+	pinned.add_child(HSeparator.new())
 
 func _overlay_panel() -> PanelContainer:
 	var panel := PanelContainer.new()
@@ -2440,14 +2639,26 @@ func _configure_overlay_layout() -> void:
 	top_left_box.add_theme_constant_override("separation", 3)
 	game_ui.add_child(top_left_box)
 	top_left_box.position = Vector2(8, 0)
-	stats_row.reparent(top_left_box)
-	var navigation_box := PanelContainer.new()
-	navigation_box.mouse_force_pass_scroll_events = false
-	navigation_box.add_theme_stylebox_override("panel", _button_style(Color("102332"), 6))
-	navigation_box.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
-	top_left_box.add_child(navigation_box)
-	navigation_row.reparent(navigation_box)
-	navigation_row.get_child(2).size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	command_frame = PanelContainer.new()
+	command_frame.name = "CommandBar"
+	command_frame.mouse_force_pass_scroll_events = false
+	var command_style := _button_style(Color("102332"), 4)
+	command_style.content_margin_left = 8; command_style.content_margin_right = 8
+	command_style.content_margin_top = 4; command_style.content_margin_bottom = 4
+	command_frame.add_theme_stylebox_override("panel", command_style)
+	top_left_box.add_child(command_frame)
+	var command_row := HBoxContainer.new()
+	command_row.add_theme_constant_override("separation", 9)
+	command_frame.add_child(command_row)
+	header_flag.reparent(command_row)
+	header_flag.custom_minimum_size = Vector2(94, 66)
+	header_flag.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	command_stack = VBoxContainer.new()
+	command_stack.add_theme_constant_override("separation", 4)
+	command_row.add_child(command_stack)
+	stats_row.reparent(command_stack)
+	navigation_row.reparent(command_stack)
+	navigation_row.get_child(navigation_row.get_child_count()-1).size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
 	clock_box = _overlay_panel()
 	session_controls.reparent(clock_box)
 	map_box = _overlay_panel()
@@ -2467,16 +2678,18 @@ func _configure_overlay_layout() -> void:
 
 func _layout_overlay() -> void:
 	if clock_box == null: return
+	if not overlay_layout_dirty and overlay_size == size and overlay_screen == screen: return
+	overlay_layout_dirty = false; overlay_size = size; overlay_screen = screen
 	clock_box.reset_size()
 	clock_box.position = Vector2(size.x - clock_box.size.x - 8, 0)
 	map_box.reset_size()
 	map_box.position = Vector2(size.x - map_box.size.x - 8, clock_box.size.y + 3)
 	selection_box.visible = screen == "selection"
 	selection_box.size.y = maxf(300, size.y - 122)
-	# Keep the two top groups independent; no panel spans the unused space between them.
 	var stats_width := 0.0
-	for cell: Control in stats_row.get_children(): stats_width += cell.get_combined_minimum_size().x + 5
-	stats_row.custom_minimum_size.x = maxf(0, stats_width - 5)
+	for cell: Control in stats_row.get_children(): stats_width += cell.get_combined_minimum_size().x + 3
+	var available := maxf(565.0, clock_box.position.x - 8.0 - 94.0 - 32.0)
+	stats_row.custom_minimum_size.x = minf(maxf(0, stats_width - 3), available)
 	top_left_box.reset_size()
 
 func _panel_target(panel: PanelContainer) -> float:
@@ -2489,9 +2702,12 @@ func _handle_position(collapsed: bool) -> float:
 	var edge := 338.0 if control_panel.visible else view_container.size.x - 338.0
 	return edge + (0.0 if collapsed else 300.0) if control_panel.visible else edge - 26.0 - (0.0 if collapsed else 300.0)
 
-func _position_panels() -> void:
+func _position_panels(force: bool = true) -> void:
 	if view_container == null: return
 	_layout_overlay()
+	var key: Array = [view_container.size, top_left_box.size if top_left_box != null else Vector2.ZERO, control_panel.visible, right_panel.visible, territory_collapsed]
+	if not force and key == last_panel_layout and panel_tweens.is_empty() and (territory_tween == null or not territory_tween.is_running()): return
+	last_panel_layout = key
 	for panel: PanelContainer in [control_panel, right_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		panel.size = Vector2(330, maxf(240, view_container.size.y - 118))
@@ -2550,6 +2766,7 @@ func _hide_panel(panel: PanelContainer) -> void:
 	if panel == null: return
 	if panel_tweens.has(panel): panel_tweens[panel].kill(); panel_tweens.erase(panel)
 	panel.hide()
+	if foundation != null: foundation.refresh_active_section()
 	if panel == territory_panel:
 		if territory_tween != null: territory_tween.kill()
 		if territory_clip != null: territory_clip.hide()

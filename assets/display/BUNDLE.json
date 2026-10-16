@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0.12",
+  "geography_version": "0.2.0.10",
+  "files": {
+    "assets/display/FONT_LICENSE.txt": "63d3ba759d12804c5b31a9d5940d855c1820d1f5999e6b0872eb1c7ff045fbc9",
+    "assets/display/coast_distance.bwd": "78716a5fdde6755110d630936ccc7d3a53819c10e7e41b802adad250d20f45da",
+    "assets/display/country_glyphs.json": "fb83c780857b64beee7940d6141cbc3d19af0a5e33d7ad8b7eb32ac608d22077",
+    "assets/display/country_glyphs.png": "1982e43e244033e721fb8fdb062416efec291fd8352c6e1722a41191c3f0504d",
+    "assets/display/local_coasts.bwd": "0f359c3681b669ab011b16aeff6434d593c243a337582a764d5ca8b4dd77a29a",
+    "assets/display/local_coasts.json": "df80374148fa01da1af85557d0982e337859e272239a06dc15a73fa23f51c46d",
+    "assets/display/selection_distance.bwd": "fd50fe573fad9ecbc05f7945ecf1dc7ad0f4ddd34426ab1ea95f7ff7e8aa45a5",
+    "assets/display/selection_distance.json": "9d1c4a0ef55e4deb57f68936521fac26777f2383e0cc88a1218c169548166130",
+    "assets/display/tiny_land_bits.bwd": "f7f2224db2822056dead4a581e6231a8bf16274c62f36c5308466af6dc1e8d52"
+  }
+}

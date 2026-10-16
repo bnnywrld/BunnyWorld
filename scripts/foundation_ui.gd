@@ -5,6 +5,7 @@ const Pie = preload("res://scripts/pie_chart.gd")
 var host: Control
 var demographics := Demographics.new()
 var indicators: Dictionary = {}
+var demographic_button: Button
 var toolbar: HBoxContainer
 var globe: Button
 var globe_value: Label
@@ -59,6 +60,8 @@ func build(main: Control) -> void:
 		button.custom_minimum_size = Vector2(44,44)
 		toolbar.add_child(button)
 	var demographic_shortcut := icon_button("demographics", "Demographics · National profile", open_country_demographics)
+	demographic_button = demographic_shortcut
+	demographic_shortcut.toggle_mode = true
 	demographic_shortcut.name = "NationalDemographicsShortcut"
 	demographic_shortcut.custom_minimum_size = Vector2(44,44)
 	toolbar.add_child(demographic_shortcut)
@@ -87,6 +90,7 @@ func build(main: Control) -> void:
 	globe.add_child(overlay)
 	host.session_controls.add_child(icon_button("ledger","World Ledger",open_ledger))
 	var bar: HFlowContainer = host.stats_row
+	bar.add_theme_constant_override("h_separation",3)
 	for entry: Array in [["political_power","Political power"],["stability","Stability"],["war_support","War support"],["treasury","Treasury"],["debt","Debt"],["population","Population"],["economy","GDP"],["economy","GDP per capita"]]:
 		var cell := HBoxContainer.new()
 		cell.add_theme_constant_override("separation", 5)
@@ -95,13 +99,13 @@ func build(main: Control) -> void:
 		var style: StyleBoxFlat = host._button_style(Color("102332"), 5)
 		style.content_margin_left = 5
 		style.content_margin_right = 5
-		style.content_margin_top = 4
-		style.content_margin_bottom = 4
+		style.content_margin_top = 2
+		style.content_margin_bottom = 2
 		box.add_theme_stylebox_override("panel", style)
 		box.add_child(cell)
 		var icon := TextureRect.new()
 		icon.texture = Icons.icon(entry[0])
-		icon.custom_minimum_size = Vector2(18,18)
+		icon.custom_minimum_size = Vector2(15,15)
 		icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		cell.add_child(icon)
@@ -115,7 +119,13 @@ func build(main: Control) -> void:
 	_build_tension()
 	host._configure_overlay_layout()
 
+func refresh_active_section() -> void:
+	if demographic_button == null: return
+	var chart: Node = host.control_details.get_node_or_null("NationalDemographics")
+	demographic_button.set_pressed_no_signal(host.control_panel.visible and chart != null and chart.visible)
+
 func open_country_demographics() -> void:
+	host.national_profile_expanded = true
 	host._show_country(host.state.player_country, false)
 	await host.get_tree().process_frame
 	host.control_details.get_parent().ensure_control_visible(host.control_details.get_node("NationalDemographics"))

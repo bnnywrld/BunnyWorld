@@ -1,14 +1,14 @@
-# BunnyWorld 0.2.0.10
+# BunnyWorld 0.2.0.12
 
-Source patch for GitHub 0.2.0.9. Close Godot, extract into the project folder and replace included files, run Prepare_BunnyWorld.bat, then open project.godot and start fresh.
+Source patch for working 0.2.0.11.
 
-- Merge the four central/southern Kalimantan states into Central–South Kalimantan.
-- Merge Courantyne Headwaters into Mahaica-Berbice.
-- Remove West Polynesia’s southern arm; reconnect Tasman Sea and fix a tiny detached Tasman shard.
-- Redraw 215 provinces in the newly densified Afghan, Ukrainian and Syrian states using terrain/river guidance.
-- Rebuild border shading, including Sweden/Åland, and all border meshes.
-- Stop UI scrolling/camera input from reaching the globe beneath panels.
+- Fixed curved country-name geometry, one shared glyph atlas/mesh, cached visibility, and refresh only when country layout changes.
+- Prepared coast and selection coverage; smoother filled edges beneath the existing border strokes.
+- Larger flag and a unified command frame: stats above category buttons, clock on the right.
+- Pinned entity headings, active demographic shortcut, consistent logo frames, briefing tooltips and selection breadcrumbs.
+- Cached unchanged camera, city-label and HUD-layout updates.
+- Separate display-bundle verification and export inclusion for the new prepared assets.
 
-Full changes, validation limits and test order: documentation/GEOGRAPHY_0210.md.
+Original geography and simulation data are unchanged. New display assets are included; no regeneration is needed. No Windows executable is included.
 
-The reported 32 debugger entries could not be reproduced and are not claimed fixed. Capture_Debug_Log.bat can collect a log if they persist. No Windows EXE is included; upload to GitHub after testing.
+Installation, limits and test order: documentation/VISUAL_0212.md. Validation and measured performance: TEST_RESULTS.md and validation_0212.

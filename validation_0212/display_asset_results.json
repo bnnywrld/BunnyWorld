@@ -1,0 +1,10 @@
+{
+  "checks": 55782,
+  "failures": 0,
+  "state_tiles": 1360,
+  "province_tiles": 13594,
+  "map_center_inside_fraction": 1.0,
+  "coast_texture_gpu_bytes": 33554432,
+  "tiny_island_bits_gpu_bytes": 16777216,
+  "selection_pack_streamed": true
+}

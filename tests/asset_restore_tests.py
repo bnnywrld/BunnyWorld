@@ -17,4 +17,26 @@ with tempfile.TemporaryDirectory() as folder:
  assert run('--force').returncode==0 and target.read_bytes()==new
  (root/'data/geography_bundle.json').write_text(json.dumps({'version':'test','files':{'assets/borders.res':sha(old)}}))
  assert run().returncode!=0
- print('ASSET_RESTORE_TESTS_PASS: known-version refresh, verify-only, custom resource protection, explicit force, mixed-bundle rejection')
+ # Visual releases reuse a declared, unchanged geography bundle.
+ (root/'data/geography_bundle.json').write_text(json.dumps({'version':'test','files':{'assets/borders.res':sha(new)}}))
+ (root/'BUILD_INFO.json').write_text(json.dumps({'version':'visual','geography_version':'test'}))
+ (root/'project.godot').write_text('config/version="visual"\n')
+ assert run('--verify-only').returncode==0
+ (root/'project.godot').write_text('config/version="test"\n')
+ assert run('--verify-only').returncode!=0
+ (root/'project.godot').write_text('config/version="visual"\n')
+ (root/'BUILD_INFO.json').write_text(json.dumps({'version':'visual','geography_version':'wrong'}))
+ assert run('--verify-only').returncode!=0
+ (root/'BUILD_INFO.json').write_text(json.dumps({'version':'visual','geography_version':'test','display_version':'visual'}))
+ assert run('--verify-only').returncode!=0 # A partial visual patch must fail early.
+ display=root/'assets/display';display.mkdir()
+ data=display/'coverage.bwd';data.write_bytes(b'prepared visual coverage')
+ (display/'BUNDLE.json').write_text(json.dumps({'version':'wrong','files':{}}))
+ assert run('--verify-only').returncode!=0
+ (display/'BUNDLE.json').write_text(json.dumps({'version':'visual','geography_version':'test','files':{'assets/display/coverage.bwd':sha(data.read_bytes())}}))
+ assert run('--verify-only').returncode==0
+ (display/'BUNDLE.json').write_text(json.dumps({'version':'visual','geography_version':'wrong','files':{}}))
+ assert run('--verify-only').returncode!=0
+ (display/'BUNDLE.json').write_text(json.dumps({'version':'visual','geography_version':'test','files':{'assets/display/coverage.bwd':sha(data.read_bytes())}}))
+ data.write_bytes(b'corrupt tile pack');assert run('--verify-only').returncode!=0
+ print('ASSET_RESTORE_TESTS_PASS: known-version refresh, custom protection, mixed geography and display rejection')
