@@ -1,0 +1,8 @@
+{
+  "passed": true,
+  "prepared_assets_verified": true,
+  "map_build_contract": true,
+  "asset_restore_tests": true,
+  "previous_official_hashes_accepted": true,
+  "native_windows_tested": false
+}

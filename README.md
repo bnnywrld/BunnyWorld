@@ -1,17 +1,16 @@
-# Bunny World 0.2.0.27
+# Bunny World 0.2.0.28
 
-Year-2000 population and demographics update over **0.2.0.26**. All 1,264 states have complete age, religion and education profiles with sources or disclosed estimates. Population: **6,146,495,066** across 224 countries. Geography and starting ownership are unchanged.
+Population-aware province rework over **0.2.0.27**. **224 countries, 1,261 states, 13,200 land provinces**. State population totals/demographics and accepted coast/state silhouettes are preserved after the two approved unions. Provinces contain no population.
 
-The inline three demographic charts remain. Separate workforce figures replace the Activity pie; participation and unemployment rates save/load independently. See [methods, limitations, sources and test order](documentation/DEMOGRAPHICS_0227.md).
+Lebanon's three owned states are united; Hezbollah retains South Lebanon. Shebaa Farms joins Golan Heights. See [report and test order](documentation/PROVINCES_0228.md) and [complete allocation](documentation/provinces_0228/ALLOCATION.md).
 
 ## Apply and run
 
-1. Close the game and Godot. Back up your working .26 project.
-2. Extract the .27 changed-files ZIP into that project root, beside project.godot, replacing included files.
-3. Run **Prepare_BunnyWorld.bat**. Application, geography and display versions must report **0.2.0.27**.
-4. Open with **Godot 4.5.1 Standard**, allow imports to finish, and start a **fresh campaign**.
-5. For an EXE, follow [Windows export instructions](documentation/EXPORT_WINDOWS.md). No Windows executable is included.
+1. Back up .27 and close Godot/game.
+2. Extract this changed-files ZIP into the project root beside project.godot, replacing included files.
+3. Run **Prepare_BunnyWorld.bat**; application/geography/display must all report **0.2.0.28**.
+4. Open with **Godot 4.5.1 Standard**, wait for imports, and start a **fresh campaign**. Old saves are unsupported.
 
-Data validation passed 15,858 checks; Godot headless passed 11,041 runtime checks, with zero failures. Native Windows visuals/performance remain the user test. This release does not add a jobs or population simulation.
+110,687 data checks and 39,260 Godot headless checks pass. Native Windows visuals/performance remain the user test. No EXE is included; see [export instructions](documentation/EXPORT_WINDOWS.md).
 
-Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu. F5 in the editor starts the project.
+Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu.

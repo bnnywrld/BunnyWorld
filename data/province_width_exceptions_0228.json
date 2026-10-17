@@ -1,0 +1,371 @@
+[
+  {
+    "province": 1496,
+    "state": 181,
+    "name": "Baoshan",
+    "area_km2": 59.476,
+    "inscribed_width_km": 6.593,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1555,
+    "state": 182,
+    "name": "Daqing",
+    "area_km2": 90.337,
+    "inscribed_width_km": 5.931,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1761,
+    "state": 190,
+    "name": "Wenzhou",
+    "area_km2": 52.723,
+    "inscribed_width_km": 6.52,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1801,
+    "state": 192,
+    "name": "Shuyang",
+    "area_km2": 69.19,
+    "inscribed_width_km": 6.343,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1805,
+    "state": 192,
+    "name": "Huaiyin",
+    "area_km2": 69.606,
+    "inscribed_width_km": 6.359,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1839,
+    "state": 193,
+    "name": "Zaozhuang",
+    "area_km2": 78.404,
+    "inscribed_width_km": 6.322,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1844,
+    "state": 193,
+    "name": "Zhucheng",
+    "area_km2": 57.975,
+    "inscribed_width_km": 6.286,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 1932,
+    "state": 197,
+    "name": "Suining",
+    "area_km2": 71.994,
+    "inscribed_width_km": 6.449,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 2251,
+    "state": 206,
+    "name": "Shangqiu",
+    "area_km2": 59.083,
+    "inscribed_width_km": 6.334,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 2253,
+    "state": 206,
+    "name": "Xinyang",
+    "area_km2": 60.681,
+    "inscribed_width_km": 6.404,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 2309,
+    "state": 207,
+    "name": "Xiantao",
+    "area_km2": 67.0,
+    "inscribed_width_km": 6.456,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 2357,
+    "state": 208,
+    "name": "Suzhou",
+    "area_km2": 89.456,
+    "inscribed_width_km": 6.358,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 3426,
+    "state": 481,
+    "name": "Cilacap",
+    "area_km2": 88.739,
+    "inscribed_width_km": 4.887,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 3570,
+    "state": 503,
+    "name": "Erbil · Province 1",
+    "area_km2": 453.215,
+    "inscribed_width_km": 4.887,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 4147,
+    "state": 624,
+    "name": "Beirut",
+    "area_km2": 54.526,
+    "inscribed_width_km": 6.351,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 4185,
+    "state": 633,
+    "name": "Macau · Province 1",
+    "area_km2": 105.045,
+    "inscribed_width_km": 6.659,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 4502,
+    "state": 675,
+    "name": "Micronesia · Province 3",
+    "area_km2": 338.491,
+    "inscribed_width_km": 6.885,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 4506,
+    "state": 675,
+    "name": "Micronesia · Province 7",
+    "area_km2": 159.893,
+    "inscribed_width_km": 6.883,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 4559,
+    "state": 683,
+    "name": "Maldives · Province 1",
+    "area_km2": 5641.156,
+    "inscribed_width_km": 6.887,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 5091,
+    "state": 761,
+    "name": "Peshawar",
+    "area_km2": 59.393,
+    "inscribed_width_km": 6.347,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 5384,
+    "state": 817,
+    "name": "Karaj",
+    "area_km2": 62.938,
+    "inscribed_width_km": 6.292,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 5631,
+    "state": 882,
+    "name": "Asansol",
+    "area_km2": 43.738,
+    "inscribed_width_km": 6.626,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 5813,
+    "state": 904,
+    "name": "Nasik",
+    "area_km2": 44.882,
+    "inscribed_width_km": 6.706,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 7635,
+    "state": 1075,
+    "name": "Moscow City · Province 7",
+    "area_km2": 117.029,
+    "inscribed_width_km": 7.329,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 8241,
+    "state": 1215,
+    "name": "Tuvalu · Province 1",
+    "area_km2": 449.176,
+    "inscribed_width_km": 4.887,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 8736,
+    "state": 1377,
+    "name": "Haiphong",
+    "area_km2": 44.639,
+    "inscribed_width_km": 6.689,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9128,
+    "state": 1414,
+    "name": "Macquarie Island · Province 1",
+    "area_km2": 217.734,
+    "inscribed_width_km": 7.486,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9132,
+    "state": 1418,
+    "name": "Cocos Islands · Province 1",
+    "area_km2": 134.234,
+    "inscribed_width_km": 6.833,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9269,
+    "state": 1447,
+    "name": "Shubrā al Khaymah",
+    "area_km2": 56.776,
+    "inscribed_width_km": 6.46,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9426,
+    "state": 1473,
+    "name": "Akrotiri · Province 1",
+    "area_km2": 161.884,
+    "inscribed_width_km": 6.329,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9440,
+    "state": 1489,
+    "name": "Gibraltar · Province 1",
+    "area_km2": 9.644,
+    "inscribed_width_km": 3.947,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9707,
+    "state": 1544,
+    "name": "Caribbean Netherlands · Province 1",
+    "area_km2": 159.228,
+    "inscribed_width_km": 6.75,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 9850,
+    "state": 1563,
+    "name": "Kanto · Province 16",
+    "area_km2": 136.58,
+    "inscribed_width_km": 7.985,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 10234,
+    "state": 1615,
+    "name": "Melilla · Province 1",
+    "area_km2": 34.138,
+    "inscribed_width_km": 3.988,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 10385,
+    "state": 1649,
+    "name": "Kaohsiung",
+    "area_km2": 126.783,
+    "inscribed_width_km": 6.65,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 11677,
+    "state": 1697,
+    "name": "North Carolina · Province 7",
+    "area_km2": 350.54,
+    "inscribed_width_km": 6.306,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 12439,
+    "state": 1738,
+    "name": "Wake Island · Province 1",
+    "area_km2": 1263.602,
+    "inscribed_width_km": 6.884,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 12440,
+    "state": 1738,
+    "name": "Wake Island · Province 2",
+    "area_km2": 3616.339,
+    "inscribed_width_km": 6.874,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 12477,
+    "state": 1763,
+    "name": "Baengnyeong Islands · Province 1",
+    "area_km2": 9.454,
+    "inscribed_width_km": 3.868,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 12478,
+    "state": 1764,
+    "name": "Nugal · Province 1",
+    "area_km2": 948.07,
+    "inscribed_width_km": 4.887,
+    "kind": "rural",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  },
+  {
+    "province": 13010,
+    "state": 1834,
+    "name": "Yantai",
+    "area_km2": 137.204,
+    "inscribed_width_km": 6.236,
+    "kind": "city",
+    "reason": "Existing narrow state/island or city footprint; not enlarged for clicking"
+  }
+]

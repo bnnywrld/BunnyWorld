@@ -163,7 +163,7 @@ func update_bar() -> void:
 			var key := "treasury_usd" if caption == "Treasury" else "debt_usd"
 			tip += "\n" + ("$%s USD\nMD 2000 starting declaration; budget simulation comes later." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
 		elif caption in ["GDP","GDP per capita"]: tip += "\nMD starting GDP per capita × current resident population. USD; not a live economy."
-		elif caption == "Population": tip += "\nSum of currently owned State populations. Every province counted once; city totals are combined views."
+		elif caption == "Population": tip += "\nSum of currently owned State populations. Provinces are movement tiles and unique-building sites; population belongs to States."
 		else: tip += "\nStarting scenario value. Political simulation follows in later patches."
 		record["cell"].tooltip_text = tip
 		record["icon"].tooltip_text = tip

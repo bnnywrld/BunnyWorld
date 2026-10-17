@@ -8,7 +8,7 @@ import argparse,json,hashlib,zlib,io,subprocess,shutil,sys,re
 R=Path(__file__).resolve().parents[1];OUT=R/'assets/display'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def inputs(ps):
- return {'tiles':{f'assets/region_ids_{i}.png':sha(R/f'assets/region_ids_{i}.png')for i in range(4)},'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json')}
+ return {'tiles':{f'assets/region_ids_{i}.png':sha(R/f'assets/region_ids_{i}.png')for i in range(4)},'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json'),'curve_algorithm':{n:sha(R/'tools'/n)for n in ['build_boundaries_021.py','build_map_boundaries.py','display_shape_0215.py','build_boundary_field.py']}}
 def sea_pack():
  target=OUT/'sea_coverage.json'
  if target.exists():return
@@ -62,6 +62,13 @@ def main():
     for code in np.unique(codes):
      l,r=divmod(int(code),65536);neighbors[str(l)].add(r);neighbors[str(r)].add(l);sl,sr=ps[str(l)]['region'],ps[str(r)]['region']
      if sl!=sr:state_neighbors[str(sl)].add(sr);state_neighbors[str(sr)].add(sl)
+  # Periodic longitude: a true shared edge may cross the atlas seam.
+  left,right=a[:,0],a[:,-1]
+  valid=(left>0)&(right>0)&(left!=right)&(left!=65535)&(right!=65535)
+  codes=np.minimum(left[valid],right[valid]).astype(np.uint32)*65536+np.maximum(left[valid],right[valid])
+  for code in np.unique(codes):
+   l,r=divmod(int(code),65536);neighbors[str(l)].add(r);neighbors[str(r)].add(l);sl,sr=ps[str(l)]['region'],ps[str(r)]['region']
+   if sl!=sr:state_neighbors[str(sl)].add(sr);state_neighbors[str(sr)].add(sl)
   for k,p in ps.items():p['neighbors']=sorted(neighbors[k])
   for k,state in world['regions'].items():state['neighbors']=sorted(state_neighbors[k])
   (R/'data/provinces.json').write_text(json.dumps(ps,separators=(',',':'),ensure_ascii=False))
@@ -72,7 +79,11 @@ def main():
   subprocess.run([sys.executable,str(R/'tools/build_map_boundaries.py')],cwd=R,check=True)
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/compile_boundaries.gd'],cwd=R,check=True)
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
-  subprocess.run([sys.executable,str(R/'tools/build_display_0217.py'),'--coast-only','--atlas-path',str(R/'tools/cartography/map_provinces.npz'),'--skip-legacy-shade'],cwd=R,check=True)
+  # A curve-only refinement changes internal paths, not land/coast windows.
+  # The first topology build still regenerates every coast derivative.
+  coast_changed=args.force or old.get('inputs',{}).get('tiles')!=source['tiles'] or old.get('inputs',{}).get('membership')!=source['membership']
+  if coast_changed:
+   subprocess.run([sys.executable,str(R/'tools/build_display_0217.py'),'--coast-only','--atlas-path',str(R/'tools/cartography/map_provinces.npz'),'--skip-legacy-shade'],cwd=R,check=True)
   # Tiny-island fallback must follow the same final land raster too. Otherwise
   # deleting a subpixel island leaves its old physical-mode land bit behind.
   from build_display_0212 import tiny_islands

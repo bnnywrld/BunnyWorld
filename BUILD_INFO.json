@@ -1,15 +1,15 @@
 {
-  "version": "0.2.0.27",
-  "baseline_version": "0.2.0.26",
-  "repository_base_commit": "32527d0a180977aa7ed1d95db861a3b4ae0d924a",
+  "version": "0.2.0.28",
+  "baseline_version": "0.2.0.27",
+  "repository_base_commit": "c808deff8d26ed2e60e0b27cbde011b6e95a3a7a",
   "engine": "Godot 4.5.1 stable official",
   "countries": 224,
-  "states": 1264,
-  "land_provinces": 13308,
+  "states": 1261,
+  "land_provinces": 13200,
   "population": 6146495066,
-  "geography_version": "0.2.0.27",
-  "display_version": "0.2.0.27",
-  "scenario_id": "bunny_world_2000_0_2_0_27",
+  "geography_version": "0.2.0.28",
+  "display_version": "0.2.0.28",
+  "scenario_id": "bunny_world_2000_0_2_0_28",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
@@ -17,31 +17,36 @@
   "map_data_changed": true,
   "simulation_changed": false,
   "changes": [
-    "Year-2000 population grid registered to current provinces, census and small-country benchmarks",
-    "Complete per-state age, education and religion estimates with provenance",
-    "Separate labour-force participation and unemployment figures; three demographic charts"
+    "Lebanon state union; Hezbollah controller retained",
+    "Shebaa Farms absorbed into Golan Heights; exact demographic count conservation",
+    "Population/area-budgeted compact terrain-guided movement provinces; state-only population",
+    "Shared current-ID border, selection, adjacency and reference rebuild"
   ],
   "validation": {
     "data": {
       "passed": true,
-      "checks": 15858,
-      "states": 1264,
+      "checks": 110687,
       "countries": 224,
-      "population": 6146495066,
-      "religion_regional_estimates": 210,
-      "province_data_and_tiles_unchanged": true,
-      "all_states_complete": true,
-      "regional_values_are_estimates": true
+      "states": 1261,
+      "land_provinces": 13200,
+      "global_population": 6146495066,
+      "exact_state_coast_antarctica_preservation": true,
+      "country_totals_preserved": true,
+      "all_internal_borders_present": 23851,
+      "narrow_footprint_exceptions": 41,
+      "province_population_fields": false,
+      "same_landmass_fragment_provinces": 0,
+      "archipelago_province_groups": 1435
     },
     "runtime": {
-      "checks": 11041,
+      "checks": 39260,
       "failures": 0,
       "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
       "passed": true
     },
-    "native_windows_tested": false,
     "prepared_assets_verified": true,
     "map_build_contract": true,
-    "asset_restore_tests": true
+    "asset_restore_tests": true,
+    "native_windows_tested": false
   }
 }

@@ -1,0 +1,7180 @@
+{
+  "same_landmass_fragments": [],
+  "island_groups": [
+    {
+      "province": 3,
+      "state": 1,
+      "island_components": 2
+    },
+    {
+      "province": 4,
+      "state": 1,
+      "island_components": 2
+    },
+    {
+      "province": 5,
+      "state": 2,
+      "island_components": 3
+    },
+    {
+      "province": 6,
+      "state": 2,
+      "island_components": 9
+    },
+    {
+      "province": 8,
+      "state": 2,
+      "island_components": 6
+    },
+    {
+      "province": 23,
+      "state": 6,
+      "island_components": 2
+    },
+    {
+      "province": 29,
+      "state": 9,
+      "island_components": 30
+    },
+    {
+      "province": 65,
+      "state": 11,
+      "island_components": 2
+    },
+    {
+      "province": 96,
+      "state": 20,
+      "island_components": 3
+    },
+    {
+      "province": 114,
+      "state": 22,
+      "island_components": 2
+    },
+    {
+      "province": 135,
+      "state": 25,
+      "island_components": 3
+    },
+    {
+      "province": 174,
+      "state": 29,
+      "island_components": 6
+    },
+    {
+      "province": 175,
+      "state": 29,
+      "island_components": 3
+    },
+    {
+      "province": 176,
+      "state": 29,
+      "island_components": 2
+    },
+    {
+      "province": 184,
+      "state": 29,
+      "island_components": 2
+    },
+    {
+      "province": 185,
+      "state": 29,
+      "island_components": 2
+    },
+    {
+      "province": 186,
+      "state": 30,
+      "island_components": 4
+    },
+    {
+      "province": 191,
+      "state": 31,
+      "island_components": 4
+    },
+    {
+      "province": 197,
+      "state": 31,
+      "island_components": 3
+    },
+    {
+      "province": 213,
+      "state": 31,
+      "island_components": 2
+    },
+    {
+      "province": 219,
+      "state": 31,
+      "island_components": 3
+    },
+    {
+      "province": 258,
+      "state": 35,
+      "island_components": 2
+    },
+    {
+      "province": 268,
+      "state": 54,
+      "island_components": 4
+    },
+    {
+      "province": 280,
+      "state": 56,
+      "island_components": 2
+    },
+    {
+      "province": 290,
+      "state": 60,
+      "island_components": 18
+    },
+    {
+      "province": 291,
+      "state": 60,
+      "island_components": 3
+    },
+    {
+      "province": 292,
+      "state": 60,
+      "island_components": 21
+    },
+    {
+      "province": 293,
+      "state": 60,
+      "island_components": 12
+    },
+    {
+      "province": 294,
+      "state": 60,
+      "island_components": 24
+    },
+    {
+      "province": 296,
+      "state": 61,
+      "island_components": 4
+    },
+    {
+      "province": 297,
+      "state": 61,
+      "island_components": 2
+    },
+    {
+      "province": 317,
+      "state": 64,
+      "island_components": 5
+    },
+    {
+      "province": 319,
+      "state": 64,
+      "island_components": 3
+    },
+    {
+      "province": 323,
+      "state": 66,
+      "island_components": 2
+    },
+    {
+      "province": 329,
+      "state": 68,
+      "island_components": 2
+    },
+    {
+      "province": 374,
+      "state": 75,
+      "island_components": 4
+    },
+    {
+      "province": 492,
+      "state": 90,
+      "island_components": 3
+    },
+    {
+      "province": 511,
+      "state": 100,
+      "island_components": 2
+    },
+    {
+      "province": 516,
+      "state": 100,
+      "island_components": 2
+    },
+    {
+      "province": 519,
+      "state": 100,
+      "island_components": 2
+    },
+    {
+      "province": 524,
+      "state": 101,
+      "island_components": 2
+    },
+    {
+      "province": 537,
+      "state": 102,
+      "island_components": 2
+    },
+    {
+      "province": 538,
+      "state": 102,
+      "island_components": 4
+    },
+    {
+      "province": 544,
+      "state": 102,
+      "island_components": 2
+    },
+    {
+      "province": 550,
+      "state": 104,
+      "island_components": 3
+    },
+    {
+      "province": 563,
+      "state": 106,
+      "island_components": 4
+    },
+    {
+      "province": 571,
+      "state": 107,
+      "island_components": 5
+    },
+    {
+      "province": 574,
+      "state": 107,
+      "island_components": 6
+    },
+    {
+      "province": 638,
+      "state": 114,
+      "island_components": 3
+    },
+    {
+      "province": 663,
+      "state": 119,
+      "island_components": 2
+    },
+    {
+      "province": 674,
+      "state": 119,
+      "island_components": 2
+    },
+    {
+      "province": 680,
+      "state": 120,
+      "island_components": 2
+    },
+    {
+      "province": 681,
+      "state": 120,
+      "island_components": 3
+    },
+    {
+      "province": 685,
+      "state": 121,
+      "island_components": 4
+    },
+    {
+      "province": 704,
+      "state": 122,
+      "island_components": 5
+    },
+    {
+      "province": 710,
+      "state": 122,
+      "island_components": 7
+    },
+    {
+      "province": 735,
+      "state": 125,
+      "island_components": 5
+    },
+    {
+      "province": 741,
+      "state": 125,
+      "island_components": 3
+    },
+    {
+      "province": 758,
+      "state": 131,
+      "island_components": 12
+    },
+    {
+      "province": 768,
+      "state": 132,
+      "island_components": 2
+    },
+    {
+      "province": 781,
+      "state": 132,
+      "island_components": 2
+    },
+    {
+      "province": 790,
+      "state": 134,
+      "island_components": 47
+    },
+    {
+      "province": 791,
+      "state": 134,
+      "island_components": 4
+    },
+    {
+      "province": 792,
+      "state": 134,
+      "island_components": 28
+    },
+    {
+      "province": 793,
+      "state": 134,
+      "island_components": 4
+    },
+    {
+      "province": 794,
+      "state": 135,
+      "island_components": 3
+    },
+    {
+      "province": 798,
+      "state": 135,
+      "island_components": 4
+    },
+    {
+      "province": 799,
+      "state": 135,
+      "island_components": 7
+    },
+    {
+      "province": 805,
+      "state": 136,
+      "island_components": 3
+    },
+    {
+      "province": 806,
+      "state": 136,
+      "island_components": 2
+    },
+    {
+      "province": 811,
+      "state": 136,
+      "island_components": 4
+    },
+    {
+      "province": 815,
+      "state": 137,
+      "island_components": 6
+    },
+    {
+      "province": 817,
+      "state": 137,
+      "island_components": 2
+    },
+    {
+      "province": 819,
+      "state": 137,
+      "island_components": 3
+    },
+    {
+      "province": 823,
+      "state": 137,
+      "island_components": 2
+    },
+    {
+      "province": 825,
+      "state": 137,
+      "island_components": 8
+    },
+    {
+      "province": 827,
+      "state": 138,
+      "island_components": 2
+    },
+    {
+      "province": 874,
+      "state": 147,
+      "island_components": 4
+    },
+    {
+      "province": 877,
+      "state": 147,
+      "island_components": 2
+    },
+    {
+      "province": 882,
+      "state": 147,
+      "island_components": 8
+    },
+    {
+      "province": 890,
+      "state": 147,
+      "island_components": 6
+    },
+    {
+      "province": 893,
+      "state": 147,
+      "island_components": 3
+    },
+    {
+      "province": 897,
+      "state": 147,
+      "island_components": 3
+    },
+    {
+      "province": 906,
+      "state": 147,
+      "island_components": 8
+    },
+    {
+      "province": 918,
+      "state": 148,
+      "island_components": 2
+    },
+    {
+      "province": 937,
+      "state": 148,
+      "island_components": 2
+    },
+    {
+      "province": 947,
+      "state": 149,
+      "island_components": 3
+    },
+    {
+      "province": 949,
+      "state": 149,
+      "island_components": 3
+    },
+    {
+      "province": 955,
+      "state": 149,
+      "island_components": 3
+    },
+    {
+      "province": 960,
+      "state": 149,
+      "island_components": 3
+    },
+    {
+      "province": 965,
+      "state": 150,
+      "island_components": 2
+    },
+    {
+      "province": 968,
+      "state": 150,
+      "island_components": 4
+    },
+    {
+      "province": 969,
+      "state": 150,
+      "island_components": 3
+    },
+    {
+      "province": 970,
+      "state": 150,
+      "island_components": 5
+    },
+    {
+      "province": 977,
+      "state": 150,
+      "island_components": 2
+    },
+    {
+      "province": 978,
+      "state": 150,
+      "island_components": 2
+    },
+    {
+      "province": 992,
+      "state": 151,
+      "island_components": 2
+    },
+    {
+      "province": 994,
+      "state": 151,
+      "island_components": 4
+    },
+    {
+      "province": 996,
+      "state": 151,
+      "island_components": 5
+    },
+    {
+      "province": 997,
+      "state": 151,
+      "island_components": 4
+    },
+    {
+      "province": 1009,
+      "state": 151,
+      "island_components": 3
+    },
+    {
+      "province": 1010,
+      "state": 151,
+      "island_components": 3
+    },
+    {
+      "province": 1016,
+      "state": 151,
+      "island_components": 3
+    },
+    {
+      "province": 1030,
+      "state": 151,
+      "island_components": 2
+    },
+    {
+      "province": 1031,
+      "state": 151,
+      "island_components": 2
+    },
+    {
+      "province": 1034,
+      "state": 151,
+      "island_components": 2
+    },
+    {
+      "province": 1052,
+      "state": 152,
+      "island_components": 6
+    },
+    {
+      "province": 1053,
+      "state": 152,
+      "island_components": 4
+    },
+    {
+      "province": 1054,
+      "state": 152,
+      "island_components": 3
+    },
+    {
+      "province": 1055,
+      "state": 152,
+      "island_components": 12
+    },
+    {
+      "province": 1058,
+      "state": 152,
+      "island_components": 3
+    },
+    {
+      "province": 1061,
+      "state": 152,
+      "island_components": 5
+    },
+    {
+      "province": 1062,
+      "state": 152,
+      "island_components": 8
+    },
+    {
+      "province": 1068,
+      "state": 152,
+      "island_components": 12
+    },
+    {
+      "province": 1070,
+      "state": 152,
+      "island_components": 8
+    },
+    {
+      "province": 1071,
+      "state": 152,
+      "island_components": 4
+    },
+    {
+      "province": 1072,
+      "state": 152,
+      "island_components": 5
+    },
+    {
+      "province": 1074,
+      "state": 152,
+      "island_components": 7
+    },
+    {
+      "province": 1080,
+      "state": 152,
+      "island_components": 2
+    },
+    {
+      "province": 1082,
+      "state": 152,
+      "island_components": 4
+    },
+    {
+      "province": 1088,
+      "state": 152,
+      "island_components": 6
+    },
+    {
+      "province": 1089,
+      "state": 152,
+      "island_components": 6
+    },
+    {
+      "province": 1092,
+      "state": 152,
+      "island_components": 2
+    },
+    {
+      "province": 1093,
+      "state": 152,
+      "island_components": 5
+    },
+    {
+      "province": 1094,
+      "state": 152,
+      "island_components": 4
+    },
+    {
+      "province": 1102,
+      "state": 152,
+      "island_components": 3
+    },
+    {
+      "province": 1103,
+      "state": 152,
+      "island_components": 2
+    },
+    {
+      "province": 1111,
+      "state": 152,
+      "island_components": 11
+    },
+    {
+      "province": 1113,
+      "state": 152,
+      "island_components": 5
+    },
+    {
+      "province": 1114,
+      "state": 152,
+      "island_components": 3
+    },
+    {
+      "province": 1117,
+      "state": 152,
+      "island_components": 2
+    },
+    {
+      "province": 1121,
+      "state": 153,
+      "island_components": 2
+    },
+    {
+      "province": 1123,
+      "state": 153,
+      "island_components": 2
+    },
+    {
+      "province": 1124,
+      "state": 153,
+      "island_components": 5
+    },
+    {
+      "province": 1128,
+      "state": 154,
+      "island_components": 2
+    },
+    {
+      "province": 1129,
+      "state": 154,
+      "island_components": 2
+    },
+    {
+      "province": 1130,
+      "state": 155,
+      "island_components": 119
+    },
+    {
+      "province": 1131,
+      "state": 155,
+      "island_components": 61
+    },
+    {
+      "province": 1132,
+      "state": 155,
+      "island_components": 91
+    },
+    {
+      "province": 1133,
+      "state": 155,
+      "island_components": 134
+    },
+    {
+      "province": 1134,
+      "state": 155,
+      "island_components": 73
+    },
+    {
+      "province": 1135,
+      "state": 155,
+      "island_components": 111
+    },
+    {
+      "province": 1136,
+      "state": 156,
+      "island_components": 2
+    },
+    {
+      "province": 1137,
+      "state": 156,
+      "island_components": 10
+    },
+    {
+      "province": 1138,
+      "state": 156,
+      "island_components": 3
+    },
+    {
+      "province": 1139,
+      "state": 156,
+      "island_components": 24
+    },
+    {
+      "province": 1140,
+      "state": 156,
+      "island_components": 3
+    },
+    {
+      "province": 1141,
+      "state": 156,
+      "island_components": 30
+    },
+    {
+      "province": 1142,
+      "state": 156,
+      "island_components": 20
+    },
+    {
+      "province": 1143,
+      "state": 156,
+      "island_components": 12
+    },
+    {
+      "province": 1144,
+      "state": 156,
+      "island_components": 3
+    },
+    {
+      "province": 1145,
+      "state": 156,
+      "island_components": 14
+    },
+    {
+      "province": 1146,
+      "state": 156,
+      "island_components": 9
+    },
+    {
+      "province": 1147,
+      "state": 157,
+      "island_components": 2
+    },
+    {
+      "province": 1148,
+      "state": 157,
+      "island_components": 3
+    },
+    {
+      "province": 1149,
+      "state": 157,
+      "island_components": 6
+    },
+    {
+      "province": 1150,
+      "state": 157,
+      "island_components": 3
+    },
+    {
+      "province": 1151,
+      "state": 157,
+      "island_components": 4
+    },
+    {
+      "province": 1153,
+      "state": 158,
+      "island_components": 9
+    },
+    {
+      "province": 1154,
+      "state": 158,
+      "island_components": 40
+    },
+    {
+      "province": 1155,
+      "state": 158,
+      "island_components": 12
+    },
+    {
+      "province": 1156,
+      "state": 158,
+      "island_components": 16
+    },
+    {
+      "province": 1158,
+      "state": 158,
+      "island_components": 16
+    },
+    {
+      "province": 1159,
+      "state": 159,
+      "island_components": 3
+    },
+    {
+      "province": 1203,
+      "state": 166,
+      "island_components": 2
+    },
+    {
+      "province": 1218,
+      "state": 168,
+      "island_components": 9
+    },
+    {
+      "province": 1236,
+      "state": 171,
+      "island_components": 4
+    },
+    {
+      "province": 1237,
+      "state": 171,
+      "island_components": 3
+    },
+    {
+      "province": 1298,
+      "state": 177,
+      "island_components": 3
+    },
+    {
+      "province": 1321,
+      "state": 177,
+      "island_components": 2
+    },
+    {
+      "province": 1627,
+      "state": 184,
+      "island_components": 4
+    },
+    {
+      "province": 1628,
+      "state": 184,
+      "island_components": 5
+    },
+    {
+      "province": 1642,
+      "state": 184,
+      "island_components": 2
+    },
+    {
+      "province": 1643,
+      "state": 184,
+      "island_components": 7
+    },
+    {
+      "province": 1652,
+      "state": 186,
+      "island_components": 3
+    },
+    {
+      "province": 1701,
+      "state": 187,
+      "island_components": 2
+    },
+    {
+      "province": 1709,
+      "state": 187,
+      "island_components": 4
+    },
+    {
+      "province": 1721,
+      "state": 188,
+      "island_components": 3
+    },
+    {
+      "province": 1722,
+      "state": 188,
+      "island_components": 2
+    },
+    {
+      "province": 1723,
+      "state": 188,
+      "island_components": 3
+    },
+    {
+      "province": 1724,
+      "state": 188,
+      "island_components": 2
+    },
+    {
+      "province": 1726,
+      "state": 188,
+      "island_components": 3
+    },
+    {
+      "province": 1733,
+      "state": 189,
+      "island_components": 4
+    },
+    {
+      "province": 1742,
+      "state": 189,
+      "island_components": 4
+    },
+    {
+      "province": 1744,
+      "state": 189,
+      "island_components": 5
+    },
+    {
+      "province": 1753,
+      "state": 189,
+      "island_components": 6
+    },
+    {
+      "province": 1756,
+      "state": 189,
+      "island_components": 5
+    },
+    {
+      "province": 1757,
+      "state": 189,
+      "island_components": 4
+    },
+    {
+      "province": 1765,
+      "state": 190,
+      "island_components": 3
+    },
+    {
+      "province": 1766,
+      "state": 190,
+      "island_components": 7
+    },
+    {
+      "province": 1769,
+      "state": 190,
+      "island_components": 9
+    },
+    {
+      "province": 1773,
+      "state": 190,
+      "island_components": 6
+    },
+    {
+      "province": 1776,
+      "state": 190,
+      "island_components": 4
+    },
+    {
+      "province": 1780,
+      "state": 190,
+      "island_components": 7
+    },
+    {
+      "province": 1782,
+      "state": 190,
+      "island_components": 9
+    },
+    {
+      "province": 1786,
+      "state": 190,
+      "island_components": 4
+    },
+    {
+      "province": 1788,
+      "state": 190,
+      "island_components": 4
+    },
+    {
+      "province": 1790,
+      "state": 190,
+      "island_components": 3
+    },
+    {
+      "province": 1795,
+      "state": 191,
+      "island_components": 2
+    },
+    {
+      "province": 1797,
+      "state": 191,
+      "island_components": 6
+    },
+    {
+      "province": 1798,
+      "state": 191,
+      "island_components": 2
+    },
+    {
+      "province": 1799,
+      "state": 191,
+      "island_components": 4
+    },
+    {
+      "province": 1812,
+      "state": 192,
+      "island_components": 2
+    },
+    {
+      "province": 1823,
+      "state": 192,
+      "island_components": 3
+    },
+    {
+      "province": 1826,
+      "state": 192,
+      "island_components": 2
+    },
+    {
+      "province": 1828,
+      "state": 192,
+      "island_components": 2
+    },
+    {
+      "province": 1845,
+      "state": 193,
+      "island_components": 2
+    },
+    {
+      "province": 2400,
+      "state": 223,
+      "island_components": 8
+    },
+    {
+      "province": 2410,
+      "state": 226,
+      "island_components": 3
+    },
+    {
+      "province": 2418,
+      "state": 227,
+      "island_components": 4
+    },
+    {
+      "province": 2423,
+      "state": 227,
+      "island_components": 4
+    },
+    {
+      "province": 2424,
+      "state": 228,
+      "island_components": 2
+    },
+    {
+      "province": 2433,
+      "state": 228,
+      "island_components": 4
+    },
+    {
+      "province": 2434,
+      "state": 228,
+      "island_components": 3
+    },
+    {
+      "province": 2436,
+      "state": 229,
+      "island_components": 7
+    },
+    {
+      "province": 2437,
+      "state": 229,
+      "island_components": 12
+    },
+    {
+      "province": 2438,
+      "state": 229,
+      "island_components": 11
+    },
+    {
+      "province": 2439,
+      "state": 229,
+      "island_components": 10
+    },
+    {
+      "province": 2440,
+      "state": 229,
+      "island_components": 9
+    },
+    {
+      "province": 2441,
+      "state": 229,
+      "island_components": 2
+    },
+    {
+      "province": 2442,
+      "state": 229,
+      "island_components": 11
+    },
+    {
+      "province": 2443,
+      "state": 229,
+      "island_components": 7
+    },
+    {
+      "province": 2444,
+      "state": 229,
+      "island_components": 4
+    },
+    {
+      "province": 2445,
+      "state": 229,
+      "island_components": 7
+    },
+    {
+      "province": 2446,
+      "state": 229,
+      "island_components": 19
+    },
+    {
+      "province": 2493,
+      "state": 236,
+      "island_components": 3
+    },
+    {
+      "province": 2494,
+      "state": 236,
+      "island_components": 4
+    },
+    {
+      "province": 2496,
+      "state": 236,
+      "island_components": 2
+    },
+    {
+      "province": 2501,
+      "state": 236,
+      "island_components": 14
+    },
+    {
+      "province": 2545,
+      "state": 263,
+      "island_components": 2
+    },
+    {
+      "province": 2547,
+      "state": 264,
+      "island_components": 3
+    },
+    {
+      "province": 2551,
+      "state": 266,
+      "island_components": 3
+    },
+    {
+      "province": 2553,
+      "state": 267,
+      "island_components": 2
+    },
+    {
+      "province": 2679,
+      "state": 272,
+      "island_components": 2
+    },
+    {
+      "province": 2744,
+      "state": 275,
+      "island_components": 2
+    },
+    {
+      "province": 2827,
+      "state": 279,
+      "island_components": 7
+    },
+    {
+      "province": 2829,
+      "state": 280,
+      "island_components": 2
+    },
+    {
+      "province": 2842,
+      "state": 282,
+      "island_components": 2
+    },
+    {
+      "province": 2846,
+      "state": 283,
+      "island_components": 21
+    },
+    {
+      "province": 2847,
+      "state": 284,
+      "island_components": 3
+    },
+    {
+      "province": 2854,
+      "state": 346,
+      "island_components": 5
+    },
+    {
+      "province": 2856,
+      "state": 346,
+      "island_components": 6
+    },
+    {
+      "province": 2858,
+      "state": 346,
+      "island_components": 4
+    },
+    {
+      "province": 2859,
+      "state": 346,
+      "island_components": 3
+    },
+    {
+      "province": 2862,
+      "state": 347,
+      "island_components": 3
+    },
+    {
+      "province": 2867,
+      "state": 348,
+      "island_components": 6
+    },
+    {
+      "province": 2910,
+      "state": 352,
+      "island_components": 2
+    },
+    {
+      "province": 2927,
+      "state": 354,
+      "island_components": 3
+    },
+    {
+      "province": 2936,
+      "state": 356,
+      "island_components": 3
+    },
+    {
+      "province": 2965,
+      "state": 357,
+      "island_components": 7
+    },
+    {
+      "province": 2966,
+      "state": 358,
+      "island_components": 34
+    },
+    {
+      "province": 2967,
+      "state": 358,
+      "island_components": 49
+    },
+    {
+      "province": 2968,
+      "state": 358,
+      "island_components": 6
+    },
+    {
+      "province": 2975,
+      "state": 360,
+      "island_components": 2
+    },
+    {
+      "province": 2976,
+      "state": 360,
+      "island_components": 4
+    },
+    {
+      "province": 2981,
+      "state": 360,
+      "island_components": 5
+    },
+    {
+      "province": 2982,
+      "state": 361,
+      "island_components": 5
+    },
+    {
+      "province": 2987,
+      "state": 361,
+      "island_components": 2
+    },
+    {
+      "province": 2988,
+      "state": 361,
+      "island_components": 2
+    },
+    {
+      "province": 2992,
+      "state": 361,
+      "island_components": 11
+    },
+    {
+      "province": 3000,
+      "state": 362,
+      "island_components": 2
+    },
+    {
+      "province": 3002,
+      "state": 362,
+      "island_components": 2
+    },
+    {
+      "province": 3006,
+      "state": 362,
+      "island_components": 3
+    },
+    {
+      "province": 3008,
+      "state": 362,
+      "island_components": 3
+    },
+    {
+      "province": 3014,
+      "state": 363,
+      "island_components": 7
+    },
+    {
+      "province": 3015,
+      "state": 363,
+      "island_components": 6
+    },
+    {
+      "province": 3018,
+      "state": 364,
+      "island_components": 3
+    },
+    {
+      "province": 3020,
+      "state": 364,
+      "island_components": 7
+    },
+    {
+      "province": 3023,
+      "state": 364,
+      "island_components": 2
+    },
+    {
+      "province": 3024,
+      "state": 364,
+      "island_components": 2
+    },
+    {
+      "province": 3025,
+      "state": 364,
+      "island_components": 5
+    },
+    {
+      "province": 3027,
+      "state": 364,
+      "island_components": 3
+    },
+    {
+      "province": 3030,
+      "state": 364,
+      "island_components": 4
+    },
+    {
+      "province": 3032,
+      "state": 364,
+      "island_components": 9
+    },
+    {
+      "province": 3035,
+      "state": 364,
+      "island_components": 3
+    },
+    {
+      "province": 3039,
+      "state": 364,
+      "island_components": 4
+    },
+    {
+      "province": 3040,
+      "state": 364,
+      "island_components": 2
+    },
+    {
+      "province": 3041,
+      "state": 364,
+      "island_components": 3
+    },
+    {
+      "province": 3043,
+      "state": 364,
+      "island_components": 3
+    },
+    {
+      "province": 3044,
+      "state": 364,
+      "island_components": 2
+    },
+    {
+      "province": 3045,
+      "state": 364,
+      "island_components": 6
+    },
+    {
+      "province": 3052,
+      "state": 365,
+      "island_components": 5
+    },
+    {
+      "province": 3053,
+      "state": 365,
+      "island_components": 2
+    },
+    {
+      "province": 3055,
+      "state": 365,
+      "island_components": 5
+    },
+    {
+      "province": 3056,
+      "state": 365,
+      "island_components": 7
+    },
+    {
+      "province": 3057,
+      "state": 365,
+      "island_components": 2
+    },
+    {
+      "province": 3059,
+      "state": 365,
+      "island_components": 4
+    },
+    {
+      "province": 3060,
+      "state": 365,
+      "island_components": 2
+    },
+    {
+      "province": 3062,
+      "state": 365,
+      "island_components": 2
+    },
+    {
+      "province": 3065,
+      "state": 365,
+      "island_components": 3
+    },
+    {
+      "province": 3066,
+      "state": 365,
+      "island_components": 2
+    },
+    {
+      "province": 3078,
+      "state": 408,
+      "island_components": 2
+    },
+    {
+      "province": 3082,
+      "state": 408,
+      "island_components": 5
+    },
+    {
+      "province": 3085,
+      "state": 409,
+      "island_components": 2
+    },
+    {
+      "province": 3092,
+      "state": 411,
+      "island_components": 4
+    },
+    {
+      "province": 3135,
+      "state": 422,
+      "island_components": 8
+    },
+    {
+      "province": 3137,
+      "state": 422,
+      "island_components": 3
+    },
+    {
+      "province": 3142,
+      "state": 423,
+      "island_components": 4
+    },
+    {
+      "province": 3149,
+      "state": 423,
+      "island_components": 2
+    },
+    {
+      "province": 3151,
+      "state": 423,
+      "island_components": 2
+    },
+    {
+      "province": 3167,
+      "state": 424,
+      "island_components": 2
+    },
+    {
+      "province": 3189,
+      "state": 425,
+      "island_components": 2
+    },
+    {
+      "province": 3207,
+      "state": 427,
+      "island_components": 2
+    },
+    {
+      "province": 3242,
+      "state": 435,
+      "island_components": 2
+    },
+    {
+      "province": 3252,
+      "state": 437,
+      "island_components": 3
+    },
+    {
+      "province": 3258,
+      "state": 438,
+      "island_components": 7
+    },
+    {
+      "province": 3265,
+      "state": 439,
+      "island_components": 5
+    },
+    {
+      "province": 3266,
+      "state": 439,
+      "island_components": 12
+    },
+    {
+      "province": 3267,
+      "state": 439,
+      "island_components": 5
+    },
+    {
+      "province": 3269,
+      "state": 439,
+      "island_components": 2
+    },
+    {
+      "province": 3272,
+      "state": 440,
+      "island_components": 3
+    },
+    {
+      "province": 3274,
+      "state": 440,
+      "island_components": 2
+    },
+    {
+      "province": 3276,
+      "state": 441,
+      "island_components": 3
+    },
+    {
+      "province": 3277,
+      "state": 441,
+      "island_components": 9
+    },
+    {
+      "province": 3278,
+      "state": 441,
+      "island_components": 3
+    },
+    {
+      "province": 3279,
+      "state": 442,
+      "island_components": 3
+    },
+    {
+      "province": 3280,
+      "state": 442,
+      "island_components": 4
+    },
+    {
+      "province": 3281,
+      "state": 442,
+      "island_components": 6
+    },
+    {
+      "province": 3282,
+      "state": 443,
+      "island_components": 2
+    },
+    {
+      "province": 3283,
+      "state": 443,
+      "island_components": 42
+    },
+    {
+      "province": 3284,
+      "state": 443,
+      "island_components": 17
+    },
+    {
+      "province": 3285,
+      "state": 444,
+      "island_components": 3
+    },
+    {
+      "province": 3286,
+      "state": 444,
+      "island_components": 7
+    },
+    {
+      "province": 3287,
+      "state": 445,
+      "island_components": 6
+    },
+    {
+      "province": 3288,
+      "state": 445,
+      "island_components": 4
+    },
+    {
+      "province": 3290,
+      "state": 445,
+      "island_components": 3
+    },
+    {
+      "province": 3291,
+      "state": 445,
+      "island_components": 9
+    },
+    {
+      "province": 3295,
+      "state": 445,
+      "island_components": 5
+    },
+    {
+      "province": 3296,
+      "state": 445,
+      "island_components": 6
+    },
+    {
+      "province": 3300,
+      "state": 445,
+      "island_components": 2
+    },
+    {
+      "province": 3301,
+      "state": 445,
+      "island_components": 9
+    },
+    {
+      "province": 3303,
+      "state": 445,
+      "island_components": 4
+    },
+    {
+      "province": 3304,
+      "state": 445,
+      "island_components": 2
+    },
+    {
+      "province": 3305,
+      "state": 445,
+      "island_components": 3
+    },
+    {
+      "province": 3310,
+      "state": 445,
+      "island_components": 2
+    },
+    {
+      "province": 3314,
+      "state": 445,
+      "island_components": 3
+    },
+    {
+      "province": 3315,
+      "state": 446,
+      "island_components": 89
+    },
+    {
+      "province": 3316,
+      "state": 447,
+      "island_components": 5
+    },
+    {
+      "province": 3317,
+      "state": 447,
+      "island_components": 5
+    },
+    {
+      "province": 3319,
+      "state": 447,
+      "island_components": 14
+    },
+    {
+      "province": 3320,
+      "state": 447,
+      "island_components": 36
+    },
+    {
+      "province": 3324,
+      "state": 447,
+      "island_components": 4
+    },
+    {
+      "province": 3325,
+      "state": 447,
+      "island_components": 27
+    },
+    {
+      "province": 3329,
+      "state": 447,
+      "island_components": 10
+    },
+    {
+      "province": 3330,
+      "state": 447,
+      "island_components": 14
+    },
+    {
+      "province": 3333,
+      "state": 447,
+      "island_components": 11
+    },
+    {
+      "province": 3334,
+      "state": 451,
+      "island_components": 2
+    },
+    {
+      "province": 3335,
+      "state": 452,
+      "island_components": 4
+    },
+    {
+      "province": 3336,
+      "state": 452,
+      "island_components": 8
+    },
+    {
+      "province": 3348,
+      "state": 454,
+      "island_components": 3
+    },
+    {
+      "province": 3350,
+      "state": 455,
+      "island_components": 4
+    },
+    {
+      "province": 3356,
+      "state": 457,
+      "island_components": 2
+    },
+    {
+      "province": 3360,
+      "state": 458,
+      "island_components": 4
+    },
+    {
+      "province": 3361,
+      "state": 459,
+      "island_components": 2
+    },
+    {
+      "province": 3365,
+      "state": 463,
+      "island_components": 5
+    },
+    {
+      "province": 3395,
+      "state": 477,
+      "island_components": 2
+    },
+    {
+      "province": 3396,
+      "state": 477,
+      "island_components": 2
+    },
+    {
+      "province": 3398,
+      "state": 477,
+      "island_components": 10
+    },
+    {
+      "province": 3399,
+      "state": 477,
+      "island_components": 3
+    },
+    {
+      "province": 3400,
+      "state": 477,
+      "island_components": 4
+    },
+    {
+      "province": 3401,
+      "state": 477,
+      "island_components": 6
+    },
+    {
+      "province": 3402,
+      "state": 477,
+      "island_components": 8
+    },
+    {
+      "province": 3404,
+      "state": 479,
+      "island_components": 5
+    },
+    {
+      "province": 3406,
+      "state": 479,
+      "island_components": 7
+    },
+    {
+      "province": 3407,
+      "state": 479,
+      "island_components": 22
+    },
+    {
+      "province": 3408,
+      "state": 479,
+      "island_components": 5
+    },
+    {
+      "province": 3409,
+      "state": 479,
+      "island_components": 6
+    },
+    {
+      "province": 3410,
+      "state": 479,
+      "island_components": 35
+    },
+    {
+      "province": 3411,
+      "state": 480,
+      "island_components": 2
+    },
+    {
+      "province": 3412,
+      "state": 480,
+      "island_components": 59
+    },
+    {
+      "province": 3414,
+      "state": 480,
+      "island_components": 19
+    },
+    {
+      "province": 3415,
+      "state": 480,
+      "island_components": 8
+    },
+    {
+      "province": 3416,
+      "state": 480,
+      "island_components": 2
+    },
+    {
+      "province": 3418,
+      "state": 480,
+      "island_components": 7
+    },
+    {
+      "province": 3419,
+      "state": 480,
+      "island_components": 5
+    },
+    {
+      "province": 3422,
+      "state": 480,
+      "island_components": 15
+    },
+    {
+      "province": 3431,
+      "state": 481,
+      "island_components": 2
+    },
+    {
+      "province": 3433,
+      "state": 481,
+      "island_components": 3
+    },
+    {
+      "province": 3434,
+      "state": 481,
+      "island_components": 13
+    },
+    {
+      "province": 3441,
+      "state": 481,
+      "island_components": 10
+    },
+    {
+      "province": 3444,
+      "state": 481,
+      "island_components": 2
+    },
+    {
+      "province": 3445,
+      "state": 481,
+      "island_components": 5
+    },
+    {
+      "province": 3446,
+      "state": 481,
+      "island_components": 2
+    },
+    {
+      "province": 3451,
+      "state": 481,
+      "island_components": 2
+    },
+    {
+      "province": 3456,
+      "state": 481,
+      "island_components": 10
+    },
+    {
+      "province": 3462,
+      "state": 482,
+      "island_components": 26
+    },
+    {
+      "province": 3463,
+      "state": 482,
+      "island_components": 15
+    },
+    {
+      "province": 3464,
+      "state": 482,
+      "island_components": 14
+    },
+    {
+      "province": 3465,
+      "state": 482,
+      "island_components": 26
+    },
+    {
+      "province": 3466,
+      "state": 482,
+      "island_components": 2
+    },
+    {
+      "province": 3468,
+      "state": 483,
+      "island_components": 14
+    },
+    {
+      "province": 3469,
+      "state": 483,
+      "island_components": 13
+    },
+    {
+      "province": 3470,
+      "state": 483,
+      "island_components": 2
+    },
+    {
+      "province": 3471,
+      "state": 483,
+      "island_components": 15
+    },
+    {
+      "province": 3474,
+      "state": 484,
+      "island_components": 27
+    },
+    {
+      "province": 3476,
+      "state": 484,
+      "island_components": 7
+    },
+    {
+      "province": 3477,
+      "state": 484,
+      "island_components": 5
+    },
+    {
+      "province": 3480,
+      "state": 484,
+      "island_components": 22
+    },
+    {
+      "province": 3481,
+      "state": 484,
+      "island_components": 5
+    },
+    {
+      "province": 3482,
+      "state": 484,
+      "island_components": 3
+    },
+    {
+      "province": 3484,
+      "state": 484,
+      "island_components": 26
+    },
+    {
+      "province": 3485,
+      "state": 484,
+      "island_components": 4
+    },
+    {
+      "province": 3486,
+      "state": 484,
+      "island_components": 9
+    },
+    {
+      "province": 3487,
+      "state": 484,
+      "island_components": 8
+    },
+    {
+      "province": 3488,
+      "state": 484,
+      "island_components": 20
+    },
+    {
+      "province": 3490,
+      "state": 484,
+      "island_components": 37
+    },
+    {
+      "province": 3493,
+      "state": 484,
+      "island_components": 2
+    },
+    {
+      "province": 3494,
+      "state": 484,
+      "island_components": 5
+    },
+    {
+      "province": 3495,
+      "state": 484,
+      "island_components": 2
+    },
+    {
+      "province": 3496,
+      "state": 484,
+      "island_components": 10
+    },
+    {
+      "province": 3497,
+      "state": 485,
+      "island_components": 24
+    },
+    {
+      "province": 3498,
+      "state": 485,
+      "island_components": 3
+    },
+    {
+      "province": 3499,
+      "state": 485,
+      "island_components": 18
+    },
+    {
+      "province": 3500,
+      "state": 486,
+      "island_components": 10
+    },
+    {
+      "province": 3504,
+      "state": 486,
+      "island_components": 2
+    },
+    {
+      "province": 3506,
+      "state": 486,
+      "island_components": 6
+    },
+    {
+      "province": 3507,
+      "state": 486,
+      "island_components": 6
+    },
+    {
+      "province": 3509,
+      "state": 486,
+      "island_components": 2
+    },
+    {
+      "province": 3519,
+      "state": 486,
+      "island_components": 3
+    },
+    {
+      "province": 3521,
+      "state": 486,
+      "island_components": 3
+    },
+    {
+      "province": 3522,
+      "state": 486,
+      "island_components": 4
+    },
+    {
+      "province": 3524,
+      "state": 487,
+      "island_components": 5
+    },
+    {
+      "province": 3533,
+      "state": 487,
+      "island_components": 2
+    },
+    {
+      "province": 3538,
+      "state": 487,
+      "island_components": 3
+    },
+    {
+      "province": 3541,
+      "state": 487,
+      "island_components": 3
+    },
+    {
+      "province": 3542,
+      "state": 489,
+      "island_components": 17
+    },
+    {
+      "province": 3543,
+      "state": 489,
+      "island_components": 18
+    },
+    {
+      "province": 3544,
+      "state": 489,
+      "island_components": 5
+    },
+    {
+      "province": 3546,
+      "state": 499,
+      "island_components": 5
+    },
+    {
+      "province": 3548,
+      "state": 499,
+      "island_components": 2
+    },
+    {
+      "province": 3553,
+      "state": 500,
+      "island_components": 4
+    },
+    {
+      "province": 3554,
+      "state": 500,
+      "island_components": 3
+    },
+    {
+      "province": 3555,
+      "state": 500,
+      "island_components": 2
+    },
+    {
+      "province": 3556,
+      "state": 500,
+      "island_components": 2
+    },
+    {
+      "province": 3558,
+      "state": 500,
+      "island_components": 6
+    },
+    {
+      "province": 3562,
+      "state": 501,
+      "island_components": 2
+    },
+    {
+      "province": 3569,
+      "state": 501,
+      "island_components": 3
+    },
+    {
+      "province": 3570,
+      "state": 503,
+      "island_components": 32
+    },
+    {
+      "province": 3672,
+      "state": 531,
+      "island_components": 2
+    },
+    {
+      "province": 3680,
+      "state": 533,
+      "island_components": 5
+    },
+    {
+      "province": 3685,
+      "state": 533,
+      "island_components": 3
+    },
+    {
+      "province": 3689,
+      "state": 534,
+      "island_components": 3
+    },
+    {
+      "province": 3692,
+      "state": 535,
+      "island_components": 3
+    },
+    {
+      "province": 3693,
+      "state": 535,
+      "island_components": 4
+    },
+    {
+      "province": 3695,
+      "state": 535,
+      "island_components": 6
+    },
+    {
+      "province": 3696,
+      "state": 536,
+      "island_components": 2
+    },
+    {
+      "province": 3697,
+      "state": 536,
+      "island_components": 4
+    },
+    {
+      "province": 3698,
+      "state": 536,
+      "island_components": 5
+    },
+    {
+      "province": 3699,
+      "state": 536,
+      "island_components": 2
+    },
+    {
+      "province": 3702,
+      "state": 537,
+      "island_components": 5
+    },
+    {
+      "province": 3703,
+      "state": 537,
+      "island_components": 3
+    },
+    {
+      "province": 3707,
+      "state": 538,
+      "island_components": 3
+    },
+    {
+      "province": 3708,
+      "state": 538,
+      "island_components": 2
+    },
+    {
+      "province": 3711,
+      "state": 539,
+      "island_components": 2
+    },
+    {
+      "province": 3735,
+      "state": 544,
+      "island_components": 2
+    },
+    {
+      "province": 3739,
+      "state": 545,
+      "island_components": 2
+    },
+    {
+      "province": 3745,
+      "state": 546,
+      "island_components": 3
+    },
+    {
+      "province": 3747,
+      "state": 546,
+      "island_components": 3
+    },
+    {
+      "province": 3798,
+      "state": 569,
+      "island_components": 3
+    },
+    {
+      "province": 3800,
+      "state": 569,
+      "island_components": 3
+    },
+    {
+      "province": 3814,
+      "state": 569,
+      "island_components": 2
+    },
+    {
+      "province": 3817,
+      "state": 569,
+      "island_components": 2
+    },
+    {
+      "province": 3822,
+      "state": 569,
+      "island_components": 2
+    },
+    {
+      "province": 3882,
+      "state": 571,
+      "island_components": 6
+    },
+    {
+      "province": 3909,
+      "state": 573,
+      "island_components": 2
+    },
+    {
+      "province": 3923,
+      "state": 573,
+      "island_components": 4
+    },
+    {
+      "province": 3954,
+      "state": 574,
+      "island_components": 2
+    },
+    {
+      "province": 3975,
+      "state": 574,
+      "island_components": 2
+    },
+    {
+      "province": 4006,
+      "state": 577,
+      "island_components": 2
+    },
+    {
+      "province": 4043,
+      "state": 593,
+      "island_components": 2
+    },
+    {
+      "province": 4044,
+      "state": 593,
+      "island_components": 4
+    },
+    {
+      "province": 4123,
+      "state": 600,
+      "island_components": 2
+    },
+    {
+      "province": 4155,
+      "state": 626,
+      "island_components": 2
+    },
+    {
+      "province": 4185,
+      "state": 633,
+      "island_components": 3
+    },
+    {
+      "province": 4186,
+      "state": 634,
+      "island_components": 2
+    },
+    {
+      "province": 4187,
+      "state": 634,
+      "island_components": 9
+    },
+    {
+      "province": 4188,
+      "state": 634,
+      "island_components": 8
+    },
+    {
+      "province": 4190,
+      "state": 634,
+      "island_components": 9
+    },
+    {
+      "province": 4193,
+      "state": 635,
+      "island_components": 2
+    },
+    {
+      "province": 4194,
+      "state": 635,
+      "island_components": 3
+    },
+    {
+      "province": 4198,
+      "state": 636,
+      "island_components": 2
+    },
+    {
+      "province": 4199,
+      "state": 636,
+      "island_components": 2
+    },
+    {
+      "province": 4304,
+      "state": 649,
+      "island_components": 3
+    },
+    {
+      "province": 4314,
+      "state": 651,
+      "island_components": 48
+    },
+    {
+      "province": 4315,
+      "state": 651,
+      "island_components": 33
+    },
+    {
+      "province": 4317,
+      "state": 651,
+      "island_components": 20
+    },
+    {
+      "province": 4318,
+      "state": 651,
+      "island_components": 2
+    },
+    {
+      "province": 4322,
+      "state": 652,
+      "island_components": 3
+    },
+    {
+      "province": 4323,
+      "state": 652,
+      "island_components": 5
+    },
+    {
+      "province": 4327,
+      "state": 652,
+      "island_components": 5
+    },
+    {
+      "province": 4331,
+      "state": 653,
+      "island_components": 4
+    },
+    {
+      "province": 4346,
+      "state": 654,
+      "island_components": 2
+    },
+    {
+      "province": 4347,
+      "state": 655,
+      "island_components": 2
+    },
+    {
+      "province": 4350,
+      "state": 655,
+      "island_components": 7
+    },
+    {
+      "province": 4353,
+      "state": 655,
+      "island_components": 6
+    },
+    {
+      "province": 4356,
+      "state": 656,
+      "island_components": 7
+    },
+    {
+      "province": 4362,
+      "state": 656,
+      "island_components": 4
+    },
+    {
+      "province": 4363,
+      "state": 657,
+      "island_components": 3
+    },
+    {
+      "province": 4364,
+      "state": 657,
+      "island_components": 2
+    },
+    {
+      "province": 4365,
+      "state": 657,
+      "island_components": 3
+    },
+    {
+      "province": 4369,
+      "state": 658,
+      "island_components": 2
+    },
+    {
+      "province": 4373,
+      "state": 658,
+      "island_components": 2
+    },
+    {
+      "province": 4375,
+      "state": 658,
+      "island_components": 2
+    },
+    {
+      "province": 4377,
+      "state": 659,
+      "island_components": 8
+    },
+    {
+      "province": 4378,
+      "state": 659,
+      "island_components": 5
+    },
+    {
+      "province": 4379,
+      "state": 659,
+      "island_components": 4
+    },
+    {
+      "province": 4380,
+      "state": 659,
+      "island_components": 5
+    },
+    {
+      "province": 4407,
+      "state": 663,
+      "island_components": 7
+    },
+    {
+      "province": 4408,
+      "state": 663,
+      "island_components": 4
+    },
+    {
+      "province": 4410,
+      "state": 663,
+      "island_components": 3
+    },
+    {
+      "province": 4411,
+      "state": 663,
+      "island_components": 2
+    },
+    {
+      "province": 4422,
+      "state": 665,
+      "island_components": 7
+    },
+    {
+      "province": 4423,
+      "state": 665,
+      "island_components": 2
+    },
+    {
+      "province": 4424,
+      "state": 665,
+      "island_components": 6
+    },
+    {
+      "province": 4429,
+      "state": 666,
+      "island_components": 3
+    },
+    {
+      "province": 4434,
+      "state": 666,
+      "island_components": 5
+    },
+    {
+      "province": 4438,
+      "state": 666,
+      "island_components": 6
+    },
+    {
+      "province": 4467,
+      "state": 668,
+      "island_components": 2
+    },
+    {
+      "province": 4501,
+      "state": 675,
+      "island_components": 60
+    },
+    {
+      "province": 4502,
+      "state": 675,
+      "island_components": 10
+    },
+    {
+      "province": 4503,
+      "state": 675,
+      "island_components": 19
+    },
+    {
+      "province": 4504,
+      "state": 675,
+      "island_components": 11
+    },
+    {
+      "province": 4505,
+      "state": 675,
+      "island_components": 4
+    },
+    {
+      "province": 4507,
+      "state": 675,
+      "island_components": 14
+    },
+    {
+      "province": 4559,
+      "state": 683,
+      "island_components": 178
+    },
+    {
+      "province": 4560,
+      "state": 684,
+      "island_components": 2
+    },
+    {
+      "province": 4564,
+      "state": 687,
+      "island_components": 3
+    },
+    {
+      "province": 4566,
+      "state": 687,
+      "island_components": 8
+    },
+    {
+      "province": 4571,
+      "state": 688,
+      "island_components": 2
+    },
+    {
+      "province": 4737,
+      "state": 693,
+      "island_components": 47
+    },
+    {
+      "province": 4738,
+      "state": 693,
+      "island_components": 6
+    },
+    {
+      "province": 4739,
+      "state": 693,
+      "island_components": 22
+    },
+    {
+      "province": 4741,
+      "state": 694,
+      "island_components": 2
+    },
+    {
+      "province": 4792,
+      "state": 706,
+      "island_components": 4
+    },
+    {
+      "province": 4793,
+      "state": 706,
+      "island_components": 8
+    },
+    {
+      "province": 4803,
+      "state": 709,
+      "island_components": 5
+    },
+    {
+      "province": 4811,
+      "state": 710,
+      "island_components": 6
+    },
+    {
+      "province": 4821,
+      "state": 712,
+      "island_components": 2
+    },
+    {
+      "province": 4822,
+      "state": 712,
+      "island_components": 6
+    },
+    {
+      "province": 4824,
+      "state": 713,
+      "island_components": 14
+    },
+    {
+      "province": 4827,
+      "state": 714,
+      "island_components": 2
+    },
+    {
+      "province": 4829,
+      "state": 714,
+      "island_components": 2
+    },
+    {
+      "province": 4849,
+      "state": 716,
+      "island_components": 2
+    },
+    {
+      "province": 4900,
+      "state": 722,
+      "island_components": 22
+    },
+    {
+      "province": 4902,
+      "state": 723,
+      "island_components": 10
+    },
+    {
+      "province": 4904,
+      "state": 723,
+      "island_components": 2
+    },
+    {
+      "province": 4931,
+      "state": 726,
+      "island_components": 3
+    },
+    {
+      "province": 4969,
+      "state": 732,
+      "island_components": 2
+    },
+    {
+      "province": 4978,
+      "state": 733,
+      "island_components": 2
+    },
+    {
+      "province": 4979,
+      "state": 733,
+      "island_components": 2
+    },
+    {
+      "province": 4982,
+      "state": 734,
+      "island_components": 3
+    },
+    {
+      "province": 4985,
+      "state": 734,
+      "island_components": 9
+    },
+    {
+      "province": 4993,
+      "state": 735,
+      "island_components": 2
+    },
+    {
+      "province": 4998,
+      "state": 736,
+      "island_components": 2
+    },
+    {
+      "province": 5000,
+      "state": 736,
+      "island_components": 4
+    },
+    {
+      "province": 5003,
+      "state": 736,
+      "island_components": 3
+    },
+    {
+      "province": 5014,
+      "state": 737,
+      "island_components": 2
+    },
+    {
+      "province": 5016,
+      "state": 739,
+      "island_components": 3
+    },
+    {
+      "province": 5028,
+      "state": 750,
+      "island_components": 23
+    },
+    {
+      "province": 5029,
+      "state": 751,
+      "island_components": 7
+    },
+    {
+      "province": 5031,
+      "state": 752,
+      "island_components": 11
+    },
+    {
+      "province": 5033,
+      "state": 752,
+      "island_components": 3
+    },
+    {
+      "province": 5036,
+      "state": 752,
+      "island_components": 2
+    },
+    {
+      "province": 5039,
+      "state": 752,
+      "island_components": 4
+    },
+    {
+      "province": 5045,
+      "state": 753,
+      "island_components": 4
+    },
+    {
+      "province": 5047,
+      "state": 753,
+      "island_components": 3
+    },
+    {
+      "province": 5049,
+      "state": 753,
+      "island_components": 5
+    },
+    {
+      "province": 5050,
+      "state": 753,
+      "island_components": 4
+    },
+    {
+      "province": 5051,
+      "state": 753,
+      "island_components": 3
+    },
+    {
+      "province": 5052,
+      "state": 753,
+      "island_components": 3
+    },
+    {
+      "province": 5054,
+      "state": 753,
+      "island_components": 8
+    },
+    {
+      "province": 5057,
+      "state": 753,
+      "island_components": 5
+    },
+    {
+      "province": 5059,
+      "state": 753,
+      "island_components": 2
+    },
+    {
+      "province": 5060,
+      "state": 753,
+      "island_components": 7
+    },
+    {
+      "province": 5064,
+      "state": 753,
+      "island_components": 6
+    },
+    {
+      "province": 5065,
+      "state": 754,
+      "island_components": 4
+    },
+    {
+      "province": 5066,
+      "state": 755,
+      "island_components": 4
+    },
+    {
+      "province": 5069,
+      "state": 755,
+      "island_components": 2
+    },
+    {
+      "province": 5080,
+      "state": 757,
+      "island_components": 6
+    },
+    {
+      "province": 5084,
+      "state": 758,
+      "island_components": 2
+    },
+    {
+      "province": 5088,
+      "state": 759,
+      "island_components": 3
+    },
+    {
+      "province": 5100,
+      "state": 762,
+      "island_components": 2
+    },
+    {
+      "province": 5109,
+      "state": 763,
+      "island_components": 2
+    },
+    {
+      "province": 5114,
+      "state": 763,
+      "island_components": 2
+    },
+    {
+      "province": 5145,
+      "state": 765,
+      "island_components": 2
+    },
+    {
+      "province": 5153,
+      "state": 776,
+      "island_components": 5
+    },
+    {
+      "province": 5154,
+      "state": 776,
+      "island_components": 8
+    },
+    {
+      "province": 5155,
+      "state": 777,
+      "island_components": 5
+    },
+    {
+      "province": 5156,
+      "state": 777,
+      "island_components": 3
+    },
+    {
+      "province": 5158,
+      "state": 777,
+      "island_components": 6
+    },
+    {
+      "province": 5159,
+      "state": 777,
+      "island_components": 2
+    },
+    {
+      "province": 5202,
+      "state": 790,
+      "island_components": 2
+    },
+    {
+      "province": 5203,
+      "state": 790,
+      "island_components": 8
+    },
+    {
+      "province": 5220,
+      "state": 793,
+      "island_components": 2
+    },
+    {
+      "province": 5236,
+      "state": 796,
+      "island_components": 7
+    },
+    {
+      "province": 5271,
+      "state": 800,
+      "island_components": 4
+    },
+    {
+      "province": 5273,
+      "state": 800,
+      "island_components": 2
+    },
+    {
+      "province": 5274,
+      "state": 801,
+      "island_components": 3
+    },
+    {
+      "province": 5275,
+      "state": 801,
+      "island_components": 7
+    },
+    {
+      "province": 5277,
+      "state": 801,
+      "island_components": 4
+    },
+    {
+      "province": 5281,
+      "state": 802,
+      "island_components": 2
+    },
+    {
+      "province": 5284,
+      "state": 802,
+      "island_components": 2
+    },
+    {
+      "province": 5428,
+      "state": 850,
+      "island_components": 2
+    },
+    {
+      "province": 5457,
+      "state": 854,
+      "island_components": 2
+    },
+    {
+      "province": 5458,
+      "state": 854,
+      "island_components": 6
+    },
+    {
+      "province": 5523,
+      "state": 864,
+      "island_components": 3
+    },
+    {
+      "province": 5526,
+      "state": 865,
+      "island_components": 5
+    },
+    {
+      "province": 5527,
+      "state": 866,
+      "island_components": 10
+    },
+    {
+      "province": 5535,
+      "state": 869,
+      "island_components": 4
+    },
+    {
+      "province": 5536,
+      "state": 869,
+      "island_components": 3
+    },
+    {
+      "province": 5571,
+      "state": 871,
+      "island_components": 2
+    },
+    {
+      "province": 5573,
+      "state": 872,
+      "island_components": 4
+    },
+    {
+      "province": 5584,
+      "state": 873,
+      "island_components": 5
+    },
+    {
+      "province": 5623,
+      "state": 878,
+      "island_components": 2
+    },
+    {
+      "province": 5624,
+      "state": 878,
+      "island_components": 3
+    },
+    {
+      "province": 5625,
+      "state": 878,
+      "island_components": 3
+    },
+    {
+      "province": 5627,
+      "state": 880,
+      "island_components": 4
+    },
+    {
+      "province": 5628,
+      "state": 880,
+      "island_components": 3
+    },
+    {
+      "province": 5645,
+      "state": 882,
+      "island_components": 2
+    },
+    {
+      "province": 5647,
+      "state": 883,
+      "island_components": 2
+    },
+    {
+      "province": 5823,
+      "state": 904,
+      "island_components": 2
+    },
+    {
+      "province": 5828,
+      "state": 904,
+      "island_components": 2
+    },
+    {
+      "province": 5840,
+      "state": 906,
+      "island_components": 13
+    },
+    {
+      "province": 5849,
+      "state": 906,
+      "island_components": 2
+    },
+    {
+      "province": 5852,
+      "state": 906,
+      "island_components": 4
+    },
+    {
+      "province": 5866,
+      "state": 908,
+      "island_components": 4
+    },
+    {
+      "province": 5874,
+      "state": 909,
+      "island_components": 4
+    },
+    {
+      "province": 5879,
+      "state": 909,
+      "island_components": 5
+    },
+    {
+      "province": 5886,
+      "state": 911,
+      "island_components": 29
+    },
+    {
+      "province": 5953,
+      "state": 924,
+      "island_components": 7
+    },
+    {
+      "province": 6016,
+      "state": 945,
+      "island_components": 2
+    },
+    {
+      "province": 6047,
+      "state": 949,
+      "island_components": 2
+    },
+    {
+      "province": 6048,
+      "state": 949,
+      "island_components": 3
+    },
+    {
+      "province": 6049,
+      "state": 949,
+      "island_components": 3
+    },
+    {
+      "province": 6055,
+      "state": 951,
+      "island_components": 2
+    },
+    {
+      "province": 6056,
+      "state": 952,
+      "island_components": 3
+    },
+    {
+      "province": 6058,
+      "state": 953,
+      "island_components": 3
+    },
+    {
+      "province": 6064,
+      "state": 953,
+      "island_components": 9
+    },
+    {
+      "province": 6068,
+      "state": 953,
+      "island_components": 3
+    },
+    {
+      "province": 6093,
+      "state": 958,
+      "island_components": 43
+    },
+    {
+      "province": 6094,
+      "state": 958,
+      "island_components": 6
+    },
+    {
+      "province": 6096,
+      "state": 959,
+      "island_components": 8
+    },
+    {
+      "province": 6097,
+      "state": 959,
+      "island_components": 5
+    },
+    {
+      "province": 6099,
+      "state": 959,
+      "island_components": 4
+    },
+    {
+      "province": 6102,
+      "state": 960,
+      "island_components": 16
+    },
+    {
+      "province": 6111,
+      "state": 961,
+      "island_components": 22
+    },
+    {
+      "province": 6115,
+      "state": 961,
+      "island_components": 4
+    },
+    {
+      "province": 6116,
+      "state": 961,
+      "island_components": 5
+    },
+    {
+      "province": 6120,
+      "state": 961,
+      "island_components": 12
+    },
+    {
+      "province": 6194,
+      "state": 973,
+      "island_components": 33
+    },
+    {
+      "province": 6196,
+      "state": 974,
+      "island_components": 4
+    },
+    {
+      "province": 6204,
+      "state": 976,
+      "island_components": 2
+    },
+    {
+      "province": 6205,
+      "state": 976,
+      "island_components": 3
+    },
+    {
+      "province": 6207,
+      "state": 976,
+      "island_components": 12
+    },
+    {
+      "province": 6208,
+      "state": 976,
+      "island_components": 2
+    },
+    {
+      "province": 6209,
+      "state": 976,
+      "island_components": 2
+    },
+    {
+      "province": 6212,
+      "state": 977,
+      "island_components": 7
+    },
+    {
+      "province": 6216,
+      "state": 977,
+      "island_components": 2
+    },
+    {
+      "province": 6221,
+      "state": 978,
+      "island_components": 5
+    },
+    {
+      "province": 6226,
+      "state": 978,
+      "island_components": 3
+    },
+    {
+      "province": 6230,
+      "state": 978,
+      "island_components": 8
+    },
+    {
+      "province": 6241,
+      "state": 979,
+      "island_components": 11
+    },
+    {
+      "province": 6242,
+      "state": 979,
+      "island_components": 2
+    },
+    {
+      "province": 6243,
+      "state": 979,
+      "island_components": 4
+    },
+    {
+      "province": 6244,
+      "state": 979,
+      "island_components": 19
+    },
+    {
+      "province": 6245,
+      "state": 979,
+      "island_components": 7
+    },
+    {
+      "province": 6309,
+      "state": 991,
+      "island_components": 2
+    },
+    {
+      "province": 6368,
+      "state": 1001,
+      "island_components": 2
+    },
+    {
+      "province": 6417,
+      "state": 1008,
+      "island_components": 2
+    },
+    {
+      "province": 6429,
+      "state": 1009,
+      "island_components": 4
+    },
+    {
+      "province": 6439,
+      "state": 1010,
+      "island_components": 7
+    },
+    {
+      "province": 6441,
+      "state": 1010,
+      "island_components": 2
+    },
+    {
+      "province": 6442,
+      "state": 1010,
+      "island_components": 2
+    },
+    {
+      "province": 6444,
+      "state": 1010,
+      "island_components": 2
+    },
+    {
+      "province": 6446,
+      "state": 1010,
+      "island_components": 2
+    },
+    {
+      "province": 6448,
+      "state": 1010,
+      "island_components": 3
+    },
+    {
+      "province": 6449,
+      "state": 1010,
+      "island_components": 2
+    },
+    {
+      "province": 6460,
+      "state": 1011,
+      "island_components": 10
+    },
+    {
+      "province": 6498,
+      "state": 1016,
+      "island_components": 2
+    },
+    {
+      "province": 6550,
+      "state": 1019,
+      "island_components": 2
+    },
+    {
+      "province": 6551,
+      "state": 1019,
+      "island_components": 2
+    },
+    {
+      "province": 6635,
+      "state": 1024,
+      "island_components": 3
+    },
+    {
+      "province": 6647,
+      "state": 1024,
+      "island_components": 8
+    },
+    {
+      "province": 6649,
+      "state": 1024,
+      "island_components": 3
+    },
+    {
+      "province": 6656,
+      "state": 1024,
+      "island_components": 4
+    },
+    {
+      "province": 6664,
+      "state": 1025,
+      "island_components": 2
+    },
+    {
+      "province": 6676,
+      "state": 1025,
+      "island_components": 4
+    },
+    {
+      "province": 6677,
+      "state": 1025,
+      "island_components": 2
+    },
+    {
+      "province": 6704,
+      "state": 1026,
+      "island_components": 2
+    },
+    {
+      "province": 6722,
+      "state": 1028,
+      "island_components": 3
+    },
+    {
+      "province": 6768,
+      "state": 1029,
+      "island_components": 2
+    },
+    {
+      "province": 6796,
+      "state": 1031,
+      "island_components": 2
+    },
+    {
+      "province": 6841,
+      "state": 1032,
+      "island_components": 2
+    },
+    {
+      "province": 6866,
+      "state": 1034,
+      "island_components": 3
+    },
+    {
+      "province": 6871,
+      "state": 1034,
+      "island_components": 2
+    },
+    {
+      "province": 6876,
+      "state": 1035,
+      "island_components": 2
+    },
+    {
+      "province": 6897,
+      "state": 1036,
+      "island_components": 2
+    },
+    {
+      "province": 6905,
+      "state": 1036,
+      "island_components": 3
+    },
+    {
+      "province": 6906,
+      "state": 1036,
+      "island_components": 6
+    },
+    {
+      "province": 6907,
+      "state": 1037,
+      "island_components": 2
+    },
+    {
+      "province": 6916,
+      "state": 1038,
+      "island_components": 2
+    },
+    {
+      "province": 6918,
+      "state": 1038,
+      "island_components": 3
+    },
+    {
+      "province": 6919,
+      "state": 1038,
+      "island_components": 3
+    },
+    {
+      "province": 6920,
+      "state": 1038,
+      "island_components": 2
+    },
+    {
+      "province": 6922,
+      "state": 1038,
+      "island_components": 6
+    },
+    {
+      "province": 6926,
+      "state": 1039,
+      "island_components": 3
+    },
+    {
+      "province": 6930,
+      "state": 1039,
+      "island_components": 2
+    },
+    {
+      "province": 6932,
+      "state": 1039,
+      "island_components": 2
+    },
+    {
+      "province": 6933,
+      "state": 1039,
+      "island_components": 3
+    },
+    {
+      "province": 6935,
+      "state": 1039,
+      "island_components": 2
+    },
+    {
+      "province": 6939,
+      "state": 1039,
+      "island_components": 6
+    },
+    {
+      "province": 6949,
+      "state": 1040,
+      "island_components": 9
+    },
+    {
+      "province": 6950,
+      "state": 1040,
+      "island_components": 7
+    },
+    {
+      "province": 6951,
+      "state": 1040,
+      "island_components": 3
+    },
+    {
+      "province": 6952,
+      "state": 1040,
+      "island_components": 6
+    },
+    {
+      "province": 6953,
+      "state": 1040,
+      "island_components": 2
+    },
+    {
+      "province": 6956,
+      "state": 1041,
+      "island_components": 7
+    },
+    {
+      "province": 6962,
+      "state": 1041,
+      "island_components": 7
+    },
+    {
+      "province": 6970,
+      "state": 1041,
+      "island_components": 12
+    },
+    {
+      "province": 6975,
+      "state": 1041,
+      "island_components": 5
+    },
+    {
+      "province": 6977,
+      "state": 1041,
+      "island_components": 9
+    },
+    {
+      "province": 6984,
+      "state": 1041,
+      "island_components": 7
+    },
+    {
+      "province": 6992,
+      "state": 1041,
+      "island_components": 2
+    },
+    {
+      "province": 7001,
+      "state": 1041,
+      "island_components": 2
+    },
+    {
+      "province": 7003,
+      "state": 1041,
+      "island_components": 2
+    },
+    {
+      "province": 7013,
+      "state": 1041,
+      "island_components": 4
+    },
+    {
+      "province": 7017,
+      "state": 1041,
+      "island_components": 3
+    },
+    {
+      "province": 7023,
+      "state": 1042,
+      "island_components": 2
+    },
+    {
+      "province": 7026,
+      "state": 1043,
+      "island_components": 45
+    },
+    {
+      "province": 7028,
+      "state": 1043,
+      "island_components": 4
+    },
+    {
+      "province": 7031,
+      "state": 1043,
+      "island_components": 2
+    },
+    {
+      "province": 7032,
+      "state": 1043,
+      "island_components": 4
+    },
+    {
+      "province": 7033,
+      "state": 1043,
+      "island_components": 10
+    },
+    {
+      "province": 7035,
+      "state": 1043,
+      "island_components": 2
+    },
+    {
+      "province": 7036,
+      "state": 1043,
+      "island_components": 11
+    },
+    {
+      "province": 7039,
+      "state": 1043,
+      "island_components": 3
+    },
+    {
+      "province": 7040,
+      "state": 1043,
+      "island_components": 2
+    },
+    {
+      "province": 7043,
+      "state": 1043,
+      "island_components": 8
+    },
+    {
+      "province": 7047,
+      "state": 1043,
+      "island_components": 9
+    },
+    {
+      "province": 7048,
+      "state": 1043,
+      "island_components": 3
+    },
+    {
+      "province": 7054,
+      "state": 1043,
+      "island_components": 5
+    },
+    {
+      "province": 7057,
+      "state": 1044,
+      "island_components": 8
+    },
+    {
+      "province": 7062,
+      "state": 1044,
+      "island_components": 2
+    },
+    {
+      "province": 7063,
+      "state": 1044,
+      "island_components": 25
+    },
+    {
+      "province": 7072,
+      "state": 1044,
+      "island_components": 16
+    },
+    {
+      "province": 7091,
+      "state": 1044,
+      "island_components": 16
+    },
+    {
+      "province": 7093,
+      "state": 1044,
+      "island_components": 2
+    },
+    {
+      "province": 7095,
+      "state": 1044,
+      "island_components": 5
+    },
+    {
+      "province": 7097,
+      "state": 1044,
+      "island_components": 2
+    },
+    {
+      "province": 7098,
+      "state": 1044,
+      "island_components": 44
+    },
+    {
+      "province": 7102,
+      "state": 1044,
+      "island_components": 2
+    },
+    {
+      "province": 7106,
+      "state": 1044,
+      "island_components": 3
+    },
+    {
+      "province": 7113,
+      "state": 1044,
+      "island_components": 12
+    },
+    {
+      "province": 7118,
+      "state": 1044,
+      "island_components": 3
+    },
+    {
+      "province": 7120,
+      "state": 1044,
+      "island_components": 10
+    },
+    {
+      "province": 7132,
+      "state": 1044,
+      "island_components": 4
+    },
+    {
+      "province": 7144,
+      "state": 1044,
+      "island_components": 6
+    },
+    {
+      "province": 7145,
+      "state": 1044,
+      "island_components": 3
+    },
+    {
+      "province": 7175,
+      "state": 1046,
+      "island_components": 3
+    },
+    {
+      "province": 7176,
+      "state": 1046,
+      "island_components": 6
+    },
+    {
+      "province": 7179,
+      "state": 1046,
+      "island_components": 2
+    },
+    {
+      "province": 7186,
+      "state": 1046,
+      "island_components": 5
+    },
+    {
+      "province": 7354,
+      "state": 1055,
+      "island_components": 2
+    },
+    {
+      "province": 7362,
+      "state": 1055,
+      "island_components": 2
+    },
+    {
+      "province": 7405,
+      "state": 1059,
+      "island_components": 3
+    },
+    {
+      "province": 7412,
+      "state": 1059,
+      "island_components": 2
+    },
+    {
+      "province": 7452,
+      "state": 1059,
+      "island_components": 3
+    },
+    {
+      "province": 7492,
+      "state": 1064,
+      "island_components": 2
+    },
+    {
+      "province": 7494,
+      "state": 1064,
+      "island_components": 2
+    },
+    {
+      "province": 7517,
+      "state": 1066,
+      "island_components": 2
+    },
+    {
+      "province": 7520,
+      "state": 1067,
+      "island_components": 2
+    },
+    {
+      "province": 7634,
+      "state": 1075,
+      "island_components": 2
+    },
+    {
+      "province": 7635,
+      "state": 1075,
+      "island_components": 2
+    },
+    {
+      "province": 7698,
+      "state": 1080,
+      "island_components": 4
+    },
+    {
+      "province": 7713,
+      "state": 1080,
+      "island_components": 2
+    },
+    {
+      "province": 7730,
+      "state": 1081,
+      "island_components": 2
+    },
+    {
+      "province": 7763,
+      "state": 1086,
+      "island_components": 7
+    },
+    {
+      "province": 7765,
+      "state": 1111,
+      "island_components": 2
+    },
+    {
+      "province": 7771,
+      "state": 1113,
+      "island_components": 14
+    },
+    {
+      "province": 7780,
+      "state": 1114,
+      "island_components": 19
+    },
+    {
+      "province": 7787,
+      "state": 1115,
+      "island_components": 7
+    },
+    {
+      "province": 7806,
+      "state": 1117,
+      "island_components": 9
+    },
+    {
+      "province": 7807,
+      "state": 1117,
+      "island_components": 5
+    },
+    {
+      "province": 7820,
+      "state": 1122,
+      "island_components": 7
+    },
+    {
+      "province": 7844,
+      "state": 1126,
+      "island_components": 2
+    },
+    {
+      "province": 7852,
+      "state": 1128,
+      "island_components": 10
+    },
+    {
+      "province": 7858,
+      "state": 1128,
+      "island_components": 22
+    },
+    {
+      "province": 7867,
+      "state": 1130,
+      "island_components": 5
+    },
+    {
+      "province": 7888,
+      "state": 1138,
+      "island_components": 8
+    },
+    {
+      "province": 7900,
+      "state": 1139,
+      "island_components": 4
+    },
+    {
+      "province": 7917,
+      "state": 1140,
+      "island_components": 3
+    },
+    {
+      "province": 7944,
+      "state": 1141,
+      "island_components": 2
+    },
+    {
+      "province": 7946,
+      "state": 1142,
+      "island_components": 2
+    },
+    {
+      "province": 7949,
+      "state": 1142,
+      "island_components": 2
+    },
+    {
+      "province": 7951,
+      "state": 1142,
+      "island_components": 2
+    },
+    {
+      "province": 7953,
+      "state": 1142,
+      "island_components": 3
+    },
+    {
+      "province": 7964,
+      "state": 1143,
+      "island_components": 3
+    },
+    {
+      "province": 7966,
+      "state": 1143,
+      "island_components": 3
+    },
+    {
+      "province": 7969,
+      "state": 1143,
+      "island_components": 3
+    },
+    {
+      "province": 7972,
+      "state": 1143,
+      "island_components": 4
+    },
+    {
+      "province": 7976,
+      "state": 1143,
+      "island_components": 2
+    },
+    {
+      "province": 7977,
+      "state": 1143,
+      "island_components": 2
+    },
+    {
+      "province": 7980,
+      "state": 1144,
+      "island_components": 2
+    },
+    {
+      "province": 7981,
+      "state": 1144,
+      "island_components": 2
+    },
+    {
+      "province": 7985,
+      "state": 1144,
+      "island_components": 2
+    },
+    {
+      "province": 7987,
+      "state": 1144,
+      "island_components": 2
+    },
+    {
+      "province": 7991,
+      "state": 1145,
+      "island_components": 2
+    },
+    {
+      "province": 7992,
+      "state": 1145,
+      "island_components": 2
+    },
+    {
+      "province": 7995,
+      "state": 1146,
+      "island_components": 3
+    },
+    {
+      "province": 8001,
+      "state": 1146,
+      "island_components": 3
+    },
+    {
+      "province": 8004,
+      "state": 1146,
+      "island_components": 2
+    },
+    {
+      "province": 8022,
+      "state": 1150,
+      "island_components": 2
+    },
+    {
+      "province": 8024,
+      "state": 1150,
+      "island_components": 3
+    },
+    {
+      "province": 8043,
+      "state": 1183,
+      "island_components": 2
+    },
+    {
+      "province": 8056,
+      "state": 1185,
+      "island_components": 2
+    },
+    {
+      "province": 8077,
+      "state": 1187,
+      "island_components": 10
+    },
+    {
+      "province": 8085,
+      "state": 1189,
+      "island_components": 10
+    },
+    {
+      "province": 8087,
+      "state": 1189,
+      "island_components": 4
+    },
+    {
+      "province": 8091,
+      "state": 1191,
+      "island_components": 19
+    },
+    {
+      "province": 8092,
+      "state": 1191,
+      "island_components": 19
+    },
+    {
+      "province": 8110,
+      "state": 1195,
+      "island_components": 5
+    },
+    {
+      "province": 8113,
+      "state": 1195,
+      "island_components": 2
+    },
+    {
+      "province": 8141,
+      "state": 1202,
+      "island_components": 3
+    },
+    {
+      "province": 8143,
+      "state": 1203,
+      "island_components": 2
+    },
+    {
+      "province": 8144,
+      "state": 1203,
+      "island_components": 2
+    },
+    {
+      "province": 8149,
+      "state": 1205,
+      "island_components": 13
+    },
+    {
+      "province": 8167,
+      "state": 1207,
+      "island_components": 3
+    },
+    {
+      "province": 8171,
+      "state": 1207,
+      "island_components": 2
+    },
+    {
+      "province": 8194,
+      "state": 1209,
+      "island_components": 2
+    },
+    {
+      "province": 8197,
+      "state": 1211,
+      "island_components": 19
+    },
+    {
+      "province": 8198,
+      "state": 1211,
+      "island_components": 6
+    },
+    {
+      "province": 8199,
+      "state": 1211,
+      "island_components": 18
+    },
+    {
+      "province": 8200,
+      "state": 1212,
+      "island_components": 2
+    },
+    {
+      "province": 8203,
+      "state": 1213,
+      "island_components": 2
+    },
+    {
+      "province": 8219,
+      "state": 1214,
+      "island_components": 3
+    },
+    {
+      "province": 8226,
+      "state": 1214,
+      "island_components": 4
+    },
+    {
+      "province": 8234,
+      "state": 1214,
+      "island_components": 2
+    },
+    {
+      "province": 8239,
+      "state": 1214,
+      "island_components": 4
+    },
+    {
+      "province": 8241,
+      "state": 1215,
+      "island_components": 16
+    },
+    {
+      "province": 8247,
+      "state": 1216,
+      "island_components": 2
+    },
+    {
+      "province": 8248,
+      "state": 1217,
+      "island_components": 3
+    },
+    {
+      "province": 8249,
+      "state": 1217,
+      "island_components": 2
+    },
+    {
+      "province": 8260,
+      "state": 1218,
+      "island_components": 4
+    },
+    {
+      "province": 8262,
+      "state": 1218,
+      "island_components": 4
+    },
+    {
+      "province": 8270,
+      "state": 1241,
+      "island_components": 3
+    },
+    {
+      "province": 8272,
+      "state": 1241,
+      "island_components": 12
+    },
+    {
+      "province": 8275,
+      "state": 1241,
+      "island_components": 20
+    },
+    {
+      "province": 8279,
+      "state": 1242,
+      "island_components": 3
+    },
+    {
+      "province": 8307,
+      "state": 1245,
+      "island_components": 3
+    },
+    {
+      "province": 8381,
+      "state": 1254,
+      "island_components": 2
+    },
+    {
+      "province": 8392,
+      "state": 1255,
+      "island_components": 2
+    },
+    {
+      "province": 8443,
+      "state": 1261,
+      "island_components": 2
+    },
+    {
+      "province": 8454,
+      "state": 1263,
+      "island_components": 2
+    },
+    {
+      "province": 8455,
+      "state": 1263,
+      "island_components": 2
+    },
+    {
+      "province": 8459,
+      "state": 1263,
+      "island_components": 2
+    },
+    {
+      "province": 8460,
+      "state": 1263,
+      "island_components": 2
+    },
+    {
+      "province": 8462,
+      "state": 1264,
+      "island_components": 2
+    },
+    {
+      "province": 8589,
+      "state": 1279,
+      "island_components": 4
+    },
+    {
+      "province": 8636,
+      "state": 1281,
+      "island_components": 2
+    },
+    {
+      "province": 8668,
+      "state": 1362,
+      "island_components": 5
+    },
+    {
+      "province": 8669,
+      "state": 1362,
+      "island_components": 2
+    },
+    {
+      "province": 8671,
+      "state": 1362,
+      "island_components": 2
+    },
+    {
+      "province": 8693,
+      "state": 1364,
+      "island_components": 10
+    },
+    {
+      "province": 8694,
+      "state": 1364,
+      "island_components": 19
+    },
+    {
+      "province": 8695,
+      "state": 1364,
+      "island_components": 6
+    },
+    {
+      "province": 8696,
+      "state": 1372,
+      "island_components": 13
+    },
+    {
+      "province": 8701,
+      "state": 1373,
+      "island_components": 3
+    },
+    {
+      "province": 8702,
+      "state": 1373,
+      "island_components": 5
+    },
+    {
+      "province": 8705,
+      "state": 1373,
+      "island_components": 12
+    },
+    {
+      "province": 8707,
+      "state": 1373,
+      "island_components": 5
+    },
+    {
+      "province": 8719,
+      "state": 1375,
+      "island_components": 4
+    },
+    {
+      "province": 8723,
+      "state": 1375,
+      "island_components": 2
+    },
+    {
+      "province": 8725,
+      "state": 1375,
+      "island_components": 3
+    },
+    {
+      "province": 8726,
+      "state": 1375,
+      "island_components": 2
+    },
+    {
+      "province": 8728,
+      "state": 1376,
+      "island_components": 3
+    },
+    {
+      "province": 8729,
+      "state": 1376,
+      "island_components": 2
+    },
+    {
+      "province": 8730,
+      "state": 1376,
+      "island_components": 3
+    },
+    {
+      "province": 8738,
+      "state": 1377,
+      "island_components": 3
+    },
+    {
+      "province": 8741,
+      "state": 1377,
+      "island_components": 5
+    },
+    {
+      "province": 8742,
+      "state": 1378,
+      "island_components": 3
+    },
+    {
+      "province": 8743,
+      "state": 1378,
+      "island_components": 2
+    },
+    {
+      "province": 8746,
+      "state": 1379,
+      "island_components": 2
+    },
+    {
+      "province": 8747,
+      "state": 1379,
+      "island_components": 4
+    },
+    {
+      "province": 8754,
+      "state": 1380,
+      "island_components": 2
+    },
+    {
+      "province": 8777,
+      "state": 1384,
+      "island_components": 6
+    },
+    {
+      "province": 8798,
+      "state": 1387,
+      "island_components": 12
+    },
+    {
+      "province": 8804,
+      "state": 1389,
+      "island_components": 2
+    },
+    {
+      "province": 8806,
+      "state": 1389,
+      "island_components": 5
+    },
+    {
+      "province": 8807,
+      "state": 1389,
+      "island_components": 11
+    },
+    {
+      "province": 8810,
+      "state": 1389,
+      "island_components": 10
+    },
+    {
+      "province": 8811,
+      "state": 1389,
+      "island_components": 2
+    },
+    {
+      "province": 8855,
+      "state": 1399,
+      "island_components": 2
+    },
+    {
+      "province": 8862,
+      "state": 1400,
+      "island_components": 2
+    },
+    {
+      "province": 8890,
+      "state": 1405,
+      "island_components": 3
+    },
+    {
+      "province": 8899,
+      "state": 1406,
+      "island_components": 11
+    },
+    {
+      "province": 8901,
+      "state": 1406,
+      "island_components": 16
+    },
+    {
+      "province": 8902,
+      "state": 1406,
+      "island_components": 17
+    },
+    {
+      "province": 8905,
+      "state": 1406,
+      "island_components": 6
+    },
+    {
+      "province": 8908,
+      "state": 1406,
+      "island_components": 14
+    },
+    {
+      "province": 8915,
+      "state": 1406,
+      "island_components": 2
+    },
+    {
+      "province": 8917,
+      "state": 1406,
+      "island_components": 12
+    },
+    {
+      "province": 8918,
+      "state": 1406,
+      "island_components": 3
+    },
+    {
+      "province": 8920,
+      "state": 1406,
+      "island_components": 7
+    },
+    {
+      "province": 8921,
+      "state": 1406,
+      "island_components": 5
+    },
+    {
+      "province": 8927,
+      "state": 1406,
+      "island_components": 25
+    },
+    {
+      "province": 8930,
+      "state": 1406,
+      "island_components": 8
+    },
+    {
+      "province": 8941,
+      "state": 1406,
+      "island_components": 25
+    },
+    {
+      "province": 8942,
+      "state": 1406,
+      "island_components": 6
+    },
+    {
+      "province": 8944,
+      "state": 1406,
+      "island_components": 3
+    },
+    {
+      "province": 8946,
+      "state": 1406,
+      "island_components": 17
+    },
+    {
+      "province": 8947,
+      "state": 1406,
+      "island_components": 2
+    },
+    {
+      "province": 8948,
+      "state": 1407,
+      "island_components": 16
+    },
+    {
+      "province": 8952,
+      "state": 1407,
+      "island_components": 22
+    },
+    {
+      "province": 8956,
+      "state": 1407,
+      "island_components": 3
+    },
+    {
+      "province": 8957,
+      "state": 1407,
+      "island_components": 2
+    },
+    {
+      "province": 8963,
+      "state": 1408,
+      "island_components": 3
+    },
+    {
+      "province": 8970,
+      "state": 1408,
+      "island_components": 23
+    },
+    {
+      "province": 8982,
+      "state": 1408,
+      "island_components": 13
+    },
+    {
+      "province": 8984,
+      "state": 1408,
+      "island_components": 8
+    },
+    {
+      "province": 8990,
+      "state": 1409,
+      "island_components": 2
+    },
+    {
+      "province": 8991,
+      "state": 1409,
+      "island_components": 61
+    },
+    {
+      "province": 8993,
+      "state": 1409,
+      "island_components": 10
+    },
+    {
+      "province": 9002,
+      "state": 1409,
+      "island_components": 16
+    },
+    {
+      "province": 9005,
+      "state": 1409,
+      "island_components": 21
+    },
+    {
+      "province": 9013,
+      "state": 1409,
+      "island_components": 16
+    },
+    {
+      "province": 9020,
+      "state": 1409,
+      "island_components": 11
+    },
+    {
+      "province": 9024,
+      "state": 1409,
+      "island_components": 42
+    },
+    {
+      "province": 9028,
+      "state": 1409,
+      "island_components": 26
+    },
+    {
+      "province": 9031,
+      "state": 1409,
+      "island_components": 20
+    },
+    {
+      "province": 9034,
+      "state": 1409,
+      "island_components": 24
+    },
+    {
+      "province": 9036,
+      "state": 1409,
+      "island_components": 8
+    },
+    {
+      "province": 9037,
+      "state": 1409,
+      "island_components": 2
+    },
+    {
+      "province": 9042,
+      "state": 1409,
+      "island_components": 10
+    },
+    {
+      "province": 9043,
+      "state": 1409,
+      "island_components": 4
+    },
+    {
+      "province": 9044,
+      "state": 1409,
+      "island_components": 7
+    },
+    {
+      "province": 9059,
+      "state": 1410,
+      "island_components": 2
+    },
+    {
+      "province": 9061,
+      "state": 1410,
+      "island_components": 5
+    },
+    {
+      "province": 9109,
+      "state": 1412,
+      "island_components": 8
+    },
+    {
+      "province": 9113,
+      "state": 1412,
+      "island_components": 2
+    },
+    {
+      "province": 9120,
+      "state": 1412,
+      "island_components": 2
+    },
+    {
+      "province": 9122,
+      "state": 1412,
+      "island_components": 2
+    },
+    {
+      "province": 9123,
+      "state": 1413,
+      "island_components": 7
+    },
+    {
+      "province": 9124,
+      "state": 1413,
+      "island_components": 12
+    },
+    {
+      "province": 9125,
+      "state": 1413,
+      "island_components": 7
+    },
+    {
+      "province": 9126,
+      "state": 1413,
+      "island_components": 2
+    },
+    {
+      "province": 9128,
+      "state": 1414,
+      "island_components": 3
+    },
+    {
+      "province": 9131,
+      "state": 1417,
+      "island_components": 3
+    },
+    {
+      "province": 9132,
+      "state": 1418,
+      "island_components": 3
+    },
+    {
+      "province": 9133,
+      "state": 1419,
+      "island_components": 2
+    },
+    {
+      "province": 9134,
+      "state": 1420,
+      "island_components": 7
+    },
+    {
+      "province": 9157,
+      "state": 1424,
+      "island_components": 2
+    },
+    {
+      "province": 9189,
+      "state": 1431,
+      "island_components": 2
+    },
+    {
+      "province": 9190,
+      "state": 1431,
+      "island_components": 4
+    },
+    {
+      "province": 9195,
+      "state": 1432,
+      "island_components": 3
+    },
+    {
+      "province": 9196,
+      "state": 1432,
+      "island_components": 6
+    },
+    {
+      "province": 9198,
+      "state": 1433,
+      "island_components": 2
+    },
+    {
+      "province": 9199,
+      "state": 1433,
+      "island_components": 2
+    },
+    {
+      "province": 9200,
+      "state": 1433,
+      "island_components": 3
+    },
+    {
+      "province": 9201,
+      "state": 1433,
+      "island_components": 4
+    },
+    {
+      "province": 9202,
+      "state": 1433,
+      "island_components": 19
+    },
+    {
+      "province": 9205,
+      "state": 1434,
+      "island_components": 13
+    },
+    {
+      "province": 9206,
+      "state": 1434,
+      "island_components": 11
+    },
+    {
+      "province": 9207,
+      "state": 1434,
+      "island_components": 3
+    },
+    {
+      "province": 9208,
+      "state": 1434,
+      "island_components": 2
+    },
+    {
+      "province": 9209,
+      "state": 1435,
+      "island_components": 3
+    },
+    {
+      "province": 9210,
+      "state": 1435,
+      "island_components": 2
+    },
+    {
+      "province": 9211,
+      "state": 1435,
+      "island_components": 3
+    },
+    {
+      "province": 9213,
+      "state": 1435,
+      "island_components": 2
+    },
+    {
+      "province": 9214,
+      "state": 1436,
+      "island_components": 6
+    },
+    {
+      "province": 9218,
+      "state": 1436,
+      "island_components": 3
+    },
+    {
+      "province": 9220,
+      "state": 1437,
+      "island_components": 4
+    },
+    {
+      "province": 9223,
+      "state": 1438,
+      "island_components": 3
+    },
+    {
+      "province": 9224,
+      "state": 1438,
+      "island_components": 2
+    },
+    {
+      "province": 9225,
+      "state": 1438,
+      "island_components": 3
+    },
+    {
+      "province": 9228,
+      "state": 1439,
+      "island_components": 2
+    },
+    {
+      "province": 9229,
+      "state": 1439,
+      "island_components": 2
+    },
+    {
+      "province": 9231,
+      "state": 1440,
+      "island_components": 3
+    },
+    {
+      "province": 9238,
+      "state": 1442,
+      "island_components": 11
+    },
+    {
+      "province": 9240,
+      "state": 1442,
+      "island_components": 27
+    },
+    {
+      "province": 9242,
+      "state": 1442,
+      "island_components": 3
+    },
+    {
+      "province": 9283,
+      "state": 1448,
+      "island_components": 2
+    },
+    {
+      "province": 9317,
+      "state": 1453,
+      "island_components": 2
+    },
+    {
+      "province": 9321,
+      "state": 1454,
+      "island_components": 2
+    },
+    {
+      "province": 9325,
+      "state": 1454,
+      "island_components": 4
+    },
+    {
+      "province": 9346,
+      "state": 1457,
+      "island_components": 2
+    },
+    {
+      "province": 9355,
+      "state": 1458,
+      "island_components": 2
+    },
+    {
+      "province": 9361,
+      "state": 1459,
+      "island_components": 2
+    },
+    {
+      "province": 9365,
+      "state": 1460,
+      "island_components": 2
+    },
+    {
+      "province": 9369,
+      "state": 1460,
+      "island_components": 3
+    },
+    {
+      "province": 9409,
+      "state": 1466,
+      "island_components": 2
+    },
+    {
+      "province": 9410,
+      "state": 1466,
+      "island_components": 2
+    },
+    {
+      "province": 9414,
+      "state": 1467,
+      "island_components": 8
+    },
+    {
+      "province": 9415,
+      "state": 1467,
+      "island_components": 8
+    },
+    {
+      "province": 9416,
+      "state": 1467,
+      "island_components": 3
+    },
+    {
+      "province": 9420,
+      "state": 1469,
+      "island_components": 14
+    },
+    {
+      "province": 9421,
+      "state": 1470,
+      "island_components": 3
+    },
+    {
+      "province": 9422,
+      "state": 1471,
+      "island_components": 6
+    },
+    {
+      "province": 9426,
+      "state": 1473,
+      "island_components": 7
+    },
+    {
+      "province": 9427,
+      "state": 1474,
+      "island_components": 10
+    },
+    {
+      "province": 9428,
+      "state": 1475,
+      "island_components": 4
+    },
+    {
+      "province": 9430,
+      "state": 1477,
+      "island_components": 4
+    },
+    {
+      "province": 9431,
+      "state": 1478,
+      "island_components": 4
+    },
+    {
+      "province": 9432,
+      "state": 1479,
+      "island_components": 3
+    },
+    {
+      "province": 9434,
+      "state": 1482,
+      "island_components": 5
+    },
+    {
+      "province": 9436,
+      "state": 1484,
+      "island_components": 10
+    },
+    {
+      "province": 9437,
+      "state": 1486,
+      "island_components": 12
+    },
+    {
+      "province": 9438,
+      "state": 1487,
+      "island_components": 13
+    },
+    {
+      "province": 9439,
+      "state": 1488,
+      "island_components": 20
+    },
+    {
+      "province": 9442,
+      "state": 1491,
+      "island_components": 3
+    },
+    {
+      "province": 9446,
+      "state": 1491,
+      "island_components": 54
+    },
+    {
+      "province": 9447,
+      "state": 1491,
+      "island_components": 5
+    },
+    {
+      "province": 9448,
+      "state": 1491,
+      "island_components": 5
+    },
+    {
+      "province": 9449,
+      "state": 1491,
+      "island_components": 3
+    },
+    {
+      "province": 9451,
+      "state": 1491,
+      "island_components": 4
+    },
+    {
+      "province": 9459,
+      "state": 1493,
+      "island_components": 4
+    },
+    {
+      "province": 9498,
+      "state": 1498,
+      "island_components": 2
+    },
+    {
+      "province": 9500,
+      "state": 1498,
+      "island_components": 2
+    },
+    {
+      "province": 9502,
+      "state": 1498,
+      "island_components": 2
+    },
+    {
+      "province": 9505,
+      "state": 1498,
+      "island_components": 2
+    },
+    {
+      "province": 9518,
+      "state": 1501,
+      "island_components": 2
+    },
+    {
+      "province": 9524,
+      "state": 1502,
+      "island_components": 2
+    },
+    {
+      "province": 9532,
+      "state": 1502,
+      "island_components": 3
+    },
+    {
+      "province": 9576,
+      "state": 1508,
+      "island_components": 3
+    },
+    {
+      "province": 9577,
+      "state": 1508,
+      "island_components": 3
+    },
+    {
+      "province": 9581,
+      "state": 1509,
+      "island_components": 2
+    },
+    {
+      "province": 9582,
+      "state": 1509,
+      "island_components": 4
+    },
+    {
+      "province": 9583,
+      "state": 1509,
+      "island_components": 2
+    },
+    {
+      "province": 9584,
+      "state": 1509,
+      "island_components": 2
+    },
+    {
+      "province": 9587,
+      "state": 1509,
+      "island_components": 4
+    },
+    {
+      "province": 9588,
+      "state": 1509,
+      "island_components": 4
+    },
+    {
+      "province": 9590,
+      "state": 1510,
+      "island_components": 2
+    },
+    {
+      "province": 9594,
+      "state": 1510,
+      "island_components": 2
+    },
+    {
+      "province": 9601,
+      "state": 1512,
+      "island_components": 4
+    },
+    {
+      "province": 9602,
+      "state": 1512,
+      "island_components": 3
+    },
+    {
+      "province": 9605,
+      "state": 1514,
+      "island_components": 7
+    },
+    {
+      "province": 9606,
+      "state": 1515,
+      "island_components": 2
+    },
+    {
+      "province": 9645,
+      "state": 1520,
+      "island_components": 3
+    },
+    {
+      "province": 9646,
+      "state": 1521,
+      "island_components": 36
+    },
+    {
+      "province": 9647,
+      "state": 1521,
+      "island_components": 24
+    },
+    {
+      "province": 9648,
+      "state": 1521,
+      "island_components": 8
+    },
+    {
+      "province": 9649,
+      "state": 1522,
+      "island_components": 3
+    },
+    {
+      "province": 9650,
+      "state": 1523,
+      "island_components": 14
+    },
+    {
+      "province": 9651,
+      "state": 1523,
+      "island_components": 141
+    },
+    {
+      "province": 9652,
+      "state": 1523,
+      "island_components": 20
+    },
+    {
+      "province": 9653,
+      "state": 1524,
+      "island_components": 6
+    },
+    {
+      "province": 9654,
+      "state": 1526,
+      "island_components": 20
+    },
+    {
+      "province": 9655,
+      "state": 1527,
+      "island_components": 5
+    },
+    {
+      "province": 9656,
+      "state": 1528,
+      "island_components": 2
+    },
+    {
+      "province": 9666,
+      "state": 1537,
+      "island_components": 3
+    },
+    {
+      "province": 9679,
+      "state": 1538,
+      "island_components": 2
+    },
+    {
+      "province": 9684,
+      "state": 1540,
+      "island_components": 4
+    },
+    {
+      "province": 9685,
+      "state": 1540,
+      "island_components": 5
+    },
+    {
+      "province": 9691,
+      "state": 1541,
+      "island_components": 2
+    },
+    {
+      "province": 9707,
+      "state": 1544,
+      "island_components": 3
+    },
+    {
+      "province": 9708,
+      "state": 1545,
+      "island_components": 4
+    },
+    {
+      "province": 9709,
+      "state": 1546,
+      "island_components": 3
+    },
+    {
+      "province": 9711,
+      "state": 1546,
+      "island_components": 7
+    },
+    {
+      "province": 9714,
+      "state": 1547,
+      "island_components": 12
+    },
+    {
+      "province": 9721,
+      "state": 1552,
+      "island_components": 3
+    },
+    {
+      "province": 9725,
+      "state": 1554,
+      "island_components": 6
+    },
+    {
+      "province": 9730,
+      "state": 1554,
+      "island_components": 17
+    },
+    {
+      "province": 9735,
+      "state": 1555,
+      "island_components": 4
+    },
+    {
+      "province": 9737,
+      "state": 1555,
+      "island_components": 2
+    },
+    {
+      "province": 9739,
+      "state": 1555,
+      "island_components": 3
+    },
+    {
+      "province": 9740,
+      "state": 1555,
+      "island_components": 5
+    },
+    {
+      "province": 9743,
+      "state": 1555,
+      "island_components": 8
+    },
+    {
+      "province": 9744,
+      "state": 1555,
+      "island_components": 2
+    },
+    {
+      "province": 9746,
+      "state": 1556,
+      "island_components": 2
+    },
+    {
+      "province": 9747,
+      "state": 1556,
+      "island_components": 2
+    },
+    {
+      "province": 9749,
+      "state": 1556,
+      "island_components": 5
+    },
+    {
+      "province": 9750,
+      "state": 1556,
+      "island_components": 2
+    },
+    {
+      "province": 9751,
+      "state": 1556,
+      "island_components": 3
+    },
+    {
+      "province": 9754,
+      "state": 1556,
+      "island_components": 5
+    },
+    {
+      "province": 9757,
+      "state": 1557,
+      "island_components": 2
+    },
+    {
+      "province": 9758,
+      "state": 1557,
+      "island_components": 3
+    },
+    {
+      "province": 9760,
+      "state": 1557,
+      "island_components": 2
+    },
+    {
+      "province": 9761,
+      "state": 1557,
+      "island_components": 2
+    },
+    {
+      "province": 9762,
+      "state": 1557,
+      "island_components": 3
+    },
+    {
+      "province": 9766,
+      "state": 1557,
+      "island_components": 4
+    },
+    {
+      "province": 9768,
+      "state": 1557,
+      "island_components": 3
+    },
+    {
+      "province": 9776,
+      "state": 1558,
+      "island_components": 2
+    },
+    {
+      "province": 9777,
+      "state": 1558,
+      "island_components": 2
+    },
+    {
+      "province": 9781,
+      "state": 1558,
+      "island_components": 2
+    },
+    {
+      "province": 9786,
+      "state": 1558,
+      "island_components": 2
+    },
+    {
+      "province": 9797,
+      "state": 1559,
+      "island_components": 3
+    },
+    {
+      "province": 9806,
+      "state": 1560,
+      "island_components": 2
+    },
+    {
+      "province": 9809,
+      "state": 1560,
+      "island_components": 2
+    },
+    {
+      "province": 9830,
+      "state": 1562,
+      "island_components": 2
+    },
+    {
+      "province": 9840,
+      "state": 1563,
+      "island_components": 2
+    },
+    {
+      "province": 9841,
+      "state": 1563,
+      "island_components": 25
+    },
+    {
+      "province": 9865,
+      "state": 1563,
+      "island_components": 2
+    },
+    {
+      "province": 9874,
+      "state": 1564,
+      "island_components": 2
+    },
+    {
+      "province": 9887,
+      "state": 1565,
+      "island_components": 3
+    },
+    {
+      "province": 9890,
+      "state": 1565,
+      "island_components": 2
+    },
+    {
+      "province": 9894,
+      "state": 1565,
+      "island_components": 3
+    },
+    {
+      "province": 9900,
+      "state": 1565,
+      "island_components": 3
+    },
+    {
+      "province": 9901,
+      "state": 1566,
+      "island_components": 25
+    },
+    {
+      "province": 9902,
+      "state": 1566,
+      "island_components": 10
+    },
+    {
+      "province": 9903,
+      "state": 1566,
+      "island_components": 3
+    },
+    {
+      "province": 9904,
+      "state": 1566,
+      "island_components": 5
+    },
+    {
+      "province": 9910,
+      "state": 1569,
+      "island_components": 10
+    },
+    {
+      "province": 9913,
+      "state": 1569,
+      "island_components": 5
+    },
+    {
+      "province": 9920,
+      "state": 1570,
+      "island_components": 14
+    },
+    {
+      "province": 9922,
+      "state": 1570,
+      "island_components": 8
+    },
+    {
+      "province": 9924,
+      "state": 1571,
+      "island_components": 10
+    },
+    {
+      "province": 9927,
+      "state": 1572,
+      "island_components": 3
+    },
+    {
+      "province": 9928,
+      "state": 1572,
+      "island_components": 12
+    },
+    {
+      "province": 9929,
+      "state": 1572,
+      "island_components": 19
+    },
+    {
+      "province": 9930,
+      "state": 1572,
+      "island_components": 10
+    },
+    {
+      "province": 9931,
+      "state": 1573,
+      "island_components": 2
+    },
+    {
+      "province": 9936,
+      "state": 1573,
+      "island_components": 12
+    },
+    {
+      "province": 9939,
+      "state": 1574,
+      "island_components": 2
+    },
+    {
+      "province": 9941,
+      "state": 1574,
+      "island_components": 2
+    },
+    {
+      "province": 9943,
+      "state": 1575,
+      "island_components": 2
+    },
+    {
+      "province": 9944,
+      "state": 1575,
+      "island_components": 3
+    },
+    {
+      "province": 10008,
+      "state": 1587,
+      "island_components": 2
+    },
+    {
+      "province": 10029,
+      "state": 1592,
+      "island_components": 9
+    },
+    {
+      "province": 10032,
+      "state": 1592,
+      "island_components": 13
+    },
+    {
+      "province": 10033,
+      "state": 1592,
+      "island_components": 7
+    },
+    {
+      "province": 10034,
+      "state": 1592,
+      "island_components": 2
+    },
+    {
+      "province": 10035,
+      "state": 1592,
+      "island_components": 2
+    },
+    {
+      "province": 10039,
+      "state": 1592,
+      "island_components": 2
+    },
+    {
+      "province": 10040,
+      "state": 1593,
+      "island_components": 11
+    },
+    {
+      "province": 10041,
+      "state": 1593,
+      "island_components": 10
+    },
+    {
+      "province": 10042,
+      "state": 1593,
+      "island_components": 6
+    },
+    {
+      "province": 10045,
+      "state": 1593,
+      "island_components": 14
+    },
+    {
+      "province": 10046,
+      "state": 1593,
+      "island_components": 8
+    },
+    {
+      "province": 10047,
+      "state": 1593,
+      "island_components": 10
+    },
+    {
+      "province": 10050,
+      "state": 1594,
+      "island_components": 13
+    },
+    {
+      "province": 10054,
+      "state": 1594,
+      "island_components": 6
+    },
+    {
+      "province": 10055,
+      "state": 1594,
+      "island_components": 2
+    },
+    {
+      "province": 10064,
+      "state": 1595,
+      "island_components": 3
+    },
+    {
+      "province": 10077,
+      "state": 1595,
+      "island_components": 2
+    },
+    {
+      "province": 10088,
+      "state": 1596,
+      "island_components": 2
+    },
+    {
+      "province": 10091,
+      "state": 1596,
+      "island_components": 2
+    },
+    {
+      "province": 10099,
+      "state": 1597,
+      "island_components": 2
+    },
+    {
+      "province": 10101,
+      "state": 1597,
+      "island_components": 5
+    },
+    {
+      "province": 10105,
+      "state": 1597,
+      "island_components": 5
+    },
+    {
+      "province": 10106,
+      "state": 1597,
+      "island_components": 4
+    },
+    {
+      "province": 10109,
+      "state": 1597,
+      "island_components": 3
+    },
+    {
+      "province": 10110,
+      "state": 1597,
+      "island_components": 3
+    },
+    {
+      "province": 10116,
+      "state": 1597,
+      "island_components": 2
+    },
+    {
+      "province": 10119,
+      "state": 1598,
+      "island_components": 10
+    },
+    {
+      "province": 10120,
+      "state": 1598,
+      "island_components": 62
+    },
+    {
+      "province": 10124,
+      "state": 1602,
+      "island_components": 18
+    },
+    {
+      "province": 10127,
+      "state": 1602,
+      "island_components": 3
+    },
+    {
+      "province": 10132,
+      "state": 1602,
+      "island_components": 4
+    },
+    {
+      "province": 10133,
+      "state": 1602,
+      "island_components": 7
+    },
+    {
+      "province": 10136,
+      "state": 1602,
+      "island_components": 2
+    },
+    {
+      "province": 10142,
+      "state": 1602,
+      "island_components": 11
+    },
+    {
+      "province": 10146,
+      "state": 1603,
+      "island_components": 2
+    },
+    {
+      "province": 10147,
+      "state": 1603,
+      "island_components": 12
+    },
+    {
+      "province": 10149,
+      "state": 1603,
+      "island_components": 51
+    },
+    {
+      "province": 10153,
+      "state": 1603,
+      "island_components": 8
+    },
+    {
+      "province": 10154,
+      "state": 1603,
+      "island_components": 5
+    },
+    {
+      "province": 10156,
+      "state": 1603,
+      "island_components": 50
+    },
+    {
+      "province": 10159,
+      "state": 1604,
+      "island_components": 10
+    },
+    {
+      "province": 10160,
+      "state": 1604,
+      "island_components": 13
+    },
+    {
+      "province": 10161,
+      "state": 1605,
+      "island_components": 4
+    },
+    {
+      "province": 10162,
+      "state": 1605,
+      "island_components": 27
+    },
+    {
+      "province": 10163,
+      "state": 1605,
+      "island_components": 4
+    },
+    {
+      "province": 10164,
+      "state": 1605,
+      "island_components": 6
+    },
+    {
+      "province": 10165,
+      "state": 1605,
+      "island_components": 7
+    },
+    {
+      "province": 10166,
+      "state": 1605,
+      "island_components": 9
+    },
+    {
+      "province": 10234,
+      "state": 1615,
+      "island_components": 4
+    },
+    {
+      "province": 10236,
+      "state": 1616,
+      "island_components": 3
+    },
+    {
+      "province": 10303,
+      "state": 1622,
+      "island_components": 2
+    },
+    {
+      "province": 10329,
+      "state": 1624,
+      "island_components": 2
+    },
+    {
+      "province": 10331,
+      "state": 1624,
+      "island_components": 2
+    },
+    {
+      "province": 10332,
+      "state": 1625,
+      "island_components": 2
+    },
+    {
+      "province": 10341,
+      "state": 1627,
+      "island_components": 2
+    },
+    {
+      "province": 10345,
+      "state": 1628,
+      "island_components": 2
+    },
+    {
+      "province": 10346,
+      "state": 1628,
+      "island_components": 3
+    },
+    {
+      "province": 10347,
+      "state": 1628,
+      "island_components": 2
+    },
+    {
+      "province": 10349,
+      "state": 1629,
+      "island_components": 2
+    },
+    {
+      "province": 10350,
+      "state": 1629,
+      "island_components": 2
+    },
+    {
+      "province": 10371,
+      "state": 1632,
+      "island_components": 2
+    },
+    {
+      "province": 10378,
+      "state": 1647,
+      "island_components": 4
+    },
+    {
+      "province": 10381,
+      "state": 1648,
+      "island_components": 2
+    },
+    {
+      "province": 10387,
+      "state": 1649,
+      "island_components": 3
+    },
+    {
+      "province": 10390,
+      "state": 1649,
+      "island_components": 2
+    },
+    {
+      "province": 10392,
+      "state": 1650,
+      "island_components": 4
+    },
+    {
+      "province": 10393,
+      "state": 1650,
+      "island_components": 2
+    },
+    {
+      "province": 10395,
+      "state": 1652,
+      "island_components": 8
+    },
+    {
+      "province": 10422,
+      "state": 1655,
+      "island_components": 2
+    },
+    {
+      "province": 10427,
+      "state": 1656,
+      "island_components": 3
+    },
+    {
+      "province": 10465,
+      "state": 1661,
+      "island_components": 2
+    },
+    {
+      "province": 10467,
+      "state": 1662,
+      "island_components": 2
+    },
+    {
+      "province": 10470,
+      "state": 1662,
+      "island_components": 4
+    },
+    {
+      "province": 10505,
+      "state": 1665,
+      "island_components": 2
+    },
+    {
+      "province": 10510,
+      "state": 1666,
+      "island_components": 2
+    },
+    {
+      "province": 10518,
+      "state": 1667,
+      "island_components": 2
+    },
+    {
+      "province": 10530,
+      "state": 1668,
+      "island_components": 5
+    },
+    {
+      "province": 10588,
+      "state": 1674,
+      "island_components": 2
+    },
+    {
+      "province": 10609,
+      "state": 1674,
+      "island_components": 2
+    },
+    {
+      "province": 10702,
+      "state": 1678,
+      "island_components": 2
+    },
+    {
+      "province": 10716,
+      "state": 1678,
+      "island_components": 2
+    },
+    {
+      "province": 10720,
+      "state": 1678,
+      "island_components": 2
+    },
+    {
+      "province": 10743,
+      "state": 1679,
+      "island_components": 2
+    },
+    {
+      "province": 10748,
+      "state": 1679,
+      "island_components": 2
+    },
+    {
+      "province": 10766,
+      "state": 1679,
+      "island_components": 2
+    },
+    {
+      "province": 10782,
+      "state": 1679,
+      "island_components": 4
+    },
+    {
+      "province": 10807,
+      "state": 1680,
+      "island_components": 3
+    },
+    {
+      "province": 10892,
+      "state": 1682,
+      "island_components": 4
+    },
+    {
+      "province": 10934,
+      "state": 1682,
+      "island_components": 2
+    },
+    {
+      "province": 10953,
+      "state": 1683,
+      "island_components": 2
+    },
+    {
+      "province": 10966,
+      "state": 1684,
+      "island_components": 2
+    },
+    {
+      "province": 10969,
+      "state": 1685,
+      "island_components": 2
+    },
+    {
+      "province": 10975,
+      "state": 1685,
+      "island_components": 6
+    },
+    {
+      "province": 10977,
+      "state": 1685,
+      "island_components": 3
+    },
+    {
+      "province": 11057,
+      "state": 1687,
+      "island_components": 3
+    },
+    {
+      "province": 11067,
+      "state": 1687,
+      "island_components": 3
+    },
+    {
+      "province": 11108,
+      "state": 1687,
+      "island_components": 3
+    },
+    {
+      "province": 11122,
+      "state": 1687,
+      "island_components": 5
+    },
+    {
+      "province": 11123,
+      "state": 1687,
+      "island_components": 4
+    },
+    {
+      "province": 11125,
+      "state": 1687,
+      "island_components": 3
+    },
+    {
+      "province": 11327,
+      "state": 1689,
+      "island_components": 3
+    },
+    {
+      "province": 11393,
+      "state": 1690,
+      "island_components": 11
+    },
+    {
+      "province": 11394,
+      "state": 1690,
+      "island_components": 36
+    },
+    {
+      "province": 11395,
+      "state": 1690,
+      "island_components": 6
+    },
+    {
+      "province": 11396,
+      "state": 1690,
+      "island_components": 4
+    },
+    {
+      "province": 11397,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11398,
+      "state": 1690,
+      "island_components": 47
+    },
+    {
+      "province": 11403,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11404,
+      "state": 1690,
+      "island_components": 18
+    },
+    {
+      "province": 11410,
+      "state": 1690,
+      "island_components": 4
+    },
+    {
+      "province": 11411,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11412,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11413,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11416,
+      "state": 1690,
+      "island_components": 3
+    },
+    {
+      "province": 11417,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11418,
+      "state": 1690,
+      "island_components": 15
+    },
+    {
+      "province": 11419,
+      "state": 1690,
+      "island_components": 7
+    },
+    {
+      "province": 11421,
+      "state": 1690,
+      "island_components": 9
+    },
+    {
+      "province": 11423,
+      "state": 1690,
+      "island_components": 6
+    },
+    {
+      "province": 11426,
+      "state": 1690,
+      "island_components": 6
+    },
+    {
+      "province": 11428,
+      "state": 1690,
+      "island_components": 4
+    },
+    {
+      "province": 11430,
+      "state": 1690,
+      "island_components": 9
+    },
+    {
+      "province": 11433,
+      "state": 1690,
+      "island_components": 3
+    },
+    {
+      "province": 11434,
+      "state": 1690,
+      "island_components": 6
+    },
+    {
+      "province": 11435,
+      "state": 1690,
+      "island_components": 12
+    },
+    {
+      "province": 11443,
+      "state": 1691,
+      "island_components": 3
+    },
+    {
+      "province": 11446,
+      "state": 1691,
+      "island_components": 2
+    },
+    {
+      "province": 11452,
+      "state": 1691,
+      "island_components": 2
+    },
+    {
+      "province": 11453,
+      "state": 1691,
+      "island_components": 6
+    },
+    {
+      "province": 11471,
+      "state": 1692,
+      "island_components": 5
+    },
+    {
+      "province": 11482,
+      "state": 1692,
+      "island_components": 3
+    },
+    {
+      "province": 11538,
+      "state": 1694,
+      "island_components": 10
+    },
+    {
+      "province": 11545,
+      "state": 1694,
+      "island_components": 5
+    },
+    {
+      "province": 11575,
+      "state": 1694,
+      "island_components": 2
+    },
+    {
+      "province": 11586,
+      "state": 1694,
+      "island_components": 2
+    },
+    {
+      "province": 11588,
+      "state": 1694,
+      "island_components": 2
+    },
+    {
+      "province": 11677,
+      "state": 1697,
+      "island_components": 3
+    },
+    {
+      "province": 11692,
+      "state": 1697,
+      "island_components": 2
+    },
+    {
+      "province": 11723,
+      "state": 1698,
+      "island_components": 4
+    },
+    {
+      "province": 11734,
+      "state": 1698,
+      "island_components": 5
+    },
+    {
+      "province": 11754,
+      "state": 1699,
+      "island_components": 2
+    },
+    {
+      "province": 11759,
+      "state": 1700,
+      "island_components": 2
+    },
+    {
+      "province": 11770,
+      "state": 1700,
+      "island_components": 2
+    },
+    {
+      "province": 11798,
+      "state": 1703,
+      "island_components": 2
+    },
+    {
+      "province": 11801,
+      "state": 1703,
+      "island_components": 2
+    },
+    {
+      "province": 11807,
+      "state": 1704,
+      "island_components": 2
+    },
+    {
+      "province": 11808,
+      "state": 1704,
+      "island_components": 2
+    },
+    {
+      "province": 11813,
+      "state": 1705,
+      "island_components": 2
+    },
+    {
+      "province": 11823,
+      "state": 1705,
+      "island_components": 3
+    },
+    {
+      "province": 11842,
+      "state": 1706,
+      "island_components": 2
+    },
+    {
+      "province": 11868,
+      "state": 1707,
+      "island_components": 2
+    },
+    {
+      "province": 11870,
+      "state": 1707,
+      "island_components": 12
+    },
+    {
+      "province": 11871,
+      "state": 1707,
+      "island_components": 4
+    },
+    {
+      "province": 12016,
+      "state": 1712,
+      "island_components": 3
+    },
+    {
+      "province": 12285,
+      "state": 1720,
+      "island_components": 2
+    },
+    {
+      "province": 12423,
+      "state": 1727,
+      "island_components": 45
+    },
+    {
+      "province": 12424,
+      "state": 1727,
+      "island_components": 6
+    },
+    {
+      "province": 12425,
+      "state": 1728,
+      "island_components": 5
+    },
+    {
+      "province": 12427,
+      "state": 1729,
+      "island_components": 2
+    },
+    {
+      "province": 12429,
+      "state": 1729,
+      "island_components": 2
+    },
+    {
+      "province": 12430,
+      "state": 1729,
+      "island_components": 4
+    },
+    {
+      "province": 12432,
+      "state": 1729,
+      "island_components": 3
+    },
+    {
+      "province": 12435,
+      "state": 1730,
+      "island_components": 5
+    },
+    {
+      "province": 12437,
+      "state": 1735,
+      "island_components": 15
+    },
+    {
+      "province": 12439,
+      "state": 1738,
+      "island_components": 13
+    },
+    {
+      "province": 12440,
+      "state": 1738,
+      "island_components": 109
+    },
+    {
+      "province": 12446,
+      "state": 1745,
+      "island_components": 16
+    },
+    {
+      "province": 12447,
+      "state": 1745,
+      "island_components": 8
+    },
+    {
+      "province": 12453,
+      "state": 1748,
+      "island_components": 2
+    },
+    {
+      "province": 12454,
+      "state": 1749,
+      "island_components": 2
+    },
+    {
+      "province": 12456,
+      "state": 1749,
+      "island_components": 2
+    },
+    {
+      "province": 12465,
+      "state": 1752,
+      "island_components": 2
+    },
+    {
+      "province": 12468,
+      "state": 1752,
+      "island_components": 2
+    },
+    {
+      "province": 12477,
+      "state": 1763,
+      "island_components": 2
+    },
+    {
+      "province": 12478,
+      "state": 1764,
+      "island_components": 14
+    },
+    {
+      "province": 12482,
+      "state": 1765,
+      "island_components": 8
+    },
+    {
+      "province": 12483,
+      "state": 1766,
+      "island_components": 5
+    },
+    {
+      "province": 12486,
+      "state": 1766,
+      "island_components": 2
+    },
+    {
+      "province": 12490,
+      "state": 1768,
+      "island_components": 11
+    },
+    {
+      "province": 12491,
+      "state": 1768,
+      "island_components": 9
+    },
+    {
+      "province": 12492,
+      "state": 1768,
+      "island_components": 21
+    },
+    {
+      "province": 12493,
+      "state": 1768,
+      "island_components": 5
+    },
+    {
+      "province": 12494,
+      "state": 1768,
+      "island_components": 16
+    },
+    {
+      "province": 12495,
+      "state": 1768,
+      "island_components": 4
+    },
+    {
+      "province": 12496,
+      "state": 1768,
+      "island_components": 3
+    },
+    {
+      "province": 12497,
+      "state": 1768,
+      "island_components": 3
+    },
+    {
+      "province": 12498,
+      "state": 1768,
+      "island_components": 6
+    },
+    {
+      "province": 12499,
+      "state": 1768,
+      "island_components": 6
+    },
+    {
+      "province": 12500,
+      "state": 1768,
+      "island_components": 3
+    },
+    {
+      "province": 12525,
+      "state": 1772,
+      "island_components": 2
+    },
+    {
+      "province": 12545,
+      "state": 1776,
+      "island_components": 4
+    },
+    {
+      "province": 12547,
+      "state": 1776,
+      "island_components": 2
+    },
+    {
+      "province": 12549,
+      "state": 1776,
+      "island_components": 2
+    },
+    {
+      "province": 12550,
+      "state": 1776,
+      "island_components": 4
+    },
+    {
+      "province": 12551,
+      "state": 1776,
+      "island_components": 6
+    },
+    {
+      "province": 12557,
+      "state": 1777,
+      "island_components": 2
+    },
+    {
+      "province": 12564,
+      "state": 1778,
+      "island_components": 2
+    },
+    {
+      "province": 12567,
+      "state": 1779,
+      "island_components": 3
+    },
+    {
+      "province": 12568,
+      "state": 1779,
+      "island_components": 3
+    },
+    {
+      "province": 12570,
+      "state": 1779,
+      "island_components": 3
+    },
+    {
+      "province": 12592,
+      "state": 1782,
+      "island_components": 3
+    },
+    {
+      "province": 12616,
+      "state": 1784,
+      "island_components": 16
+    },
+    {
+      "province": 12619,
+      "state": 1785,
+      "island_components": 7
+    },
+    {
+      "province": 12622,
+      "state": 1785,
+      "island_components": 2
+    },
+    {
+      "province": 12648,
+      "state": 1788,
+      "island_components": 6
+    },
+    {
+      "province": 12651,
+      "state": 1789,
+      "island_components": 5
+    },
+    {
+      "province": 12652,
+      "state": 1789,
+      "island_components": 8
+    },
+    {
+      "province": 12653,
+      "state": 1789,
+      "island_components": 43
+    },
+    {
+      "province": 12654,
+      "state": 1789,
+      "island_components": 27
+    },
+    {
+      "province": 12655,
+      "state": 1789,
+      "island_components": 9
+    },
+    {
+      "province": 12656,
+      "state": 1789,
+      "island_components": 13
+    },
+    {
+      "province": 12657,
+      "state": 1789,
+      "island_components": 29
+    },
+    {
+      "province": 12658,
+      "state": 1789,
+      "island_components": 2
+    },
+    {
+      "province": 12661,
+      "state": 1790,
+      "island_components": 4
+    },
+    {
+      "province": 12663,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12664,
+      "state": 1790,
+      "island_components": 5
+    },
+    {
+      "province": 12665,
+      "state": 1790,
+      "island_components": 4
+    },
+    {
+      "province": 12667,
+      "state": 1790,
+      "island_components": 18
+    },
+    {
+      "province": 12668,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12671,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12672,
+      "state": 1790,
+      "island_components": 3
+    },
+    {
+      "province": 12673,
+      "state": 1790,
+      "island_components": 28
+    },
+    {
+      "province": 12674,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12675,
+      "state": 1790,
+      "island_components": 3
+    },
+    {
+      "province": 12677,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12680,
+      "state": 1790,
+      "island_components": 2
+    },
+    {
+      "province": 12681,
+      "state": 1790,
+      "island_components": 14
+    },
+    {
+      "province": 12684,
+      "state": 1791,
+      "island_components": 7
+    },
+    {
+      "province": 12685,
+      "state": 1791,
+      "island_components": 2
+    },
+    {
+      "province": 12686,
+      "state": 1791,
+      "island_components": 3
+    },
+    {
+      "province": 12687,
+      "state": 1791,
+      "island_components": 5
+    },
+    {
+      "province": 12688,
+      "state": 1791,
+      "island_components": 6
+    },
+    {
+      "province": 12689,
+      "state": 1791,
+      "island_components": 3
+    },
+    {
+      "province": 12690,
+      "state": 1791,
+      "island_components": 2
+    },
+    {
+      "province": 12693,
+      "state": 1792,
+      "island_components": 2
+    },
+    {
+      "province": 12696,
+      "state": 1792,
+      "island_components": 4
+    },
+    {
+      "province": 12709,
+      "state": 1793,
+      "island_components": 2
+    },
+    {
+      "province": 12710,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12711,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12712,
+      "state": 1793,
+      "island_components": 8
+    },
+    {
+      "province": 12713,
+      "state": 1793,
+      "island_components": 2
+    },
+    {
+      "province": 12714,
+      "state": 1793,
+      "island_components": 5
+    },
+    {
+      "province": 12715,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12717,
+      "state": 1793,
+      "island_components": 10
+    },
+    {
+      "province": 12718,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12719,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12720,
+      "state": 1793,
+      "island_components": 2
+    },
+    {
+      "province": 12721,
+      "state": 1793,
+      "island_components": 3
+    },
+    {
+      "province": 12723,
+      "state": 1793,
+      "island_components": 2
+    },
+    {
+      "province": 12724,
+      "state": 1793,
+      "island_components": 2
+    },
+    {
+      "province": 12725,
+      "state": 1793,
+      "island_components": 4
+    },
+    {
+      "province": 12727,
+      "state": 1794,
+      "island_components": 10
+    },
+    {
+      "province": 12732,
+      "state": 1794,
+      "island_components": 3
+    },
+    {
+      "province": 12733,
+      "state": 1794,
+      "island_components": 5
+    },
+    {
+      "province": 12743,
+      "state": 1795,
+      "island_components": 5
+    },
+    {
+      "province": 12745,
+      "state": 1795,
+      "island_components": 2
+    },
+    {
+      "province": 12746,
+      "state": 1795,
+      "island_components": 3
+    },
+    {
+      "province": 12747,
+      "state": 1795,
+      "island_components": 10
+    },
+    {
+      "province": 12748,
+      "state": 1795,
+      "island_components": 7
+    },
+    {
+      "province": 12749,
+      "state": 1795,
+      "island_components": 7
+    },
+    {
+      "province": 12751,
+      "state": 1795,
+      "island_components": 5
+    },
+    {
+      "province": 12756,
+      "state": 1795,
+      "island_components": 4
+    },
+    {
+      "province": 12759,
+      "state": 1795,
+      "island_components": 4
+    },
+    {
+      "province": 12809,
+      "state": 1805,
+      "island_components": 8
+    },
+    {
+      "province": 12812,
+      "state": 1805,
+      "island_components": 2
+    },
+    {
+      "province": 12813,
+      "state": 1805,
+      "island_components": 10
+    },
+    {
+      "province": 12815,
+      "state": 1805,
+      "island_components": 13
+    },
+    {
+      "province": 12816,
+      "state": 1806,
+      "island_components": 4
+    },
+    {
+      "province": 12818,
+      "state": 1806,
+      "island_components": 4
+    },
+    {
+      "province": 12820,
+      "state": 1806,
+      "island_components": 3
+    },
+    {
+      "province": 12825,
+      "state": 1806,
+      "island_components": 4
+    },
+    {
+      "province": 12826,
+      "state": 1806,
+      "island_components": 15
+    },
+    {
+      "province": 12828,
+      "state": 1807,
+      "island_components": 4
+    },
+    {
+      "province": 12833,
+      "state": 1807,
+      "island_components": 2
+    },
+    {
+      "province": 12834,
+      "state": 1807,
+      "island_components": 10
+    },
+    {
+      "province": 12837,
+      "state": 1807,
+      "island_components": 2
+    },
+    {
+      "province": 12843,
+      "state": 1811,
+      "island_components": 41
+    },
+    {
+      "province": 12844,
+      "state": 1811,
+      "island_components": 64
+    },
+    {
+      "province": 12846,
+      "state": 1813,
+      "island_components": 4
+    },
+    {
+      "province": 12847,
+      "state": 1813,
+      "island_components": 2
+    },
+    {
+      "province": 12848,
+      "state": 1813,
+      "island_components": 4
+    },
+    {
+      "province": 12849,
+      "state": 1813,
+      "island_components": 7
+    },
+    {
+      "province": 12851,
+      "state": 1813,
+      "island_components": 3
+    },
+    {
+      "province": 12852,
+      "state": 1813,
+      "island_components": 3
+    },
+    {
+      "province": 12857,
+      "state": 1813,
+      "island_components": 6
+    },
+    {
+      "province": 12858,
+      "state": 1813,
+      "island_components": 10
+    },
+    {
+      "province": 12859,
+      "state": 1815,
+      "island_components": 11
+    },
+    {
+      "province": 12866,
+      "state": 1818,
+      "island_components": 2
+    },
+    {
+      "province": 12875,
+      "state": 1824,
+      "island_components": 23
+    },
+    {
+      "province": 12884,
+      "state": 1826,
+      "island_components": 7
+    },
+    {
+      "province": 12886,
+      "state": 1826,
+      "island_components": 2
+    },
+    {
+      "province": 12887,
+      "state": 1826,
+      "island_components": 4
+    },
+    {
+      "province": 12891,
+      "state": 1826,
+      "island_components": 2
+    },
+    {
+      "province": 12897,
+      "state": 1827,
+      "island_components": 3
+    },
+    {
+      "province": 12898,
+      "state": 1827,
+      "island_components": 4
+    },
+    {
+      "province": 12908,
+      "state": 1827,
+      "island_components": 2
+    },
+    {
+      "province": 12911,
+      "state": 1827,
+      "island_components": 3
+    },
+    {
+      "province": 12914,
+      "state": 1827,
+      "island_components": 12
+    },
+    {
+      "province": 12929,
+      "state": 1828,
+      "island_components": 2
+    },
+    {
+      "province": 12963,
+      "state": 1830,
+      "island_components": 2
+    },
+    {
+      "province": 12972,
+      "state": 1831,
+      "island_components": 2
+    },
+    {
+      "province": 12973,
+      "state": 1831,
+      "island_components": 3
+    },
+    {
+      "province": 12978,
+      "state": 1831,
+      "island_components": 3
+    },
+    {
+      "province": 12986,
+      "state": 1831,
+      "island_components": 3
+    },
+    {
+      "province": 12988,
+      "state": 1831,
+      "island_components": 8
+    },
+    {
+      "province": 12994,
+      "state": 1832,
+      "island_components": 5
+    },
+    {
+      "province": 13002,
+      "state": 1832,
+      "island_components": 4
+    },
+    {
+      "province": 13015,
+      "state": 1834,
+      "island_components": 3
+    },
+    {
+      "province": 13016,
+      "state": 1834,
+      "island_components": 10
+    },
+    {
+      "province": 13017,
+      "state": 1834,
+      "island_components": 2
+    },
+    {
+      "province": 13018,
+      "state": 1834,
+      "island_components": 9
+    },
+    {
+      "province": 13037,
+      "state": 1835,
+      "island_components": 3
+    },
+    {
+      "province": 13070,
+      "state": 1839,
+      "island_components": 2
+    },
+    {
+      "province": 13108,
+      "state": 1847,
+      "island_components": 3
+    },
+    {
+      "province": 13112,
+      "state": 1847,
+      "island_components": 8
+    },
+    {
+      "province": 13113,
+      "state": 1847,
+      "island_components": 7
+    },
+    {
+      "province": 13192,
+      "state": 1857,
+      "island_components": 2
+    },
+    {
+      "province": 13196,
+      "state": 1857,
+      "island_components": 2
+    },
+    {
+      "province": 13200,
+      "state": 1857,
+      "island_components": 2
+    }
+  ]
+}

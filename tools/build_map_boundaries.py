@@ -21,7 +21,7 @@ expected={tuple(sorted((int(k),n)))for k,r in w['regions'].items()for n in r['ne
 paths,extra=ensure_edges(s,paths,expected,0)
 report={'land':mesh(paths,'land_boundaries_021'),'land_short_edge_segments_restored':extra}
 del paths,s
-paths=contours(a,sorted(map(int,ps)),1);paths=[(x,y,l,r,2)for x,y,l,r,_ in paths if r>0 and str(r)in ps and ps[str(l)]['region']==ps[str(r)]['region']]
+paths=contours(a,sorted(map(int,ps)),1,province=True);paths=[(x,y,l,r,2)for x,y,l,r,_ in paths if r>0 and str(r)in ps and ps[str(l)]['region']==ps[str(r)]['region']]
 expected={(p['id'],n)for p in ps.values()for n in p['neighbors']if p['id']<n and p['region']==ps[str(n)]['region']}
 paths,extra=ensure_edges(a,paths,expected,2);report['province_short_edge_segments_restored']=extra
 report['province']=mesh(paths,'province_boundaries_021');(ROOT/'data/boundaries_build_report.json').write_text(json.dumps(report,indent=2));print('BOUNDARIES_0215_READY',report,flush=True)

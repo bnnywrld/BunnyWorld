@@ -12,7 +12,7 @@ R=Path(__file__).resolve().parents[1];O=R/'assets/display';W,H=16384,8192
 
 def build():
  a=atlas();ps=json.loads((R/'data/provinces.json').read_text())
- paths=contours(a,sorted(map(int,ps)),1)
+ paths=contours(a,sorted(map(int,ps)),1,province=True)
  curves=[];pairs=[]
  for x,y,p,q,kind in paths:
   if q==65535:continue

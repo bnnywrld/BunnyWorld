@@ -1,14 +1,14 @@
 {
   "land": {
-    "paths": 28580,
-    "vertices": 856554,
-    "triangles": 799394
+    "paths": 28569,
+    "vertices": 856504,
+    "triangles": 799366
   },
   "land_short_edge_segments_restored": 17,
-  "province_short_edge_segments_restored": 48,
+  "province_short_edge_segments_restored": 37,
   "province": {
-    "paths": 27331,
-    "vertices": 660202,
-    "triangles": 605540
+    "paths": 28441,
+    "vertices": 452114,
+    "triangles": 395232
   }
 }

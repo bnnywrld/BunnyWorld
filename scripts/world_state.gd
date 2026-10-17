@@ -2,7 +2,7 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 15
+const SAVE_VERSION := 16
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}

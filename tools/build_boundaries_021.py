@@ -5,6 +5,7 @@ drawn with smooth coverage independent of map texel size and camera zoom.
 """
 from pathlib import Path
 import json,struct
+from functools import lru_cache
 import numpy as np
 from PIL import Image
 from scipy.ndimage import find_objects
@@ -13,7 +14,11 @@ from shapely.geometry import LineString
 ROOT=Path(__file__).resolve().parents[1];W,H=16384,8192
 Image.MAX_IMAGE_PIXELS=None
 
-def contours(atlas,ids,scale,water=False):
+@lru_cache(maxsize=1)
+def province_membership():
+ return {int(k):p['region']for k,p in json.loads((ROOT/'data/provinces.json').read_text()).items()}
+
+def contours(atlas,ids,scale,water=False,province=False):
     hh,ww=atlas.shape;boxes=find_objects(atlas,max_label=max(ids));paths=[]
     for sid in ids:
         bb=boxes[sid-1]
@@ -37,8 +42,10 @@ def contours(atlas,ids,scale,water=False):
                 neighbor=int(other[start])
                 if neighbor!=sid and (neighbor==0 or sid<neighbor):
                     pts=np.column_stack([xx[start:end+1],yy[start:end+1]])
-                    from display_shape_0215 import smooth
-                    simple=smooth(np.asarray(LineString(pts).simplify(.8,preserve_topology=False).coords))
+                    from display_shape_0215 import smooth,smooth_internal
+                    member=province_membership()
+                    internal=(province and neighbor>0 and member.get(sid)==member.get(neighbor))
+                    simple=smooth_internal(pts)if internal else smooth(np.asarray(LineString(pts).simplify(.8,preserve_topology=False).coords))
                     if len(simple)>1:paths.append((simple[:,0]/ww,simple[:,1]/hh,sid,neighbor,1 if water else 0))
                 start=end
         if sid%250==0:print('Boundary contours',sid,'paths',len(paths),flush=True)
@@ -81,7 +88,7 @@ if __name__=='__main__':
     rgb=np.asarray(Image.open(ROOT/'assets/sea_ids.png'),np.uint16);sea=rgb[:,:,0]+rgb[:,:,1]*256
     report['sea']=mesh(contours(sea,sorted(map(int,json.loads((ROOT/'data/sea_regions.json').read_text()))),2,True),'sea_boundaries_021');del sea,rgb
     atlas=np.load(ROOT/'tools/cartography/province_atlas_022r2.npz' if (ROOT/'tools/cartography/province_atlas_022r2.npz').exists() else ROOT/'tools/cartography/province_atlas_021.npz')['provinces'];ps=json.loads((ROOT/'data/provinces.json').read_text())
-    paths=contours(atlas,sorted(map(int,ps)),1)
+    paths=contours(atlas,sorted(map(int,ps)),1,province=True)
     # State and national edges are already drawn by the land layer.
     paths=[(x,y,a,b,2) for x,y,a,b,_ in paths if b>0 and ps[str(a)]['region']==ps[str(b)]['region']]
     report['province']=mesh(paths,'province_boundaries_021')
