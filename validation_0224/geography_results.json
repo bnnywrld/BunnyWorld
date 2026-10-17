@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "checks": 45043,
+  "countries": 224,
+  "states": 1239,
+  "land_provinces": 13308,
+  "changed_native_pixels": 5,
+  "global_population": 6144737528
+}

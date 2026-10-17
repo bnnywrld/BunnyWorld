@@ -66,6 +66,10 @@ def main():
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/compile_boundaries.gd'],cwd=R,check=True)
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
   subprocess.run([sys.executable,str(R/'tools/build_display_0217.py'),'--coast-only','--atlas-path',str(R/'tools/cartography/map_provinces.npz'),'--skip-legacy-shade'],cwd=R,check=True)
+  # Tiny-island fallback must follow the same final land raster too. Otherwise
+  # deleting a subpixel island leaves its old physical-mode land bit behind.
+  from build_display_0212 import tiny_islands
+  tiny_islands()
  # Spatial batches are a separate derivative. A renderer-only regeneration
  # must not rebuild province geography or coastal distance fields.
  chunk_path=R/'assets/rendering/chunks.json'

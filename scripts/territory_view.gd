@@ -57,4 +57,9 @@ func country_states(main: Control,tag: String) -> void:
   var r: Dictionary=host.state.regions[str(id)]
   var button: Button=host._button(str(r["name"])+"   ·   "+host.foundation.compact_number(r["population"]),func():host._open_country_state(id),"Capital: "+str(r["state_capital"])+" · "+str(r["provinces"].size())+" provinces")
   button.name="State_"+str(id);button.alignment=HORIZONTAL_ALIGNMENT_LEFT;button.clip_text=true;button.custom_minimum_size.y=38;button.size_flags_horizontal=Control.SIZE_EXPAND_FILL;button.add_theme_font_size_override("font_size",13);list.add_child(button)
+  button.mouse_entered.connect(func():host._preview_state(id))
+  button.mouse_exited.connect(func():
+   if host.state_preview==id:host._preview_state(0))
+  button.tree_exiting.connect(func():
+   if host.state_preview==id:host._preview_state(0))
  host._reveal_panel(host.territory_panel);host._position_panels()

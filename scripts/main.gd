@@ -164,6 +164,9 @@ var resident_terrain: RefCounted
 var loading_overlay: ColorRect
 var loading_progress: ProgressBar
 var loading_caption: Label
+var menu_background: TextureRect
+var state_preview := 0
+var active_feature := ""
 var boot_complete := false
 var detail_mesh_builds := 0
 var inspection_active: bool = false
@@ -908,27 +911,37 @@ func _rebuild_palette() -> void:
 
 func _update_selection_shader() -> void:
 	map_frame_policy.invalidate()
-	if display_coverage != null: display_coverage.select(state.selected_region if inspection_active else 0, state.selected_province if inspection_active else 0,state.selected_sea)
-	planet_material.set_shader_parameter("selected_sea", float(state.selected_sea))
+	var previewing := state_preview > 0 and state.regions.has(str(state_preview))
+	var active := inspection_active or previewing
+	var region_id := state_preview if previewing else state.selected_region
+	var province_id := 0 if previewing else state.selected_province
+	var sea_id := 0 if previewing else state.selected_sea
+	var tag: String = state.regions[str(region_id)]["owner"] if previewing else state.selected_country
+	if display_coverage != null: display_coverage.select(region_id if active else 0, province_id if active else 0, sea_id)
+	planet_material.set_shader_parameter("selected_sea", float(sea_id))
 	for material: ShaderMaterial in border_materials:
-		material.set_shader_parameter("selected_country", float(state.countries[state.selected_country]["index"]) if inspection_active else 0.0)
-		material.set_shader_parameter("inspection_active", inspection_active)
-		material.set_shader_parameter("selected_region", float(state.selected_region))
-		material.set_shader_parameter("selected_sea", float(state.selected_sea))
-		material.set_shader_parameter("selected_province", float(state.selected_province))
-	var index: float = float(state.countries[state.selected_country]["index"])
-	planet_material.set_shader_parameter("selected_country", index if inspection_active else 0.0)
-	planet_material.set_shader_parameter("inspection_active", inspection_active)
-	planet_material.set_shader_parameter("selected_region", float(state.selected_region))
-	planet_material.set_shader_parameter("selected_province", float(state.selected_province))
+		material.set_shader_parameter("selected_country", float(state.countries[tag]["index"]) if active else 0.0)
+		material.set_shader_parameter("inspection_active", active)
+		material.set_shader_parameter("selected_region", float(region_id))
+		material.set_shader_parameter("selected_sea", float(sea_id))
+		material.set_shader_parameter("selected_province", float(province_id))
+	planet_material.set_shader_parameter("selected_country", float(state.countries[tag]["index"]) if active else 0.0)
+	planet_material.set_shader_parameter("inspection_active", active)
+	planet_material.set_shader_parameter("selected_region", float(region_id))
+	planet_material.set_shader_parameter("selected_province", float(province_id))
 	_update_border_visibility()
+
+func _preview_state(id: int) -> void:
+	if id == state_preview: return
+	state_preview = id if state.regions.has(str(id)) else 0
+	_update_selection_shader()
 
 func _update_border_visibility() -> void:
 	if border_meshes.is_empty(): return
 	# Match the existing shader's exact zero-opacity ranges. Visibility changes
 	# submit no geometry and never generate or load new meshes on camera travel.
 	spatial_map_layers.set_enabled("land",distance > 1.45)
-	spatial_map_layers.set_enabled("province",inspection_active and state.selected_region > 0 and distance > 1.45 and distance < 1.52)
+	spatial_map_layers.set_enabled("province",(state_preview > 0 or inspection_active and state.selected_region > 0) and distance > 1.45 and distance < 1.52)
 	spatial_map_layers.set_enabled("sea",distance < 2.8 or state.selected_sea > 0)
 	spatial_map_layers.set_enabled("water",distance < 3.5)
 	spatial_map_layers.update_view(distance)
@@ -957,6 +970,7 @@ func _country_item_selected(index: int) -> void:
 		_show_country(country_tags[index], true)
 
 func _clear_details() -> void:
+	active_feature = ""
 	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
 	if pinned != null:
 		for child: Node in pinned.get_children(): pinned.remove_child(child); child.queue_free()
@@ -964,6 +978,7 @@ func _clear_details() -> void:
 	for child: Node in details.get_children():
 		details.remove_child(child)
 		child.queue_free()
+	if foundation != null: foundation.refresh_active_section()
 
 func _wrapped(text: String, size: int = 14, color: Color = Color("96b1be")) -> Label:
 	var label := _label(text, size, color)
@@ -1330,6 +1345,8 @@ func _population_profile(chart: Control, state_scope: bool) -> void:
 func _show_country(tag: String, focus: bool = true) -> void:
 	if not state.countries.has(tag):
 		return
+	active_feature = ""
+	_preview_state(0)
 	_reveal_panel(control_panel)
 	details = control_details
 	state.selected_country = tag
@@ -1399,6 +1416,11 @@ func _selection_breadcrumb(region: Dictionary) -> void:
 	row.add_theme_constant_override("separation", 2)
 	var tag: String = region["owner"]
 	var country := _button(str(state.countries[tag]["name"]), func(): _show_country_states(tag), "Browse this country's States")
+	country.name = "BrowseCountryStates"
+	var record: Dictionary = state.countries[tag]
+	country.icon = flags.resolve(tag, str(record.get("cosmetic", "")), record["outlook"])
+	country.expand_icon = true
+	country.add_theme_constant_override("icon_max_width", 22)
 	var state_button := _button(str(region["name"]), func(): _open_country_state(int(region["id"])), "Show selected State")
 	for button: Button in [country,state_button]:
 		button.add_theme_font_size_override("font_size",11)
@@ -1416,13 +1438,17 @@ func _selection_breadcrumb(region: Dictionary) -> void:
 	details.add_child(row)
 
 func _show_territory() -> void:
+	_preview_state(0)
 	preload("res://scripts/territory_view.gd").new().render(self)
 
 func _show_country_states(tag: String) -> void:
+	_preview_state(0)
 	preload("res://scripts/territory_view.gd").new().country_states(self,tag)
+	_focus_country(tag)
 
 func _open_country_state(id: int) -> void:
 	if not state.regions.has(str(id)): return
+	_preview_state(0)
 	inspect_region=id
 	inspect_province=0
 	state.selected_country=state.regions[str(id)]["owner"]
@@ -2316,9 +2342,15 @@ func _run_smoke_test() -> void:
 	else:
 		get_tree().quit()
 func _build_menu() -> void:
+	menu_background = _space_background(self)
+	menu_background.name = "MainMenuBackground"
 	menu_screen = CenterContainer.new()
 	menu_screen.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	# Keep the photograph's Earth and lunar horizon visible beside the menu.
+	menu_screen.anchor_right = .45
+	menu_screen.offset_left = 32
 	add_child(menu_screen)
+	menu_screen.visibility_changed.connect(func(): menu_background.visible = menu_screen.visible)
 	var panel := PanelContainer.new()
 	panel.custom_minimum_size = Vector2(440, 420)
 	panel.add_theme_stylebox_override("panel", _panel_style(Color("102332"), 18))
@@ -2512,6 +2544,8 @@ func _placeholder(caption: String) -> void:
 
 func _close_panels() -> void:
 	if screen == "playing":
+		_preview_state(0)
+		active_feature = ""
 		_hide_panel(control_panel)
 		_hide_panel(territory_panel)
 		inspection_active = false
@@ -2733,7 +2767,7 @@ func _layout_overlay() -> void:
 	top_left_box.reset_size()
 
 func _panel_target(panel: PanelContainer) -> float:
-	return 8.0 if panel == control_panel else view_container.size.x - 338.0
+	return 8.0 if panel == control_panel else view_container.size.x - 378.0
 
 func _territory_width() -> float:
 	return clampf(view_container.size.x * .305, 350.0, 440.0)
@@ -2751,7 +2785,7 @@ func _position_panels(force: bool = true) -> void:
 	last_panel_layout = key
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
-		panel.size = Vector2(330, maxf(240, view_container.size.y - 118))
+		panel.size = Vector2(370, maxf(240, view_container.size.y - 118))
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -2777,6 +2811,7 @@ func _animate_territory() -> void:
 
 func _toggle_territory() -> void:
 	if not territory_handle.visible: return
+	_preview_state(0)
 	territory_collapsed = not territory_collapsed
 	_animate_territory()
 
@@ -2797,7 +2832,7 @@ func _reveal_panel(panel: PanelContainer) -> void:
 	if panel_tweens.has(panel): panel_tweens[panel].kill(); panel_tweens.erase(panel)
 	panel.show()
 	panel.modulate.a = 0
-	panel.position = Vector2(_panel_target(panel) + (-330 if panel == control_panel else 330), 110)
+	panel.position = Vector2(_panel_target(panel) + (-370 if panel == control_panel else 370), 110)
 	var tween := create_tween().set_parallel(true)
 	panel_tweens[panel] = tween
 	tween.tween_property(panel, "position:x", _panel_target(panel), .16).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
@@ -2806,6 +2841,7 @@ func _reveal_panel(panel: PanelContainer) -> void:
 
 func _hide_panel(panel: PanelContainer) -> void:
 	if panel == null: return
+	if panel == territory_panel: _preview_state(0)
 	if panel_tweens.has(panel): panel_tweens[panel].kill(); panel_tweens.erase(panel)
 	panel.hide()
 	if foundation != null: foundation.refresh_active_section()
@@ -2967,12 +3003,41 @@ func _go_to_place(record: Dictionary, animated: bool = true) -> void:
 func _area_number(area: float) -> String:
 	return "%.2f" % area if area<10.0 else _number(int(round(area)))
 
+func _space_background(parent: Control) -> TextureRect:
+	var background := TextureRect.new()
+	background.texture = load("res://assets/ui/menu_background.jpg")
+	background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
+	background.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	background.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	parent.add_child(background)
+	return background
+
+func _show_feature(caption: String) -> void:
+	if screen != "playing": return
+	if active_feature == caption and control_panel.visible:
+		active_feature = ""
+		_hide_panel(control_panel)
+		return
+	details = control_details
+	_clear_details()
+	active_feature = caption
+	var heading := HBoxContainer.new()
+	var title := _label(caption, 23, Color("f0eee2"))
+	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	heading.add_child(title)
+	heading.add_child(_button("×", func(): active_feature = ""; _hide_panel(control_panel), "Close panel"))
+	control_heading.add_child(heading)
+	_reveal_panel(control_panel)
+	foundation.refresh_active_section()
+
 func _build_loading_screen() -> void:
 	loading_overlay = ColorRect.new()
 	loading_overlay.color = Color("07151f")
 	loading_overlay.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	loading_overlay.z_index = 100
 	add_child(loading_overlay)
+	_space_background(loading_overlay)
 	var center := CenterContainer.new()
 	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	loading_overlay.add_child(center)

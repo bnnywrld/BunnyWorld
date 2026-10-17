@@ -22,6 +22,7 @@ var demo_content: VBoxContainer
 var demo_tag := ""
 var demo_states: Array[int] = []
 var tension_dialog: AcceptDialog
+var feature_buttons: Dictionary = {}
 const COLUMNS := ["name", "population", "gdp", "gdp_per_capita", "stability", "war_support", "states", "outlook", "debt", "treasury"]
 const CAPTIONS := ["Country", "Population", "GDP", "GDP / capita", "Stability", "War support", "States", "Outlook", "Debt", "Treasury"]
 const WIDTHS := [220, 120, 115, 105, 95, 125, 80, 160, 110, 110]
@@ -56,7 +57,11 @@ func build(main: Control) -> void:
 	host.navigation_row.move_child(toolbar, 1)
 	toolbar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	for row: Array in [["politics", "Government"], ["stability", "National policies"], ["economy", "Economy"], ["research", "Research"], ["construction", "Construction"]]:
-		var button := icon_button(row[0],row[1],func(): pass,true)
+		var caption: String = row[1]
+		var button := icon_button(row[0], caption, func(): host._show_feature(caption))
+		button.name = "Feature_" + str(row[0])
+		button.toggle_mode = true
+		feature_buttons[caption] = button
 		button.custom_minimum_size = Vector2(44,44)
 		toolbar.add_child(button)
 	var demographic_shortcut := icon_button("demographics", "Demographics · National profile", open_country_demographics)
@@ -67,9 +72,11 @@ func build(main: Control) -> void:
 	toolbar.add_child(demographic_shortcut)
 	for entry: Array in [["production", "Production"], ["diplomacy", "Diplomacy"], ["trade", "Trade"], ["military", "Military"], ["intelligence", "Intelligence"], ["space", "Space Exploration"]]:
 		var texture: Texture2D = load("res://assets/ui/" + entry[0] + ".svg") if entry[0] in ["production", "trade", "intelligence", "space"] else Icons.icon(entry[0])
-		var button: Button = host._icon_button(entry[1] + " · Planned", texture, func(): pass, Vector2(44, 44))
-		button.disabled = true
-		button.modulate = Color(1, 1, 1, .5)
+		var caption: String = entry[1]
+		var button: Button = host._icon_button(caption, texture, func(): host._show_feature(caption), Vector2(44, 44))
+		button.name = "Feature_" + str(entry[0])
+		button.toggle_mode = true
+		feature_buttons[caption] = button
 		toolbar.add_child(button)
 	toolbar.hide()
 	globe = icon_button("globe", "World Tension · open wars and event history", open_tension)
@@ -125,6 +132,8 @@ func build(main: Control) -> void:
 	host._configure_overlay_layout()
 
 func refresh_active_section() -> void:
+	for caption: String in feature_buttons:
+		feature_buttons[caption].set_pressed_no_signal(host.control_panel.visible and host.active_feature == caption)
 	if demographic_button == null: return
 	var chart: Node = host.control_details.get_node_or_null("NationalDemographics")
 	demographic_button.set_pressed_no_signal(host.control_panel.visible and host.state.selected_country==host.state.player_country and chart != null and chart.visible)

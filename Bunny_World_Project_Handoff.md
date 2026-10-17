@@ -1,3 +1,17 @@
+# BunnyWorld 0.2.0.24 handoff
+
+Changed-files source patch over GitHub main c74c3c6 (0.2.0.23). App, geography and display are .24. See documentation/PATCH_0224.md. Delivery is a ZIP for native user testing; this does not imply main was pushed.
+
+Current totals: 224 countries, 1,239 states, 13,308 land provinces; population 6,144,737,528. Mariana Islands absorbs Saipan/Tinian; Hawaii absorbs Midway/Johnston; Micronesia becomes a single state including former Palau. PAU is removed from active and releasable countries. Malpelo and Navassa states/provinces/land are removed (five native pixels). Other province footprints remain exact. Statistical allocations from deleted islands stay in their original countries; Palau population joins Micronesia.
+
+UI: 370px shared country/diplomacy inspector; supplied static Moon/Earth image for loading/menu; country flag breadcrumb centers camera and opens state browser; temporary state-list hover presentation without selection/owner changes; all planned top-toolbar sections open empty titled inspectors with close/toggle behavior.
+
+The user runs Windows and checks native layout, interactions and graphics. Automated checks cover data/reference integrity, exact raster delta, application behavior and prepared-resource contracts. No new FPS claim and no renderer redesign in this patch. The proposed experimental renderer branch remains deferred.
+
+Authoring: tools/consolidate_islands_0224.py is one-shot, followed by tools/build_map.py --godot <Godot>. The shared pipeline now also refreshes tiny_land_bits on topology changes to remove physical-mode ghost islands. Prepared geography/display bundles and restore parts must ship together.
+
+Prior foundation follows (historical counts/versions below are superseded):
+
 # BunnyWorld 0.2.0.23 handoff
 
 0.2.0.23 is the next performance patch over the user-confirmed 0.2.0.22 (local source snapshot c4750c7). App/display advance to .23; geography remains .21. See documentation/PATCH_0223.md. GitHub main is not implied to have changed by a local commit or ZIP delivery.
