@@ -1,6 +1,7 @@
 extends RefCounted
 # Meshes are prepared offline and uploaded at startup. Normal-view rendering
-# uses native per-chunk frustum culling; extreme distant views retain the original batch.
+# uses native per-chunk frustum culling. Only the sphere has a small far-view
+# fallback; duplicate full-world border/river meshes are never loaded.
 var layers: Dictionary={}
 var close_view:=false
 var prepared_chunks:=0
@@ -10,8 +11,9 @@ var metadata: Dictionary
 var previous_camera:=Vector3.INF
 var horizon_passes:=0
 var maximum_distance:=4.5
-func initialize() -> void:
+func initialize(geography_version: String = "") -> void:
  metadata=JSON.parse_string(FileAccess.get_file_as_string("res://assets/rendering/chunks.json"))
+ if not geography_version.is_empty():assert(str(metadata["geography_version"])==geography_version,"Render batches target a different geography")
  assert(metadata["schema"]==1 and metadata["province_sha256"]==FileAccess.get_sha256("res://data/provinces.json"),"Render chunks do not match the current geography. Run Prepare_BunnyWorld.bat.")
 func register(kind: String, original: MeshInstance3D, parent: Node3D) -> void:
  var group:=Node3D.new();group.name=kind+"_spatial";parent.add_child(group);group.hide()
@@ -44,10 +46,10 @@ func update_view(distance: float) -> void:
  for kind: String in layers:_apply(kind)
 func _apply(kind: String) -> void:
  var row: Dictionary=layers[kind]
- row["original"].visible=row["enabled"] and not close_view
- row["group"].visible=row["enabled"] and close_view
+ var far_sphere: bool=kind=="sphere" and not close_view
+ row["original"].visible=row["enabled"] and far_sphere
+ row["group"].visible=row["enabled"] and not far_sphere
 func cull(camera: Camera3D, planet: Node3D) -> void:
- if not close_view:return
  var local_camera: Vector3=planet.global_transform.affine_inverse()*camera.global_position
  if previous_camera.is_equal_approx(local_camera):return
  previous_camera=local_camera;horizon_passes+=1
@@ -56,7 +58,7 @@ func cull(camera: Camera3D, planet: Node3D) -> void:
  var horizon:=acos(clampf(1.0/maxf(local_camera.length(),1.000001),0,1))+acos(1.0/1.03)
  var direction:=local_camera.normalized()
  for row: Dictionary in layers.values():
-  if not row["enabled"]:continue
+  if not row["enabled"] or not row["group"].visible:continue
   for chunk: Dictionary in row["chunks"]:
    var limit: float=cos(minf(PI,horizon+float(chunk["radius"])))
    var visible: bool=direction.dot(chunk["center"])>=limit

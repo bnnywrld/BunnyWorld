@@ -1,3 +1,7 @@
+# Bunny World 0.2.0.23
+
+Performance patch over **0.2.0.22**: less duplicate mesh memory, cached distant terrain shading, separate political/physical shader programs, coalesced hover and indexed city/scenery visibility. Worldwide simulation remains independent of camera visibility. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes and test order](documentation/PATCH_0223.md).
+
 # Bunny World 0.2.0.22
 
 Rendering performance patch over **0.2.0.21**. Accurate shared picking, a smaller GPU sea mask, less unused distant terrain work, automatic idle redraws and immediate texture-quality switching. Worldwide simulation remains independent of visibility. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, test order and performance reports](documentation/PATCH_0222.md).

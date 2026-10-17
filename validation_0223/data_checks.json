@@ -1,0 +1,17 @@
+{
+  "cache_algorithm": 2,
+  "cache_pixels": 8388608,
+  "decoded_cache_base_bytes": 25165824,
+  "cache_sha256": "e992f9d7982ea56d7044c064c477df4649e976ee4bb14f22ba981524dcf42fb5",
+  "geography_and_simulation_unchanged": {
+    "data/world.json": "7c160ffb2635b0b7083cad1ffba907b09127ab2e507db48a5cf8abacea032999",
+    "data/provinces.json": "220610310a7347c9d2329c6444ae21f96c1e7f5b6022e3e240618ab279a034a7",
+    "scripts/world_state.gd": "e13c045efda674fae476ba09e43395109b69336779a71a156be725bdaf1b1974",
+    "assets/relief_data.png": "5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab",
+    "assets/relief_data.bin": "8dbac71d64bfa13d827e56d29b5328ec4d21f49cbbbfea0d5c83bea914a2d2c0",
+    "assets/region_ids_0.png": "83b693381c3984742c75e628aba23785cda33db6111e262f6504f15eb3b25221",
+    "assets/region_ids_1.png": "bb4bfbd64d2343d4b07901f737a46bcfc81d62a621872c6fca7d7038972d7fea",
+    "assets/region_ids_2.png": "052ffa5ef12c44946a16cdfee3ec97368aa852dceaaa5c69718f8714ecd845bd",
+    "assets/region_ids_3.png": "59481459bfd2d7086d73cae94950866409b2e0e62705451cfaa15e63b00d0a95"
+  }
+}

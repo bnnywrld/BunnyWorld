@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "algorithm": 2,
+  "format": "RGB8",
+  "channels": "RG signed tangent normal XY, zero=128 scale=127; B snow weight",
+  "width": 4096,
+  "height": 2048,
+  "mipmaps": true,
+  "source": "assets/relief_data.png",
+  "source_sha256": "5a97ca680cbe4309ac31440aeb890cf67eda82efb96349354cc08406354bb6ab",
+  "sha256": "e992f9d7982ea56d7044c064c477df4649e976ee4bb14f22ba981524dcf42fb5",
+  "base_decoded_bytes": 25165824,
+  "ownership_baked": false,
+  "near_terrain_unchanged": true,
+  "lighting": "World-space sun applied at runtime to the cached tangent normal"
+}

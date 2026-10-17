@@ -1,0 +1,114 @@
+{
+	"adapter": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"after": {
+		"buffers_bytes": 108359196.0,
+		"textures_bytes": 1350616844.0,
+		"variant": "after",
+		"views": [
+			{
+				"draw_calls": 34.0,
+				"moving_median_ms": 135.639,
+				"primitives": 448221.0,
+				"view": "minsk_close_political"
+			},
+			{
+				"draw_calls": 24.0,
+				"moving_median_ms": 545.94,
+				"primitives": 326978.0,
+				"view": "alps_close_physical"
+			},
+			{
+				"draw_calls": 80.0,
+				"moving_median_ms": 400.525,
+				"primitives": 1301622.0,
+				"view": "asia_transition_physical"
+			},
+			{
+				"draw_calls": 86.0,
+				"moving_median_ms": 504.316,
+				"primitives": 1338351.0,
+				"view": "asia_far_physical"
+			},
+			{
+				"draw_calls": 47.0,
+				"moving_median_ms": 350.286,
+				"primitives": 893335.0,
+				"view": "arctic_far_physical"
+			},
+			{
+				"draw_calls": 45.0,
+				"moving_median_ms": 271.508,
+				"primitives": 611552.0,
+				"view": "antarctic_far_physical"
+			},
+			{
+				"draw_calls": 25.0,
+				"moving_median_ms": 287.021,
+				"primitives": 786169.0,
+				"view": "far_political"
+			},
+			{
+				"draw_calls": 26.0,
+				"moving_median_ms": 279.18,
+				"primitives": 795734.0,
+				"view": "far_physical"
+			}
+		]
+	},
+	"before": {
+		"buffers_bytes": 215369036.0,
+		"textures_bytes": 1317062411.0,
+		"variant": "before",
+		"views": [
+			{
+				"draw_calls": 34.0,
+				"moving_median_ms": 129.08,
+				"primitives": 448221.0,
+				"view": "minsk_close_political"
+			},
+			{
+				"draw_calls": 24.0,
+				"moving_median_ms": 543.843,
+				"primitives": 326978.0,
+				"view": "alps_close_physical"
+			},
+			{
+				"draw_calls": 80.0,
+				"moving_median_ms": 384.473,
+				"primitives": 1301622.0,
+				"view": "asia_transition_physical"
+			},
+			{
+				"draw_calls": 86.0,
+				"moving_median_ms": 525.389,
+				"primitives": 1338351.0,
+				"view": "asia_far_physical"
+			},
+			{
+				"draw_calls": 47.0,
+				"moving_median_ms": 492.385,
+				"primitives": 893335.0,
+				"view": "arctic_far_physical"
+			},
+			{
+				"draw_calls": 45.0,
+				"moving_median_ms": 274.181,
+				"primitives": 611552.0,
+				"view": "antarctic_far_physical"
+			},
+			{
+				"draw_calls": 3.0,
+				"moving_median_ms": 372.779,
+				"primitives": 1033016.0,
+				"view": "far_political"
+			},
+			{
+				"draw_calls": 3.0,
+				"moving_median_ms": 353.408,
+				"primitives": 1033016.0,
+				"view": "far_physical"
+			}
+		]
+	},
+	"scope": "0.2.0.22/23 production renderer comparison at 960x600, twelve moving samples per view. Initial same-process baseline retained for final shader recheck. Linux software rendering, not native GPU FPS; full UI/scenery excluded."
+}

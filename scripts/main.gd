@@ -8,6 +8,8 @@ const OCEAN := Color("16394d")
 var state := State.new()
 var build_version: String = str(ProjectSettings.get_setting("application/config/version"))
 var planet_material: ShaderMaterial
+var physical_shader: Shader
+var political_shader: Shader
 var planet: Node3D
 var camera: Camera3D
 var world_view: SubViewport
@@ -69,6 +71,11 @@ var last_pick_key: Array = []
 var last_pick_uv := Vector2(-1, -1)
 var pick_ray_marches := 0
 var pick_cache_hits := 0
+var terrain_shading: RefCounted
+var pending_hover := false
+var pending_hover_position := Vector2.ZERO
+var hover_requests := 0
+var hover_queries := 0
 var display_coverage: RefCounted
 var control_details: VBoxContainer
 var title_label: Label
@@ -76,6 +83,8 @@ var subtitle_label: Label
 var stats_label: Label
 var game_menu: AcceptDialog
 var cities: Array = []
+var city_point_index: RefCounted
+var city_projection_tests := 0
 var city_layer: Control
 var country_label_layer: Control
 var country_labels_enabled := true
@@ -234,6 +243,11 @@ func _ready() -> void:
 		city["sphere_point"] = Vector3(cos(lat) * sin(lon), sin(lat), cos(lat) * cos(lon))
 		var uv := Vector2((float(city["longitude"])+180.0)/360.0,(90.0-float(city["latitude"]))/180.0)
 		city["raised_point"] = relief_surface.point_at(uv) + city["sphere_point"] * .000025
+	city_point_index = preload("res://scripts/map_point_index.gd").new()
+	var city_points := PackedVector3Array()
+	for city: Dictionary in cities: city_points.append(city["sphere_point"])
+	city_point_index.build(city_points)
+	last_city_view.clear()
 	urban_scenery = Urban.new()
 	planet.add_child(urban_scenery)
 	_loading_stage(65, "Preparing cities and landmarks")
@@ -705,10 +719,14 @@ func _build_planet() -> void:
 	planet.rotation_order = EULER_ORDER_XYZ
 	world_view.add_child(planet)
 	var mesh := MeshInstance3D.new()
-	mesh.mesh = _sphere_mesh(512, 256)
+	mesh.mesh = _sphere_mesh(256, 128)
+	mesh.custom_aabb = mesh.mesh.get_aabb().grow(.025)
+	mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	planet.add_child(mesh)
 	planet_material = ShaderMaterial.new()
-	planet_material.shader = load("res://scripts/planet.gdshader")
+	political_shader = load("res://scripts/planet.gdshader")
+	physical_shader = load("res://scripts/planet_physical.gdshader")
+	planet_material.shader = physical_shader if map_mode == 6 else political_shader
 	map_rendering=preload("res://scripts/map_rendering.gd").new()
 	map_rendering.initialize(state.provinces,state.regions,state.countries)
 	map_rendering.visual_changed.connect(map_frame_policy.invalidate)
@@ -721,12 +739,14 @@ func _build_planet() -> void:
 	water_passages = JSON.parse_string(FileAccess.get_file_as_string("res://data/waterways.json"))["passages"]
 	resident_terrain = preload("res://scripts/resident_terrain.gd").new()
 	resident_terrain.initialize(planet_material, graphics_setting == 1)
+	terrain_shading = preload("res://scripts/terrain_shading.gd").new()
+	terrain_shading.initialize(planet_material)
 	display_coverage = preload("res://scripts/display_coverage.gd").new()
 	display_coverage.initialize(planet_material)
 	physical_texture = load("res://assets/terrain_color.png")
 	mesh.material_override = planet_material
 	spatial_map_layers = preload("res://scripts/spatial_map_layers.gd").new()
-	spatial_map_layers.initialize()
+	spatial_map_layers.initialize(str(state.database["version"]))
 	spatial_map_layers.register("sphere",mesh,planet)
 	detail_patch = MeshInstance3D.new()
 	detail_patch.material_override = planet_material
@@ -749,10 +769,7 @@ func _build_planet() -> void:
 	planet_material.set_shader_parameter("urban_material", load("res://assets/materials/urban_detail.png"))
 	for kind: String in ["land", "sea", "province"]:
 		var border_mesh := MeshInstance3D.new()
-		border_mesh.mesh = load("res://assets/%s_boundaries.res" % kind)
-		if kind!="sea":
-			assert(str(border_mesh.mesh.get_meta("geography_version",""))==str(state.database["version"]),"Outdated "+kind+" borders: close Godot and run Prepare_BunnyWorld.bat")
-			assert(str(border_mesh.mesh.get_meta("province_sha256",""))==FileAccess.get_sha256("res://data/provinces.json"),"Border geometry differs from province membership. Rebuild the map.")
+		# Material holder only: prepared spatial batches own the geometry.
 		var material := ShaderMaterial.new()
 		material.shader = load("res://scripts/provinces.gdshader" if kind == "province" else "res://scripts/boundaries.gdshader")
 		if kind == "province": material.set_shader_parameter("province_index",map_rendering.province_texture)
@@ -766,7 +783,7 @@ func _build_planet() -> void:
 		spatial_map_layers.register(kind,border_mesh,planet)
 	_update_border_visibility()
 	var waterways := MeshInstance3D.new()
-	waterways.mesh = load("res://assets/waterways.res")
+	# Do not keep a second whole-world river mesh beside the spatial batches.
 	var water_material := ShaderMaterial.new()
 	waterways_material = water_material
 	water_material.shader = load("res://scripts/waterways.gdshader")
@@ -822,6 +839,7 @@ func _sphere_mesh(segments: int, rings: int) -> ArrayMesh:
 	return mesh
 
 func _rebuild_palette() -> void:
+	_select_planet_shader()
 	map_frame_policy.invalidate()
 	if map_rendering != null: map_rendering.update_ownership(state.provinces,state.regions,state.countries)
 	if country_label_layer != null and country_label_layer.preparation_runs>0: country_label_layer.refresh_if_changed()
@@ -1046,6 +1064,7 @@ func _show_sea(id: int) -> void:
 	_update_selection_shader()
 
 func _update_map_hover(position: Vector2) -> void:
+	hover_queries += 1
 	if dragging or screen == "menu":
 		hover_panel.hide(); hover_owner = 0.0; return
 	var id := _region_at(position)
@@ -1617,6 +1636,7 @@ func _ui_blocks_globe(position: Vector2) -> bool:
 
 func _globe_input(event: InputEvent) -> void:
 	if event is InputEventMouse and _ui_blocks_globe(event.position):
+		pending_hover = false
 		dragging = false
 		rotation_velocity = Vector2.ZERO
 		return
@@ -1630,6 +1650,7 @@ func _globe_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_RIGHT:
 			dragging = event.pressed
 			if dragging:
+				pending_hover = false
 				rotation_velocity = Vector2.ZERO
 				last_drag_time = Time.get_ticks_msec()
 				if focus_tween != null: focus_tween.kill()
@@ -1660,7 +1681,7 @@ func _globe_input(event: InputEvent) -> void:
 			last_drag_time = now
 		else:
 			dragging = false
-			_update_map_hover(event.position)
+			_queue_map_hover(event.position)
 
 func _process(delta: float) -> void:
 	if not boot_complete: return
@@ -1688,10 +1709,6 @@ func _process(delta: float) -> void:
 				material.set_shader_parameter("show_regions", show_regions)
 				material.set_shader_parameter("camera_distance", distance)
 			last_border_distance = distance
-		var target_hover := 1.0 if hover_panel.visible and hover_owner>0.0 and not dragging else 0.0
-		hover_blend = move_toward(hover_blend, target_hover, delta*7.0)
-		planet_material.set_shader_parameter("hovered_country", hover_owner if target_hover>0.0 else 0.0)
-		planet_material.set_shader_parameter("hover_amount", hover_blend)
 		if not dragging and screen != "menu" and not console.visible:
 			planet.rotation.y += rotation_velocity.x * delta
 			planet.rotation.x = clampf(planet.rotation.x + rotation_velocity.y * delta, -1.5, 1.5)
@@ -1699,6 +1716,11 @@ func _process(delta: float) -> void:
 			if rotation_velocity.length() < 0.0001: rotation_velocity = Vector2.ZERO
 		_update_camera_pose()
 		_update_detail_patch()
+		_flush_map_hover()
+		var target_hover := 1.0 if hover_panel.visible and hover_owner>0.0 and not dragging else 0.0
+		hover_blend = move_toward(hover_blend, target_hover, delta*7.0)
+		planet_material.set_shader_parameter("hovered_country", hover_owner if target_hover>0.0 else 0.0)
+		planet_material.set_shader_parameter("hover_amount", hover_blend)
 		waterways_material.set_shader_parameter("physical_mode",map_mode==6)
 		waterways_material.set_shader_parameter("camera_distance",distance)
 		_update_cities()
@@ -2580,12 +2602,19 @@ func _update_cities() -> void:
 		city_layer.queue_redraw()
 		return
 	var occupied: Array[Rect2] = []
-	for city: Dictionary in cities:
+	var indices: Array = city_point_index.candidates(planet.global_transform.affine_inverse()*camera.global_position) if city_point_index != null else range(cities.size())
+	var transform := planet.global_transform
+	var eye := camera.position
+	var view_size := view_container.size
+	var ratio := view_size/Vector2(world_view.size)
+	for index: int in indices:
+		var city: Dictionary = cities[index]
 		if not city["capital"] and not city.get("state_capital",false) and distance > 1.35: continue
-		var p: Vector3 = planet.global_transform * city["raised_point"]
-		if p.dot(camera.position - p) <= 0 or camera.is_position_behind(p): continue
-		var projected := camera.unproject_position(p) * view_container.size / Vector2(world_view.size)
-		if not Rect2(Vector2.ZERO, view_container.size).has_point(projected): continue
+		city_projection_tests += 1
+		var p: Vector3 = transform * city["raised_point"]
+		if p.dot(eye - p) <= 0 or camera.is_position_behind(p): continue
+		var projected := camera.unproject_position(p) * ratio
+		if not Rect2(Vector2.ZERO, view_size).has_point(projected): continue
 		var box := Rect2(projected - Vector2(4, 12), Vector2(25 + str(city["name"]).length() * 7, 22))
 		var overlaps := false
 		for other: Rect2 in occupied:
@@ -3026,7 +3055,7 @@ func _update_map_rendering(delta: float) -> void:
 	if world_view == null or camera == null or planet == null: return
 	var key: Array = [map_frame_policy.revision, planet.global_transform, camera.global_transform, world_view.size, camera.fov, hover_owner, hover_blend, dragging, map_mode, active_org, inspection_active, state.selected_country, state.selected_region, state.selected_province, state.selected_sea, screen, country_labels_enabled, city_scenery_enabled, graphics_setting]
 	if country_label_layer != null: key.append(country_label_layer.visibility_passes)
-	if urban_scenery != null: key.append_array([urban_scenery.visible, urban_scenery.visibility_alpha, urban_scenery.visible_buildings])
+	if urban_scenery != null: key.append_array([urban_scenery.visible, urban_scenery.visibility_alpha, urban_scenery.visible_buildings, urban_scenery.visibility_passes])
 	var draw: bool = map_frame_policy.request_frame(key, delta)
 	world_view.render_target_update_mode = SubViewport.UPDATE_ONCE if draw else SubViewport.UPDATE_DISABLED
 	var report: String = map_diagnostics.capture(self, draw)
@@ -3040,3 +3069,26 @@ func _graphics_changed(index: int) -> void:
 	if resident_terrain != null: resident_terrain.set_light(planet_material, graphics_setting == 1)
 	map_frame_policy.invalidate()
 	_persist_interface_settings()
+
+func _queue_map_hover(position: Vector2) -> void:
+	hover_requests += 1
+	pending_hover_position = position
+	pending_hover = true
+
+func _flush_map_hover() -> void:
+	if not pending_hover: return
+	pending_hover = false
+	if dragging or screen == "menu" or console != null and console.visible or game_menu != null and game_menu.visible or save_dialog != null and save_dialog.visible or load_dialog != null and load_dialog.visible or overwrite_dialog != null and overwrite_dialog.visible or foundation != null and foundation.modals_visible(): return
+	if not Rect2(Vector2.ZERO,view_container.size).has_point(pending_hover_position) or _ui_blocks_globe(pending_hover_position): return
+	_update_map_hover(pending_hover_position)
+
+func _select_planet_shader() -> void:
+	var target: Shader = physical_shader if map_mode == 6 else political_shader
+	if target == null or planet_material == null or planet_material.shader == target: return
+	# Shared geography/palette/selection uniforms survive mode changes. No
+	# texture decoding, uploading or mesh replacement occurs here.
+	var parameters: Dictionary = {}
+	for parameter: Dictionary in planet_material.shader.get_shader_uniform_list():
+		parameters[parameter["name"]] = planet_material.get_shader_parameter(parameter["name"])
+	planet_material.shader = target
+	for key: String in parameters: planet_material.set_shader_parameter(key,parameters[key])

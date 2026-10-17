@@ -30,12 +30,14 @@ def main():
   for n,h in old['resources'].items():assert sha(R/n)==h,f'Map resource mismatch: {n}'
   from build_sea_mask import check as check_sea_mask
   check_sea_mask()
+  from build_far_terrain import check as check_far_terrain
+  check_far_terrain()
   print('MAP_BUILD_CONTRACT_PASS',len(ps),'provinces; ownership-independent',flush=True);return
  import numpy as np
  from PIL import Image
  from build_boundary_hint import atlas,build as build_hint
  Image.MAX_IMAGE_PIXELS=None
- resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/') and n not in ['assets/display/sea_mask.bwd','assets/display/sea_mask.json'])
+ resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/') and n not in ['assets/display/sea_mask.bwd','assets/display/sea_mask.json','assets/display/far_terrain.bwd','assets/display/far_terrain.json'])
  changed=args.force or bool(old)and old.get('inputs')!=source or resource_mismatch
  if changed:
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
@@ -91,7 +93,9 @@ def main():
  resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res']
  from build_sea_mask import build as build_sea_mask
  build_sea_mask()
- resources+=['assets/display/sea_mask.bwd','assets/display/sea_mask.json']
+ from build_far_terrain import build as build_far_terrain
+ build_far_terrain()
+ resources+=['assets/display/sea_mask.bwd','assets/display/sea_mask.json','assets/display/far_terrain.bwd','assets/display/far_terrain.json']
  resources+=chunk_files
  decoded=[hashlib.sha256(Image.open(R/f'assets/region_ids_{i}.png').convert('RGB').tobytes()).hexdigest()for i in range(4)]
  contract={'schema':1,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}

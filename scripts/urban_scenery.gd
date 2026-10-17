@@ -26,6 +26,12 @@ var visible_buildings := 0
 var peak_visible_buildings := 0
 var visibility_alpha := 0.0
 var mesh_builds := 0
+var visibility_passes := 0
+var candidate_tests := 0
+var last_candidate_count := 0
+var view_key: Array = []
+var point_index := preload("res://scripts/map_point_index.gd").new()
+var last_visibility_alpha := -1.0
 
 func initialize(surface: RefCounted) -> void:
 	relief = surface
@@ -35,6 +41,7 @@ func initialize(surface: RefCounted) -> void:
 	for record: Dictionary in clusters:
 		record["point"] = _unit(float(record["longitude"]), float(record["latitude"]))
 		record["surface"] = relief.point_at(Surface.uv_of(record["point"]))
+	_build_spatial_buckets()
 	for record: Dictionary in landmarks:
 		record["point"] = _unit(float(record["longitude"]), float(record["latitude"]))
 		record["surface"] = relief.point_at(Surface.uv_of(record["point"]))
@@ -73,19 +80,30 @@ static func _unit(lon: float, lat: float) -> Vector3:
 
 func update_view(camera: Camera3D, distance: float, enabled: bool, delta: float) -> void:
 	visibility_alpha = smoothstep(0.0, 1.0, clampf((1.18 - distance) / .10, 0, 1)) if enabled else 0.0
-	material.set_shader_parameter("visibility_alpha", visibility_alpha)
-	landmark_material.set_shader_parameter("visibility_alpha", visibility_alpha)
+	if last_visibility_alpha != visibility_alpha:
+		material.set_shader_parameter("visibility_alpha", visibility_alpha)
+		landmark_material.set_shader_parameter("visibility_alpha", visibility_alpha)
+		last_visibility_alpha = visibility_alpha
 	visible = visibility_alpha > .001
 	if not visible:
 		visible_buildings = 0
-		# Release once when leaving close view, including menu transitions.
+		view_key.clear()
+		timer = .25
 		if not active.is_empty() or not active_landmarks.is_empty(): _clear_active()
 		return
+	var key: Array = [global_transform,camera.global_transform,camera.get_viewport().size,camera.fov,camera.projection,camera.size,camera.keep_aspect,camera.frustum_offset,camera.h_offset,camera.v_offset]
+	if key == view_key: return
 	timer += delta
 	if timer < .25: return
 	timer = 0.0
+	view_key = key
+	visibility_passes += 1
+	var candidates := _candidate_indices(camera)
+	last_candidate_count = candidates.size()
 	var nearby: Array[Dictionary] = []
-	for record: Dictionary in clusters:
+	for index: int in candidates:
+		var record: Dictionary = clusters[index]
+		candidate_tests += 1
 		if _in_view(record, camera):
 			nearby.append({"record": record, "distance": (global_transform * record["point"]).distance_squared_to(camera.global_position)})
 	nearby.sort_custom(func(a: Dictionary, b: Dictionary): return a["distance"] < b["distance"])
@@ -272,3 +290,11 @@ func _exit_tree() -> void:
 	for cache: Dictionary in [cached_clusters,cached_landmarks]:
 		for node: Node3D in cache.values():
 			if is_instance_valid(node) and node.get_parent() == null: node.free()
+
+func _build_spatial_buckets() -> void:
+	var points := PackedVector3Array()
+	for record: Dictionary in clusters: points.append(record["point"])
+	point_index.build(points)
+
+func _candidate_indices(camera: Camera3D) -> Array[int]:
+	return point_index.candidates(global_transform.affine_inverse()*camera.global_position)

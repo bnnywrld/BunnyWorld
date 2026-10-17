@@ -1,0 +1,132 @@
+{
+	"city_views": [
+		{
+			"new_cpu_us": 1182,
+			"old_cpu_us": 7971,
+			"pose": [
+				1813,
+				2.3,
+				99.2
+			],
+			"projection_candidates": 332,
+			"total_city_records": 2340
+		},
+		{
+			"new_cpu_us": 2302,
+			"old_cpu_us": 4289,
+			"pose": [
+				1499,
+				46.0,
+				7.5
+			],
+			"projection_candidates": 592,
+			"total_city_records": 2340
+		},
+		{
+			"new_cpu_us": 1372,
+			"old_cpu_us": 3910,
+			"pose": [
+				1569,
+				38.05,
+				127.15
+			],
+			"projection_candidates": 489,
+			"total_city_records": 2340
+		},
+		{
+			"new_cpu_us": 1796,
+			"old_cpu_us": 4735,
+			"pose": [
+				534,
+				41.9,
+				12.45
+			],
+			"projection_candidates": 764,
+			"total_city_records": 2340
+		},
+		{
+			"new_cpu_us": 228,
+			"old_cpu_us": 3837,
+			"pose": [
+				1813,
+				0.0,
+				179.8
+			],
+			"projection_candidates": 16,
+			"total_city_records": 2340
+		},
+		{
+			"new_cpu_us": 645,
+			"old_cpu_us": 5508,
+			"pose": [
+				1813,
+				80.0,
+				-40.0
+			],
+			"projection_candidates": 205,
+			"total_city_records": 2340
+		}
+	],
+	"scenery_views": [
+		{
+			"candidate_records": 365,
+			"pose": [
+				1813,
+				2.3,
+				99.2
+			],
+			"query_cpu_us": 1531,
+			"total_records": 2787
+		},
+		{
+			"candidate_records": 762,
+			"pose": [
+				1499,
+				46.0,
+				7.5
+			],
+			"query_cpu_us": 5175,
+			"total_records": 2787
+		},
+		{
+			"candidate_records": 610,
+			"pose": [
+				1569,
+				38.05,
+				127.15
+			],
+			"query_cpu_us": 4110,
+			"total_records": 2787
+		},
+		{
+			"candidate_records": 941,
+			"pose": [
+				534,
+				41.9,
+				12.45
+			],
+			"query_cpu_us": 2070,
+			"total_records": 2787
+		},
+		{
+			"candidate_records": 16,
+			"pose": [
+				1813,
+				0.0,
+				179.8
+			],
+			"query_cpu_us": 337,
+			"total_records": 2787
+		},
+		{
+			"candidate_records": 281,
+			"pose": [
+				1813,
+				80.0,
+				-40.0
+			],
+			"query_cpu_us": 865,
+			"total_records": 2787
+		}
+	]
+}

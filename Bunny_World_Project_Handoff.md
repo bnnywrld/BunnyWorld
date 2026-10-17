@@ -1,4 +1,14 @@
-# BunnyWorld 0.2.0.22 handoff
+# BunnyWorld 0.2.0.23 handoff
+
+0.2.0.23 is the next performance patch over the user-confirmed 0.2.0.22 (local source snapshot c4750c7). App/display advance to .23; geography remains .21. See documentation/PATCH_0223.md. GitHub main is not implied to have changed by a local commit or ZIP delivery.
+
+Current renderer: no duplicate whole-world border/river buffers; the exact spatial batches remain, with a 256×128 far sphere beyond distance 4.5 and original 512×256 sphere batches nearby. planet.gdshader and planet_physical.gdshader compile shared planet_surface.gdshaderinc with separate physical shading. The physical far path blends to a 4096×2048 mipmapped normal/snow cache from distance 2.0–2.4. It retains dynamic world lighting; close relief/picking stays original. Cache data is independent of ownership.
+
+Mouse hover is coalesced to one latest-position query per application frame; clicks stay immediate. Conservative point buckets accelerate only decorative city/building visibility, preserving complete-scan results. Stationary scenery reuses visibility. The WorldState loop remains global and continues when map draws are disabled. The previous 10 Hz idle policy, live lookup textures and accurate relief-ray cache remain.
+
+121 application checks pass, including off-screen ownership and clock advancement with redraws disabled. Minimal renderer counters show about 70 MiB less texture-plus-buffer payload than .22. Near images retain exact pixels apart from a one-level rounding difference in one Alps channel; distant filtered lighting and the small far sphere have documented minor differences. Native 940MX FPS is unmeasured here. The user confirmed .22 works with lower GPU usage.
+
+The following is the retained .22/.21 foundation:
 
 0.2.0.22 is a changed-files performance patch over GitHub main ca86fe36fd39ea7122c9836933fed091fc99c456 (0.2.0.21). Geography/data stay at 0.2.0.21; application/display advance to 0.2.0.22. See documentation/PATCH_0222.md for installation, tests and console diagnostics. A local change or ZIP delivery does not mean GitHub main was updated.
 
