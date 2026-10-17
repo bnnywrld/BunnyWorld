@@ -1,0 +1,131 @@
+{
+	"cases": [
+		{
+			"case": "minsk_political",
+			"moving": {
+				"draw_calls": 34.0,
+				"median_ms": 231.935,
+				"p90_ms": 1034.708,
+				"primitives": 448221.0
+			},
+			"stationary": {
+				"draw_calls": 34.0,
+				"median_ms": 275.458,
+				"p90_ms": 319.593,
+				"primitives": 448221.0
+			}
+		},
+		{
+			"case": "israel_political",
+			"moving": {
+				"draw_calls": 25.0,
+				"median_ms": 178.481,
+				"p90_ms": 302.887,
+				"primitives": 344726.0
+			},
+			"stationary": {
+				"draw_calls": 25.0,
+				"median_ms": 185.232,
+				"p90_ms": 217.233,
+				"primitives": 344726.0
+			}
+		},
+		{
+			"case": "sumatra_physical",
+			"moving": {
+				"draw_calls": 18.0,
+				"median_ms": 174.385,
+				"p90_ms": 704.789,
+				"primitives": 249632.0
+			},
+			"stationary": {
+				"draw_calls": 18.0,
+				"median_ms": 226.031,
+				"p90_ms": 270.218,
+				"primitives": 249632.0
+			}
+		},
+		{
+			"case": "alps_physical",
+			"moving": {
+				"draw_calls": 24.0,
+				"median_ms": 330.619,
+				"p90_ms": 500.27,
+				"primitives": 326978.0
+			},
+			"stationary": {
+				"draw_calls": 24.0,
+				"median_ms": 274.145,
+				"p90_ms": 487.958,
+				"primitives": 326978.0
+			}
+		},
+		{
+			"case": "rome_political",
+			"moving": {
+				"draw_calls": 23.0,
+				"median_ms": 158.949,
+				"p90_ms": 204.859,
+				"primitives": 313399.0
+			},
+			"stationary": {
+				"draw_calls": 23.0,
+				"median_ms": 161.709,
+				"p90_ms": 189.693,
+				"primitives": 313399.0
+			}
+		},
+		{
+			"case": "asia_political",
+			"moving": {
+				"draw_calls": 72.0,
+				"median_ms": 668.561,
+				"p90_ms": 1328.255,
+				"primitives": 1233090.0
+			},
+			"stationary": {
+				"draw_calls": 72.0,
+				"median_ms": 415.967,
+				"p90_ms": 497.885,
+				"primitives": 1233090.0
+			}
+		},
+		{
+			"case": "europe_medium",
+			"moving": {
+				"draw_calls": 83.0,
+				"median_ms": 385.183,
+				"p90_ms": 448.368,
+				"primitives": 1716621.0
+			},
+			"stationary": {
+				"draw_calls": 83.0,
+				"median_ms": 455.422,
+				"p90_ms": 777.696,
+				"primitives": 1716621.0
+			}
+		},
+		{
+			"case": "globe_political",
+			"moving": {
+				"draw_calls": 48.0,
+				"median_ms": 367.292,
+				"p90_ms": 411.986,
+				"primitives": 924789.0
+			},
+			"stationary": {
+				"draw_calls": 48.0,
+				"median_ms": 402.584,
+				"p90_ms": 452.405,
+				"primitives": 924789.0
+			}
+		}
+	],
+	"native_windows_tested": false,
+	"renderer": "llvmpipe (LLVM 20.1.2, 256 bits)",
+	"version": "0.2.0.22",
+	"viewport": [
+		960,
+		600
+	]
+}

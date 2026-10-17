@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "format": "R8",
+  "width": 8192,
+  "height": 4096,
+  "source": "assets/sea_ids.png",
+  "source_sha256": "e7881a05192d18c200e77025e99f9ecb2e758c20afff0ad7bb73c9f83febe500",
+  "sha256": "cd9741d735faa1abbbe7e9abc3c3184d191f4085274800f2be0c7e27ab34e488",
+  "decoded_bytes": 33554432,
+  "predicate": "R != 0 or G != 0; nearest sampling at original resolution"
+}

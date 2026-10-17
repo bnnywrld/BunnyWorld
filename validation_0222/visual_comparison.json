@@ -1,0 +1,53 @@
+{
+  "scope": "Same renderer views before/after. Shader TIME glow can change between captures.",
+  "cases": [
+    {
+      "view": "alps_physical",
+      "mean_channel_difference": 0.008482638888888889,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "asia_political",
+      "mean_channel_difference": 0.004495225694444444,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "europe_medium",
+      "mean_channel_difference": 0.006808159722222222,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "globe_political",
+      "mean_channel_difference": 0.0037135416666666666,
+      "pixels_changed_over_8": 89,
+      "pixels": 576000
+    },
+    {
+      "view": "israel_political",
+      "mean_channel_difference": 0.012772135416666667,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "minsk_political",
+      "mean_channel_difference": 0.026732204861111112,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "rome_political",
+      "mean_channel_difference": 0.007750868055555556,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    },
+    {
+      "view": "sumatra_physical",
+      "mean_channel_difference": 0.010587239583333333,
+      "pixels_changed_over_8": 0,
+      "pixels": 576000
+    }
+  ]
+}

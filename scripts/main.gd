@@ -63,6 +63,12 @@ var last_camera_view: Array = []
 var tiny_state_markers: Control
 var map_rendering: RefCounted
 var ownership_visual_dirty := false
+var map_frame_policy := preload("res://scripts/map_frame_policy.gd").new()
+var map_diagnostics := preload("res://scripts/map_diagnostics.gd").new()
+var last_pick_key: Array = []
+var last_pick_uv := Vector2(-1, -1)
+var pick_ray_marches := 0
+var pick_cache_hits := 0
 var display_coverage: RefCounted
 var control_details: VBoxContainer
 var title_label: Label
@@ -260,6 +266,7 @@ func _ready() -> void:
 	await get_tree().process_frame
 	loading_overlay.queue_free()
 	boot_complete = true
+	print("BUNNY_RENDERER ", JSON.stringify(map_diagnostics.adapter()))
 	set_process(true)
 	_set_status("World ready  ·  %d countries  ·  %d states" % [state.countries.size(), state.regions.size()])
 	for arg: String in OS.get_cmdline_user_args():
@@ -704,6 +711,7 @@ func _build_planet() -> void:
 	planet_material.shader = load("res://scripts/planet.gdshader")
 	map_rendering=preload("res://scripts/map_rendering.gd").new()
 	map_rendering.initialize(state.provinces,state.regions,state.countries)
+	map_rendering.visual_changed.connect(map_frame_policy.invalidate)
 	region_images=map_rendering.region_images
 	for tile: int in 4:
 		planet_material.set_shader_parameter("region_map_%d"%tile,map_rendering.region_textures[tile])
@@ -727,10 +735,16 @@ func _build_planet() -> void:
 	detail_patch.custom_aabb = AABB(Vector3(-1.02,-1.02,-1.02),Vector3(2.04,2.04,2.04))
 	detail_patch.hide()
 	planet.add_child(detail_patch)
-	var sea_texture: Texture2D = load("res://assets/sea_ids.png")
-	sea_image = sea_texture.get_image()
+	# CPU selection keeps exact sea IDs. The GPU only needs ocean coverage,
+	# avoiding an otherwise unused full RGB sea-ID texture in steady state.
+	sea_image = Image.new()
+	if FileAccess.file_exists("res://assets/sea_ids.png"):
+		var sea_error := sea_image.load_png_from_buffer(FileAccess.get_file_as_bytes("res://assets/sea_ids.png"))
+		assert(sea_error == OK, "Sea selection IDs could not be decoded")
+	else:
+		sea_image = load("res://assets/sea_ids.png").get_image()
 	if sea_image.is_compressed(): sea_image.decompress()
-	planet_material.set_shader_parameter("sea_map", sea_texture)
+	planet_material.set_shader_parameter("sea_map", map_rendering.create_sea_mask_texture())
 	planet_material.set_shader_parameter("urban_density", load("res://assets/urban_density.png"))
 	planet_material.set_shader_parameter("urban_material", load("res://assets/materials/urban_detail.png"))
 	for kind: String in ["land", "sea", "province"]:
@@ -808,6 +822,7 @@ func _sphere_mesh(segments: int, rings: int) -> ArrayMesh:
 	return mesh
 
 func _rebuild_palette() -> void:
+	map_frame_policy.invalidate()
 	if map_rendering != null: map_rendering.update_ownership(state.provinces,state.regions,state.countries)
 	if country_label_layer != null and country_label_layer.preparation_runs>0: country_label_layer.refresh_if_changed()
 	var color_image := Image.create(8192, 1, false, Image.FORMAT_RGBA8)
@@ -874,6 +889,7 @@ func _rebuild_palette() -> void:
 	_update_legend()
 
 func _update_selection_shader() -> void:
+	map_frame_policy.invalidate()
 	if display_coverage != null: display_coverage.select(state.selected_region if inspection_active else 0, state.selected_province if inspection_active else 0,state.selected_sea)
 	planet_material.set_shader_parameter("selected_sea", float(state.selected_sea))
 	for material: ShaderMaterial in border_materials:
@@ -1540,11 +1556,20 @@ func _update_detail_patch() -> void:
 		material.set_shader_parameter("detail_span",span)
 
 func _uv_at(position: Vector2) -> Vector2:
+	# Cache only the geometric intersection, never owner/state data. Repeated
+	# region/province/sea queries share one accurate relief ray per view/point.
+	var key: Array = [position, camera.global_transform, planet.global_transform, world_view.size, camera.fov, camera.near, camera.far, camera.projection, camera.keep_aspect, camera.size, camera.frustum_offset, camera.h_offset, camera.v_offset, relief_surface.get_instance_id()]
+	if key == last_pick_key:
+		pick_cache_hits += 1
+		return last_pick_uv
+	last_pick_key = key
+	pick_ray_marches += 1
 	var inverse := planet.global_transform.affine_inverse()
 	var origin: Vector3 = inverse * camera.project_ray_origin(position)
 	var direction: Vector3 = inverse.basis * camera.project_ray_normal(position)
 	var point: Vector3 = relief_surface.ray_point(origin, direction.normalized())
-	return Surface.uv_of(point) if point != Vector3.ZERO else Vector2(-1, -1)
+	last_pick_uv = Surface.uv_of(point) if point != Vector3.ZERO else Vector2(-1, -1)
+	return last_pick_uv
 
 func _map_pixel_at(position: Vector2) -> Color:
 	var uv := _uv_at(position)
@@ -1691,6 +1716,7 @@ func _process(delta: float) -> void:
 			last_relation_day = state.day
 			_refresh_opinions()
 			if map_mode == 7: _rebuild_palette()
+	_update_map_rendering(delta)
 
 func _toggle_pause() -> void:
 	if screen != "playing":
@@ -2512,9 +2538,9 @@ func _build_game_menu() -> void:
 	box.add_child(_button("Help", func(): game_menu.hide(); _help()))
 	graphics_picker = OptionButton.new()
 	for item: String in ["Graphics: Balanced", "Graphics: Light", "Graphics: High"]: graphics_picker.add_item(item)
-	graphics_picker.tooltip_text = "Terrain texture quality takes effect after restarting the game."
+	graphics_picker.tooltip_text = "Apply terrain texture quality and anti-aliasing immediately."
 	graphics_picker.select(graphics_setting)
-	graphics_picker.item_selected.connect(func(index: int): graphics_setting = index; world_view.msaa_3d = [Viewport.MSAA_2X, Viewport.MSAA_DISABLED, Viewport.MSAA_4X][index]; _persist_interface_settings())
+	graphics_picker.item_selected.connect(_graphics_changed)
 	box.add_child(graphics_picker)
 	frame_picker = OptionButton.new()
 	frame_picker.add_item("Frame limit: 60 FPS")
@@ -2795,6 +2821,20 @@ func _toggle_console() -> void:
 		console_input.grab_focus()
 
 func _run_command(line: String) -> void:
+	var args := line.strip_edges().split(" ", false)
+	if not args.is_empty() and args[0].to_lower() == "perf":
+		var reply := "Use perf start [120–3600 frames], perf stop, perf status, perf continuous or perf auto."
+		if args.size() in [2,3] and args[1] == "start":
+			if args.size() == 2 or args[2].is_valid_int(): reply = map_diagnostics.start(int(args[2]) if args.size() == 3 else 600)
+		elif args.size() == 2 and args[1] in ["continuous", "auto"]:
+			map_frame_policy.force_continuous = args[1] == "continuous"
+			map_frame_policy.invalidate()
+			reply = "Map redraw: " + ("every application frame" if map_frame_policy.force_continuous else "automatic; 10 Hz when stationary")
+		elif args.size() == 2 and args[1] == "stop": reply = map_diagnostics.finish(self)
+		elif args.size() == 2 and args[1] == "status": reply = JSON.stringify(map_diagnostics.adapter()) + "\nFrames remaining: %d\nLast report: %s" % [map_diagnostics.remaining, map_diagnostics.last_path]
+		console_log.append_text("> " + line + "\n" + reply + "\n")
+		console_input.clear()
+		return
 	console_log.append_text("> " + line + "\n" + Commands.execute(state, line) + "\n")
 	console_input.clear()
 	inspect_region = 0
@@ -2979,3 +3019,24 @@ func _unify_country_panel() -> void:
 func _focus_state_capital(sid: int) -> void:
 	var r: Dictionary=state.regions[str(sid)]
 	_go_to_place({"state":sid,"province":int(r["capital_province"]),"country":r["owner"],"kind":"City","name":r["state_capital"],"uv":Vector2(r["capital_uv"][0],r["capital_uv"][1])},true)
+
+# This function only schedules viewport draws. Simulation above always runs,
+# including when the viewport is disabled or the other hemisphere is hidden.
+func _update_map_rendering(delta: float) -> void:
+	if world_view == null or camera == null or planet == null: return
+	var key: Array = [map_frame_policy.revision, planet.global_transform, camera.global_transform, world_view.size, camera.fov, hover_owner, hover_blend, dragging, map_mode, active_org, inspection_active, state.selected_country, state.selected_region, state.selected_province, state.selected_sea, screen, country_labels_enabled, city_scenery_enabled, graphics_setting]
+	if country_label_layer != null: key.append(country_label_layer.visibility_passes)
+	if urban_scenery != null: key.append_array([urban_scenery.visible, urban_scenery.visibility_alpha, urban_scenery.visible_buildings])
+	var draw: bool = map_frame_policy.request_frame(key, delta)
+	world_view.render_target_update_mode = SubViewport.UPDATE_ONCE if draw else SubViewport.UPDATE_DISABLED
+	var report: String = map_diagnostics.capture(self, draw)
+	if not report.is_empty():
+		print(report)
+		_set_status(report)
+
+func _graphics_changed(index: int) -> void:
+	graphics_setting = clampi(index, 0, 2)
+	world_view.msaa_3d = [Viewport.MSAA_2X, Viewport.MSAA_DISABLED, Viewport.MSAA_4X][graphics_setting]
+	if resident_terrain != null: resident_terrain.set_light(planet_material, graphics_setting == 1)
+	map_frame_policy.invalidate()
+	_persist_interface_settings()

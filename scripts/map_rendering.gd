@@ -1,4 +1,5 @@
 extends RefCounted
+signal visual_changed
 # Runtime map resources come from the authoritative source, not stale imported
 # categorical textures. Shared by picking, fills, labels and border materials.
 var region_textures: Array[Texture2D] = []
@@ -54,6 +55,7 @@ func update_membership(provinces: Dictionary) -> void:
  if province_texture==null:province_texture=ImageTexture.create_from_image(image)
  else:province_texture.update(image)
  membership_uploads+=1
+ visual_changed.emit()
 func update_ownership(provinces: Dictionary, regions: Dictionary, countries: Dictionary) -> void:
  var snapshot: Array=[]
  for key: String in regions:snapshot.append_array([int(key),int(countries[regions[key]["owner"]]["index"])])
@@ -66,3 +68,13 @@ func update_ownership(provinces: Dictionary, regions: Dictionary, countries: Dic
   membership_bytes[at+2]=owner&255;membership_bytes[at+3]=(owner>>8)&255
  province_texture.update(Image.create_from_data(256,256,false,Image.FORMAT_RGBA8,membership_bytes))
  ownership_uploads+=1
+ visual_changed.emit()
+
+func create_sea_mask_texture() -> ImageTexture:
+ var file := FileAccess.open("res://assets/display/sea_mask.bwd", FileAccess.READ)
+ assert(file != null, "Sea coverage mask is missing. Run Prepare_BunnyWorld.bat.")
+ var width := file.get_32()
+ var height := file.get_32()
+ var raw := file.get_buffer(file.get_length()-8).decompress(width*height, FileAccess.COMPRESSION_DEFLATE)
+ assert(raw.size() == width*height, "Invalid sea coverage mask")
+ return ImageTexture.create_from_image(Image.create_from_data(width,height,false,Image.FORMAT_R8,raw))

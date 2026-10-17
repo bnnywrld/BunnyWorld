@@ -1,0 +1,9 @@
+{
+  "base_version": "0.2.0.21",
+  "app_version": "0.2.0.22",
+  "geography_version": "0.2.0.21",
+  "overlay_bundle_and_asset_hashes_verified": 51,
+  "zip_members": 36,
+  "unmodified_world_state_and_geography": true,
+  "result": "PASS"
+}

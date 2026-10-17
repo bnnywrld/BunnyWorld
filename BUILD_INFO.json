@@ -1,75 +1,36 @@
 {
-  "version": "0.2.0.21",
-  "scenario_id": "bunny_world_2000_0_2_0_21",
   "engine": "Godot 4.5.1 stable official",
-  "baseline_version": "0.2.0.20",
+  "countries": 225,
+  "states": 1251,
+  "land_provinces": 13310,
+  "population": 6144737528,
+  "geography_version": "0.2.0.21",
+  "version": "0.2.0.22",
+  "baseline_version": "0.2.0.21",
+  "repository_base_commit": "ca86fe36fd39ea7122c9836933fed091fc99c456",
+  "scenario_id": "bunny_world_2000_0_2_0_21",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
-  "countries": 225,
-  "states": 1251,
-  "land_provinces": 13310,
-  "md_land_provinces": 13221,
-  "population": 6144737528,
-  "local_demographic_refinement": "deferred",
-  "limits": [
-    "Karelian Isthmus uses an authored coarse pre-1940-border guide, clipped to Leningrad.",
-    "Northern Khabarovsk uses an authored Uda/Stanovoy transition guide; no archival treaty geometry is asserted.",
-    "New Stanovoy/Amur division follows terrain-guided geographic grouping; not an archival Manchurian treaty border."
+  "display_version": "0.2.0.22",
+  "map_data_changed": false,
+  "simulation_changed": false,
+  "rendering_changes": [
+    "Single cached relief intersection per view/point",
+    "Exact R8 GPU sea mask; original sea IDs retained for CPU picking",
+    "Distant shader skips unused biome/urban samples",
+    "Idle map redraw heartbeat at 10 Hz; full rate while changing",
+    "Immediate terrain quality switching",
+    "Opt-in bounded native timing reports"
   ],
-  "graphical_linux_tested": true,
-  "debugger_issue_status": "Reported 32 entries not reproduced; exact user log needed if persistent.",
-  "geography_version": "0.2.0.21",
-  "visual_update": true,
-  "map_data_changed": true,
-  "visual_limits": [
-    "Native Windows/NVIDIA 940MX performance requires user testing; Linux software-renderer timings are not Windows FPS."
-  ],
-  "display_version": "0.2.0.21",
-  "repository_base_commit": "d6cc3d76084eca40582adc858cf8e5d9d76c161b",
   "validation": {
-    "geography_checks": 12,
-    "runtime_checks": 33,
+    "runtime_checks": 63,
     "runtime_failures": 0,
-    "renderer_views": 8,
-    "moving_frame_time_reduction_percent": [
-      44.0,
-      48.7,
-      56.6,
-      26.0,
-      57.8,
-      13.0,
-      21.0,
-      30.1
-    ],
-    "gpu_memory_net_reduction_mib": 76.26,
+    "geography_unchanged": true,
+    "sea_mask_pixels_verified": 33554432,
+    "nominal_sea_texture_gpu_savings_mib": 64,
+    "idle_draw_requests_per_600_frames_at_60hz": 100,
     "native_windows_tested": false
-  },
-  "rendering": {
-    "country_edge_shading": "live ownership",
-    "state_selection": "live province membership",
-    "country_border_geometry": "ownership-independent province-pair curve field",
-    "geography_version": "0.2.0.21",
-    "universal_field_gpu_mib": 192,
-    "boundary_hint_gpu_mib": 32,
-    "close_view_primitives_before": 2208168,
-    "close_view_primitives_after": 844810,
-    "frame_time_reduction_percent": [
-      53.1,
-      51.0,
-      61.0,
-      41.5,
-      22.8
-    ],
-    "smooth_curve_fields_unchanged": true,
-    "id_texture_gpu_mib_saved": 128,
-    "spatial_chunks_exact_triangles": true,
-    "spatial_grid": [
-      8,
-      4
-    ],
-    "live_lookup_format": "RGBA8: State ID RG, owner index BA",
-    "id_texture_format": "RG8"
   }
 }

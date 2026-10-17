@@ -1,0 +1,7 @@
+{
+	"maximum_ms": 1.134,
+	"measurement": "CPU camera/spatial-culling/detail-uniform updates only; not FPS",
+	"median_ms": 0.043,
+	"p95_ms": 0.27,
+	"runtime_geometry_builds": 0
+}

@@ -1,3 +1,7 @@
+# Bunny World 0.2.0.22
+
+Rendering performance patch over **0.2.0.21**. Accurate shared picking, a smaller GPU sea mask, less unused distant terrain work, automatic idle redraws and immediate texture-quality switching. Worldwide simulation remains independent of visibility. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, test order and performance reports](documentation/PATCH_0222.md).
+
 # Bunny World 0.2.0.21
 
 Performance/source patch over **0.2.0.20**, including complete Vatican absorption into Rome/Lazio. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, measurements and test order](documentation/PATCH_0221.md).

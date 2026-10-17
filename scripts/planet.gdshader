@@ -163,7 +163,7 @@ float tile_value(sampler2D field,vec4 rect,vec2 uv){
  if(any(lessThan(local,vec2(0.0)))||any(greaterThan(local,vec2(1.0))))return 0.0;
  return texture(field,local).r;
 }
-float ocean_sample(vec2 uv){vec2 id=texture(sea_map,vec2(fract(uv.x),clamp(uv.y,0.0,1.0))).rg;return id.x+id.y>.001?1.0:0.0;}
+float ocean_sample(vec2 uv){return texture(sea_map,vec2(fract(uv.x),clamp(uv.y,0.0,1.0))).r;}
 float ocean_nearby(vec2 uv){
  vec2 step=1.0/vec2(textureSize(sea_map,0));
  return max(ocean_sample(uv),max(max(ocean_sample(uv+vec2(step.x,0.0)),ocean_sample(uv-vec2(step.x,0.0))),max(ocean_sample(uv+vec2(0.0,step.y)),ocean_sample(uv-vec2(0.0,step.y)))));
@@ -251,7 +251,10 @@ void fragment(){
  vec3 base=mix(water,land_color,land_coverage);
  if(physical_mode){
   vec3 earth=texture(terrain_color,uv).rgb;
-  vec3 types=biome_at(uv);
+  // Biome IDs affect only close material patterns/exposure, never snow or
+  // hillshade. Skip their four fetches and categorical ranking at far zoom.
+  vec3 types=vec3(0.0);
+  if(terrain_mix>.001)types=biome_at(uv);
   float primary=types.r;
   float secondary=types.g;
   vec3 n=normalize(geographic_normal);
@@ -287,7 +290,8 @@ void fragment(){
   float snowline=mix(4700.0,1700.0,smoothstep(.25,.85,abs(uv.y-.5)*2.0));
   float snow=smoothstep(snowline,snowline+1000.0,meters)*(1.0-smoothstep(.65,1.25,steep));
   earth=mix(earth,vec3(.87,.91,.94),snow*.68);
-  float urban=texture(urban_density,uv).r*city_detail;
+  float urban=0.0;
+  if(city_detail>.001)urban=texture(urban_density,uv).r*city_detail;
   // Four broad blocks in each ~15 km patch match the enlarged building style.
   // Longitude scale is corrected for latitude instead of shrinking streets
   // toward the poles. The grid remains fixed to the world.

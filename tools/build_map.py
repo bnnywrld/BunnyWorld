@@ -28,13 +28,14 @@ def main():
  if args.check:
   assert old.get('inputs')==source,'Map topology changed. Run python tools/build_map.py --godot <Godot executable>'
   for n,h in old['resources'].items():assert sha(R/n)==h,f'Map resource mismatch: {n}'
+  from build_sea_mask import check as check_sea_mask
+  check_sea_mask()
   print('MAP_BUILD_CONTRACT_PASS',len(ps),'provinces; ownership-independent',flush=True);return
  import numpy as np
  from PIL import Image
  from build_boundary_hint import atlas,build as build_hint
- from build_boundary_field import build as build_field
  Image.MAX_IMAGE_PIXELS=None
- resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/'))
+ resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/') and n not in ['assets/display/sea_mask.bwd','assets/display/sea_mask.json'])
  changed=args.force or bool(old)and old.get('inputs')!=source or resource_mismatch
  if changed:
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
@@ -77,7 +78,9 @@ def main():
   assert godot,'Supply --godot to rebuild the spatial render batches.'
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
  if changed or not (OUT/'boundary_hint.bwd').exists():build_hint()
- if changed or not (OUT/'boundary_distance.bwd').exists():build_field()
+ if changed or not (OUT/'boundary_distance.bwd').exists():
+  from build_boundary_field import build as build_field
+  build_field()
  sea_pack()
  # The compatibility PNG is an output too, not an independent authority.
  lut=np.zeros((256,256,3),np.uint8);lut[255,255,:2]=[255,31]
@@ -86,6 +89,9 @@ def main():
  if not np.array_equal(old_png,lut):Image.fromarray(lut).save(R/'assets/province_index.png')
  chunk_files=['assets/rendering/chunks.json']+['assets/rendering/'+kind+'_chunks.res'for kind in ['sphere','land','province','sea','water']]
  resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res']
+ from build_sea_mask import build as build_sea_mask
+ build_sea_mask()
+ resources+=['assets/display/sea_mask.bwd','assets/display/sea_mask.json']
  resources+=chunk_files
  decoded=[hashlib.sha256(Image.open(R/f'assets/region_ids_{i}.png').convert('RGB').tobytes()).hexdigest()for i in range(4)]
  contract={'schema':1,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}

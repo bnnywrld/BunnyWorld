@@ -1,4 +1,12 @@
-# BunnyWorld 0.2.0.21 handoff
+# BunnyWorld 0.2.0.22 handoff
+
+0.2.0.22 is a changed-files performance patch over GitHub main ca86fe36fd39ea7122c9836933fed091fc99c456 (0.2.0.21). Geography/data stay at 0.2.0.21; application/display advance to 0.2.0.22. See documentation/PATCH_0222.md for installation, tests and console diagnostics. A local change or ZIP delivery does not mean GitHub main was updated.
+
+New rendering behavior: CPU picks share a cached accurate relief intersection, with live membership/ownership reads; GPU sea coverage is a prepared exact R8 mask and CPU sea selection retains IDs; far physical shader skips unused biome/urban reads; graphics quality replaces the existing material array immediately. MapFramePolicy requests full-rate draws on visual changes and a 10 Hz stationary heartbeat, without disabling the main process or WorldState.advance(). Ownership/membership updates explicitly invalidate drawing. Future simulation systems must preserve this separation.
+
+The 0.2.0.22 native performance commands are `perf status`, `perf start [frames]`, `perf stop`, `perf continuous`, `perf auto`. They do not change simulation speed, pause state, frame limit or resolution. Native 940MX/release performance has not been measured here; software timing variance must not be presented as native FPS gains. Earlier review text claiming an unbounded selection cache was incorrect: the cache is capped at 12 entries.
+
+The following describes the retained 0.2.0.21 geography and renderer foundation:
 
 Current patch baseline: confirmed/tested 0.2.0.20, GitHub main d6cc3d76084eca40582adc858cf8e5d9d76c161b. This session delivers the next changed-files ZIP for user testing. Do not infer that GitHub main was updated from a local commit or a ZIP delivery.
 

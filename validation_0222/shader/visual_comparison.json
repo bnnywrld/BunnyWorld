@@ -1,0 +1,41 @@
+{
+  "scope": "Old/new shader at identical view/resources and fixed field glow phase. Other layer glow may still animate.",
+  "cases": [
+    {
+      "view": "alps_close_physical",
+      "mean_channel_difference": 0.0,
+      "pixels_changed_over_8": 0,
+      "pixels": 256000,
+      "byte_identical_png": true,
+      "png_sha256_0": "9c5c221773c732b2d63f7bed53bb2f576deaca2d220d0f871f657895c5f68a46",
+      "png_sha256_1": "9c5c221773c732b2d63f7bed53bb2f576deaca2d220d0f871f657895c5f68a46"
+    },
+    {
+      "view": "asia_far_physical",
+      "mean_channel_difference": 0.0,
+      "pixels_changed_over_8": 0,
+      "pixels": 256000,
+      "byte_identical_png": true,
+      "png_sha256_0": "914adf19ca47b51696e7a73e2c2936cee671c901fa2711b7581c26c57bde8494",
+      "png_sha256_1": "914adf19ca47b51696e7a73e2c2936cee671c901fa2711b7581c26c57bde8494"
+    },
+    {
+      "view": "europe_political",
+      "mean_channel_difference": 0.0,
+      "pixels_changed_over_8": 0,
+      "pixels": 256000,
+      "byte_identical_png": true,
+      "png_sha256_0": "75a275d71d330bd91111f7f2dff042a2d4603a5528a0153c0fc2b4f2f3b33a47",
+      "png_sha256_1": "75a275d71d330bd91111f7f2dff042a2d4603a5528a0153c0fc2b4f2f3b33a47"
+    },
+    {
+      "view": "globe_far_physical",
+      "mean_channel_difference": 0.0,
+      "pixels_changed_over_8": 0,
+      "pixels": 256000,
+      "byte_identical_png": true,
+      "png_sha256_0": "e25a701e5573e8c4754a54bb94d3525dc44455daacb4bbf1edfba323ca097036",
+      "png_sha256_1": "e25a701e5573e8c4754a54bb94d3525dc44455daacb4bbf1edfba323ca097036"
+    }
+  ]
+}
