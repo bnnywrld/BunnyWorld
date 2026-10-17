@@ -1,0 +1,10 @@
+Bunny World 0.2.0.26 changed-files patch
+Base: working 0.2.0.25 / GitHub main aeacb59
+
+1. Close Godot and the game; keep a copy of .25.
+2. Extract all files into the project root beside project.godot and replace included files.
+3. Run Prepare_BunnyWorld.bat and wait for success (app/geography/display .26).
+4. Open in Godot 4.5.1 Standard and start a FRESH campaign, or export a new release EXE.
+
+Read documentation/state_audit_0226/STATE_CHANGES.md for full inventory, modeled population allocation and your short test.
+No Windows executable included. Taiwan, Afghanistan and all exclusions remain unchanged.

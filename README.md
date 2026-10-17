@@ -1,76 +1,52 @@
-# Bunny World 0.2.0.25
+# Bunny World 0.2.0.26
 
-Follow-up over **0.2.0.24**: reliable loading/menu photograph, restored neutral Antarctica, inline state demographics, Rota/Papua mergers, a complete MD state-count/name audit and release-export instructions. Run **Prepare_BunnyWorld.bat** and start a fresh campaign. See [patch and test order](documentation/PATCH_0225.md), [state audit](documentation/state_audit_0225/AUDIT.md) and [Windows EXE export](documentation/EXPORT_WINDOWS.md).
+State detail patch over the confirmed **0.2.0.25** project / GitHub main at `aeacb59`.
+Adds 29 meaningful states using existing whole provinces in China, Syria, India,
+Morocco, Pakistan and Colombia. **224 countries, 1,264 states, 13,308 land provinces.**
+Taiwan, Afghanistan, the Philippines and all other explicit exclusions stay unchanged.
+Previously approved island and territory mergers remain.
 
-# Bunny World 0.2.0.24
+See the [complete state changes, member provinces and test checklist](documentation/state_audit_0226/STATE_CHANGES.md)
+and [all-country count comparison](documentation/state_audit_0226/COUNTRY_COUNTS.md).
 
-Interface and island cleanup over **0.2.0.23**: supplied loading/menu photograph, wider inspectors, flag breadcrumb, state hover previews, empty feature panels, country centering and requested island consolidations. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes and two local test groups](documentation/PATCH_0224.md).
+## Apply and run
 
-# Bunny World 0.2.0.23
+1. Close Godot and the game. Keep a copy of your working 0.2.0.25 project.
+2. Extract the changed-files patch into that project root, beside `project.godot`, replacing included files.
+3. Run **Prepare_BunnyWorld.bat**. Application, geography and display bundles must all report **0.2.0.26**.
+4. Open `project.godot` with **Godot 4.5.1 Standard**, let imports finish and press F5.
+5. Start a **fresh campaign**. Earlier scenario saves are not compatible with this geography.
+6. For a Windows release build, follow [EXE export instructions](documentation/EXPORT_WINDOWS.md).
 
-Performance patch over **0.2.0.22**: less duplicate mesh memory, cached distant terrain shading, separate political/physical shader programs, coalesced hover and indexed city/scenery visibility. Worldwide simulation remains independent of camera visibility. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes and test order](documentation/PATCH_0223.md).
+This patch contains source and prepared resource parts, not a Windows executable.
+Obsolete compressed parts listed in PATCH_REMOVED_FILES_0226.txt may be removed;
+keeping those unreferenced parts does not affect play. Do not delete unrelated files.
 
-# Bunny World 0.2.0.22
+## What is preserved
 
-Rendering performance patch over **0.2.0.21**. Accurate shared picking, a smaller GPU sea mask, less unused distant terrain work, automatic idle redraws and immediate texture-quality switching. Worldwide simulation remains independent of visibility. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, test order and performance reports](documentation/PATCH_0222.md).
+The four canonical province images are byte-identical to .25, including Antarctica.
+No province was added, cut or deleted, and no starting province owner changed.
+Every country retains its exact population, buildings and building-slot total.
+The shared map pipeline refreshes membership, adjacency, borders and prepared resources.
 
-# Bunny World 0.2.0.21
+Population subdivision shares are explicitly modeled from existing settlement ranks
+and rural land area; they are not regional census counts. State-specific demographic
+refinement remains a separate task. This patch leaves rendering and simulation code unchanged.
 
-Performance/source patch over **0.2.0.20**, including complete Vatican absorption into Rome/Lazio. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, measurements and test order](documentation/PATCH_0221.md).
+## Validation
 
-# Bunny World 0.2.0.20
+The .26 data validator passed **65,301 checks**. Godot 4.5.1 headless passed **330 runtime checks**
+for membership, state browsing, hover highlight, inline demographics and an offscreen owner transfer.
+Prepared resources and the map build contract verify. Headless ownership checks inspect the
+texture upload buffer, not hardware GPU readback. Native Windows graphics/performance were not tested here.
 
-Combined changed-files patch over **0.2.0.18 or 0.2.0.19**: includes all 55 State requests plus map renderer optimisation. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. No executable is included. See [changes, measurements and test order](documentation/PATCH_0220.md).
+Your short test: inspect a new state in each target country, hover it in the state browser,
+check its capital and inline chart, then try an owner transfer. Briefly check Taiwan,
+Afghanistan, Micronesia, Papua New Guinea and Antarctica.
 
-# Bunny World 0.2.0.19
+Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed;
+Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu.
+F5 in the **editor** starts the project.
 
-Apply over 0.2.0.18, run **Prepare_BunnyWorld.bat**, then start a fresh campaign. See [all 55 State changes and test order](documentation/PATCH_0219.md). This checkpoint preserves the 0.2.0.18 renderer; performance work follows separately.
-
-# Bunny World 0.2.0.15
-
-State corrections and worldwide audit. Overlay on 0.2.0.14, run Prepare_BunnyWorld.bat, then start a fresh campaign. See [patch notes and audit scope](documentation/PATCH_0215.md).
-
-# Bunny World 0.2.0.14
-
-Rebuilt patch over 0.2.0.13. See [patch notes](documentation/PATCH_0214.md) for installation, changes and test checklist. A fresh campaign is required.
-
-# BunnyWorld 0.2.0.13
-
-Latest source patch: label transparency, country-edge colouring and the wider territory drawer.
-Apply over 0.2.0.12; see [patch guide](documentation/VISUAL_0213.md).
-
-
-Godot 4.5.1 **Standard**, GL Compatibility; Windows 10/11 x64. The current development baseline is `main`.
-
-This visual ZIP applies over working 0.2.0.12. See [visual changes, installation and test order](documentation/VISUAL_0213.md). Country names stay enabled; demographic charts are under Population profile.
-
-## Update and run
-
-1. Close Godot and the running game.
-2. Extract the changed-files ZIP over your working 0.2.0.12 project, beside `project.godot`, replacing the included files.
-3. In the project folder, double-click **Prepare_BunnyWorld.bat**. Wait for successful preparation: application **0.2.0.13**, geography bundle **0.2.0.10** and display bundle **0.2.0.13** are the expected pairing.
-4. Open `project.godot` in Godot, let imports finish, and press F5. Start a **fresh campaign**.
-
-The preparation helper uses installed Python 3, restores prepared resources, refreshes known older border files automatically, and verifies the matching map/data/border bundle. It stops on unknown custom resource edits or mixed versions. Alternative: `python tools/restore_repository_assets.py`. Export templates are not needed to run the project in the editor.
-
-## Current geography
-
-223 retained starting country owners, **1,360 States**, **13,594 land provinces**. The original MD archive has 1,250 States and 13,221 real land provinces (dummy ID zero, sea zones and lakes excluded). Natural Earth supplies the geographic boundaries; MD supplies country budgets, regional naming hints and province density guidance. [Country comparison](GEOGRAPHY_COUNTRY_COUNTS.md).
-
-All 99 Natural Earth disputed/breakaway source identities map to protected State coverage. Nested claims and neighboring disputed islands can share a protected State as documented in the comparison. Future-dispute boundaries retain January-2000 scenario owners and existing starting cores/claims; reserving the geometry does not activate a later dispute.
-
-National population/building totals are retained. New local demographic refinement and old-save migration remain deferred. Map data and prepared geography assets are unchanged by 0.2.0.13; border shaders, country names and information panels are updated. No Windows executable is built for this source update.
-
-## Test order
-
-1. Political map: Egypt, Algeria and Nigeria. Check State counts/shapes and aligned black borders.
-2. Close zoom: South Korea/Japan, then Europe, India, eastern China and the US. Compare useful province density.
-3. Zoom out over the Sahara, Siberia and Greenland; sparse areas should have larger cells.
-4. Inspect Crimea and the Donetsk/Luhansk reserved territories (Ukraine at startup), then Golan Heights, Aksai Chin, Transnistria and Northern Cyprus.
-5. Select States/provinces, search for places, rotate/zoom, and collapse/reopen the territory drawer. Report a country/place, screenshot, zoom/map mode and any slowdown or error.
-
-Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu. F5 in the **editor** starts the project.
-
-Technical checks and limits are in TEST_RESULTS.md. Native Windows visual/performance testing belongs to the user.
-
-The full geography correction list and test order are in [documentation/GEOGRAPHY_0209.md](documentation/GEOGRAPHY_0209.md). The Russian historical cuts remain approximations at game scale.
+Earlier release history: [archived .25 README](documentation/versions/README_main_0225.md),
+[.25 patch](documentation/PATCH_0225.md), [.25 MD audit](documentation/state_audit_0225/AUDIT.md).

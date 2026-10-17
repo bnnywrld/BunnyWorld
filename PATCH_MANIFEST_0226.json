@@ -1,0 +1,305 @@
+{
+  "version": "0.2.0.26",
+  "baseline": "0.2.0.25",
+  "base_commit": "aeacb59",
+  "files": [
+    {
+      "path": "APPLY_0_2_0_26.txt",
+      "bytes": 611,
+      "sha256": "234a8292429d99f45868c5d7056513fe31b70e4d60b57c94bf1a87f39787b552"
+    },
+    {
+      "path": "ASSET_RESTORE.json",
+      "bytes": 28032,
+      "sha256": "656cc260f19f19e149043c4a6a9dcb47d285e1dd50fa96cc2c2f8339a148abbb"
+    },
+    {
+      "path": "BUILD_INFO.json",
+      "bytes": 1297,
+      "sha256": "a70c930e8e25855a5d331e6cc5e12a37cfcae62dc5ed93373a10ba17a58f8763"
+    },
+    {
+      "path": "PATCH_REMOVED_FILES_0226.txt",
+      "bytes": 1030,
+      "sha256": "aafe19715be8a204dd1aacc5745d6bc861b9a42c3bc6ba5c37b753cb1979d4d2"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3150,
+      "sha256": "bdcd610af55bc685886f7dcb7e32a637a8c0d1c251d78ef68dec39c556398110"
+    },
+    {
+      "path": "assets/display/BUNDLE.json",
+      "bytes": 2774,
+      "sha256": "0392de693b7c971bd3436917a64ed42b4e90ffa18d84b9c2932241ef2b77e83d"
+    },
+    {
+      "path": "assets/display/local_coasts.bwd",
+      "bytes": 33565225,
+      "sha256": "98b52fe207d6e26746036f8ae05d7a93fdd5fc23dfaf683c4fab22bd0368ff06"
+    },
+    {
+      "path": "assets/display/local_coasts.json",
+      "bytes": 83670,
+      "sha256": "62a85279c9308ae56c945a46f021d41e71011cf91e03eb1266fc73f8c956f69d"
+    },
+    {
+      "path": "assets/display/map_contract.json",
+      "bytes": 313750,
+      "sha256": "93e2d47cb0b6ac42b7d6c1863a0a62993997f7674def95e6ded570398b84c299"
+    },
+    {
+      "path": "assets/province_index.png",
+      "bytes": 9064,
+      "sha256": "da629059988a3b34f7a641610ffe2fa180a58892c48a2dbc2153ac1371158ba2"
+    },
+    {
+      "path": "assets/rendering/chunks.json",
+      "bytes": 1530,
+      "sha256": "bdc14155515e85029842622851da5347827584b317ef0bae126a3a6d7da66130"
+    },
+    {
+      "path": "data/boundaries_build_report.json",
+      "bytes": 266,
+      "sha256": "7f261530aa8edc97eface666db3c839e98dd9c715e9cfc18359d936caad72598"
+    },
+    {
+      "path": "data/cities.json",
+      "bytes": 465225,
+      "sha256": "fd73cc95e4a4ad47786d16010e1d9752ed1a17d4ee8ccf943c5545edf19ebc40"
+    },
+    {
+      "path": "data/geography_0226_report.json",
+      "bytes": 16235,
+      "sha256": "9557661cc4ec10fe7994982333f298de02bf8fadb8ecb9f1614ef81e23307d2a"
+    },
+    {
+      "path": "data/geography_bundle.json",
+      "bytes": 1714,
+      "sha256": "89d7f8d6bd7637a2724859090002f567fa599b04c7d2f045636d0565af65b248"
+    },
+    {
+      "path": "data/population_weights_0226.json",
+      "bytes": 272201,
+      "sha256": "cfa636aaa0b598b1a845f44c263c0bd0c934353ca9f7ddb556c7a16212d5b0db"
+    },
+    {
+      "path": "data/protected_territories_0210.json",
+      "bytes": 22589,
+      "sha256": "d230c37e1d5dbe59f3ad597eac48ec38a2f29d32a31afe2fa082d83a27d0455a"
+    },
+    {
+      "path": "data/provinces.json",
+      "bytes": 4629988,
+      "sha256": "3e6959c252ca1faa0d2e7d257bfa92ba67b3e925d9876e6959c55956f36f69aa"
+    },
+    {
+      "path": "data/state_plan_0226.json",
+      "bytes": 305318,
+      "sha256": "17e7aeb7e6754fe1f6a8ce5b579c2138692ac9d01b5f329029938b7596d19bb2"
+    },
+    {
+      "path": "data/urban_population.json",
+      "bytes": 294572,
+      "sha256": "7164c870581118a34822dedfc2adb4bae20c2ca4d8e642a345e8ceea4a16e621"
+    },
+    {
+      "path": "data/urban_scenery.json",
+      "bytes": 4322766,
+      "sha256": "c271b729eaf6fe48de3d9b56f601fc8dd0fed5a45bdb1ddf7772b72fe3381649"
+    },
+    {
+      "path": "data/world.json",
+      "bytes": 1690674,
+      "sha256": "13f5140b947b70fe3b071de2040c6a0871bb0b5ee3cd580437375c98895ff22a"
+    },
+    {
+      "path": "documentation/EXPORT_WINDOWS.md",
+      "bytes": 2874,
+      "sha256": "345048843872f21b13e2c108fed077e592cee23cdd2e9dcc843c05c21a1f6505"
+    },
+    {
+      "path": "documentation/state_audit_0226/COUNTRY_COUNTS.md",
+      "bytes": 7596,
+      "sha256": "1421a1a3c3228402afad029cacddf9d1b2ed935e02bb404a7e3cfacc7e870b4b"
+    },
+    {
+      "path": "documentation/state_audit_0226/STATE_CHANGES.md",
+      "bytes": 29057,
+      "sha256": "a73f16366e417a654ea7f50f67842be06121aeaa4fe5fd6a57934dfd6daf6558"
+    },
+    {
+      "path": "documentation/versions/README_main_0225.md",
+      "bytes": 6530,
+      "sha256": "27781155a46a631f8b2990d8526bf5b362900529539ef0f55837861e7bbc381f"
+    },
+    {
+      "path": "export_presets.cfg",
+      "bytes": 1744,
+      "sha256": "a911ca9968639b206d91e685bbfeaba8b894d1584296d248ff706defd57bef6e"
+    },
+    {
+      "path": "project.godot",
+      "bytes": 1011,
+      "sha256": "2111ac4bd4d3f8b03da37e65de0b58fe597c226d1307f1db956faaac53963bda"
+    },
+    {
+      "path": "repository_assets/0a0071db1d243be5ffceb2be5a946c9f82b1e09fd40825eb6ac3e8fa540d3a39.zlib.part000",
+      "bytes": 2097152,
+      "sha256": "9164073e030cd288b929e1c4b9f008525ece4ba31713e00f2adf8a5950641f18"
+    },
+    {
+      "path": "repository_assets/0a0071db1d243be5ffceb2be5a946c9f82b1e09fd40825eb6ac3e8fa540d3a39.zlib.part001",
+      "bytes": 2097152,
+      "sha256": "604a2e6b3ae15e8873c45b34cb4520c6f45db2aeb7d4110db83c84ec2ffedfb3"
+    },
+    {
+      "path": "repository_assets/0a0071db1d243be5ffceb2be5a946c9f82b1e09fd40825eb6ac3e8fa540d3a39.zlib.part002",
+      "bytes": 2097152,
+      "sha256": "694e49643f98c53d73d17d8c8882d1f612a9ca7ae0fe23dccd3304b0b20245df"
+    },
+    {
+      "path": "repository_assets/0a0071db1d243be5ffceb2be5a946c9f82b1e09fd40825eb6ac3e8fa540d3a39.zlib.part003",
+      "bytes": 2097152,
+      "sha256": "9ce8e94421f512964e2f20f65b9d0b513cd8a5a20fcf68a67b76cdf975130448"
+    },
+    {
+      "path": "repository_assets/0a0071db1d243be5ffceb2be5a946c9f82b1e09fd40825eb6ac3e8fa540d3a39.zlib.part004",
+      "bytes": 1782935,
+      "sha256": "9b8f45af5ba3e5cb29c62a4423163d45c08a5b70ded7c54e894bd5cf64372879"
+    },
+    {
+      "path": "repository_assets/2d5553901d15081039ca23f2678c62be1a2a5dfb3a348b9ee0f068ef3636d16a.zlib.part000",
+      "bytes": 2097152,
+      "sha256": "f078dfaa6f550417850be7ce4b435279b672e263aec979fd7ef611a2b68e635e"
+    },
+    {
+      "path": "repository_assets/2d5553901d15081039ca23f2678c62be1a2a5dfb3a348b9ee0f068ef3636d16a.zlib.part001",
+      "bytes": 2097152,
+      "sha256": "83ff7fcd689765bb017bf19e6deea49ce389228f7daec4f59d9d48c78ce4f092"
+    },
+    {
+      "path": "repository_assets/2d5553901d15081039ca23f2678c62be1a2a5dfb3a348b9ee0f068ef3636d16a.zlib.part002",
+      "bytes": 2097152,
+      "sha256": "a7f456e42e286dc4d198249553e3e38be86987716352eb7d61e5d77dd9561643"
+    },
+    {
+      "path": "repository_assets/2d5553901d15081039ca23f2678c62be1a2a5dfb3a348b9ee0f068ef3636d16a.zlib.part003",
+      "bytes": 1824222,
+      "sha256": "2b695dcf4250f50fd4482ec9b63b6d642fe7442a143de539c427d45c40c2560f"
+    },
+    {
+      "path": "repository_assets/fdebf0e51df86dcef172e3566ffefa74cc6156fd6bcdf46ffc386153e78b55fd.zlib.part000",
+      "bytes": 2097152,
+      "sha256": "15f43859871239237b9af4cbd72f4b7748f2e502f4a5230889ffca4506aa2193"
+    },
+    {
+      "path": "repository_assets/fdebf0e51df86dcef172e3566ffefa74cc6156fd6bcdf46ffc386153e78b55fd.zlib.part001",
+      "bytes": 2097152,
+      "sha256": "47d41ab63a44824639de7892461e37719bffd3770e2cdb26b33daad013eb8764"
+    },
+    {
+      "path": "repository_assets/fdebf0e51df86dcef172e3566ffefa74cc6156fd6bcdf46ffc386153e78b55fd.zlib.part002",
+      "bytes": 2097152,
+      "sha256": "1e2533f001f297303c5f137cf2d564bc428a8b2be5e7bcc0641af02609dc067d"
+    },
+    {
+      "path": "repository_assets/fdebf0e51df86dcef172e3566ffefa74cc6156fd6bcdf46ffc386153e78b55fd.zlib.part003",
+      "bytes": 2097152,
+      "sha256": "e833a495e96f90452fe22d88bee6165acb6fdd27f77b55330bc7bb180697177c"
+    },
+    {
+      "path": "repository_assets/fdebf0e51df86dcef172e3566ffefa74cc6156fd6bcdf46ffc386153e78b55fd.zlib.part004",
+      "bytes": 1107260,
+      "sha256": "f93338e3c14c7565a9f77fdfcfaf4dbe382bd6d899be3deb7c27bfc87e2312df"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part000",
+      "bytes": 2097152,
+      "sha256": "fd644ec0c15c0ec610551100eede5124b5d52d149a13a908d47b55e990e6c4b7"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part001",
+      "bytes": 2097152,
+      "sha256": "7dac5bcc335d09a2be97fb1957376246fce48452251867b598bda3ed022a533f"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part002",
+      "bytes": 2097152,
+      "sha256": "d72415159c88b59aabb7d40ad950177cfbd2c6c978cd5e0465c140a9a2ae7f6e"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part003",
+      "bytes": 2097152,
+      "sha256": "d043f23fae1fcc85905905bc340245cef9a1e03dbae34cacdc8c2bb361eeef29"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part004",
+      "bytes": 2097152,
+      "sha256": "cb932aad7e3b7d1b52614b069e2a2b4598ab96a28e7f39cb94cfeda11eb9d224"
+    },
+    {
+      "path": "repository_assets/fead00e42bbe3df9084b246045dfcce18b41d3cc031a7e4d82eb633905416f4c.zlib.part005",
+      "bytes": 1823526,
+      "sha256": "0c113b1c24617d5ab2ee6daa515b384e1db9fdceb431764b565175f0be792845"
+    },
+    {
+      "path": "tests/geography_0226_tests.py",
+      "bytes": 5453,
+      "sha256": "14a13ee050c19664482be7e7d9ab254c61ed12cc6b2ca54b4e310b5f0698b7c8"
+    },
+    {
+      "path": "tests/states_0226_tests.gd",
+      "bytes": 3935,
+      "sha256": "c205a5fb7ec941c557d62eb82b20a17bc05715bb1662d9a3c169fb69e79ca5e8"
+    },
+    {
+      "path": "tools/apply_states_0226.py",
+      "bytes": 12067,
+      "sha256": "f10206d7a45d9d6931787d1056639889baf2fa9e20ce693b08b2cd74b381878e"
+    },
+    {
+      "path": "tools/cartography/grouped_atlas_022r2.npz",
+      "bytes": 1492667,
+      "sha256": "950b6dac5fced3331ffeaddab510a84ef29774070261cff0da56837134f2e65b"
+    },
+    {
+      "path": "tools/package_patch_0226.py",
+      "bytes": 3574,
+      "sha256": "70e6ec57ea30faf8738e264db326bbc999eff638d34973a8c7fc3f860cec8deb"
+    },
+    {
+      "path": "tools/report_states_0226.py",
+      "bytes": 8910,
+      "sha256": "dfecbcfa214542e293ca25bba2093d8117d5109c5f3d8781973b916cff4e777e"
+    },
+    {
+      "path": "tools/review_states_0226.py",
+      "bytes": 13198,
+      "sha256": "b8ba77fb3813e582b8407b44f21cea62c1f62a050d2f1db89c4933238e60c9ef"
+    },
+    {
+      "path": "validation_0226/geography_results.json",
+      "bytes": 449,
+      "sha256": "9c9b85a5553ff2127fd8c5c4f0245ebaad8c95111d3fc6c8373c9c9f19f44bb8"
+    },
+    {
+      "path": "validation_0226/runtime_results.json",
+      "bytes": 177,
+      "sha256": "79beb39b5c3a2321c173f3bb6077a3d5902e21ee28cb5d5e68c05559c854f607"
+    }
+  ],
+  "obsolete_parts": [
+    "repository_assets/1455bf798e56b712a32fe2c680c7cfa679e0dd3f6362e4f49b4c7669287e34da.zlib.part000",
+    "repository_assets/1455bf798e56b712a32fe2c680c7cfa679e0dd3f6362e4f49b4c7669287e34da.zlib.part001",
+    "repository_assets/1455bf798e56b712a32fe2c680c7cfa679e0dd3f6362e4f49b4c7669287e34da.zlib.part002",
+    "repository_assets/1455bf798e56b712a32fe2c680c7cfa679e0dd3f6362e4f49b4c7669287e34da.zlib.part003",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part000",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part001",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part002",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part003",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part004",
+    "repository_assets/d05d18966e9682bd4266860f1a773bb8995b3e9521202ea4528ae667d717ef6f.zlib.part005"
+  ],
+  "compressed_resource_roundtrips": 4
+}
