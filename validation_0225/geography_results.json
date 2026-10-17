@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "checks": 38887,
+  "countries": 224,
+  "states": 1235,
+  "land_provinces": 13308,
+  "global_population": 6144737528,
+  "restored_antarctic_pixels": 12530235,
+  "owned_province_pixels_changed": 0,
+  "audit_countries_below_raw_md": 34,
+  "raw_md_shortfall_sum": 82
+}

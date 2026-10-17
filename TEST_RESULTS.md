@@ -1,26 +1,11 @@
-# BunnyWorld 0.2.0.24 verification
+# BunnyWorld 0.2.0.25 verification
 
-74 full-application checks pass with zero failures in Godot 4.5.1 GL Compatibility
-on Linux llvmpipe. The checks cover the supplied loading/menu image, aspect
-preservation and menu visibility, 370px country/diplomacy inspectors, all eleven
-feature toolbar sections, close/toggle/replacement behavior, country flag and
-camera-centering action, temporary state hover and restoration, Micronesia's
-single-state browser, removed countries/provinces and live GPU island membership.
-Menu, loading, Research and state-list views were captured; the menu and panel
-layouts were inspected. Native Windows appearance/input feel remains the user's test.
+92 full-application checks pass with zero failures in Godot 4.5.1 GL Compatibility on Linux llvmpipe. Includes the prior .24 interactions plus raw JPEG startup with imported texture cache deliberately absent, inline state pie/four selectors and scrolling, Rota/Papua unions, and rendered/picked neutral Antarctic land in political, physical and population modes. Menu, state-chart and Antarctic physical screenshots inspected.
 
-The independent geography check passes 45,043 assertions: exact before/after
-province raster comparison, unchanged other province footprints, all memberships,
-unique local numbering, national/world populations, capitals, city/scenery island
-references, adjacency symmetry and removal from the tiny-land physical fallback.
-Exactly five raster pixels are removed, corresponding to Malpelo and Navassa.
-Totals: 224 countries, 1,239 states, 13,308 land provinces; 6,144,737,528 residents.
+38,887 independent geography/reference assertions pass. Every owned province pixel stays exact; 12,530,235 neutral Antarctic land pixels restored from bundled geographic source. All gameplay province IDs, country populations and world population stay unchanged. State hierarchy, numbering, capitals, linked cities/scenery and adjacency checked. MD reference matches supplied archive checksums; audit covers all 224 countries.
 
-The shared map pipeline rebuilt and verified borders, spatial batches, smooth
-boundary/coast fields and tiny-land bits together. Prepared resource restoration,
-geography/display bundle hashes and the map/source/cache contracts pass.
-GDScript parsing, Python compilation and git diff whitespace checks pass.
+The supplied JPEG survives a resource-export fixture and decodes as 1536x1024. The source-version export validator accepts .25 and rejects a deliberately wrong .24 expectation. This does not constitute a native Windows EXE export/test.
 
-There is no renderer redesign, simulation change or new native FPS claim in this
-patch. Windows export was not performed. Use a fresh campaign in the .24 source
-project. See documentation/PATCH_0224.md for the two short local test groups.
+Prepared resource restoration, geography/display bundle and map/cache contracts pass; GDScript parsing, Python compilation and git diff whitespace checks pass.
+
+Current totals: 224 countries, 1,235 states, 13,308 land provinces; population 6,144,737,528. Antarctica is neutral terrain outside ordinary gameplay counts. No new FPS claim or renderer redesign; native EXE appearance/performance comparison is the user test.

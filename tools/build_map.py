@@ -42,7 +42,11 @@ def main():
  if changed:
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
   assert godot,'Geography changed: supply --godot <Godot 4.5.1 executable> to rebuild all dependent resources.'
-  a=atlas();ids=set(np.unique(a))- {0,65535};assert ids==set(map(int,ps)),'Raster province IDs differ from data/provinces.json'
+  a=atlas()
+  if world.get('map',{}).get('antarctica_province_id')==65535:
+   for lon,lat in [(0,-85),(90,-80),(-90,-80),(140,-80)]:
+    assert int(a[int((90-lat)/180*8192),int((lon+180)/360*16384)])==65535,'Declared Antarctic terrain is missing. Restore its reserved land pixels before rebuilding.'
+  ids=set(np.unique(a))- {0,65535};assert ids==set(map(int,ps)),'Raster province IDs differ from data/provinces.json'
   lut=np.zeros(65536,np.uint16);lut[65535]=8191
   for p in ps.values():lut[p['id']]=p['region']
   # Derive adjacency from canonical pixels too. Old neighbor tables must

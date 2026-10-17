@@ -1,7 +1,0 @@
-{
-	"application_frames": 600,
-	"change_wakes_immediately": true,
-	"idle_map_draw_requests": 100,
-	"moving_draws_per_60_frames": 60,
-	"simulation_gated": false
-}

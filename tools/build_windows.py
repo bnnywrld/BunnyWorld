@@ -124,7 +124,9 @@ def main():
         subprocess.run([args.godot, '--headless', '--path', str(root), '--export-release', 'Windows Desktop', str(output)], check=True)
         if embedded:
             print(validate_embedded_launcher(output))
-            subprocess.run([args.godot, '--headless', '--main-pack', str(output), '--script', str(root / 'tests/export_pack_version_tests.gd')], check=True)
+            info = json.loads((root / 'BUILD_INFO.json').read_text())
+            world = json.loads((root / 'data/world.json').read_text())
+            subprocess.run([args.godot, '--headless', '--main-pack', str(output), '--script', str(root / 'tests/export_pack_version_tests.gd'), '--', '--expected-version=' + info['version'], '--expected-scenario=' + world['scenario_id']], check=True)
         else:
             validate_external_launcher(output)
             pack = output.with_suffix('.pck')

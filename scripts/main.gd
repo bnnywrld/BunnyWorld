@@ -165,6 +165,7 @@ var loading_overlay: ColorRect
 var loading_progress: ProgressBar
 var loading_caption: Label
 var menu_background: TextureRect
+var menu_photo: Texture2D
 var state_preview := 0
 var active_feature := ""
 var boot_complete := false
@@ -669,7 +670,13 @@ func _build_interface() -> void:
 	territory_details.custom_minimum_size.x = 270
 	territory_details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	territory_details.add_theme_constant_override("separation", 5)
-	territory_frame.add_child(territory_details)
+	territory_scroll = ScrollContainer.new()
+	territory_scroll.name = "TerritoryScroll"
+	territory_scroll.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	territory_scroll.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	territory_scroll.mouse_force_pass_scroll_events = false
+	territory_frame.add_child(territory_scroll)
+	territory_scroll.add_child(territory_details)
 	territory_panel.hide()
 	_position_panels()
 	var scroll := ScrollContainer.new()
@@ -3003,9 +3010,22 @@ func _go_to_place(record: Dictionary, animated: bool = true) -> void:
 func _area_number(area: float) -> String:
 	return "%.2f" % area if area<10.0 else _number(int(round(area)))
 
+func _menu_photo_texture() -> Texture2D:
+	if menu_photo != null: return menu_photo
+	var path := "res://assets/ui/menu_background.jpg"
+	# Source patches can arrive before the editor refreshes its import cache.
+	# Decode the shipped JPEG directly; exports retain an imported fallback.
+	if FileAccess.file_exists(path):
+		var photo := Image.new()
+		if photo.load_jpg_from_buffer(FileAccess.get_file_as_bytes(path)) == OK:
+			menu_photo = ImageTexture.create_from_image(photo)
+	if menu_photo == null and ResourceLoader.exists(path): menu_photo = load(path)
+	if menu_photo == null: push_error("Loading/menu photograph is missing: " + path)
+	return menu_photo
+
 func _space_background(parent: Control) -> TextureRect:
 	var background := TextureRect.new()
-	background.texture = load("res://assets/ui/menu_background.jpg")
+	background.texture = _menu_photo_texture()
 	background.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	background.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_COVERED
 	background.mouse_filter = Control.MOUSE_FILTER_IGNORE

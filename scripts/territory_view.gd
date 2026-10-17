@@ -20,7 +20,7 @@ func inventory(body: VBoxContainer,records: Dictionary,levels: bool) -> void:
   var count:=text(str(int(records[id]))+("/10" if levels else ""),11,Color("eee4cd"));count.horizontal_alignment=HORIZONTAL_ALIGNMENT_RIGHT;row.add_child(count);tile.tooltip_text=Facilities.caption(id)+": "+str(int(records[id]))+(" / 10 levels" if levels else " buildings");grid.add_child(tile)
  if grid.get_child_count()==0:body.add_child(text("No recorded facilities"))
 func render(main: Control) -> void:
- host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_SHRINK_BEGIN
+ host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_SHRINK_BEGIN;host.territory_scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_AUTO;host.territory_scroll.scroll_vertical=0
  if host.state.selected_region<=0:host._hide_panel(host.territory_panel);return
  var r: Dictionary=host.state.regions[str(host.state.selected_region)];var before: VBoxContainer=host.details;host.details=host.territory_heading;host._selection_breadcrumb(r);host.territory_heading.add_child(text(str(r["name"]),21,Color("f0eee2")));host.details=host.territory_details
  var summary:=HBoxContainer.new();summary.name="StateSummary";summary.add_child(text(host.foundation.compact_number(r["population"])+" residents",17,Color("eee4cd")));summary.add_child(text(host.foundation.compact_number(int(r["area_km2"]))+" km²",14));host.territory_details.add_child(summary)
@@ -31,11 +31,13 @@ func render(main: Control) -> void:
  var resources:=section("Resources","StateResources");var row:=HBoxContainer.new();var icon:=TextureRect.new();icon.texture=Facilities.icon("resources");icon.expand_mode=TextureRect.EXPAND_IGNORE_SIZE;icon.stretch_mode=TextureRect.STRETCH_KEEP_ASPECT_CENTERED;icon.custom_minimum_size=Vector2(22,22);row.add_child(icon);row.add_child(text("Data unavailable"));resources.add_child(row)
  if host.state.selected_province>0 and host.distance<=1.2:
   var p: Dictionary=host.state.provinces[str(host.state.selected_province)];var label:=text("Province "+str(int(p["local_index"]))+" · "+str(p.get("kind","rural")).capitalize()+" · "+host._area_number(p["area_km2"])+" km²");label.name="SelectedProvince";label.tooltip_text=str(p.get("neighbors",[]).size())+" land connections";host.territory_details.add_child(label)
- var demographics: Button=host._button("Population profile  ›",func():host.foundation.open_demographics(r["owner"],int(r["id"])),"State age, religion, education and activity");demographics.add_theme_font_size_override("font_size",12);host.territory_details.add_child(demographics)
+ var demographics:=preload("res://scripts/compact_demographics.gd").new()
+ demographics.configure(host.foundation.demographics.state_metrics(host.state,int(r["id"])),host.territory_metric,func(key: String):host.territory_metric=key,true)
+ section("Population profile","StatePopulationProfile").add_child(demographics)
  var rights:=text("Cores "+str(r.get("cores",[]).size())+"   ·   Claims "+str(r.get("claims",[]).size()),11);rights.tooltip_text="Cores: "+", ".join(r.get("cores",[]))+"\nClaims: "+", ".join(r.get("claims",[]));host.territory_details.add_child(rights)
  host.details=before;host._reveal_panel(host.territory_panel);host._position_panels()
 func sea(main: Control,id: int) -> void:
- host=main;clear(host.territory_heading);clear(host.territory_details);var r: Dictionary=host.state.sea_regions[str(id)];host.territory_heading.add_child(text("SEA REGION",10,Color("76bfb2")));var title:=text(r["name"],21,Color("eee4cd"));title.name="SeaTitle";title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;title.custom_minimum_size.y=54;host.territory_heading.add_child(title);host.territory_details.add_child(text(str(r["naval_terrain"]).replace("_"," ").capitalize(),14))
+ host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_AUTO;var r: Dictionary=host.state.sea_regions[str(id)];host.territory_heading.add_child(text("SEA REGION",10,Color("76bfb2")));var title:=text(r["name"],21,Color("eee4cd"));title.name="SeaTitle";title.autowrap_mode=TextServer.AUTOWRAP_WORD_SMART;title.custom_minimum_size.y=54;host.territory_heading.add_child(title);host.territory_details.add_child(text(str(r["naval_terrain"]).replace("_"," ").capitalize(),14))
  var grid:=GridContainer.new();grid.columns=2;grid.add_theme_constant_override("h_separation",5);grid.add_theme_constant_override("v_separation",5);section("Neighbouring waters","NeighboringWaters").add_child(grid)
  for n: int in r["neighbors"]:
   if not host.state.sea_regions.has(str(n)):continue
@@ -43,7 +45,7 @@ func sea(main: Control,id: int) -> void:
  host._reveal_panel(host.territory_panel);host._position_panels()
 
 func country_states(main: Control,tag: String) -> void:
- host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_EXPAND_FILL
+ host=main;clear(host.territory_heading);clear(host.territory_details);host.territory_details.size_flags_vertical=Control.SIZE_EXPAND_FILL;host.territory_scroll.vertical_scroll_mode=ScrollContainer.SCROLL_MODE_DISABLED;host.territory_scroll.scroll_vertical=0
  var country: Dictionary=host.state.countries[tag]
  host.territory_heading.add_child(text(str(country["name"]),21,Color("f0eee2")))
  var ids: Array=[]

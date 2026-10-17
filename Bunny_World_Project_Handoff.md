@@ -1,3 +1,19 @@
+# BunnyWorld 0.2.0.25 handoff
+
+Changed-files source patch over local delivered .24 (4fb8395). App/geography/display .25. No implication of a push to GitHub main. See documentation/PATCH_0225.md.
+
+User-confirmed .24 UI largely works. Follow-up fixes: direct JPEG loading for background independent of import cache, JPEG explicitly exported; Antarctica restored to canonical reserved-ID 65535/display region 8191 from bundled Natural Earth coast data (12,530,235 pixels), remains neutral terrain; inline StateDemographics pie/four buttons restored with scrolling. Rota -> Mariana Islands 1735; Western Papua 1601 -> Southern Papua 1603; Sepik 1600 and Papuan Highlands 1606 -> Northern Papua 1602. PAP has four states.
+
+Current totals: 224 countries, 1,235 states, 13,308 land provinces; population 6,144,737,528. No owned province pixel or country population changed. Antarctic sentinel is not included in gameplay counts. Map authoring now asserts Antarctic interior points when its metadata declares neutral Antarctic land. No ordinary Antarctica country was authorized or added.
+
+State audit: 34 countries below raw MD counts, 82 combined deficits, global net 15 fewer than MD. Supplied MD archive state-history/definition checksums match the bundled 1,250-state January-2000 reference. documentation/state_audit_0225 contains all counts, current/reference names, 225 naming review flags, regional candidates and proposed priorities. Global splits/renames are a separate geography pass; explicit Micronesia/PAP reductions override raw numerical minima and approved island mergers must remain.
+
+Performance: user reports almost no aggregate CPU use, low RAM use, and GPU near/at 100% during movement; physical mode worse than political. GPU rendering is the leading hypothesis. User accepts LONGER STARTUP to prioritize SMOOTH PLAY; permit offline/boot work and CPU caches while keeping GPU memory bounded. Native release EXE comparison is next baseline, not a substitute for renderer redesign. Physical-only detail/clean information modes remain the intended experimental renderer design, not implemented in this follow-up.
+
+92 application checks, 38,887 data checks, prepared asset/contracts and JPEG export fixture pass. Photo startup tested with imported ctex cache deliberately removed. Antarctic physical/political/population and inline-chart screenshots inspected. Linux llvmpipe only; native Windows appearance/performance is user test. documentation/EXPORT_WINDOWS.md gives GUI release steps. build_windows.py export version validator now takes current source version/scenario instead of hard-coded .6. No Windows EXE exported here.
+
+Historical foundation follows; prior counts/versions are superseded:
+
 # BunnyWorld 0.2.0.24 handoff
 
 Changed-files source patch over GitHub main c74c3c6 (0.2.0.23). App, geography and display are .24. See documentation/PATCH_0224.md. Delivery is a ZIP for native user testing; this does not imply main was pushed.

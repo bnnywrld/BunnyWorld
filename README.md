@@ -1,3 +1,7 @@
+# Bunny World 0.2.0.25
+
+Follow-up over **0.2.0.24**: reliable loading/menu photograph, restored neutral Antarctica, inline state demographics, Rota/Papua mergers, a complete MD state-count/name audit and release-export instructions. Run **Prepare_BunnyWorld.bat** and start a fresh campaign. See [patch and test order](documentation/PATCH_0225.md), [state audit](documentation/state_audit_0225/AUDIT.md) and [Windows EXE export](documentation/EXPORT_WINDOWS.md).
+
 # Bunny World 0.2.0.24
 
 Interface and island cleanup over **0.2.0.23**: supplied loading/menu photograph, wider inspectors, flag breadcrumb, state hover previews, empty feature panels, country centering and requested island consolidations. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes and two local test groups](documentation/PATCH_0224.md).

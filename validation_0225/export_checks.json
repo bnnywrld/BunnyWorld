@@ -1,0 +1,10 @@
+{
+  "jpeg_source_export_fixture": "passed",
+  "jpeg_decoded_dimensions": [
+    1536,
+    1024
+  ],
+  "source_version_validator": "passed",
+  "wrong_version_rejected": true,
+  "windows_executable_exported": false
+}

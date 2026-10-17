@@ -1,5 +1,5 @@
-BunnyWorld 0.2.0.24 changed-files source patch over 0.2.0.23.
-Close Godot and the game. Extract into the folder containing project.godot, replacing files.
-Run Prepare_BunnyWorld.bat and wait for success. Reopen project.godot, press F5, start a fresh campaign.
-Application/display/geography: 0.2.0.24. No Windows executable is included.
-See documentation/PATCH_0224.md for the UI and island test groups.
+BunnyWorld 0.2.0.25 changed-files source patch over 0.2.0.24.
+Close Godot/game. Extract into the folder containing project.godot, replacing files.
+Run Prepare_BunnyWorld.bat, reopen Godot and start a fresh campaign.
+App/geography/display: 0.2.0.25. No Windows executable included.
+See documentation/PATCH_0225.md, documentation/EXPORT_WINDOWS.md and documentation/state_audit_0225/AUDIT.md.

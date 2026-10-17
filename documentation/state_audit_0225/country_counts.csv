@@ -1,0 +1,225 @@
+﻿tag,country,current_states,md_states,shortfall,target_minimum,constraint,next_action
+ABK,Abkhazia,1,1,0,1,,Review names if flagged; no count increase required.
+ACE,Aceh,1,1,0,1,,Review names if flagged; no count increase required.
+AFG,Afghanistan,2,3,1,3,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+AIA,Al-Itihaad,1,1,0,1,,Review names if flagged; no count increase required.
+ALB,Albania,2,2,0,2,,Review names if flagged; no count increase required.
+ALG,Algeria,12,10,0,10,,Review names if flagged; no count increase required.
+AGL,Angola,2,3,1,3,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+ANT,Antigua and Barbuda,1,1,0,1,,Review names if flagged; no count increase required.
+ARG,Argentina,7,8,1,8,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+AFR,Armed Forces Revolutionary Council,1,1,0,1,,Review names if flagged; no count increase required.
+ARM,Armenia,3,3,0,3,,Review names if flagged; no count increase required.
+NKR,Artsakh,3,3,0,3,,Review names if flagged; no count increase required.
+AST,Australia,13,11,0,11,,Review names if flagged; no count increase required.
+AUS,Austria,5,3,0,3,,Review names if flagged; no count increase required.
+AZE,Azerbaijan,4,5,1,5,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+BAH,Bahamas,1,1,0,1,,Review names if flagged; no count increase required.
+BHR,Bahrain,1,1,0,1,,Review names if flagged; no count increase required.
+BAN,Bangladesh,4,4,0,4,,Review names if flagged; no count increase required.
+BAR,Barbados,1,1,0,1,,Review names if flagged; no count increase required.
+BLR,Belarus,6,6,0,6,,Review names if flagged; no count increase required.
+BEL,Belgium,4,4,0,4,,Review names if flagged; no count increase required.
+BLZ,Belize,1,1,0,1,,Review names if flagged; no count increase required.
+BEN,Benin,2,2,0,2,,Review names if flagged; no count increase required.
+BHU,Bhutan,1,2,1,2,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+BOL,Bolivia,3,3,0,3,,Review names if flagged; no count increase required.
+BOS,Bosnia,5,6,1,6,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+BOT,Botswana,2,2,0,2,,Review names if flagged; no count increase required.
+BRA,Brazil,27,25,0,25,,Review names if flagged; no count increase required.
+BRU,Brunei,1,1,0,1,,Review names if flagged; no count increase required.
+BUL,Bulgaria,5,3,0,3,,Review names if flagged; no count increase required.
+BFA,Burkina Faso,3,3,0,3,,Review names if flagged; no count increase required.
+BUR,Burundi,2,2,0,2,,Review names if flagged; no count increase required.
+VER,Cabo Verde,1,1,0,1,,Review names if flagged; no count increase required.
+CBD,Cambodia,4,4,0,4,,Review names if flagged; no count increase required.
+CAM,Cameroon,3,3,0,3,,Review names if flagged; no count increase required.
+CAN,Canada,13,13,0,13,,Review names if flagged; no count increase required.
+CAR,Central African Republic,4,4,0,4,,Review names if flagged; no count increase required.
+CHA,Chad,4,4,0,4,,Review names if flagged; no count increase required.
+CHE,Chechnya,1,1,0,1,,Review names if flagged; no count increase required.
+CHL,Chile,5,6,1,6,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+CHI,China,35,43,8,43,,"Review Pearl River Delta, Nanjing, Liaoxi, Songjiang, Hulunbuir, Shandong Peninsula, Northern Hebei and Western Sichuan as candidate population/economic regions. Preserve current country control and approved Xinjiang/Tibet unions."
+COL,Colombia,5,8,3,8,,"Review Pacifico, Caribe, Antioquia, Santander and Amazonia against current mixed departmental unions; retain removed island states as removed."
+COM,Comoros,1,2,1,2,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+CNG,Congo,2,2,0,2,,Review names if flagged; no count increase required.
+DRC,Congo DR,11,10,0,10,,Review names if flagged; no count increase required.
+COS,Costa Rica,1,2,1,2,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+CRO,Croatia,3,2,0,2,,Review names if flagged; no count increase required.
+CUB,Cuba,3,3,0,3,,Review names if flagged; no count increase required.
+CYP,Cyprus,1,1,0,1,,Review names if flagged; no count increase required.
+CZE,Czech Republic,4,4,0,4,,Review names if flagged; no count increase required.
+CDI,Côte d'Ivoire,3,3,0,3,,Review names if flagged; no count increase required.
+DEN,Denmark,6,4,0,4,,Review names if flagged; no count increase required.
+DJI,Djibouti,2,2,0,2,,Review names if flagged; no count increase required.
+DMI,Dominica,1,1,0,1,,Review names if flagged; no count increase required.
+DOM,Dominican Republic,2,2,0,2,,Review names if flagged; no count increase required.
+ECU,Ecuador,4,4,0,4,,Review names if flagged; no count increase required.
+EGY,Egypt,14,11,0,11,,Review names if flagged; no count increase required.
+ELS,El Salvador,1,2,1,2,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+EGU,Equatorial Guinea,2,2,0,2,,Review names if flagged; no count increase required.
+ERI,Eritrea,2,2,0,2,,Review names if flagged; no count increase required.
+EST,Estonia,4,4,0,4,,Review names if flagged; no count increase required.
+ETH,Ethiopia,8,7,0,7,,Review names if flagged; no count increase required.
+FAO,Faroe Islands,1,1,0,1,,Review names if flagged; no count increase required.
+FIJ,Fiji,1,1,0,1,,Review names if flagged; no count increase required.
+FIN,Finland,7,5,0,5,,Review names if flagged; no count increase required.
+FRA,France,34,32,0,32,,Review names if flagged; no count increase required.
+GAB,Gabon,2,2,0,2,,Review names if flagged; no count increase required.
+GAM,Gambia,2,2,0,2,,Review names if flagged; no count increase required.
+HAM,Gaza Strip,1,1,0,1,,Review names if flagged; no count increase required.
+GEO,Georgia,2,4,2,4,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+GER,Germany,16,17,1,17,Keep Free Hanseatic Bremen integrated as requested.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+GAH,Ghana,4,4,0,4,,Review names if flagged; no count increase required.
+GRE,Greece,9,8,0,8,,Review names if flagged; no count increase required.
+GRN,Greenland,3,4,1,4,Keep Hans Island integrated and earlier user-approved Greenland unions.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+GRA,Grenada,1,1,0,1,,Review names if flagged; no count increase required.
+GUA,Guatemala,2,2,0,2,,Review names if flagged; no count increase required.
+GUI,Guinea,2,2,0,2,,Review names if flagged; no count increase required.
+GUB,Guinea-Bissau,2,2,0,2,,Review names if flagged; no count increase required.
+GUY,Guyana,2,2,0,2,,Review names if flagged; no count increase required.
+HAI,Haiti,2,2,0,2,,Review names if flagged; no count increase required.
+HEZ,Hezbollah,1,1,0,1,,Review names if flagged; no count increase required.
+HON,Honduras,2,2,0,2,,Review names if flagged; no count increase required.
+HKG,Hong Kong,1,1,0,1,,Review names if flagged; no count increase required.
+HUN,Hungary,4,4,0,4,,Review names if flagged; no count increase required.
+ICE,Iceland,1,1,0,1,,Review names if flagged; no count increase required.
+RAJ,India,40,45,5,45,,"Prioritize missing Awadh/Purvanchal and important urban/economic regions such as Mumbai/Vidarbha/Rayalaseema. Keep user-approved Karnataka, Chandigarh and other mergers."
+IND,Indonesia,16,17,1,17,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+PER,Iran,31,28,0,28,,Review names if flagged; no count increase required.
+IRQ,Iraq,15,15,0,15,,Review names if flagged; no count increase required.
+IRE,Ireland,3,3,0,3,,Review names if flagged; no count increase required.
+TAL,Islamic Emirate of Afghanistan,9,8,0,8,,Review names if flagged; no count increase required.
+IEK,Islamic Emirate of Kurdistan,1,1,0,1,,Review names if flagged; no count increase required.
+ISR,Israel,7,5,0,5,,Review names if flagged; no count increase required.
+ITA,Italy,20,17,0,17,,Review names if flagged; no count increase required.
+JAM,Jamaica,1,1,0,1,,Review names if flagged; no count increase required.
+JAP,Japan,13,13,0,13,,Review names if flagged; no count increase required.
+JOR,Jordan,3,3,0,3,,Review names if flagged; no count increase required.
+JUB,Jubaland,1,1,0,1,,Review names if flagged; no count increase required.
+KAC,Kachin State,1,1,0,1,,Review names if flagged; no count increase required.
+KAR,Karen State,1,1,0,1,,Review names if flagged; no count increase required.
+KAZ,Kazakhstan,7,6,0,6,,Review names if flagged; no count increase required.
+KEN,Kenya,6,6,0,6,,Review names if flagged; no count increase required.
+KOR,Korea,9,6,0,6,,Review names if flagged; no count increase required.
+NKO,Korea DPR,6,6,0,6,,Review names if flagged; no count increase required.
+KOS,Kosovo,1,1,0,1,,Review names if flagged; no count increase required.
+KUR,Kurdistan,2,2,0,2,,Review names if flagged; no count increase required.
+KUW,Kuwait,1,1,0,1,,Review names if flagged; no count increase required.
+KYR,Kyrgyzstan,3,3,0,3,,Review names if flagged; no count increase required.
+LAO,Laos,3,3,0,3,,Review names if flagged; no count increase required.
+LAT,Latvia,4,4,0,4,,Review names if flagged; no count increase required.
+LEB,Lebanon,3,3,0,3,,Review names if flagged; no count increase required.
+LES,Lesotho,1,1,0,1,,Review names if flagged; no count increase required.
+LIB,Liberia,1,1,0,1,,Review names if flagged; no count increase required.
+LUR,Liberians United for Reconciliation and Democracy,1,1,0,1,,Review names if flagged; no count increase required.
+LBA,Libya,15,15,0,15,,Review names if flagged; no count increase required.
+LIT,Lithuania,4,4,0,4,,Review names if flagged; no count increase required.
+LUX,Luxembourg,1,1,0,1,,Review names if flagged; no count increase required.
+MAC,Macau,1,1,0,1,,Review names if flagged; no count increase required.
+FYR,Macedonia,2,2,0,2,,Review names if flagged; no count increase required.
+MAD,Madagascar,3,4,1,4,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+MLW,Malawi,2,2,0,2,,Review names if flagged; no count increase required.
+MAY,Malaysia,7,6,0,6,,Review names if flagged; no count increase required.
+MLD,Maldives,1,1,0,1,,Review names if flagged; no count increase required.
+MAL,Mali,9,9,0,9,,Review names if flagged; no count increase required.
+MLT,Malta,1,1,0,1,,Review names if flagged; no count increase required.
+NPM,Maoist Nepal,1,1,0,1,,Review names if flagged; no count increase required.
+MAU,Mauritania,4,4,0,4,,Review names if flagged; no count increase required.
+MRT,Mauritius,1,1,0,1,,Review names if flagged; no count increase required.
+MEX,Mexico,13,13,0,13,,Review names if flagged; no count increase required.
+MIC,Micronesia,1,7,6,1,User explicitly requires ONE Micronesia state including Palau; do not split it to meet raw MD count.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+MLV,Moldova,2,3,1,3,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+MON,Mongolia,2,2,0,2,,Review names if flagged; no count increase required.
+MNT,Montenegro,1,1,0,1,,Review names if flagged; no count increase required.
+MOR,Morocco,7,11,4,11,,"Review Fes-Meknes, Rabat-Sale-Kenitra, Tanger-Tetouan-Al Hoceima, Marrakesh-Safi and Draa-Tafilalet. Current slash-separated unions need geographic validation before naming or division."
+MLC,Movement for the Liberation of Congo,2,2,0,2,,Review names if flagged; no count increase required.
+MOZ,Mozambique,7,6,0,6,,Review names if flagged; no count increase required.
+BRM,Myanmar,8,7,0,7,,Review names if flagged; no count increase required.
+NAM,Namibia,2,2,0,2,,Review names if flagged; no count increase required.
+NAU,Nauru,1,,,,,Review names if flagged; no count increase required.
+NEP,Nepal,1,1,0,1,,Review names if flagged; no count increase required.
+HOL,Netherlands,6,5,0,5,,Review names if flagged; no count increase required.
+NZL,New Zealand,4,5,1,5,Keep one South Island state and the approved island unions.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+NIC,Nicaragua,2,2,0,2,,Review names if flagged; no count increase required.
+NGR,Niger,4,4,0,4,,Review names if flagged; no count increase required.
+NIG,Nigeria,8,7,0,7,,Review names if flagged; no count increase required.
+NCY,Northern Cyprus,1,1,0,1,,Review names if flagged; no count increase required.
+NRY,Norway,8,4,0,4,,Review names if flagged; no count increase required.
+OMA,Oman,6,5,0,5,,Review names if flagged; no count increase required.
+PAK,Pakistan,8,12,4,12,,"Review Malakand, northern/central/southern Punjab and the Pashto-speaking Balochistan region. Check tribal-area overlaps to avoid duplicates."
+PAL,Palestine,1,1,0,1,,Review names if flagged; no count increase required.
+PAN,Panama,3,3,0,3,,Review names if flagged; no count increase required.
+PAP,Papua New Guinea,4,5,1,4,"User explicitly requires FOUR states after mainland mergers: Southern Papua, Northern Papua, Bismarck Archipelago and Bougainville.",Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+PAR,Paraguay,2,2,0,2,,Review names if flagged; no count increase required.
+PUK,Patriotic Union of Kurdistan,1,1,0,1,,Review names if flagged; no count increase required.
+PRU,Peru,6,5,0,5,,Review names if flagged; no count increase required.
+PHI,Philippines,8,20,12,20,,"Prioritize Metro Manila, Cordillera, Ilocos, Cagayan, Bicol, Calabarzon, Central Visayas, Mindoro, Palawan, Caraga, Davao and Bangsamoro. Respect the approved Western/Northern Mindanao union; omit reef-only replacements. Check actual source geometry before deciding twelve additions."
+POL,Poland,15,13,0,13,,Review names if flagged; no count increase required.
+POR,Portugal,7,7,0,7,,Review names if flagged; no count increase required.
+PUN,Puntland,3,3,0,3,,Review names if flagged; no count increase required.
+QAT,Qatar,1,1,0,1,,Review names if flagged; no count increase required.
+RCD,Rally for Congolese Democracy,1,1,0,1,,Review names if flagged; no count increase required.
+TAI,Republic of China,6,11,5,11,Keep Pratas/Spratly consolidations; add useful inhabited subdivisions instead of recreating reef states.,"Review Taipei, Hsinchu, Taichung, Tainan, Kaohsiung and Hualien as inhabited mainland subdivisions, with Lienchiang considered from existing geography. Do not recreate Pratas or other reef-only states."
+ROM,Romania,7,6,0,6,,Review names if flagged; no count increase required.
+SOV,Russia,87,85,0,85,,Review names if flagged; no count increase required.
+RWA,Rwanda,1,1,0,1,,Review names if flagged; no count increase required.
+SHA,Sahrawi,1,1,0,1,,Review names if flagged; no count increase required.
+STK,Saint Kitts and Nevis,1,1,0,1,,Review names if flagged; no count increase required.
+STL,Saint Lucia,1,1,0,1,,Review names if flagged; no count increase required.
+STV,Saint Vincent and the Grenadines,1,1,0,1,,Review names if flagged; no count increase required.
+SAM,Samoa,1,1,0,1,,Review names if flagged; no count increase required.
+SAU,Saudi Arabia,12,10,0,10,,Review names if flagged; no count increase required.
+SEN,Senegal,4,4,0,4,,Review names if flagged; no count increase required.
+SER,Serbia,3,4,1,4,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+SEY,Seychelles,1,1,0,1,,Review names if flagged; no count increase required.
+SIE,Sierra Leone,1,1,0,1,,Review names if flagged; no count increase required.
+SIN,Singapore,1,1,0,1,,Review names if flagged; no count increase required.
+SLO,Slovakia,2,2,0,2,,Review names if flagged; no count increase required.
+SLV,Slovenia,2,2,0,2,,Review names if flagged; no count increase required.
+SOL,Solomon Islands,1,2,1,2,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+SNA,Somali National Alliance,3,3,0,3,,Review names if flagged; no count increase required.
+SOM,Somalia,2,2,0,2,,Review names if flagged; no count increase required.
+SML,Somaliland,1,3,2,3,,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+SAF,South Africa,9,9,0,9,,Review names if flagged; no count increase required.
+SOO,South Ossetia,1,1,0,1,,Review names if flagged; no count increase required.
+SHN,South Shan State,1,1,0,1,,Review names if flagged; no count increase required.
+SSU,South Sudan,6,6,0,6,,Review names if flagged; no count increase required.
+SWS,Southwestern State of Somalia,1,1,0,1,,Review names if flagged; no count increase required.
+SPR,Spain,19,20,1,20,Keep approved tiny enclave/island unions; consider meaningful mainland regions.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+SRI,Sri Lanka,2,2,0,2,,Review names if flagged; no count increase required.
+SUD,Sudan,12,10,0,10,,Review names if flagged; no count increase required.
+SUR,Suriname,2,2,0,2,,Review names if flagged; no count increase required.
+SWA,Swaziland,1,1,0,1,,Review names if flagged; no count increase required.
+SWE,Sweden,9,8,0,8,,Review names if flagged; no count increase required.
+SWI,Switzerland,4,4,0,4,,Review names if flagged; no count increase required.
+SYR,Syria,8,15,7,15,,"Use governorate/settlement regions around Aleppo, Idlib, Hama, Homs, Latakia, Daraa and As-Suwayda to replace broad unions; validate the footprint rather than copying MD straight boundaries."
+SAO,São Tomé and Príncipe,1,1,0,1,,Review names if flagged; no count increase required.
+TAJ,Tajikistan,3,3,0,3,,Review names if flagged; no count increase required.
+TML,Tamil Eelam,1,1,0,1,,Review names if flagged; no count increase required.
+TNZ,Tanzania,12,11,0,11,,Review names if flagged; no count increase required.
+SIA,Thailand,6,5,0,5,,Review names if flagged; no count increase required.
+TIM,Timor-Leste,1,,,,,Review names if flagged; no count increase required.
+TOG,Togo,2,2,0,2,,Review names if flagged; no count increase required.
+TON,Tonga,1,1,0,1,,Review names if flagged; no count increase required.
+PMR,Transnistria,1,1,0,1,,Review names if flagged; no count increase required.
+TRI,Trinidad and Tobago,1,1,0,1,,Review names if flagged; no count increase required.
+TUN,Tunisia,3,3,0,3,,Review names if flagged; no count increase required.
+TUR,Turkey,21,18,0,18,,Review names if flagged; no count increase required.
+TRK,Turkmenistan,2,2,0,2,,Review names if flagged; no count increase required.
+TUL,Tuvalu,1,1,0,1,,Review names if flagged; no count increase required.
+UNI,UNITA,3,3,0,3,,Review names if flagged; no count increase required.
+UGA,Uganda,4,4,0,4,,Review names if flagged; no count increase required.
+UKR,Ukraine,29,28,0,28,,Review names if flagged; no count increase required.
+UAE,United Arab Emirates,2,2,0,2,,Review names if flagged; no count increase required.
+ENG,United Kingdom,34,35,1,35,Keep Rockall integrated as requested.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+USA,United States,62,64,2,64,"Keep Rota/Saipan/Tinian in Mariana Islands, Midway/Johnston in Hawaii, and Navassa removed. Any additional states must represent meaningful inhabited regions.",Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+URG,Uruguay,2,2,0,2,,Review names if flagged; no count increase required.
+UZB,Uzbekistan,3,3,0,3,,Review names if flagged; no count increase required.
+VAN,Vanuatu,1,1,0,1,,Review names if flagged; no count increase required.
+VEN,Venezuela,6,6,0,6,,Review names if flagged; no count increase required.
+VIE,Vietnam,9,8,0,8,,Review names if flagged; no count increase required.
+WAA,Wa State,1,2,1,2,Keep the approved Yunnan/Wa State consolidation.,Review missing meaningful regional divisions against MD names and geographic source; retain all explicitly approved mergers.
+YEM,Yemen,15,13,0,13,,Review names if flagged; no count increase required.
+ZAM,Zambia,4,4,0,4,,Review names if flagged; no count increase required.
+ZIM,Zimbabwe,3,3,0,3,,Review names if flagged; no count increase required.
