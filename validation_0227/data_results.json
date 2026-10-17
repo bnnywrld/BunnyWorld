@@ -1,0 +1,11 @@
+{
+  "passed": true,
+  "checks": 15858,
+  "states": 1264,
+  "countries": 224,
+  "population": 6146495066,
+  "religion_regional_estimates": 210,
+  "province_data_and_tiles_unchanged": true,
+  "all_states_complete": true,
+  "regional_values_are_estimates": true
+}

@@ -13,7 +13,7 @@ This project uses GDScript; a .NET/C# editor is unnecessary.
    for example `Desktop/BunnyWorld_Test/BunnyWorld.exe`.
 6. **Untick Export With Debug**, then save/export. Use Export Project to make the EXE;
    Export PCK/ZIP produces game data without a playable executable.
-7. Close Godot completely and double-click the exported EXE. Confirm **0.2.0.26**
+7. Close Godot completely and double-click the exported EXE. Confirm **0.2.0.27**
    on the main menu. Start a fresh campaign.
 
 The included preset embeds the game pack. If you deliberately change to an external

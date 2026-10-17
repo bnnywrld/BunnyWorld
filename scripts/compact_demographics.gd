@@ -1,7 +1,7 @@
 extends VBoxContainer
 const Pie = preload("res://scripts/pie_chart.gd")
-const KEYS := ["age", "religion", "education", "activity"]
-const CAPTIONS := ["Age", "Religion", "Education", "Activity"]
+const KEYS := ["age", "religion", "education"]
+const CAPTIONS := ["Age", "Religion", "Education"]
 var entry: Dictionary = {}
 var selected := "age"
 var changed: Callable
@@ -10,7 +10,7 @@ var page: VBoxContainer
 var selectors: HBoxContainer
 func configure(profile: Dictionary, initial: String, callback: Callable, is_state: bool) -> void:
 	entry = profile
-	selected = initial
+	selected = initial if initial in KEYS else "age"
 	changed = callback
 	state_scope = is_state
 	add_theme_constant_override("separation", 4)
@@ -42,6 +42,7 @@ func label(text: String, font_size: int = 11) -> Label:
 	item.add_theme_font_size_override("font_size", font_size)
 	return item
 func select_metric(key: String) -> void:
+	if key not in KEYS: return
 	selected = key
 	if changed.is_valid(): changed.call(key)
 	for button: Button in selectors.get_children(): button.set_pressed_no_signal(button.name == key)
@@ -50,7 +51,7 @@ func select_metric(key: String) -> void:
 	var denominator := int(metric.get("denominator", 0))
 	var denom := "All residents" if key in ["age", "religion"] else ("Adults 25+" if key == "education" else "Working-age residents")
 	var context := label(("State estimate" if state_scope else "National") + " · " + denom)
-	context.tooltip_text = "%s · %s people\n%s" % [entry.get("scope", ""), denominator, str(metric.get("sources", metric.get("source", "")))]
+	context.tooltip_text = "%s · %s people\n%s" % [entry.get("scope", ""), denominator, str(metric.get("sources", metric.get("source", "")))+"\n"+str(metric.get("statuses",metric.get("status","")))]
 	page.add_child(context)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
@@ -92,5 +93,5 @@ func select_metric(key: String) -> void:
 		line.add_child(text)
 		legend.add_child(line)
 	if categories.size() > 5: legend.add_child(label("More groups: hover chart"))
-	if denominator == 0: legend.add_child(label("Unavailable"))
-	pie.tooltip_text = "\n".join(descriptions) if denominator > 0 else "Population breakdown unavailable"
+	if denominator == 0: legend.add_child(label("No residents in this group"))
+	pie.tooltip_text = "\n".join(descriptions) if denominator > 0 else "No residents in this group"

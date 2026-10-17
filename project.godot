@@ -10,8 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Bunny World 0.2.0.26"
-config/version="0.2.0.26"
+config/name="Bunny World 0.2.0.27"
+config/version="0.2.0.27"
 run/main_scene="res://main.tscn"
 config/use_custom_user_dir=true
 config/custom_user_dir_name="BunnyWorld"

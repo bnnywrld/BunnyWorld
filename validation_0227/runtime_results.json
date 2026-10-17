@@ -1,0 +1,6 @@
+{
+  "checks": 11041,
+  "failures": 0,
+  "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
+  "passed": true
+}

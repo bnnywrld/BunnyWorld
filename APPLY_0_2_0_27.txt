@@ -1,0 +1,11 @@
+BunnyWorld 0.2.0.27 changed-files source patch
+BASE REQUIRED: working 0.2.0.26 project (GitHub main at packaging).
+
+Back up .26; close Godot/game. Extract this ZIP into the project root beside
+project.godot, replacing included files. Run Prepare_BunnyWorld.bat. Application,
+geography and display must all report 0.2.0.27. Open with Godot 4.5.1 Standard.
+Start a FRESH CAMPAIGN; old saves are unsupported. F5/F9 saves made in .27 work.
+
+Read documentation/DEMOGRAPHICS_0227.md for sources, estimates and quick tests.
+This ZIP is incremental: it reuses .26 prepared geometry/resources. No EXE and
+no replacement province raster are included. No files need deleting.

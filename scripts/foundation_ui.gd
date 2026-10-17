@@ -317,8 +317,8 @@ func render_demographics() -> void:
 	grid.add_theme_constant_override("h_separation",18)
 	grid.add_theme_constant_override("v_separation",14)
 	demo_content.add_child(grid)
-	var captions := {"age":"Age", "religion":"Religion", "education":"Education", "activity":"Economic activity"}
-	for key: String in ["age","religion","education","activity"]:
+	var captions := {"age":"Age", "religion":"Religion", "education":"Education"}
+	for key: String in ["age","religion","education"]:
 		var metric: Dictionary = entry["metrics"][key]
 		var panel := PanelContainer.new()
 		panel.name = key
@@ -361,6 +361,14 @@ func render_demographics() -> void:
 			line.add_child(label)
 			legend.add_child(line)
 		if denominator == 0: page.add_child(host._label("Population breakdown unavailable",12))
+
+	var workforce_panel := PanelContainer.new()
+	workforce_panel.name = "WorkforceFigures"
+	workforce_panel.custom_minimum_size = Vector2(445,180)
+	var workforce := preload("res://scripts/workforce_panel.gd").new()
+	workforce.configure(entry["workforce"],demo_scope.selected>0)
+	workforce_panel.add_child(workforce)
+	grid.add_child(workforce_panel)
 
 func _build_tension() -> void:
 	tension_dialog = _modal("World Tension")

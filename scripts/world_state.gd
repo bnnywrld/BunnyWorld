@@ -2,7 +2,7 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 14
+const SAVE_VERSION := 15
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}
@@ -155,7 +155,7 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 	last_error = ""
 	var region_state: Dictionary = {}
 	for sid: String in regions:
-		region_state[sid] = {"owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"]}
+		region_state[sid] = {"owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
 	var national: Dictionary = {}
 	for tag: String in countries:
 		national[tag] = {"stats": countries[tag].get("starting_stats", {}), "outlook": countries[tag]["outlook"], "cosmetic": countries[tag].get("cosmetic", ""), "color_override": countries[tag].get("color_override", [])}
@@ -247,6 +247,10 @@ func load_game(path: String) -> Dictionary:
 			return _invalid("The saved population is invalid.")
 		if entry.get("owner") != "" and not countries.has(entry.get("owner")):
 			return _invalid("The saved territorial ownership is invalid.")
+		if not entry.get("workforce") is Dictionary: return _invalid("The saved workforce is invalid.")
+		for rate: String in ["participation_rate","unemployment_rate"]:
+			var value: Variant=entry["workforce"].get(rate)
+			if not (value is int or value is float) or not is_finite(float(value)) or float(value)<0 or float(value)>1: return _invalid("The saved workforce rate is invalid.")
 		for field: String in ["cores", "claims"]:
 			if not entry.get(field) is Array: return _invalid("The saved territorial rights are invalid.")
 			var seen: Dictionary = {}
@@ -323,6 +327,7 @@ func load_game(path: String) -> Dictionary:
 		regions[sid]["population"] = int(saved_regions[sid]["population"])
 		regions[sid]["cores"] = saved_regions[sid]["cores"].duplicate()
 		regions[sid]["claims"] = saved_regions[sid]["claims"].duplicate()
+		for rate: String in ["participation_rate","unemployment_rate"]: regions[sid]["workforce"][rate]=float(saved_regions[sid]["workforce"][rate])
 	for tag: String in countries:
 		countries[tag]["starting_stats"] = national[tag]["stats"].duplicate(true)
 		countries[tag]["outlook"] = national[tag]["outlook"]

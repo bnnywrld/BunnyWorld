@@ -26,6 +26,9 @@ def main():
   assert sorted(s['provinces'])==sorted(members.get(sid,[])),f'State {sid}: membership lists disagree'
  assert all(str(p['region'])in world['regions']for p in ps.values())
  if args.check:
+  assert old.get('geography_version')==world['version'],'Map contract geography version is stale'
+  chunks=json.loads((R/'assets/rendering/chunks.json').read_text())
+  assert chunks.get('geography_version')==world['version'],'Render batches target a different geography'
   assert old.get('inputs')==source,'Map topology changed. Run python tools/build_map.py --godot <Godot executable>'
   for n,h in old['resources'].items():assert sha(R/n)==h,f'Map resource mismatch: {n}'
   from build_sea_mask import check as check_sea_mask
@@ -87,6 +90,10 @@ def main():
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
   assert godot,'Supply --godot to rebuild the spatial render batches.'
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
+ elif chunk_meta.get('geography_version')!=world['version']:
+  # Geometry/hash checks above allow metadata-only releases to reuse meshes.
+  chunk_meta['geography_version']=world['version']
+  chunk_path.write_text(json.dumps(chunk_meta,separators=(',',':'))+'\n')
  if changed or not (OUT/'boundary_hint.bwd').exists():build_hint()
  if changed or not (OUT/'boundary_distance.bwd').exists():
   from build_boundary_field import build as build_field

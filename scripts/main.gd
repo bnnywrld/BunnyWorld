@@ -1334,7 +1334,7 @@ func _summary_grid(rows: Array) -> void:
 
 func _population_profile(chart: Control, state_scope: bool) -> void:
 	var expanded: bool = territory_profile_expanded if state_scope else national_profile_expanded
-	var button := _button(("▾  " if expanded else "▸  ")+"Population profile", func(): pass, "Age, religion, education and economic activity")
+	var button := _button(("▾  " if expanded else "▸  ")+"Population profile", func(): pass, "Age, religion and education")
 	button.name = "StateProfileToggle" if state_scope else "NationalProfileToggle"
 	button.alignment = HORIZONTAL_ALIGNMENT_LEFT
 	button.toggle_mode = true
@@ -1383,9 +1383,13 @@ func _show_country(tag: String, focus: bool = true) -> void:
 		_briefing_section("Diplomatic relations")
 		_opinion_stat(state.player_country, tag)
 		_opinion_stat(tag, state.player_country)
+	var demographic_entry: Dictionary = foundation.demographics.country_metrics(state, tag)
+	var workforce := preload("res://scripts/workforce_panel.gd").new()
+	workforce.configure(demographic_entry["workforce"])
+	details.add_child(workforce)
 	var chart := preload("res://scripts/compact_demographics.gd").new()
 	chart.name = "NationalDemographics"
-	chart.configure(foundation.demographics.country_metrics(state, tag), national_metric, func(key: String): national_metric = key, false)
+	chart.configure(demographic_entry, national_metric, func(key: String): national_metric = key, false)
 	_population_profile(chart, false)
 	_show_territory()
 

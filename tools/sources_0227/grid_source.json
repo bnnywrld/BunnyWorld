@@ -1,0 +1,7 @@
+{
+  "url": "https://jeodpp.jrc.ec.europa.eu/ftp/jrc-opendata/GHSL/GHS_POP_GLOBE_R2023A/GHS_POP_E2000_GLOBE_R2023A_4326_30ss/V1-0/GHS_POP_E2000_GLOBE_R2023A_4326_30ss_V1_0.zip",
+  "dataset": "EC JRC GHS-POP R2023A, year 2000, WGS84 30 arc-seconds",
+  "doi": "10.2905/2FF68A52-5B5B-4A22-8F40-C41DA8332CFE",
+  "archive_sha256": "59ec2b3cbcd532e823fac55e1a3b63533c6f64f8cf2911d3e930bcc6b0d7b6b1",
+  "raster": "tools/sources_0227/GHS_POP_E2000_GLOBE_R2023A_4326_30ss_V1_0.tif"
+}
