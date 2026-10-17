@@ -34,7 +34,7 @@ def main():
  from build_boundary_hint import atlas,build as build_hint
  from build_boundary_field import build as build_field
  Image.MAX_IMAGE_PIXELS=None
- resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items())
+ resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/'))
  changed=args.force or bool(old)and old.get('inputs')!=source or resource_mismatch
  if changed:
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
@@ -56,12 +56,26 @@ def main():
   for k,state in world['regions'].items():state['neighbors']=sorted(state_neighbors[k])
   (R/'data/provinces.json').write_text(json.dumps(ps,separators=(',',':'),ensure_ascii=False))
   (R/'data/world.json').write_text(json.dumps(world,separators=(',',':'),ensure_ascii=False))
-  np.savez_compressed(R/'tools/cartography/map_provinces.npz',provinces=a)
-  np.savez_compressed(R/'tools/cartography/grouped_atlas_022r2.npz',regions=lut[a])
+  buffer=io.BytesIO();np.savez_compressed(buffer,provinces=a);target=R/'tools/cartography/map_provinces.npz';temp=target.with_suffix('.npz.prepare-tmp');temp.write_bytes(buffer.getvalue());temp.replace(target)
+  buffer=io.BytesIO();np.savez_compressed(buffer,regions=lut[a]);target=R/'tools/cartography/grouped_atlas_022r2.npz';temp=target.with_suffix('.npz.prepare-tmp');temp.write_bytes(buffer.getvalue());temp.replace(target)
   # Every derivative is rebuilt together; no per-area correction switches.
   subprocess.run([sys.executable,str(R/'tools/build_map_boundaries.py')],cwd=R,check=True)
   subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/compile_boundaries.gd'],cwd=R,check=True)
+  subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
   subprocess.run([sys.executable,str(R/'tools/build_display_0217.py'),'--coast-only','--atlas-path',str(R/'tools/cartography/map_provinces.npz'),'--skip-legacy-shade'],cwd=R,check=True)
+ # Spatial batches are a separate derivative. A renderer-only regeneration
+ # must not rebuild province geography or coastal distance fields.
+ chunk_path=R/'assets/rendering/chunks.json'
+ chunk_meta=json.loads(chunk_path.read_text())if chunk_path.exists()else{}
+ chunk_stale=chunk_meta.get('province_sha256')!=sha(R/'data/provinces.json')
+ if not chunk_stale:
+  for kind,row in chunk_meta['layers'].items():
+   path=R/row['path'];source_path=R/('assets/waterways.res'if kind=='water'else'assets/'+kind+'_boundaries.res')
+   if not path.is_file()or sha(path)!=row['sha256']or(kind!='sphere'and sha(source_path)!=row['source_sha256']):chunk_stale=True
+ if chunk_stale:
+  godot=args.godot or shutil.which('godot')or shutil.which('godot4')
+  assert godot,'Supply --godot to rebuild the spatial render batches.'
+  subprocess.run([godot,'--headless','--path',str(R),'--script','res://tools/build_render_chunks.gd'],cwd=R,check=True)
  if changed or not (OUT/'boundary_hint.bwd').exists():build_hint()
  if changed or not (OUT/'boundary_distance.bwd').exists():build_field()
  sea_pack()
@@ -70,7 +84,9 @@ def main():
  for p in ps.values():i=int(p['id']);sid=int(p['region']);lut[i//256,i%256]=[sid&255,sid>>8,int(p.get('local_index',0))&255]
  old_png=np.asarray(Image.open(R/'assets/province_index.png').convert('RGB'))
  if not np.array_equal(old_png,lut):Image.fromarray(lut).save(R/'assets/province_index.png')
- resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res','assets/micro_boundaries.res']
+ chunk_files=['assets/rendering/chunks.json']+['assets/rendering/'+kind+'_chunks.res'for kind in ['sphere','land','province','sea','water']]
+ resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res']
+ resources+=chunk_files
  decoded=[hashlib.sha256(Image.open(R/f'assets/region_ids_{i}.png').convert('RGB').tobytes()).hexdigest()for i in range(4)]
  contract={'schema':1,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}
  cp.write_text(json.dumps(contract,separators=(',',':'))+'\n')

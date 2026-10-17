@@ -6,7 +6,11 @@ var region_images: Array[Image] = []
 var province_texture: ImageTexture
 var contract: Dictionary
 var membership_uploads := 0
-func initialize(provinces: Dictionary) -> void:
+var ownership_uploads := 0
+var owner_by_state: Dictionary = {}
+var owner_snapshot: Array = []
+var membership_bytes := PackedByteArray()
+func initialize(provinces: Dictionary, regions: Dictionary = {}, countries: Dictionary = {}) -> void:
  contract=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/map_contract.json"))
  assert(contract.get("schema",0)==1,"Map build contract missing. Run tools/build_map.py.")
  assert(int(contract["province_count"])==provinces.size(),"Province topology changed. Rebuild the map.")
@@ -27,15 +31,38 @@ func initialize(provinces: Dictionary) -> void:
   image.convert(Image.FORMAT_RGB8)
   var hash:=HashingContext.new();hash.start(HashingContext.HASH_SHA256);hash.update(image.get_data())
   assert(hash.finish().hex_encode()==str(contract["decoded_tiles"][tile]),"Province texture differs from the map build: "+path)
-  region_images.append(image);region_textures.append(ImageTexture.create_from_image(image))
+  region_images.append(image)
+  # IDs occupy only R/G. Keep verified RGB bytes for picking, but upload the
+  # same two ID channels as RG8 instead of reserving an unused blue channel.
+  var gpu_image: Image=image.duplicate();gpu_image.convert(Image.FORMAT_RG8)
+  region_textures.append(ImageTexture.create_from_image(gpu_image))
+ if regions.is_empty() or countries.is_empty():
+  var world: Dictionary=JSON.parse_string(FileAccess.get_file_as_string("res://data/world.json"))
+  regions=world["regions"];countries=world["countries"]
+ update_ownership(provinces,regions,countries)
  update_membership(provinces)
 func update_membership(provinces: Dictionary) -> void:
- var bytes:=PackedByteArray();bytes.resize(256*256*3);bytes.fill(0)
+ # RG identifies the State; BA holds its current owner. All shader boundary
+ # samples resolve both from one fetch, with no ownership-dependent geometry.
+ membership_bytes.resize(256*256*4);membership_bytes.fill(0)
  for p: Dictionary in provinces.values():
-  var id:=int(p["id"])*3;var sid:=int(p["region"])
-  bytes[id]=sid&255;bytes[id+1]=(sid>>8)&255;bytes[id+2]=int(p.get("local_index",0))&255
- bytes[65535*3]=255;bytes[65535*3+1]=31
- var image:=Image.create_from_data(256,256,false,Image.FORMAT_RGB8,bytes)
+  var id:=int(p["id"])*4;var sid:=int(p["region"]);var owner:=int(owner_by_state.get(sid,0))
+  membership_bytes[id]=sid&255;membership_bytes[id+1]=(sid>>8)&255
+  membership_bytes[id+2]=owner&255;membership_bytes[id+3]=(owner>>8)&255
+ membership_bytes[65535*4]=255;membership_bytes[65535*4+1]=31
+ var image:=Image.create_from_data(256,256,false,Image.FORMAT_RGBA8,membership_bytes)
  if province_texture==null:province_texture=ImageTexture.create_from_image(image)
  else:province_texture.update(image)
  membership_uploads+=1
+func update_ownership(provinces: Dictionary, regions: Dictionary, countries: Dictionary) -> void:
+ var snapshot: Array=[]
+ for key: String in regions:snapshot.append_array([int(key),int(countries[regions[key]["owner"]]["index"])])
+ if snapshot==owner_snapshot:return
+ owner_snapshot=snapshot;owner_by_state.clear()
+ for i: int in range(0,snapshot.size(),2):owner_by_state[snapshot[i]]=snapshot[i+1]
+ if province_texture==null:return
+ for p: Dictionary in provinces.values():
+  var at:=int(p["id"])*4;var owner:=int(owner_by_state.get(int(p["region"]),0))
+  membership_bytes[at+2]=owner&255;membership_bytes[at+3]=(owner>>8)&255
+ province_texture.update(Image.create_from_data(256,256,false,Image.FORMAT_RGBA8,membership_bytes))
+ ownership_uploads+=1

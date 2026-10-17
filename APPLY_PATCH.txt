@@ -1,5 +1,5 @@
-BunnyWorld 0.2.0.20 combined changed-files source patch over 0.2.0.18 or 0.2.0.19.
-Includes all 55 State changes and map performance improvements.
-Close Godot and the game. Extract beside project.godot, replace included files.
-Run Prepare_BunnyWorld.bat, reopen Godot, F5, and start a fresh campaign.
-No Windows executable is included. See documentation/PATCH_0220.md.
+BunnyWorld 0.2.0.21 changed-files source patch over 0.2.0.20.
+Close Godot and the game. Extract beside project.godot, replacing files.
+Run Prepare_BunnyWorld.bat. Reopen project.godot, press F5, start a fresh campaign.
+Application, geography and display versions: 0.2.0.21. No new executable is included.
+See documentation/PATCH_0221.md for changes and test order.

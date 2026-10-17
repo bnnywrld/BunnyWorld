@@ -54,3 +54,5 @@ Thumbs.db
 # Restored from versioned parts to stay below GitHub file limits.
 /assets/display/selection_distance_0217.bwd
 !/assets/micro_boundaries.res
+/assets/rendering/*_chunks.res
+/assets/rendering/*.prepare-tmp.res

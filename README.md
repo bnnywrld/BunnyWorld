@@ -1,3 +1,7 @@
+# Bunny World 0.2.0.21
+
+Performance/source patch over **0.2.0.20**, including complete Vatican absorption into Rome/Lazio. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. See [changes, measurements and test order](documentation/PATCH_0221.md).
+
 # Bunny World 0.2.0.20
 
 Combined changed-files patch over **0.2.0.18 or 0.2.0.19**: includes all 55 State requests plus map renderer optimisation. Run **Prepare_BunnyWorld.bat**, reopen Godot and start a fresh campaign. No executable is included. See [changes, measurements and test order](documentation/PATCH_0220.md).

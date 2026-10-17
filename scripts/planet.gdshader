@@ -1,6 +1,5 @@
 shader_type spatial;
 render_mode unshaded;
-#include "res://scripts/microstate.gdshaderinc"
 #include "res://scripts/water_passages.gdshaderinc"
 uniform sampler2D region_map_0 : filter_nearest, repeat_disable;
 uniform sampler2D region_map_1 : filter_nearest, repeat_disable;
@@ -59,8 +58,9 @@ vec3 map_data(vec2 uv){
  else{data=uv.x<.5?texture(region_map_2,p).rgb:texture(region_map_3,p).rgb;}
  return floor(data*255.0+.5);
 }
-float province_at(vec2 uv){vec3 d=map_data(uv);return resolve_micro_province(uv,d.r+d.g*256.0);}
-float province_region(float pid){vec3 d=floor(texture(province_index,vec2((mod(pid,256.0)+.5)/256.0,(floor(pid/256.0)+.5)/256.0)).rgb*255.0+.5);return d.r+d.g*256.0;}
+float province_at(vec2 uv){vec3 d=map_data(uv);return d.r+d.g*256.0;}
+vec4 province_record(float pid){return floor(texture(province_index,vec2((mod(pid,256.0)+.5)/256.0,(floor(pid/256.0)+.5)/256.0))*255.0+.5);}
+float province_region(float pid){vec2 d=province_record(pid).rg;return d.r+d.g*256.0;}
 float region_at(vec2 uv){return province_region(province_at(uv));}
 vec2 lookup(float id){return vec2((id+.5)/palette_width,.5);}
 float owner_at(float id){vec3 d=texture(owners,lookup(id)).rgb;return floor(d.r*255.0+.5)+floor(d.g*255.0+.5)*256.0;}
@@ -185,7 +185,7 @@ void fragment(){
  float facing=clamp(dot(normalize(NORMAL),normalize(VIEW)),0.0,1.0);
  vec3 water=mix(vec3(.025,.105,.18),vec3(.075,.27,.39),facing);
  float passage_id=water_passage(uv);
- float pid=passage_id>0.0?0.0:province_at(uv);float region=passage_id>0.0?0.0:province_region(pid);float owner=owner_at(region);
+ float pid=passage_id>0.0?0.0:province_at(uv);vec4 rec=province_record(pid);float region=rec.r+rec.g*256.0;float owner=rec.b+rec.a*256.0;
  MapCoverage coverage=map_coverage(uv,pid,region,owner);
  bool chosen=inspection_active&&owner>0.0&&owner==selected_country;
  vec2 texel=1.0/map_resolution;vec2 pixel=uv*map_resolution-.5;vec2 origin=(floor(pixel)+.5)*texel;vec2 blend=fract(pixel);
@@ -202,7 +202,6 @@ void fragment(){
  blend=mix(blend,vec2(.5),far_filter);surface=mix(mix(c00,c10,blend.x),mix(c01,c11,blend.x),blend.y);
  if(passage_id>0.0)surface=vec4(water,0.0);
  // Subpixel enclaves cannot rely on four coarse atlas samples for their fill.
- if(abs(region-micro_region)<.5){surface=vec4(texture(colors,lookup(region)).rgb,1.0);}
  }
 
  float coast_value=texture(coast_distance,uv).r;
@@ -224,7 +223,6 @@ void fragment(){
   land_coverage=max(land_coverage,coverage_alpha(mix(row0,row1,weight.y)));
  }
  if(passage_id>0.0)land_coverage=0.0;
- if(abs(region-micro_region)<.5)land_coverage=1.0;
  // The smoothed coastline can extend beyond a categorical land texel. Extend
  // its display owner too, so country selection/hover does not cut square holes
  // into otherwise smooth coverage. Picking keeps the original region/owner.
@@ -304,7 +302,6 @@ void fragment(){
   // A screen-footprint AA band avoids the coarser physical mask halo.
   float physical_land=land_coverage;
   if(passage_id>0.0)physical_land=0.0;
-  if(abs(region-micro_region)<.5)physical_land=1.0;
   base=mix(water,earth,physical_land);
   float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72))),-.75,1.0);
   base*=.70+.32*smoothstep(-.5,.9,sun);

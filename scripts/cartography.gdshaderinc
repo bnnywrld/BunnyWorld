@@ -39,10 +39,6 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  c.selected_state_distance=c.state_hit>.5?10000.0:-10000.0;
  c.selected_province_distance=c.province_hit>.5?10000.0:-10000.0;
  c.national_edge=false;c.state_edge=false;c.province_edge=false;
- // Preserve the existing authored subpixel enclave geometry. Its exact
- // polygon overrides the single identity pixel for both picking and colour.
- vec2 micro_margin=vec2(4.0)/map_resolution;
- if(micro_vertex_count>2&&all(greaterThanEqual(uv,micro_bounds.xy-micro_margin))&&all(lessThanEqual(uv,micro_bounds.zw+micro_margin)))return c;
  // Derivatives are evaluated before the nonuniform boundary branch.
  highp vec2 pixel=uv*map_resolution;
  highp vec2 screen_dx=dFdx(pixel),screen_dy=dFdy(pixel);
@@ -63,9 +59,8 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  if(any(greaterThan(p00,vec4(0.0)))&&all(equal(p00,p10))&&all(equal(p00,p01))&&all(equal(p00,p11))){
   vec4 bytes=floor(p00*255.0+.5);
   float a=bytes.r+bytes.g*256.0,b=bytes.b+bytes.a*256.0;
-  vec3 ar=floor(texture(province_index,vec2((mod(a,256.0)+.5)/256.0,(floor(a/256.0)+.5)/256.0)).rgb*255.0+.5);
-  vec3 br=floor(texture(province_index,vec2((mod(b,256.0)+.5)/256.0,(floor(b/256.0)+.5)/256.0)).rgb*255.0+.5);
-  float sa=ar.r+ar.g*256.0,sb=br.r+br.g*256.0,oa=owner_at(sa),ob=owner_at(sb);
+  vec4 ar=province_record(a),br=province_record(b);
+  float sa=ar.r+ar.g*256.0,sb=br.r+br.g*256.0,oa=ar.b+ar.a*256.0,ob=br.b+br.a*256.0;
   float h=smoothstep(-footprint*.65,footprint*.65,sd),pixels=sd/footprint;
   vec3 ca=texture(colors,lookup(sa)).rgb,cb=texture(colors,lookup(sb)).rgb;
   c.tint=sa<.5?cb:(sb<.5?ca:mix(cb,ca,h));
@@ -108,8 +103,8 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
   bool other_state=false,other_province=false;
   for(int y=0;y<4;y++)for(int x=0;x<4;x++){
    float p=province_at((cell+vec2(float(x)-.5,float(y)-.5))/map_resolution);
-   vec3 rec=floor(texture(province_index,vec2((mod(p,256.0)+.5)/256.0,(floor(p/256.0)+.5)/256.0)).rgb*255.0+.5);
-   float s=rec.r+rec.g*256.0,o=owner_at(s),w=wx[x]*wy[y];vec2 g=vec2(dwx[x]*wy[y],wx[x]*dwy[y]);
+   vec4 rec=province_record(p);
+   float s=rec.r+rec.g*256.0,o=rec.b+rec.a*256.0,w=wx[x]*wy[y];vec2 g=vec2(dwx[x]*wy[y],wx[x]*dwy[y]);
    if(o==owner){own_value+=w;own_grad+=g;}
    if(s==sid){state_value+=w;state_grad+=g;}
    if(p==pid){province_value+=w;province_grad+=g;}

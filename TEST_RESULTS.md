@@ -1,9 +1,5 @@
-# BunnyWorld 0.2.0.20 verification
+# BunnyWorld 0.2.0.21 verification
 
-All 55 State requests are covered. The 0.2.0.19 geography passes 17 structural/spatial checks, prepared resource restoration, runtime loading, and ownership/save-load checks. Its land coverage and global population are preserved.
+12 geography checks and 33 full-application runtime checks pass. Eight stationary/moving renderer views improve against 0.2.0.20; moving medians improve 13.0–57.8%. Image comparisons pass with unchanged geometry detail. See validation_0221/comparison.json, memory.json, geography_checks.json and runtime/.
 
-The performance patch leaves the geography data and province PNGs byte-identical to 0.2.0.19. Five production-renderer camera views show 22.8–61.0% lower median frame times on Linux software rendering, with the same visible boundaries/highlights. Close-view submitted primitives fall by 61.7%.
-
-23 full-application runtime checks pass, including ownership transfer/restoration, physical edges, membership updates, camera uploads, country-name stability and sea selection. Prepared asset/map-contract tests pass.
-
-See validation_0220/comparison.json and runtime_results.json. Native Windows/NVIDIA 940MX performance is not measured here.
+Prepared bundle/asset restoration and map contracts pass. Native Windows performance is not measured. Installation instructions and tests are in documentation/PATCH_0221.md.

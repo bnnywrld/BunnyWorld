@@ -92,9 +92,6 @@ var place_results: ItemList
 var place_hint: Label
 var place_matches: Array[Dictionary] = []
 var water_passages: Array = []
-var micro_geometry: Dictionary = {}
-var micro_polygon := PackedVector2Array()
-var micro_rect := Rect2()
 const Urban = preload("res://scripts/urban_scenery.gd")
 var urban_scenery: Node3D
 var rotation_velocity := Vector2.ZERO
@@ -117,6 +114,7 @@ var hover_flags: Dictionary = {}
 var hover_panel: PanelContainer
 var border_materials: Array[ShaderMaterial] = []
 var border_meshes: Dictionary = {}
+var spatial_map_layers: RefCounted
 var waterways_material: ShaderMaterial
 var sea_image: Image
 var sound_player: AudioStreamPlayer
@@ -704,9 +702,8 @@ func _build_planet() -> void:
 	planet.add_child(mesh)
 	planet_material = ShaderMaterial.new()
 	planet_material.shader = load("res://scripts/planet.gdshader")
-	_configure_microstate()
 	map_rendering=preload("res://scripts/map_rendering.gd").new()
-	map_rendering.initialize(state.provinces)
+	map_rendering.initialize(state.provinces,state.regions,state.countries)
 	region_images=map_rendering.region_images
 	for tile: int in 4:
 		planet_material.set_shader_parameter("region_map_%d"%tile,map_rendering.region_textures[tile])
@@ -720,6 +717,9 @@ func _build_planet() -> void:
 	display_coverage.initialize(planet_material)
 	physical_texture = load("res://assets/terrain_color.png")
 	mesh.material_override = planet_material
+	spatial_map_layers = preload("res://scripts/spatial_map_layers.gd").new()
+	spatial_map_layers.initialize()
+	spatial_map_layers.register("sphere",mesh,planet)
 	detail_patch = MeshInstance3D.new()
 	detail_patch.material_override = planet_material
 	detail_patch.mesh = _detail_grid()
@@ -741,7 +741,6 @@ func _build_planet() -> void:
 			assert(str(border_mesh.mesh.get_meta("province_sha256",""))==FileAccess.get_sha256("res://data/provinces.json"),"Border geometry differs from province membership. Rebuild the map.")
 		var material := ShaderMaterial.new()
 		material.shader = load("res://scripts/provinces.gdshader" if kind == "province" else "res://scripts/boundaries.gdshader")
-		if kind=="land":material.set_shader_parameter("micro_region",float(micro_geometry.get("state",-1)))
 		if kind == "province": material.set_shader_parameter("province_index",map_rendering.province_texture)
 		for tile: int in range(4): material.set_shader_parameter("region_map_%d" % tile,map_rendering.region_textures[tile])
 		material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
@@ -750,13 +749,7 @@ func _build_planet() -> void:
 		border_materials.append(material)
 		planet.add_child(border_mesh)
 		border_meshes[kind] = border_mesh
-	# Close views use the shared curve field. Only the subpixel enclave needs
-	# its ribbon, so draw its tiny prebuilt mesh instead of the entire globe.
-	var micro_border := MeshInstance3D.new()
-	micro_border.mesh = load("res://assets/micro_boundaries.res")
-	micro_border.material_override = border_materials[0]
-	planet.add_child(micro_border)
-	border_meshes["micro"] = micro_border
+		spatial_map_layers.register(kind,border_mesh,planet)
 	_update_border_visibility()
 	var waterways := MeshInstance3D.new()
 	waterways.mesh = load("res://assets/waterways.res")
@@ -766,6 +759,7 @@ func _build_planet() -> void:
 	water_material.set_shader_parameter("relief_data",load("res://assets/relief_data.png"))
 	waterways.material_override = water_material
 	planet.add_child(waterways)
+	spatial_map_layers.register("water",waterways,planet)
 	# A very thin rim makes the sphere readable without terrain or models.
 	var rim := MeshInstance3D.new()
 	var sphere := SphereMesh.new()
@@ -814,6 +808,7 @@ func _sphere_mesh(segments: int, rings: int) -> ArrayMesh:
 	return mesh
 
 func _rebuild_palette() -> void:
+	if map_rendering != null: map_rendering.update_ownership(state.provinces,state.regions,state.countries)
 	if country_label_layer != null and country_label_layer.preparation_runs>0: country_label_layer.refresh_if_changed()
 	var color_image := Image.create(8192, 1, false, Image.FORMAT_RGBA8)
 	var owner_image := Image.create(8192, 1, false, Image.FORMAT_RGBA8)
@@ -898,10 +893,11 @@ func _update_border_visibility() -> void:
 	if border_meshes.is_empty(): return
 	# Match the existing shader's exact zero-opacity ranges. Visibility changes
 	# submit no geometry and never generate or load new meshes on camera travel.
-	border_meshes["land"].visible = distance > 1.45
-	border_meshes["micro"].visible = distance <= 1.45
-	border_meshes["province"].visible = inspection_active and state.selected_region > 0 and distance > 1.45 and distance < 1.52
-	border_meshes["sea"].visible = distance < 2.8 or state.selected_sea > 0
+	spatial_map_layers.set_enabled("land",distance > 1.45)
+	spatial_map_layers.set_enabled("province",inspection_active and state.selected_region > 0 and distance > 1.45 and distance < 1.52)
+	spatial_map_layers.set_enabled("sea",distance < 2.8 or state.selected_sea > 0)
+	spatial_map_layers.set_enabled("water",distance < 3.5)
+	spatial_map_layers.update_view(distance)
 
 func _search_changed(value: String) -> void:
 	list_filter = value.strip_edges().to_lower()
@@ -1503,7 +1499,9 @@ func _update_camera_pose() -> void:
 	if camera == null: return
 	_update_border_visibility()
 	var key: Array = [distance, planet.global_transform if planet != null else Transform3D()]
-	if key == last_camera_view: return
+	if key == last_camera_view:
+		if spatial_map_layers != null: spatial_map_layers.cull(camera,planet)
+		return
 	last_camera_view = key
 	if planet == null:
 		camera.position = Vector3(0, 0, distance)
@@ -1518,6 +1516,7 @@ func _update_camera_pose() -> void:
 	var clearance := maxf(.015, distance - 1.0)
 	camera.position = anchor + Vector3(0, -sin(tilt), cos(tilt)) * clearance
 	camera.look_at(anchor, Vector3.UP)
+	if spatial_map_layers != null: spatial_map_layers.cull(camera,planet)
 
 func _update_detail_patch() -> void:
 	if distance >= 1.4 or screen == "menu":
@@ -1559,14 +1558,6 @@ func _map_pixel_at(position: Vector2) -> Color:
 	var x := clampi(int((u * 2.0 - tx) * region_image.get_width()), 0, region_image.get_width() - 1)
 	var y := clampi(int((v * 2.0 - ty) * region_image.get_height()), 0, region_image.get_height() - 1)
 	var pixel := region_image.get_pixel(x, y)
-	if not micro_polygon.is_empty():
-		var raw_id := int(round(pixel.r*255.0)) + int(round(pixel.g*255.0))*256
-		var resolved := raw_id
-		if micro_rect.has_point(uv) and Geometry2D.is_point_in_polygon(uv,micro_polygon):
-			resolved = int(micro_geometry["province"])
-		elif raw_id==int(micro_geometry["province"]):
-			resolved = int(micro_geometry["host_province"])
-		if resolved!=raw_id: return Color(float(resolved&255)/255.0,float(resolved>>8)/255.0,0,1)
 	return pixel
 
 func _region_at(position: Vector2) -> int:
@@ -2253,16 +2244,13 @@ func _run_smoke_test() -> void:
 	_smoke_check(checks, not place_dialog.visible and not state.paused and state.player_country==player_before,"search resumes and preserves player country")
 	_smoke_check(checks, state.selected_country=="JAP" and state.selected_province>0 and _province_at(Vector2(world_view.size)*.5)==state.selected_province,"search camera and province picking agree")
 	state.paused = true
-	var vatican_record: Dictionary = places.entries.filter(func(r: Dictionary):return r["kind"]=="Country" and r["country"]=="HLS")[0]
-	_go_to_place(vatican_record,false)
-	_smoke_check(checks, state.regions[str(_region_at(Vector2(world_view.size)*.5))]["owner"]=="HLS","small Vatican remains selectable")
 	var colosseum: Dictionary = places.find_places("Colosseum")[0]
 	_go_to_place(colosseum,false)
 	_smoke_check(checks, state.regions[str(_region_at(Vector2(world_view.size)*.5))]["owner"]=="ITA","Colosseum correctly belongs to Italy")
 	_smoke_check(checks, _area_number(.44)=="0.44","small province area is readable")
 	_smoke_check(checks,state.regions.size()==1355,"updated State geography")
 	_set_city_scenery(old_scenery)
-	print("REFINEMENT_UI_CHECKS place_search_camera_pause_and_player=true persistent_scenery=true Vatican_and_Colosseum_picking=true population_tooltips=true")
+	print("REFINEMENT_UI_CHECKS place_search_camera_pause_and_player=true persistent_scenery=true Colosseum_picking=true population_tooltips=true")
 	if false in checks:
 		printerr("UI_SMOKE_FAIL checks=", checks)
 		get_tree().quit(1)
@@ -2909,24 +2897,6 @@ func _go_to_place(record: Dictionary, animated: bool = true) -> void:
 
 func _area_number(area: float) -> String:
 	return "%.2f" % area if area<10.0 else _number(int(round(area)))
-
-func _configure_microstate() -> void:
-	var path := "res://data/microstate_geometry.json"
-	if not FileAccess.file_exists(path): return
-	micro_geometry = JSON.parse_string(FileAccess.get_file_as_string(path))
-	micro_polygon.clear()
-	for point: Array in micro_geometry["polygon_uv"]: micro_polygon.append(Vector2(float(point[0]),float(point[1])))
-	var minimum := micro_polygon[0]; var maximum := minimum
-	for point: Vector2 in micro_polygon: minimum=minimum.min(point); maximum=maximum.max(point)
-	micro_rect = Rect2(minimum,maximum-minimum)
-	var padded := micro_polygon.duplicate()
-	padded.resize(64)
-	planet_material.set_shader_parameter("micro_bounds",Vector4(minimum.x,minimum.y,maximum.x,maximum.y))
-	planet_material.set_shader_parameter("micro_polygon",padded)
-	planet_material.set_shader_parameter("micro_vertex_count",micro_polygon.size())
-	planet_material.set_shader_parameter("micro_province",float(micro_geometry["province"]))
-	planet_material.set_shader_parameter("micro_host_province",float(micro_geometry["host_province"]))
-	planet_material.set_shader_parameter("micro_region",float(micro_geometry["state"]))
 
 func _build_loading_screen() -> void:
 	loading_overlay = ColorRect.new()

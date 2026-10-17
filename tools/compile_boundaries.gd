@@ -1,7 +1,7 @@
 extends SceneTree
 
 func _initialize() -> void:
-	for kind: String in ["land", "sea", "province", "micro"]:
+	for kind: String in ["land", "sea", "province"]:
 		if not OS.get_cmdline_user_args().is_empty() and kind != OS.get_cmdline_user_args()[0]:
 			continue
 		# Geography edits rebuild land and province lines. The unchanged sea
