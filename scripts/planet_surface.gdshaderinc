@@ -90,22 +90,9 @@ float patch_noise(vec2 p){
  return mix(mix(patch_hash(i),patch_hash(i+vec2(1,0)),f.x),mix(patch_hash(i+vec2(0,1)),patch_hash(i+vec2(1,1)),f.x),f.y);
 }
 vec3 varied_sample(float layer,vec2 uv,float phase,vec2 dx,vec2 dy){
- // Two fixed-world patch samples. Explicit gradients preserve mip selection
- // across changes of patch identity; nothing is generated/uploaded on travel.
- float i=floor(phase),f=fract(phase);
+ float i=floor(phase);
  vec2 a=vec2(patch_hash(vec2(i,layer)),patch_hash(vec2(layer+19.0,i)))*37.0;
- vec2 b=vec2(patch_hash(vec2(i+1.0,layer)),patch_hash(vec2(layer+19.0,i+1.0)))*37.0;
- bool odd=mod(i,2.0)>.5;
- vec2 uva=odd?vec2(-uv.y,uv.x):uv;
- vec2 uvb=odd?uv:vec2(-uv.y,uv.x);
- vec2 dxa=odd?vec2(-dx.y,dx.x):dx;
- vec2 dya=odd?vec2(-dy.y,dy.x):dy;
- vec2 dxb=odd?dx:vec2(-dx.y,dx.x);
- vec2 dyb=odd?dy:vec2(-dy.y,dy.x);
- vec3 first=textureGrad(terrain_materials,vec3(uva+a,layer),dxa,dya).rgb;
- vec3 second=textureGrad(terrain_materials,vec3(uvb+b,layer),dxb,dyb).rgb;
- float blend=smoothstep(.18,.82,f);
- return mix(first,second,blend);
+ return textureGrad(terrain_materials,vec3(uv+a,layer),dx,dy).rgb;
 }
 vec3 material(float layer,vec3 position,vec3 phase,vec3 dx,vec3 dy){
  // World-anchored triplanar mapping avoids longitude/pole stretching and seams.
@@ -246,7 +233,7 @@ void fragment(){
  if(!physical_mode&&!information_mode&&region>.5)land_color=country_tint;
  vec3 base=mix(water,land_color,land_coverage);
 #ifdef PHYSICAL_MAP
- if(physical_mode){
+ if(physical_mode && land_coverage > .001){
   vec3 earth=texture(terrain_color,uv).rgb;
   // Biome IDs affect only close material patterns/exposure, never snow or
   // hillshade. Skip their four fetches and categorical ranking at far zoom.
@@ -255,7 +242,7 @@ void fragment(){
   float primary=types.r;
   float secondary=types.g;
   vec3 n=normalize(geographic_normal);
-  vec3 material_position=n*1900.0;
+  vec3 material_position=n*2600.0;
   vec3 material_phase=vec3(0.0);
   vec3 urban_dx=dFdx(n)*430.0,urban_dy=dFdy(n)*430.0;
   float close=smoothstep(0.0,1.0,terrain_mix);
@@ -263,7 +250,7 @@ void fragment(){
   if(close>.001){
    // Compute spatial variation once, shared by both biomes and exposed rock.
    vec3 warp=vec3(patch_noise(material_position.xy*.85+13.0),patch_noise(material_position.yz*.85+37.0),patch_noise(material_position.zx*.85+59.0))-.5;
-   material_position+=warp*.82;
+   material_position+=warp*.25;
    material_phase=vec3(patch_noise(material_position.yz*.43),patch_noise(material_position.xz*.43+17.0),patch_noise(material_position.xy*.43+31.0))*7.0;
   }
   vec3 material_dx=dFdx(material_position),material_dy=dFdy(material_position);
@@ -320,7 +307,7 @@ void fragment(){
   if(passage_id>0.0)physical_land=0.0;
   base=mix(water,earth,physical_land);
   float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72))),-.75,1.0);
-  base*=.70+.32*smoothstep(-.5,.9,sun);
+  base*=.52+.52*smoothstep(-.5,.9,sun);
   float haze=pow(1.0-facing,2.8)*.29;base=mix(base,vec3(.18,.35,.49),haze);
   float coastal_band=1.0-smoothstep(1.5,10.0,abs(field_pixels(coast_value)));
   float political_band=max(national_band*.20,coastal_band*.12);
