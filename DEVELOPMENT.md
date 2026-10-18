@@ -1,16 +1,16 @@
-# Developing BunnyWorld 0.2.1.1
+# Developing BunnyWorld 0.2.1.2
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
 
 ## Government and political power
 
-GovernmentRules is the shared source of valid properties/options and the default 100 PP change cost. WorldState validates player ownership, a genuinely different valid option and sufficient PP before changing the property and charging atomically. New saves (schema 18) persist settings, balance and named additive daily modifiers; validate every political field before committing a load. No old-save migration.
+GovernmentRules is the shared source of valid properties/options and the default 100 PP change cost. WorldState validates player ownership, a genuinely different valid option and sufficient PP before changing the property and charging atomically. New saves (schema 20) persist settings, balance and named additive daily modifiers; validate every political field before committing a load. No old-save migration.
 
 WorldState.advance applies the number of crossed midnights × the actual daily total, once per country per day boundary; paused time gives no income. Base gain is +1. PP balances reuse starting_stats.political_power as the live statistic. Properties do not yet apply political modifiers. Government choice windows refresh affordability on daily ticks; purchases refresh the top bar immediately.
 
 political_summary.gd shares the large/compact portrait and parliament layout. Only player-country compact parliament has an activation callback. political_panel.gd uses native buttons and an exclusive AcceptDialog. political_power_indicator.gd renders a BBCode tooltip from the same breakdown used by the simulation. Country panels remain 370px; Government is 600×480px, capped to available space. Run `Godot --headless --path . --script res://tests/political_ui_tests.gd` for integration checks.
 
-Application/geography/display 0.2.1.1 includes approved sea-first map edits. See documentation/MAP_EDITS.md for reproduction. The 0.2.1 government/PP systems are retained. Resolution reduction is a separate task.
+Application/geography/display 0.2.1.2 uses one 8192×4096 province ID PNG and 4096×2048 universal border/coast fields. Active builders obtain native dimensions from map_dimensions.py; the source is province_ids.png. Tiny states/inhabited-island anchors are protected; no IDs or population are removed. See documentation/MAP_EDITS.md for reproduction and measurements. The existing government/PP systems are retained.
 
 ## Reproduce .28 geography
 

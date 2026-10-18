@@ -741,7 +741,8 @@ func _build_planet() -> void:
 	map_rendering.initialize(state.provinces,state.regions,state.countries)
 	map_rendering.visual_changed.connect(map_frame_policy.invalidate)
 	region_images=map_rendering.region_images
-	for tile: int in 4:
+	planet_material.set_shader_parameter("map_resolution",Vector2(region_images[0].get_size()))
+	for tile: int in map_rendering.region_textures.size():
 		planet_material.set_shader_parameter("region_map_%d"%tile,map_rendering.region_textures[tile])
 	planet_material.set_shader_parameter("palette_width", 8192.0)
 	planet_material.set_shader_parameter("province_index",map_rendering.province_texture)
@@ -783,7 +784,7 @@ func _build_planet() -> void:
 		var material := ShaderMaterial.new()
 		material.shader = load("res://scripts/provinces.gdshader" if kind == "province" else "res://scripts/boundaries.gdshader")
 		if kind == "province": material.set_shader_parameter("province_index",map_rendering.province_texture)
-		for tile: int in range(4): material.set_shader_parameter("region_map_%d" % tile,map_rendering.region_textures[tile])
+		for tile: int in map_rendering.region_textures.size(): material.set_shader_parameter("region_map_%d" % tile,map_rendering.region_textures[tile])
 		material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
 		material.set_shader_parameter("camera_distance", distance)
 		border_mesh.material_override = material
@@ -1637,15 +1638,7 @@ func _map_pixel_at(position: Vector2) -> Color:
 	var uv := _uv_at(position)
 	if uv.x < 0: return Color.BLACK
 	if _water_passage_at(uv)>0: return Color.BLACK
-	var u := uv.x
-	var v := uv.y
-	var tx := mini(int(u * 2.0), 1)
-	var ty := mini(int(v * 2.0), 1)
-	var region_image: Image = region_images[ty * 2 + tx]
-	var x := clampi(int((u * 2.0 - tx) * region_image.get_width()), 0, region_image.get_width() - 1)
-	var y := clampi(int((v * 2.0 - ty) * region_image.get_height()), 0, region_image.get_height() - 1)
-	var pixel := region_image.get_pixel(x, y)
-	return pixel
+	return map_rendering.pixel_at_uv(uv)
 
 func _region_at(position: Vector2) -> int:
 	if tiny_state_markers!=null:

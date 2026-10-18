@@ -1,3 +1,3 @@
-# BunnyWorld 0.2.1.1
+# BunnyWorld 0.2.1.2
 
-User map edits integrated with sea > state > province priority. North Borneo and Nugal merged into their principal recipient states; all residents and demographic counts conserved. Coastline terrain, picking, highlights and border resources rebuilt. Existing government/PP behaviour retained. Map resolution is unchanged; start a fresh campaign. See documentation/MAP_EDITS.md.
+Reduce province IDs to one 8192×4096 PNG and shared boundary/coast fields to half their previous width/height. Preserve every country/state/province/sea ID; protect tiny states and valid inhabited-island locations. Keep population, demographics, real areas, owners, buildings and terrain texture resolution. Nominal listed GPU payload falls 420 MiB; target-laptop FPS awaits testing. Start a fresh campaign. See documentation/MAP_EDITS.md.

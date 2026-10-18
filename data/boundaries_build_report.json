@@ -1,19 +1,19 @@
 {
   "land": {
-    "paths": 25948,
-    "vertices": 845280,
-    "triangles": 793384
+    "paths": 13967,
+    "vertices": 759146,
+    "triangles": 731212
   },
-  "land_short_edge_segments_restored": 13,
-  "province_short_edge_segments_restored": 37,
+  "land_short_edge_segments_restored": 10,
+  "province_short_edge_segments_restored": 69,
   "province": {
-    "paths": 27879,
-    "vertices": 446308,
-    "triangles": 390550
+    "paths": 27083,
+    "vertices": 395990,
+    "triangles": 341824
   },
   "sea": {
-    "paths": 7481,
-    "vertices": 300248,
-    "triangles": 285286
+    "paths": 7266,
+    "vertices": 290974,
+    "triangles": 276442
   }
 }

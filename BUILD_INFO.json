@@ -1,42 +1,62 @@
 {
-  "version": "0.2.1.1",
-  "baseline_version": "0.2.1",
-  "repository_base_commit": "e7a6647575d77899cfe9b8a0421a34b99ffdb88d",
+  "version": "0.2.1.2",
+  "baseline_version": "0.2.1.1",
+  "repository_base_commit": "96158b04b45f3e7a380d12941fb91397d03ab8f8",
   "engine": "Godot 4.5.1 stable",
-  "geography_version": "0.2.1.1",
-  "display_version": "0.2.1.1",
-  "scenario_id": "bunny_world_2000_0_2_1_1",
+  "geography_version": "0.2.1.2",
+  "display_version": "0.2.1.2",
+  "scenario_id": "bunny_world_2000_0_2_1_2",
   "countries": 224,
   "states": 1259,
   "land_provinces": 13197,
   "sea_regions": 120,
   "population": 6146495066,
+  "map_resolution": [
+    8192,
+    4096
+  ],
+  "province_pngs": 1,
   "fresh_campaign_required": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
-  "map_resolution": [
-    16384,
-    8192
-  ],
+  "gpu_fps_measured": false,
+  "gpu_nominal_bytes_saved": 440401920,
   "validation": {
     "data": {
       "passed": true,
-      "checks": 88411,
-      "countries": 224,
+      "checks": 91826,
       "states": 1259,
       "provinces": 13197,
-      "sea_regions": 120,
-      "population": 6146495066,
-      "sea_first": true,
-      "resolution_unchanged": true
+      "seas": 120,
+      "native_size": [
+        8192,
+        4096
+      ],
+      "gpu_nominal_bytes_before": 587202560,
+      "gpu_nominal_bytes_after": 146800640,
+      "gpu_nominal_bytes_saved": 440401920,
+      "gpu_fields": {
+        "boundary_hint": 8388608,
+        "boundary_pairs": 33554432,
+        "boundary_distance": 16777216,
+        "coast_distance_0217": 16777216,
+        "tiny_land_bits": 4194304,
+        "province_ids": 67108864
+      },
+      "hardware_fps_measured": false
     },
     "runtime": {
-      "checks": 41790,
+      "checks": 54989,
       "failures": 0,
-      "geography_sha256": "9381e8963aa7ac5e2ce8b3ab14f1dc76edd035af48a07df708916b4558987122",
+      "geography_sha256": "6f3f302f38afd7299f95032778354080cc3897dc6195105a3e4c89ae745d6822",
       "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
       "passed": true,
-      "version": "0.2.1.1"
+      "version": "0.2.1.2"
+    },
+    "political_ui": {
+      "checks": 99,
+      "failures": 0,
+      "passed": true
     }
   }
 }

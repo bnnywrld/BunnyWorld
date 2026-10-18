@@ -2,9 +2,6 @@ shader_type spatial;
 render_mode unshaded, cull_disabled, depth_draw_never, depth_test_disabled;
 uniform sampler2D owners : filter_nearest;
 uniform sampler2D region_map_0 : filter_nearest;
-uniform sampler2D region_map_1 : filter_nearest;
-uniform sampler2D region_map_2 : filter_nearest;
-uniform sampler2D region_map_3 : filter_nearest;
 uniform sampler2D relief_data : filter_linear, repeat_enable;
 #include "res://scripts/border_surface.gdshaderinc"
 uniform float palette_width=8192.0;
@@ -50,7 +47,7 @@ void vertex(){
 }
 void fragment(){
  if(facing<.012||opacity<.001)discard;
- if(kind>.5){vec3 p=normalize(sphere_point);vec2 uv=vec2(fract(atan(p.x,p.z)/6.28318530718+.5),acos(clamp(p.y,-1.0,1.0))/3.14159265359);vec2 at=fract(uv*2.0);vec3 d;if(uv.y<.5)d=uv.x<.5?texture(region_map_0,at).rgb:texture(region_map_1,at).rgb;else d=uv.x<.5?texture(region_map_2,at).rgb:texture(region_map_3,at).rgb;if(d.r+d.g>0.0)discard;}
+ if(kind>.5){vec3 p=normalize(sphere_point);vec2 uv=vec2(fract(atan(p.x,p.z)/6.28318530718+.5),acos(clamp(p.y,-1.0,1.0))/3.14159265359);vec3 d=texture(region_map_0,uv).rgb;if(d.r+d.g>0.0)discard;}
  float px=abs(UV.x)*extent;float aa=max(fwidth(px)*.65,.45);float casing=1.0-smoothstep(half_width-aa,half_width+aa,px);float inner=1.0-smoothstep(max(.1,half_width-.65)-aa,max(.1,half_width-.65)+aa,px);
  vec3 dark=vec3(.025,.045,.055);vec3 ink=physical_mode?vec3(.34,.39,.36):vec3(.44,.48,.46);if(kind>.5){ink=vec3(.36,.54,.60);dark=ink;}
  float glow=0.0;if(selected>.5){ink=selected>1.5?vec3(.70,.82,.79):vec3(.90,.81,.58);dark=selected>1.5?vec3(.11,.25,.27):vec3(.21,.18,.11);glow=exp(-max(px-half_width,0.0)*1.15)*.18*(.88+.12*sin(TIME*1.7));}

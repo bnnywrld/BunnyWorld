@@ -17,8 +17,10 @@ func initialize(provinces: Dictionary, regions: Dictionary = {}, countries: Dict
  assert(int(contract["province_count"])==provinces.size(),"Province topology changed. Rebuild the map.")
  for row: Array in contract["membership"]:
   assert(provinces.has(str(int(row[0])))and int(provinces[str(int(row[0]))]["region"])==int(row[1]),"Map membership changed. Run tools/build_map.py.")
- for tile: int in 4:
-  var path: String="res://assets/region_ids_%d.png"%tile
+ var paths: Array=contract.get("tiles",[])
+ assert(paths.size()==1,"This version requires one current province PNG")
+ for tile: int in paths.size():
+  var path: String=str(paths[tile])
   var image: Image
   # Source projects: read the exact PNG bytes, bypassing editor import caches.
   # Exported projects: use the imported texture, checked against decoded bytes.
@@ -30,6 +32,7 @@ func initialize(provinces: Dictionary, regions: Dictionary = {}, countries: Dict
   assert(image!=null,"Province map tile could not be read: "+path)
   if image.is_compressed():image.decompress()
   image.convert(Image.FORMAT_RGB8)
+  assert(image.get_size()==Vector2i(int(contract["native_size"][0]),int(contract["native_size"][1])),"Province image dimensions differ from map contract")
   var hash:=HashingContext.new();hash.start(HashingContext.HASH_SHA256);hash.update(image.get_data())
   assert(hash.finish().hex_encode()==str(contract["decoded_tiles"][tile]),"Province texture differs from the map build: "+path)
   region_images.append(image)
@@ -42,6 +45,11 @@ func initialize(provinces: Dictionary, regions: Dictionary = {}, countries: Dict
   regions=world["regions"];countries=world["countries"]
  update_ownership(provinces,regions,countries)
  update_membership(provinces)
+func pixel_at_uv(uv: Vector2) -> Color:
+ var image: Image=region_images[0]
+ var x:=posmod(int(floor(uv.x*image.get_width())),image.get_width())
+ var y:=clampi(int(floor(uv.y*image.get_height())),0,image.get_height()-1)
+ return image.get_pixel(x,y)
 func update_membership(provinces: Dictionary) -> void:
  # RG identifies the State; BA holds its current owner. All shader boundary
  # samples resolve both from one fetch, with no ownership-dependent geometry.

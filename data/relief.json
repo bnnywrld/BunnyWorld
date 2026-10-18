@@ -28,8 +28,8 @@
     "width": "Smooth broad profile, limited by 8192\u00d74096 prepared elevation; lowland reaches only",
     "runtime_work": "None: baked into shared CPU/GPU relief"
   },
-  "coast_revision": "0.2.1.1",
-  "coast_pixels_changed": 922,
-  "coast_land_added": 44,
-  "coast_water_added": 878
+  "coast_revision": "0.2.1.2",
+  "coast_pixels_changed": 25948,
+  "coast_land_added": 12953,
+  "coast_water_added": 12995
 }

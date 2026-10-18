@@ -6,14 +6,22 @@ import json,zlib,struct,hashlib
 import numpy as np
 from PIL import Image
 from scipy.ndimage import maximum_filter
-R=Path(__file__).resolve().parents[1];W,H=16384,8192
+R=Path(__file__).resolve().parents[1]
+from map_dimensions import W,H
 Image.MAX_IMAGE_PIXELS=None
 
 def atlas():
- a=np.zeros((H,W),np.uint16)
- for i in range(4):
-  rgb=np.asarray(Image.open(R/f'assets/region_ids_{i}.png'));t,l=i//2*4096,i%2*8192
-  a[t:t+4096,l:l+8192]=rgb[:,:,0].astype(np.uint16)+rgb[:,:,1].astype(np.uint16)*256
+ from map_dimensions import PATHS
+ if len(PATHS)==1:
+  rgb=np.asarray(Image.open(R/PATHS[0]),np.uint16)
+  a=rgb[:,:,0]+rgb[:,:,1]*256
+  assert a.shape==(H,W)
+ else:
+  a=np.zeros((H,W),np.uint16)
+  for i,path in enumerate(PATHS):
+   rgb=np.asarray(Image.open(R/path),np.uint16);t,l=i//2*(H//2),i%2*(W//2)
+   a[t:t+H//2,l:l+W//2]=rgb[:,:,0]+rgb[:,:,1]*256
+
  return a
 
 def build():

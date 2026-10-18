@@ -1,8 +1,5 @@
 #include "res://scripts/water_passages.gdshaderinc"
 uniform sampler2D region_map_0 : filter_nearest, repeat_disable;
-uniform sampler2D region_map_1 : filter_nearest, repeat_disable;
-uniform sampler2D region_map_2 : filter_nearest, repeat_disable;
-uniform sampler2D region_map_3 : filter_nearest, repeat_disable;
 uniform sampler2D province_index : filter_nearest, repeat_disable;
 uniform sampler2D relief_data : filter_linear, repeat_enable;
 uniform sampler2DArray terrain_materials : source_color, filter_linear_mipmap_anisotropic, repeat_enable;
@@ -18,7 +15,7 @@ varying flat float patch_surface;
 varying vec3 radial_world;
 varying vec3 east_world;
 varying vec3 north_world;
-const vec2 map_resolution=vec2(16384.0,8192.0);
+uniform vec2 map_resolution=vec2(8192.0,4096.0);
 uniform sampler2D local_coast : filter_linear, repeat_disable;
 uniform vec4 local_coast_rect=vec4(0.0);
 uniform bool local_coast_enabled=false;
@@ -53,9 +50,8 @@ uniform float border_width=1.15;
 uniform float border_strength=1.0;
 uniform float coast_strength=1.0;
 vec3 map_data(vec2 uv){
- uv=vec2(fract(uv.x),clamp(uv.y,0.0,.999999));vec2 p=fract(uv*2.0);vec3 data;
- if(uv.y<.5){data=uv.x<.5?texture(region_map_0,p).rgb:texture(region_map_1,p).rgb;}
- else{data=uv.x<.5?texture(region_map_2,p).rgb:texture(region_map_3,p).rgb;}
+ uv=vec2(fract(uv.x),clamp(uv.y,0.0,.999999));
+ vec3 data=texture(region_map_0,uv).rgb;
  return floor(data*255.0+.5);
 }
 float province_at(vec2 uv){vec3 d=map_data(uv);return d.r+d.g*256.0;}
@@ -151,7 +147,7 @@ vec3 biome_at(vec2 uv){
 }
 float small_land_at(vec2 pixel){
  pixel=vec2(mod(pixel.x+map_resolution.x,map_resolution.x),clamp(pixel.y,0.0,map_resolution.y-1.0));
- vec2 bit_uv=(vec2(floor(pixel.x/8.0),pixel.y)+.5)/vec2(2048.0,8192.0);
+ vec2 bit_uv=(vec2(floor(pixel.x/8.0),pixel.y)+.5)/vec2(map_resolution.x/8.0,map_resolution.y);
  uint bits=uint(floor(texture(tiny_land_bits,bit_uv).r*255.0+.5));
  return float((bits>>uint(mod(pixel.x,8.0)))&uint(1));
 }

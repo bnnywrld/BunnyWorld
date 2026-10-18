@@ -10,7 +10,8 @@ from scipy.ndimage import find_objects,distance_transform_edt,binary_dilation,ga
 from skimage.measure import find_contours
 from build_display_0212 import inside,segments,distance
 from display_shape_0215 import smooth
-R=Path(__file__).resolve().parents[1];OUT=R/'assets/display';W,H=16384,8192;Image.MAX_IMAGE_PIXELS=None
+R=Path(__file__).resolve().parents[1];OUT=R/'assets/display'
+from map_dimensions import W,H;Image.MAX_IMAGE_PIXELS=None
 
 def paths_for(mask,top,left):
  paths=[]
@@ -54,9 +55,7 @@ def main():
  # Rebuild coast distance from FINAL land, independently of selected State or
  # province. Old per-State windows are retired, eliminating stale merge masks.
  land=(a>0);del a,s
- # Include unassigned Antarctic land from the exact source raster.
- for i in range(4):
-  rgb=np.asarray(Image.open(R/f'assets/region_ids_{i}.png'));t,l=i//2*4096,i%2*8192;land[t:t+4096,l:l+8192]|=(rgb[:,:,0]==255)&(rgb[:,:,1]==255)
+ # The authoritative atlas already contains reserved Antarctic land.
  paths=paths_for(land,0,0);model=segments(paths,True)
  low=land[::2,::2]|land[1::2,::2]|land[::2,1::2]|land[1::2,1::2];high=land[::2,::2]&land[1::2,::2]&land[::2,1::2]&land[1::2,1::2];edge=low!=high;edge[:,1:]|=low[:,1:]!=low[:,:-1];edge[1:]|=low[1:]!=low[:-1];band=binary_dilation(np.pad(edge,((0,0),(10,10)),mode='wrap'),iterations=8)[:,10:-10]
  coarse=inside(paths,(H//2,W//2),np.array([0.,0.]),2);yy,xx=np.nonzero(band);out=np.where(coarse,1.,0.).astype('<f2')

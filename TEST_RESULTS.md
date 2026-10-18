@@ -1,3 +1,3 @@
-# BunnyWorld 0.2.1.1 validation
+# BunnyWorld 0.2.1.2 validation
 
-88,411 map/data checks and 41,790 Godot 4.5.1 headless runtime checks passed. See documentation/MAP_EDITS.md. All source IDs, sea-priority coast edits, state mergers, references, global residents, demographic/workforce counts, CPU/GPU relief, picking anchors, map modes and save/load verified. Native Windows appearance/FPS untested.
+91,826 map/data checks, 54,989 Godot 4.5.1 headless runtime checks and 99 government/PP checks passed, zero failures. IDs, protected places, source demographic hashes, populations, references, field dimensions, CPU/GPU relief, map modes, picking, save/load and ownership updates verified. See documentation/MAP_EDITS.md for memory calculations and test steps. Native Windows/FPS untested.

@@ -1,46 +1,58 @@
-# BunnyWorld 0.2.1.1 — approved map edits
+# BunnyWorld 0.2.1.2 — smaller map renderer inputs
 
-Changed-files update over 0.2.1. Source resolution remains 16384×8192 for land, 8192×4096 for sea; downscaling is deferred.
+Changed-files update over **0.2.1.1**. The existing renderer and UI are retained.
 
 ## Result
 
-224 countries, 1259 states, 13197 land provinces, 120 seas. Total population: 6,146,495,066.
+- One **8192×4096 province ID PNG**, replacing four 8192×4096 quadrants (formerly 16384×8192 total).
+- All **224 countries, 1,259 states, 13,197 provinces and 120 sea regions** remain. No territorial IDs were removed.
+- Population remains **6,146,495,066**. Every state population, demographic profile, owner, building inventory and recorded physical area is unchanged. Artificial enlargement affects the visible footprint only.
+- The large shared border-pair, border-distance, border-hint and coast textures are also reduced in both dimensions. Small-island coverage is regenerated.
+- Terrain colour, elevation and ground-material texture resolutions are retained. Only coastal coverage/displacement is adjusted to the final land outline.
 
-Priority: sea map (including land/water changes), then states, then province shapes. Sea edits are exact at their native resolution; each changed coast pixel controls its corresponding 2×2 land pixels. Fine existing coast pixels outside those edits remain unchanged. Province IDs retain their parent state, except when that state is merged. Empty areas and fitting fragments are absorbed into neighbouring provinces within the final state.
+## Small places and inhabited islands
 
-## State removals
+- **Nauru** (673): enlarged from 2 ordinary-downsample pixels to a compact, selectable footprint (at least nine pixels).
+- **Akrotiri** (1473): enlarged from 3 ordinary-downsample pixels to a compact, selectable footprint (at least nine pixels).
+- **Gibraltar** (1489): enlarged from 0 ordinary-downsample pixels to a compact, selectable footprint (at least nine pixels).
+- **Scattered Islands in the Indian Ocean** (1524): enlarged from 3 ordinary-downsample pixels to a compact, selectable footprint (at least nine pixels).
+- **Melilla** (1615): enlarged from 1 ordinary-downsample pixels to a compact, selectable footprint (at least nine pixels).
 
-- North Borneo (657) → Sabah / Labuan (651): all 1,244,443 residents and their demographic counts transferred; buildings and base building slots combined.
-- Nugal (1764) → Somaliland (1752): all 381 residents and their demographic counts transferred; buildings and base building slots combined.
+Ordinary 2×2 voting lost two IDs: Gibraltar province 9440 and Somaliland province 12478. Both are retained. 68 valid city, landmark and state-capital locations receive a protected pixel where needed, preventing the loss of inhabited islands even when their province also occupies another island.
 
-Retained-state partial border transfers use source land area as a population estimate. Coastal water removal does not delete residents. Religion, education, age groups and workforce counts are conserved globally. Provinces still have no population.
+Existing coordinate/reference inconsistencies are preserved rather than moving unrelated cities into distant states. Only 6 display anchors needed small adjustments within their original state; no state membership or city/scenery records were removed. The exact changes are recorded in data/map_reduction_audit.json.
 
-## Geography and references
+## Performance evidence
 
-Sea-grid coastline edits: 44 pixels become land; 878 become water. Province IDs fully removed after fitting: 1. City references updated: 13.
+| Resource | Before | After | Change |
+|---|---:|---:|---:|
+| Province ID GPU texture payload (RG8) | 256 MiB | 64 MiB | −192 MiB |
+| Listed province/border/coast/tiny-island GPU payloads combined | 560 MiB | 140 MiB | **−420 MiB (75%)** |
+| CPU province picking images (RGB8) | 384 MiB | 96 MiB | −288 MiB |
 
-All existing city and scenery records are retained. The display anchors/scenery for Istanbul, San Andrés, Mariehamn and Sonsorol Village were moved to the nearest surviving land within their assigned province because the sea edit submerged their old pixels. Other city coordinates remain unchanged. Capitals, province/state/country membership, neighbours, lookup textures, borders, coast fields, selection fields, terrain displacement and CPU picking data are updated together. CPU and GPU relief use identical values. Current restore packs replace obsolete packs.
+The payload figures are exact format/dimension calculations, excluding driver overhead and other game assets. They are **not measurements of total VRAM or FPS**. On this host, a three-run interleaved Pillow RGB PNG-decode benchmark changed from median 1501 ms to 412 ms; it excludes GPU upload, simulation and drawing, and is not a 940MX benchmark.
+
+The expected benefits are lower memory pressure, fewer/lighter ID-map resources, and better texture-cache behaviour. Actual frame pacing and FPS on the target laptop remain to be measured.
 
 ## Validation
 
-88,411 data checks and 41,790 Godot headless runtime checks passed. Native Windows visuals and performance need the user test. No performance gain is claimed for this geography-only patch.
+**91,826 map/data checks**, **54,989 Godot 4.5.1 headless runtime checks**, and **99 government/PP UI checks** passed. These cover retained IDs, tiny-state footprints, land/sea agreement, unchanged simulation/demographics, every province and sea picking anchor, current resource checksums, same-version save/load, map modes and offscreen ownership updates. CPU/GPU relief data agree.
 
-## Apply and test
+## Apply and compare
 
-1. Close the game and Godot. Pull main, or extract the changed-files patch into the 0.2.1 project folder.
-2. Run Prepare_BunnyWorld.bat. Application, geography and display must report 0.2.1.1.
-3. Open project.godot in Godot 4.5.1 Standard and start a fresh campaign.
-4. Check the edited Baltic/Åland, Crimea and Turkish coastline: physical/political fill, province picking and sea highlights should agree.
-5. Check Sabah/Labuan and Somaliland: removed states are absent and recipient population includes their residents.
-6. Inspect Amur/Okhotsk, Kashmir, your province edits, and the changed sea regions. Rotate to the opposite hemisphere and back.
-7. Check Government/property costs and +1 daily PP remain functional; save/load within this version.
+1. Close Godot and the game. Pull main, or apply the changed-files ZIP over 0.2.1.1.
+2. Run **Prepare_BunnyWorld.bat**. Application, geography and display should all report **0.2.1.2**.
+3. Open project.godot with **Godot 4.5.1 Standard**, allow imports to complete, and start a **fresh campaign** (save schema 20).
+4. Use the same window size, map mode, graphics quality and zoom as .1.1. Compare continuous rotation and zooming, especially near dense coastlines. Check both political and physical modes.
+5. Check Gibraltar, Nauru, Akrotiri, Melilla, Scattered Islands and small Pacific islands. Check Åland, the Turkish straits and your other accepted map edits.
+6. Select small provinces, states and sea regions; inspect city/landmark positions and government/PP controls. Save/load within this version.
 
-A Windows EXE is not included. The next separate task can test smaller ID-map resolution.
+No Windows EXE is included. The source still uses Godot 4.5.1 Compatibility. Native Windows graphics/FPS were not tested here.
+
+## Editable maps
+
+BunnyWorld_0212_Editing_PNGs.zip contains **provinces.png, states.png and sea_regions.png**, each 8192×4096 with readable, unique colours and embedded colour-to-ID mappings. Keep PNG dimensions, use sampled existing colours, disable antialiasing, and retain the original files for recovery if your editor removes metadata.
 
 ## Reproduce
 
-From the recorded 0.2.1 commit, restore assets and capture pre-edit runtime demographics. The decoded original/edited PNG IDs and baseline records are under tools/cartography/edits_0211. Run apply_edits_0211.py once, refresh_coast_0211.py, then build_map.py --godot <Godot 4.5.1>. Run map_edits_0211_tests.py and map_edits_0211_runtime.gd. The latter checks all province/sea picking anchors, selections, demographic counts, save/load and offscreen ownership.
-
-## Absorbed province IDs
-
-- 6611: Amur · Province 2 (fully absorbed by higher-priority state/coast fitting).
+The accepted high-resolution source, accepted sea map, pre-reduction records, hashes and benchmark are under tools/cartography/reduced_0212. From the recorded .1.1 source commit, copy these inputs and run reduce_map_0212.py, refresh_reduced_terrain_0212.py, then build_map.py --godot <Godot 4.5.1>. All active map builders use the current layout through map_dimensions.py. Historical numbered generators are not current-map authorities.

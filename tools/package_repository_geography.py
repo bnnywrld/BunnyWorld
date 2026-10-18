@@ -28,7 +28,7 @@ def main():
  (ROOT/'ASSET_RESTORE.json').write_text(json.dumps(manifest,indent=2)+'\n')
  from repository_hygiene import check as check_repository
  check_repository(prune=True)
- files=['data/world.json','data/provinces.json','data/cities.json','data/microstate_geometry.json','data/urban_population.json','data/urban_scenery.json','data/sea_regions.json','assets/sea_ids.png','assets/province_index.png','assets/land_boundaries.res','assets/province_boundaries.res','assets/sea_boundaries.res']+['assets/region_ids_%d.png'%i for i in range(4)]
+ files=['data/world.json','data/provinces.json','data/cities.json','data/microstate_geometry.json','data/urban_population.json','data/urban_scenery.json','data/sea_regions.json','assets/sea_ids.png','assets/province_index.png','assets/land_boundaries.res','assets/province_boundaries.res','assets/sea_boundaries.res']+__import__('map_dimensions').PATHS
  files += [p for p in ['data/demographics.json','data/state_demographics.json']if (ROOT/p).is_file()]
  bundle={'version':version,'scenario':world['scenario_id'],'states':len(world['regions']),'land_provinces':len(json.load(open(ROOT/'data/provinces.json'))),'files':{p:sha((ROOT/p).read_bytes()) for p in files}}
  (ROOT/'data/geography_bundle.json').write_text(json.dumps(bundle,indent=2)+'\n')

@@ -1,0 +1,9 @@
+{
+  "base_commit": "96158b04b45f3e7a380d12941fb91397d03ab8f8",
+  "unchanged_hashes": {
+    "data/state_demographics.json": "f05da778a8be64127f6cbf735967cdf73927d601d102fa59727d537a30887e4a",
+    "data/demographics.json": "da1a1ad8ca5e160013906d4983b8be13c4dd8f8b68e0cf8f787ffb881dc5429b",
+    "data/waterways.json": "454696f57645595ac93be51bcb627b5af86fd5bf2a3b4b878799c0128e733695",
+    "scripts/water_passages.gdshaderinc": "363e327ffc98542a11e14866d3b69ea008a1f90bc368654b4bbd644905e65d11"
+  }
+}

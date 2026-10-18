@@ -1,5 +1,5 @@
 {
-	"geography_version": "0.2.1.1",
+	"geography_version": "0.2.1.2",
 	"grid": [
 		8,
 		4
@@ -8,23 +8,23 @@
 		"land": {
 			"chunks": 32,
 			"path": "assets/rendering/land_chunks.res",
-			"sha256": "102054b2ba20896094cd30c79b7ad04d9ea76e1ca25c2afa02361e76a8e4f211",
-			"source_sha256": "b6294cd7797afad0ed96de528b226b4545e748afaa827a4621ae6c6ef329de72",
-			"triangles": 793384
+			"sha256": "bf89e64dcf43b78782026f19a14341e7e5483cc819bcb9c8245d9ac5a4915263",
+			"source_sha256": "f65cbe80eff9faaece1e5c75d015a95fbf57293ea961caa4f37f526a1ba2544b",
+			"triangles": 731212
 		},
 		"province": {
 			"chunks": 25,
 			"path": "assets/rendering/province_chunks.res",
-			"sha256": "fa46461d282653edb38e3ec706340d95ae81566df3832d29cd854437ec14b072",
-			"source_sha256": "03837ca6973dc39545b17770efa333aecbbcaced2dd891f1f5c691ebe93aad60",
-			"triangles": 390550
+			"sha256": "0f1370af74bcc4a8ae80deb703594188b05d0b609f437ef0134b11f3ae537f0d",
+			"source_sha256": "c06c4ac3cc92a8928541a35e40045327e82998718347565d4f75ed8a00c4f416",
+			"triangles": 341824
 		},
 		"sea": {
 			"chunks": 32,
 			"path": "assets/rendering/sea_chunks.res",
-			"sha256": "3481eabfefa8992bb4469f836a3c91ce268425bc83735ca2eb9013c951c31cc1",
-			"source_sha256": "b273be7ab11556e72303ab02e0fb4c64a64c19b20d17c12dcc60505a67104f81",
-			"triangles": 285286
+			"sha256": "681f2c1633e82ba978bdfefea3f554f85d47a4ef29feecf8af80f1943403c7ee",
+			"source_sha256": "c9bff8a0050009a42ce7baa569bbcbb0cf5a9e7b865a1140516eb273db54944e",
+			"triangles": 276442
 		},
 		"sphere": {
 			"chunks": 32,
@@ -41,7 +41,7 @@
 			"triangles": 242206
 		}
 	},
-	"province_sha256": "00420e7f2950927741582e5b140cb8ff9411bac7ae91d15769c9d7cd46fcce10",
+	"province_sha256": "43121af5cb1b2ccc184b81a0223cdb6e03e8233e4c573028ba72b8b9a9502fd3",
 	"schema": 1,
 	"shape_changed": false
 }

@@ -6,9 +6,10 @@ Usage: python tools/build_map.py [--check] [--godot /path/to/godot]
 from pathlib import Path
 import argparse,json,hashlib,zlib,io,subprocess,shutil,sys,re
 R=Path(__file__).resolve().parents[1];OUT=R/'assets/display'
+from map_dimensions import W,H,PATHS
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def inputs(ps):
- return {'tiles':{f'assets/region_ids_{i}.png':sha(R/f'assets/region_ids_{i}.png')for i in range(4)},'sea_ids':sha(R/'assets/sea_ids.png'),'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json'),'curve_algorithm':{n:sha(R/'tools'/n)for n in ['build_boundaries_021.py','build_map_boundaries.py','display_shape_0215.py','build_boundary_field.py','build_sea_coverage.py']}}
+ return {'tiles':{path:sha(R/path)for path in PATHS},'native_size':[W,H],'sea_ids':sha(R/'assets/sea_ids.png'),'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json'),'curve_algorithm':{n:sha(R/'tools'/n)for n in ['build_boundaries_021.py','build_map_boundaries.py','display_shape_0215.py','build_boundary_field.py','build_sea_coverage.py','map_dimensions.py']}}
 def sea_pack():
  target=OUT/'sea_coverage.json'
  if target.exists():return
@@ -42,7 +43,7 @@ def main():
  Image.MAX_IMAGE_PIXELS=None
  resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/') and n not in ['assets/display/sea_mask.bwd','assets/display/sea_mask.json','assets/display/far_terrain.bwd','assets/display/far_terrain.json'])
  changed=args.force or bool(old)and old.get('inputs')!=source or resource_mismatch
- sea_changed=args.force or old.get('inputs',{}).get('sea_ids')!=source['sea_ids'] or not (OUT/'sea_coverage.json').exists()
+ sea_changed=args.force or old.get('native_size')!=[W,H] or old.get('inputs',{}).get('sea_ids')!=source['sea_ids'] or not (OUT/'sea_coverage.json').exists()
  if sea_changed:
   from build_sea_coverage import build as build_seas
   build_seas()
@@ -52,15 +53,15 @@ def main():
   a=atlas()
   if world.get('map',{}).get('antarctica_province_id')==65535:
    for lon,lat in [(0,-85),(90,-80),(-90,-80),(140,-80)]:
-    assert int(a[int((90-lat)/180*8192),int((lon+180)/360*16384)])==65535,'Declared Antarctic terrain is missing. Restore its reserved land pixels before rebuilding.'
+    assert int(a[int((90-lat)/180*H),int((lon+180)/360*W)])==65535,'Declared Antarctic terrain is missing. Restore its reserved land pixels before rebuilding.'
   ids=set(np.unique(a))- {0,65535};assert ids==set(map(int,ps)),'Raster province IDs differ from data/provinces.json'
   lut=np.zeros(65536,np.uint16);lut[65535]=8191
   for p in ps.values():lut[p['id']]=p['region']
   # Derive adjacency from canonical pixels too. Old neighbor tables must
   # never decide which current edges exist after a merge or split.
   neighbors={k:set()for k in ps};state_neighbors={k:set()for k in world['regions']}
-  for top in range(0,8192,128):
-   for left,right in [(a[top:top+128,:-1],a[top:top+128,1:]),(a[top:min(8191,top+128)],a[top+1:min(8192,top+129)])]:
+  for top in range(0,H,128):
+   for left,right in [(a[top:top+128,:-1],a[top:top+128,1:]),(a[top:min(H-1,top+128)],a[top+1:min(H,top+129)])]:
     valid=(left>0)&(right>0)&(left!=right)&(left!=65535)&(right!=65535)
     codes=np.minimum(left[valid],right[valid]).astype(np.uint32)*65536+np.maximum(left[valid],right[valid])
     for code in np.unique(codes):
@@ -127,15 +128,15 @@ def main():
  build_far_terrain()
  resources+=['assets/display/sea_mask.bwd','assets/display/sea_mask.json','assets/display/far_terrain.bwd','assets/display/far_terrain.json']
  resources+=chunk_files
- decoded=[hashlib.sha256(Image.open(R/f'assets/region_ids_{i}.png').convert('RGB').tobytes()).hexdigest()for i in range(4)]
- contract={'schema':1,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}
+ decoded=[hashlib.sha256(Image.open(R/path).convert('RGB').tobytes()).hexdigest()for path in PATHS]
+ contract={'schema':1,'native_size':[W,H],'tiles':PATHS,'version':version,'geography_version':world['version'],'province_count':len(ps),'state_count':len(world['regions']),'inputs':source,'membership':source['membership'],'decoded_tiles':decoded,'resources':{n:sha(R/n)for n in resources},'ownership_baked':False,'land_selection_masks':False,'coverage':'Shared smoothed curve distances and live province-pair membership; cubic junction fallback'}
  cp.write_text(json.dumps(contract,separators=(',',':'))+'\n')
  active=resources+['assets/display/map_contract.json','assets/display/country_glyphs.png','assets/display/country_glyphs.json','assets/display/FONT_LICENSE.txt','assets/display/tiny_land_bits.bwd']
  bundle={'version':version,'geography_version':world['version'],'files':{n:sha(R/n)for n in active}}
  (OUT/'BUNDLE.json').write_text(json.dumps(bundle,indent=2)+'\n')
  geo_path=R/'data/geography_bundle.json'
  if geo_path.exists():
-  geo=json.loads(geo_path.read_text());geo['files']={n:sha(R/n)for n in geo['files']};geo_path.write_text(json.dumps(geo,indent=2)+'\n')
+  geo=json.loads(geo_path.read_text());geo['files']={n:sha(R/n)for n in geo['files']if (R/n).is_file()};geo_path.write_text(json.dumps(geo,indent=2)+'\n')
  if changed:
   subprocess.run([sys.executable,str(R/'tools/package_repository_geography.py')],cwd=R,check=True)
  print('MAP_BUILD_READY',len(ps),'provinces; dynamic State/country coverage',flush=True)

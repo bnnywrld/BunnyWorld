@@ -8,7 +8,8 @@ from scipy.ndimage import maximum_filter
 from build_boundary_hint import atlas
 from build_boundaries_021 import contours
 from build_display_0212 import segments
-R=Path(__file__).resolve().parents[1];O=R/'assets/display';W,H=16384,8192
+R=Path(__file__).resolve().parents[1];O=R/'assets/display'
+from map_dimensions import W,H
 
 def build():
  a=atlas();ps=json.loads((R/'data/provinces.json').read_text())

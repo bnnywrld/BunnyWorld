@@ -1,0 +1,17 @@
+{
+  "old": [
+    1563.984492000145,
+    1501.1492169996927,
+    1479.2236230000526
+  ],
+  "new": [
+    442.73149499986175,
+    388.0991930000164,
+    412.3515360001875
+  ],
+  "method": "Pillow RGB PNG decode from resident bytes, three interleaved runs; excludes GPU upload and gameplay",
+  "median_before_ms": 1501.1492169996927,
+  "median_after_ms": 412.3515360001875,
+  "gpu_fps_measured": false,
+  "province_png_sha256": "35bac8026097a611fdc713cf794a760d09dd89228851ce5a8a7609ce56191c24"
+}

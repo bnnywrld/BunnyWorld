@@ -12,7 +12,8 @@ from skimage.measure import find_contours
 from shapely.geometry import LineString,Polygon
 from rasterio.features import rasterize
 from rasterio.transform import Affine
-ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/display';W,H=16384,8192
+ROOT=Path(__file__).resolve().parents[1];OUT=ROOT/'assets/display'
+from map_dimensions import W,H
 Image.MAX_IMAGE_PIXELS=None
 
 def rings(mask,top=0,left=0):
@@ -81,10 +82,8 @@ def protect_anchor(data,rect,uv):
  return data
 
 def atlas():
- a=np.zeros((H,W),np.uint16)
- for ty in range(2):
-  for tx in range(2):
-   rgb=np.asarray(Image.open(ROOT/f'assets/region_ids_{ty*2+tx}.png'));a[ty*H//2:(ty+1)*H//2,tx*W//2:(tx+1)*W//2]=rgb[:,:,0].astype(np.uint16)+rgb[:,:,1].astype(np.uint16)*256
+ from build_boundary_hint import atlas as canonical_atlas
+ a=canonical_atlas()
  return a
 
 def coverage():

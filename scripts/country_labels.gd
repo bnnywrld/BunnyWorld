@@ -79,8 +79,8 @@ func configure(main: Control) -> void:
  _build_geometry()
 func owner_at(uv: Vector2) -> String:
  preparation_reads+=1
- var tx:=mini(int(uv.x*2),1);var ty:=mini(int(uv.y*2),1);var im: Image=host.region_images[ty*2+tx]
- var c:=im.get_pixel(clampi(int((uv.x*2-tx)*im.get_width()),0,im.get_width()-1),clampi(int((uv.y*2-ty)*im.get_height()),0,im.get_height()-1));var pid:=int(round(c.r*255))+256*int(round(c.g*255));var sid:=int(host.state.provinces.get(str(pid),{}).get("region",0))
+ var c: Color=host.map_rendering.pixel_at_uv(uv)
+ var pid:=int(round(c.r*255))+256*int(round(c.g*255));var sid:=int(host.state.provinces.get(str(pid),{}).get("region",0))
  return str(host.state.regions.get(str(sid),{}).get("owner",""))
 
 func _point_at(entry: Dictionary, offset: float, up: float = 0.0) -> Vector3:

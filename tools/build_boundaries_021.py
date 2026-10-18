@@ -11,7 +11,8 @@ from PIL import Image
 from scipy.ndimage import find_objects
 from skimage.measure import find_contours
 from shapely.geometry import LineString
-ROOT=Path(__file__).resolve().parents[1];W,H=16384,8192
+ROOT=Path(__file__).resolve().parents[1]
+from map_dimensions import W,H
 Image.MAX_IMAGE_PIXELS=None
 
 @lru_cache(maxsize=1)
@@ -45,7 +46,7 @@ def contours(atlas,ids,scale,water=False,province=False):
                     from display_shape_0215 import smooth,smooth_internal
                     member=province_membership()
                     internal=(province and neighbor>0 and member.get(sid)==member.get(neighbor))
-                    simple=smooth_internal(pts)if internal else smooth(np.asarray(LineString(pts).simplify(.8,preserve_topology=False).coords))
+                    simple=smooth_internal(pts)if internal else smooth(np.asarray(LineString(pts).simplify(.8*(1.0 if water else __import__('map_dimensions').SCALE),preserve_topology=False).coords),scale=(1.0 if water else __import__('map_dimensions').SCALE))
                     if len(simple)>1:paths.append((simple[:,0]/ww,simple[:,1]/hh,sid,neighbor,1 if water else 0))
                 start=end
         if sid%250==0:print('Boundary contours',sid,'paths',len(paths),flush=True)
@@ -57,7 +58,7 @@ def mesh(paths,name):
         # Simplification is planar. Long latitude/longitude runs need extra
         # vertices before spherical projection; otherwise a ribbon becomes a
         # chord through the planet and no longer follows the categorical atlas.
-        points=np.column_stack([x,y])+np.array([.5/W,.5/H])*(2 if kind==1 else 1);step=np.max(np.abs(np.diff(points,axis=0))*np.array([2048,1024]),axis=1)
+        points=np.column_stack([x,y])+(np.array([.5/8192,.5/4096])if kind==1 else np.array([.5/W,.5/H]));step=np.max(np.abs(np.diff(points,axis=0))*np.array([2048,1024]),axis=1)
         pieces=[]
         for j,n in enumerate(np.maximum(1,np.ceil(step).astype(int))):
             t=np.arange(n,dtype=float)/n

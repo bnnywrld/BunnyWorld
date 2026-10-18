@@ -4,8 +4,8 @@
   "width": 8192,
   "height": 4096,
   "source": "assets/sea_ids.png",
-  "source_sha256": "e6db030f5462289780a0f82afb7c11aaffb60abf3ed0e200afbf918b5461edc3",
-  "sha256": "5565856f4994ba8d35c9108a5fd46cab8bf96dcdc888102991e8621d74c8fa2c",
+  "source_sha256": "fda9d16e3e15520e15c453112f25946a5c4c7eaf14db59facc0e30e7d6757c0e",
+  "sha256": "918aaa73fbf11bd051ce192a8ae151292cfbfecab3c04f22338fafcd316f5608",
   "decoded_bytes": 33554432,
   "predicate": "R != 0 or G != 0; nearest sampling at original resolution"
 }
