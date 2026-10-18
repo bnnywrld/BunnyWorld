@@ -1,6 +1,0 @@
-{
-  "checks": 330,
-  "failures": 0,
-  "mode": "Godot 4.5.1 headless; checks texture upload bytes, not hardware GPU readback; no native Windows graphics test",
-  "passed": true
-}

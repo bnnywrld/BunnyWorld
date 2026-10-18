@@ -56,3 +56,15 @@ Thumbs.db
 !/assets/micro_boundaries.res
 /assets/rendering/*_chunks.res
 /assets/rendering/*.prepare-tmp.res
+
+# Patch delivery paperwork and QA output belong outside source control.
+/PATCH_MANIFEST*.json
+/PATCH_REMOVED_FILES*.txt
+/APPLY_*.txt
+/validation_*/
+*.translation
+/tools/**/*.csv.import
+/documentation/**/*.csv.import
+*.zip
+# Keep only source datasets explicitly required by the map toolchain.
+!/tools/cartography/gshhg_high.zip
