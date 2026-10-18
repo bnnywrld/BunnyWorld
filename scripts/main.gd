@@ -271,13 +271,27 @@ func _ready() -> void:
 	_update_camera_pose()
 	_update_detail_patch()
 	urban_scenery.update_view(camera, distance, true, .3)
-	for warm_frame: int in 4: await get_tree().process_frame
+
+	# Exercise close terrain rendering while the loading screen is visible.
+	planet_material.set_shader_parameter("camera_distance", distance)
+	planet_material.set_shader_parameter("terrain_mix", 1.0)
+	planet_material.set_shader_parameter("city_detail", 1.0)
+	for warm_frame: int in 4:
+		await get_tree().process_frame
 	map_mode = 0
 	_rebuild_palette()
 	distance = 3.65
 	_update_camera_pose()
 	_update_detail_patch()
 	urban_scenery.update_view(camera, distance, false, .3)
+
+	# Restore distant settings and draw the political shader before loading ends.
+	planet_material.set_shader_parameter("camera_distance", distance)
+	planet_material.set_shader_parameter("terrain_mix", 0.0)
+	planet_material.set_shader_parameter("city_detail", 0.0)
+	for warm_frame: int in 4:
+		await get_tree().process_frame
+
 	_enter_menu()
 	_update_clock()
 	_loading_stage(100, "Ready")
