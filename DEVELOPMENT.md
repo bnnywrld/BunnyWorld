@@ -1,6 +1,12 @@
-# Developing BunnyWorld 0.2.0.28
+# Developing BunnyWorld 0.2.0.30
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
+
+## Government interface
+
+scripts/political_panel.gd builds the five menu controls; scripts/political_art.gd draws native vector silhouettes and 100 neutral seats. main.political_ui_choices is temporary interface state; it is deliberately excluded from WorldState, data JSON and saves. New campaign selection and successful loads clear it. Government uses a 760px panel; other sections retain their existing width. Run `Godot --headless --path . --script res://tests/political_ui_tests.gd` to check all choices, clearing, reopen persistence, isolation from game data and panel transitions.
+
+Application .30 uses the unchanged .29 geography/display bundles. Do not regenerate or repackage map resources for this UI update.
 
 ## Reproduce .28 geography
 

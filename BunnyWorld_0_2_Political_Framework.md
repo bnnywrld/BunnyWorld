@@ -1,10 +1,10 @@
 # BunnyWorld 0.2 — Political framework
 
-Updated: 14 October 2026.
+Updated: 18 October 2026.
 
 ## Status and scope
 
-This document preserves the political design discussed with the user. It is a design record, not evidence that these features have been implemented. Development is to begin after the 0.1 map work is finished and the current source is available. The attached 0.1.0 source is an older baseline, not the latest map build.
+This document preserves the agreed political design. Version 0.2.0.30 implements only the Government interface: two simple portrait placeholders, an unassigned 100-seat parliament, and five changeable property menus. Property choices are temporary UI state, cleared on new campaign/load; no political country data, historical offices, party seats, election dates, costs or simulation effects are implemented. The remaining sections are design plans, not evidence of working mechanics.
 
 Demographics and the political foundation precede the economy. The initial demographic direction includes age, religion (including nonreligious populations), education, and economic activity. Gender is omitted; ethnicity is postponed. Detailed employment follows with the economy.
 

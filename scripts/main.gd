@@ -168,6 +168,8 @@ var menu_background: TextureRect
 var menu_photo: Texture2D
 var state_preview := 0
 var active_feature := ""
+# Temporary interface choices, excluded from WorldState and save files.
+var political_ui_choices: Dictionary = {}
 var boot_complete := false
 var detail_mesh_builds := 0
 var inspection_active: bool = false
@@ -1406,7 +1408,7 @@ func _show_country(tag: String, focus: bool = true) -> void:
 			_briefing_section("Government")
 			var government: Dictionary = c.get("government", {})
 			details.add_child(_wrapped(str(government.get("party", "")) if not str(government.get("party", "")).is_empty() else str(c["outlook"])))
-			details.add_child(_wrapped("Government institutions and reforms arrive in 0.2.1–0.2.2.",12))
+			details.add_child(_button("Open government", func(): _show_feature("Government")))
 		else:
 			_briefing_section("Diplomatic actions")
 			for action: String in ["Improve relations", "Offer treaty", "Trade agreement", "Diplomatic support", "Declare war"]:
@@ -1833,6 +1835,7 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 		if show_errors:
 			_show_error(state.last_error)
 		return false
+	political_ui_choices.clear()
 	if focus_tween != null:
 		focus_tween.kill()
 	planet.rotation = Vector3(float(view["rotation"][0]), float(view["rotation"][1]), 0)
@@ -2392,6 +2395,7 @@ func _enter_menu() -> void:
 	_update_clock()
 
 func _start_selection() -> void:
+	political_ui_choices.clear()
 	state.reset()
 	inspect_region = 0
 	search.text = ""
@@ -2791,12 +2795,12 @@ func _handle_position(collapsed: bool) -> float:
 func _position_panels(force: bool = true) -> void:
 	if view_container == null: return
 	_layout_overlay()
-	var key: Array = [view_container.size, top_left_box.size if top_left_box != null else Vector2.ZERO, control_panel.visible, right_panel.visible, territory_collapsed]
+	var key: Array = [view_container.size, top_left_box.size if top_left_box != null else Vector2.ZERO, control_panel.visible, right_panel.visible, territory_collapsed, active_feature]
 	if not force and key == last_panel_layout and panel_tweens.is_empty() and (territory_tween == null or not territory_tween.is_running()): return
 	last_panel_layout = key
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
-		panel.size = Vector2(370, maxf(240, view_container.size.y - 118))
+		panel.size = Vector2(minf(760, view_container.size.x - 24) if active_feature == "Government" else 370, maxf(240, view_container.size.y - 118))
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -3052,7 +3056,16 @@ func _show_feature(caption: String) -> void:
 	heading.add_child(title)
 	heading.add_child(_button("×", func(): active_feature = ""; _hide_panel(control_panel), "Close panel"))
 	control_heading.add_child(heading)
+	if caption == "Government":
+		var tag: String = state.player_country
+		if not political_ui_choices.has(tag): political_ui_choices[tag] = {}
+		var country := _label(str(state.countries[tag]["name"]), 14, Color("93a8aa"))
+		control_heading.add_child(country)
+		var politics := preload("res://scripts/political_panel.gd").new()
+		politics.configure(political_ui_choices[tag])
+		control_details.add_child(politics)
 	_reveal_panel(control_panel)
+	_position_panels()
 	foundation.refresh_active_section()
 
 func _build_loading_screen() -> void:

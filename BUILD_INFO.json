@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0.29",
-  "baseline_version": "0.2.0.28",
-  "repository_base_commit": "bc1e659c9d06e00c6c92e5aa14c3dc71e7413b9d",
+  "version": "0.2.0.30",
+  "baseline_version": "0.2.0.29",
+  "repository_base_commit": "02aae98f845ca3035f6c59359e0f95ea6d55bd45",
   "engine": "Godot 4.5.1 stable official",
   "countries": 224,
   "states": 1261,
@@ -15,49 +15,23 @@
   "windows_executable_exported": false,
   "native_windows_tested": false,
   "fresh_campaign_required": true,
-  "map_data_changed": true,
+  "map_data_changed": false,
   "simulation_changed": false,
   "changes": [
-    "User colour-map edits applied; state pixels take priority",
-    "Existing province IDs fitted to states; detached scraps and new narrow fragments absorbed by bordering tiles",
-    "Only fully painted-out Istanbul Province 7 and Maracaibo province removed; cities retained",
-    "Sea borders, adjacency, selection fields and picking source rebuilt from current sea IDs",
-    "Year-2000 resident/demographic/workforce totals conserved across modeled edited-boundary transfers"
+    "Interface-only government panel with two vector silhouette portraits and a neutral 100-seat parliament",
+    "Five government-property selectors; temporary choices survive reopening and reset on new/load",
+    "No political country data, simulation modifiers, party allocations or save fields added"
   ],
   "validation": {
-    "data": {
+    "political_ui": {
       "passed": true,
-      "checks": 101898,
-      "countries": 224,
-      "states": 1261,
-      "provinces": 13198,
-      "sea_regions": 120,
-      "population": 6146495066,
-      "exact_edited_state_pixels": true,
-      "exact_edited_sea_pixels": true,
-      "same_landmass_fragment_check": "4-connected on all fitted states",
-      "new_provinces": 0,
-      "removed_provinces": [
-        {
-          "id": 10465,
-          "name": "Istanbul \u00b7 Province 7"
-        },
-        {
-          "id": 12585,
-          "name": "Maracaibo"
-        }
-      ],
-      "native_windows_tested": false
-    },
-    "runtime": {
-      "checks": 42073,
-      "failures": 0,
-      "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
-      "passed": true
+      "checks": 46,
+      "engine": "Godot 4.5.1 headless",
+      "minimum_resolution": "1100x700",
+      "linux_visual_layout": true
     },
     "native_windows_tested": false,
     "prepared_assets_verified": true,
-    "map_build_contract": true,
-    "asset_restore_tests": true
+    "map_build_contract": true
   }
 }
