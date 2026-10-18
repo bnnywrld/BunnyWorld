@@ -1,12 +1,16 @@
-# Developing BunnyWorld 0.2.0.30
+# Developing BunnyWorld 0.2.1
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
 
-## Government interface
+## Government and political power
 
-scripts/political_panel.gd builds the five menu controls; scripts/political_art.gd draws native vector silhouettes and 100 neutral seats. main.political_ui_choices is temporary interface state; it is deliberately excluded from WorldState, data JSON and saves. New campaign selection and successful loads clear it. Government uses a 760px panel; other sections retain their existing width. Run `Godot --headless --path . --script res://tests/political_ui_tests.gd` to check all choices, clearing, reopen persistence, isolation from game data and panel transitions.
+GovernmentRules is the shared source of valid properties/options and the default 100 PP change cost. WorldState validates player ownership, a genuinely different valid option and sufficient PP before changing the property and charging atomically. New saves (schema 18) persist settings, balance and named additive daily modifiers; validate every political field before committing a load. No old-save migration.
 
-Application .30 uses the unchanged .29 geography/display bundles. Do not regenerate or repackage map resources for this UI update.
+WorldState.advance applies the number of crossed midnights × the actual daily total, once per country per day boundary; paused time gives no income. Base gain is +1. PP balances reuse starting_stats.political_power as the live statistic. Properties do not yet apply political modifiers. Government choice windows refresh affordability on daily ticks; purchases refresh the top bar immediately.
+
+political_summary.gd shares the large/compact portrait and parliament layout. Only player-country compact parliament has an activation callback. political_panel.gd uses native buttons and an exclusive AcceptDialog. political_power_indicator.gd renders a BBCode tooltip from the same breakdown used by the simulation. Country panels remain 370px; Government is 600×480px, capped to available space. Run `Godot --headless --path . --script res://tests/political_ui_tests.gd` for integration checks.
+
+Application .2.1 uses unchanged .29 geography/display bundles. Do not regenerate or repackage map resources for this update.
 
 ## Reproduce .28 geography
 

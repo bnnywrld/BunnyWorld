@@ -1,133 +1,108 @@
 extends VBoxContainer
-## Interface-only choices, owned by main rather than WorldState or save data.
-const Art = preload("res://scripts/political_art.gd")
+const Rules = preload("res://scripts/government_rules.gd")
+const Summary = preload("res://scripts/political_summary.gd")
 const Icons = preload("res://scripts/ui_icons.gd")
-const PROPERTIES := [
-	{"key":"constitution", "title":"Constitution", "icon":"politics", "help":"The constitutional form of the state.", "options":["Republic", "Constitutional monarchy", "Absolute monarchy"]},
-	{"key":"executive", "title":"Executive system", "icon":"organizations", "help":"How executive leadership is organized.", "options":["Parliamentary", "Presidential", "Semi-presidential", "Single rule"]},
-	{"key":"competition", "title":"Political competition", "icon":"population", "help":"The framework for political participation.", "options":["Competitive democracy", "Restricted competition", "One-party rule", "Closed authoritarian rule"]},
-	{"key":"selection", "title":"Selection rules", "icon":"ledger", "help":"How the head of state is selected.", "options":["Direct election", "Indirect election", "Parliamentary appointment", "Hereditary succession"]},
-	{"key":"power", "title":"Distribution of power", "icon":"stability", "help":"The balance of authority among governing institutions.", "options":["Legislature-led", "Balanced powers", "Executive-led", "Concentrated authority"]}
-]
-var choices: Dictionary
-var selectors: Dictionary = {}
+var world: RefCounted
+var country := ""
+var on_change: Callable
+var property_buttons: Dictionary = {}
+var choice_buttons: Dictionary = {}
+var choice_dialog: AcceptDialog
+var choice_content: VBoxContainer
+var active_property: Dictionary = {}
+var balance_label: Label
 
-func configure(values: Dictionary) -> void:
-	choices = values
+func configure(state: RefCounted, tag: String, changed: Callable) -> void:
+	world = state
+	country = tag
+	on_change = changed
 	name = "PoliticalPanel"
 	size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	add_theme_constant_override("separation", 16)
-	var institutions := PanelContainer.new()
-	institutions.add_theme_stylebox_override("panel", _style(Color("0c1c27"), 14))
-	add_child(institutions)
-	var offices := HBoxContainer.new()
-	offices.add_theme_constant_override("separation", 18)
-	institutions.add_child(offices)
-	offices.add_child(_office("HEAD OF STATE"))
-	var legislature := VBoxContainer.new()
-	legislature.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	legislature.add_theme_constant_override("separation", 4)
-	offices.add_child(legislature)
-	legislature.add_child(_label("PARLIAMENT", 13, Color("a6c5c7")))
-	var arc := Art.new()
-	arc.name = "ParliamentSeats"
-	arc.custom_minimum_size = Vector2(260, 146)
-	arc.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	arc.tooltip_text = "Parliament · 100 unassigned seats"
-	legislature.add_child(arc)
-	legislature.add_child(_label("100 seats · unassigned", 12, Color("93a8b1")))
-	legislature.add_child(_label("Next election · —", 12, Color("93a8b1")))
-	offices.add_child(_office("HEAD OF GOVERNMENT"))
-	var heading := _label("GOVERNMENT PROPERTIES", 12, Color("76c6bc"))
-	heading.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
+	add_theme_constant_override("separation", 10)
+	var summary := Summary.new()
+	summary.configure(false)
+	add_child(summary)
+	add_child(HSeparator.new())
+	var heading := Label.new()
+	heading.text = "GOVERNMENT PROPERTIES"
+	heading.add_theme_font_size_override("font_size", 11)
+	heading.add_theme_color_override("font_color", Color("76c6bc"))
 	add_child(heading)
 	var properties := HFlowContainer.new()
-	properties.add_theme_constant_override("h_separation", 8)
-	properties.add_theme_constant_override("v_separation", 8)
+	properties.add_theme_constant_override("h_separation", 6)
+	properties.add_theme_constant_override("v_separation", 6)
 	add_child(properties)
-	for property: Dictionary in PROPERTIES:
-		properties.add_child(_property(property))
+	for property: Dictionary in Rules.PROPERTIES:
+		var button := Button.new()
+		button.name = "Property_" + str(property["key"])
+		button.custom_minimum_size = Vector2(170, 58)
+		button.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		button.icon = Icons.icon(property["icon"])
+		button.expand_icon = true
+		button.add_theme_constant_override("icon_max_width", 20)
+		button.add_theme_font_size_override("font_size", 11)
+		button.clip_text = true
+		button.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+		button.pressed.connect(func(): open_property(property))
+		property_buttons[property["key"]] = button
+		properties.add_child(button)
+	choice_dialog = AcceptDialog.new()
+	choice_dialog.name = "GovernmentPropertyChoice"
+	choice_dialog.exclusive = true
+	choice_dialog.ok_button_text = "Cancel"
+	add_child(choice_dialog)
+	choice_content = VBoxContainer.new()
+	choice_content.add_theme_constant_override("separation", 8)
+	choice_dialog.add_child(choice_content)
+	refresh()
 
-func _office(title: String) -> Control:
-	var box := VBoxContainer.new()
-	box.custom_minimum_size.x = 116
-	box.add_theme_constant_override("separation", 8)
-	var role := _label(title, 10, Color("9eb5bb"))
-	role.custom_minimum_size = Vector2(116, 30)
-	role.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	box.add_child(role)
-	var portrait := Art.new()
-	portrait.portrait = true
-	portrait.custom_minimum_size = Vector2(92, 112)
-	portrait.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-	box.add_child(portrait)
-	box.add_child(_label("—", 18, Color("e5e9e6")))
-	return box
+func refresh() -> void:
+	for property: Dictionary in Rules.PROPERTIES:
+		var current: String = world.government_property(country, property["key"])
+		var button: Button = property_buttons[property["key"]]
+		button.text = str(property["title"]) + "\n" + ("Not set" if current.is_empty() else current)
+		button.tooltip_text = str(property["help"]) + "\nClick to change · 100 political power"
+	if choice_dialog.visible: _refresh_choices()
 
-func _property(property: Dictionary) -> Control:
-	var plate := PanelContainer.new()
-	plate.custom_minimum_size = Vector2(132, 102)
-	plate.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	plate.add_theme_stylebox_override("panel", _style(Color("132732"), 9))
-	plate.tooltip_text = property["help"]
-	var box := VBoxContainer.new()
-	box.add_theme_constant_override("separation", 6)
-	plate.add_child(box)
-	var heading := HBoxContainer.new()
-	heading.add_theme_constant_override("separation", 6)
-	box.add_child(heading)
-	var icon := TextureRect.new()
-	icon.texture = Icons.icon(property["icon"])
-	icon.custom_minimum_size = Vector2(20, 20)
-	icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	heading.add_child(icon)
-	var title := _label(property["title"], 11, Color("9eb5bb"))
-	title.custom_minimum_size = Vector2(76, 30)
-	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	title.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
-	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_LEFT
-	heading.add_child(title)
-	var picker := OptionButton.new()
-	picker.name = "Property_" + str(property["key"])
-	picker.custom_minimum_size = Vector2(112, 36)
-	picker.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	picker.fit_to_longest_item = false
-	picker.clip_text = true
-	picker.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
-	picker.add_theme_font_size_override("font_size", 12)
-	picker.add_item("Not set")
+func open_property(property: Dictionary) -> void:
+	active_property = property
+	choice_dialog.title = property["title"]
+	for child: Node in choice_content.get_children():
+		choice_content.remove_child(child)
+		child.queue_free()
+	choice_buttons.clear()
+	var explanation := Label.new()
+	explanation.text = property["help"]
+	explanation.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	explanation.custom_minimum_size.x = 300
+	choice_content.add_child(explanation)
+	balance_label = Label.new()
+	balance_label.add_theme_font_size_override("font_size", 12)
+	choice_content.add_child(balance_label)
 	for option: String in property["options"]:
-		picker.add_item(option)
-	var current: String = str(choices.get(property["key"], ""))
-	picker.select(property["options"].find(current) + 1 if not current.is_empty() else 0)
-	picker.tooltip_text = str(property["help"]) + "\nCurrent: " + (current if not current.is_empty() else "Not set")
-	picker.item_selected.connect(func(index: int):
-		var value := "" if index == 0 else str(property["options"][index - 1])
-		if value.is_empty(): choices.erase(property["key"])
-		else: choices[property["key"]] = value
-		picker.tooltip_text = str(property["help"]) + "\nCurrent: " + (value if not value.is_empty() else "Not set"))
-	selectors[property["key"]] = picker
-	box.add_child(picker)
-	return plate
+		var button := Button.new()
+		button.custom_minimum_size = Vector2(300, 36)
+		button.add_theme_font_size_override("font_size", 13)
+		button.pressed.connect(func(): apply_choice(option))
+		choice_buttons[option] = button
+		choice_content.add_child(button)
+	_refresh_choices()
+	choice_dialog.popup_centered(Vector2i(340, 0))
 
-func _label(text: String, font_size: int, color: Color) -> Label:
-	var label := Label.new()
-	label.text = text
-	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-	label.add_theme_font_size_override("font_size", font_size)
-	label.add_theme_color_override("font_color", color)
-	label.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	return label
+func _refresh_choices() -> void:
+	var balance: float = world.political_power(country)
+	balance_label.text = "Change: 100 PP  ·  Available: %.1f PP" % balance
+	for option: String in choice_buttons:
+		var current: bool = world.government_property(country, active_property["key"]) == option
+		var button: Button = choice_buttons[option]
+		button.text = option + ("  ·  Current" if current else "  ·  100 PP")
+		button.disabled = current or balance < Rules.CHANGE_COST
+		button.tooltip_text = "Current setting" if current else ("Requires 100 political power" if button.disabled else "Apply for 100 political power")
 
-func _style(color: Color, padding: int) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = color
-	style.border_color = Color("2c4854")
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(6)
-	style.content_margin_left = padding
-	style.content_margin_right = padding
-	style.content_margin_top = padding
-	style.content_margin_bottom = padding
-	return style
+func apply_choice(value: String) -> void:
+	if world.change_government_property(country, active_property["key"], value):
+		choice_dialog.hide()
+		refresh()
+		if on_change.is_valid(): on_change.call()
+	else:
+		_refresh_choices()

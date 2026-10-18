@@ -106,7 +106,10 @@ func build(main: Control) -> void:
 		var cell := HBoxContainer.new()
 		cell.add_theme_constant_override("separation", 4)
 		cell.alignment = BoxContainer.ALIGNMENT_CENTER
-		var box := PanelContainer.new()
+		var box: PanelContainer = preload("res://scripts/political_power_indicator.gd").new() if entry[0] == "political_power" else PanelContainer.new()
+		if entry[0] == "political_power":
+			box.set("world", host.state)
+			cell.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		var style: StyleBoxFlat = host._button_style(Color("102332"), 5)
 		style.content_margin_left = 4
 		style.content_margin_right = 4
@@ -125,6 +128,9 @@ func build(main: Control) -> void:
 		label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 		cell.add_child(label)
 		bar.add_child(box)
+		if entry[0] == "political_power":
+			icon.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			label.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		indicators[entry[1]] = {"cell": box, "label": label, "icon": icon}
 	_build_ledger()
 	_build_demographics()
@@ -164,6 +170,11 @@ func update_bar() -> void:
 			tip += "\n" + ("$%s USD\nMD 2000 starting declaration; budget simulation comes later." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
 		elif caption in ["GDP","GDP per capita"]: tip += "\nMD starting GDP per capita × current resident population. USD; not a live economy."
 		elif caption == "Population": tip += "\nSum of currently owned State populations. Provinces are movement tiles and unique-building sites; population belongs to States."
+		elif caption == "Political power":
+			record["cell"].set("country", tag)
+			tip += "\nDaily gain: %+.2f PP" % host.state.daily_political_power(tag)
+			for source: Dictionary in host.state.political_power_breakdown(tag):
+				tip += "\n%s: %+.2f" % [source["name"], source["value"]]
 		else: tip += "\nStarting scenario value. Political simulation follows in later patches."
 		record["cell"].tooltip_text = tip
 		record["icon"].tooltip_text = tip
@@ -171,7 +182,8 @@ func update_bar() -> void:
 	globe_value.text = str(int(host.state.world_tension))
 
 func modals_visible() -> bool:
-	return ledger_dialog.visible or demo_dialog.visible or tension_dialog.visible
+	var politics: Node = host.control_details.get_node_or_null("PoliticalPanel")
+	return ledger_dialog.visible or demo_dialog.visible or tension_dialog.visible or (politics != null and politics.choice_dialog.visible)
 
 func _modal(title: String) -> AcceptDialog:
 	var d := AcceptDialog.new()

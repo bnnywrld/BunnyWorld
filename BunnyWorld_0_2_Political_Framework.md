@@ -4,7 +4,7 @@ Updated: 18 October 2026.
 
 ## Status and scope
 
-This document preserves the agreed political design. Version 0.2.0.30 implements only the Government interface: two simple portrait placeholders, an unassigned 100-seat parliament, and five changeable property menus. Property choices are temporary UI state, cleared on new campaign/load; no political country data, historical offices, party seats, election dates, costs or simulation effects are implemented. The remaining sections are design plans, not evidence of working mechanics.
+Version 0.2.1 implements compact portrait/parliament placeholders in Government and country/diplomacy panels, changeable government properties costing 100 PP, +1 base PP per completed day, and a colored daily-income breakdown. Properties and PP persist in new-schema saves. Real leaders, parties, seat allocations, election dates, reforms and wider modifiers remain planned; the detailed sections below describe that intended design, not implemented mechanics.
 
 Demographics and the political foundation precede the economy. The initial demographic direction includes age, religion (including nonreligious populations), education, and economic activity. Gender is omitted; ethnicity is postponed. Detailed employment follows with the economy.
 

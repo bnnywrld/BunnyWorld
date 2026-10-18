@@ -1,5 +1,7 @@
 extends Control
 ## Lightweight vector placeholders. No portraits, party data or seat allocations.
+signal activated
+var can_activate := false
 var portrait := false
 var hovered_seat := -1
 var seats: Array[Vector2] = []
@@ -7,6 +9,7 @@ var seat_radius := 4.0
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_STOP if not portrait else Control.MOUSE_FILTER_IGNORE
+	if can_activate: mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 	resized.connect(queue_redraw)
 	mouse_exited.connect(func(): hovered_seat = -1; queue_redraw())
 
@@ -24,7 +27,7 @@ func _draw() -> void:
 	seats.clear()
 	var center := Vector2(size.x * .5, size.y - 14)
 	var outer := minf(size.x * .47, size.y - 24)
-	seat_radius = clampf(outer / 27.0, 2.5, 5.0)
+	seat_radius = clampf(outer / 27.0, .9, 5.0)
 	# Exactly 100 empty seats. All neutral until political data is introduced.
 	var counts: Array[int] = [12, 16, 20, 24, 28]
 	for row: int in counts.size():
@@ -48,6 +51,10 @@ func _plate() -> StyleBoxFlat:
 	return style
 
 func _gui_input(event: InputEvent) -> void:
+	if can_activate and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		activated.emit()
+		accept_event()
+		return
 	if event is InputEventMouseMotion:
 		var next := -1
 		for i: int in seats.size():
@@ -56,5 +63,5 @@ func _gui_input(event: InputEvent) -> void:
 				break
 		if next != hovered_seat:
 			hovered_seat = next
-			tooltip_text = "Unassigned seat" if next >= 0 else "Parliament · 100 unassigned seats"
+			tooltip_text = "Open government" if can_activate else ("Unassigned seat" if next >= 0 else "Parliament · 100 unassigned seats")
 			queue_redraw()

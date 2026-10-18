@@ -2,7 +2,9 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 17
+const SAVE_VERSION := 18
+const GovernmentRules = preload("res://scripts/government_rules.gd")
+const BASE_DAILY_POLITICAL_POWER := 1.0
 const HOUR_SECONDS := 3600
 const SPEEDS := [1, 3, 10, 30]
 var database: Dictionary = {}
@@ -32,6 +34,8 @@ var player_country: String = "JAP"
 var scenario_epoch: int = 0
 var last_error: String = ""
 var accumulator: float = 0.0
+var government_properties: Dictionary = {}
+var political_power_modifiers: Dictionary = {}
 
 func initialize(data: Dictionary) -> void:
 	database = data
@@ -45,6 +49,12 @@ func initialize(data: Dictionary) -> void:
 
 func reset() -> void:
 	countries = database["countries"].duplicate(true)
+	government_properties.clear()
+	political_power_modifiers.clear()
+	for tag: String in countries:
+		if not countries[tag].has("starting_stats"): countries[tag]["starting_stats"] = {}
+		if not countries[tag]["starting_stats"].has("political_power"):
+			countries[tag]["starting_stats"]["political_power"] = 100.0
 	regions = database["regions"].duplicate(true)
 	organizations = database["organizations"].duplicate(true)
 	provinces = province_database.duplicate(true)
@@ -70,7 +80,38 @@ func advance(delta: float) -> bool:
 	if steps <= 0:
 		return false
 	accumulator -= steps
+	var previous_day := day
 	hour += steps
+	var elapsed_days := day - previous_day
+	if elapsed_days > 0:
+		# Update once at crossed midnight(s), never once per rendered frame.
+		for tag: String in countries:
+			countries[tag]["starting_stats"]["political_power"] = political_power(tag) + elapsed_days * daily_political_power(tag)
+	return true
+
+func political_power(tag: String) -> float:
+	return float(countries.get(tag, {}).get("starting_stats", {}).get("political_power", 0.0))
+
+func political_power_breakdown(tag: String) -> Array[Dictionary]:
+	var rows: Array[Dictionary] = [{"name":"Base gain", "value":BASE_DAILY_POLITICAL_POWER}]
+	for source: String in political_power_modifiers.get(tag, {}):
+		rows.append({"name":source, "value":float(political_power_modifiers[tag][source])})
+	return rows
+
+func daily_political_power(tag: String) -> float:
+	var total := 0.0
+	for row: Dictionary in political_power_breakdown(tag): total += float(row["value"])
+	return total
+
+func government_property(tag: String, key: String) -> String:
+	return str(government_properties.get(tag, {}).get(key, ""))
+
+func change_government_property(tag: String, key: String, value: String) -> bool:
+	if tag != player_country or not countries.has(tag) or not GovernmentRules.valid_choice(key, value): return false
+	if government_property(tag, key) == value or political_power(tag) < GovernmentRules.CHANGE_COST: return false
+	if not government_properties.has(tag): government_properties[tag] = {}
+	countries[tag]["starting_stats"]["political_power"] = political_power(tag) - GovernmentRules.CHANGE_COST
+	government_properties[tag][key] = value
 	return true
 
 func date_dictionary() -> Dictionary:
@@ -158,7 +199,7 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 		region_state[sid] = {"owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
 	var national: Dictionary = {}
 	for tag: String in countries:
-		national[tag] = {"stats": countries[tag].get("starting_stats", {}), "outlook": countries[tag]["outlook"], "cosmetic": countries[tag].get("cosmetic", ""), "color_override": countries[tag].get("color_override", [])}
+		national[tag] = {"stats": countries[tag].get("starting_stats", {}), "outlook": countries[tag]["outlook"], "cosmetic": countries[tag].get("cosmetic", ""), "color_override": countries[tag].get("color_override", []), "government_properties":government_properties.get(tag, {}), "political_power_modifiers":political_power_modifiers.get(tag, {})}
 	var province_buildings: Dictionary = {}
 	for pid: String in provinces:
 		if not provinces[pid]["buildings"].is_empty(): province_buildings[pid] = provinces[pid]["buildings"]
@@ -293,6 +334,17 @@ func load_game(path: String) -> Dictionary:
 		var entry: Variant = national.get(tag)
 		if not entry is Dictionary or not entry.get("stats") is Dictionary or not entry.get("cosmetic") is String or entry["cosmetic"].length() > 80 or entry.get("outlook") not in ["Western Outlook", "Emerging Outlook", "Non-Aligned Outlook", "Salafist Outlook", "Nationalist Outlook", "Unspecified"]:
 			return _invalid("Saved country values are invalid.")
+		var properties: Variant = entry.get("government_properties")
+		var modifiers: Variant = entry.get("political_power_modifiers")
+		if not properties is Dictionary or properties.size() > GovernmentRules.PROPERTIES.size() or not modifiers is Dictionary or modifiers.size() > 64:
+			return _invalid("Saved political settings are invalid.")
+		for key: Variant in properties:
+			if not key is String or not properties[key] is String or not GovernmentRules.valid_choice(key, properties[key]): return _invalid("Saved government property is invalid.")
+		for source: Variant in modifiers:
+			var modifier: Variant = modifiers[source]
+			if not source is String or source.length() > 96 or not (modifier is int or modifier is float) or not is_finite(float(modifier)) or absf(float(modifier)) > 1000:
+				return _invalid("Saved political power modifier is invalid.")
+		if not entry["stats"].has("political_power"): return _invalid("Saved political power is missing.")
 		for value: Variant in entry["stats"].values():
 			if not (value is int or value is float) or not is_finite(float(value)) or absf(float(value)) > 10000000000000000:
 				return _invalid("Saved statistics are invalid.")
@@ -329,6 +381,8 @@ func load_game(path: String) -> Dictionary:
 		regions[sid]["claims"] = saved_regions[sid]["claims"].duplicate()
 		for rate: String in ["participation_rate","unemployment_rate"]: regions[sid]["workforce"][rate]=float(saved_regions[sid]["workforce"][rate])
 	for tag: String in countries:
+		government_properties[tag] = national[tag]["government_properties"].duplicate(true)
+		political_power_modifiers[tag] = national[tag]["political_power_modifiers"].duplicate(true)
 		countries[tag]["starting_stats"] = national[tag]["stats"].duplicate(true)
 		countries[tag]["outlook"] = national[tag]["outlook"]
 		countries[tag]["cosmetic"] = national[tag]["cosmetic"]

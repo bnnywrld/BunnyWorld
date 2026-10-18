@@ -1,7 +1,7 @@
 {
-  "version": "0.2.0.30",
-  "baseline_version": "0.2.0.29",
-  "repository_base_commit": "02aae98f845ca3035f6c59359e0f95ea6d55bd45",
+  "version": "0.2.1",
+  "baseline_version": "0.2.0.30",
+  "repository_base_commit": "41f0772a4b1b8637ae7f44cc91d7f1db87acd04b",
   "engine": "Godot 4.5.1 stable official",
   "countries": 224,
   "states": 1261,
@@ -16,22 +16,26 @@
   "native_windows_tested": false,
   "fresh_campaign_required": true,
   "map_data_changed": false,
-  "simulation_changed": false,
+  "simulation_changed": true,
   "changes": [
-    "Interface-only government panel with two vector silhouette portraits and a neutral 100-seat parliament",
-    "Five government-property selectors; temporary choices survive reopening and reset on new/load",
-    "No political country data, simulation modifiers, party allocations or save fields added"
+    "Government panel narrowed to 600px with clickable property cards and a small choice window",
+    "Compact portraits/parliament on country and diplomacy panels; own parliament opens Government",
+    "Smaller 3-column country statistics below political summary, without political power",
+    "Government property changes cost 100 PP with atomic balance and affordability checks",
+    "Base political power income +1 per completed day; colored daily growth breakdown in top-bar tooltip",
+    "Political properties, PP balance and named daily modifiers persist in new-schema saves"
   ],
   "validation": {
     "political_ui": {
       "passed": true,
-      "checks": 46,
-      "engine": "Godot 4.5.1 headless",
-      "minimum_resolution": "1100x700",
-      "linux_visual_layout": true
+      "checks": 99,
+      "engine": "Godot 4.5.1",
+      "minimum_window": "1100x700",
+      "linux_gl_visual_inspection": true
     },
-    "native_windows_tested": false,
     "prepared_assets_verified": true,
-    "map_build_contract": true
-  }
+    "map_build_contract": true,
+    "native_windows_tested": false
+  },
+  "save_schema_version": 18
 }

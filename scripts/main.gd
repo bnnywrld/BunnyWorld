@@ -168,8 +168,6 @@ var menu_background: TextureRect
 var menu_photo: Texture2D
 var state_preview := 0
 var active_feature := ""
-# Temporary interface choices, excluded from WorldState and save files.
-var political_ui_choices: Dictionary = {}
 var boot_complete := false
 var detail_mesh_builds := 0
 var inspection_active: bool = false
@@ -1308,26 +1306,26 @@ func _briefing_section(caption: String) -> void:
 func _summary_grid(rows: Array) -> void:
 	var grid := GridContainer.new()
 	grid.name = "CountrySummary"
-	grid.columns = 2
+	grid.columns = 3
 	grid.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	grid.add_theme_constant_override("h_separation", 6)
-	grid.add_theme_constant_override("v_separation", 6)
+	grid.add_theme_constant_override("h_separation", 4)
+	grid.add_theme_constant_override("v_separation", 4)
 	for row: Array in rows:
 		var cell := PanelContainer.new()
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cell.mouse_force_pass_scroll_events = false
 		var style := _button_style(Color("0c1922"), 3, Color("2b3d44"))
 		style.shadow_size = 0
-		style.content_margin_left = 9; style.content_margin_right = 9
-		style.content_margin_top = 8; style.content_margin_bottom = 8
+		style.content_margin_left = 5; style.content_margin_right = 5
+		style.content_margin_top = 4; style.content_margin_bottom = 4
 		cell.add_theme_stylebox_override("panel", style)
 		var box := VBoxContainer.new()
 		box.add_theme_constant_override("separation", 2)
 		cell.add_child(box)
-		var caption := _label(str(row[0]).to_upper(), 10, Color("8fa5aa"))
+		var caption := _label(str(row[0]).to_upper(), 9, Color("8fa5aa"))
 		caption.clip_text = true
 		box.add_child(caption)
-		var value := _label(str(row[1]), 20, Color("e9e6d7"))
+		var value := _label(str(row[1]), 14, Color("e9e6d7"))
 		value.clip_text = true
 		box.add_child(value)
 		cell.tooltip_text = str(row[2]) if row.size()>2 else str(row[0])+": "+str(row[1])
@@ -1371,14 +1369,20 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	details.add_child(_wrapped(c["outlook"], 14, Color("e5c888")))
 	var values: Dictionary = c.get("starting_stats", {})
 	var per_capita := float(values.get("gdp_per_capita_usd", 0))
+	var politics_summary := preload("res://scripts/political_summary.gd").new()
+	var open_government := Callable()
+	if screen == "playing" and tag == state.player_country:
+		open_government = func(): _show_feature("Government")
+	politics_summary.configure(true, open_government)
+	details.add_child(politics_summary)
 	_briefing_section("National overview")
 	_summary_grid([
 		["Population", foundation.compact_number(int(metrics["population"])), "Residents: "+_number(int(metrics["population"]))],
-		["GDP", foundation.money(per_capita*float(metrics["population"])), "GDP: $"+_number(int(per_capita*float(metrics["population"])))],
+		["GDP", foundation.compact_money(per_capita*float(metrics["population"])), "GDP: $"+_number(int(per_capita*float(metrics["population"])))],
 		["GDP / person", foundation.compact_money(per_capita), "GDP per capita: $"+_number(int(per_capita))],
 		["Stability", "%.0f%%" % (float(values.get("stability",.65))*100)],
-		["Political power", "%.0f" % float(values.get("political_power",100))],
-		["War support", "%.0f%%" % (float(values.get("war_support",.5))*100)]])
+		["War support", "%.0f%%" % (float(values.get("war_support",.5))*100)],
+		["States", str(metrics["regions"].size())]])
 	var capital: String = str(int(c["capital"]))
 	details.add_child(_wrapped("%d states  ·  Capital state: %s" % [metrics["regions"].size(), state.regions.get(capital,{}).get("name","Unknown")],12,Color("93a8aa")))
 	if screen == "playing" and tag != state.player_country:
@@ -1775,6 +1779,9 @@ func _process(delta: float) -> void:
 		_update_clock()
 		if state.day != last_relation_day:
 			last_relation_day = state.day
+			_update_country_bar()
+			var government_panel: Node = control_details.get_node_or_null("PoliticalPanel")
+			if government_panel != null: government_panel.refresh()
 			_refresh_opinions()
 			if map_mode == 7: _rebuild_palette()
 	_update_map_rendering(delta)
@@ -1835,7 +1842,6 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 		if show_errors:
 			_show_error(state.last_error)
 		return false
-	political_ui_choices.clear()
 	if focus_tween != null:
 		focus_tween.kill()
 	planet.rotation = Vector3(float(view["rotation"][0]), float(view["rotation"][1]), 0)
@@ -2395,7 +2401,6 @@ func _enter_menu() -> void:
 	_update_clock()
 
 func _start_selection() -> void:
-	political_ui_choices.clear()
 	state.reset()
 	inspect_region = 0
 	search.text = ""
@@ -2800,7 +2805,8 @@ func _position_panels(force: bool = true) -> void:
 	last_panel_layout = key
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
-		panel.size = Vector2(minf(760, view_container.size.x - 24) if active_feature == "Government" else 370, maxf(240, view_container.size.y - 118))
+		var available_height := maxf(240, view_container.size.y - 118)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(480, available_height)) if active_feature == "Government" else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -3058,11 +3064,10 @@ func _show_feature(caption: String) -> void:
 	control_heading.add_child(heading)
 	if caption == "Government":
 		var tag: String = state.player_country
-		if not political_ui_choices.has(tag): political_ui_choices[tag] = {}
 		var country := _label(str(state.countries[tag]["name"]), 14, Color("93a8aa"))
 		control_heading.add_child(country)
 		var politics := preload("res://scripts/political_panel.gd").new()
-		politics.configure(political_ui_choices[tag])
+		politics.configure(state, tag, _update_country_bar)
 		control_details.add_child(politics)
 	_reveal_panel(control_panel)
 	_position_panels()
@@ -3147,6 +3152,8 @@ func _water_passage_at(uv: Vector2) -> int:
 
 func _unify_country_panel() -> void:
 	view_container.remove_child(right_panel);right_panel.queue_free();right_panel=control_panel;diplomatic_heading=control_heading;diplomatic_details=control_details;details=control_details;control_panel.name="CountryInspector"
+	control_details.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+
 func _focus_state_capital(sid: int) -> void:
 	var r: Dictionary=state.regions[str(sid)]
 	_go_to_place({"state":sid,"province":int(r["capital_province"]),"country":r["owner"],"kind":"City","name":r["state_capital"],"uv":Vector2(r["capital_uv"][0],r["capital_uv"][1])},true)
