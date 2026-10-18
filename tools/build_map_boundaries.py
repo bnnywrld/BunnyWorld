@@ -1,5 +1,6 @@
 """Rebuild State and internal province lines together from current IDs."""
 import json,numpy as np
+from PIL import Image
 from build_boundaries_021 import ROOT,contours,mesh
 w=json.loads((ROOT/'data/world.json').read_text());ps=json.loads((ROOT/'data/provinces.json').read_text());a=np.load(ROOT/'tools/cartography/map_provinces.npz')['provinces'];s=np.load(ROOT/'tools/cartography/grouped_atlas_022r2.npz')['regions']
 def ensure_edges(arr,paths,expected,kind):
@@ -24,4 +25,9 @@ del paths,s
 paths=contours(a,sorted(map(int,ps)),1,province=True);paths=[(x,y,l,r,2)for x,y,l,r,_ in paths if r>0 and str(r)in ps and ps[str(l)]['region']==ps[str(r)]['region']]
 expected={(p['id'],n)for p in ps.values()for n in p['neighbors']if p['id']<n and p['region']==ps[str(n)]['region']}
 paths,extra=ensure_edges(a,paths,expected,2);report['province_short_edge_segments_restored']=extra
-report['province']=mesh(paths,'province_boundaries_021');(ROOT/'data/boundaries_build_report.json').write_text(json.dumps(report,indent=2));print('BOUNDARIES_0215_READY',report,flush=True)
+report['province']=mesh(paths,'province_boundaries_021')
+del paths,a
+rgb=np.asarray(Image.open(ROOT/'assets/sea_ids.png').convert('RGB'),np.uint16);sea=rgb[:,:,0]+rgb[:,:,1]*256
+records=json.loads((ROOT/'data/sea_regions.json').read_text())
+report['sea']=mesh(contours(sea,sorted(map(int,records)),2,water=True),'sea_boundaries_021')
+(ROOT/'data/boundaries_build_report.json').write_text(json.dumps(report,indent=2));print('BOUNDARIES_0215_READY',report,flush=True)

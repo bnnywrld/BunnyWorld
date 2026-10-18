@@ -1,16 +1,14 @@
-# Bunny World 0.2.0.28
+# Bunny World 0.2.0.29
 
-Population-aware province rework over **0.2.0.27**. **224 countries, 1,261 states, 13,200 land provinces**. State population totals/demographics and accepted coast/state silhouettes are preserved after the two approved unions. Provinces contain no population.
-
-Lebanon's three owned states are united; Hezbollah retains South Lebanon. Shebaa Farms joins Golan Heights. See [report and test order](documentation/PROVINCES_0228.md) and [complete allocation](documentation/provinces_0228/ALLOCATION.md).
+User map edits integrated over **0.2.0.28**: **224 countries, 1,261 states, 13,198 land provinces, 120 sea regions**. State borders take priority; province IDs are preserved except two fully erased tiles. All cities remain. Sea borders, neighbours and highlights rebuild from current IDs. Population is state-only.
 
 ## Apply and run
 
-1. Back up .27 and close Godot/game.
-2. Extract this changed-files ZIP into the project root beside project.godot, replacing included files.
-3. Run **Prepare_BunnyWorld.bat**; application/geography/display must all report **0.2.0.28**.
-4. Open with **Godot 4.5.1 Standard**, wait for imports, and start a **fresh campaign**. Old saves are unsupported.
+1. Back up .28 and close Godot/game.
+2. Extract the changed-files ZIP beside project.godot, replacing included files.
+3. Run **Prepare_BunnyWorld.bat**; application/geography/display must all report **0.2.0.29**.
+4. Open with **Godot 4.5.1 Standard**, allow imports and start a **fresh campaign**.
 
-110,687 data checks and 39,260 Godot headless checks pass. Native Windows visuals/performance remain the user test. No EXE is included; see [export instructions](documentation/EXPORT_WINDOWS.md).
+101,898 data checks and 42,073 Godot headless checks pass. See [report and test order](documentation/MAP_EDITS_0229.md). Native Windows visuals/performance remain the user test. No EXE is included; see [export instructions](documentation/EXPORT_WINDOWS.md).
 
 Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu.

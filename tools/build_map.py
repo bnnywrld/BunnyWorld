@@ -8,7 +8,7 @@ import argparse,json,hashlib,zlib,io,subprocess,shutil,sys,re
 R=Path(__file__).resolve().parents[1];OUT=R/'assets/display'
 sha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
 def inputs(ps):
- return {'tiles':{f'assets/region_ids_{i}.png':sha(R/f'assets/region_ids_{i}.png')for i in range(4)},'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json'),'curve_algorithm':{n:sha(R/'tools'/n)for n in ['build_boundaries_021.py','build_map_boundaries.py','display_shape_0215.py','build_boundary_field.py']}}
+ return {'tiles':{f'assets/region_ids_{i}.png':sha(R/f'assets/region_ids_{i}.png')for i in range(4)},'sea_ids':sha(R/'assets/sea_ids.png'),'membership':sorted([[int(k),int(v['region'])]for k,v in ps.items()]),'microstate':sha(R/'data/microstate_geometry.json'),'curve_algorithm':{n:sha(R/'tools'/n)for n in ['build_boundaries_021.py','build_map_boundaries.py','display_shape_0215.py','build_boundary_field.py','build_sea_coverage.py']}}
 def sea_pack():
  target=OUT/'sea_coverage.json'
  if target.exists():return
@@ -42,6 +42,10 @@ def main():
  Image.MAX_IMAGE_PIXELS=None
  resource_mismatch=bool(old)and any(not(R/n).is_file()or sha(R/n)!=h for n,h in old.get('resources',{}).items() if not n.startswith('assets/rendering/') and n not in ['assets/display/sea_mask.bwd','assets/display/sea_mask.json','assets/display/far_terrain.bwd','assets/display/far_terrain.json'])
  changed=args.force or bool(old)and old.get('inputs')!=source or resource_mismatch
+ sea_changed=args.force or old.get('inputs',{}).get('sea_ids')!=source['sea_ids'] or not (OUT/'sea_coverage.json').exists()
+ if sea_changed:
+  from build_sea_coverage import build as build_seas
+  build_seas()
  if changed:
   godot=args.godot or shutil.which('godot')or shutil.which('godot4')
   assert godot,'Geography changed: supply --godot <Godot 4.5.1 executable> to rebuild all dependent resources.'
@@ -116,7 +120,7 @@ def main():
  old_png=np.asarray(Image.open(R/'assets/province_index.png').convert('RGB'))
  if not np.array_equal(old_png,lut):Image.fromarray(lut).save(R/'assets/province_index.png')
  chunk_files=['assets/rendering/chunks.json']+['assets/rendering/'+kind+'_chunks.res'for kind in ['sphere','land','province','sea','water']]
- resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res']
+ resources=['assets/display/boundary_hint.bwd','assets/display/boundary_pairs.bwd','assets/display/boundary_distance.bwd','assets/display/sea_coverage.json','assets/display/sea_coverage.bwd','assets/display/coast_distance_0217.bwd','assets/display/local_coasts.json','assets/display/local_coasts.bwd','assets/land_boundaries.res','assets/province_boundaries.res','assets/sea_boundaries.res']
  from build_sea_mask import build as build_sea_mask
  build_sea_mask()
  from build_far_terrain import build as build_far_terrain

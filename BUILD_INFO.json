@@ -1,15 +1,16 @@
 {
-  "version": "0.2.0.28",
-  "baseline_version": "0.2.0.27",
-  "repository_base_commit": "c808deff8d26ed2e60e0b27cbde011b6e95a3a7a",
+  "version": "0.2.0.29",
+  "baseline_version": "0.2.0.28",
+  "repository_base_commit": "bc1e659c9d06e00c6c92e5aa14c3dc71e7413b9d",
   "engine": "Godot 4.5.1 stable official",
   "countries": 224,
   "states": 1261,
-  "land_provinces": 13200,
+  "land_provinces": 13198,
+  "sea_regions": 120,
   "population": 6146495066,
-  "geography_version": "0.2.0.28",
-  "display_version": "0.2.0.28",
-  "scenario_id": "bunny_world_2000_0_2_0_28",
+  "geography_version": "0.2.0.29",
+  "display_version": "0.2.0.29",
+  "scenario_id": "bunny_world_2000_0_2_0_29",
   "source_update": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
@@ -17,36 +18,46 @@
   "map_data_changed": true,
   "simulation_changed": false,
   "changes": [
-    "Lebanon state union; Hezbollah controller retained",
-    "Shebaa Farms absorbed into Golan Heights; exact demographic count conservation",
-    "Population/area-budgeted compact terrain-guided movement provinces; state-only population",
-    "Shared current-ID border, selection, adjacency and reference rebuild"
+    "User colour-map edits applied; state pixels take priority",
+    "Existing province IDs fitted to states; detached scraps and new narrow fragments absorbed by bordering tiles",
+    "Only fully painted-out Istanbul Province 7 and Maracaibo province removed; cities retained",
+    "Sea borders, adjacency, selection fields and picking source rebuilt from current sea IDs",
+    "Year-2000 resident/demographic/workforce totals conserved across modeled edited-boundary transfers"
   ],
   "validation": {
     "data": {
       "passed": true,
-      "checks": 110687,
+      "checks": 101898,
       "countries": 224,
       "states": 1261,
-      "land_provinces": 13200,
-      "global_population": 6146495066,
-      "exact_state_coast_antarctica_preservation": true,
-      "country_totals_preserved": true,
-      "all_internal_borders_present": 23851,
-      "narrow_footprint_exceptions": 41,
-      "province_population_fields": false,
-      "same_landmass_fragment_provinces": 0,
-      "archipelago_province_groups": 1435
+      "provinces": 13198,
+      "sea_regions": 120,
+      "population": 6146495066,
+      "exact_edited_state_pixels": true,
+      "exact_edited_sea_pixels": true,
+      "same_landmass_fragment_check": "4-connected on all fitted states",
+      "new_provinces": 0,
+      "removed_provinces": [
+        {
+          "id": 10465,
+          "name": "Istanbul \u00b7 Province 7"
+        },
+        {
+          "id": 12585,
+          "name": "Maracaibo"
+        }
+      ],
+      "native_windows_tested": false
     },
     "runtime": {
-      "checks": 39260,
+      "checks": 42073,
       "failures": 0,
       "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
       "passed": true
     },
+    "native_windows_tested": false,
     "prepared_assets_verified": true,
     "map_build_contract": true,
-    "asset_restore_tests": true,
-    "native_windows_tested": false
+    "asset_restore_tests": true
   }
 }
