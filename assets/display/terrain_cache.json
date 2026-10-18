@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "algorithm": 3,
+  "format": "RGBA8",
+  "channels": "RG tangent normal XY; B snow weight; A rock exposure",
+  "width": 4096,
+  "height": 2048,
+  "mipmaps": true,
+  "source": "assets/relief_data.png",
+  "source_sha256": "3c0b097957c54321404b0dacc9308d38fa47c6d18b08f717718cce0fb4f68fcf",
+  "sha256": "dc83d7ffd631514cdaf5f60b28b5f339ee63b2dde84b87aa7fdfed12606cbfcd",
+  "base_decoded_bytes": 33554432,
+  "ownership_baked": false,
+  "near_terrain_unchanged": false,
+  "lighting": "World-space sun applied at runtime to the cached tangent normal"
+}

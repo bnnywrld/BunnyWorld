@@ -791,7 +791,7 @@ func _build_planet() -> void:
 	if sea_image.is_compressed(): sea_image.decompress()
 	planet_material.set_shader_parameter("sea_map", map_rendering.create_sea_mask_texture())
 	planet_material.set_shader_parameter("urban_density", load("res://assets/urban_density.png"))
-	planet_material.set_shader_parameter("urban_material", load("res://assets/materials/urban_detail.png"))
+	planet_material.set_shader_parameter("urban_material", load("res://assets/materials/urban.png"))
 	for kind: String in ["land", "sea", "province"]:
 		var border_mesh := MeshInstance3D.new()
 		# Material holder only: prepared spatial batches own the geometry.

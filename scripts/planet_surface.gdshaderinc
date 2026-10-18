@@ -260,7 +260,7 @@ void fragment(){
   }
   // Regional colour is low frequency; material detail never changes residency.
   earth=mix(earth,mix(earth*pattern*1.6,pattern,.48),close*.88);
-  float far_blend=far_terrain_enabled?smoothstep(2.0,2.4,camera_distance):0.0;
+  float far_blend=far_terrain_enabled?1.0:0.0;
   vec3 relief_normal=radial_world;
   float snow=0.0;
   if(far_blend<1.0){
@@ -274,19 +274,26 @@ void fragment(){
    float dry=(primary==3.0?1.0-types.b:0.0)+(secondary==3.0?types.b:0.0);
    float icy=(primary==6.0?1.0-types.b:0.0)+(secondary==6.0?types.b:0.0);
    float exposed=max(smoothstep(.25,.95,steep),smoothstep(2900.0,5400.0,meters))*(1.0-dry*.65)*(1.0-icy);
-   if(exposed*close>.01)earth=mix(earth,material(5.0,material_position,material_phase,material_dx,material_dy)*.72+vec3(.10),exposed*.40*close);
+   if(exposed*close*(1.0-far_blend)>.01)earth=mix(earth,material(5.0,material_position,material_phase,material_dx,material_dy)*.72+vec3(.10),exposed*.40*close*(1.0-far_blend));
    float snowline=mix(4700.0,1700.0,smoothstep(.25,.85,abs(uv.y-.5)*2.0));
    snow=smoothstep(snowline,snowline+1000.0,meters)*(1.0-smoothstep(.65,1.25,steep));
   }
   if(far_blend>0.0){
    // Cached tangent normals retain dynamic world-space lighting on rotation.
    // Snow is geographic; neither channel contains ownership or light direction.
-   vec3 cached=texture(far_terrain,uv).rgb;
+   vec4 cached=texture(far_terrain,uv);
    vec2 xy=(cached.rg*255.0-vec2(128.0))/127.0;
    float z=sqrt(max(.000001,1.0-dot(xy,xy)));
    vec3 cached_normal=normalize(radial_world*z+east_world*xy.x+north_world*xy.y);
    relief_normal=normalize(mix(relief_normal,cached_normal,far_blend));
    snow=mix(snow,cached.b,far_blend);
+   float cached_dry=(primary==3.0?1.0-types.b:0.0)+(secondary==3.0?types.b:0.0);
+   float cached_icy=(primary==6.0?1.0-types.b:0.0)+(secondary==6.0?types.b:0.0);
+   float cached_exposed=cached.a*(1.0-cached_dry*.65)*(1.0-cached_icy);
+   if(cached_exposed*close>.01){
+    vec3 rock_color=material(5.0,material_position,material_phase,material_dx,material_dy)*.72+vec3(.10);
+    earth=mix(earth,rock_color,cached_exposed*.40*close*far_blend);
+   }
   }
   earth=mix(earth,vec3(.87,.91,.94),snow*.68);
   float urban=0.0;
