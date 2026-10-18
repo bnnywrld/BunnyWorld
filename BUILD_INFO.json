@@ -1,41 +1,42 @@
 {
-  "version": "0.2.1",
-  "baseline_version": "0.2.0.30",
-  "repository_base_commit": "41f0772a4b1b8637ae7f44cc91d7f1db87acd04b",
-  "engine": "Godot 4.5.1 stable official",
+  "version": "0.2.1.1",
+  "baseline_version": "0.2.1",
+  "repository_base_commit": "e7a6647575d77899cfe9b8a0421a34b99ffdb88d",
+  "engine": "Godot 4.5.1 stable",
+  "geography_version": "0.2.1.1",
+  "display_version": "0.2.1.1",
+  "scenario_id": "bunny_world_2000_0_2_1_1",
   "countries": 224,
-  "states": 1261,
-  "land_provinces": 13198,
+  "states": 1259,
+  "land_provinces": 13197,
   "sea_regions": 120,
   "population": 6146495066,
-  "geography_version": "0.2.0.29",
-  "display_version": "0.2.0.29",
-  "scenario_id": "bunny_world_2000_0_2_0_29",
-  "source_update": true,
+  "fresh_campaign_required": true,
   "windows_executable_exported": false,
   "native_windows_tested": false,
-  "fresh_campaign_required": true,
-  "map_data_changed": false,
-  "simulation_changed": true,
-  "changes": [
-    "Government panel narrowed to 600px with clickable property cards and a small choice window",
-    "Compact portraits/parliament on country and diplomacy panels; own parliament opens Government",
-    "Smaller 3-column country statistics below political summary, without political power",
-    "Government property changes cost 100 PP with atomic balance and affordability checks",
-    "Base political power income +1 per completed day; colored daily growth breakdown in top-bar tooltip",
-    "Political properties, PP balance and named daily modifiers persist in new-schema saves"
+  "map_resolution": [
+    16384,
+    8192
   ],
   "validation": {
-    "political_ui": {
+    "data": {
       "passed": true,
-      "checks": 99,
-      "engine": "Godot 4.5.1",
-      "minimum_window": "1100x700",
-      "linux_gl_visual_inspection": true
+      "checks": 88411,
+      "countries": 224,
+      "states": 1259,
+      "provinces": 13197,
+      "sea_regions": 120,
+      "population": 6146495066,
+      "sea_first": true,
+      "resolution_unchanged": true
     },
-    "prepared_assets_verified": true,
-    "map_build_contract": true,
-    "native_windows_tested": false
-  },
-  "save_schema_version": 18
+    "runtime": {
+      "checks": 41790,
+      "failures": 0,
+      "geography_sha256": "9381e8963aa7ac5e2ce8b3ab14f1dc76edd035af48a07df708916b4558987122",
+      "mode": "Godot 4.5.1 headless; native Windows visuals not tested",
+      "passed": true,
+      "version": "0.2.1.1"
+    }
+  }
 }

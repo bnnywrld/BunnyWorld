@@ -10,7 +10,10 @@ def main():
   name=path.relative_to(ROOT).as_posix()
   if name not in existing:manifest['files'].append({'path':name,'sha256':'','bytes':0,'parts':[]})
  for item in manifest['files']:
-  if item['path'] not in ['assets/land_boundaries.res','assets/province_boundaries.res','assets/sea_boundaries.res','assets/display/selection_distance_0217.bwd'] and not item['path'].startswith('assets/rendering/'):continue
+  # Coast edits can change relief and surface data as well as boundary meshes.
+  # Repack any restored input that changed, preserving every unchanged pack.
+  source=ROOT/item['path']
+  if item['path'] not in ['assets/land_boundaries.res','assets/province_boundaries.res','assets/sea_boundaries.res','assets/display/selection_distance_0217.bwd'] and not item['path'].startswith('assets/rendering/') and (not source.is_file() or sha(source.read_bytes())==item['sha256']):continue
   data=(ROOT/item['path']).read_bytes();digest=sha(data);previous=item['sha256'];oldparts=item['parts'];compressed=zlib.compress(data,9);parts=[]
   chunk_size=8*1024*1024 if item['path'].endswith('.bwd')else 2*1024*1024
   for n,start in enumerate(range(0,len(compressed),chunk_size)):

@@ -1,4 +1,4 @@
-# Developing BunnyWorld 0.2.1
+# Developing BunnyWorld 0.2.1.1
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
 
@@ -10,7 +10,7 @@ WorldState.advance applies the number of crossed midnights × the actual daily t
 
 political_summary.gd shares the large/compact portrait and parliament layout. Only player-country compact parliament has an activation callback. political_panel.gd uses native buttons and an exclusive AcceptDialog. political_power_indicator.gd renders a BBCode tooltip from the same breakdown used by the simulation. Country panels remain 370px; Government is 600×480px, capped to available space. Run `Godot --headless --path . --script res://tests/political_ui_tests.gd` for integration checks.
 
-Application .2.1 uses unchanged .29 geography/display bundles. Do not regenerate or repackage map resources for this update.
+Application/geography/display 0.2.1.1 includes approved sea-first map edits. See documentation/MAP_EDITS.md for reproduction. The 0.2.1 government/PP systems are retained. Resolution reduction is a separate task.
 
 ## Reproduce .28 geography
 

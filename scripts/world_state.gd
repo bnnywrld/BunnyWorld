@@ -2,7 +2,7 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 18
+const SAVE_VERSION := 19
 const GovernmentRules = preload("res://scripts/government_rules.gd")
 const BASE_DAILY_POLITICAL_POWER := 1.0
 const HOUR_SECONDS := 3600

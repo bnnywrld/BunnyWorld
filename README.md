@@ -1,18 +1,9 @@
-# Bunny World 0.2.1
+# Bunny World 0.2.1.1
 
-Compact Government and country interfaces, with political power spending and daily income.
+Approved sea/state/province map edits over 0.2.1. Priority: **sea silhouette → states → provinces**. Two states merged with all their residents and demographic counts preserved. **224 countries, 1259 states, 13197 land provinces, 120 seas.** Map resolution is unchanged.
 
-- Government is 600px wide. Click a property card to open its small choice window; changing a setting costs **100 PP**. The current setting cannot be charged again and unaffordable choices are disabled.
-- Country control and diplomacy show smaller portrait placeholders and a neutral 100-seat parliament above a compact stats grid. Click your own parliament to open Government; foreign parliaments are read-only.
-- Political power remains in the top bar. Every completed day gives **+1 PP**. Hover to see the daily total and its actual sources, with positive values green and negative values red.
-- Chosen government settings and PP balances persist in saves. Leaders, real party allocations and election dates remain placeholders. Government choices currently affect only the selected setting and the one-time PP cost.
+Close Godot/game, pull main (or apply the changed-files ZIP over 0.2.1), run **Prepare_BunnyWorld.bat**, then open **project.godot** with **Godot 4.5.1 Standard** and start a **fresh campaign**. All preparation versions must be **0.2.1.1**. Save schema 19; old saves unsupported.
 
-## Apply and run
+Government/property selection, 100 PP changes and +1 daily PP from 0.2.1 remain. See [map changes and test order](documentation/MAP_EDITS.md), [validation](TEST_RESULTS.md) and [Windows export instructions](documentation/EXPORT_WINDOWS.md). No EXE is included. Native Windows appearance/performance remains to be checked.
 
-1. Close Godot/game and pull **main** into the existing checkout.
-2. Run **Prepare_BunnyWorld.bat**. Application reports **0.2.1**; unchanged geography/display report **0.2.0.29**.
-3. Open with **Godot 4.5.1 Standard**, allow imports and start a **fresh campaign**. This release uses save schema 18; older saves are unsupported.
-
-See [validation and test order](TEST_RESULTS.md), [source-control rules](SOURCE_CONTROL.md), and [Windows export instructions](documentation/EXPORT_WINDOWS.md). No EXE or new binary map assets are included. Map remains 224 countries, 1,261 states, 13,198 land provinces and 120 sea regions.
-
-Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 same-version save/load; F11 fullscreen; Escape menu.
+Controls: right-drag rotate; wheel zoom; left click inspect; Space pause; 1–4 speed; Ctrl+F search; F focus; F5/F9 save/load; F11 fullscreen; Escape menu.
