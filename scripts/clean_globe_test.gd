@@ -16,7 +16,7 @@ const OUTLOOK_COLORS := {
 	"Unspecified": Color("718793")
 }
 
-const MAP_MODES := [
+const MAP_MODES: Array[String] = [
 	"Political map",
 	"Organizations",
 	"Population",
@@ -528,7 +528,7 @@ func _process(delta: float) -> void:
 	# Display FPS & coordinates
 	var fps := Engine.get_frames_per_second()
 	var mouse_uv := uv_at(get_viewport().get_mouse_position())
-	var mode_name := MAP_MODES[map_mode]
+	var mode_name: String = MAP_MODES[map_mode]
 	info_label.text = "%s | %d FPS | dist=%.2f | tilt=%.1f° | UV=(%.3f, %.3f)" % [
 		mode_name, fps, distance, camera_tilt_degrees, mouse_uv.x, mouse_uv.y
 	]
