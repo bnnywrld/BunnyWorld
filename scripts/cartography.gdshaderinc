@@ -39,6 +39,7 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  c.selected_state_distance=c.state_hit>.5?10000.0:-10000.0;
  c.selected_province_distance=c.province_hit>.5?10000.0:-10000.0;
  c.national_edge=false;c.state_edge=false;c.province_edge=false;
+ if(physical_mode && camera_distance > 1.65 && !inspection_active && hovered_country < 0.5) return c;
  // Derivatives are evaluated before the nonuniform boundary branch.
  highp vec2 pixel=uv*map_resolution;
  highp vec2 screen_dx=dFdx(pixel),screen_dy=dFdy(pixel);
@@ -93,7 +94,7 @@ MapCoverage map_coverage(vec2 uv,float pid,float sid,float owner){
  }
  // Conservative fallback at multi-province junctions and subpixel islands.
  // This uses current membership as well; no old State masks are involved.
- if(hint>.001){
+ if(hint>.001 && (!physical_mode || camera_distance < 1.68 || inspection_active || hovered_country > 0.0)){
   highp vec2 at=pixel-.5,cell=floor(at),f=fract(at);
   vec4 wx=cubic_weights(f.x),wy=cubic_weights(f.y);
   vec4 dwx=cubic_derivative(f.x),dwy=cubic_derivative(f.y);

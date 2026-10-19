@@ -249,18 +249,18 @@ void fragment(){
   vec3 pattern=vec3(.5);
   if(close>.001){
    // Compute spatial variation once, shared by both biomes and exposed rock.
-   vec3 warp=vec3(patch_noise(material_position.xy*.85+13.0),patch_noise(material_position.yz*.85+37.0),patch_noise(material_position.zx*.85+59.0))-.5;
-   material_position+=warp*.25;
-   material_phase=vec3(patch_noise(material_position.yz*.43),patch_noise(material_position.xz*.43+17.0),patch_noise(material_position.xy*.43+31.0))*7.0;
+    vec3 warp=vec3(patch_noise(material_position.xy*.65+13.0),patch_noise(material_position.yz*.65+37.0),patch_noise(material_position.zx*.65+59.0));
+    material_position+=(warp-.5)*.22;
+    material_phase=warp*7.0;
   }
   vec3 material_dx=dFdx(material_position),material_dy=dFdy(material_position);
   if(close>.001){
    pattern=material(primary,material_position,material_phase,material_dx,material_dy);
-   if(types.b>.015&&primary!=secondary)pattern=mix(pattern,material(secondary,material_position,material_phase,material_dx,material_dy),types.b);
+   if(types.b>.18&&primary!=secondary)pattern=mix(pattern,material(secondary,material_position,material_phase,material_dx,material_dy),types.b);
   }
   // Regional colour is low frequency; material detail never changes residency.
   earth=mix(earth,mix(earth*pattern*1.6,pattern,.48),close*.88);
-  float far_blend=far_terrain_enabled?1.0:0.0;
+  float far_blend=far_terrain_enabled?smoothstep(1.22,1.48,camera_distance):0.0;
   vec3 relief_normal=radial_world;
   float snow=0.0;
   if(far_blend<1.0){
@@ -313,8 +313,10 @@ void fragment(){
   float physical_land=land_coverage;
   if(passage_id>0.0)physical_land=0.0;
   base=mix(water,earth,physical_land);
-  float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72))),-.75,1.0);
-  base*=.52+.52*smoothstep(-.5,.9,sun);
+  float micro_h=dot(pattern,vec3(.299,.587,.114));
+  float micro_bump=clamp((dFdx(micro_h)-dFdy(micro_h))*3.5,-0.28,0.28)*close*physical_land;
+  float sun=clamp(dot(relief_normal,normalize(vec3(-.42,.55,.72)))+micro_bump,-.75,1.0);
+base*=.52+.52*smoothstep(-.5,.9,sun);
   float haze=pow(1.0-facing,2.8)*.29;base=mix(base,vec3(.18,.35,.49),haze);
   float coastal_band=1.0-smoothstep(1.5,10.0,abs(field_pixels(coast_value)));
   float political_band=max(national_band*.20,coastal_band*.12);

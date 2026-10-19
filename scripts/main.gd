@@ -1773,7 +1773,10 @@ func _process(delta: float) -> void:
 		planet_material.set_shader_parameter("hover_amount", hover_blend)
 		waterways_material.set_shader_parameter("physical_mode",map_mode==6)
 		waterways_material.set_shader_parameter("camera_distance",distance)
-		_update_cities()
+		city_timer += delta
+		if not dragging or city_timer >= 0.05:
+			city_timer = 0.0
+			_update_cities()
 		if urban_scenery != null: urban_scenery.update_view(camera, distance, city_scenery_enabled and screen != "menu", delta)
 		if country_label_layer != null: country_label_layer.update_view()
 		if tiny_state_markers!=null:tiny_state_markers.update_view()
@@ -1781,7 +1784,7 @@ func _process(delta: float) -> void:
 		planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 		planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))
 		_position_panels(false)
-		planet_material.set_shader_parameter("terrain_mix", clampf((2.0 - distance) / 0.35, 0, 1) if map_mode == 6 else 0.0)
+		planet_material.set_shader_parameter("terrain_mix", clampf((1.5 - distance) / 0.25, 0, 1) if map_mode == 6 else 0.0)
 	if screen == "playing" and not state.database.is_empty() and state.advance(delta):
 		_update_clock()
 		if state.day != last_relation_day:

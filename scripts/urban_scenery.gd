@@ -8,8 +8,8 @@ signal preparation_progress(completed: int,total: int)
 const EARTH_METERS := 6371000.0
 const SIZE_MULTIPLIER := 3.0
 const DISPLAY_SCALE := 12.0 * SIZE_MULTIPLIER
-const BUILDING_CAP := 2048
-const CLUSTER_CAP := 96
+const BUILDING_CAP := 1600
+const CLUSTER_CAP := 76
 const Surface = preload("res://scripts/relief_surface.gd")
 var relief: RefCounted
 var clusters: Array = []
@@ -166,7 +166,7 @@ func _cluster(record: Dictionary) -> MultiMeshInstance3D:
 	multimesh.transform_format = MultiMesh.TRANSFORM_3D
 	multimesh.use_colors = true
 	multimesh.mesh = building_mesh
-	multimesh.instance_count = record["instances"].size()
+	multimesh.instance_count = maxi(1, int(round(record["instances"].size() * 0.8))) if not record["instances"].is_empty() else 0
 	var colors := [Color("d4c9b4"), Color("b8b4a6"), Color("c7b49c"), Color("a8b8c2"), Color("b6c5cb")]
 	for i: int in multimesh.instance_count:
 		var item: Array = record["instances"][i]
