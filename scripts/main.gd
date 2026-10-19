@@ -743,13 +743,13 @@ func _build_planet() -> void:
 	planet.rotation_order = EULER_ORDER_XYZ
 	world_view.add_child(planet)
 	var mesh := MeshInstance3D.new()
-	mesh.mesh = _sphere_mesh(256, 128)
+	mesh.mesh = _sphere_mesh(384, 192)
 	mesh.custom_aabb = mesh.mesh.get_aabb().grow(.025)
 	mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	planet.add_child(mesh)
 	planet_material = ShaderMaterial.new()
-	political_shader = load("res://scripts/planet.gdshader")
-	physical_shader = load("res://scripts/planet_physical.gdshader")
+	political_shader = load("res://scripts/clean_globe.gdshader")
+	physical_shader = load("res://scripts/clean_globe_physical.gdshader")
 	planet_material.shader = physical_shader if map_mode == 6 else political_shader
 	map_rendering=preload("res://scripts/map_rendering.gd").new()
 	map_rendering.initialize(state.provinces,state.regions,state.countries)
@@ -774,7 +774,10 @@ func _build_planet() -> void:
 	spatial_map_layers.initialize(str(state.database["version"]))
 	spatial_map_layers.register("sphere",mesh,planet)
 	detail_patch = MeshInstance3D.new()
-	detail_patch.material_override = planet_material
+	var empty_patch_mat := StandardMaterial3D.new()
+	empty_patch_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
+	empty_patch_mat.albedo_color = Color(0, 0, 0, 0)
+	detail_patch.material_override = empty_patch_mat
 	detail_patch.mesh = _detail_grid()
 	detail_mesh_builds += 1
 	detail_patch.custom_aabb = AABB(Vector3(-1.02,-1.02,-1.02),Vector3(2.04,2.04,2.04))
@@ -962,8 +965,8 @@ func _update_border_visibility() -> void:
 	if border_meshes.is_empty(): return
 	# Match the existing shader's exact zero-opacity ranges. Visibility changes
 	# submit no geometry and never generate or load new meshes on camera travel.
-	spatial_map_layers.set_enabled("land",distance > 1.45)
-	spatial_map_layers.set_enabled("province",(state_preview > 0 or inspection_active and state.selected_region > 0) and distance > 1.45 and distance < 1.52)
+	spatial_map_layers.set_enabled("land", false)
+	spatial_map_layers.set_enabled("province", false)
 	spatial_map_layers.set_enabled("sea",distance < 2.8 or state.selected_sea > 0)
 	spatial_map_layers.set_enabled("water",distance < 3.5)
 	spatial_map_layers.update_view(distance)

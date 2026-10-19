@@ -102,6 +102,7 @@ var _last_pick_uv: Vector2 = Vector2(-1.0, -1.0)
 func _ready() -> void:
 	planet = Node3D.new()
 	planet.name = "Planet"
+	planet.rotation_order = EULER_ORDER_XYZ
 	add_child(planet)
 
 	camera = Camera3D.new()
