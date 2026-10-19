@@ -106,6 +106,55 @@ float ocean_nearby(vec2 uv) {
 	return max(ocean_sample(uv), max(max(ocean_sample(uv + vec2(step.x, 0.0)), ocean_sample(uv - vec2(step.x, 0.0))), max(ocean_sample(uv + vec2(0.0, step.y)), ocean_sample(uv - vec2(0.0, step.y)))));
 }
 
+// Find nearest valid province texel for coastal land fringe where region_map_0 is water
+float nearest_province(vec2 uv) {
+	vec2 texel = 1.0 / map_resolution;
+	// Ring 1 (1 texel)
+	float p = province_at(uv + vec2(texel.x, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(texel.x, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(0.0, texel.y));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(0.0, texel.y));
+	if (p > 0.5) return p;
+	// Ring 2 (diagonals & 2 texels)
+	p = province_at(uv + vec2(texel.x, texel.y));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(-texel.x, texel.y));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(texel.x, -texel.y));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(-texel.x, -texel.y));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(texel.x * 2.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(texel.x * 2.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(0.0, texel.y * 2.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(0.0, texel.y * 2.0));
+	if (p > 0.5) return p;
+	// Ring 3 & 4 (3 to 4 texels)
+	p = province_at(uv + vec2(texel.x * 3.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(texel.x * 3.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(0.0, texel.y * 3.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(0.0, texel.y * 3.0));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(texel.x * 4.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(texel.x * 4.0, 0.0));
+	if (p > 0.5) return p;
+	p = province_at(uv + vec2(0.0, texel.y * 4.0));
+	if (p > 0.5) return p;
+	p = province_at(uv - vec2(0.0, texel.y * 4.0));
+	if (p > 0.5) return p;
+	return 0.0;
+}
+
 // ============================================================
 // Cartography: boundary SDF + pair-based coverage (inlined)
 // ============================================================
@@ -135,94 +184,84 @@ MapCoverage map_coverage(vec2 uv, float pid, float sid, float owner) {
 	c.country_distance = 10000.0;
 	c.state_distance = 10000.0;
 	c.province_distance = 10000.0;
-	c.selected_state_distance = 10000.0;
-	c.selected_province_distance = 10000.0;
+	c.selected_state_distance = c.state_hit > .5 ? 10000.0 : -10000.0;
+	c.selected_province_distance = c.province_hit > .5 ? 10000.0 : -10000.0;
 	c.national_edge = false;
 	c.state_edge = false;
 	c.province_edge = false;
 
-	if (pid < .5) return c;
 	if (physical_mode && camera_distance > 1.65 && !inspection_active && hovered_country < 0.5) return c;
 
-	highp vec2 tex_coord = uv * map_resolution;
-	vec2 f = fract(tex_coord) - 0.5;
-	vec2 dir = sign(f);
-	vec2 d_texel = 0.5 - abs(f);
+	float hint = texture(boundary_hint, uv).r;
+	if (hint <= .001) return c;
 
-	// Screen pixels per texel
-	vec2 px_per_texel = 1.0 / max(fwidth(tex_coord), vec2(0.0001));
-	vec2 dist_px = d_texel * px_per_texel;
+	// Read continuous signed distance to vector boundary
+	highp float sd = texture(boundary_distance, uv).r;
+	float footprint = max(fwidth(sd), .000001);
+	float pixels = sd / footprint;
 
-	// Neighbor texel steps in UV
-	vec2 step_x = vec2(dir.x / map_resolution.x, 0.0);
-	vec2 step_y = vec2(0.0, dir.y / map_resolution.y);
-	vec2 step_xy = vec2(dir.x / map_resolution.x, dir.y / map_resolution.y);
-
-	float pid_x = province_at(uv + step_x);
-	float pid_y = province_at(uv + step_y);
-
-	bool edge_x = (pid_x != pid && pid_x > .5);
-	bool edge_y = (pid_y != pid && pid_y > .5);
-	bool edge_diag = false;
-	float pid_diag = pid;
-
-	if (!edge_x && !edge_y && dist_px.x < 3.5 && dist_px.y < 3.5) {
-		pid_diag = province_at(uv + step_xy);
-		edge_diag = (pid_diag != pid && pid_diag > .5);
+	// Read boundary province pair at uv
+	vec2 size = vec2(textureSize(boundary_pairs, 0));
+	vec4 p00 = texture(boundary_pairs, uv);
+	if (all(equal(p00, vec4(0.0)))) {
+		vec2 step = 1.0 / size;
+		p00 = texture(boundary_pairs, uv + vec2(step.x, 0.0));
+		if (all(equal(p00, vec4(0.0)))) p00 = texture(boundary_pairs, uv - vec2(step.x, 0.0));
+		if (all(equal(p00, vec4(0.0)))) p00 = texture(boundary_pairs, uv + vec2(0.0, step.y));
+		if (all(equal(p00, vec4(0.0)))) p00 = texture(boundary_pairs, uv - vec2(0.0, step.y));
 	}
 
-	if (!edge_x && !edge_y && !edge_diag) return c;
+	if (any(greaterThan(p00, vec4(0.0)))) {
+		vec4 bytes = floor(p00 * 255.0 + .5);
+		float a = bytes.r + bytes.g * 256.0;
+		float b = bytes.b + bytes.a * 256.0;
+		vec4 ar = province_record(a);
+		vec4 br = province_record(b);
+		float sa = ar.r + ar.g * 256.0;
+		float sb = br.r + br.g * 256.0;
+		float oa = ar.b + ar.a * 256.0;
+		float ob = br.b + br.a * 256.0;
 
-	float dist = 10000.0;
-	float n_pid = pid;
+		float h = smoothstep(-footprint * .65, footprint * .65, sd);
+		vec3 ca = sa > .5 ? texture(colors, lookup(sa)).rgb : vec3(0.0);
+		vec3 cb = sb > .5 ? texture(colors, lookup(sb)).rgb : vec3(0.0);
 
-	if (edge_x && edge_y) {
-		dist = length(dist_px);
-		n_pid = dist_px.x < dist_px.y ? pid_x : pid_y;
-	} else if (edge_x) {
-		dist = dist_px.x;
-		n_pid = pid_x;
-	} else if (edge_y) {
-		dist = dist_px.y;
-		n_pid = pid_y;
-	} else if (edge_diag) {
-		dist = length(dist_px);
-		n_pid = pid_diag;
-	}
+		// Smooth antialiased state fill transition along the vector curve
+		c.tint = sa < .5 ? cb : (sb < .5 ? ca : mix(cb, ca, h));
 
-	vec4 n_rec = province_record(n_pid);
-	float n_sid = n_rec.r + n_rec.g * 256.0;
-	float n_owner = n_rec.b + n_rec.a * 256.0;
+		c.country_hit = (oa == selected_country && oa > .5 ? h : 0.0) + (ob == selected_country && ob > .5 ? 1.0 - h : 0.0);
+		c.hover_hit = (oa == hovered_country && oa > .5 ? h : 0.0) + (ob == hovered_country && ob > .5 ? 1.0 - h : 0.0);
 
-	bool is_national = (n_owner != owner) && (owner > .5) && (n_owner > .5);
-	bool is_state = (n_sid != sid) && (sid > .5) && (n_sid > .5);
-	bool is_province = (n_pid != pid) && (pid > .5) && (n_pid > .5);
+		bool ah = (sa == selected_region && sa > .5);
+		bool bh = (sb == selected_region && sb > .5);
+		c.state_hit = (ah ? h : 0.0) + (bh ? 1.0 - h : 0.0);
+		c.selected_state_distance = (ah != bh) ? (ah ? pixels : -pixels) : (ah ? 10000.0 : -10000.0);
 
-	c.national_edge = is_national;
-	c.state_edge = is_state && !is_national;
-	c.province_edge = is_province && !is_state && !is_national;
+		ah = (a == selected_province && a > .5);
+		bh = (b == selected_province && b > .5);
+		c.province_hit = (ah ? h : 0.0) + (bh ? 1.0 - h : 0.0);
+		c.selected_province_distance = (ah != bh) ? (ah ? pixels : -pixels) : (ah ? 10000.0 : -10000.0);
 
-	if (is_national) c.country_distance = dist;
-	if (is_state) c.state_distance = dist;
-	if (is_province) c.province_distance = dist;
+		c.national_edge = (oa != ob && oa > .5 && ob > .5);
+		c.state_edge = (sa != sb && sa > .5 && sb > .5);
+		c.province_edge = (a != b && a > .5 && b > .5 && sa == sb);
 
-	// Sub-pixel antialiasing at the state color boundary in political mode
-	if (is_state && !physical_mode) {
-		float blend_w = clamp(dist * 0.7, 0.0, 1.0);
-		vec3 n_tint = n_sid > .5 ? texture(colors, lookup(n_sid)).rgb : c.tint;
-		c.tint = mix(mix(c.tint, n_tint, 0.5), c.tint, blend_w);
-	}
+		c.country_distance = c.national_edge ? pixels : 10000.0;
+		c.state_distance = c.state_edge ? pixels : 10000.0;
+		c.province_distance = c.province_edge ? pixels : 10000.0;
 
-	// Selection outlines
-	if (selected_region > .5) {
-		bool self_sel = (sid == selected_region);
-		bool neigh_sel = (n_sid == selected_region);
-		if (self_sel != neigh_sel) c.selected_state_distance = dist;
-	}
-	if (selected_province > .5) {
-		bool self_sel = (pid == selected_province);
-		bool neigh_sel = (n_pid == selected_province);
-		if (self_sel != neigh_sel) c.selected_province_distance = dist;
+		// Coastal edge: suppress internal border lines, extend land selection
+		if (sa < .5 || sb < .5) {
+			float land_state = sa > .5 ? sa : sb;
+			float land_prov = sa > .5 ? a : b;
+			float land_owner = sa > .5 ? oa : ob;
+			c.state_hit = (land_state == selected_region && land_state > .5 ? 1.0 : 0.0);
+			c.province_hit = (land_prov == selected_province && land_prov > .5 ? 1.0 : 0.0);
+			c.country_hit = (land_owner == selected_country && land_owner > .5 ? 1.0 : 0.0);
+			c.hover_hit = (land_owner == hovered_country && land_owner > .5 ? 1.0 : 0.0);
+			c.selected_state_distance = c.state_hit > .5 ? 10000.0 : -10000.0;
+			c.selected_province_distance = c.province_hit > .5 ? 10000.0 : -10000.0;
+		}
 	}
 
 	return c;
@@ -307,6 +346,22 @@ void fragment() {
 	vec3 water = mix(vec3(.025, .105, .18), vec3(.075, .27, .39), facing);
 	float passage_id = water_passage(uv);
 	float pid = passage_id > 0.0 ? 0.0 : province_at(uv);
+
+	float coast_value = texture(coast_distance, uv).r;
+	float land_coverage = coverage_alpha(coast_value);
+	if (land_coverage < .999 && small_land_at(floor(uv * map_resolution)) > .5) {
+		vec2 pixel2 = uv * map_resolution - .5, corner = floor(pixel2), weight = fract(pixel2);
+		float row0 = mix(small_land_at(corner), small_land_at(corner + vec2(1.0, 0.0)), weight.x);
+		float row1 = mix(small_land_at(corner + vec2(0.0, 1.0)), small_land_at(corner + vec2(1.0)), weight.x);
+		land_coverage = max(land_coverage, coverage_alpha(mix(row0, row1, weight.y)));
+	}
+	if (passage_id > 0.0) land_coverage = 0.0;
+
+	// Fill in province for smoothed coastal land fringe
+	if (pid < 0.5 && land_coverage > 0.001) {
+		pid = nearest_province(uv);
+	}
+
 	vec4 rec = province_record(pid);
 	float region = rec.r + rec.g * 256.0;
 	float owner = rec.b + rec.a * 256.0;
@@ -318,6 +373,7 @@ void fragment() {
 	vec2 blend = fract(pixel);
 	vec2 dx = dFdx(uv) * .3 * far_filter;
 	vec2 dy = dFdy(uv) * .3 * far_filter;
+
 	// Political surface colour
 	vec4 surface = vec4(water, 0.0);
 	if (!physical_mode && !information_mode && region > .5) surface = vec4(coverage.tint, 1.0);
@@ -331,33 +387,9 @@ void fragment() {
 		if (passage_id > 0.0) surface = vec4(water, 0.0);
 	}
 
-	float coast_value = texture(coast_distance, uv).r;
-	float land_coverage = coverage_alpha(coast_value);
-	if (land_coverage < .999 && region > 0.0 && small_land_at(floor(uv * map_resolution)) > .5) {
-		vec2 pixel2 = uv * map_resolution - .5, corner = floor(pixel2), weight = fract(pixel2);
-		float row0 = mix(small_land_at(corner), small_land_at(corner + vec2(1.0, 0.0)), weight.x);
-		float row1 = mix(small_land_at(corner + vec2(0.0, 1.0)), small_land_at(corner + vec2(1.0)), weight.x);
-		land_coverage = max(land_coverage, coverage_alpha(mix(row0, row1, weight.y)));
-	}
-	if (passage_id > 0.0) land_coverage = 0.0;
-
-	// Extend display owner into smoothed coast fringe
-	float display_owner = owner;
-	if (display_owner < .5 && land_coverage > .001) {
-		float nearest = region_at(uv + vec2(texel.x * 2.0, 0.0));
-		if (nearest < .5) nearest = region_at(uv - vec2(texel.x * 2.0, 0.0));
-		if (nearest < .5) nearest = region_at(uv + vec2(0.0, texel.y * 2.0));
-		if (nearest < .5) nearest = region_at(uv - vec2(0.0, texel.y * 2.0));
-		display_owner = owner_at(nearest);
-	}
-	chosen = inspection_active && display_owner > 0.0 && display_owner == selected_country;
 	vec3 land_color = clamp((surface.rgb - water * (1.0 - surface.a)) / max(.0001, surface.a), vec3(0.0), vec3(1.0));
-	if (surface.a < .001 && land_coverage > .001 && !physical_mode) {
-		float nearby = region_at(uv + vec2(texel.x, 0.0));
-		if (nearby < .5) nearby = region_at(uv - vec2(texel.x, 0.0));
-		if (nearby < .5) nearby = region_at(uv + vec2(0.0, texel.y));
-		if (nearby < .5) nearby = region_at(uv - vec2(0.0, texel.y));
-		land_color = nearby > .5 ? texture(colors, lookup(nearby)).rgb : water;
+	if (surface.a < .001 && land_coverage > .001 && !physical_mode && region > .5) {
+		land_color = coverage.tint;
 	}
 	float selected_hit = coverage.country_hit;
 	float hovered_hit = coverage.hover_hit;
@@ -485,9 +517,9 @@ void fragment() {
 		vec3 ink = physical_mode ? vec3(.18, .21, .19) : vec3(.30, .35, .31);
 		base = field_ink(base, coverage.province_distance, 1.2, ink, near * fade * .65 * inland);
 	}
-	if (selected_state && coverage.selected_state_distance < 50.0)
+	if (selected_state && abs(coverage.selected_state_distance) < 20.0)
 		base = field_ink(base, coverage.selected_state_distance, 2.0, vec3(.70, .82, .79), near * inland);
-	if (selected_prov && coverage.selected_province_distance < 50.0)
+	if (selected_prov && abs(coverage.selected_province_distance) < 20.0)
 		base = field_ink(base, coverage.selected_province_distance, 1.6, vec3(.75, .87, .81), province_opacity * near * inland);
 	// Coastline ink
 	vec3 coast_ink = vec3(.34, .39, .36); float coast_width = 3.2;
