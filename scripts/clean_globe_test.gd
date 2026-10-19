@@ -365,7 +365,7 @@ func _handle_click(position: Vector2) -> void:
 		update_selection(0.0, 0.0, 0.0, 0.0, false)
 		info_label.text = "Clicked: ocean"
 		return
-	var pixel := map_rendering.pixel_at_uv(uv)
+	var pixel: Color = map_rendering.pixel_at_uv(uv)
 	var pid   := int(round(pixel.r * 255.0)) + int(round(pixel.g * 255.0)) * 256
 	var rid   := int(_state_data.provinces.get(str(pid), {}).get("region", 0))
 	var tag   : String = _state_data.regions.get(str(rid), {}).get("owner", "")
