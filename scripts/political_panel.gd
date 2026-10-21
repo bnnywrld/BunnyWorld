@@ -1,4 +1,5 @@
 extends VBoxContainer
+const FloatingPanel = preload("res://scripts/styled_popup.gd")
 const Rules = preload("res://scripts/government_rules.gd")
 const Summary = preload("res://scripts/political_summary.gd")
 const LawIcons = preload("res://scripts/law_icons.gd")
@@ -7,13 +8,13 @@ var country := ""
 var on_change: Callable
 var property_buttons: Dictionary = {}
 var choice_buttons: Dictionary = {}
-var choice_dialog: AcceptDialog
+var choice_dialog: FloatingPanel
 var choice_content: VBoxContainer
 var active_property: Dictionary = {}
 var balance_label: Label
 var government_type: Label
 
-func configure(state: RefCounted, tag: String, changed: Callable) -> void:
+func configure(state: RefCounted, tag: String, changed: Callable, host: Control) -> void:
 	world = state
 	country = tag
 	on_change = changed
@@ -55,14 +56,11 @@ func configure(state: RefCounted, tag: String, changed: Callable) -> void:
 			button.pressed.connect(func(): open_property(property))
 			property_buttons[property["key"]] = button
 			row.add_child(button)
-	choice_dialog = AcceptDialog.new()
+	choice_dialog = FloatingPanel.new()
 	choice_dialog.name = "GovernmentPropertyChoice"
-	choice_dialog.exclusive = true
-	choice_dialog.ok_button_text = "Close"
-	add_child(choice_dialog)
-	choice_content = VBoxContainer.new()
-	choice_content.add_theme_constant_override("separation", 8)
-	choice_dialog.add_child(choice_content)
+	host.add_child(choice_dialog)
+	choice_content = choice_dialog.content
+
 	refresh()
 
 func refresh() -> void:
@@ -99,18 +97,13 @@ func open_property(property: Dictionary) -> void:
 		choice_buttons[option] = button
 		choice_content.add_child(button)
 	_refresh_choices()
-	choice_dialog.reset_size()
-	# Use viewport coordinates so embedded dialogs also work with stretched windows.
 	var button: Button = property_buttons[property["key"]]
-	var anchor: Rect2 = button.get_global_rect()
-	var bounds := get_viewport_rect().size
-	var popup_size := Vector2(choice_dialog.size)
-	var origin := Vector2(anchor.end.x + 8, anchor.position.y)
-	if origin.x + popup_size.x > bounds.x - 12:
-		origin.x = anchor.position.x - popup_size.x - 8
-	origin.x = clampf(origin.x, 12, maxf(12, bounds.x - popup_size.x - 12))
-	origin.y = clampf(origin.y, 12, maxf(12, bounds.y - popup_size.y - 12))
-	choice_dialog.popup(Rect2i(Vector2i(origin), choice_dialog.size))
+	# Place to the right of the law grid so other law buttons remain exposed.
+	var anchor := Rect2(Vector2(get_global_rect().end.x + 16, button.get_global_rect().position.y), Vector2.ZERO)
+	choice_dialog.show_beside(anchor)
+
+func _exit_tree() -> void:
+	if is_instance_valid(choice_dialog): choice_dialog.queue_free()
 
 func _refresh_choices() -> void:
 	var balance: float = world.political_power(country)

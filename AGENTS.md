@@ -9,3 +9,8 @@ Keep main runnable. Read README.md, DEVELOPMENT.md and SOURCE_CONTROL.md.
 - After packaging assets run `python tools/repository_hygiene.py --prune`. Stage deletions as well as additions, then run `python tools/repository_hygiene.py`.
 - Keep only manifest-referenced asset parts; never remove an active part or a map-contract dependency to save space.
 - Do not create persistent remote branches unless requested. Do not rewrite published history without explicit approval.
+
+## UI consistency
+
+- Match the established navy panels, muted borders, gold corner accents, typography and inherited button theme whenever adding UI. Use `scripts/ui_style.gd` for shared styling and `scripts/styled_popup.gd` for new floating windows; do not introduce native OS title bars or separate visual themes.
+- Law and institution pickers must allow switching directly to another item, close with Escape/×, and disappear with their owning tab. Keep expensive work out of frame updates.

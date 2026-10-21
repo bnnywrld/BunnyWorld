@@ -1,5 +1,6 @@
 extends Control
 
+const UIStyle = preload("res://scripts/ui_style.gd")
 const State = preload("res://scripts/world_state.gd")
 const MapPalette = preload("res://scripts/map_palette.gd")
 const SAVE_DIRECTORY := "user://saves"
@@ -342,27 +343,10 @@ func _ready() -> void:
 		_capture.call_deferred()
 
 func _panel_style(color: Color, radius: int = 12, border: Color = Color("223b4c")) -> StyleBoxFlat:
-	var style := StyleBoxFlat.new()
-	style.bg_color = color.lerp(Color("101e27"), .28)
-	style.border_color = border
-	style.set_border_width_all(1)
-	style.set_corner_radius_all(mini(radius, 4))
-	style.shadow_color = Color(0.01, 0.02, 0.025, 0.34)
-	style.shadow_size = 5
-	style.shadow_offset = Vector2(0, 3)
-	style.content_margin_left = 16
-	style.content_margin_right = 16
-	style.content_margin_top = 14
-	style.content_margin_bottom = 14
-	return style
+	return UIStyle.panel(color, radius, border)
 
 func _button_style(color: Color, radius: int = 7, border: Color = Color("294657")) -> StyleBoxFlat:
-	var style := _panel_style(color, radius, border)
-	style.content_margin_left = 9
-	style.content_margin_right = 9
-	style.content_margin_top = 6
-	style.content_margin_bottom = 6
-	return style
+	return UIStyle.button(color, radius, border)
 
 func _build_theme() -> void:
 	var t := Theme.new()
@@ -997,6 +981,7 @@ func _country_item_selected(index: int) -> void:
 		_show_country(country_tags[index], true)
 
 func _clear_details() -> void:
+	if details == control_details: _close_floating_panels()
 	active_feature = ""
 	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
 	if pinned != null:
@@ -1670,6 +1655,8 @@ func _ui_blocks_globe(position: Vector2) -> bool:
 	# a child even when its panel uses MOUSE_FILTER_STOP, unless forced scroll
 	# propagation is disabled. Also guard the camera when a drag enters a panel.
 	var point := view_container.get_global_transform() * position
+	for popup: Control in get_tree().get_nodes_in_group("floating_ui"):
+		if popup.is_visible_in_tree() and popup.get_global_rect().has_point(point): return true
 	for panel: Control in [control_panel, right_panel, territory_panel, territory_handle, clock_box, map_box, selection_box, top_left_box]:
 		if panel == null or not panel.is_visible_in_tree() or not panel.get_global_rect().has_point(point):
 			continue
@@ -1933,6 +1920,14 @@ func _notification(what: int) -> void:
 		state.paused = true
 		_update_clock()
 
+func _close_floating_panels() -> bool:
+	var closed := false
+	for popup: Control in get_tree().get_nodes_in_group("floating_ui"):
+		if popup.visible:
+			popup.hide()
+			closed = true
+	return closed
+
 func _close_side_tabs() -> bool:
 	var closed := false
 	if territory_panel != null and (territory_panel.visible or (territory_clip != null and territory_clip.visible)):
@@ -1961,6 +1956,9 @@ func _input(event: InputEvent) -> void:
 			get_viewport().set_input_as_handled()
 			return
 	if event.keycode == KEY_ESCAPE:
+		if _close_floating_panels():
+			get_viewport().set_input_as_handled()
+			return
 		if is_typing:
 			focus.release_focus()
 			get_viewport().set_input_as_handled()
@@ -2851,7 +2849,7 @@ func _position_panels(force: bool = true) -> void:
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		var available_height := maxf(240, view_container.size.y - 118)
-		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature == "Government" else Vector2(370, available_height)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research"] else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -2907,6 +2905,7 @@ func _reveal_panel(panel: PanelContainer) -> void:
 
 func _hide_panel(panel: PanelContainer) -> void:
 	if panel == null: return
+	if panel == control_panel: _close_floating_panels()
 	if panel == territory_panel: _preview_state(0)
 	if panel_tweens.has(panel): panel_tweens[panel].kill(); panel_tweens.erase(panel)
 	panel.hide()
@@ -3111,8 +3110,14 @@ func _show_feature(caption: String) -> void:
 		var country := _label(str(state.countries[tag]["name"]), 14, Color("93a8aa"))
 		control_heading.add_child(country)
 		var politics := preload("res://scripts/political_panel.gd").new()
-		politics.configure(state, tag, _update_country_bar)
+		politics.configure(state, tag, _update_country_bar, self)
 		control_details.add_child(politics)
+	elif caption == "Research":
+		var tag: String = state.player_country
+		control_heading.add_child(_label(str(state.countries[tag]["name"]), 14, UIStyle.MUTED_COLOR))
+		var research := preload("res://scripts/research_panel.gd").new()
+		research.configure(state, tag, self)
+		control_details.add_child(research)
 	_reveal_panel(control_panel)
 	_position_panels()
 	foundation.refresh_active_section()

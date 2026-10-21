@@ -1,4 +1,17 @@
-# BunnyWorld 0.2.1.5 validation
+# BunnyWorld 0.2.1.6 validation
+
+Godot 4.5.1 on Linux. Research and law-window UI only; save schema remains 21.
+
+- `research_ui_tests.gd`: **1,110 checks, zero failures**. Actual pointer events open/switch law pickers and open university trees; Escape/close buttons, tab-toggle cleanup, one-window lifecycle, deterministic 2–6 institution slots for all 224 countries, and smaller viewport bounds passed.
+- `political_ui_tests.gd`: **6,918 checks, zero failures**. All law choices, 100 PP costs, insufficient funds, no-effect behavior, daily PP, country defaults and save/load validation remain covered.
+- `model_tests.gd`: passed dates, clock, ownership, memberships, save/load, corruption rejection and conservation.
+- GL Compatibility / Mesa llvmpipe: law picker, direct replacement, institution list and empty tree rendered and inspected at 1440×900 and 1024×768. Compact law-window and tree dimensions also pass checks after layout settles.
+- Repository hygiene: 82 active packed parts verified, zero unused parts.
+- No map assets, demographics, saved research state or simulation rules changed. Research trees are empty and have no effects or timers.
+
+Native Windows execution and target-laptop FPS remain untested.
+
+## Previous Constitution & Laws validation (0.2.1.5)
 
 Validated with Godot 4.5.1 on Linux. Fresh campaigns; save schema 21.
 

@@ -57,7 +57,7 @@ func run() -> void:
 	world.countries["POL"]["starting_stats"]["political_power"] = 350.0
 	panel.open_property(Rules.PROPERTIES[0])
 	await process_frame
-	check(panel.choice_dialog.visible and game.foundation.modals_visible(), "property choice is modal")
+	check(panel.choice_dialog.visible and not game.foundation.modals_visible(), "law picker permits direct switching")
 	check(panel.choice_buttons.size() == 3, "constitutional choices")
 	panel.choice_buttons["Constitutional Monarchy"].pressed.emit()
 	check(world.political_power("POL") == 250, "change deducts exactly 100 PP")

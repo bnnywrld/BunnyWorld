@@ -1,4 +1,4 @@
-# Developing BunnyWorld 0.2.1.5
+# Developing BunnyWorld 0.2.1.6
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
 
@@ -12,7 +12,7 @@ Labels/city architecture, coastline province lookup and terrain geometry are sep
 
 ## Clean globe stabilization
 
-The current application is 0.2.1.5 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
+The current application is 0.2.1.6 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
 
 The clean surface uses one 384×192 sphere, spatial border/river batches and the existing atmosphere. There is no detail patch. DisplayCoverage.initialize(target, false) loads the required coast/tiny-land/sea fields but skips the unused boundary hint/pair/distance textures and local coast packs. Legacy callers retain the default behavior. Three skipped fields are 3072×1536 × (1+4+2) bytes = 33,030,144 bytes (31.5 MiB), excluding driver overhead. The sandbox shares immutable textures between both materials.
 
@@ -22,9 +22,19 @@ The published branch's scenery checksum and generator fingerprints were stale. P
 
 Validation: Godot 4.5.1 model tests, political_ui_tests.gd, clean_globe_stability.gd; Python tools/restore_repository_assets.py --verify-only; Python tools/build_map.py --check; Python tools/repository_hygiene.py. A GL Compatibility render probe also exercises distant political/physical and close physical views under Mesa llvmpipe. This verifies rendering, not target-laptop speed. The fixed globe mesh remains coarser than the full CPU relief field at extreme zoom; this patch does not change terrain geometry/picking algorithms.
 
+## Shared UI and Research scaffold (0.2.1.6)
+
+`ui_style.gd` is the shared source of panel/button styles and heading/accent colors. Main's existing style helpers delegate to it without changing their output. New windows use `styled_popup.gd`, which inherits the existing briefing frame, the host theme and gold corner accents instead of a native OS title bar. The UI convention is recorded in AGENTS.md for future changes.
+
+Law pickers are nonmodal: outside clicks dismiss without consuming the event, so clicking another law immediately replaces the previous picker. They sit beside the grid, keeping the other law buttons exposed. Floating panels stop pointer/scroll events over their bounds, are included in the globe input guard and are freed with their owner. Escape closes a floating panel before closing its tab; tab toggles/switches also dismiss it. No frame loop was added.
+
+Research uses the existing sidebar tab with institution buttons. Each opens a styled, centered window identifying the institution and containing a genuinely empty tree canvas. No placeholder technology nodes, research effects, timers, funding or save-schema changes. `research_institutions.gd` gives deterministic UI identities: curated names for 13 major countries, otherwise unique capital-based university/research-institute names using `state_capital`. Named lists use 3–6 slots; other countries provisionally get 2/3/4 slots at <5k/5k–20k/≥20k scenario GDP per capita. These are UI scaffolding choices, not a calculated scientific-capacity model. No specialization bonuses yet. Names can be recomputed without duplicates or random changes; research state persistence comes with the later playable system.
+
+Run `tests/research_ui_tests.gd` for actual pointer dispatch between laws and institutions, Escape/close behavior, lifecycle cleanup, all-country identity bounds/determinism and smaller viewport bounds. Run the existing political/model suites for PP and persistence regression coverage.
+
 ## Government and political power
 
-GovernmentRules defines six ordered categories, 28 law choices and the default 100 PP cost. The section uses horizontal rows of 56px icon-only buttons, current-option pictograms, identifying tooltips and small exclusive choice dialogs anchored beside the clicked button and clamped to the viewport. The government title above parliament derives from the form, executive and competition choices. The existing country scroll container scrolls the entire Government content; the pinned country heading remains visible. Government is 600×720px, capped to available space. Country panels retain their 370px width.
+GovernmentRules defines six ordered categories, 28 law choices and the default 100 PP cost. The section uses horizontal rows of 56px icon-only buttons, current-option pictograms, identifying tooltips and small nonmodal floating choice panels beside the law grid and clamped to the viewport. The government title above parliament derives from the form, executive and competition choices. The existing country scroll container scrolls the entire Government content; the pinned country heading remains visible. Government is 600×720px, capped to available space. Country panels retain their 370px width.
 
 `data/government_laws_2000.json` supplies a complete starting law set for each of the 224 active countries. These are editable scenario seeds combining imported MD recruitment/healthcare/labor ideas with broad country policy profiles and explicit anchors (e.g. Japan/UK monarchies, US presidential republic, China one-party rule). They are gameplay abstractions, not a verified historical legal database; minor-country and broad social/economic defaults need future historical refinement. Same-sex marriage is initially illegal everywhere in the 2000 scenario. Nuclear deterrent is seeded only for the scenario's declared nuclear states; Israel uses ambiguity and DPRK starts non-nuclear.
 

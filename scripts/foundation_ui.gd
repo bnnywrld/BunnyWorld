@@ -182,8 +182,7 @@ func update_bar() -> void:
 	globe_value.text = str(int(host.state.world_tension))
 
 func modals_visible() -> bool:
-	var politics: Node = host.control_details.get_node_or_null("PoliticalPanel")
-	return ledger_dialog.visible or demo_dialog.visible or tension_dialog.visible or (politics != null and politics.choice_dialog.visible)
+	return ledger_dialog.visible or demo_dialog.visible or tension_dialog.visible
 
 func _modal(title: String) -> AcceptDialog:
 	var d := AcceptDialog.new()

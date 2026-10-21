@@ -1,7 +1,7 @@
 {
-  "version": "0.2.1.5",
-  "baseline_version": "0.2.1.4 clean-globe",
-  "repository_base_commit": "24837ce92b0ed240b98cfc786a1699589a161415",
+  "version": "0.2.1.6",
+  "baseline_version": "0.2.1.5 clean-globe",
+  "repository_base_commit": "b81663f164877c2e6c25ee26afe139bc4a491829",
   "engine": "Godot 4.5.1 stable",
   "geography_version": "0.2.1.2",
   "display_version": "0.2.1.2",
@@ -30,7 +30,12 @@
       "failures": 0,
       "passed": true
     },
-    "government_render": {
+    "research_ui": {
+      "checks": 1110,
+      "failures": 0,
+      "passed": true
+    },
+    "ui_render": {
       "renderer": "Godot 4.5.1 GL Compatibility / Mesa llvmpipe",
       "resolutions": [
         [
@@ -42,6 +47,9 @@
           768
         ]
       ],
+      "passed": true
+    },
+    "repository_hygiene": {
       "passed": true
     }
   },
