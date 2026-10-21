@@ -57,6 +57,14 @@ uniform bool information_mode = false;
 uniform bool show_regions = false;
 uniform float region_opacity = 0.0;
 
+// Cartographic style controls: shared defaults for game and sandbox.
+uniform float country_tint_close = 0.10;
+uniform float country_tint_far = 0.28;
+uniform float country_ribbon_strength = 0.42;
+uniform float coastal_shelf_strength = 0.32;
+uniform float coastal_foam_strength = 0.30;
+uniform float terrain_detail_strength = 0.72;
+
 // --- Uniforms: camera-driven ---
 uniform float camera_distance = 3.65;
 uniform float far_filter = 0.0;
@@ -650,7 +658,7 @@ void fragment() {
 		vec3 sun_dir_w = normalize(vec3(-0.52, 0.62, 0.58));
 		vec3 half_v = normalize(sun_dir_w + normalize(VIEW));
 		float spec_angle = max(dot(normalize(NORMAL + wave_n * 0.16), half_v), 0.0);
-		float specular = pow(spec_angle, 26.0) * 0.38;
+		float specular = pow(spec_angle, 26.0) * 0.22;
 		float wave_diff = clamp(dot(wave_n.xy, vec2(-0.5, 0.5)), -0.22, 0.22);
 		water = mix(water, water * (1.0 + wave_diff * 0.40) + vec3(specular), (1.0 - land_coverage) * (physical_mode ? 1.0 : 0.40));
 
@@ -658,9 +666,9 @@ void fragment() {
 		if (land_coverage < 0.98) {
 			float surf_fade = smoothstep(1.75, 1.35, camera_distance);
 			float geo_shelf = smoothstep(0.40, 0.498, coast_value);
-			float px_shelf = smoothstep(16.0, 1.0, -coast_px) * smoothstep(2.0, 1.4, camera_distance);
-			float shelf = max(geo_shelf * 0.50, px_shelf);
-			vec3 shelf_color = mix(water, vec3(0.04, 0.38, 0.45), 0.60);
+			float px_shelf = smoothstep(9.0, 1.0, -coast_px) * smoothstep(2.0, 1.4, camera_distance);
+			float shelf = max(geo_shelf * 0.30, px_shelf);
+			vec3 shelf_color = mix(water, vec3(0.08, 0.29, 0.34), coastal_shelf_strength);
 			water = mix(water, shelf_color, shelf * (1.0 - land_coverage));
 			// Animated multi-band shoreline wave surf foam: ONLY visible at close zoom (camera_distance < 1.75)
 			if (surf_fade > 0.001) {
@@ -669,7 +677,7 @@ void fragment() {
 				float surf_band1 = smoothstep(6.0, 1.2, -coast_px) * smoothstep(0.30, 0.80, wave1);
 				float surf_band2 = smoothstep(14.0, 3.5, -coast_px) * smoothstep(0.50, 0.95, wave2);
 				float surf = max(surf_band1, surf_band2 * 0.60) * shelf * surf_fade;
-				water = mix(water, vec3(0.90, 0.96, 1.0), surf * 0.75 * (1.0 - land_coverage));
+				water = mix(water, vec3(0.90, 0.96, 1.0), surf * coastal_foam_strength * (1.0 - land_coverage));
 			}
 		}
 	}
@@ -761,8 +769,10 @@ void fragment() {
 			// Multi-Biome Terrain Modulation:
 			// Combine the crisp, high-resolution physical detail and vivid colors of the biomes
 			// with the regional climate tones of the NASA Earth colormap (green in PA/FL, dry brown in NV).
-			vec3 textured = mix(earth * (pattern * 1.55), pattern, 0.46);
-			earth = mix(earth, textured, close * 0.95);
+			// Keep regional colour dominant; detail provides texture rather than
+			// replacing the climate palette with a contrasting tile.
+			vec3 textured = mix(earth * (pattern * 1.45), pattern, 0.30);
+			earth = mix(earth, textured, close * terrain_detail_strength);
 		}
 		float far_blend = far_terrain_enabled ? smoothstep(1.22, 1.48, camera_distance) : 0.0;
 		vec3 relief_normal = radial_world;
@@ -858,7 +868,7 @@ void fragment() {
 		float sun = clamp(dot(relief_normal, sun_dir), -0.75, 1.0);
 		float valley_ao = clamp(dot(relief_normal, radial_world) * 0.85 + 0.25, 0.50, 1.0);
 		float sun_light = smoothstep(-0.45, 0.85, sun);
-		base *= mix(0.50, 1.18, sun_light) * valley_ao;
+		base *= mix(0.64, 1.12, sun_light) * mix(1.0, valley_ao, 0.70);
 		// Atmospheric horizon limb gradient
 		float horizon_limb = pow(1.0 - facing, 2.6) * 0.35;
 		base = mix(base, vec3(0.18, 0.45, 0.68), horizon_limb);
@@ -873,19 +883,19 @@ void fragment() {
 			// Soft gentle contrast S-curve
 			base = mix(base, base * base * (3.0 - 2.0 * base), 0.12);
 		}
-		// Whole-country translucent tint filter with zoom/tilt fade and 3x intense border/coastline ribbon (HOI4 style)
+		// Restrained political tint preserves terrain and country readability at every zoom.
 		if (region > 0.5 && owner > 0.5 && physical_land > 0.001) {
-			// Inland interior tint fades completely away when zooming in (0% at close zoom <= 1.25, 30% at distant orbit >= 1.65)
-			float interior_strength = mix(0.0, 0.30, smoothstep(1.25, 1.65, camera_distance));
+			// Retain a light interior tint at close zoom, increasing towards orbit.
+			float interior_strength = mix(country_tint_close, country_tint_far, smoothstep(1.18, 1.85, camera_distance));
 
 			// Border ribbon: along international land borders
-			float border_band = coverage.national_edge ? (1.0 - smoothstep(1.5, 26.0, abs(coverage.country_distance))) : 0.0;
+			float border_band = coverage.national_edge ? (1.0 - smoothstep(1.0, 10.0, abs(coverage.country_distance))) : 0.0;
 			// Coastline ribbon: along the country's sea coast
-			float coast_band = (coast_px > 0.0) ? (1.0 - smoothstep(1.5, 22.0, coast_px)) * is_ocean : 0.0;
+			float coast_band = (coast_px > 0.0) ? (1.0 - smoothstep(1.0, 8.0, coast_px)) * is_ocean : 0.0;
 			float ribbon_band = max(border_band, coast_band);
 
-			// 3x more intense around borders and coastlines, and stays permanently visible even at close zoom!
-			float ribbon_strength = ribbon_band * 0.78 * border_strength;
+			// Narrow border ribbons distinguish neighbours without painting a wide halo.
+			float ribbon_strength = ribbon_band * country_ribbon_strength * border_strength;
 
 			float tilt_fade = mix(0.80, 1.0, smoothstep(0.15, 0.50, facing));
 			float total_strength = clamp(interior_strength * (1.0 - ribbon_band) + ribbon_strength, 0.0, 0.88) * tilt_fade;
@@ -937,10 +947,10 @@ void fragment() {
 	float ocean_coast = (abs(coast_px) < 8.0 || selected_sea > 0.0) ? is_ocean : 1.0;
 	// Border lines are rendered via 3D vector ribbon meshes (Option A: true HOI4 rounded borders)
 	// Coastline ink below is retained for crisp, physically-accurate land/sea boundaries.
-	vec3 coast_ink = vec3(.34, .39, .36); float coast_width = 3.2;
+	vec3 coast_ink = vec3(.34, .39, .36); float coast_width = 1.8;
 	if (selected_hit > 0.10) {
 		coast_ink = mix(coast_ink, vec3(0.90, 0.81, 0.58), smoothstep(0.10, 0.85, selected_hit) * smoothstep(0.15, 0.65, ocean_coast));
-		coast_width = mix(coast_width, 2.6, selected_hit);
+		coast_width = mix(coast_width, 2.2, selected_hit);
 	}
 	if (selected_sea > 0.0 && sea_val > 0.35) {
 		coast_ink = mix(coast_ink, vec3(0.35, 0.78, 0.95), smoothstep(0.15, 0.65, ocean_coast));

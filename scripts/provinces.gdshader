@@ -38,11 +38,11 @@ void vertex(){
 	POSITION.xy += vec2(-line.y, line.x) * UV.x * extent * 2.0 / VIEWPORT_SIZE * p.w;
 }
 void fragment(){
-	float fade = 1.0 - smoothstep(1.18, 1.35, camera_distance);
+	float fade = 1.0 - smoothstep(1.12, 1.26, camera_distance);
 	if (inspection_active && parent_region == selected_region) fade = max(fade, 1.0 - smoothstep(1.36, 1.52, camera_distance));
 	if (selected > 0.5) fade = 1.0;
 	if (facing < 0.012 || fade <= 0.0 || parent_owner < 0.5 || (inspection_active && parent_owner != selected_country)) discard;
-	float px = abs(UV.x) * extent, aa = max(fwidth(px) * 0.65, 0.4), hw = selected > 0.5 ? 1.0 : 0.58;
+	float px = abs(UV.x) * extent, aa = max(fwidth(px) * 0.65, 0.4), hw = selected > 0.5 ? 1.0 : 0.42;
 	float outer = 1.0 - smoothstep(hw - aa, hw + aa, px);
 	float inner = 1.0 - smoothstep(max(0.1, hw - 0.45) - aa, max(0.1, hw - 0.45) + aa, px);
 	vec3 color = mix(vec3(0.045, 0.075, 0.08), physical_mode ? vec3(0.30, 0.35, 0.31) : vec3(0.45, 0.48, 0.43), inner);
@@ -54,5 +54,5 @@ void fragment(){
 		pwing_alpha = smoothstep(0.0, 1.0, pwing) * 0.45;
 	}
 	ALBEDO = mix(sel_gold, color, outer);
-	ALPHA = max(outer, pwing_alpha) * fade * (selected > 0.5 ? 1.0 : (parent_region == selected_region ? 0.52 : 0.32)) * smoothstep(0.012, 0.08, facing);
+	ALPHA = max(outer, pwing_alpha) * fade * (selected > 0.5 ? 1.0 : (parent_region == selected_region ? 0.38 : 0.20)) * smoothstep(0.012, 0.08, facing);
 }

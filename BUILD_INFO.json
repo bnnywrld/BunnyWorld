@@ -1,7 +1,7 @@
 {
-  "version": "0.2.1.3",
-  "baseline_version": "0.2.1.2 clean-globe",
-  "repository_base_commit": "0b3cd5129c409fedfcc9696763ffa6d871565827",
+  "version": "0.2.1.4",
+  "baseline_version": "0.2.1.3 clean-globe",
+  "repository_base_commit": "e7a48c794373f35fe42244d6dfac0e126b2267e2",
   "engine": "Godot 4.5.1 stable",
   "geography_version": "0.2.1.2",
   "display_version": "0.2.1.2",
@@ -51,6 +51,19 @@
     },
     "map_contract": {
       "passed": true
+    },
+    "capital_cleanup": {
+      "tests": 2,
+      "failures": 0,
+      "passed": true
     }
+  },
+  "city_cleanup": {
+    "removed_markers": 42,
+    "removed_clusters": 42,
+    "removed_decorative_buildings": 190,
+    "remaining_markers": 2298,
+    "remaining_clusters": 2745,
+    "population_changed": false
   }
 }

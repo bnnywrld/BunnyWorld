@@ -1,10 +1,18 @@
-# Developing BunnyWorld 0.2.1.3
+# Developing BunnyWorld 0.2.1.4
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
 
+## Map style and capital decoration
+
+Application 0.2.1.4 uses the existing 0.2.1.2 geography/display bundle. Shared shader defaults control near/far country tint, ribbon intensity, coastal shelf/foam and terrain detail strength. Border widths remain screen-space; state/province lines are subordinate to national outlines. No additional texture samples, buffers or terrain geometry are introduced by these style changes.
+
+`python tools/clean_obsolete_capitals.py` removes only GeoNames cities500 additions ranked below 10,000 that are neither national nor current state capitals, together with their synthetic State capital clusters. Original mapped settlements and larger added cities remain. It clears stale capital flags, recomputes decorative priorities/weights and refreshes the ordinary JSON bundle checksums. It never changes world/province topology or resident populations. Rank is a decoration filter, not a demographic estimate. Repeat runs are safe; test with `python tests/obsolete_capitals_tests.py`. Historical generators remain historical reproduction tools, not commands to run over current geography.
+
+Labels/city architecture, coastline province lookup and terrain geometry are separate future work.
+
 ## Clean globe stabilization
 
-The current application is 0.2.1.3 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
+The current application is 0.2.1.4 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
 
 The clean surface uses one 384×192 sphere, spatial border/river batches and the existing atmosphere. There is no detail patch. DisplayCoverage.initialize(target, false) loads the required coast/tiny-land/sea fields but skips the unused boundary hint/pair/distance textures and local coast packs. Legacy callers retain the default behavior. Three skipped fields are 3072×1536 × (1+4+2) bytes = 33,030,144 bytes (31.5 MiB), excluding driver overhead. The sandbox shares immutable textures between both materials.
 

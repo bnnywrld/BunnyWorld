@@ -6,10 +6,10 @@
   "files": {
     "data/world.json": "9c09f2fe0b386e1bff3aa9a3cb46d2a6ca50c9b4e777ecc9774f001b5d3e77cc",
     "data/provinces.json": "4743932d45b179be9fab8a85abf0abe8efdd9ac337805755d05b3bbfefa5f488",
-    "data/cities.json": "c637305721502b3581fb957c0369f2ac1b1dd388b35c26c9bdf28e5f0c461690",
+    "data/cities.json": "abaccb230359f8d273aa53b0bcd8658a998441b4b13aa3cf9627e0f0d68ef77a",
     "data/microstate_geometry.json": "9ac8cd79b40f10a9375de42e9272eaf1f6431128d14fd92a54d473ec0e5b7cea",
     "data/urban_population.json": "2898b5180da1898bf691d1586d4bca56cd45910fb4f3acd281e7018302717b48",
-    "data/urban_scenery.json": "afdf45cace25d03c873e40ee078d0ed68e589d1bcb85880affe7266d36cbcb98",
+    "data/urban_scenery.json": "e9067943a1f4070b84f7e01404eee12edc598498ed1e8270e89d6b52779f04f7",
     "data/sea_regions.json": "af0cfda4747c3002f78a71bf76a01da6add728d7f3976bcc25dd11f6c859b6fc",
     "assets/sea_ids.png": "53cff68fa2304e00903179d7fe6bba38d4d55ff2a8dc87f38d69bc6878f1d198",
     "assets/province_index.png": "0c32941d92ad8d8319265d31b6d86df795fb24e758f668a3c4a081e3b88c8e66",

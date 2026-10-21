@@ -42,8 +42,8 @@ void vertex(){
 	if (kind > 0.5) selected = (selected_sea > 0.0 && (left == selected_sea || right == selected_sea)) ? 2.0 : 0.0;
 	else if (show_regions && selected_region > 0.0 && (left == selected_region || right == selected_region)) selected = 2.0;
 	float nearby = 1.0 - smoothstep(1.3, 3.1, camera_distance);
-	float width = national ? mix(1.35, 2.0, nearby) : 1.25;
-	opacity = national ? 1.0 : (1.0 - smoothstep(1.42, 1.72, camera_distance)) * 0.52;
+	float width = national ? mix(1.35, 1.85, nearby) : 0.85;
+	opacity = national ? 1.0 : (1.0 - smoothstep(1.42, 1.72, camera_distance)) * 0.34;
 	if (!national && (!show_regions || (inspection_active && lo != selected_country))) opacity = 0.0;
 	if (kind > 0.5) { width = 0.85; opacity = (1.0 - smoothstep(1.9, 2.8, camera_distance)) * 0.22; }
 	if (selected > 0.5) { width = selected > 1.5 ? 2.0 : mix(1.6, 2.2, nearby); opacity = 1.0; }
