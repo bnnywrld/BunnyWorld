@@ -2851,7 +2851,7 @@ func _position_panels(force: bool = true) -> void:
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		var available_height := maxf(240, view_container.size.y - 118)
-		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(480, available_height)) if active_feature == "Government" else Vector2(370, available_height)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature == "Government" else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)

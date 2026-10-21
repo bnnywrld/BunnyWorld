@@ -2,7 +2,7 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 20
+const SAVE_VERSION := 21
 const GovernmentRules = preload("res://scripts/government_rules.gd")
 const BASE_DAILY_POLITICAL_POWER := 1.0
 const HOUR_SECONDS := 3600
@@ -35,10 +35,12 @@ var scenario_epoch: int = 0
 var last_error: String = ""
 var accumulator: float = 0.0
 var government_properties: Dictionary = {}
+var government_starting_laws: Dictionary = {}
 var political_power_modifiers: Dictionary = {}
 
 func initialize(data: Dictionary) -> void:
 	database = data
+	government_starting_laws = JSON.parse_string(FileAccess.get_file_as_string("res://data/government_laws_2000.json"))["countries"]
 	relation_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/relations.json"))
 	province_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/provinces.json"))
 	urban_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/urban_population.json"))
@@ -52,6 +54,7 @@ func reset() -> void:
 	government_properties.clear()
 	political_power_modifiers.clear()
 	for tag: String in countries:
+		government_properties[tag] = government_starting_laws[tag].duplicate(true)
 		if not countries[tag].has("starting_stats"): countries[tag]["starting_stats"] = {}
 		if not countries[tag]["starting_stats"].has("political_power"):
 			countries[tag]["starting_stats"]["political_power"] = 100.0
@@ -336,7 +339,7 @@ func load_game(path: String) -> Dictionary:
 			return _invalid("Saved country values are invalid.")
 		var properties: Variant = entry.get("government_properties")
 		var modifiers: Variant = entry.get("political_power_modifiers")
-		if not properties is Dictionary or properties.size() > GovernmentRules.PROPERTIES.size() or not modifiers is Dictionary or modifiers.size() > 64:
+		if not properties is Dictionary or properties.size() != GovernmentRules.PROPERTIES.size() or not modifiers is Dictionary or modifiers.size() > 64:
 			return _invalid("Saved political settings are invalid.")
 		for key: Variant in properties:
 			if not key is String or not properties[key] is String or not GovernmentRules.valid_choice(key, properties[key]): return _invalid("Saved government property is invalid.")

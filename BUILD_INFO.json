@@ -1,7 +1,7 @@
 {
-  "version": "0.2.1.4",
-  "baseline_version": "0.2.1.3 clean-globe",
-  "repository_base_commit": "e7a48c794373f35fe42244d6dfac0e126b2267e2",
+  "version": "0.2.1.5",
+  "baseline_version": "0.2.1.4 clean-globe",
+  "repository_base_commit": "24837ce92b0ed240b98cfc786a1699589a161415",
   "engine": "Godot 4.5.1 stable",
   "geography_version": "0.2.1.2",
   "display_version": "0.2.1.2",
@@ -26,35 +26,22 @@
       "passed": true
     },
     "political_ui": {
-      "checks": 99,
+      "checks": 6918,
       "failures": 0,
       "passed": true
     },
-    "clean_globe_stability": {
-      "checks": 52,
-      "failures": 0,
-      "idle_draws_per_600_frames_at_60hz": 100,
-      "passed": true
-    },
-    "render_probe": {
-      "modes": [
-        "political",
-        "physical_close",
-        "physical_distant"
-      ],
+    "government_render": {
       "renderer": "Godot 4.5.1 GL Compatibility / Mesa llvmpipe",
-      "shader_errors": 0,
-      "target_laptop_fps_measured": false
-    },
-    "prepared_assets": {
-      "passed": true
-    },
-    "map_contract": {
-      "passed": true
-    },
-    "capital_cleanup": {
-      "tests": 2,
-      "failures": 0,
+      "resolutions": [
+        [
+          1440,
+          900
+        ],
+        [
+          1024,
+          768
+        ]
+      ],
       "passed": true
     }
   },
@@ -65,5 +52,6 @@
     "remaining_markers": 2298,
     "remaining_clusters": 2745,
     "population_changed": false
-  }
+  },
+  "save_schema": 21
 }

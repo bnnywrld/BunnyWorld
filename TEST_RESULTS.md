@@ -1,4 +1,19 @@
-# BunnyWorld 0.2.1.4 validation
+# BunnyWorld 0.2.1.5 validation
+
+Validated with Godot 4.5.1 on Linux. Fresh campaigns; save schema 21.
+
+- Political UI/runtime: **6,918 checks, zero failures**. All 224 countries have 28 valid starting laws; six compact categories, derived government title, option selection, 100 PP deductions, repeated/current-choice rejection, insufficient funds and foreign-country protection passed.
+- Every law popup opens, fits the viewport and shows its choices. All available options are accepted by the shared purchase path. Non-PP starting stats, daily modifiers, map ownership and population stay unchanged.
+- Daily PP and multi-day increments, pause behavior, live affordability, save/load round trips and transactional rejection of corrupted political data passed.
+- Model suite passed: dates, clock, ownership transfers, organization memberships, save/load, corruption rejection and population conservation.
+- GL Compatibility / Mesa llvmpipe: Government top, scrolled lower categories, choice popups and 1024×768 layout rendered and visually inspected; default 1440×900 also inspected. This is software-rendered layout validation, not target-laptop FPS measurement.
+- No map assets, packed resources or demographic data changed in this patch. No Windows EXE exported or native Windows execution performed.
+
+Commands: `Godot --headless --path . --script res://tests/model_tests.gd`; `Godot --headless --path . --script res://tests/political_ui_tests.gd`; `python tools/repository_hygiene.py`.
+
+The starting policy data uses broad scenario abstractions; it has not received a comprehensive country-by-country historical legal audit.
+
+## Previous map validation (0.2.1.4)
 
 Validated with Godot 4.5.1 on Linux, including GL Compatibility rendering under Mesa llvmpipe.
 

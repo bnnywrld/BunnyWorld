@@ -36,39 +36,68 @@ func run() -> void:
 	check(game.active_feature == "Government", "own parliament opens Government")
 	var panel = game.control_details.get_node("PoliticalPanel")
 	check(game.control_panel.size.x <= 610, "compact government width")
-	check(game.control_panel.size.y <= 490, "government height fits its content")
-	check(panel.property_buttons.size() == 5, "five property buttons")
+	check(game.control_panel.size.y <= 730, "government height fits its content")
+	check(panel.property_buttons.size() == 28, "all 28 law icon buttons")
+	check(Rules.CATEGORIES.size() == 6, "six law categories")
+	check(panel.government_type.text == "Semi-Presidential Republic", "government title derived from starting laws")
+	check(world.government_property("JAP", "form_of_government") == "Constitutional Monarchy", "Japan starts as constitutional monarchy")
+	check(world.government_property("USA", "executive") == "Presidential", "US starts with presidential executive")
+	check(world.government_property("ENG", "form_of_government") == "Constitutional Monarchy", "UK monarchy seeded")
+	check(world.government_property("HOL", "marriage") == "Illegal", "2000 scenario predates marriage legalization")
+	for tag: String in world.countries:
+		check(world.government_properties[tag].size() == 28, "all countries have a full law set")
+		for property: Dictionary in Rules.PROPERTIES:
+			check(Rules.valid_choice(property["key"], world.government_property(tag, property["key"])), "starting choice valid")
+	var scroll: ScrollContainer = game.control_details.get_parent()
+	check(scroll.get_v_scroll_bar().max_value > scroll.size.y, "government vertically scrolls")
+	for button: Button in panel.property_buttons.values():
+		check(button.text.is_empty() and button.icon != null, "square icon-only law buttons")
+		check(button.size.x == button.size.y, "law buttons are square")
 	check(panel.find_children("*", "OptionButton", true, false).is_empty(), "no dropdown properties")
 	world.countries["POL"]["starting_stats"]["political_power"] = 350.0
 	panel.open_property(Rules.PROPERTIES[0])
 	await process_frame
 	check(panel.choice_dialog.visible and game.foundation.modals_visible(), "property choice is modal")
 	check(panel.choice_buttons.size() == 3, "constitutional choices")
-	panel.choice_buttons["Republic"].pressed.emit()
+	panel.choice_buttons["Constitutional Monarchy"].pressed.emit()
 	check(world.political_power("POL") == 250, "change deducts exactly 100 PP")
-	check(world.government_property("POL", "constitution") == "Republic", "choice applied")
+	check(world.government_property("POL", "form_of_government") == "Constitutional Monarchy", "choice applied")
 	check(not panel.choice_dialog.visible, "choice closes window")
-	check(not world.change_government_property("POL", "constitution", "Republic"), "same choice rejected")
+	check(panel.government_type.text == "Constitutional Monarchy", "title refreshes after change")
+	check("Constitutional Monarchy" in panel.property_buttons["form_of_government"].tooltip_text, "current selection tooltip refreshes")
+	check(not world.change_government_property("POL", "form_of_government", "Constitutional Monarchy"), "same choice rejected")
 	check(world.political_power("POL") == 250, "same choice free of charges")
-	check(not world.change_government_property("GER", "constitution", "Republic"), "foreign country protected")
+	check(not world.change_government_property("GER", "form_of_government", "Constitutional Monarchy"), "foreign country protected")
 	check(not world.change_government_property("POL", "invalid", "Republic"), "invalid property rejected")
-	check(not world.change_government_property("POL", "constitution", "invalid"), "invalid value rejected")
+	check(not world.change_government_property("POL", "form_of_government", "invalid"), "invalid value rejected")
 	world.countries["POL"]["starting_stats"]["political_power"] = 99.5
 	panel.open_property(Rules.PROPERTIES[1])
 	check(panel.choice_buttons["Presidential"].disabled, "insufficient balance disabled")
 	panel.apply_choice("Presidential")
-	check(world.political_power("POL") == 99.5 and world.government_property("POL", "executive").is_empty(), "insufficient PP never spent")
+	check(world.political_power("POL") == 99.5 and world.government_property("POL", "executive") == "Semi-Presidential", "insufficient PP never spent")
 	world.countries["POL"]["starting_stats"]["political_power"] = 100.0
 	panel.refresh()
 	check(not panel.choice_buttons["Presidential"].disabled, "affordability refreshes")
 	panel.apply_choice("Presidential")
 	check(world.political_power("POL") == 0, "exact balance allowed")
+	var stats_before: Dictionary = world.countries["POL"]["starting_stats"].duplicate(true)
+	var modifiers_before: Dictionary = world.political_power_modifiers.duplicate(true)
 	for property: Dictionary in Rules.PROPERTIES:
+		panel.open_property(property)
+		await process_frame
+		check(panel.choice_dialog.visible, "every law has a working popup")
+		check(panel.choice_dialog.position.x >= 0 and panel.choice_dialog.position.y >= 0, "popup starts inside viewport")
+		check(panel.choice_dialog.position.x + panel.choice_dialog.size.x <= game.get_viewport_rect().size.x, "popup right edge fits")
+		check(panel.choice_dialog.position.y + panel.choice_dialog.size.y <= game.get_viewport_rect().size.y, "popup bottom edge fits")
 		for option: String in property["options"]:
 			world.countries["POL"]["starting_stats"]["political_power"] = 100
 			var same: bool = world.government_property("POL", property["key"]) == option
 			check(world.change_government_property("POL", property["key"], option) == not same, "every valid choice works")
 			check(world.political_power("POL") == (100 if same else 0), "all options use same default cost")
+	panel.choice_dialog.hide()
+	for key: String in stats_before:
+		if key != "political_power": check(world.countries["POL"]["starting_stats"][key] == stats_before[key], "laws have no stat effects")
+	check(world.political_power_modifiers == modifiers_before, "laws have no PP modifier effects")
 	game._show_country("GER", false)
 	await process_frame
 	summary = game.control_details.get_node("PoliticalSummary")
@@ -156,7 +185,7 @@ func run() -> void:
 	DirAccess.remove_absolute(ProjectSettings.globalize_path(save_path + ".bak"))
 	check(equivalent(world.regions, map_before), "map and population unchanged after JSON round trip")
 	game._start_selection()
-	check(world.government_properties.is_empty() and world.political_power_modifiers.is_empty(), "new campaign resets politics")
+	check(world.government_property("POL", "form_of_government") == "Republic" and world.political_power_modifiers.is_empty(), "new campaign resets politics to scenario defaults")
 	print("POLITICAL_UI_RESULT checks=", checks, " failures=", failures)
 	quit(0 if failures == 0 else 1)
 
