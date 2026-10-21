@@ -16,12 +16,8 @@ var world_view: SubViewport
 var view_container: SubViewportContainer
 const Surface = preload("res://scripts/relief_surface.gd")
 var relief_surface: RefCounted
-var detail_patch: MeshInstance3D
 var foundation: RefCounted
 var capture_foundation := ""
-var detail_timer := 0.0
-var detail_center := Vector2(-10, -10)
-var detail_span := Vector2.ZERO
 var camera_tilt_degrees := 0.0
 var region_images: Array[Image] = []
 var country_list: ItemList
@@ -93,7 +89,6 @@ var national_profile_expanded := false
 var territory_profile_expanded := false
 var hover_owner := 0.0
 var hover_blend := 0.0
-var last_border_distance := -1.0
 var city_timer: float = 0.0
 var city_scenery_enabled := true
 var graphics_setting := 0
@@ -159,7 +154,6 @@ var capture_to := ""
 var list_filter: String = ""
 var inspect_region: int = 0
 var inspect_province: int = 0
-var physical_texture: Texture2D
 var resident_terrain: RefCounted
 var loading_overlay: ColorRect
 var loading_progress: ProgressBar
@@ -169,7 +163,10 @@ var menu_photo: Texture2D
 var state_preview := 0
 var active_feature := ""
 var boot_complete := false
-var detail_mesh_builds := 0
+var last_surface_view: Array = []
+var last_hover_view: Array = []
+var view_uniform_updates := 0
+var camera_pose_updates := 0
 var inspection_active: bool = false
 var relations_reverse: bool = false
 var relations_picker: OptionButton
@@ -269,7 +266,6 @@ func _ready() -> void:
 	_rebuild_palette()
 	distance = 1.08
 	_update_camera_pose()
-	_update_detail_patch()
 	urban_scenery.update_view(camera, distance, true, .3)
 
 	# Exercise close terrain rendering while the loading screen is visible.
@@ -282,7 +278,6 @@ func _ready() -> void:
 	_rebuild_palette()
 	distance = 3.65
 	_update_camera_pose()
-	_update_detail_patch()
 	urban_scenery.update_view(camera, distance, false, .3)
 
 	# Restore distant settings and draw the political shader before loading ends.
@@ -767,22 +762,11 @@ func _build_planet() -> void:
 	terrain_shading = preload("res://scripts/terrain_shading.gd").new()
 	terrain_shading.initialize(planet_material)
 	display_coverage = preload("res://scripts/display_coverage.gd").new()
-	display_coverage.initialize(planet_material)
-	physical_texture = load("res://assets/earth_day.jpg")
+	display_coverage.initialize(planet_material, false)
 	mesh.material_override = planet_material
 	spatial_map_layers = preload("res://scripts/spatial_map_layers.gd").new()
 	spatial_map_layers.initialize(str(state.database["version"]))
 	# Clean globe uses unified single sphere mesh (1 draw call). Spatial map layers handles borders only.
-	detail_patch = MeshInstance3D.new()
-	var empty_patch_mat := StandardMaterial3D.new()
-	empty_patch_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
-	empty_patch_mat.albedo_color = Color(0, 0, 0, 0)
-	detail_patch.material_override = empty_patch_mat
-	detail_patch.mesh = _detail_grid()
-	detail_mesh_builds += 1
-	detail_patch.custom_aabb = AABB(Vector3(-1.02,-1.02,-1.02),Vector3(2.04,2.04,2.04))
-	detail_patch.hide()
-	planet.add_child(detail_patch)
 	# CPU selection keeps exact sea IDs. The GPU only needs ocean coverage,
 	# avoiding an otherwise unused full RGB sea-ID texture in steady state.
 	sea_image = Image.new()
@@ -874,15 +858,14 @@ func _sphere_mesh(segments: int, rings: int) -> ArrayMesh:
 	arrays[Mesh.ARRAY_VERTEX] = vertices
 	arrays[Mesh.ARRAY_NORMAL] = normals
 	arrays[Mesh.ARRAY_TEX_UV] = uvs
-	var patch_flags := PackedVector2Array()
-	patch_flags.resize(vertices.size())
-	arrays[Mesh.ARRAY_TEX_UV2] = patch_flags
 	arrays[Mesh.ARRAY_INDEX] = indices
 	var mesh := ArrayMesh.new()
 	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
 	return mesh
 
 func _rebuild_palette() -> void:
+	last_surface_view.clear()
+	last_hover_view.clear()
 	_select_planet_shader()
 	map_frame_policy.invalidate()
 	if map_rendering != null: map_rendering.update_ownership(state.provinces,state.regions,state.countries)
@@ -988,6 +971,7 @@ func _update_border_visibility() -> void:
 	spatial_map_layers.set_enabled("sea", distance < 2.8 or state.selected_sea > 0)
 	spatial_map_layers.set_enabled("water", distance < 3.5)
 	spatial_map_layers.update_view(distance)
+	spatial_map_layers.cull(camera, planet)
 
 func _search_changed(value: String) -> void:
 	list_filter = value.strip_edges().to_lower()
@@ -1622,12 +1606,10 @@ func _focus_country(tag: String, animated: bool = true) -> void:
 
 func _update_camera_pose() -> void:
 	if camera == null: return
-	_update_border_visibility()
 	var key: Array = [distance, planet.global_transform if planet != null else Transform3D()]
-	if key == last_camera_view:
-		if spatial_map_layers != null: spatial_map_layers.cull(camera,planet)
-		return
+	if key == last_camera_view: return
 	last_camera_view = key
+	camera_pose_updates += 1
 	if planet == null:
 		camera.position = Vector3(0, 0, distance)
 		return
@@ -1642,28 +1624,7 @@ func _update_camera_pose() -> void:
 	var clearance := maxf(.015, distance - 1.0)
 	camera.position = anchor + Vector3(0, -sin(tilt), cos(tilt)) * clearance
 	camera.look_at(anchor, Vector3.UP)
-	if spatial_map_layers != null: spatial_map_layers.cull(camera,planet)
-
-func _update_detail_patch() -> void:
-	if distance >= 1.4 or screen == "menu":
-		if detail_patch != null: detail_patch.hide()
-		planet_material.set_shader_parameter("detail_span", Vector2.ZERO)
-		if detail_span != Vector2.ZERO:
-			for material: ShaderMaterial in border_materials: material.set_shader_parameter("detail_span",Vector2.ZERO)
-		detail_span = Vector2.ZERO
-		return
-	var center := Surface.uv_of(planet.global_transform.basis.inverse() * Vector3.BACK)
-	var half_y := clampf((distance - 1.0) * tan(deg_to_rad(camera.fov) * .5) * 3.0 / PI, .001, .14)
-	var half_x := minf(.49, half_y * float(world_view.size.x) / maxf(1, world_view.size.y) * .5 / maxf(.10, sin(center.y * PI)))
-	var span := Vector2(half_x, half_y)
-	if detail_span.distance_to(span) < .00005 and center.distance_to(detail_center) < minf(span.x, span.y) * .05: return
-	detail_center = center; detail_span = span
-	detail_patch.show()
-	planet_material.set_shader_parameter("detail_center", center)
-	planet_material.set_shader_parameter("detail_span", span)
-	for material: ShaderMaterial in border_materials:
-		material.set_shader_parameter("detail_center",center)
-		material.set_shader_parameter("detail_span",span)
+	_update_border_visibility()
 
 func _uv_at(position: Vector2) -> Vector2:
 	# Cache only the geometric intersection, never owner/state data. Repeated
@@ -1780,42 +1741,26 @@ func _process(delta: float) -> void:
 		elif hover_panel.visible:
 			_position_map_hover()
 	if planet_material != null:
-		var visible_regions := distance <= 1.65
-		if show_regions != visible_regions:
-			show_regions = visible_regions
-			planet_material.set_shader_parameter("show_regions", show_regions)
-		planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
-		planet_material.set_shader_parameter("camera_distance",distance)
-		planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
-		planet_material.set_shader_parameter("city_detail", clampf((1.50 - distance) / .25, 0.0, 1.0))
-		if not is_equal_approx(last_border_distance, distance):
-			for material: ShaderMaterial in border_materials:
-				material.set_shader_parameter("show_regions", show_regions)
-				material.set_shader_parameter("camera_distance", distance)
-			last_border_distance = distance
 		if not dragging and screen != "menu" and not console.visible:
 			planet.rotation.y += rotation_velocity.x * delta
 			planet.rotation.x = clampf(planet.rotation.x + rotation_velocity.y * delta, -1.5, 1.5)
 			rotation_velocity *= exp(-10.0 * delta)
 			if rotation_velocity.length() < 0.0001: rotation_velocity = Vector2.ZERO
 		_update_camera_pose()
-		_update_detail_patch()
+		_update_view_uniforms()
 		_flush_map_hover()
 		var target_hover := 1.0 if hover_panel.visible and hover_owner>0.0 and not dragging else 0.0
 		hover_blend = move_toward(hover_blend, target_hover, delta*7.0)
-		planet_material.set_shader_parameter("hovered_country", hover_owner if target_hover>0.0 else 0.0)
-		planet_material.set_shader_parameter("hover_amount", hover_blend)
-		waterways_material.set_shader_parameter("physical_mode",map_mode==6)
-		waterways_material.set_shader_parameter("camera_distance",distance)
+		var hover_view: Array = [hover_owner if target_hover > 0.0 else 0.0, hover_blend]
+		if hover_view != last_hover_view:
+			last_hover_view = hover_view
+			planet_material.set_shader_parameter("hovered_country", hover_view[0])
+			planet_material.set_shader_parameter("hover_amount", hover_blend)
 		_update_cities()
 		if urban_scenery != null: urban_scenery.update_view(camera, distance, city_scenery_enabled and screen != "menu", delta)
 		if country_label_layer != null: country_label_layer.update_view()
 		if tiny_state_markers!=null:tiny_state_markers.update_view()
-		planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
-		planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
-		planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))
 		_position_panels(false)
-		planet_material.set_shader_parameter("terrain_mix", clampf((2.3 - distance) / 0.9, 0.0, 1.0) if map_mode == 6 else 0.0)
 	if screen == "playing" and not state.database.is_empty() and state.advance(delta):
 		_update_clock()
 		if state.day != last_relation_day:
@@ -1826,6 +1771,28 @@ func _process(delta: float) -> void:
 			_refresh_opinions()
 			if map_mode == 7: _rebuild_palette()
 	_update_map_rendering(delta)
+
+# View-dependent uniforms change on zoom/mode changes, never on idle frames.
+func _update_view_uniforms() -> void:
+	var key: Array = [distance, map_mode]
+	if key == last_surface_view: return
+	last_surface_view = key
+	view_uniform_updates += 1
+	show_regions = distance <= 1.65
+	planet_material.set_shader_parameter("show_regions", show_regions)
+	planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
+	planet_material.set_shader_parameter("camera_distance", distance)
+	planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
+	planet_material.set_shader_parameter("city_detail", clampf((1.50 - distance) / .25, 0, 1))
+	planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
+	planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0, 1))
+	planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0, 1))
+	planet_material.set_shader_parameter("terrain_mix", clampf((2.3 - distance) / 0.9, 0, 1) if map_mode == 6 else 0.0)
+	for material: ShaderMaterial in border_materials:
+		material.set_shader_parameter("show_regions", show_regions)
+		material.set_shader_parameter("camera_distance", distance)
+	waterways_material.set_shader_parameter("physical_mode", map_mode == 6)
+	waterways_material.set_shader_parameter("camera_distance", distance)
 
 func _toggle_pause() -> void:
 	if screen != "playing":
@@ -2048,7 +2015,6 @@ func _capture() -> void:
 		var uv := Vector2((capture_point.x + 180.0) / 360.0, (90.0 - capture_point.y) / 180.0)
 		planet.rotation = Vector3(clampf((.5 - uv.y) * PI, -1.45, 1.45), -(uv.x - .5) * TAU, 0)
 		_update_camera_pose()
-		_update_detail_patch()
 	if capture_state > 0 and state.regions.has(str(capture_state)):
 		if focus_tween != null: focus_tween.kill()
 		var region: Dictionary = state.regions[str(capture_state)]
@@ -2087,9 +2053,9 @@ func _capture() -> void:
 	await get_tree().create_timer(.5).timeout
 	await RenderingServer.frame_post_draw
 	var result := get_viewport().get_texture().get_image().save_png(capture_path)
-	print("RESIDENT_TERRAIN material_layers=", resident_terrain.layer_count, " runtime_uploads=0 detail_mesh_builds=",detail_mesh_builds)
+	print("RESIDENT_TERRAIN material_layers=", resident_terrain.layer_count, " runtime_uploads=0")
 	print("CAPTURE_RESULT ", result)
-	print("CAPTURE_TERRAIN tilt_degrees=", camera_tilt_degrees, " detail_visible=", detail_patch.visible, " patch_vertices=", detail_patch.mesh.surface_get_array_len(0) if detail_patch.mesh != null else 0)
+	print("CAPTURE_TERRAIN tilt_degrees=", camera_tilt_degrees, " surface=single_sphere")
 	if urban_scenery != null: print("CAPTURE_URBAN alpha=", urban_scenery.visibility_alpha, " buildings=", urban_scenery.visible_buildings, " clusters=", urban_scenery.active.size(), " landmarks=", urban_scenery.active_landmarks.keys(), " peak=", urban_scenery.peak_visible_buildings)
 	print("CAPTURE_LAYOUT viewport=", get_viewport().get_visible_rect().size, " window=", DisplayServer.window_get_size())
 	print("CAPTURE_REFINEMENTS scenery_enabled=",city_scenery_enabled," place_results=",place_matches.size()," selected_country=",state.selected_country," province=",state.selected_province)
@@ -2150,7 +2116,7 @@ func _run_smoke_test() -> void:
 		_map_changed(mode)
 		_smoke_check(checks, map_mode == mode and "GDP" in legend.text, "map_mode == mode and \"GDP\" in legend.text")
 	_map_changed(6)
-	_smoke_check(checks, physical_texture != null and map_picker.item_count == 8, "physical_texture != null and map_picker.item_count == 8")
+	_smoke_check(checks, resident_terrain.initialized and map_picker.item_count == 8, "resident_terrain.initialized and map_picker.item_count == 8")
 	_smoke_check(checks, state.countries["CHI"]["cosmetic"] == "CHI_AUTH_S" and state.countries["VIE"]["cosmetic"] == "VIE_AUTH_S", "state.countries[\"CHI\"][\"cosmetic\"] == \"CHI_AUTH_S\" and state.countries[\"VIE\"][\"cosmetic\"] == \"VIE_AUTH_S\"")
 	_smoke_check(checks, state.provinces.size() > state.regions.size() and state.provinces.size() < 65535, "state.provinces.size() > state.regions.size() and state.provinces.size() < 65535")
 	for oid: String in state.organizations:
@@ -2310,8 +2276,7 @@ func _run_smoke_test() -> void:
 	_globe_input(province_click)
 	_smoke_check(checks, state.selected_province == pid, "state.selected_province == pid")
 	_smoke_check(checks, camera_tilt_degrees > 0.0 and camera_tilt_degrees < 38.0, "camera_tilt_degrees > 0.0 and camera_tilt_degrees < 38.0")
-	_update_detail_patch()
-	_smoke_check(checks, detail_patch.visible and detail_patch.mesh != null, "detail_patch.visible and detail_patch.mesh != null")
+	_smoke_check(checks, planet.get_child(0) is MeshInstance3D, "single globe surface exists")
 	var saved_distance := distance
 	distance = 1.015
 	_update_camera_pose()
@@ -3183,34 +3148,6 @@ func _loading_stage(value: float, caption: String) -> void:
 	loading_progress.value = value
 	loading_caption.text = caption
 	print("STARTUP_PROGRESS ",int(value)," ",caption)
-
-func _detail_grid() -> ArrayMesh:
-	# A single immutable grid. Geographic position/elevation are applied on GPU.
-	var vertices := PackedVector3Array()
-	var uvs := PackedVector2Array()
-	var flags := PackedVector2Array()
-	var indices := PackedInt32Array()
-	var nx := 192
-	var ny := 144
-	for y: int in ny+1:
-		for x: int in nx+1:
-			vertices.append(Vector3(float(x)/nx,float(y)/ny,0))
-			uvs.append(Vector2(float(x)/nx,float(y)/ny))
-			flags.append(Vector2(1,0))
-	for y: int in ny:
-		for x: int in nx:
-			var a := y*(nx+1)+x
-			var b := a+nx+1
-			indices.append_array(PackedInt32Array([a,a+1,b,a+1,b+1,b]))
-	var arrays := []
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = vertices
-	arrays[Mesh.ARRAY_TEX_UV] = uvs
-	arrays[Mesh.ARRAY_TEX_UV2] = flags
-	arrays[Mesh.ARRAY_INDEX] = indices
-	var mesh := ArrayMesh.new()
-	mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES,arrays)
-	return mesh
 
 func _water_passage_at(uv: Vector2) -> int:
 	var point := Vector2(uv.x*360.0-180.0,90.0-uv.y*180.0)

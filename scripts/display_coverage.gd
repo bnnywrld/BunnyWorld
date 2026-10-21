@@ -11,21 +11,23 @@ var last_sea := -1
 var coast_index: Dictionary
 var coast_pack: FileAccess
 var coast_key := ""
-func initialize(target: ShaderMaterial) -> void:
+func initialize(target: ShaderMaterial, legacy_fields: bool = true) -> void:
  material=target
- var hint:=FileAccess.open("res://assets/display/boundary_hint.bwd",FileAccess.READ)
- var hw:=hint.get_32();var hh:=hint.get_32()
- var hb:=hint.get_buffer(hint.get_length()-8).decompress(hw*hh,FileAccess.COMPRESSION_DEFLATE)
- assert(hb.size()==hw*hh,"Invalid boundary acceleration field")
- material.set_shader_parameter("boundary_hint",ImageTexture.create_from_image(Image.create_from_data(hw,hh,false,Image.FORMAT_R8,hb)))
- for record: Array in [["boundary_pairs",Image.FORMAT_RGBA8,4],["boundary_distance",Image.FORMAT_RH,2]]:
-  var field:=FileAccess.open("res://assets/display/"+record[0]+".bwd",FileAccess.READ)
-  var width:=field.get_32();var height:=field.get_32()
-  var raw:=field.get_buffer(field.get_length()-8).decompress(width*height*int(record[2]),FileAccess.COMPRESSION_DEFLATE)
-  assert(raw.size()==width*height*int(record[2]),"Invalid universal boundary field")
-  material.set_shader_parameter(record[0],ImageTexture.create_from_image(Image.create_from_data(width,height,false,record[1],raw)))
- coast_index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/local_coasts.json"))
- coast_pack=FileAccess.open("res://assets/display/local_coasts.bwd",FileAccess.READ)
+ # The clean shader resolves land borders from IDs; legacy fields stay offline.
+ if legacy_fields:
+  var hint:=FileAccess.open("res://assets/display/boundary_hint.bwd",FileAccess.READ)
+  var hw:=hint.get_32();var hh:=hint.get_32()
+  var hb:=hint.get_buffer(hint.get_length()-8).decompress(hw*hh,FileAccess.COMPRESSION_DEFLATE)
+  assert(hb.size()==hw*hh,"Invalid boundary acceleration field")
+  material.set_shader_parameter("boundary_hint",ImageTexture.create_from_image(Image.create_from_data(hw,hh,false,Image.FORMAT_R8,hb)))
+  for record: Array in [["boundary_pairs",Image.FORMAT_RGBA8,4],["boundary_distance",Image.FORMAT_RH,2]]:
+   var field:=FileAccess.open("res://assets/display/"+record[0]+".bwd",FileAccess.READ)
+   var width:=field.get_32();var height:=field.get_32()
+   var raw:=field.get_buffer(field.get_length()-8).decompress(width*height*int(record[2]),FileAccess.COMPRESSION_DEFLATE)
+   assert(raw.size()==width*height*int(record[2]),"Invalid universal boundary field")
+   material.set_shader_parameter(record[0],ImageTexture.create_from_image(Image.create_from_data(width,height,false,record[1],raw)))
+  coast_index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/local_coasts.json"))
+  coast_pack=FileAccess.open("res://assets/display/local_coasts.bwd",FileAccess.READ)
  index=JSON.parse_string(FileAccess.get_file_as_string("res://assets/display/sea_coverage.json"))
  pack=FileAccess.open("res://assets/display/"+str(index["data_file"]),FileAccess.READ)
  var coast:=FileAccess.open("res://assets/display/coast_distance_0217.bwd",FileAccess.READ)
@@ -44,7 +46,7 @@ func select(state: int, province: int, sea: int=0) -> void:
   last_province=province
  if sea!=last_sea:
   _set_tile("sea",sea,"seas");last_sea=sea
- if state>0 or province>0:_set_local_coast(state,province)
+ if coast_pack != null and (state>0 or province>0):_set_local_coast(state,province)
 func _set_tile(prefix: String, id: int, scope: String) -> void:
  var key:=scope+":"+str(id)
  if id<=0 or not index[scope].has(str(id)):

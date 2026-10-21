@@ -1,6 +1,18 @@
-# Developing BunnyWorld 0.2.1.2
+# Developing BunnyWorld 0.2.1.3
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
+
+## Clean globe stabilization
+
+The current application is 0.2.1.3 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
+
+The clean surface uses one 384×192 sphere, spatial border/river batches and the existing atmosphere. There is no detail patch. DisplayCoverage.initialize(target, false) loads the required coast/tiny-land/sea fields but skips the unused boundary hint/pair/distance textures and local coast packs. Legacy callers retain the default behavior. Three skipped fields are 3072×1536 × (1+4+2) bytes = 33,030,144 bytes (31.5 MiB), excluding driver overhead. The sandbox shares immutable textures between both materials.
+
+Camera transforms/horizon scans are cached; selection visibility changes still trigger culling. View uniforms use distance/mode keys and are invalidated on palette/shader changes. Hover uniforms update only when the hover changes. The 10 Hz stationary redraw policy and independent simulation remain intact. Ocean-neighbor taps are gated to the union of the existing coastal-effect bands, including selected-sea behavior.
+
+The published branch's scenery checksum and generator fingerprints were stale. Prepared borders/chunks were rebuilt from the unchanged PNGs/membership with the checked-in generators; active packs and contracts were republished together. Do not merely rewrite generator fingerprints to bypass rebuilds. Run preparation verification and repository hygiene after pulling.
+
+Validation: Godot 4.5.1 model tests, political_ui_tests.gd, clean_globe_stability.gd; Python tools/restore_repository_assets.py --verify-only; Python tools/build_map.py --check; Python tools/repository_hygiene.py. A GL Compatibility render probe also exercises distant political/physical and close physical views under Mesa llvmpipe. This verifies rendering, not target-laptop speed. The fixed globe mesh remains coarser than the full CPU relief field at extreme zoom; this patch does not change terrain geometry/picking algorithms.
 
 ## Government and political power
 

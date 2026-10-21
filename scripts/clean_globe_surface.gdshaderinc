@@ -13,11 +13,6 @@ uniform sampler2D tiny_land_bits : filter_nearest, repeat_disable;
 uniform sampler2D sea_map : filter_linear, repeat_disable;
 uniform vec2 map_resolution = vec2(6144.0, 3072.0);
 
-// --- Uniforms: boundary SDF (loaded from .bwd by test harness) ---
-uniform sampler2D boundary_hint : filter_linear, repeat_enable;
-uniform sampler2D boundary_pairs : filter_nearest, repeat_enable;
-uniform sampler2D boundary_distance : filter_linear, repeat_enable;
-
 // --- Uniforms: dynamic palette ---
 uniform sampler2D colors : source_color, filter_nearest;
 uniform sampler2D owners : filter_nearest;
@@ -723,7 +718,11 @@ void fragment() {
 	float selected_hit = coverage.country_hit;
 	float hovered_hit = coverage.hover_hit;
 	vec3 country_tint = coverage.tint;
-	float is_ocean = smoothstep(0.12, 0.65, ocean_nearby(uv));
+	// Ocean-neighbor taps only affect the narrow coastal bands below.
+	float is_ocean = 0.0;
+	if (abs(coast_px) < 22.0 || selected_sea > 0.0) {
+		is_ocean = smoothstep(0.12, 0.65, ocean_nearby(uv));
+	}
 	float coast_inland = (coast_px > 0.0) ? (1.0 - smoothstep(1.0, 12.0, coast_px)) * smoothstep(0.0, 1.2, coast_px) * is_ocean : 0.0;
 	if (!physical_mode && !information_mode && region > .5) land_color = country_tint;
 	vec3 base = mix(water, land_color, land_coverage);

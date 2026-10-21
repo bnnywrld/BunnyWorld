@@ -142,25 +142,15 @@ func _ready() -> void:
 	display_coverage = preload("res://scripts/display_coverage.gd").new()
 
 	_init_material_uniforms(political_material)
-	_init_material_uniforms(physical_material)
+	# Share immutable textures and decompressed fields between both materials.
+	for parameter: Dictionary in political_material.shader.get_shader_uniform_list():
+		var name: String = parameter["name"]
+		physical_material.set_shader_parameter(name, political_material.get_shader_parameter(name))
 
 	# Set active
 	active_material = political_material
 	globe_mesh.material_override = active_material
 
-	# Atmosphere rim
-	var atmo := MeshInstance3D.new()
-	var atmo_sphere := SphereMesh.new()
-	atmo_sphere.radius = 1.028
-	atmo_sphere.height = 2.056
-	atmo_sphere.radial_segments = 128
-	atmo_sphere.rings = 64
-	atmo.mesh = atmo_sphere
-	var rim_mat := ShaderMaterial.new()
-	rim_mat.shader = load("res://scripts/atmosphere.gdshader")
-	atmo.material_override = rim_mat
-	atmo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
-	atmo.name = "Atmosphere"
 	# 3D Vector Ribbon Meshes (Option A: true HOI4 rounded borders)
 	var land_res = load("res://assets/land_boundaries.res")
 	if land_res != null:
@@ -225,7 +215,7 @@ func _init_material_uniforms(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("city_growth", 1.0)
 	resident_terrain.initialize(mat, false)
 	terrain_shading.initialize(mat)
-	display_coverage.initialize(mat)
+	display_coverage.initialize(mat, false)
 
 func _set_param(name: String, value: Variant) -> void:
 	political_material.set_shader_parameter(name, value)
@@ -429,6 +419,8 @@ func update_selection(country_idx: float, region_id: float, province_id: float, 
 
 	if display_coverage != null:
 		display_coverage.select(int(region_id) if active else 0, int(province_id) if active else 0, int(sea_id))
+		for name: String in ["sea_coverage", "sea_coverage_rect", "sea_coverage_enabled"]:
+			_set_param(name, political_material.get_shader_parameter(name))
 
 func update_hover(country_idx: float, amount: float) -> void:
 	hovered_country = country_idx
