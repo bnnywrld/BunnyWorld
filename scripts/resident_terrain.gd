@@ -22,7 +22,7 @@ func initialize(material: ShaderMaterial, light: bool = false) -> void:
 	if result!=OK: push_error("Resident terrain materials could not be prepared")
 	material.set_shader_parameter("terrain_materials", texture)
 	material.set_shader_parameter("terrain_types", load("res://assets/terrain_types.png"))
-	material.set_shader_parameter("terrain_color", load("res://assets/terrain_color.png"))
+	material.set_shader_parameter("terrain_color", load("res://assets/earth_day.jpg"))
 	initialized = true
 
 func set_light(material: ShaderMaterial, light: bool) -> void:

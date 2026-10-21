@@ -6,7 +6,7 @@ signal preparation_progress(completed: int,total: int)
 # landmark parts are baked into a single mesh per monument. No physics,
 # collision, individual shadows, annual regeneration, or building simulation.
 const EARTH_METERS := 6371000.0
-const SIZE_MULTIPLIER := 3.0
+const SIZE_MULTIPLIER := 2.4
 const DISPLAY_SCALE := 12.0 * SIZE_MULTIPLIER
 const BUILDING_CAP := 1600
 const CLUSTER_CAP := 76

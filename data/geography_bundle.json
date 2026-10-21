@@ -1,23 +1,22 @@
 {
   "version": "0.2.1.2",
   "scenario": "bunny_world_2000_0_2_1_2",
-  "states": 1259,
-  "land_provinces": 13197,
+  "states": 1252,
+  "land_provinces": 13074,
   "files": {
-    "data/world.json": "6f3f302f38afd7299f95032778354080cc3897dc6195105a3e4c89ae745d6822",
-    "data/provinces.json": "43121af5cb1b2ccc184b81a0223cdb6e03e8233e4c573028ba72b8b9a9502fd3",
-    "data/cities.json": "d54d229465e1c9f75a5fcae946ece83733a99f210d230606f403d93de9f70c7d",
+    "assets/province_ids.png": "0f9c8d7cf461b67282000f16cfabfcb777dcfe342fbafb82d50a13593861f314",
+    "assets/province_index.png": "0c32941d92ad8d8319265d31b6d86df795fb24e758f668a3c4a081e3b88c8e66",
+    "assets/sea_ids.png": "53cff68fa2304e00903179d7fe6bba38d4d55ff2a8dc87f38d69bc6878f1d198",
+    "assets/land_boundaries.res": "f498dfe3cc8608261ff81052462e11442886f0d817d1a06d29294efcdc5c125c",
+    "assets/province_boundaries.res": "a72373c6f2d029007931b974267b017dd945f73d5f52d7fe21816f1a8454f2b4",
+    "assets/sea_boundaries.res": "42f05fb75a76fe5970f9d7d0f0601d18d53fc18544b1e74c9bc5432ed8efe76d",
+    "data/world.json": "9c09f2fe0b386e1bff3aa9a3cb46d2a6ca50c9b4e777ecc9774f001b5d3e77cc",
+    "data/provinces.json": "4743932d45b179be9fab8a85abf0abe8efdd9ac337805755d05b3bbfefa5f488",
+    "data/cities.json": "c637305721502b3581fb957c0369f2ac1b1dd388b35c26c9bdf28e5f0c461690",
     "data/microstate_geometry.json": "9ac8cd79b40f10a9375de42e9272eaf1f6431128d14fd92a54d473ec0e5b7cea",
-    "data/urban_population.json": "2b41234b3c1987d9d9030e520926b974036b07ee38c15c2c15f4aaf187c54f22",
-    "data/urban_scenery.json": "70bb730c8f38a08be0c6785dd2e3bda2d9ff6d06658c41c70931bb592ba7d017",
-    "data/sea_regions.json": "774c54fb6f89923f411e6560e0a80e4b0db3a0f829c253f9038b302186b6ee5f",
-    "assets/sea_ids.png": "fda9d16e3e15520e15c453112f25946a5c4c7eaf14db59facc0e30e7d6757c0e",
-    "assets/province_index.png": "e6529223745f45c4641e5dc56dc2c7917559d4ee10dadc10c56541db37c886c9",
-    "assets/land_boundaries.res": "f65cbe80eff9faaece1e5c75d015a95fbf57293ea961caa4f37f526a1ba2544b",
-    "assets/province_boundaries.res": "c06c4ac3cc92a8928541a35e40045327e82998718347565d4f75ed8a00c4f416",
-    "assets/sea_boundaries.res": "c9bff8a0050009a42ce7baa569bbcbb0cf5a9e7b865a1140516eb273db54944e",
-    "assets/province_ids.png": "35bac8026097a611fdc713cf794a760d09dd89228851ce5a8a7609ce56191c24",
-    "data/demographics.json": "da1a1ad8ca5e160013906d4983b8be13c4dd8f8b68e0cf8f787ffb881dc5429b",
-    "data/state_demographics.json": "f05da778a8be64127f6cbf735967cdf73927d601d102fa59727d537a30887e4a"
+    "data/urban_population.json": "2898b5180da1898bf691d1586d4bca56cd45910fb4f3acd281e7018302717b48",
+    "data/urban_scenery.json": "2b42e199ebc3c886cf82040b56e3fc698d5ea248a9741a1ec9eb5e3d76cfa60d",
+    "data/state_demographics.json": "93e99c11e932cb72c5beaf91dec8055516f7a87a1237f15cc075bb7e76f27c55",
+    "data/sea_regions.json": "af0cfda4747c3002f78a71bf76a01da6add728d7f3976bcc25dd11f6c859b6fc"
   }
 }

@@ -768,11 +768,11 @@ func _build_planet() -> void:
 	terrain_shading.initialize(planet_material)
 	display_coverage = preload("res://scripts/display_coverage.gd").new()
 	display_coverage.initialize(planet_material)
-	physical_texture = load("res://assets/terrain_color.png")
+	physical_texture = load("res://assets/earth_day.jpg")
 	mesh.material_override = planet_material
 	spatial_map_layers = preload("res://scripts/spatial_map_layers.gd").new()
 	spatial_map_layers.initialize(str(state.database["version"]))
-	spatial_map_layers.register("sphere",mesh,planet)
+	# Clean globe uses unified single sphere mesh (1 draw call). Spatial map layers handles borders only.
 	detail_patch = MeshInstance3D.new()
 	var empty_patch_mat := StandardMaterial3D.new()
 	empty_patch_mat.transparency = BaseMaterial3D.TRANSPARENCY_ALPHA
@@ -795,6 +795,22 @@ func _build_planet() -> void:
 	planet_material.set_shader_parameter("sea_map", map_rendering.create_sea_mask_texture())
 	planet_material.set_shader_parameter("urban_density", load("res://assets/urban_density.png"))
 	planet_material.set_shader_parameter("urban_material", load("res://assets/materials/urban.png"))
+	planet_material.set_shader_parameter("urban_grid_material", load("res://assets/materials/urban_grid.png"))
+	planet_material.set_shader_parameter("urban_asian_material", load("res://assets/materials/urban_asian.png"))
+	planet_material.set_shader_parameter("water_normal", load("res://assets/water_normal.png"))
+	planet_material.set_shader_parameter("rock_detail", load("res://assets/materials/rock_detail.png"))
+	planet_material.set_shader_parameter("farmland_detail", load("res://assets/materials/resident_2.png"))
+	planet_material.set_shader_parameter("rice_paddy_detail", load("res://assets/materials/rice_paddy.png"))
+	planet_material.set_shader_parameter("swamp_detail", load("res://assets/materials/swamp.png"))
+	planet_material.set_shader_parameter("tundra_detail", load("res://assets/materials/tundra.png"))
+	planet_material.set_shader_parameter("savanna_detail", load("res://assets/materials/savanna.png"))
+	planet_material.set_shader_parameter("chaparral_detail", load("res://assets/materials/chaparral.png"))
+	planet_material.set_shader_parameter("badlands_detail", load("res://assets/materials/badlands.png"))
+	planet_material.set_shader_parameter("conifer_detail", load("res://assets/materials/conifer_forest.png"))
+	planet_material.set_shader_parameter("rainforest_detail", load("res://assets/materials/rainforest.png"))
+	planet_material.set_shader_parameter("alluvium_detail", load("res://assets/materials/alluvium.png"))
+	planet_material.set_shader_parameter("mediterranean_detail", load("res://assets/materials/mediterranean.png"))
+	planet_material.set_shader_parameter("city_growth", 1.0)
 	for kind: String in ["land", "sea", "province"]:
 		var border_mesh := MeshInstance3D.new()
 		# Material holder only: prepared spatial batches own the geometry.
@@ -926,6 +942,8 @@ func _rebuild_palette() -> void:
 	planet_material.set_shader_parameter("owners", owners_texture)
 	for material: ShaderMaterial in border_materials:
 		material.set_shader_parameter("owners", owners_texture)
+		material.set_shader_parameter("colors", palette_texture)
+		material.set_shader_parameter("palette_width", 8192.0)
 		material.set_shader_parameter("physical_mode", map_mode == 6)
 	planet_material.set_shader_parameter("show_regions", show_regions)
 	planet_material.set_shader_parameter("border_width", 1.15 if map_mode == 0 else 0.7)
@@ -965,10 +983,10 @@ func _update_border_visibility() -> void:
 	if border_meshes.is_empty(): return
 	# Match the existing shader's exact zero-opacity ranges. Visibility changes
 	# submit no geometry and never generate or load new meshes on camera travel.
-	spatial_map_layers.set_enabled("land", false)
-	spatial_map_layers.set_enabled("province", false)
-	spatial_map_layers.set_enabled("sea",distance < 2.8 or state.selected_sea > 0)
-	spatial_map_layers.set_enabled("water",distance < 3.5)
+	spatial_map_layers.set_enabled("land", distance < 4.5)
+	spatial_map_layers.set_enabled("province", distance < 1.35 or state.selected_region > 0 or state_preview > 0)
+	spatial_map_layers.set_enabled("sea", distance < 2.8 or state.selected_sea > 0)
+	spatial_map_layers.set_enabled("water", distance < 3.5)
 	spatial_map_layers.update_view(distance)
 
 func _search_changed(value: String) -> void:
@@ -1095,10 +1113,17 @@ func _sea_at(position: Vector2) -> int:
 	if passage>0: return passage
 	var pixel := sea_image.get_pixel(clampi(int(uv.x * sea_image.get_width()), 0, sea_image.get_width()-1), clampi(int(uv.y * sea_image.get_height()), 0, sea_image.get_height()-1))
 	var id := int(round(pixel.r * 255.0)) + int(round(pixel.g * 255.0)) * 256
-	return id if state.sea_regions.has(str(id)) else 0
+	if not state.sea_regions.has(str(id)): return 0
+	var sea_data: Dictionary = state.sea_regions[str(id)]
+	if sea_data.get("is_inland_water", false) or sea_data.get("name", "").begins_with("Inland Water"):
+		return 0
+	return id
 
 func _show_sea(id: int) -> void:
-	if not state.sea_regions.has(str(id)):return
+	if not state.sea_regions.has(str(id)): return
+	var sea_data: Dictionary = state.sea_regions[str(id)]
+	if sea_data.get("is_inland_water", false) or sea_data.get("name", "").begins_with("Inland Water"):
+		return
 	state.selected_sea=id;state.selected_region=0;state.selected_province=0;inspect_region=0;inspect_province=0;inspection_active=false
 	preload("res://scripts/territory_view.gd").new().sea(self,id)
 	_update_selection_shader()
@@ -1115,7 +1140,7 @@ func _update_map_hover(position: Vector2) -> void:
 		var tag: String = region["owner"]
 		hover_tag = tag
 		text = str(state.countries.get(tag, {}).get("name", "Unclaimed"))
-		if show_regions: text += "\nState: " + str(region["name"])
+		if screen == "playing" and show_regions: text += "\nState: " + str(region["name"])
 		if map_mode == 7:
 			var score := state.opinion(tag, state.selected_country) if relations_reverse else state.opinion(state.selected_country, tag)
 			text += "\nOpinion: %+.0f" % score
@@ -1123,7 +1148,7 @@ func _update_map_hover(position: Vector2) -> void:
 		elif map_mode in [4, 5]:
 			var per_capita := float(state.countries[tag].get("starting_stats", {}).get("gdp_per_capita_usd", 0))
 			text += "\nGDP/person: $" + _number(int(per_capita)) if map_mode == 5 else "\nGDP: $%.1f billion" % (per_capita * float(state.country_metrics(tag)["population"]) / 1e9)
-		if distance <= 1.2:
+		if screen == "playing" and distance <= 1.2:
 			var pid := _province_at(position)
 			if pid > 0:
 				var p: Dictionary = state.provinces[str(pid)]
@@ -1376,6 +1401,10 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	details = control_details
 	state.selected_country = tag
 	inspection_active = true
+	var allow_state_selection := screen == "playing" and (distance <= 1.65)
+	if not allow_state_selection:
+		inspect_region = 0
+		inspect_province = 0
 	state.selected_region = inspect_region if inspect_region > 0 and state.regions[str(inspect_region)]["owner"] == tag else 0
 	state.selected_province = inspect_province if state.provinces.has(str(inspect_province)) and int(state.provinces[str(inspect_province)]["region"]) == state.selected_region else 0
 	state.selected_sea = 0
@@ -1604,7 +1633,8 @@ func _update_camera_pose() -> void:
 		return
 	var front := planet.global_transform.basis.inverse() * Vector3.BACK
 	var uv := Surface.uv_of(front)
-	var radius: float = 1.0 + relief_surface.height_at(uv)
+	var mountain_offset: float = (relief_surface.height_at(uv) if relief_surface != null else 0.0) * smoothstep(1.08, 1.02, distance)
+	var radius: float = 1.0 + mountain_offset
 	var amount := smoothstep(0.0, 1.0, clampf((1.18 - distance) / .165, 0, 1))
 	camera_tilt_degrees = 38.0 * amount
 	var tilt := deg_to_rad(camera_tilt_degrees)
@@ -1713,12 +1743,13 @@ func _globe_input(event: InputEvent) -> void:
 			rotation_velocity = Vector2.ZERO
 			var id := _region_at(event.position)
 			if state.regions.has(str(id)):
-				inspect_region = id
-				inspect_province = _province_at(event.position) if distance <= 1.2 else 0
+				var allow_state_selection := screen == "playing" and (distance <= 1.65)
+				inspect_region = id if allow_state_selection else 0
+				inspect_province = _province_at(event.position) if (allow_state_selection and distance <= 1.2) else 0
 				_show_country(state.regions[str(id)]["owner"], false)
 			elif id == 0:
 				var sea := _sea_at(event.position)
-				if sea > 0: _show_sea(sea)
+				if sea > 0 and screen == "playing": _show_sea(sea)
 				else: _close_panels()
 			elif id == 8191: _close_panels()
 			_play_ui("select")
@@ -1776,10 +1807,7 @@ func _process(delta: float) -> void:
 		planet_material.set_shader_parameter("hover_amount", hover_blend)
 		waterways_material.set_shader_parameter("physical_mode",map_mode==6)
 		waterways_material.set_shader_parameter("camera_distance",distance)
-		city_timer += delta
-		if not dragging or city_timer >= 0.05:
-			city_timer = 0.0
-			_update_cities()
+		_update_cities()
 		if urban_scenery != null: urban_scenery.update_view(camera, distance, city_scenery_enabled and screen != "menu", delta)
 		if country_label_layer != null: country_label_layer.update_view()
 		if tiny_state_markers!=null:tiny_state_markers.update_view()
@@ -1787,7 +1815,7 @@ func _process(delta: float) -> void:
 		planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 		planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))
 		_position_panels(false)
-		planet_material.set_shader_parameter("terrain_mix", clampf((1.5 - distance) / 0.25, 0, 1) if map_mode == 6 else 0.0)
+		planet_material.set_shader_parameter("terrain_mix", clampf((2.3 - distance) / 0.9, 0.0, 1.0) if map_mode == 6 else 0.0)
 	if screen == "playing" and not state.database.is_empty() and state.advance(delta):
 		_update_clock()
 		if state.day != last_relation_day:
@@ -1938,6 +1966,43 @@ func _notification(what: int) -> void:
 		state.paused = true
 		_update_clock()
 
+func _close_side_tabs() -> bool:
+	var closed := false
+	if territory_panel != null and (territory_panel.visible or (territory_clip != null and territory_clip.visible)):
+		_hide_panel(territory_panel)
+		closed = true
+	if control_panel != null and control_panel.visible:
+		active_feature = ""
+		_hide_panel(control_panel)
+		if right_panel != null and right_panel != control_panel:
+			_hide_panel(right_panel)
+		inspection_active = false
+		state.selected_region = 0
+		state.selected_province = 0
+		_update_selection_shader()
+		closed = true
+	return closed
+
+func _input(event: InputEvent) -> void:
+	if not event is InputEventKey or not event.pressed or event.echo:
+		return
+	var focus := get_viewport().gui_get_focus_owner() if get_viewport() != null else null
+	var is_typing := (focus is LineEdit or focus is TextEdit)
+	if event.keycode == KEY_SPACE and not is_typing and screen == "playing":
+		if not save_dialog.visible and not load_dialog.visible and not overwrite_dialog.visible and not game_menu.visible and not console.visible:
+			_toggle_pause()
+			get_viewport().set_input_as_handled()
+			return
+	if event.keycode == KEY_ESCAPE:
+		if is_typing:
+			focus.release_focus()
+			get_viewport().set_input_as_handled()
+			return
+		if not save_dialog.visible and not load_dialog.visible and not overwrite_dialog.visible and not game_menu.visible and not console.visible:
+			if _close_side_tabs():
+				get_viewport().set_input_as_handled()
+				return
+
 func _unhandled_key_input(event: InputEvent) -> void:
 	if not event is InputEventKey or not event.pressed or event.echo:
 		return
@@ -1965,7 +2030,9 @@ func _unhandled_key_input(event: InputEvent) -> void:
 		KEY_F9: _load()
 		KEY_F11:
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED if DisplayServer.window_get_mode() == DisplayServer.WINDOW_MODE_FULLSCREEN else DisplayServer.WINDOW_MODE_FULLSCREEN)
-		KEY_ESCAPE: _open_game_menu()
+		KEY_ESCAPE:
+			if not _close_side_tabs():
+				_open_game_menu()
 		KEY_1: _speed_changed(0)
 		KEY_2: _speed_changed(1)
 		KEY_3: _speed_changed(2)
@@ -2724,7 +2791,6 @@ func _entity_heading(caption: String, texture: Texture2D, organization: bool = f
 	title.custom_minimum_size.x = 100
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
-	row.add_child(_button("×", func(): _hide_panel(control_panel); _hide_panel(right_panel); inspection_active = false; _update_selection_shader(), "Close country information"))
 	pinned.add_child(row)
 	pinned.add_child(HSeparator.new())
 
@@ -2775,8 +2841,8 @@ func _configure_overlay_layout() -> void:
 		if child.get_class() == "Control": child.queue_free()
 	selection_box = _overlay_panel()
 	country_sidebar.reparent(selection_box)
-	selection_box.position = Vector2(8, 112)
 	selection_box.size = Vector2(250, 530)
+	selection_box.position = Vector2(size.x - 258, 112)
 	# Discard the original layout containers after moving every live control.
 	for child: Node in game_ui.get_children():
 		if child is VBoxContainer and child != top_left_box: child.queue_free()
@@ -2793,6 +2859,7 @@ func _layout_overlay() -> void:
 	map_box.position = Vector2(size.x - map_box.size.x - 8, clock_box.size.y + 3)
 	selection_box.visible = screen == "selection"
 	selection_box.size.y = maxf(300, size.y - 122)
+	selection_box.position = Vector2(size.x - selection_box.size.x - 8, 112)
 	var stats_width := 0.0
 	for cell: Control in stats_row.get_children(): stats_width += cell.get_combined_minimum_size().x + 3
 	var available := maxf(565.0, clock_box.position.x - 8.0 - 94.0 - 32.0)
@@ -3073,7 +3140,6 @@ func _show_feature(caption: String) -> void:
 	var title := _label(caption, 23, Color("f0eee2"))
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	heading.add_child(title)
-	heading.add_child(_button("×", func(): active_feature = ""; _hide_panel(control_panel), "Close panel"))
 	control_heading.add_child(heading)
 	if caption == "Government":
 		var tag: String = state.player_country

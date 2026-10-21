@@ -32,6 +32,8 @@ const MAP_MODES: Array[String] = [
 # ------------------------------------------------------------------
 var planet: Node3D
 var globe_mesh: MeshInstance3D
+var land_mesh: MeshInstance3D
+var province_mesh: MeshInstance3D
 var camera: Camera3D
 var info_label: Label
 var mode_picker: OptionButton
@@ -42,6 +44,8 @@ var mode_picker: OptionButton
 var political_material: ShaderMaterial
 var physical_material: ShaderMaterial
 var active_material: ShaderMaterial
+var land_material: ShaderMaterial
+var prov_material: ShaderMaterial
 
 # ------------------------------------------------------------------
 # Data helpers (reused from main pipeline, read-only)
@@ -157,7 +161,34 @@ func _ready() -> void:
 	atmo.material_override = rim_mat
 	atmo.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
 	atmo.name = "Atmosphere"
-	planet.add_child(atmo)
+	# 3D Vector Ribbon Meshes (Option A: true HOI4 rounded borders)
+	var land_res = load("res://assets/land_boundaries.res")
+	if land_res != null:
+		land_mesh = MeshInstance3D.new()
+		land_mesh.mesh = land_res
+		land_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		land_mesh.name = "LandBoundaries"
+		land_material = ShaderMaterial.new()
+		land_material.shader = load("res://scripts/boundaries.gdshader")
+		land_material.set_shader_parameter("palette_width", 8192.0)
+		land_material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
+		for tile: int in map_rendering.region_textures.size():
+			land_material.set_shader_parameter("region_map_%d" % tile, map_rendering.region_textures[tile])
+		land_mesh.material_override = land_material
+		planet.add_child(land_mesh)
+
+	var prov_res = load("res://assets/province_boundaries.res")
+	if prov_res != null:
+		province_mesh = MeshInstance3D.new()
+		province_mesh.mesh = prov_res
+		province_mesh.cast_shadow = GeometryInstance3D.SHADOW_CASTING_SETTING_OFF
+		province_mesh.name = "ProvinceBoundaries"
+		prov_material = ShaderMaterial.new()
+		prov_material.shader = load("res://scripts/provinces.gdshader")
+		prov_material.set_shader_parameter("province_index", map_rendering.province_texture)
+		prov_material.set_shader_parameter("relief_data", load("res://assets/relief_data.png"))
+		province_mesh.material_override = prov_material
+		planet.add_child(province_mesh)
 
 	# Build palette & UI
 	_rebuild_palette()
@@ -176,6 +207,22 @@ func _init_material_uniforms(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("sea_map", map_rendering.create_sea_mask_texture())
 	mat.set_shader_parameter("urban_density", load("res://assets/urban_density.png"))
 	mat.set_shader_parameter("urban_material", load("res://assets/materials/urban.png"))
+	mat.set_shader_parameter("urban_grid_material", load("res://assets/materials/urban_grid.png"))
+	mat.set_shader_parameter("urban_asian_material", load("res://assets/materials/urban_asian.png"))
+	mat.set_shader_parameter("water_normal", load("res://assets/water_normal.png"))
+	mat.set_shader_parameter("rock_detail", load("res://assets/materials/rock_detail.png"))
+	mat.set_shader_parameter("farmland_detail", load("res://assets/materials/resident_2.png"))
+	mat.set_shader_parameter("rice_paddy_detail", load("res://assets/materials/rice_paddy.png"))
+	mat.set_shader_parameter("swamp_detail", load("res://assets/materials/swamp.png"))
+	mat.set_shader_parameter("tundra_detail", load("res://assets/materials/tundra.png"))
+	mat.set_shader_parameter("savanna_detail", load("res://assets/materials/savanna.png"))
+	mat.set_shader_parameter("chaparral_detail", load("res://assets/materials/chaparral.png"))
+	mat.set_shader_parameter("badlands_detail", load("res://assets/materials/badlands.png"))
+	mat.set_shader_parameter("conifer_detail", load("res://assets/materials/conifer_forest.png"))
+	mat.set_shader_parameter("rainforest_detail", load("res://assets/materials/rainforest.png"))
+	mat.set_shader_parameter("alluvium_detail", load("res://assets/materials/alluvium.png"))
+	mat.set_shader_parameter("mediterranean_detail", load("res://assets/materials/mediterranean.png"))
+	mat.set_shader_parameter("city_growth", 1.0)
 	resident_terrain.initialize(mat, false)
 	terrain_shading.initialize(mat)
 	display_coverage.initialize(mat)
@@ -183,6 +230,8 @@ func _init_material_uniforms(mat: ShaderMaterial) -> void:
 func _set_param(name: String, value: Variant) -> void:
 	political_material.set_shader_parameter(name, value)
 	physical_material.set_shader_parameter(name, value)
+	if land_material != null: land_material.set_shader_parameter(name, value)
+	if prov_material != null: prov_material.set_shader_parameter(name, value)
 
 # ==================================================================
 # UI
@@ -394,7 +443,8 @@ func _update_camera_pose() -> void:
 	if camera == null: return
 	var front := planet.global_transform.basis.inverse() * Vector3.BACK
 	var uv := ReliefSurface.uv_of(front)
-	var radius: float = 1.0 + relief_surface.height_at(uv)
+	var mountain_offset: float = (relief_surface.height_at(uv) if relief_surface != null else 0.0) * smoothstep(1.08, 1.02, distance)
+	var radius: float = 1.0 + mountain_offset
 	var amount := smoothstep(0.0, 1.0, clampf((1.18 - distance) / .165, 0.0, 1.0))
 	camera_tilt_degrees = 38.0 * amount
 	var tilt := deg_to_rad(camera_tilt_degrees)
@@ -416,7 +466,7 @@ func _update_camera_uniforms() -> void:
 	_set_param("far_filter", clampf((distance - 2.4) / 1.0, 0.0, 1.0))
 	_set_param("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 	_set_param("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))
-	_set_param("terrain_mix", clampf((1.5 - distance) / 0.25, 0.0, 1.0) if map_mode == 6 else 0.0)
+	_set_param("terrain_mix", clampf((2.3 - distance) / 0.9, 0.0, 1.0) if map_mode == 6 else 0.0)
 	_set_param("physical_mode", map_mode == 6)
 
 # ==================================================================
@@ -506,8 +556,14 @@ func _handle_click(position: Vector2) -> void:
 	var tag: String = _state_data.regions.get(str(rid), {}).get("owner", "")
 	var idx: float = float(_state_data.countries.get(tag, {}).get("index", 0))
 	if rid > 0:
-		update_selection(idx, float(rid), float(pid), 0.0, true)
-		info_label.text = "Country: %s (idx %.0f) | State %d | Province %d" % [tag, idx, rid, pid]
+		var allow_state := distance <= 1.65
+		var sel_rid := float(rid) if allow_state else 0.0
+		var sel_pid := float(pid) if (allow_state and distance <= 1.2) else 0.0
+		update_selection(idx, sel_rid, sel_pid, 0.0, true)
+		if allow_state:
+			info_label.text = "Country: %s (idx %.0f) | State %d | Province %d" % [tag, idx, rid, pid]
+		else:
+			info_label.text = "Country: %s (idx %.0f)" % [tag, idx]
 	else:
 		update_selection(0.0, 0.0, 0.0, 0.0, false)
 		info_label.text = "Clicked: unowned land"
@@ -525,6 +581,11 @@ func _process(delta: float) -> void:
 
 	_update_camera_pose()
 	_update_camera_uniforms()
+
+	if land_mesh != null:
+		land_mesh.visible = distance < 4.5
+	if province_mesh != null:
+		province_mesh.visible = distance < 1.35 or selected_region > 0.0
 
 	# Display FPS & coordinates
 	var fps := Engine.get_frames_per_second()

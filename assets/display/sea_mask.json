@@ -1,11 +1,11 @@
 {
   "schema": 1,
   "format": "R8",
-  "width": 8192,
-  "height": 4096,
+  "width": 6144,
+  "height": 3072,
   "source": "assets/sea_ids.png",
-  "source_sha256": "fda9d16e3e15520e15c453112f25946a5c4c7eaf14db59facc0e30e7d6757c0e",
-  "sha256": "918aaa73fbf11bd051ce192a8ae151292cfbfecab3c04f22338fafcd316f5608",
-  "decoded_bytes": 33554432,
+  "source_sha256": "53cff68fa2304e00903179d7fe6bba38d4d55ff2a8dc87f38d69bc6878f1d198",
+  "sha256": "e9d343393fc686441fe9035d656adf8888bb6ffb6851a394eed49f155c438e33",
+  "decoded_bytes": 18874368,
   "predicate": "R != 0 or G != 0; nearest sampling at original resolution"
 }
