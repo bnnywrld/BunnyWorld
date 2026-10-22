@@ -1,0 +1,863 @@
+{
+  "source": "Bunny_World_Organizations_Design.md; existing scenario memberships preserved. Pending entries are definitions only and never grant membership or effects.",
+  "organizations": {
+    "EU": {
+      "type": "regional",
+      "name": "European Union",
+      "hq": {
+        "city": "Brussels",
+        "country": "BEL",
+        "place_id": ""
+      },
+      "integration_level": 3,
+      "outlook_affinity": "western",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "BENELUX": {
+      "type": "regional",
+      "name": "Benelux",
+      "hq": {
+        "city": "Brussels",
+        "country": "BEL",
+        "place_id": ""
+      },
+      "integration_level": 3,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "ASEAN": {
+      "type": "regional",
+      "name": "ASEAN",
+      "hq": {
+        "city": "Jakarta",
+        "country": "IND",
+        "place_id": ""
+      },
+      "integration_level": 1,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "MERCOSUR": {
+      "type": "regional",
+      "name": "Southern Common Market",
+      "hq": {
+        "city": "Montevideo",
+        "country": "URG",
+        "place_id": ""
+      },
+      "integration_level": 2,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OAU": {
+      "type": "regional",
+      "name": "Organization of African Unity",
+      "hq": {
+        "city": "Addis Ababa",
+        "country": "ETH",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [
+        {
+          "date": "2002-07-09",
+          "name": "African Union"
+        }
+      ],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "ECOWAS": {
+      "type": "regional",
+      "name": "ECOWAS",
+      "hq": {
+        "city": "Abuja",
+        "country": "NIG",
+        "place_id": ""
+      },
+      "integration_level": 1,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "SADC": {
+      "type": "regional",
+      "name": "Southern African Development Community",
+      "hq": {
+        "city": "Gaborone",
+        "country": "BOT",
+        "place_id": ""
+      },
+      "integration_level": 1,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "NAFTA": {
+      "type": "regional",
+      "name": "North American Free Trade Agreement",
+      "hq": null,
+      "integration_level": 1,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "No single headquarters; national secretariat sections."
+    },
+    "CAN": {
+      "type": "regional",
+      "name": "Andean Community",
+      "hq": {
+        "city": "Lima",
+        "country": "PRU",
+        "place_id": ""
+      },
+      "integration_level": 2,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "CARICOM": {
+      "type": "regional",
+      "name": "Caribbean Community",
+      "hq": {
+        "city": "Georgetown",
+        "country": "GUY",
+        "place_id": ""
+      },
+      "integration_level": 1,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "GCC": {
+      "type": "regional",
+      "name": "Gulf Cooperation Council",
+      "hq": {
+        "city": "Riyadh",
+        "country": "SAU",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "ARAB": {
+      "type": "regional",
+      "name": "League of Arab States",
+      "hq": {
+        "city": "Cairo",
+        "country": "EGY",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "CIS": {
+      "type": "regional",
+      "name": "Commonwealth of Independent States",
+      "hq": {
+        "city": "Minsk",
+        "country": "BLR",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "UNION_STATE": {
+      "type": "regional",
+      "name": "Union State of Russia and Belarus",
+      "hq": null,
+      "integration_level": 4,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Institutions in Moscow and Minsk; location awaits review."
+    },
+    "EURASEC": {
+      "type": "regional",
+      "name": "Eurasian Economic Community",
+      "hq": {
+        "city": "Moscow",
+        "country": "SOV",
+        "place_id": ""
+      },
+      "integration_level": 2,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "2000-10-10",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OAS": {
+      "type": "regional",
+      "name": "Organization of American States",
+      "hq": {
+        "city": "Washington",
+        "country": "USA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "NATO": {
+      "type": "security",
+      "name": "NATO",
+      "hq": {
+        "city": "Brussels",
+        "country": "BEL",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "western",
+      "exclusive": true,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "USA",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "CSTO": {
+      "type": "security",
+      "name": "Collective Security Treaty",
+      "hq": {
+        "city": "Moscow",
+        "country": "SOV",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "multipolar",
+      "exclusive": true,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [
+        {
+          "date": "2002-10-07",
+          "name": "Collective Security Treaty Organization"
+        }
+      ],
+      "leader": "SOV",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "SHANGHAI": {
+      "type": "forum",
+      "name": "Shanghai Five",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Shanghai Five has no permanent seat; SCO succession and membership await review."
+    },
+    "UN": {
+      "type": "global",
+      "name": "United Nations",
+      "hq": {
+        "city": "New York",
+        "country": "USA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "IMF": {
+      "type": "global",
+      "name": "International Monetary Fund",
+      "hq": {
+        "city": "Washington",
+        "country": "USA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "IBRD": {
+      "type": "global",
+      "name": "World Bank (IBRD)",
+      "hq": {
+        "city": "Washington",
+        "country": "USA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "WTO": {
+      "type": "global",
+      "name": "World Trade Organization",
+      "hq": {
+        "city": "Geneva",
+        "country": "SWI",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "IAEA": {
+      "type": "global",
+      "name": "International Atomic Energy Agency",
+      "hq": {
+        "city": "Vienna",
+        "country": "AUS",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "G7": {
+      "type": "forum",
+      "name": "Group of Seven",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "western",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": true,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "G20": {
+      "type": "forum",
+      "name": "Group of Twenty",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": true,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OECD": {
+      "type": "forum",
+      "name": "Organisation for Economic Co-operation and Development",
+      "hq": {
+        "city": "Paris",
+        "country": "FRA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "APEC": {
+      "type": "forum",
+      "name": "Asia-Pacific Economic Cooperation",
+      "hq": {
+        "city": "Singapore",
+        "country": "SIN",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "G77": {
+      "type": "forum",
+      "name": "Group of 77",
+      "hq": {
+        "city": "New York",
+        "country": "USA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "PARIS_CLUB": {
+      "type": "forum",
+      "name": "Paris Club",
+      "hq": {
+        "city": "Paris",
+        "country": "FRA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OSCE": {
+      "type": "forum",
+      "name": "Organization for Security and Co-operation in Europe",
+      "hq": {
+        "city": "Vienna",
+        "country": "AUS",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "COMMONWEALTH": {
+      "type": "cultural",
+      "name": "Commonwealth of Nations",
+      "hq": {
+        "city": "London",
+        "country": "ENG",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "FRANCOPHONIE": {
+      "type": "cultural",
+      "name": "Francophonie",
+      "hq": {
+        "city": "Paris",
+        "country": "FRA",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OIC": {
+      "type": "cultural",
+      "name": "Organisation of the Islamic Conference",
+      "hq": {
+        "city": "Jeddah",
+        "country": "SAU",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "1969-09-25",
+      "renames": [
+        {
+          "date": "2011-06-28",
+          "name": "Organisation of Islamic Cooperation"
+        }
+      ],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "CPLP": {
+      "type": "cultural",
+      "name": "Community of Portuguese Language Countries",
+      "hq": {
+        "city": "Lisbon",
+        "country": "POR",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "NAM": {
+      "type": "movement",
+      "name": "Non-Aligned Movement",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "non_aligned",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": true,
+      "chair_country": "SAF",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OPEC": {
+      "type": "commodity",
+      "name": "Organization of the Petroleum Exporting Countries",
+      "hq": {
+        "city": "Vienna",
+        "country": "AUS",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": true,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "NPT": {
+      "type": "treaty",
+      "name": "Nuclear Non-Proliferation Treaty",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Treaty regime; no organization headquarters assigned."
+    },
+    "CWC": {
+      "type": "treaty",
+      "name": "Chemical Weapons Convention",
+      "hq": {
+        "city": "The Hague",
+        "country": "HOL",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "OTTAWA": {
+      "type": "treaty",
+      "name": "Ottawa Treaty",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Treaty regime; no organization headquarters assigned."
+    },
+    "CTBT": {
+      "type": "treaty",
+      "name": "Comprehensive Nuclear-Test-Ban Treaty",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Not in force; signatories and ratifications are distinct."
+    },
+    "KYOTO": {
+      "type": "treaty",
+      "name": "Kyoto Protocol",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "2005-02-16",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "ICC": {
+      "type": "treaty",
+      "name": "Rome Statute of the International Criminal Court",
+      "hq": {
+        "city": "The Hague",
+        "country": "HOL",
+        "place_id": ""
+      },
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "2002-07-01",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {}
+    },
+    "UNCLOS": {
+      "type": "treaty",
+      "name": "UN Convention on the Law of the Sea",
+      "hq": null,
+      "integration_level": 0,
+      "outlook_affinity": "",
+      "exclusive": false,
+      "membership_reviewed": false,
+      "founded": "",
+      "renames": [],
+      "leader": "",
+      "rotating_chair": false,
+      "chair_country": "",
+      "statuses": {},
+      "opt_out_levels": {},
+      "hq_note": "Treaty regime; no organization headquarters assigned."
+    }
+  }
+}

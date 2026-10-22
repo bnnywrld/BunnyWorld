@@ -48,3 +48,66 @@ State boundaries use the bundled Natural Earth 1:10m geographic subdivisions, gr
 Province generation is independent of the MD province bitmap. Existing Natural Earth rivers, NOAA ETOPO relief, ESA CCI land classification and settlement reference points guide offline growth on local Lambert azimuthal equal-area grids. Kilometre distances and spherical areas replace uncorrected flat texture distances. Prepared shapes are gameplay approximations, not municipal or census districts.
 
 Local demographic refinement is explicitly deferred. Existing national totals are preserved, with temporary overlap/area allocations solely to maintain runtime contracts. Existing population source notices remain historical attribution, not a claim that GHSL was newly aggregated over this map.
+
+
+## Organization foundation (0.2.1.7)
+
+The supplied `Bunny_World_Organizations_Design.md` defines the eight types, statuses, headquarters, integration ladder and future mechanics. Starting membership arrays are inherited unchanged from clean-globe commit 2678dae238b99d0c75a4fb98d71cd53b23451c08, not newly claimed as historically audited. The document says: “Ask me to review member lists as a table before importing; do not silently guess.” No additional lists or status assignments were imported in this patch. This is why UN, cultural communities, movements and other missing groups remain inactive directory entries.
+
+| Existing organization | Scenario members retained |
+| --- | ---: |
+| EU | 15 |
+| NATO | 19 |
+| ASEAN | 10 |
+| ECOWAS | 15 |
+| WTO | 130 |
+| G7 | 7 |
+| CSTO | 6 |
+| OAU | 53 |
+| ARAB | 22 |
+| GCC | 6 |
+| CIS | 12 |
+| APEC | 21 |
+| OECD | 29 |
+| OPEC | 11 |
+| MERCOSUR | 4 |
+| NAFTA | 3 |
+| OSCE | 49 |
+| IMF | 178 |
+| IBRD | 178 |
+
+Additional definitions below are **not active memberships**. The candidate lists are only those explicitly provided in the design; blank/unspecified lists still require historical verification and review, including the game's representation of missing territories. They cannot be enabled by clicking the directory.
+
+| Definition awaiting membership review | Candidate or unresolved starting list |
+| --- | --- |
+| Benelux | Belgium, Netherlands, Luxembourg |
+| SADC | Historical January-2000 roster to verify |
+| Andean Community | Bolivia, Colombia, Ecuador, Peru, Venezuela |
+| CARICOM | Historical roster and associate statuses to verify |
+| Union State | Russia and Belarus; treaty activation and integration interpretation to review |
+| Eurasian Economic Community | Later-2000 founding roster to verify; absent at scenario start |
+| OAS | Historical roster and suspension statuses to verify |
+| Shanghai Five | China, Kazakhstan, Kyrgyzstan, Russia, Tajikistan; modeled as a forum definition, not an exclusive faction; succession to SCO pending |
+| UN | January-2000 membership and game-tag coverage to verify; Security Council roles pending |
+| IAEA | Historical roster to verify |
+| G20 | Historical participating countries and institutional representation to verify |
+| G77 | Historical roster to verify |
+| Paris Club | Historical creditor membership to verify |
+| Commonwealth | Historical roster to verify; Pakistan's 1999 suspension must be represented |
+| Francophonie | Full/associate/observer statuses to verify |
+| Organisation of the Islamic Conference | January-2000 roster to verify |
+| CPLP | January-2000 roster to verify |
+| Non-Aligned Movement | Historical roster and observer statuses to verify; South Africa chair in 2000, no HQ |
+| NPT | Parties/statuses to verify; India, Pakistan and Israel outside in the design |
+| CWC | Parties and ratifications to verify |
+| Ottawa Treaty | Parties and ratifications to verify; USA, Russia, China outside in the design |
+| CTBT | Signed versus ratified statuses must remain distinct; not in force |
+| Kyoto Protocol | Later entry into force; no automatic activation or member import |
+| Rome Statute / ICC | Later entry into force; no automatic activation or member import |
+| UNCLOS | Parties and ratifications to verify |
+
+MERCOSUR associate memberships (Chile/Bolivia), NATO partnerships and CIS founding-participant distinctions also need review before changing the inherited full statuses. Real founding membership dates are not fabricated where the supplied metadata is incomplete. Headquarters follow the supplied design, plus existing organization context (OSCE Vienna and World Bank Washington). NAFTA has national sections rather than a single HQ; the Union State's multiple institutions are left without a single point pending review.
+
+Dated display-name references: [AU launch on 9 July 2002, South African Government](https://www.gcis.gov.za/content/newsroom/media-releases/media-releases/african-union-summit-kicks-durban); [CSTO Charter of 7 October 2002](https://en.odkb-csto.org/documents/documents/ustav_organizatsii_dogovora_o_kollektivnoy_bezopasnosti_/); [OIC name change at the June 2011 ministerial meeting, Türkiye MFA](https://www.mfa.gov.tr/OIC.en.mfa). OIC is an inactive definition. Display names do not change membership, leaders, treaties or integration levels.
+
+No numerical political-power, opinion, approval, host-country, economic or military modifiers have been invented. The existing systems continue unchanged until values and associated rules are agreed.

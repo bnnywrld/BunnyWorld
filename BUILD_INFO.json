@@ -1,7 +1,7 @@
 {
-  "version": "0.2.1.6",
-  "baseline_version": "0.2.1.5 clean-globe",
-  "repository_base_commit": "b81663f164877c2e6c25ee26afe139bc4a491829",
+  "version": "0.2.1.7",
+  "baseline_version": "0.2.1.6 clean-globe",
+  "repository_base_commit": "2678dae238b99d0c75a4fb98d71cd53b23451c08",
   "engine": "Godot 4.5.1 stable",
   "geography_version": "0.2.1.2",
   "display_version": "0.2.1.2",
@@ -22,6 +22,11 @@
   "gpu_fps_measured": false,
   "gpu_nominal_bytes_saved": 33030144,
   "validation": {
+    "organizations_ui": {
+      "checks": 132,
+      "failures": 0,
+      "passed": true
+    },
     "model": {
       "passed": true
     },
@@ -35,13 +40,14 @@
       "failures": 0,
       "passed": true
     },
+    "clean_globe_stability": {
+      "checks": 52,
+      "failures": 0,
+      "passed": true
+    },
     "ui_render": {
       "renderer": "Godot 4.5.1 GL Compatibility / Mesa llvmpipe",
       "resolutions": [
-        [
-          1440,
-          900
-        ],
         [
           1024,
           768
@@ -50,6 +56,8 @@
       "passed": true
     },
     "repository_hygiene": {
+      "active_parts": 82,
+      "unused_parts": 0,
       "passed": true
     }
   },
@@ -61,5 +69,12 @@
     "remaining_clusters": 2745,
     "population_changed": false
   },
-  "save_schema": 21
+  "save_schema": 22,
+  "organization_system": {
+    "active_scenario_organizations": 19,
+    "catalog_definitions": 44,
+    "membership_imports": 0,
+    "effects": "Inactive until mechanic and balance values exist",
+    "hq_markers": true
+  }
 }

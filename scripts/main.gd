@@ -58,6 +58,8 @@ var overlay_size := Vector2.ZERO
 var overlay_screen := ""
 var last_panel_layout: Array = []
 var last_city_view: Array = []
+var organization_hq_places: Dictionary = {}
+const OrganizationRules = preload("res://scripts/organization_rules.gd")
 var last_camera_view: Array = []
 var tiny_state_markers: Control
 var map_rendering: RefCounted
@@ -257,6 +259,7 @@ func _ready() -> void:
 	urban_scenery.preparation_progress.connect(func(done: int,total: int): _loading_stage(65.0+20.0*float(done)/total,"Preparing cities and landmarks"))
 	await urban_scenery.initialize(relief_surface)
 	places.initialize(state, cities, JSON.parse_string(FileAccess.get_file_as_string("res://data/urban_scenery.json")))
+	_cache_organization_headquarters()
 	_build_place_search()
 	for tag: String in state.countries:
 		var country: Dictionary = state.countries[tag]
@@ -989,7 +992,7 @@ func _country_item_selected(index: int) -> void:
 
 func _clear_details() -> void:
 	if details == control_details: _close_floating_panels()
-	active_feature = ""
+	if details == control_details: active_feature = ""
 	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
 	if pinned != null:
 		for child: Node in pinned.get_children(): pinned.remove_child(child); child.queue_free()
@@ -1527,37 +1530,35 @@ func _focus_state(id: int) -> void:
 	focus_tween.tween_property(self,"distance",target_distance,.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func _open_organization(oid: String) -> void:
+	if not state.organizations.has(oid): return
+	overlay_layout_dirty = true
 	active_org = oid
 	map_mode = 1
 	map_picker.select(1)
 	org_picker.visible = true
+	relations_picker.visible = false
 	org_picker.select(org_ids.find(oid))
 	_rebuild_palette()
 	_show_organization()
 
 func _show_organization() -> void:
+	var member_tab: Node = control_details.get_node_or_null("OrganizationsPanel")
+	if active_feature == "Organizations" and member_tab != null and control_panel.visible:
+		member_tab.open_organization(active_org)
+		return
 	_hide_panel(control_panel)
 	_reveal_panel(right_panel)
 	details = diplomatic_details
-	var org: Dictionary = state.organizations[active_org]
 	_clear_details()
-	details.add_child(_label("INTERNATIONAL ORGANIZATION", 11, Color("63c9b6")))
-	_entity_heading(org["name"], _organization_texture(active_org), true)
-	details.add_child(_wrapped(org["purpose"], 15, Color("e5c888")))
-	details.add_child(HSeparator.new())
-	_stat("Members", str(org["members"].size()))
-	_stat("Role", org["direction"])
-	if org.has("membership_note"): details.add_child(_wrapped(org["membership_note"], 12))
-	details.add_child(HSeparator.new())
-	details.add_child(_label("MEMBERSHIP", 11, Color("63c9b6")))
-	var members: Array = org["members"].duplicate()
-	members.sort_custom(func(a: String, b: String): return state.countries[a]["name"].naturalnocasecmp_to(state.countries[b]["name"]) < 0)
-	var country_grid := _icon_grid()
-	for tag: String in members:
-		var c: Dictionary = state.countries[tag]
-		country_grid.add_child(_icon_button(c["name"], flags.resolve(tag, str(c.get("cosmetic", "")), c["outlook"]), func(): _show_country(tag, true)))
-	details.add_child(HSeparator.new())
-	details.add_child(_wrapped("Budgets, proposals and shared projects will arrive in the next development stages.", 13))
+	var org: Dictionary = state.organizations[active_org]
+	details.add_child(_label("INTERNATIONAL ORGANIZATION", 11, UIStyle.ACCENT_COLOR))
+	_entity_heading(OrganizationRules.display_name(org, state.date_dictionary()), _organization_texture(active_org), true)
+	var organizations_ui := preload("res://scripts/organizations_panel.gd").new()
+	organizations_ui.world = state
+	organizations_ui.host = self
+	organizations_ui.country_tag = state.player_country
+	details.add_child(organizations_ui)
+	organizations_ui.open_organization(active_org, true)
 
 func _map_changed(index: int) -> void:
 	overlay_layout_dirty = true
@@ -2510,7 +2511,7 @@ func _update_legend() -> void:
 	legend.visible = map_mode not in [0, 6]
 	match map_mode:
 		0: legend.text = "Political map"
-		1: legend.text = "Teal: members of " + active_org + "  ·  Dark blue: non-members"
+		1: legend.text = "Teal: members of " + active_org + "  ·  Dark blue: non-members  ·  Gold star: headquarters"
 		2: legend.text = "State population  ·  Dark blue: fewer people  →  Gold: more people\nTotals per state, on a logarithmic color scale"
 		4: legend.text = "GDP · $0.1B → $10T · Continuous logarithmic scale\nPale cream → amber → dark brown. Grey: unavailable."
 		6: legend.text = "Physical map · Terrain and waterways"
@@ -2697,13 +2698,16 @@ func _open_game_menu() -> void:
 	game_menu.popup_centered(Vector2i(400, 515))
 
 func _update_cities() -> void:
-	var key: Array = [planet.global_transform, camera.global_transform, view_container.size, screen]
+	var key: Array = [planet.global_transform, camera.global_transform, view_container.size, screen, map_mode, active_org]
 	if key == last_city_view: return
 	last_city_view = key
 	var markers: Array[Dictionary] = []
-	if distance > 1.65 or screen == "menu":
+	if (distance > 1.65 and map_mode != 1) or screen == "menu":
 		city_layer.set("markers", markers)
 		city_layer.queue_redraw()
+		return
+	if map_mode == 1:
+		_update_organization_headquarters()
 		return
 	var occupied: Array[Rect2] = []
 	var indices: Array = city_point_index.candidates(planet.global_transform.affine_inverse()*camera.global_position) if city_point_index != null else range(cities.size())
@@ -2727,6 +2731,28 @@ func _update_cities() -> void:
 		occupied.append(box)
 		markers.append({"name": city["name"], "point": projected, "capital": city["capital"], "state_capital":city.get("state_capital",false)})
 		if markers.size() >= 70: break
+	city_layer.set("markers", markers)
+	city_layer.queue_redraw()
+
+func _cache_organization_headquarters() -> void:
+	organization_hq_places.clear()
+	for oid: String in state.organizations:
+		organization_hq_places[oid] = OrganizationRules.headquarters(state.organizations[oid], places.entries)
+
+func _update_organization_headquarters() -> void:
+	var markers: Array[Dictionary] = []
+	var record: Dictionary = organization_hq_places.get(active_org, {})
+	if not record.is_empty():
+		var uv: Vector2 = record["uv"]
+		var local_point: Vector3 = relief_surface.point_at(uv) + ReliefSurface.unit_point(uv) * .000025
+		var point: Vector3 = planet.global_transform * local_point
+		if point.dot(camera.position - point) > 0 and not camera.is_position_behind(point):
+			var projected := camera.unproject_position(point) * view_container.size / Vector2(world_view.size)
+			if Rect2(Vector2.ZERO, view_container.size).has_point(projected):
+				var hq: Dictionary = state.organizations[active_org]["hq"]
+				var exact: bool = record.get("location_exact", false)
+				var caption := "%s HQ · %s" % [active_org, hq["city"]] if exact else "%s HQ host · %s (city unavailable)" % [active_org, record["name"]]
+				markers.append({"name":caption, "point":projected, "capital":true, "organization":active_org})
 	city_layer.set("markers", markers)
 	city_layer.queue_redraw()
 
@@ -2856,7 +2882,7 @@ func _position_panels(force: bool = true) -> void:
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		var available_height := maxf(240, view_container.size.y - 118)
-		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research"] else Vector2(370, available_height)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research", "Organizations"] else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -3125,6 +3151,12 @@ func _show_feature(caption: String) -> void:
 		var research := preload("res://scripts/research_panel.gd").new()
 		research.configure(state, tag, self)
 		control_details.add_child(research)
+	elif caption == "Organizations":
+		var tag: String = state.player_country
+		control_heading.add_child(_label(str(state.countries[tag]["name"]), 14, UIStyle.MUTED_COLOR))
+		var organizations_ui := preload("res://scripts/organizations_panel.gd").new()
+		organizations_ui.configure(state, tag, self)
+		control_details.add_child(organizations_ui)
 	_reveal_panel(control_panel)
 	_position_panels()
 	foundation.refresh_active_section()

@@ -1,4 +1,12 @@
-# Bunny World 0.2.1.6 — Research UI and styled law windows
+# Bunny World 0.2.1.7 — Organizations
+
+The **Organizations** toolbar button opens your country's memberships as large clickable cards. Open a card for **Members** and **Features**, headquarters, type, outlook affinity and integration level. Cards show counts rather than long member lists. Member rows open country information. The directory also shows the remaining design definitions, clearly inactive pending membership review.
+
+The 19 existing scenario member lists are preserved. All eight organization types have a data foundation; full/associate/observer/partner/suspended statuses and integration opt-outs are saved. Security alliances allow at most one full membership. No organization actions or PP/opinion/economic/military effects are enabled yet: the document leaves balance values and agreement mechanics pending. Unimplemented features are labeled **Planned**.
+
+In **Organizations map mode**, a gold star marks the selected organization's headquarters and national capital/city markers are hidden. Fixed seats are linked to the existing place catalog, falling back to a labeled host-country location if unavailable. Organizations without a fixed HQ get no artificial star. OAU/AU and CST/CSTO labels follow the campaign date; memberships do not automatically change.
+
+Start a **fresh campaign** (save schema 22). Geography, map assets and population are unchanged.
 
 Use branch **clean-globe**. The new globe is connected to the existing country panels, politics, demographics, eight map modes and save system. Current map: **6144×3072**, **224 countries, 1,252 states, 13,074 provinces and 784 sea regions**.
 
@@ -10,7 +18,7 @@ Government now has six compact icon rows covering all 28 Constitution & Laws set
 
 Country-specific year-2000 starting laws are seeded for all 224 countries, including Japan's constitutional monarchy. Broad policy categories are scenario abstractions; some country defaults will need later historical refinement. Map styling and obsolete-capital cleanup from 0.2.1.4 are retained.
 
-Close Godot/game, pull **clean-globe**, run **Prepare_BunnyWorld.bat**, then open **project.godot** in **Godot 4.5.1 Standard**. Application version: **0.2.1.6**; geography/display bundle: **0.2.1.2**. Use a fresh campaign for testing. No EXE is included.
+Close Godot/game, pull **clean-globe**, run **Prepare_BunnyWorld.bat**, then open **project.godot** in **Godot 4.5.1 Standard**. Application version: **0.2.1.7**; geography/display bundle: **0.2.1.2**. Use a fresh campaign for testing. No EXE is included.
 
 Prepared boundary resources have been rebuilt from the existing canonical map with the checked-in tools to repair stale build provenance. Province/sea PNGs, ownership, population, state/province IDs and demographics are unchanged. Packed assets are required; preparation verifies them before opening the game.
 

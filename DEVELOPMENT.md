@@ -1,6 +1,20 @@
-# Developing BunnyWorld 0.2.1.6
+# Developing BunnyWorld 0.2.1.7
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
+
+## Organizations (0.2.1.7)
+
+`organization_rules.json` adds metadata without modifying the canonical world/map data. `organization_rules.gd` overlays definitions onto the 19 existing scenario organizations at reset. All existing membership arrays stay byte-for-byte equivalent. Every imported membership initially remains full; associates, observers, partners and suspension are supported by status maps but no new status assignments or member lists are silently imported. Twenty-five additional definitions are visible only in the directory, with empty membership and no simulation presence. The document explicitly requires membership review before import; see DATA_SOURCES.md.
+
+The toolbar's Organizations section uses `organizations_panel.gd`: country-specific cards, a back action, Members and Features tabs, flags/statuses on member rows, planned disabled actions, and map access. It inherits the current navy/gold theme. The existing unified country inspector is reused; map access updates the same organization detail instead of clearing its owner. The section uses the existing outer vertical scroll and releases children when switching views. No background or frame-processing node was introduced.
+
+`trade_integration_level` returns the highest regional level from full memberships, respecting per-country opt-outs, and gives no live economy bonuses. Saved statuses/opt-outs are validated before assignment; full security memberships are exclusive, partnerships are not. Save schema 22 requires a fresh game, with no migration. PP, opinions, research, laws, approval, trade and military behavior remain unchanged: the design specifies no agreed bonus values or playable consent workflow. Do not debit PP for disabled actions or claim future effects as active.
+
+HQ records resolve once against PlaceCatalog after startup; city matching includes the existing Washington, D.C. spelling. Runtime records link to city/state/province IDs, with an explicit country fallback. In Organizations mode, the city overlay projects at most one HQ, even from globe zoom, instead of scanning the national-city index. Countries without a fixed HQ show no marker. The cached city-view key includes map mode and organization, so changing either invalidates markers while a stationary view does no extra work. Existing map meshes, textures, ownership and geography are unchanged.
+
+OAU/AU and CST/CSTO use dated display names, preserving stable IDs and current membership. These are presentation changes, not event-driven expansions. The remaining founding/succession records are inactive definitions; implementing campaign events is separate work.
+
+Run `tests/organizations_tests.gd`, existing model/political/research UI suites and clean_globe_stability.gd with Godot 4.5.1. Set BUNNYWORLD_QA_DIR to an external directory for optional GL screenshot capture. Screenshots and packaged outputs do not belong in the repository.
 
 ## Map style and capital decoration
 
@@ -12,7 +26,7 @@ Labels/city architecture, coastline province lookup and terrain geometry are sep
 
 ## Clean globe stabilization
 
-The current application is 0.2.1.6 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
+The current application is 0.2.1.7 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
 
 The clean surface uses one 384×192 sphere, spatial border/river batches and the existing atmosphere. There is no detail patch. DisplayCoverage.initialize(target, false) loads the required coast/tiny-land/sea fields but skips the unused boundary hint/pair/distance textures and local coast packs. Legacy callers retain the default behavior. Three skipped fields are 3072×1536 × (1+4+2) bytes = 33,030,144 bytes (31.5 MiB), excluding driver overhead. The sandbox shares immutable textures between both materials.
 

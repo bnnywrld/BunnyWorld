@@ -56,7 +56,7 @@ func build(main: Control) -> void:
 	host.navigation_row.add_child(toolbar)
 	host.navigation_row.move_child(toolbar, 1)
 	toolbar.size_flags_vertical = Control.SIZE_SHRINK_CENTER
-	for row: Array in [["politics", "Government"], ["stability", "National policies"], ["economy", "Economy"], ["research", "Research"], ["construction", "Construction"]]:
+	for row: Array in [["politics", "Government"], ["stability", "National policies"], ["economy", "Economy"], ["research", "Research"], ["organizations", "Organizations"], ["construction", "Construction"]]:
 		var caption: String = row[1]
 		var button := icon_button(row[0], caption, func(): host._show_feature(caption))
 		button.name = "Feature_" + str(row[0])

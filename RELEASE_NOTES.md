@@ -1,3 +1,12 @@
+# 0.2.1.7 — Organizations
+
+- Organizations toolbar section with large membership cards and member/feature detail tabs.
+- Eight organization types; saved membership statuses, exclusive full alliance membership, integration opt-out queries and headquarters links.
+- Existing 19 membership lists preserved. Directory contains 25 additional inactive definitions awaiting the member-list review requested in the design.
+- Organizations map mode shows the selected HQ as a gold star and hides country capitals/city markers. No fixed HQ means no star.
+- Unbuilt or unbalanced effects/actions are marked Planned and remain inactive. OAU/AU and CST/CSTO display names follow the campaign date; no automatic membership changes.
+- Application 0.2.1.7; fresh campaign/schema 22; map/display stay 0.2.1.2. No EXE export.
+
 # 0.2.1.4 — map style and obsolete capital cleanup
 
 - Physical map: retain a light country tint at close zoom; narrow and soften border/coast colour ribbons.

@@ -1,4 +1,19 @@
-# BunnyWorld 0.2.1.6 validation
+# BunnyWorld 0.2.1.7 validation
+
+Godot 4.5.1 on Linux; fresh campaigns/save schema 22.
+
+- `organizations_tests.gd`: **132 checks, zero failures**, including actual card pointer input; default player-only cards; all eight types/44 definitions; 19 unchanged member arrays; status/opt-out queries; exclusive alliance validation; metadata/status/save round-trip; dated names; member/features tabs; inactive-directory isolation; HQ-only markers; no fake seat for rotating forums; nonmember HQ hosts; city-marker restoration; no national-city scan in HQ mode; tab cleanup; and 1024×768 bounds.
+- GL Compatibility/Mesa llvmpipe rendered and visually inspected the membership cards, Features tab and EU headquarters marker at 1024×768. Capitals/city labels are absent in organization mode. This is software-renderer validation, not laptop FPS measurement.
+- `model_tests.gd`: passed dates, clock, ownership, memberships, save/load, corruption rejection and population conservation.
+- `political_ui_tests.gd`: **6,918 checks, zero failures**.
+- `research_ui_tests.gd`: **1,110 checks, zero failures**.
+- `clean_globe_stability.gd`: **52 checks, zero failures**, including exactly 100 idle map draws across ten simulated seconds and no stationary camera/uniform/coverage work.
+- `tools/repository_hygiene.py`: **82 active parts verified, zero unused parts**.
+- Canonical map/geography, membership arrays, populations, laws and research mechanics unchanged. No organization PP/opinion/economic/military effects activated; all unbuilt actions are marked Planned.
+
+Native Windows execution, Windows export and target-laptop FPS remain untested. No EXE is included.
+
+## Previous research UI validation (0.2.1.6)
 
 Godot 4.5.1 on Linux. Research and law-window UI only; save schema remains 21.
 

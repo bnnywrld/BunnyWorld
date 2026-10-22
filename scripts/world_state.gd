@@ -2,7 +2,8 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 21
+const SAVE_VERSION := 22
+const OrganizationRules = preload("res://scripts/organization_rules.gd")
 const GovernmentRules = preload("res://scripts/government_rules.gd")
 const BASE_DAILY_POLITICAL_POWER := 1.0
 const HOUR_SECONDS := 3600
@@ -60,6 +61,7 @@ func reset() -> void:
 			countries[tag]["starting_stats"]["political_power"] = 100.0
 	regions = database["regions"].duplicate(true)
 	organizations = database["organizations"].duplicate(true)
+	OrganizationRules.seed(organizations)
 	provinces = province_database.duplicate(true)
 	selected_province = 0
 	selected_sea = 0
@@ -185,6 +187,21 @@ func memberships(tag: String) -> Array[String]:
 		if tag in organizations[oid]["members"]:
 			result.append(oid)
 	return result
+
+func full_memberships(tag: String) -> Array[String]:
+	var result: Array[String] = []
+	for oid: String in memberships(tag):
+		if OrganizationRules.status(organizations[oid], tag) == "full": result.append(oid)
+	return result
+
+func trade_integration_level(tag: String) -> int:
+	# Data query only. Trade/economy bonuses are not active yet.
+	var highest := 0
+	for oid: String in full_memberships(tag):
+		var org: Dictionary = organizations[oid]
+		if org.get("type") == "regional":
+			highest = maxi(highest, int(org.get("opt_out_levels", {}).get(tag, org["integration_level"])))
+	return highest
 
 func transfer_region(id: int, new_owner: String) -> bool:
 	if not regions.has(str(id)) or not countries.has(new_owner):
@@ -317,6 +334,8 @@ func load_game(path: String) -> Dictionary:
 			members[member] = true
 		if not (org.get("budget") is float or org.get("budget") is int) or not is_finite(float(org["budget"])) or float(org["budget"]) < 0:
 			return _invalid("The saved organization budget is invalid.")
+	if not OrganizationRules.valid_state(saved_orgs, countries):
+		return _invalid("The saved organization statuses or alliance memberships are invalid.")
 	var view: Variant = payload.get("view")
 	if not view is Dictionary or not view.get("rotation") is Array or view["rotation"].size() != 2:
 		return _invalid("The saved globe view is invalid.")

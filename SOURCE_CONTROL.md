@@ -1,6 +1,6 @@
 # Keeping BunnyWorld small
 
-The working version is on main. Keep game code/data, required assets, geographic build inputs, licenses and current design/development notes. Large packed resources in repository_assets are required: Prepare_BunnyWorld.bat restores the checksum-verified originals. They are not backups.
+The working version is on clean-globe. Keep game code/data, required assets, geographic build inputs, licenses and current design/development notes. Large packed resources in repository_assets are required: Prepare_BunnyWorld.bat restores the checksum-verified originals. They are not backups.
 
 ## Every update
 
@@ -21,7 +21,7 @@ Pulling the cleanup removes tracked obsolete packs from the working folder. It d
 For the smallest new checkout use:
 
 ```
-git clone --depth 1 --single-branch --branch main https://github.com/bnnywrld/BunnyWorld.git
+git clone --depth 1 --single-branch --branch clean-globe https://github.com/bnnywrld/BunnyWorld.git
 ```
 
 Use a clean sibling folder first; preserve any local edits or uncommitted patches before replacing an existing checkout. A shallow clone avoids downloading old asset history. Do not use reset --hard or clean -fdx to recover disk space.
