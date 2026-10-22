@@ -778,6 +778,7 @@ func _build_planet() -> void:
 	planet_material.set_shader_parameter("rainforest_detail", load("res://assets/materials/rainforest.png"))
 	planet_material.set_shader_parameter("alluvium_detail", load("res://assets/materials/alluvium.png"))
 	planet_material.set_shader_parameter("mediterranean_detail", load("res://assets/materials/mediterranean.png"))
+	planet_material.set_shader_parameter("grassland_detail", load("res://assets/materials/grassland.png"))
 	planet_material.set_shader_parameter("city_growth", 1.0)
 	for kind: String in ["land", "sea", "province"]:
 		var border_mesh := MeshInstance3D.new()
@@ -800,6 +801,7 @@ func _build_planet() -> void:
 	waterways_material = water_material
 	water_material.shader = load("res://scripts/waterways.gdshader")
 	water_material.set_shader_parameter("relief_data",load("res://assets/relief_data.png"))
+	water_material.set_shader_parameter("coast_distance", planet_material.get_shader_parameter("coast_distance"))
 	waterways.material_override = water_material
 	planet.add_child(waterways)
 	spatial_map_layers.register("water",waterways,planet)
@@ -939,6 +941,11 @@ func _update_selection_shader() -> void:
 	planet_material.set_shader_parameter("inspection_active", active)
 	planet_material.set_shader_parameter("selected_region", float(region_id))
 	planet_material.set_shader_parameter("selected_province", float(province_id))
+	var growth := 1.0
+	if region_id > 0 and state.regions.has(str(region_id)):
+		var pop := float(state.regions[str(region_id)].get("population", 500000))
+		growth = clampf(0.85 + log(maxf(pop, 10000.0) / 100000.0) * 0.12, 0.85, 1.45)
+	planet_material.set_shader_parameter("city_growth", growth)
 	_update_border_visibility()
 
 func _preview_state(id: int) -> void:
@@ -1770,7 +1777,7 @@ func _update_view_uniforms() -> void:
 	planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
 	planet_material.set_shader_parameter("camera_distance", distance)
 	planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
-	planet_material.set_shader_parameter("city_detail", clampf((1.50 - distance) / .25, 0, 1))
+	planet_material.set_shader_parameter("city_detail", clampf((1.30 - distance) / .16, 0, 1))
 	planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
 	planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0, 1))
 	planet_material.set_shader_parameter("coast_strength", clampf((3.2 - distance) / 1.0, 0, 1))

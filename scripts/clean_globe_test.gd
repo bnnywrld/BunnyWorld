@@ -212,6 +212,7 @@ func _init_material_uniforms(mat: ShaderMaterial) -> void:
 	mat.set_shader_parameter("rainforest_detail", load("res://assets/materials/rainforest.png"))
 	mat.set_shader_parameter("alluvium_detail", load("res://assets/materials/alluvium.png"))
 	mat.set_shader_parameter("mediterranean_detail", load("res://assets/materials/mediterranean.png"))
+	mat.set_shader_parameter("grassland_detail", load("res://assets/materials/grassland.png"))
 	mat.set_shader_parameter("city_growth", 1.0)
 	resident_terrain.initialize(mat, false)
 	terrain_shading.initialize(mat)
@@ -416,6 +417,11 @@ func update_selection(country_idx: float, region_id: float, province_id: float, 
 	_set_param("selected_region", region_id)
 	_set_param("selected_province", province_id)
 	_set_param("selected_sea", sea_id)
+	var growth := 1.0
+	if active and region_id > 0 and _state_data.regions.has(str(int(region_id))):
+		var pop := float(_state_data.regions[str(int(region_id))].get("population", 500000))
+		growth = clampf(0.85 + log(maxf(pop, 10000.0) / 100000.0) * 0.12, 0.85, 1.45)
+	_set_param("city_growth", growth)
 
 	if display_coverage != null:
 		display_coverage.select(int(region_id) if active else 0, int(province_id) if active else 0, int(sea_id))
@@ -454,7 +460,7 @@ func _update_camera_uniforms() -> void:
 	_set_param("camera_distance", distance)
 	_set_param("region_opacity", clampf((1.65 - distance) / 0.15, 0.0, 1.0))
 	_set_param("province_opacity", clampf((1.2 - distance) / 0.08, 0.0, 1.0))
-	_set_param("city_detail", clampf((1.50 - distance) / .25, 0.0, 1.0))
+	_set_param("city_detail", clampf((1.30 - distance) / .16, 0.0, 1.0))
 	_set_param("far_filter", clampf((distance - 2.4) / 1.0, 0.0, 1.0))
 	_set_param("border_strength", clampf((4.1 - distance) / 1.3, 0.0, 1.0))
 	_set_param("coast_strength", clampf((3.2 - distance) / 1.0, 0.0, 1.0))

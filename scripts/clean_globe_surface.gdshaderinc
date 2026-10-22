@@ -47,6 +47,7 @@ uniform sampler2D conifer_detail : filter_linear_mipmap_anisotropic, repeat_enab
 uniform sampler2D rainforest_detail : filter_linear_mipmap_anisotropic, repeat_enable;
 uniform sampler2D alluvium_detail : filter_linear_mipmap_anisotropic, repeat_enable;
 uniform sampler2D mediterranean_detail : filter_linear_mipmap_anisotropic, repeat_enable;
+uniform sampler2D grassland_detail : filter_linear_mipmap_anisotropic, repeat_enable;
 uniform sampler2D urban_grid_material : source_color, filter_linear_mipmap, repeat_enable;
 uniform sampler2D urban_asian_material : source_color, filter_linear_mipmap, repeat_enable;
 uniform float city_growth = 1.0;
@@ -460,138 +461,139 @@ vec3 get_overlay(vec3 base_color, vec3 overlay_color, float amount) {
 	return mix(base_color, to_linear(clamp(res, vec3(0.0), vec3(1.0))), amount);
 }
 
-// --- Multi-biome sampling with farmland, rice paddies, conifer woods, badlands, swamp, savanna, chaparral, and tundra ---
+// --- Multi-biome sampling: authentic real-world biomes across every continent ---
 vec3 sample_biome(float layer, vec2 uv_coord, vec2 dx_coord, vec2 dy_coord, vec2 globe_uv, float meters, float coast_dist) {
-	float macro_var = patch_noise(globe_uv * vec2(110.0, 55.0));
-	float micro_var = patch_noise(uv_coord * 0.05);
+	int id = int(floor(layer + 0.5));
 
-	// East Asia & Southeast Asia check (China, Japan, Korea, SE Asia):
-	// Longitude 70E to 145E (globe_uv.x ~0.69 to 0.91), Latitude 10S to 48N (globe_uv.y ~0.23 to 0.58)
-	bool is_east_asia = (globe_uv.x > 0.69 && globe_uv.x < 0.91 && globe_uv.y > 0.23 && globe_uv.y < 0.58);
+	// Geographic & Climatic Zone Calculations:
+	// 1. Equatorial Tropical Belt (Amazon, Congo, Indonesia, SE Asia - lat 18S to 18N):
+	float tropical_w = 1.0 - smoothstep(0.08, 0.12, abs(globe_uv.y - 0.5));
 
-	// Russian / Siberian Boreal Taiga check (Russia north of 52N):
-	// Longitude 28E to 180E (globe_uv.x ~0.57 to 1.0), Latitude north of 52N (globe_uv.y < 0.21)
-	bool is_russia_boreal = (globe_uv.x > 0.57 && globe_uv.y < 0.21);
+	// 2. East Asia & Southeast Asia (China, Japan, Korea, Vietnam, Taiwan, Thailand, Philippines):
+	// lons ~65E to 145E (UV.x ~0.68 to 0.92), lats ~10S to 46N (UV.y ~0.24 to 0.56)
+	float ea_x = smoothstep(0.66, 0.72, globe_uv.x) * (1.0 - smoothstep(0.92, 0.96, globe_uv.x));
+	float ea_y = smoothstep(0.22, 0.26, globe_uv.y) * (1.0 - smoothstep(0.55, 0.60, globe_uv.y));
+	float east_asia_w = ea_x * ea_y;
 
-	// 1. Farmland / Agriculture (layer 2):
-	if (abs(layer - 2.0) < 0.5) {
-		// In northern Russia & Siberia: Permafrost & taiga prevent agriculture! Render Siberian pine/larch taiga
-		if (is_russia_boreal) {
-			vec3 pine = textureGrad(conifer_detail, uv_coord, dx_coord, dy_coord).rgb;
-			if (globe_uv.y < 0.14) {
-				vec3 tund = textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
-				return mix(pine, tund, smoothstep(0.14, 0.10, globe_uv.y));
-			}
-			return pine;
-		}
-		vec3 ag_texture;
-		if (is_east_asia) {
-			// In East Asia, agriculture is Asian flooded rice paddy terraces!
-			ag_texture = textureGrad(rice_paddy_detail, uv_coord, dx_coord, dy_coord).rgb;
-		} else {
-			// In Europe & Americas, agriculture uses the authentic European farmland mosaic (resident_2.png)
-			ag_texture = textureGrad(farmland_detail, uv_coord, dx_coord, dy_coord).rgb;
-		}
-		
-		// In coastal river deltas & floodplains (like Nile, Rhine, Mississippi), blend rich silt mudflats
-		if (coast_dist < 10.0 && meters < 65.0) {
-			vec3 silt = textureGrad(alluvium_detail, uv_coord, dx_coord, dy_coord).rgb;
-			float wet_w = smoothstep(10.0, 1.5, coast_dist) * smoothstep(65.0, 8.0, meters);
-			ag_texture = mix(ag_texture, silt, wet_w * 0.70);
-		}
-		return ag_texture;
-	}
+	// 3. Northern Cold Boreal Belt (Canada, Scandinavia, Northern Siberia - lat > 56N):
+	float taiga_lat = globe_uv.y + (patch_noise(globe_uv * vec2(60.0, 30.0) + 17.1) - 0.5) * 0.035;
+	float taiga_belt = smoothstep(0.19, 0.14, taiga_lat);
 
-	// 2. Plains / Grassland (layer 4) - covers 71% of world map:
-	if (abs(layer - 4.0) < 0.5) {
-		// In northern Russia/Siberia: Plains at high latitudes are cold taiga and tundra, not farmland!
-		if (is_russia_boreal) {
-			vec3 pine = textureGrad(conifer_detail, uv_coord, dx_coord, dy_coord).rgb;
+	// 4. Mediterranean & Chaparral Zones (California, Med Basin, Central Chile, South Africa, SW Australia):
+	bool is_california = (globe_uv.x > 0.11 && globe_uv.x < 0.18 && globe_uv.y > 0.30 && globe_uv.y < 0.40);
+	bool is_med_basin = (globe_uv.x > 0.47 && globe_uv.x < 0.61 && globe_uv.y > 0.28 && globe_uv.y < 0.38);
+	bool is_chile_med = (globe_uv.x > 0.29 && globe_uv.x < 0.33 && globe_uv.y > 0.65 && globe_uv.y < 0.74);
+	bool is_south_africa = (globe_uv.x > 0.53 && globe_uv.x < 0.58 && globe_uv.y > 0.66 && globe_uv.y < 0.72);
+	bool is_australia_med = (globe_uv.x > 0.81 && globe_uv.x < 0.94 && globe_uv.y > 0.65 && globe_uv.y < 0.75);
+	float chaparral_zone = (is_california || is_med_basin || is_chile_med || is_south_africa || is_australia_med) ? 1.0 : 0.0;
+
+	// 5. Wetlands & Swamps (Mississippi delta / Florida Everglades, Pantanal, Pripet marshes):
+	bool is_gulf_wetland = (globe_uv.x > 0.22 && globe_uv.x < 0.29 && globe_uv.y > 0.32 && globe_uv.y < 0.40);
+	bool is_pantanal = (globe_uv.x > 0.32 && globe_uv.x < 0.38 && globe_uv.y > 0.55 && globe_uv.y < 0.65);
+	bool is_pripet = (globe_uv.x > 0.56 && globe_uv.x < 0.59 && globe_uv.y > 0.20 && globe_uv.y < 0.23);
+	float swamp_w = (is_gulf_wetland || is_pantanal || is_pripet || (meters < 40.0 && coast_dist < 18.0)) ? 1.0 : 0.0;
+
+	// Dedicated Direct Mappings (IDs 8 to 14):
+	if (id == 14) return textureGrad(rice_paddy_detail, uv_coord, dx_coord, dy_coord).rgb;
+	if (id == 13) return textureGrad(alluvium_detail, uv_coord, dx_coord, dy_coord).rgb;
+	if (id == 12) return textureGrad(badlands_detail, uv_coord, dx_coord, dy_coord).rgb;
+	if (id == 11) return mix(textureGrad(mediterranean_detail, uv_coord, dx_coord, dy_coord).rgb, textureGrad(chaparral_detail, uv_coord, dx_coord, dy_coord).rgb, 0.50);
+	if (id == 10) return textureGrad(savanna_detail, uv_coord, dx_coord, dy_coord).rgb;
+	if (id == 9)  return textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
+	if (id == 8)  return textureGrad(swamp_detail, uv_coord, dx_coord, dy_coord).rgb;
+
+	// Standard Geographical Categories (0 to 7):
+	// Category 4: Plains / Grassland -> MUST be the user's new green plains texture!
+	if (id == 4) {
+		vec3 grass = textureGrad(grassland_detail, uv_coord, dx_coord, dy_coord).rgb;
+		if (chaparral_zone > 0.5) {
+			vec3 med = mix(textureGrad(mediterranean_detail, uv_coord, dx_coord, dy_coord).rgb, textureGrad(chaparral_detail, uv_coord, dx_coord, dy_coord).rgb, 0.50);
+			grass = mix(grass, med, 0.70);
+		} else if (globe_uv.y < 0.16) {
 			vec3 tund = textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
-			return mix(pine, tund, smoothstep(0.16, 0.10, globe_uv.y));
-		}
-		vec3 grass;
-		if (is_east_asia) {
-			// In East Asia, plains are intensely cultivated rice paddies & agricultural mosaics
-			vec3 paddy = textureGrad(rice_paddy_detail, uv_coord, dx_coord, dy_coord).rgb;
-			vec3 farm = textureGrad(farmland_detail, uv_coord, dx_coord, dy_coord).rgb;
-			grass = mix(paddy, farm, smoothstep(0.40, 0.70, micro_var) * 0.40);
-		} else {
-			// In Europe & Americas, agricultural plains use the authentic farmland mosaic (resident_2.png)
-			vec3 farm = textureGrad(farmland_detail, uv_coord, dx_coord, dy_coord).rgb;
-			vec3 pasture = textureGrad(terrain_materials, vec3(uv_coord, 4.0), dx_coord, dy_coord).rgb;
-			grass = mix(farm, pasture, smoothstep(0.42, 0.82, macro_var) * 0.45);
-		}
-		// Coastal river deltas and floodplains: rich silt alluvium mudflats
-		if (coast_dist < 10.0 && meters < 65.0) {
-			vec3 silt = textureGrad(alluvium_detail, uv_coord, dx_coord, dy_coord).rgb;
-			grass = mix(grass, silt, smoothstep(10.0, 2.0, coast_dist) * 0.65);
-		}
-		// Semi-arid scrub / chaparral / Mediterranean scrub (California, Spain, Italy, Greece, Chile)
-		if (abs(globe_uv.y - 0.5) > 0.08 && abs(globe_uv.y - 0.5) < 0.28) {
-			vec3 med = textureGrad(mediterranean_detail, uv_coord, dx_coord, dy_coord).rgb;
-			vec3 chap = textureGrad(chaparral_detail, uv_coord, dx_coord, dy_coord).rgb;
-			vec3 scrub = mix(med, chap, smoothstep(0.35, 0.65, micro_var));
-			grass = mix(grass, scrub, smoothstep(0.40, 0.76, macro_var) * 0.65);
-		}
-		// Drier acacia savanna in tropical & subtropical latitudes (Texas, Florida, Sahel, Australia, Brazil)
-		if (abs(globe_uv.y - 0.5) < 0.22) {
+			grass = mix(grass, tund, smoothstep(0.16, 0.10, globe_uv.y));
+		} else if (tropical_w > 0.01 && abs(globe_uv.y - 0.5) > 0.05) {
 			vec3 sav = textureGrad(savanna_detail, uv_coord, dx_coord, dy_coord).rgb;
-			grass = mix(grass, sav, smoothstep(0.38, 0.75, macro_var) * 0.70);
-		}
-		// Cold northern sub-polar tundra in high latitudes (globe_uv.y < 0.20, lat > 54N)
-		if (globe_uv.y < 0.20) {
-			vec3 tund = textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
-			grass = mix(grass, tund, smoothstep(0.20, 0.12, globe_uv.y));
+			grass = mix(grass, sav, tropical_w * 0.65);
 		}
 		return grass;
 	}
 
-	// 3. Mountain rock & alpine highlands (layer 5):
-	if (abs(layer - 5.0) < 0.5) {
-		vec3 r_macro = textureGrad(terrain_materials, vec3(uv_coord, 5.0), dx_coord, dy_coord).rgb;
-		vec3 r_micro = textureGrad(rock_detail, uv_coord * 1.5, dx_coord * 1.5, dy_coord * 1.5).rgb;
-		vec3 rock_base = mix(r_macro, r_micro * 0.95, 0.55);
-		// Alpine tundra moss & cold weathered slate at high altitude
-		if (meters > 1800.0) {
-			vec3 tund = textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
-			float alt_w = smoothstep(1800.0, 3200.0, meters);
-			rock_base = mix(rock_base, tund, alt_w * 0.70);
+	// Category 2: Farmland / Cropland
+	if (id == 2) {
+		// In East & Southeast Asia (China, Japan, Korea, Vietnam, Taiwan), display authentic Rice Paddies!
+		if (east_asia_w > 0.05) {
+			vec3 paddy = textureGrad(rice_paddy_detail, uv_coord, dx_coord, dy_coord).rgb;
+			return paddy;
 		}
-		return rock_base;
+		// In Europe & Americas, display patchy cropland mixed with green pastures
+		vec3 fields = textureGrad(farmland_detail, uv_coord, dx_coord, dy_coord).rgb;
+		vec3 pasture = textureGrad(grassland_detail, uv_coord, dx_coord, dy_coord).rgb;
+		float farm_patch = patch_noise(globe_uv * vec2(360.0, 180.0) + 7.3);
+		vec3 ag_mix = mix(pasture, fields, smoothstep(0.30, 0.55, farm_patch));
+		// River deltas & floodplains
+		if (coast_dist < 18.0 && meters < 65.0) {
+			vec3 silt = textureGrad(alluvium_detail, uv_coord, dx_coord, dy_coord).rgb;
+			ag_mix = mix(ag_mix, silt, 0.60);
+		}
+		if (swamp_w > 0.5) {
+			vec3 marsh = textureGrad(swamp_detail, uv_coord, dx_coord, dy_coord).rgb;
+			ag_mix = mix(ag_mix, marsh, 0.70);
+		}
+		return ag_mix;
 	}
 
-	// 4. Desert & Arid Lands (layer 3):
-	if (abs(layer - 3.0) < 0.5) {
+	// Category 0 & 1: Forest / Woodland
+	if (id == 0 || id == 1) {
+		// Equatorial Tropical Rainforest (Amazon, Congo, Indonesia, SE Asia)
+		if (tropical_w > 0.25) {
+			return textureGrad(rainforest_detail, uv_coord, dx_coord, dy_coord).rgb;
+		}
+		// Conifer taiga in northern boreal belt (Canada, Scandinavia, Northern Siberia)
+		// AND high mountain slope forests
+		float mountain_conifer = smoothstep(650.0, 1500.0, meters);
+		float conifer_weight = max(taiga_belt, mountain_conifer * (1.0 - tropical_w));
+		if (conifer_weight > 0.01) {
+			vec3 pine = textureGrad(conifer_detail, uv_coord, dx_coord, dy_coord).rgb;
+			vec3 dec = textureGrad(terrain_materials, vec3(uv_coord, 0.0), dx_coord, dy_coord).rgb;
+			return mix(dec, pine, conifer_weight);
+		}
+		return textureGrad(terrain_materials, vec3(uv_coord, 0.0), dx_coord, dy_coord).rgb;
+	}
+
+	// Category 3: Desert / Arid
+	if (id == 3) {
 		vec3 sand = textureGrad(terrain_materials, vec3(uv_coord, 3.0), dx_coord, dy_coord).rgb;
 		vec3 bad = textureGrad(badlands_detail, uv_coord, dx_coord, dy_coord).rgb;
-		vec3 sav = textureGrad(savanna_detail, uv_coord, dx_coord, dy_coord).rgb;
-		vec3 med = textureGrad(mediterranean_detail, uv_coord, dx_coord, dy_coord).rgb;
-		// Break up dunes with badlands clay, semi-arid scrub and savanna margins
-		vec3 arid_mix = mix(bad, mix(med, sav, micro_var), 0.50);
-		return mix(sand, arid_mix, smoothstep(0.38, 0.78, macro_var) * 0.70);
+		return mix(sand, bad, 0.40);
 	}
 
-	// 5. Forest / Woodland (layers 0 & 1):
-	if (layer < 1.5) {
-		// Boreal / taiga conifers in northern latitudes (Canada, Russia, Scandinavia - lat > 42N)
-		if (globe_uv.y < 0.27) {
-			vec3 pine = textureGrad(conifer_detail, uv_coord, dx_coord, dy_coord).rgb;
-			vec3 dec = textureGrad(terrain_materials, vec3(uv_coord, layer), dx_coord, dy_coord).rgb;
-			return mix(dec, pine, smoothstep(0.27, 0.19, globe_uv.y));
+	// Category 5: Mountain Rock
+	if (id == 5) {
+		vec3 r_macro = textureGrad(terrain_materials, vec3(uv_coord, 5.0), dx_coord, dy_coord).rgb;
+		vec3 r_micro = textureGrad(rock_detail, uv_coord * 1.5, dx_coord * 1.5, dy_coord * 1.5).rgb;
+		vec3 rock = mix(r_macro, r_micro * 0.95, 0.60);
+		if (meters > 2000.0) {
+			vec3 tund = textureGrad(tundra_detail, uv_coord, dx_coord, dy_coord).rgb;
+			rock = mix(rock, tund, smoothstep(2000.0, 3400.0, meters) * 0.65);
 		}
-		return textureGrad(terrain_materials, vec3(uv_coord, layer), dx_coord, dy_coord).rgb;
+		return rock;
 	}
 
-	// 6. Tropical Rainforest / Jungle (layer 7):
-	if (abs(layer - 7.0) < 0.5) {
-		vec3 j_old = textureGrad(terrain_materials, vec3(uv_coord, 7.0), dx_coord, dy_coord).rgb;
-		vec3 j_new = textureGrad(rainforest_detail, uv_coord, dx_coord, dy_coord).rgb;
-		return mix(j_old * 0.50 + j_new * 0.50, j_new, 0.85);
+	// Category 6: Snow & Ice
+	if (id == 6) {
+		return textureGrad(terrain_materials, vec3(uv_coord, 6.0), dx_coord, dy_coord).rgb;
 	}
 
-	// Snow (layer 6):
-	return textureGrad(terrain_materials, vec3(uv_coord, layer), dx_coord, dy_coord).rgb;
+	// Category 7: Rainforest & Wetlands
+	if (id == 7) {
+		if (tropical_w > 0.20) {
+			return textureGrad(rainforest_detail, uv_coord, dx_coord, dy_coord).rgb;
+		}
+		return textureGrad(swamp_detail, uv_coord, dx_coord, dy_coord).rgb;
+	}
+
+	return textureGrad(grassland_detail, uv_coord, dx_coord, dy_coord).rgb;
 }
 
 vec3 biome_at(vec2 uv) {
@@ -608,7 +610,7 @@ vec3 biome_at(vec2 uv) {
 	influence[0] = (1.0 - f.x) * (1.0 - f.y); influence[1] = f.x * (1.0 - f.y);
 	influence[2] = (1.0 - f.x) * f.y; influence[3] = f.x * f.y;
 	float best = 0.0; float next = 0.0; float first = 0.0; float second = 0.0;
-	for (int category = 0; category < 8; category++) {
+	for (int category = 0; category < 15; category++) {
 		float total = 0.0;
 		for (int corner = 0; corner < 4; corner++) {
 			float a = floor(entries[corner].r * 255.0 + .5);
@@ -646,7 +648,21 @@ void fragment() {
 	float passage_id = water_passage(uv);
 	float pid = passage_id > 0.0 ? 0.0 : province_at(uv);
 
-	float coast_value = texture(coast_distance, uv).r;
+	// Smooth C1 Hermite cubic sampling for coast distance field (eliminates bilinear 45-degree facets)
+	vec2 coast_size = vec2(textureSize(coast_distance, 0));
+	vec2 coast_texel = 1.0 / coast_size;
+	vec2 c_pos = uv * coast_size - 0.5;
+	vec2 c_f = fract(c_pos);
+	vec2 c_smooth_f = c_f * c_f * (3.0 - 2.0 * c_f);
+	vec2 c_uv = (floor(c_pos) + 0.5 + c_smooth_f) * coast_texel;
+	float coast_value = texture(coast_distance, c_uv).r;
+
+	// Natural organic coastline micro-curvature (resembles satellite coastal curves)
+	// Gently applies only at the water-land interface (|coast_value - 0.5| < 0.045), preserving landmass
+	if (abs(coast_value - 0.5) < 0.045) {
+		float coastal_curve = (patch_noise(uv * vec2(2800.0, 1400.0) + 19.3) - 0.5) * 0.0038;
+		coast_value = clamp(coast_value + coastal_curve, 0.0, 1.0);
+	}
 	float land_coverage = coverage_alpha(coast_value);
 	float coast_px = field_pixels(coast_value);
 	if (land_coverage < 0.999) {
@@ -681,12 +697,27 @@ void fragment() {
 			}
 		}
 	}
-	// Only apply tiny-island recovery for isolated micro-islands where continuous SDF has near-zero coverage
+	// Small island recovery: smooth, rounded atoll/island shapes (no angular diamonds or square blocks)
 	if (coast_value < 0.38 && small_land_at(floor(uv * map_resolution)) > .5) {
-		vec2 pixel2 = uv * map_resolution - .5, corner = floor(pixel2), weight = fract(pixel2);
-		float row0 = mix(small_land_at(corner), small_land_at(corner + vec2(1.0, 0.0)), weight.x);
-		float row1 = mix(small_land_at(corner + vec2(0.0, 1.0)), small_land_at(corner + vec2(1.0)), weight.x);
-		land_coverage = max(land_coverage, coverage_alpha(mix(row0, row1, weight.y)));
+		vec2 p2 = uv * map_resolution - .5;
+		vec2 cell = floor(p2);
+		vec2 frac_p = fract(p2);
+		float island_acc = 0.0;
+		float total_w = 0.0;
+		for (int dy = -1; dy <= 1; dy++) {
+			for (int dx = -1; dx <= 1; dx++) {
+				vec2 neighbor = cell + vec2(float(dx), float(dy));
+				float bit = small_land_at(neighbor);
+				vec2 d_vec = frac_p - vec2(float(dx), float(dy)) - 0.5;
+				float dist_sq = dot(d_vec, d_vec);
+				float w = clamp(1.0 - dist_sq * 0.75, 0.0, 1.0);
+				w = w * w * (3.0 - 2.0 * w);
+				island_acc += bit * w;
+				total_w += w;
+			}
+		}
+		float island_smooth = total_w > 0.0001 ? island_acc / total_w : 0.0;
+		land_coverage = max(land_coverage, smoothstep(0.28, 0.65, island_smooth));
 	}
 	if (passage_id > 0.0) land_coverage = 0.0;
 
@@ -743,7 +774,6 @@ void fragment() {
 		float primary = types.r;
 		float secondary = types.g;
 		vec3 n = normalize(geographic_normal);
-		vec3 urban_dx = dFdx(n) * 430.0, urban_dy = dFdy(n) * 430.0;
 		float close = smoothstep(0.0, 1.0, terrain_mix);
 		vec4 elev = texture(relief_data, uv);
 		float meters = elev.b * 9000.0;
@@ -766,13 +796,21 @@ void fragment() {
 				pattern = mix(pattern, sec_sample, blend_w);
 			}
 
-			// Multi-Biome Terrain Modulation:
-			// Combine the crisp, high-resolution physical detail and vivid colors of the biomes
-			// with the regional climate tones of the NASA Earth colormap (green in PA/FL, dry brown in NV).
-			// Keep regional colour dominant; detail provides texture rather than
-			// replacing the climate palette with a contrasting tile.
-			vec3 textured = mix(earth * (pattern * 1.45), pattern, 0.30);
-			earth = mix(earth, textured, close * terrain_detail_strength);
+			// Satellite Climate Hue Preservation with Micro-Relief Detail:
+			// The NASA Blue Marble colormap provides authentic real-world climate tones
+			// (rich green in PA/FL/Europe, sandy tan in NM/AZ/NV, terracotta red in Australia).
+			// Extract high-frequency luminance from the material texture to provide surface grain without hue shift:
+			float pat_lum = dot(pattern, vec3(0.299, 0.587, 0.114));
+			vec3 sat_detail = earth * (pat_lum * 1.42 + 0.29);
+
+			// Detect arid land where satellite earth is tan/red/desert (earth.r >= earth.g - 0.02) or Category 3:
+			float is_arid = max(smoothstep(0.00, 0.07, earth.r - earth.g + 0.02), (primary == 3.0 ? 1.0 : 0.0));
+
+			// Lush temperate & tropical vegetation: blend rich pigment from the biome texture
+			vec3 lush_mix = mix(sat_detail, pattern * 1.15 * earth, 0.35);
+			// Arid desert & semi-arid scrub: strictly preserve the authentic satellite tan/red hues
+			vec3 textured = mix(lush_mix, sat_detail, is_arid * 0.90);
+			earth = mix(earth, textured, close * 0.85);
 		}
 		float far_blend = far_terrain_enabled ? smoothstep(1.22, 1.48, camera_distance) : 0.0;
 		vec3 relief_normal = radial_world;
@@ -817,21 +855,25 @@ void fragment() {
 		earth = mix(earth, vec3(.87, .91, .94), snow * .68);
 		float urban_raw = 0.0;
 		if (city_detail > .001) {
-			// Domain warp breaks geometric ellipses into organic city sprawl & transport arteries
+			// Sub-pixel organic edge variation without shifting city center off buildings
 			vec2 urban_warp = vec2(
-				patch_noise(uv * vec2(1400.0, 700.0) + 17.3),
-				patch_noise(uv * vec2(1400.0, 700.0) + 53.1)
+				patch_noise(uv * vec2(2800.0, 1400.0) + 17.3),
+				patch_noise(uv * vec2(2800.0, 1400.0) + 53.1)
 			) - vec2(0.5);
-			urban_raw = texture(urban_density, uv + urban_warp * 0.0016).r;
+			urban_raw = texture(urban_density, uv + urban_warp * 0.00018).r;
 		}
-		if (urban_raw > .16 && city_detail > .001) {
-			vec3 up = n * 430.0;
+		if (urban_raw > .08 && city_detail > .001) {
+			// East Asian cities: readable scale (~70 km per tile) so roofs, streets, and courtyard houses are clearly visible
+			vec3 up_asian = n * 240.0;
+			vec3 up_western = n * 420.0;
+			vec3 urban_dx_asian = dFdx(n) * 240.0, urban_dy_asian = dFdy(n) * 240.0;
+			vec3 urban_dx_western = dFdx(n) * 420.0, urban_dy_western = dFdy(n) * 420.0;
 			vec3 weights = pow(abs(n), vec3(8.0)); weights /= weights.x + weights.y + weights.z;
 
 			// East Asian cities: China, Japan, Korea, Taiwan, Hong Kong, Vietnam
-			bool is_asian_country = (owner == 44.0 || owner == 108.0 || owner == 112.0 || owner == 113.0 || owner == 230.0 || owner == 197.0 || owner == 227.0);
-			bool is_asian_region = (uv.x > 0.68 && uv.x < 0.94 && uv.y > 0.18 && uv.y < 0.62);
-			bool use_asian = is_asian_country || (owner < 0.5 && is_asian_region);
+			bool is_asian_country = (owner == 40.0 || owner == 96.0 || owner == 103.0 || owner == 140.0 || owner == 197.0 || owner == 83.0 || owner == 117.0 || owner == 219.0 || owner == 130.0);
+			bool is_asian_region = (uv.x > 0.72 && uv.x < 0.93 && uv.y > 0.20 && uv.y < 0.52);
+			bool use_asian = is_asian_country || is_asian_region;
 
 			// American / Canadian / Australian / NZ grid cities:
 			bool is_grid_country = (owner == 214.0 || owner == 34.0 || owner == 12.0 || owner == 144.0);
@@ -840,24 +882,23 @@ void fragment() {
 
 			vec3 blocks;
 			if (use_asian) {
-				blocks = textureGrad(urban_asian_material, up.yz, urban_dx.yz, urban_dy.yz).rgb * weights.x +
-				         textureGrad(urban_asian_material, up.xz, urban_dx.xz, urban_dy.xz).rgb * weights.y +
-				         textureGrad(urban_asian_material, up.xy, urban_dx.xy, urban_dy.xy).rgb * weights.z;
+				blocks = textureGrad(urban_asian_material, up_asian.yz, urban_dx_asian.yz, urban_dy_asian.yz).rgb * weights.x +
+				         textureGrad(urban_asian_material, up_asian.xz, urban_dx_asian.xz, urban_dy_asian.xz).rgb * weights.y +
+				         textureGrad(urban_asian_material, up_asian.xy, urban_dx_asian.xy, urban_dy_asian.xy).rgb * weights.z;
 			} else if (use_grid) {
-				blocks = textureGrad(urban_grid_material, up.yz, urban_dx.yz, urban_dy.yz).rgb * weights.x +
-				         textureGrad(urban_grid_material, up.xz, urban_dx.xz, urban_dy.xz).rgb * weights.y +
-				         textureGrad(urban_grid_material, up.xy, urban_dx.xy, urban_dy.xy).rgb * weights.z;
+				blocks = textureGrad(urban_grid_material, up_western.yz, urban_dx_western.yz, urban_dy_western.yz).rgb * weights.x +
+				         textureGrad(urban_grid_material, up_western.xz, urban_dx_western.xz, urban_dy_western.xz).rgb * weights.y +
+				         textureGrad(urban_grid_material, up_western.xy, urban_dx_western.xy, urban_dy_western.xy).rgb * weights.z;
 			} else {
-				blocks = textureGrad(urban_material, up.yz, urban_dx.yz, urban_dy.yz).rgb * weights.x +
-				         textureGrad(urban_material, up.xz, urban_dx.xz, urban_dy.xz).rgb * weights.y +
-				         textureGrad(urban_material, up.xy, urban_dx.xy, urban_dy.xy).rgb * weights.z;
+				blocks = textureGrad(urban_material, up_western.yz, urban_dx_western.yz, urban_dy_western.yz).rgb * weights.x +
+				         textureGrad(urban_material, up_western.xz, urban_dx_western.xz, urban_dy_western.xz).rgb * weights.y +
+				         textureGrad(urban_material, up_western.xy, urban_dx_western.xy, urban_dy_western.xy).rgb * weights.z;
 			}
 			vec3 city = mix(vec3(.28, .30, .29), blocks * .92 + vec3(.04), .88);
-			// Higher threshold contracts smaller cities so they hug their building clusters,
-			// with organic edges preventing geometric circular spots
-			float urban_threshold = mix(0.20, 0.12, clamp(city_growth - 1.0, 0.0, 1.0));
-			float urban_opacity = smoothstep(urban_threshold, urban_threshold + 0.18, urban_raw) * city_detail;
-			earth = mix(earth, city, urban_opacity * 0.95);
+			// Adaptive building-anchored threshold: covers the building clusters with soft natural edge transition
+			float urban_threshold = mix(0.22, 0.14, clamp(city_growth - 0.7, 0.0, 1.0));
+			float urban_opacity = smoothstep(urban_threshold, urban_threshold + 0.28, urban_raw) * city_detail;
+			earth = mix(earth, city, urban_opacity * 0.78);
 		}
 		float physical_land = land_coverage;
 		if (passage_id > 0.0) physical_land = 0.0;
@@ -869,9 +910,9 @@ void fragment() {
 		float valley_ao = clamp(dot(relief_normal, radial_world) * 0.85 + 0.25, 0.50, 1.0);
 		float sun_light = smoothstep(-0.45, 0.85, sun);
 		base *= mix(0.64, 1.12, sun_light) * mix(1.0, valley_ao, 0.70);
-		// Atmospheric horizon limb gradient
-		float horizon_limb = pow(1.0 - facing, 2.6) * 0.35;
-		base = mix(base, vec3(0.18, 0.45, 0.68), horizon_limb);
+		// Atmospheric limb contrast
+		float horizon_limb = pow(1.0 - facing, 3.2) * 0.18;
+		base = mix(base, vec3(0.35, 0.52, 0.68), horizon_limb);
 
 		// 4. Realistic Earth color grading (calibrated to HOI4 / orbital photo reference)
 		if (physical_land > 0.001) {
@@ -967,5 +1008,18 @@ void fragment() {
 	coast_ink = mix(vec3(.22, .30, .29), coast_ink, smoothstep(0.15, 0.65, ocean_coast));
 	coast_width = mix(1.1, coast_width, smoothstep(0.15, 0.65, ocean_coast));
 	base = field_ink(base, coast_px, coast_width, coast_ink, near * mix(0.45, (physical_mode ? .8 : 1.0), smoothstep(0.15, 0.65, ocean_coast)));
+
+	// Subtle Earth horizon atmospheric haze (looking at Earth from high up):
+	// When camera is tilted, the far part of the map toward the horizon fades slightly into soft blue-gray haze.
+	// When looking straight down it is almost unnoticeable. Cheap ALU-only, zero volumetric overhead.
+	float view_facing = clamp(dot(normalize(NORMAL), normalize(VIEW)), 0.0, 1.0);
+	float horizon_angle = pow(1.0 - view_facing, 2.2);
+	float view_depth = -VERTEX.z;
+	float near_clearance = max(0.015, camera_distance - 1.0);
+	float tilt_depth_factor = smoothstep(near_clearance * 1.15, near_clearance * 3.4, view_depth);
+	float haze_amount = clamp(horizon_angle * 0.40 + tilt_depth_factor * (1.0 - view_facing) * 0.60, 0.0, 0.60);
+	vec3 earth_haze_color = vec3(0.56, 0.66, 0.75);
+	base = mix(base, earth_haze_color, haze_amount * 0.55);
+
 	ALBEDO = base;
 }
