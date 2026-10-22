@@ -1,7 +1,7 @@
 {
-  "version": "0.2.1.7",
-  "baseline_version": "0.2.1.6 clean-globe",
-  "repository_base_commit": "2678dae238b99d0c75a4fb98d71cd53b23451c08",
+  "version": "0.2.1.8",
+  "baseline_version": "0.2.1.7 clean-globe",
+  "repository_base_commit": "3427db5ce494e4e2d01b159e9a78d354d828ff7d",
   "engine": "Godot 4.5.1 stable",
   "geography_version": "0.2.1.2",
   "display_version": "0.2.1.2",
@@ -22,8 +22,13 @@
   "gpu_fps_measured": false,
   "gpu_nominal_bytes_saved": 33030144,
   "validation": {
-    "organizations_ui": {
-      "checks": 132,
+    "construction_model": {
+      "checks": 2550,
+      "failures": 0,
+      "passed": true
+    },
+    "construction_ui": {
+      "checks": 21,
       "failures": 0,
       "passed": true
     },
@@ -40,14 +45,24 @@
       "failures": 0,
       "passed": true
     },
+    "organizations_ui": {
+      "checks": 132,
+      "failures": 0,
+      "passed": true
+    },
     "clean_globe_stability": {
       "checks": 52,
       "failures": 0,
-      "passed": true
+      "passed": true,
+      "idle_draws_per_10_seconds": 100
     },
     "ui_render": {
       "renderer": "Godot 4.5.1 GL Compatibility / Mesa llvmpipe",
       "resolutions": [
+        [
+          1440,
+          900
+        ],
         [
           1024,
           768
@@ -69,12 +84,22 @@
     "remaining_clusters": 2745,
     "population_changed": false
   },
-  "save_schema": 22,
+  "save_schema": 23,
   "organization_system": {
     "active_scenario_organizations": 19,
     "catalog_definitions": 44,
     "membership_imports": 0,
     "effects": "Inactive until mechanic and balance values exist",
     "hq_markers": true
+  },
+  "construction_system": {
+    "building_types": 22,
+    "max_factories_per_project": 10,
+    "network_level_cap": 10,
+    "ai_enabled": false,
+    "progress_tick": "daily",
+    "manufactured_goods": "factory allocation counter; no market or stockpile simulation",
+    "gdp": "MD base output coefficients \u00d7 starting productivity; additions on completion only",
+    "map": "private construction tab mode; 8192-byte R8 queue palette"
   }
 }

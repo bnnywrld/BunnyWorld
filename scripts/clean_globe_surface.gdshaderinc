@@ -55,6 +55,8 @@ uniform float city_growth = 1.0;
 // --- Uniforms: map mode ---
 uniform bool physical_mode = false;
 uniform bool information_mode = false;
+uniform bool construction_mode = false;
+uniform sampler2D construction_flags : filter_nearest;
 uniform bool show_regions = false;
 uniform float region_opacity = 0.0;
 
@@ -966,6 +968,14 @@ void fragment() {
 		base = mix(base, sea_glow, (0.28 + 0.32 * sea_edge) * sea_hit);
 	}
 
+	// A tiny state palette marks queued projects. No extra texture taps outside
+	// Construction mode; screen-space stripes require no geographic mesh rebuild.
+	if (construction_mode && region > 0.5) {
+		float queued = texture(construction_flags, vec2((region + 0.5) / palette_width, 0.5)).r;
+		float diagonal = fract((FRAGCOORD.x + FRAGCOORD.y) / 16.0);
+		float stripe = smoothstep(0.32,0.40,diagonal) * (1.0-smoothstep(0.65,0.73,diagonal));
+		base = mix(base,vec3(1.0,0.77,0.16),queued * stripe * land_coverage * 0.78);
+	}
 	// Selection/hover/border overlays (shared by all modes)
 	if (inspection_active && !information_mode) {
 		base = mix(base, vec3(.93, .85, .65), (physical_mode ? .045 : .09) * selected_hit * land_coverage);

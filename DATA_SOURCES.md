@@ -111,3 +111,12 @@ MERCOSUR associate memberships (Chile/Bolivia), NATO partnerships and CIS foundi
 Dated display-name references: [AU launch on 9 July 2002, South African Government](https://www.gcis.gov.za/content/newsroom/media-releases/media-releases/african-union-summit-kicks-durban); [CSTO Charter of 7 October 2002](https://en.odkb-csto.org/documents/documents/ustav_organizatsii_dogovora_o_kollektivnoy_bezopasnosti_/); [OIC name change at the June 2011 ministerial meeting, Türkiye MFA](https://www.mfa.gov.tr/OIC.en.mfa). OIC is an inactive definition. Display names do not change membership, leaders, treaties or integration levels.
 
 No numerical political-power, opinion, approval, host-country, economic or military modifiers have been invented. The existing systems continue unchanged until values and associated rules are agreed.
+
+
+## Construction source (0.2.1.8)
+
+The user-supplied bunnyversion.zip contains `common/buildings/00_buildings.txt`, including its monetary pricing table and actual `base_cost` / `per_level_extra_cost` construction-point fields. `00_money_system.txt` supplies GDP base coefficients and direct energy/network output. `MD_defines.lua` sets civilian construction speed to 4 and infrastructure coefficient .75; `00_on_actions.txt` sets productivity_center to 1000. `data/construction.json` records building/money source hashes. No contemporary MD release is substituted for this supplied version.
+
+The source has not been executed as HOI4 scripts: this scaffold uses neutral sector productivity modifiers and full staffing, scaled by each game's imported overall_productivity. Starting national GDP remains the imported baseline; only new completed buildings add output. MD's resource, workforce, healthcare, tax, law, energy and global dynamic-modifier systems are not newly simulated. The infrastructure speed scaling and logarithmic slot formula are explicit BunnyWorld balancing adaptations approved in the construction discussion.
+
+Railroads use the supplied MD rail_terminal definition as the current state-network proxy, with ten separate levels. This is not a claim that MD's province railway routes or their per-province prices were implemented. The geometric coast eligibility list is derived from the game's existing land/sea masks, excluding inland-water records; it changes no geography.

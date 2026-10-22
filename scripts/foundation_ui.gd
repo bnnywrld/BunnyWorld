@@ -157,7 +157,7 @@ func update_bar() -> void:
 	var c: Dictionary = host.state.countries[tag]
 	var stats: Dictionary = c.get("starting_stats",{})
 	var population: int = host.state.country_metrics(tag)["population"]
-	var pc: Variant = stats.get("gdp_per_capita_usd")
+	var pc: Variant = host.state.gdp_per_capita(tag)
 	var gdp: Variant = null if pc == null else float(pc)*population
 	var values := {"Political power":str(int(stats["political_power"])) if stats.has("political_power") else "—","Stability":"%.0f%%" % (float(stats.get("stability",.65))*100),"War support":"%.0f%%" % (float(stats.get("war_support",.5))*100),"Treasury":money(stats.get("treasury_usd")),"Debt":money(stats.get("debt_usd")),"Population":number(population),"GDP":money(gdp),"GDP per capita":money(pc)}
 	for caption: String in indicators:
@@ -167,8 +167,8 @@ func update_bar() -> void:
 		if caption in ["GDP", "GDP per capita"] and pc != null: tip += "\nExact: $" + number(int(gdp if caption == "GDP" else pc)) + " USD"
 		if caption in ["Treasury","Debt"]:
 			var key := "treasury_usd" if caption == "Treasury" else "debt_usd"
-			tip += "\n" + ("$%s USD\nMD 2000 starting declaration; budget simulation comes later." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
-		elif caption in ["GDP","GDP per capita"]: tip += "\nMD starting GDP per capita × current resident population. USD; not a live economy."
+			tip += "\n" + ("$%s USD\nStarting balance plus construction payments/refunds; wider budget simulation comes later." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
+		elif caption in ["GDP","GDP per capita"]: tip += "\nStarting economy plus completed construction output. USD; wider economy simulation comes later."
 		elif caption == "Population": tip += "\nSum of currently owned State populations. Provinces are movement tiles and unique-building sites; population belongs to States."
 		elif caption == "Political power":
 			record["cell"].set("country", tag)
@@ -244,7 +244,7 @@ func refresh_ledger() -> void:
 		var c: Dictionary = host.state.countries[tag]
 		if not ledger_search.text.is_empty() and not ledger_search.text.to_lower() in (str(c["name"])+" "+tag).to_lower(): continue
 		var stats: Dictionary = c.get("starting_stats",{})
-		var pc: Variant = stats.get("gdp_per_capita_usd")
+		var pc: Variant = host.state.gdp_per_capita(tag)
 		var pop: int = aggregates[tag]["population"]
 		ledger_rows.append({"tag":tag,"name":c["name"],"population":pop,"gdp":null if pc == null else float(pc)*pop,"gdp_per_capita":pc,"stability":stats.get("stability"),"war_support":stats.get("war_support"),"states":aggregates[tag]["states"],"outlook":c["outlook"],"debt":stats.get("debt_usd"),"treasury":stats.get("treasury_usd")})
 	ledger_rows.sort_custom(func(a: Dictionary,b: Dictionary):

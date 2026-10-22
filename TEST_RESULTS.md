@@ -1,4 +1,18 @@
-# BunnyWorld 0.2.1.7 validation
+# BunnyWorld 0.2.1.8 validation
+
+Godot 4.5.1 on Linux; fresh campaign/save schema 23.
+
+- `construction_tests.gd`: **2,550 checks, zero failures**. All states retain original building counts and receive capacity headroom. Verified MD costs, logarithmic capacity, cash-first/shortfall borrowing, factory allocation cap and Manufactured Goods count, daily progress, paused clock, full/shared slot restrictions, separate network reservations/caps, foreign-state rejection, proportional refunds, no repeated refunds/GDP, completion effects, saved buildings/queue/GDP and atomic invalid-save rejection.
+- `construction_ui_tests.gd`: **21 checks, zero failures**. Private mode unavailable in the general picker, actual building-button input and globe-ray click enqueueing, no country-inspector replacement, full-state blue palette, stripe flag upload, state/province visibility, save/load exit, paused idle behavior, tab toggle/Escape/map-switch cleanup and 1024×768 bounds.
+- GL Compatibility / Mesa llvmpipe renders visually inspected at **1440×900** and **1024×768**. Queue, factory controls, Treasury deductions, building picker, state fills and queued-state highlighting rendered correctly. Software rendering does not measure target-laptop FPS.
+- Existing `model_tests.gd` passed dates, clock, transfers, membership, persistence, corruption rejection and conservation.
+- Political UI: **6,918 checks, zero failures**. Research UI: **1,110**, zero failures. Organizations UI: **132**, zero failures.
+- Clean globe stability: **52 checks, zero failures**; unchanged stationary-view work and exactly **100 map draws per ten simulated idle seconds**.
+- Repository hygiene: **82 active parts, zero unused parts**. No geometry, ownership, state/province IDs, population or initial building counts changed. Only construction gameplay data and a small runtime overlay were added.
+
+No AI construction, manufactured-goods stockpile/market, full employment/energy economy, interest or natural GDP growth is enabled. Native Windows execution and laptop performance remain untested. No Windows EXE exported.
+
+## Previous Organizations validation (0.2.1.7)
 
 Godot 4.5.1 on Linux; fresh campaigns/save schema 22.
 

@@ -134,6 +134,13 @@ var sound_player: AudioStreamPlayer
 var sound_enabled: bool = true
 var sound_streams: Dictionary = {}
 var org_ids: Array[String] = []
+const CONSTRUCTION_MODE := 8
+var construction_previous_mode := 6
+var construction_building := "industrial_complex"
+var construction_state := ""
+var construction_seen_revision := -1
+var construction_map_revision := -1
+var construction_flags: ImageTexture
 var map_mode: int = 6
 var active_org: String = "ASEAN"
 var show_regions: bool = false
@@ -865,13 +872,17 @@ func _rebuild_palette() -> void:
 	color_image.set_pixel(8191, 0, Color("d5e5eb"))
 	owner_image.fill(Color(0, 0, 0, 1))
 	var national_gdp: Dictionary = {}
+	var national_gdpc: Dictionary = {}
+	var construction_output: Dictionary = {}
 	var max_gdp := 1.0
 	var max_gdpc := 1.0
 	var populations: Dictionary = {}
 	for entry: Dictionary in state.regions.values():
 		populations[entry["owner"]] = int(populations.get(entry["owner"], 0)) + int(entry["population"])
+		construction_output[entry["owner"]] = float(construction_output.get(entry["owner"],0)) + float(entry.get("construction_gdp",0))
 	for tag: String in state.countries:
-		var per_capita := float(state.countries[tag].get("starting_stats", {}).get("gdp_per_capita_usd", 0))
+		var per_capita := float(state.countries[tag].get("starting_stats",{}).get("gdp_per_capita_usd",0)) + float(construction_output.get(tag,0))/maxf(1,float(populations.get(tag,0)))
+		national_gdpc[tag] = per_capita
 		max_gdpc = maxf(max_gdpc, per_capita)
 		national_gdp[tag] = per_capita * float(populations.get(tag, 0))
 		max_gdp = maxf(max_gdp, national_gdp[tag])
@@ -890,13 +901,19 @@ func _rebuild_palette() -> void:
 			rgb = Color(float(colors[0]) / 255.0, float(colors[1]) / 255.0, float(colors[2]) / 255.0)
 			if map_mode == 1:
 				rgb = Color("4ecab1") if tag in state.organizations[active_org]["members"] else Color("273f50")
-		if map_mode == 2:
+		if map_mode == CONSTRUCTION_MODE:
+			rgb = Color("273f50")
+			if tag == state.player_country:
+				var free: int = state.construction.free_slots(sid)
+				var ratio := float(free) / maxf(1, int(region["construction_slots"]))
+				rgb = Color("286fba") if free == 0 else Color("155c39").lerp(Color("a7e6a0"),ratio)
+		elif map_mode == 2:
 			var weight := log(1.0 + float(region["population"])) / log(1.0 + max_population)
 			rgb = Color("1b354c").lerp(Color("ffd36b"), pow(weight, 4.0))
 		elif map_mode == 3:
 			rgb = OUTLOOK_COLORS.get(state.countries.get(tag, {}).get("outlook", "Unspecified"), Color("718793"))
 		elif map_mode in [4, 5]:
-			var value := float(national_gdp.get(tag, 0)) if map_mode == 4 else float(state.countries.get(tag, {}).get("starting_stats", {}).get("gdp_per_capita_usd", 0))
+			var value := float(national_gdp.get(tag, 0)) if map_mode == 4 else float(national_gdpc.get(tag,0))
 			rgb = MapPalette.economic(value, map_mode == 5)
 		elif map_mode == 7:
 			var score := state.opinion(tag, state.selected_country) if relations_reverse else state.opinion(state.selected_country, tag)
@@ -920,7 +937,8 @@ func _rebuild_palette() -> void:
 	planet_material.set_shader_parameter("show_regions", show_regions)
 	planet_material.set_shader_parameter("border_width", 1.15 if map_mode == 0 else 0.7)
 	planet_material.set_shader_parameter("physical_mode", map_mode == 6)
-	planet_material.set_shader_parameter("information_mode", map_mode in [1,2,3,4,5,7])
+	planet_material.set_shader_parameter("information_mode", map_mode in [1,2,3,4,5,7,8])
+	planet_material.set_shader_parameter("construction_mode", map_mode == CONSTRUCTION_MODE)
 	_update_selection_shader()
 	_update_legend()
 
@@ -991,6 +1009,7 @@ func _country_item_selected(index: int) -> void:
 		_show_country(country_tags[index], true)
 
 func _clear_details() -> void:
+	if details == control_details: _leave_construction_mode()
 	if details == control_details: _close_floating_panels()
 	if details == control_details: active_feature = ""
 	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
@@ -1120,12 +1139,19 @@ func _update_map_hover(position: Vector2) -> void:
 		hover_tag = tag
 		text = str(state.countries.get(tag, {}).get("name", "Unclaimed"))
 		if screen == "playing" and show_regions: text += "\nState: " + str(region["name"])
-		if map_mode == 7:
+		if map_mode == CONSTRUCTION_MODE:
+			text += "\nState: " + str(region["name"])
+			if tag == state.player_country:
+				text += "\nShared slots free: %d / %d" % [state.construction.free_slots(str(id)),region["construction_slots"]]
+				var reason: String = state.construction.blocked(str(id), construction_building)
+				text += "\n" + (reason if not reason.is_empty() else "Click: %s · %s" % [state.construction.catalog[construction_building]["name"],preload("res://scripts/construction_panel.gd").money(state.construction.quote(str(id),construction_building)["cost"])])
+			else: text += "\nYou can only build in your own states."
+		elif map_mode == 7:
 			var score := state.opinion(tag, state.selected_country) if relations_reverse else state.opinion(state.selected_country, tag)
 			text += "\nOpinion: %+.0f" % score
 		elif map_mode == 2: text += "\nState residents: " + _number(int(region["population"]))
 		elif map_mode in [4, 5]:
-			var per_capita := float(state.countries[tag].get("starting_stats", {}).get("gdp_per_capita_usd", 0))
+			var per_capita := state.gdp_per_capita(tag)
 			text += "\nGDP/person: $" + _number(int(per_capita)) if map_mode == 5 else "\nGDP: $%.1f billion" % (per_capita * float(state.country_metrics(tag)["population"]) / 1e9)
 		if screen == "playing" and distance <= 1.2:
 			var pid := _province_at(position)
@@ -1394,7 +1420,7 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	_entity_heading(c["name"], flags.resolve(tag, str(c.get("cosmetic", "")), c["outlook"]))
 	details.add_child(_wrapped(c["outlook"], 14, Color("e5c888")))
 	var values: Dictionary = c.get("starting_stats", {})
-	var per_capita := float(values.get("gdp_per_capita_usd", 0))
+	var per_capita := state.gdp_per_capita(tag)
 	var politics_summary := preload("res://scripts/political_summary.gd").new()
 	var open_government := Callable()
 	if screen == "playing" and tag == state.player_country:
@@ -1561,6 +1587,7 @@ func _show_organization() -> void:
 	organizations_ui.open_organization(active_org, true)
 
 func _map_changed(index: int) -> void:
+	if map_mode == CONSTRUCTION_MODE: _leave_construction_mode()
 	overlay_layout_dirty = true
 	_play_ui("click")
 	map_mode = index
@@ -1698,6 +1725,10 @@ func _globe_input(event: InputEvent) -> void:
 		elif event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			rotation_velocity = Vector2.ZERO
 			var id := _region_at(event.position)
+			if map_mode == CONSTRUCTION_MODE:
+				_construction_click(id)
+				view_container.accept_event()
+				return
 			if state.regions.has(str(id)):
 				var allow_state_selection := screen == "playing" and (distance <= 1.65)
 				inspect_region = id if allow_state_selection else 0
@@ -1765,6 +1796,16 @@ func _process(delta: float) -> void:
 			if government_panel != null: government_panel.refresh()
 			_refresh_opinions()
 			if map_mode == 7: _rebuild_palette()
+	if state.construction.revision != construction_seen_revision:
+		construction_seen_revision = state.construction.revision
+		var construction_ui: Node = control_details.get_node_or_null("ConstructionPanel")
+		if construction_ui != null: construction_ui.refresh()
+		_update_country_bar()
+		if map_mode == CONSTRUCTION_MODE and construction_map_revision != state.construction.map_revision:
+			construction_map_revision = state.construction.map_revision
+			_rebuild_palette()
+			_update_construction_flags()
+		elif map_mode in [4,5]: _rebuild_palette()
 	_update_map_rendering(delta)
 
 # View-dependent uniforms change on zoom/mode changes, never on idle frames.
@@ -1773,11 +1814,11 @@ func _update_view_uniforms() -> void:
 	if key == last_surface_view: return
 	last_surface_view = key
 	view_uniform_updates += 1
-	show_regions = distance <= 1.65
+	show_regions = map_mode == CONSTRUCTION_MODE or distance <= 1.65
 	planet_material.set_shader_parameter("show_regions", show_regions)
-	planet_material.set_shader_parameter("region_opacity", clampf((1.65 - distance) / 0.15, 0, 1))
+	planet_material.set_shader_parameter("region_opacity", 1.0 if map_mode == CONSTRUCTION_MODE else clampf((1.65 - distance) / 0.15, 0, 1))
 	planet_material.set_shader_parameter("camera_distance", distance)
-	planet_material.set_shader_parameter("province_opacity", clampf((1.2 - distance) / 0.08, 0, 1))
+	planet_material.set_shader_parameter("province_opacity", 0.0 if map_mode == CONSTRUCTION_MODE else clampf((1.2 - distance) / 0.08, 0, 1))
 	planet_material.set_shader_parameter("city_detail", clampf((1.30 - distance) / .16, 0, 1))
 	planet_material.set_shader_parameter("far_filter", clampf((distance - 2.4) / 1.0, 0, 1))
 	planet_material.set_shader_parameter("border_strength", clampf((4.1 - distance) / 1.3, 0, 1))
@@ -1810,7 +1851,7 @@ func _speed_changed(index: int) -> void:
 
 func _view_state() -> Dictionary:
 	return {"rotation": [planet.rotation.x, planet.rotation.y], "distance": distance,
-		"map_mode": map_mode, "organization": active_org, "show_regions": show_regions, "inspection_active": inspection_active, "relations_reverse": relations_reverse}
+		"map_mode": construction_previous_mode if map_mode == CONSTRUCTION_MODE else map_mode, "organization": active_org, "show_regions": show_regions, "inspection_active": inspection_active, "relations_reverse": relations_reverse}
 
 func _save() -> void:
 	if screen != "playing":
@@ -1845,6 +1886,7 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 		if show_errors:
 			_show_error(state.last_error)
 		return false
+	_leave_construction_mode()
 	if focus_tween != null:
 		focus_tween.kill()
 	planet.rotation = Vector3(float(view["rotation"][0]), float(view["rotation"][1]), 0)
@@ -1861,7 +1903,7 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 	map_picker.select(map_mode)
 	org_picker.select(org_ids.find(active_org))
 	org_picker.visible = map_mode == 1
-	show_regions = distance <= 1.65
+	show_regions = map_mode == CONSTRUCTION_MODE or distance <= 1.65
 	_rebuild_palette()
 	_update_country_list()
 	_show_country(state.selected_country, false)
@@ -2517,6 +2559,7 @@ func _update_legend() -> void:
 		6: legend.text = "Physical map · Terrain and waterways"
 		5: legend.text = "GDP/capita · $0 → $100k · Continuous logarithmic scale\nPale cream → amber → dark brown. Grey: unavailable."
 		7: legend.text = ("Others → " if relations_reverse else str(state.countries[state.selected_country]["name"]) + " → ") + (str(state.countries[state.selected_country]["name"]) if relations_reverse else "others") + " · Dark red −200 · Red −100 · Yellow 0 · Green +100 · Dark green +200\nExact values on hover; white marks the selected country."
+		8: legend.text = "Construction · Your states only\nLight green: more free slots · Dark green: fewer · Blue: full\nYellow stripes: queued construction"
 		3: legend.text = "Blue: Western  ·  Red: Emerging  ·  Gold: Non-Aligned\nGreen: Salafist  ·  Purple: Nationalist  ·  Grey: Unspecified"
 
 func _build_save_dialogs() -> void:
@@ -2644,12 +2687,12 @@ func _update_country_bar() -> void:
 	var pp := str(stats["political_power"]) if stats.has("political_power") else "—"
 	var stability := "%.0f%%" % (float(stats["stability"]) * 100) if stats.has("stability") else "—"
 	var support := "%.0f%%" % (float(stats["war_support"]) * 100) if stats.has("war_support") else "—"
-	var per_capita := float(stats.get("gdp_per_capita_usd", 0))
+	var per_capita := state.gdp_per_capita(state.player_country)
 	var gdp := "$%.1fB" % (per_capita * population / 1000000000.0) if per_capita > 0 else "—"
 	stats_label.text = "Political power: %s    Stability: %s    War support: %s    Population: %s    GDP: %s    GDP / capita: %s" % [pp, stability, support, _number(population), gdp, "$" + _number(int(per_capita)) if per_capita > 0 else "—"]
 	if foundation != null: foundation.update_bar()
 	overlay_layout_dirty = true
-	stats_label.tooltip_text = "Population follows state ownership. Other values are starting scenario figures. GDP is derived from population × GDP per capita. — means unavailable."
+	stats_label.tooltip_text = "Population follows state ownership. Other values are starting scenario figures. GDP includes the starting economy and completed building output. — means unavailable."
 
 func _build_game_menu() -> void:
 	game_menu = AcceptDialog.new()
@@ -2703,6 +2746,10 @@ func _update_cities() -> void:
 	last_city_view = key
 	var markers: Array[Dictionary] = []
 	if (distance > 1.65 and map_mode != 1) or screen == "menu":
+		city_layer.set("markers", markers)
+		city_layer.queue_redraw()
+		return
+	if map_mode == CONSTRUCTION_MODE:
 		city_layer.set("markers", markers)
 		city_layer.queue_redraw()
 		return
@@ -2882,7 +2929,7 @@ func _position_panels(force: bool = true) -> void:
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		var available_height := maxf(240, view_container.size.y - 118)
-		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research", "Organizations"] else Vector2(370, available_height)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research", "Organizations", "Construction"] else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
@@ -2937,6 +2984,7 @@ func _reveal_panel(panel: PanelContainer) -> void:
 	tween.finished.connect(func(): panel_tweens.erase(panel); _position_panels())
 
 func _hide_panel(panel: PanelContainer) -> void:
+	if panel == control_panel: _leave_construction_mode()
 	if panel == null: return
 	if panel == control_panel: _close_floating_panels()
 	if panel == territory_panel: _preview_state(0)
@@ -3127,6 +3175,7 @@ func _space_background(parent: Control) -> TextureRect:
 func _show_feature(caption: String) -> void:
 	if screen != "playing": return
 	if active_feature == caption and control_panel.visible:
+		_leave_construction_mode()
 		active_feature = ""
 		_hide_panel(control_panel)
 		return
@@ -3151,6 +3200,22 @@ func _show_feature(caption: String) -> void:
 		var research := preload("res://scripts/research_panel.gd").new()
 		research.configure(state, tag, self)
 		control_details.add_child(research)
+	elif caption == "Construction":
+		_hide_panel(territory_panel)
+		construction_previous_mode = map_mode
+		map_mode = CONSTRUCTION_MODE
+		map_picker.disabled = true
+		map_picker.text = "Construction"
+		org_picker.hide()
+		relations_picker.hide()
+		inspection_active = false
+		state.selected_region = 0
+		state.selected_province = 0
+		var construction_ui := preload("res://scripts/construction_panel.gd").new()
+		construction_ui.configure(self)
+		control_details.add_child(construction_ui)
+		_rebuild_palette()
+		_update_construction_flags()
 	elif caption == "Organizations":
 		var tag: String = state.player_country
 		control_heading.add_child(_label(str(state.countries[tag]["name"]), 14, UIStyle.MUTED_COLOR))
@@ -3160,6 +3225,49 @@ func _show_feature(caption: String) -> void:
 	_reveal_panel(control_panel)
 	_position_panels()
 	foundation.refresh_active_section()
+
+func _construction_click(id: int) -> void:
+	var sid := str(id)
+	if not state.regions.has(sid): return
+	if state.regions[sid]["owner"] == state.player_country: construction_state = sid
+	var reason: String = state.construction.blocked(sid, construction_building)
+	if reason.is_empty():
+		state.construction.add(sid, construction_building)
+		_set_status("Queued " + str(state.construction.catalog[construction_building]["name"]) + " · " + str(state.regions[sid]["name"]))
+	else: _set_status(reason)
+	_construction_changed()
+
+func _construction_changed() -> void:
+	construction_seen_revision = state.construction.revision
+	var panel: Node = control_details.get_node_or_null("ConstructionPanel")
+	if panel != null: panel.refresh()
+	_update_country_bar()
+	if map_mode == CONSTRUCTION_MODE and construction_map_revision != state.construction.map_revision:
+		construction_map_revision = state.construction.map_revision
+		_rebuild_palette()
+		_update_construction_flags()
+
+func _update_construction_flags() -> void:
+	construction_map_revision = state.construction.map_revision
+	var flags_image := Image.create(8192, 1, false, Image.FORMAT_R8)
+	flags_image.fill(Color.BLACK)
+	for job: Dictionary in state.construction.queue:
+		var sid := str(int(job["state"]))
+		if state.regions[sid]["owner"] == state.player_country: flags_image.set_pixel(int(sid),0,Color.WHITE)
+	if construction_flags == null: construction_flags = ImageTexture.create_from_image(flags_image)
+	else: construction_flags.update(flags_image)
+	planet_material.set_shader_parameter("construction_flags", construction_flags)
+
+func _leave_construction_mode() -> void:
+	if map_mode != CONSTRUCTION_MODE: return
+	map_mode = construction_previous_mode
+	map_picker.disabled = false
+	map_picker.select(map_mode)
+	map_picker.text = map_picker.get_item_text(map_mode)
+	org_picker.visible = map_mode == 1
+	relations_picker.visible = map_mode == 7
+	_rebuild_palette()
+	overlay_layout_dirty = true
 
 func _build_loading_screen() -> void:
 	loading_overlay = ColorRect.new()

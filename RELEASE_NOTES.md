@@ -1,3 +1,13 @@
+# 0.2.1.8 — Player construction
+
+- Private Construction map: own-state slot colours, queued-work yellow stripes, restore previous map on exit.
+- Navy/gold building picker and construction queue with progress, ETA, up/down priority, factory +/- controls and cancellation.
+- 10 factories per project; leftover factories displayed as producing Manufactured Goods. No AI or market simulation.
+- MD point/money costs for 22 state building types; upfront Treasury spending, shortfall debt, proportional unspent refunds.
+- Generous logarithmic state capacity; separate 10-level Infrastructure, Internet and Railroads. MD rail terminals represent state rail networks; province routes deferred.
+- Completed buildings increase annual GDP using MD output coefficients/productivity. Initial GDP and building counts preserved.
+- Fresh campaign/save schema 23; application 0.2.1.8; geography/display remain 0.2.1.2. No EXE export.
+
 # 0.2.1.7 — Organizations
 
 - Organizations toolbar section with large membership cards and member/feature detail tabs.

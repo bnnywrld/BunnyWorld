@@ -2,7 +2,9 @@ class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
 
-const SAVE_VERSION := 22
+const SAVE_VERSION := 23
+const Construction = preload("res://scripts/construction.gd")
+var construction := Construction.new()
 const OrganizationRules = preload("res://scripts/organization_rules.gd")
 const GovernmentRules = preload("res://scripts/government_rules.gd")
 const BASE_DAILY_POLITICAL_POWER := 1.0
@@ -41,6 +43,7 @@ var political_power_modifiers: Dictionary = {}
 
 func initialize(data: Dictionary) -> void:
 	database = data
+	construction.initialize(self)
 	government_starting_laws = JSON.parse_string(FileAccess.get_file_as_string("res://data/government_laws_2000.json"))["countries"]
 	relation_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/relations.json"))
 	province_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/provinces.json"))
@@ -76,6 +79,7 @@ func reset() -> void:
 	player_country = selected_country
 	selected_region = 0
 	last_error = ""
+	construction.reset()
 
 func advance(delta: float) -> bool:
 	if paused:
@@ -92,6 +96,7 @@ func advance(delta: float) -> bool:
 		# Update once at crossed midnight(s), never once per rendered frame.
 		for tag: String in countries:
 			countries[tag]["starting_stats"]["political_power"] = political_power(tag) + elapsed_days * daily_political_power(tag)
+		construction.advance_days(elapsed_days)
 	return true
 
 func political_power(tag: String) -> float:
@@ -138,6 +143,16 @@ func country_metrics(tag: String) -> Dictionary:
 			for key: String in region.get("buildings", {}):
 				buildings[key] = int(buildings.get(key, 0)) + int(region["buildings"][key])
 	return {"population": population, "regions": ids, "buildings": buildings}
+
+func gdp(tag: String) -> float:
+	var base := float(countries[tag].get("starting_stats", {}).get("gdp_per_capita_usd", 0))
+	var total := 0.0
+	for region: Dictionary in regions.values():
+		if region["owner"] == tag: total += base * int(region["population"]) + float(region.get("construction_gdp", 0))
+	return total
+
+func gdp_per_capita(tag: String) -> float:
+	return gdp(tag) / maxf(1, country_metrics(tag)["population"])
 
 func country_record(tag: String) -> Dictionary:
 	return countries.get(tag, database.get("country_registry", {}).get(tag, {}))
@@ -216,7 +231,7 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 	last_error = ""
 	var region_state: Dictionary = {}
 	for sid: String in regions:
-		region_state[sid] = {"owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
+		region_state[sid] = {"buildings": regions[sid]["buildings"], "construction_slots":regions[sid]["construction_slots"], "construction_gdp":regions[sid]["construction_gdp"], "owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
 	var national: Dictionary = {}
 	for tag: String in countries:
 		national[tag] = {"stats": countries[tag].get("starting_stats", {}), "outlook": countries[tag]["outlook"], "cosmetic": countries[tag].get("cosmetic", ""), "color_override": countries[tag].get("color_override", []), "government_properties":government_properties.get(tag, {}), "political_power_modifiers":political_power_modifiers.get(tag, {})}
@@ -226,7 +241,7 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 	var payload := {"schema_version": SAVE_VERSION, "save_name": save_name, "scenario_id": database["scenario_id"],
 		"source_sha256": database["source"]["sha256"], "world_tension": world_tension, "tension_events": tension_events, "hour": hour, "speed": speed,
 		"selected_country": selected_country, "player_country": player_country, "selected_region": selected_region,
-		"relations": relation_offsets, "selected_province": selected_province, "selected_sea": selected_sea, "province_buildings": province_buildings, "national": national, "regions": region_state, "organizations": organizations, "view": view}
+		"construction":construction.export_state(), "relations": relation_offsets, "selected_province": selected_province, "selected_sea": selected_sea, "province_buildings": province_buildings, "national": national, "regions": region_state, "organizations": organizations, "view": view}
 	var serialized := JSON.stringify(payload)
 	var envelope := JSON.stringify({"format": "BunnyWorldSave", "checksum": serialized.sha256_text(), "payload": serialized})
 	var full := ProjectSettings.globalize_path(path)
@@ -318,6 +333,8 @@ func load_game(path: String) -> Dictionary:
 			for tag: Variant in entry[field]:
 				if not tag is String or country_record(tag).is_empty() or seen.has(tag): return _invalid("The saved territorial rights are invalid.")
 				seen[tag] = true
+	if not construction.valid(payload.get("construction"), saved_regions, str(payload["player_country"])):
+		return _invalid("The saved construction queue or buildings are invalid.")
 	var saved_orgs: Variant = payload.get("organizations")
 	if not saved_orgs is Dictionary or saved_orgs.size() != organizations.size():
 		return _invalid("The saved organizations do not match this world.")
@@ -397,6 +414,9 @@ func load_game(path: String) -> Dictionary:
 	world_tension = float(tension)
 	tension_events = events.duplicate(true)
 	for sid: String in regions:
+		regions[sid]["buildings"] = saved_regions[sid]["buildings"].duplicate(true)
+		regions[sid]["construction_slots"] = int(saved_regions[sid]["construction_slots"])
+		regions[sid]["construction_gdp"] = float(saved_regions[sid]["construction_gdp"])
 		regions[sid]["owner"] = saved_regions[sid]["owner"]
 		regions[sid]["population"] = int(saved_regions[sid]["population"])
 		regions[sid]["cores"] = saved_regions[sid]["cores"].duplicate()
@@ -414,6 +434,7 @@ func load_game(path: String) -> Dictionary:
 	selected_sea = int(saved_sea)
 	relation_offsets = saved_relations.duplicate()
 	organizations = saved_orgs.duplicate(true)
+	construction.import_state(payload["construction"])
 	hour = int(saved_hour)
 	speed = int(payload["speed"])
 	selected_country = payload["selected_country"]

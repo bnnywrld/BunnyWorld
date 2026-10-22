@@ -1,6 +1,22 @@
-# Developing BunnyWorld 0.2.1.7
+# Developing BunnyWorld 0.2.1.8
 
 Godot 4.5.1 Standard, GL Compatibility. Fresh campaigns only. Provinces are movement tiles and unique-building sites; state populations/demographics are independent of province count. No save migration.
+
+## Construction (0.2.1.8)
+
+`construction.gd` owns the player-only queue via a weak reference to WorldState. Entries lock their construction-point quote and cash/borrowing split on purchase. Allocation walks queue order, at most 10 factories per job, from the current owned civilian-industry count; the remainder is labeled Manufactured Goods. No goods units/stockpile are fabricated. Completed jobs update state building counts and add their annual GDP output exactly once. Ownership losses pause affected jobs; existing progress can still be cancelled. Newly completed factories enter capacity the next day. Simulation uses daily batches; no queue work occurs while paused or empty, and a completed job's excess daily points are not carried between jobs.
+
+MD's base construction speed is 4 points/factory/day. The first scaffold adapts the MD .75 infrastructure coefficient to a +7.5% speed bonus per level, excluding infrastructure itself. It does not implement technology, law or sector modifiers. Monetary prices are MD billion-USD values from the supplied building pricing table; construction-point costs and per-level extra costs are separate fields. Refunds return cash × unfinished fraction and reverse borrowed × unfinished fraction, with any already-repaid borrowing returned to cash. Queueing and cancellation never add GDP. Infrastructure/Internet/Railroads cap at 10 with independent slots. Other caps/shared/coastal rules follow MD. Existing counts above a normal per-type cap are retained as the minimum allowed cap; current networks are already within ten levels. Electrical-grid specializations are mutually exclusive for new construction.
+
+Capacity = floor(2 + 5 ln(1 + area_km²/250) + 8 ln(1 + population/50,000)), with a floor of existing shared buildings + max(4, ceil(existing × .25)). Capacity is seeded once on fresh campaigns, reserves queued shared buildings, and never shrinks beneath an existing city layout. This is provisional game balancing, not an MD limit or physical land-use model. It gives large and populous states substantial room while keeping small states compact.
+
+GDP retains the original country GDP/person × current owned population and adds completed state output. MD base per-building billion-USD coefficients are multiplied by the owner's starting overall_productivity/1000 (neutral sector modifiers, full staffing); network/energy direct contributions use the MD constants. Full staffing is a scaffold assumption: employment, resource inputs, energy constraints, productivity growth and macroeconomics are not enabled. GDP accessors feed country summaries, top bar, ledger and GDP map modes. Construction/manufacturing assignments do not remove an existing factory's GDP. Added output follows state ownership; it is not deposited in Treasury.
+
+`construction_panel.gd` uses shared navy/gold styles, a building picker, bounded 30-entry queue pages, current/wanted factory counts, progress/ETA, priority and refund controls. `main.gd` dispatches state clicks without replacing the tab. Private map mode 8 disables the normal picker while open, saves the previous 0–7 mode, and restores it on close, Escape, tab switch or loading. States stay visible; province/city clutter is hidden. The shader uses an 8192×1 R8 queue flag texture (8 KiB) and a screen-space yellow stripe calculation only in Construction mode. No geography/membership assets or meshes are regenerated. Slot reservation caches rebuild once per queue topology revision; progress-only ticks refresh the UI without palette uploads.
+
+`tools/import_construction.py /path/to/bunnyversion.zip` reproduces `data/construction.json` from the supplied MD building/money scripts. It derives coastal states offline from existing province/sea masks, excluding inland water, and writes no map files. The state Railroads entry deliberately uses MD rail_terminal as a state-network abstraction. Province rail routes/ports/forts, new Data Centers and research facilities remain separate future work.
+
+Save schema 23 persists queue IDs, locked quotes, payment split, factory preferences, progress, completed buildings, state capacity and added GDP. Validation checks ownership tags, capacities, limits, coastal rules, finite amounts and valid queue identifiers before assigning any live state. No old-save migration.
 
 ## Organizations (0.2.1.7)
 
@@ -26,7 +42,7 @@ Labels/city architecture, coastline province lookup and terrain geometry are sep
 
 ## Clean globe stabilization
 
-The current application is 0.2.1.7 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
+The current application is 0.2.1.8 on clean-globe; geography/display remain 0.2.1.2. Canonical IDs are 6144×3072 with 1,252 states, 13,074 land provinces and 784 seas. Earlier .28/.29 reproduction notes below describe historical geography; do not run those generators over this map.
 
 The clean surface uses one 384×192 sphere, spatial border/river batches and the existing atmosphere. There is no detail patch. DisplayCoverage.initialize(target, false) loads the required coast/tiny-land/sea fields but skips the unused boundary hint/pair/distance textures and local coast packs. Legacy callers retain the default behavior. Three skipped fields are 3072×1536 × (1+4+2) bytes = 33,030,144 bytes (31.5 MiB), excluding driver overhead. The sandbox shares immutable textures between both materials.
 
