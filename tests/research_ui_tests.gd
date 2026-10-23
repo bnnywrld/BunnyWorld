@@ -26,6 +26,11 @@ func escape() -> void:
 	event.pressed = true
 	root.push_input(event, true)
 	await process_frame
+func capture(label: String) -> void:
+	var directory := OS.get_environment("BUNNYWORLD_QA_DIR")
+	if directory.is_empty() or DisplayServer.get_name() == "headless": return
+	await RenderingServer.frame_post_draw
+	get_root().get_texture().get_image().save_png(directory.path_join(label + ".png"))
 func run() -> void:
 	root.size = Vector2i(1440, 900)
 	var game = load("res://main.tscn").instantiate()
@@ -71,11 +76,22 @@ func run() -> void:
 	check(get_nodes_in_group("floating_ui").size() == 1, "old law window freed with its tab")
 	await click_at(research.institution_buttons[0].get_global_rect().get_center())
 	for frame: int in 4: await process_frame
-	check(research.tech_window.size.y <= 600, "tree respects requested window height after layout settles")
+	check(research.tech_window.size.y >= 700 and research.tech_window.size.y <= 800, "tree uses most of the available screen height")
 	check(game.get_viewport_rect().encloses(research.tech_window.get_global_rect()), "settled tree stays within viewport")
 	check(research.tech_window.visible, "university click opens technology tree")
+	await capture("research-industry")
 	check(research.active_institution == "University of Tokyo", "tree identifies selected university")
-	check(research.tree_canvas.get_child_count() == 0, "technology tree is empty")
+	check(research.tech_buttons.size() > 100, "industry technology tree is populated")
+	check(research.category_tabs.tab_count == 11, "all category subtabs are clickable")
+	await click_at(research.category_tabs.get_global_position() + research.category_tabs.get_tab_rect(5).get_center())
+	await process_frame
+	check(research.selected_category == "Aircraft" and research.tech_buttons.has("early_airframe_designs"), "switching category displays aircraft graph")
+	await capture("research-aircraft")
+	research.category_tabs.current_tab = 0
+	await process_frame
+	var old_tech: Button = research.tech_buttons["nanofibers_3"]
+	var next_tech: Button = research.tech_buttons["nanofibers_4"]
+	check(old_tech.position.y < next_tech.position.y and old_tech.disabled and not next_tech.disabled, "oldest technologies above newer selectable successors")
 	check(research.tech_window.get_theme_stylebox("panel").bg_color == game.control_panel.get_theme_stylebox("panel").bg_color, "research window uses existing panel background")
 	await escape()
 	check(not research.tech_window.visible and game.control_panel.visible, "Escape closes tree before Research tab")
@@ -104,6 +120,32 @@ func run() -> void:
 	await process_frame
 	check(get_nodes_in_group("floating_ui").size() == 1, "repeated tab changes leave no orphan windows")
 	check(world.political_power("JAP") == pp_before and world.government_properties == laws_before, "UI browsing changes no PP or laws")
+	game._show_feature("Research")
+	await process_frame
+	research = game.control_details.get_node("ResearchPanel")
+	research.open_tree(research.institutions[0])
+	await process_frame
+	await process_frame
+	var selected_tech: Button = research.tech_buttons["nanofibers_4"]
+	research.tree_scroll.scroll_horizontal = int(selected_tech.position.x - 80)
+	research.tree_scroll.scroll_vertical = int(selected_tech.position.y - 80)
+	await process_frame
+	await process_frame
+	await capture("research-selection")
+	await click_at(selected_tech.get_global_rect().get_center())
+	check(not research.tech_window.visible and world.research.assignments["JAP"].get("University of Tokyo") == "nanofibers_4", "selection closes tree and starts chosen university")
+	world.research.progress["JAP"]["nanofibers_4"] = 374
+	world.hour = 23
+	world.paused = false
+	world.accumulator = 1
+	world.advance(0)
+	await process_frame
+	var notices: Node = game.game_ui.get_node("ResearchNotifications")
+	check(notices.find_children("*","PanelContainer",false,false).size() == 1 and not world.paused, "completion displays dismissible notification without pausing")
+	await capture("research-completed")
+	check(research.institution_buttons[0].text.contains("No research selected"), "finished university becomes idle")
+	world.research.dismiss(0)
+	check(notices.find_children("*","PanelContainer",false,false).is_empty(), "notification disappears on dismissal")
 	game.queue_free()
 	await process_frame
 	check(get_nodes_in_group("floating_ui").is_empty(), "all floating panels freed with game")

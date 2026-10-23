@@ -30,6 +30,13 @@ var pause_button: Button
 var speed_picker: OptionButton
 var map_picker: OptionButton
 var org_picker: OptionButton
+var org_type_picker: OptionButton
+var organization_type := "all"
+var alliances_overview := false
+var alliance_by_country: Dictionary = {}
+var diplomacy_actions: Control
+var diplomacy_country := ""
+var currency_names: Dictionary = {}
 var right_panel: PanelContainer
 var territory_clip: Control
 var territory_handle: Button
@@ -139,6 +146,8 @@ var construction_previous_mode := 6
 var construction_building := "industrial_complex"
 var construction_state := ""
 var construction_seen_revision := -1
+var society_seen_revision := -1
+var employment_seen_revision := -1
 var construction_map_revision := -1
 var construction_flags: ImageTexture
 var map_mode: int = 6
@@ -206,7 +215,7 @@ var save_directory: String = SAVE_DIRECTORY
 var popup_was_paused: bool = true
 var pending_overwrite_path: String = ""
 var overwrite_dialog: ConfirmationDialog
-const OUTLOOK_COLORS := {"Western Outlook": Color("498fe0"), "Emerging Outlook": Color("d75650"), "Non-Aligned Outlook": Color("d7b553"), "Salafist Outlook": Color("52a56f"), "Nationalist Outlook": Color("aa77cc"), "Unspecified": Color("718793")}
+const OUTLOOK_COLORS := {"Western Outlook": Color("498fe0"), "Multipolar Outlook": Color("d75650"), "Non-Aligned Outlook": Color("d7b553"), "Nationalist Outlook": Color("aa77cc"), "Unspecified": Color("718793")}
 
 func _ready() -> void:
 	set_process(false)
@@ -222,6 +231,7 @@ func _ready() -> void:
 		add_child(error)
 		return
 	state.initialize(raw)
+	currency_names = JSON.parse_string(FileAccess.get_file_as_string("res://data/currencies_2000.json"))["countries"]
 	state.territory_changed.connect(func(_id: int,_old: String,_new: String): ownership_visual_dirty=true)
 	_loading_stage(20, "Preparing world and interface")
 	await get_tree().process_frame
@@ -562,11 +572,23 @@ func _build_interface() -> void:
 	relations_picker.item_selected.connect(func(index: int): relations_reverse = index == 1; _rebuild_palette())
 	relations_picker.hide()
 	map_picker.get_parent().add_child(relations_picker)
+	org_type_picker = OptionButton.new()
+	org_type_picker.fit_to_longest_item = false
+	org_type_picker.custom_minimum_size.x = 150
+	org_type_picker.clip_text = true
+	org_type_picker.add_item("All types")
+	org_type_picker.set_item_metadata(0, "all")
+	for key: String in OrganizationRules.TYPES:
+		org_type_picker.add_item(OrganizationRules.TYPES[key])
+		org_type_picker.set_item_metadata(org_type_picker.item_count-1, key)
+	org_type_picker.item_selected.connect(_organization_type_changed)
+	org_type_picker.hide()
+	map_bar.add_child(org_type_picker)
 	org_picker = OptionButton.new()
-	for oid: String in state.organizations:
-		org_ids.append(oid)
-		org_picker.add_item(oid)
-	org_picker.select(org_ids.find(active_org))
+	org_picker.fit_to_longest_item = false
+	org_picker.custom_minimum_size.x = 170
+	org_picker.clip_text = true
+	_refresh_organization_picker()
 	org_picker.item_selected.connect(_organization_changed)
 	org_picker.visible = false
 	map_bar.add_child(org_picker)
@@ -756,7 +778,7 @@ func _build_planet() -> void:
 	terrain_shading = preload("res://scripts/terrain_shading.gd").new()
 	terrain_shading.initialize(planet_material)
 	display_coverage = preload("res://scripts/display_coverage.gd").new()
-	display_coverage.initialize(planet_material, false)
+	display_coverage.initialize(planet_material)
 	mesh.material_override = planet_material
 	spatial_map_layers = preload("res://scripts/spatial_map_layers.gd").new()
 	spatial_map_layers.initialize(str(state.database["version"]))
@@ -879,7 +901,7 @@ func _rebuild_palette() -> void:
 	var populations: Dictionary = {}
 	for entry: Dictionary in state.regions.values():
 		populations[entry["owner"]] = int(populations.get(entry["owner"], 0)) + int(entry["population"])
-		construction_output[entry["owner"]] = float(construction_output.get(entry["owner"],0)) + float(entry.get("construction_gdp",0))
+		construction_output[entry["owner"]] = float(construction_output.get(entry["owner"],0)) + state.employment.gdp_output(str(int(entry["id"])))
 	for tag: String in state.countries:
 		var per_capita := float(state.countries[tag].get("starting_stats",{}).get("gdp_per_capita_usd",0)) + float(construction_output.get(tag,0))/maxf(1,float(populations.get(tag,0)))
 		national_gdpc[tag] = per_capita
@@ -900,13 +922,22 @@ func _rebuild_palette() -> void:
 			var colors: Array = state.country_color(tag)
 			rgb = Color(float(colors[0]) / 255.0, float(colors[1]) / 255.0, float(colors[2]) / 255.0)
 			if map_mode == 1:
-				rgb = Color("4ecab1") if tag in state.organizations[active_org]["members"] else Color("273f50")
+				if alliances_overview:
+					rgb = Color("273f50")
+					if alliance_by_country.has(tag):
+						var leader: String = state.organizations[alliance_by_country[tag]].get("leader", "")
+						if state.countries.has(leader):
+							var color: Array = state.country_color(leader)
+							rgb = Color(float(color[0])/255, float(color[1])/255, float(color[2])/255)
+				else: rgb = Color("4ecab1") if not org_ids.is_empty() and tag in state.organizations[active_org]["members"] else Color("273f50")
 		if map_mode == CONSTRUCTION_MODE:
 			rgb = Color("273f50")
 			if tag == state.player_country:
 				var free: int = state.construction.free_slots(sid)
 				var ratio := float(free) / maxf(1, int(region["construction_slots"]))
 				rgb = Color("286fba") if free == 0 else Color("155c39").lerp(Color("a7e6a0"),ratio)
+				if construction_building in ["infrastructure", "internet_station", "rail_terminal"]:
+					rgb = Color("142f4a").lerp(Color("efd28a"), clampf(float(region["buildings"].get(construction_building,0))/10.0,0,1))
 		elif map_mode == 2:
 			var weight := log(1.0 + float(region["population"])) / log(1.0 + max_population)
 			rgb = Color("1b354c").lerp(Color("ffd36b"), pow(weight, 4.0))
@@ -1009,6 +1040,10 @@ func _country_item_selected(index: int) -> void:
 		_show_country(country_tags[index], true)
 
 func _clear_details() -> void:
+	if details == control_details and is_instance_valid(diplomacy_actions):
+		diplomacy_actions.queue_free()
+		diplomacy_actions = null
+		diplomacy_country = ""
 	if details == control_details: _leave_construction_mode()
 	if details == control_details: _close_floating_panels()
 	if details == control_details: active_feature = ""
@@ -1079,12 +1114,15 @@ func _rights_row(caption: String, tags: Array) -> void:
 	if tags.is_empty():
 		details.add_child(_wrapped("None", 13))
 		return
-	var grid := _icon_grid(4 if details == territory_details else 6)
+	var grid := HFlowContainer.new()
+	grid.name = "Rights_" + caption
+	grid.add_theme_constant_override("h_separation", 4)
+	details.add_child(grid)
 	var ordered: Array = tags.duplicate()
 	ordered.sort_custom(func(a: String, b: String): return str(state.country_record(a).get("name", a)).naturalnocasecmp_to(str(state.country_record(b).get("name", b))) < 0)
 	for tag: String in ordered:
 		var c := state.country_record(tag)
-		grid.add_child(_icon_button(str(c.get("name", tag)), flags.resolve(tag, str(c.get("cosmetic", "")), str(c.get("outlook", "Unspecified"))), func(): _show_rights_country(tag)))
+		grid.add_child(_icon_button(str(c.get("name", tag)), flags.resolve(tag, str(c.get("cosmetic", "")), str(c.get("outlook", "Unspecified"))), func(): _show_rights_country(tag), Vector2(34, 24)))
 
 func _show_rights_country(tag: String) -> void:
 	if state.countries.has(tag):
@@ -1144,6 +1182,8 @@ func _update_map_hover(position: Vector2) -> void:
 			if tag == state.player_country:
 				text += "\nShared slots free: %d / %d" % [state.construction.free_slots(str(id)),region["construction_slots"]]
 				var reason: String = state.construction.blocked(str(id), construction_building)
+				if construction_building in ["infrastructure", "internet_station", "rail_terminal"]:
+					text += "\n%s: %d/10 · %d queued" % [state.construction.catalog[construction_building]["name"],region["buildings"].get(construction_building,0),state.construction.pending(str(id),construction_building)]
 				text += "\n" + (reason if not reason.is_empty() else "Click: %s · %s" % [state.construction.catalog[construction_building]["name"],preload("res://scripts/construction_panel.gd").money(state.construction.quote(str(id),construction_building)["cost"])])
 			else: text += "\nYou can only build in your own states."
 		elif map_mode == 7:
@@ -1289,23 +1329,27 @@ func _icon_button(caption: String, texture: Texture2D, action: Callable, icon_si
 	else: button.text = "◇"
 	return button
 
-func _opinion_stat(from_tag: String, toward_tag: String) -> void:
+func _opinion_stat(from_tag: String, toward_tag: String, parent: Control = null, compact: bool = false) -> void:
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
 	for tag: String in [from_tag, toward_tag]:
 		if tag == toward_tag:
-			row.add_child(_label("opinion of", 11))
+			row.add_child(_label("→" if compact else "opinion of", 10 if compact else 11))
 		var country: Dictionary = state.countries[tag]
 		var flag := TextureRect.new()
 		flag.texture = flags.resolve(tag, str(country.get("cosmetic", "")), country["outlook"])
-		flag.custom_minimum_size = Vector2(30, 20)
+		flag.custom_minimum_size = Vector2(18, 13) if compact else Vector2(30, 20)
 		flag.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 		flag.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 		flag.texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR
 		flag.mouse_filter = Control.MOUSE_FILTER_STOP
 		flag.tooltip_text = country["name"]
 		row.add_child(flag)
-	var label := _label("", 14)
+	var label := preload("res://scripts/opinion_value.gd").new()
+	label.world = state
+	label.from_tag = from_tag
+	label.toward_tag = toward_tag
+	label.add_theme_font_size_override("font_size", 12 if compact else 14)
 	label.custom_minimum_size.x = 34
 	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT
 	label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
@@ -1314,7 +1358,7 @@ func _opinion_stat(from_tag: String, toward_tag: String) -> void:
 	label.set_meta("toward", toward_tag)
 	opinion_labels.append(label)
 	row.add_child(label)
-	details.add_child(row)
+	(parent if parent != null else details).add_child(row)
 	_refresh_opinions()
 
 func _refresh_opinions() -> void:
@@ -1359,7 +1403,10 @@ func _summary_grid(rows: Array) -> void:
 	grid.add_theme_constant_override("h_separation", 4)
 	grid.add_theme_constant_override("v_separation", 4)
 	for row: Array in rows:
-		var cell := PanelContainer.new()
+		var cell: PanelContainer = preload("res://scripts/population_tooltip.gd").new() if row[0] == "Population" else PanelContainer.new()
+		if row[0] == "Population":
+			cell.set("world",state)
+			cell.set("country",state.selected_country)
 		cell.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		cell.mouse_force_pass_scroll_events = false
 		var style := _button_style(Color("0c1922"), 3, Color("2b3d44"))
@@ -1375,6 +1422,14 @@ func _summary_grid(rows: Array) -> void:
 		box.add_child(caption)
 		var value := _label(str(row[1]), 14, Color("e9e6d7"))
 		value.clip_text = true
+		if row[0] == "Currency":
+			value.add_theme_font_size_override("font_size",11)
+			value.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			value.max_lines_visible = -1
+			value.clip_text = false
+			value.custom_minimum_size.y = 30
+			value.name = "CurrencyName"
+			value.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		box.add_child(value)
 		cell.tooltip_text = str(row[2]) if row.size()>2 else str(row[0])+": "+str(row[1])
 		grid.add_child(cell)
@@ -1417,7 +1472,14 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	var metrics := state.country_metrics(tag)
 	_clear_details()
 	details.add_child(_label("COUNTRY CONTROL" if screen == "playing" and tag == state.player_country else "DIPLOMACY / INFORMATION", 11, Color("63c9b6")))
-	_entity_heading(c["name"], flags.resolve(tag, str(c.get("cosmetic", "")), c["outlook"]))
+	var country_heading := _entity_heading(c["name"], flags.resolve(tag, str(c.get("cosmetic", "")), c["outlook"]))
+	if screen == "playing" and tag != state.player_country:
+		var relations := VBoxContainer.new()
+		relations.name = "HeaderRelations"
+		relations.add_theme_constant_override("separation", 0)
+		country_heading.add_child(relations)
+		_opinion_stat(state.player_country, tag, relations, true)
+		_opinion_stat(tag, state.player_country, relations, true)
 	details.add_child(_wrapped(c["outlook"], 14, Color("e5c888")))
 	var values: Dictionary = c.get("starting_stats", {})
 	var per_capita := state.gdp_per_capita(tag)
@@ -1425,26 +1487,39 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	var open_government := Callable()
 	if screen == "playing" and tag == state.player_country:
 		open_government = func(): _show_feature("Government")
-	politics_summary.configure(true, open_government)
+	politics_summary.configure(true, open_government, preload("res://scripts/government_rules.gd").government_title(state.government_properties[tag]))
+	politics_summary.configure_parties(state, tag)
 	details.add_child(politics_summary)
 	_briefing_section("National overview")
+	var demographic_entry: Dictionary = foundation.demographics.country_metrics(state, tag)
+	var workforce: Dictionary = demographic_entry["workforce"]
+	var factory_types := {"industrial_complex":"Civilian industries", "arms_factory":"Military industries", "offices":"Offices", "microchip_plant":"Chip plants", "data_center":"Data centers"}
+	var counts := {}
+	for key: String in factory_types: counts[key] = 0
+	for region: Dictionary in state.regions.values():
+		if region["owner"] != tag: continue
+		for key: String in counts: counts[key] += int(region["buildings"].get(key, 0))
+	var total_factories := 0
+	var factory_lines: Array[String] = []
+	for key: String in counts:
+		total_factories += int(counts[key])
+		factory_lines.append("%s: %d" % [factory_types[key], counts[key]])
+	var currency: Dictionary = currency_names.get(tag, {"name":"—", "code":""})
 	_summary_grid([
 		["Population", foundation.compact_number(int(metrics["population"])), "Residents: "+_number(int(metrics["population"]))],
 		["GDP", foundation.compact_money(per_capita*float(metrics["population"])), "GDP: $"+_number(int(per_capita*float(metrics["population"])))],
 		["GDP / person", foundation.compact_money(per_capita), "GDP per capita: $"+_number(int(per_capita))],
 		["Stability", "%.0f%%" % (float(values.get("stability",.65))*100)],
 		["War support", "%.0f%%" % (float(values.get("war_support",.5))*100)],
-		["States", str(metrics["regions"].size())]])
+		["States", str(metrics["regions"].size())],
+		["Labor force", foundation.compact_number(int(workforce["labour_force"]))],
+		["Unemployment", "%.1f%%" % (float(workforce["unemployment_rate"])*100)],
+		["Debt", foundation.compact_money(values.get("debt_usd"))],
+		["Factories", str(total_factories), "\n".join(factory_lines)],
+		["Currency", str(currency["name"]), str(currency["name"])],
+		["Treasury", foundation.compact_money(values.get("treasury_usd"))]])
 	var capital: String = str(int(c["capital"]))
-	details.add_child(_wrapped("%d states  ·  Capital state: %s" % [metrics["regions"].size(), state.regions.get(capital,{}).get("name","Unknown")],12,Color("93a8aa")))
-	if screen == "playing" and tag != state.player_country:
-		_briefing_section("Diplomatic relations")
-		_opinion_stat(state.player_country, tag)
-		_opinion_stat(tag, state.player_country)
-	var demographic_entry: Dictionary = foundation.demographics.country_metrics(state, tag)
-	var workforce := preload("res://scripts/workforce_panel.gd").new()
-	workforce.configure(demographic_entry["workforce"])
-	details.add_child(workforce)
+	details.add_child(_wrapped("Capital state: %s" % state.regions.get(capital,{}).get("name","Unknown"),12,Color("93a8aa")))
 	var chart := preload("res://scripts/compact_demographics.gd").new()
 	chart.name = "NationalDemographics"
 	chart.configure(demographic_entry, national_metric, func(key: String): national_metric = key, false)
@@ -1462,13 +1537,13 @@ func _show_country(tag: String, focus: bool = true) -> void:
 	if screen == "playing":
 		if tag == state.player_country:
 			_briefing_section("Government")
-			var government: Dictionary = c.get("government", {})
-			details.add_child(_wrapped(str(government.get("party", "")) if not str(government.get("party", "")).is_empty() else str(c["outlook"])))
+			details.add_child(_wrapped(preload("res://scripts/government_roster.gd").caption(state,tag)))
 			details.add_child(_button("Open government", func(): _show_feature("Government")))
 		else:
-			_briefing_section("Diplomatic actions")
-			for action: String in ["Improve relations", "Offer treaty", "Trade agreement", "Diplomatic support", "Declare war"]:
-				_placeholder(action)
+			diplomacy_country = tag
+			diplomacy_actions = preload("res://scripts/diplomacy_actions.gd").new()
+			game_ui.add_child(diplomacy_actions)
+			diplomacy_actions.configure(self)
 	if map_mode == 7: _rebuild_palette()
 	else: _update_selection_shader()
 	var index := country_tags.find(tag)
@@ -1559,9 +1634,13 @@ func _open_organization(oid: String) -> void:
 	if not state.organizations.has(oid): return
 	overlay_layout_dirty = true
 	active_org = oid
+	alliances_overview = false
+	organization_type = str(state.organizations[oid].get("type", "all"))
+	_refresh_organization_picker()
 	map_mode = 1
 	map_picker.select(1)
 	org_picker.visible = true
+	org_type_picker.show()
 	relations_picker.visible = false
 	org_picker.select(org_ids.find(oid))
 	_rebuild_palette()
@@ -1593,21 +1672,60 @@ func _map_changed(index: int) -> void:
 	map_mode = index
 	map_picker.select(index)
 	org_picker.visible = index == 1
+	org_type_picker.visible = index == 1
 	relations_picker.visible = index == 7
 	_rebuild_palette()
 	if map_mode == 1:
-		_show_organization()
+		if alliances_overview or org_ids.is_empty(): _hide_panel(control_panel)
+		else: _show_organization()
 	elif state.selected_sea > 0:
 		_show_sea(state.selected_sea)
 	else:
 		_show_country(state.selected_country, false)
 
 func _organization_changed(index: int) -> void:
+	if index < 0 or index >= org_ids.size(): return
 	overlay_layout_dirty = true
 	_play_ui("click")
-	active_org = org_ids[index]
+	alliances_overview = org_ids[index] == "__alliances__"
+	if not alliances_overview: active_org = org_ids[index]
 	_rebuild_palette()
-	_show_organization()
+	if not alliances_overview: _show_organization()
+	else: _hide_panel(control_panel)
+	country_label_layer.last_view = ""
+	country_label_layer.update_view(true)
+
+func _refresh_organization_picker() -> void:
+	org_ids.clear()
+	org_picker.clear()
+	alliance_by_country.clear()
+	for oid: String in state.organizations:
+		if state.organizations[oid].get("type") == "security":
+			for tag: String in OrganizationRules.full_members(state.organizations[oid]): alliance_by_country[tag] = oid
+	if organization_type == "security":
+		org_ids.append("__alliances__")
+		org_picker.add_item("All alliances")
+	for oid: String in state.organizations:
+		if organization_type != "all" and state.organizations[oid].get("type") != organization_type: continue
+		org_ids.append(oid)
+		org_picker.add_item(OrganizationRules.display_name(state.organizations[oid], state.date_dictionary()))
+	org_picker.disabled = org_ids.is_empty()
+	if org_ids.is_empty(): org_picker.add_item("No active organizations")
+	if not alliances_overview and active_org not in org_ids and not org_ids.is_empty(): active_org = org_ids.back()
+	org_picker.select(org_ids.find("__alliances__" if alliances_overview else active_org))
+	for i: int in org_type_picker.item_count:
+		if org_type_picker.get_item_metadata(i) == organization_type: org_type_picker.select(i)
+
+func _organization_type_changed(index: int) -> void:
+	organization_type = str(org_type_picker.get_item_metadata(index))
+	alliances_overview = organization_type == "security"
+	_refresh_organization_picker()
+	_rebuild_palette()
+	if alliances_overview or org_ids.is_empty(): _hide_panel(control_panel)
+	else: _show_organization()
+	overlay_layout_dirty = true
+	country_label_layer.last_view = ""
+	country_label_layer.update_view(true)
 
 func _focus_country(tag: String, animated: bool = true) -> void:
 	var point: Array = state.countries[tag]["map_center"]
@@ -1690,6 +1808,9 @@ func _ui_blocks_globe(position: Vector2) -> bool:
 	# a child even when its panel uses MOUSE_FILTER_STOP, unless forced scroll
 	# propagation is disabled. Also guard the camera when a drag enters a panel.
 	var point := view_container.get_global_transform() * position
+	if is_instance_valid(diplomacy_actions) and diplomacy_actions.is_visible_in_tree():
+		for child: Control in [diplomacy_actions.frame, diplomacy_actions.arrow]:
+			if child.is_visible_in_tree() and child.get_global_rect().has_point(point): return true
 	for popup: Control in get_tree().get_nodes_in_group("floating_ui"):
 		if popup.is_visible_in_tree() and popup.get_global_rect().has_point(point): return true
 	for panel: Control in [control_panel, right_panel, territory_panel, territory_handle, clock_box, map_box, selection_box, top_left_box]:
@@ -1806,6 +1927,23 @@ func _process(delta: float) -> void:
 			_rebuild_palette()
 			_update_construction_flags()
 		elif map_mode in [4,5]: _rebuild_palette()
+	if state.society.revision != society_seen_revision or state.employment.revision != employment_seen_revision:
+		society_seen_revision = state.society.revision
+		employment_seen_revision = state.employment.revision
+		var society_ui: Node = control_details.get_node_or_null("SocietyPanel")
+		if society_ui != null: society_ui.refresh()
+		elif control_panel.visible and control_details.has_node("CountrySummary"):
+			var saved_scroll: int = control_details.get_parent().scroll_vertical
+			_show_country(state.selected_country, false)
+			control_details.get_parent().set_deferred("scroll_vertical", saved_scroll)
+		elif territory_panel.visible and state.selected_region > 0:
+			var saved_scroll: int = territory_scroll.scroll_vertical
+			_show_territory()
+			territory_scroll.set_deferred("scroll_vertical", saved_scroll)
+		if foundation.ledger_dialog.visible: foundation.refresh_ledger()
+		if foundation.demo_dialog.visible: foundation.render_demographics()
+		_update_country_bar()
+		if map_mode in [2,4,5]: _rebuild_palette()
 	_update_map_rendering(delta)
 
 # View-dependent uniforms change on zoom/mode changes, never on idle frames.
@@ -1851,7 +1989,7 @@ func _speed_changed(index: int) -> void:
 
 func _view_state() -> Dictionary:
 	return {"rotation": [planet.rotation.x, planet.rotation.y], "distance": distance,
-		"map_mode": construction_previous_mode if map_mode == CONSTRUCTION_MODE else map_mode, "organization": active_org, "show_regions": show_regions, "inspection_active": inspection_active, "relations_reverse": relations_reverse}
+		"map_mode": construction_previous_mode if map_mode == CONSTRUCTION_MODE else map_mode, "organization": active_org, "organization_type":organization_type, "alliances_overview":alliances_overview, "show_regions": show_regions, "inspection_active": inspection_active, "relations_reverse": relations_reverse}
 
 func _save() -> void:
 	if screen != "playing":
@@ -1894,6 +2032,9 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 	_update_camera_pose()
 	map_mode = int(view["map_mode"])
 	active_org = view["organization"]
+	organization_type = str(view.get("organization_type", "all"))
+	alliances_overview = bool(view.get("alliances_overview", false))
+	_refresh_organization_picker()
 	relations_reverse = view["relations_reverse"]
 	relations_picker.select(1 if relations_reverse else 0)
 	relations_picker.visible = map_mode == 7
@@ -1901,8 +2042,9 @@ func _load_from(path: String, show_errors: bool = true) -> bool:
 	inspect_region = state.selected_region
 	inspect_province = state.selected_province
 	map_picker.select(map_mode)
-	org_picker.select(org_ids.find(active_org))
+	org_picker.select(org_ids.find("__alliances__" if alliances_overview else active_org))
 	org_picker.visible = map_mode == 1
+	org_type_picker.visible = map_mode == 1
 	show_regions = map_mode == CONSTRUCTION_MODE or distance <= 1.65
 	_rebuild_palette()
 	_update_country_list()
@@ -1980,6 +2122,13 @@ func _close_floating_panels() -> bool:
 
 func _close_side_tabs() -> bool:
 	var closed := false
+	if state.selected_sea != 0:
+		state.selected_sea = 0
+		state.selected_region = 0
+		state.selected_province = 0
+		inspection_active = false
+		_update_selection_shader()
+		closed = true
 	if territory_panel != null and (territory_panel.visible or (territory_clip != null and territory_clip.visible)):
 		_hide_panel(territory_panel)
 		closed = true
@@ -2553,14 +2702,16 @@ func _update_legend() -> void:
 	legend.visible = map_mode not in [0, 6]
 	match map_mode:
 		0: legend.text = "Political map"
-		1: legend.text = "Teal: members of " + active_org + "  ·  Dark blue: non-members  ·  Gold star: headquarters"
+		1: legend.text = "All alliances · Full members use their leader's color · Dark blue: unaligned" if alliances_overview else "Teal: members of " + active_org + "  ·  Dark blue: non-members  ·  Gold star: headquarters"
 		2: legend.text = "State population  ·  Dark blue: fewer people  →  Gold: more people\nTotals per state, on a logarithmic color scale"
 		4: legend.text = "GDP · $0.1B → $10T · Continuous logarithmic scale\nPale cream → amber → dark brown. Grey: unavailable."
 		6: legend.text = "Physical map · Terrain and waterways"
 		5: legend.text = "GDP/capita · $0 → $100k · Continuous logarithmic scale\nPale cream → amber → dark brown. Grey: unavailable."
 		7: legend.text = ("Others → " if relations_reverse else str(state.countries[state.selected_country]["name"]) + " → ") + (str(state.countries[state.selected_country]["name"]) if relations_reverse else "others") + " · Dark red −200 · Red −100 · Yellow 0 · Green +100 · Dark green +200\nExact values on hover; white marks the selected country."
 		8: legend.text = "Construction · Your states only\nLight green: more free slots · Dark green: fewer · Blue: full\nYellow stripes: queued construction"
-		3: legend.text = "Blue: Western  ·  Red: Emerging  ·  Gold: Non-Aligned\nGreen: Salafist  ·  Purple: Nationalist  ·  Grey: Unspecified"
+		3: legend.text = "Blue: Western  ·  Red: Multipolar  ·  Gold: Non-Aligned\nPurple: Nationalist  ·  Grey: Unspecified"
+	if map_mode == CONSTRUCTION_MODE and construction_building in ["infrastructure", "internet_station", "rail_terminal"]:
+		legend.text = str(state.construction.catalog[construction_building]["name"]) + " · Dark blue: level 0 → Gold: level 10\nYellow stripes: queued levels"
 
 func _build_save_dialogs() -> void:
 	save_dialog = ConfirmationDialog.new()
@@ -2787,6 +2938,7 @@ func _cache_organization_headquarters() -> void:
 		organization_hq_places[oid] = OrganizationRules.headquarters(state.organizations[oid], places.entries)
 
 func _update_organization_headquarters() -> void:
+	if alliances_overview: city_layer.set("markers", []); city_layer.queue_redraw(); return
 	var markers: Array[Dictionary] = []
 	var record: Dictionary = organization_hq_places.get(active_org, {})
 	if not record.is_empty():
@@ -2803,7 +2955,7 @@ func _update_organization_headquarters() -> void:
 	city_layer.set("markers", markers)
 	city_layer.queue_redraw()
 
-func _entity_heading(caption: String, texture: Texture2D, organization: bool = false) -> void:
+func _entity_heading(caption: String, texture: Texture2D, organization: bool = false) -> HBoxContainer:
 	var pinned: VBoxContainer = control_heading if details == control_details else diplomatic_heading
 	if details.get_child_count() > 0 and details.get_child(0) is Label:
 		details.get_child(0).reparent(pinned)
@@ -2831,11 +2983,16 @@ func _entity_heading(caption: String, texture: Texture2D, organization: bool = f
 		badge.custom_minimum_size.x = 44
 		row.add_child(badge)
 	var title := _wrapped(caption, 24, Color("f0f7f8"))
+	title.autowrap_mode = TextServer.AUTOWRAP_OFF
+	title.clip_text = true
+	title.text_overrun_behavior = TextServer.OVERRUN_TRIM_ELLIPSIS
+	title.tooltip_text = caption
 	title.custom_minimum_size.x = 100
 	title.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	row.add_child(title)
 	pinned.add_child(row)
 	pinned.add_child(HSeparator.new())
+	return row
 
 func _overlay_panel() -> PanelContainer:
 	var panel := PanelContainer.new()
@@ -2889,10 +3046,14 @@ func _configure_overlay_layout() -> void:
 	# Discard the original layout containers after moving every live control.
 	for child: Node in game_ui.get_children():
 		if child is VBoxContainer and child != top_left_box: child.queue_free()
+	var research_notices := preload("res://scripts/research_notifications.gd").new()
+	game_ui.add_child(research_notices)
+	research_notices.configure(self)
 	legend.position = Vector2(12, 112)
 	_position_panels()
 
 func _layout_overlay() -> void:
+	if org_type_picker != null: org_type_picker.visible = org_picker.visible
 	if clock_box == null: return
 	if not overlay_layout_dirty and overlay_size == size and overlay_screen == screen: return
 	overlay_layout_dirty = false; overlay_size = size; overlay_screen = screen
@@ -2908,6 +3069,8 @@ func _layout_overlay() -> void:
 	var available := maxf(565.0, clock_box.position.x - 8.0 - 94.0 - 32.0)
 	stats_row.custom_minimum_size.x = minf(maxf(0, stats_width - 3), available)
 	top_left_box.reset_size()
+	if map_box.position.x < top_left_box.get_rect().end.x:
+		map_box.position.y = maxf(map_box.position.y, top_left_box.get_rect().end.y + 4)
 
 func _panel_target(panel: PanelContainer) -> float:
 	return 8.0 if panel == control_panel else view_container.size.x - 378.0
@@ -2923,19 +3086,20 @@ func _handle_position(collapsed: bool) -> float:
 func _position_panels(force: bool = true) -> void:
 	if view_container == null: return
 	_layout_overlay()
+	if is_instance_valid(diplomacy_actions): diplomacy_actions.layout()
 	var key: Array = [view_container.size, top_left_box.size if top_left_box != null else Vector2.ZERO, control_panel.visible, right_panel.visible, territory_collapsed, active_feature]
 	if not force and key == last_panel_layout and panel_tweens.is_empty() and (territory_tween == null or not territory_tween.is_running()): return
 	last_panel_layout = key
 	for panel: PanelContainer in [control_panel]:
 		if panel == null or not panel.is_inside_tree(): continue
 		var available_height := maxf(240, view_container.size.y - 118)
-		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research", "Organizations", "Construction"] else Vector2(370, available_height)
+		panel.size = Vector2(minf(600, view_container.size.x - 24), minf(720, available_height)) if active_feature in ["Government", "Research", "Organizations", "Construction", "Society", "Agenda", "Trade", "Economy", "Production"] else Vector2(370, available_height)
 		if panel.visible and not panel_tweens.has(panel): panel.position = Vector2(_panel_target(panel), 110)
 	if territory_clip == null: return
 	territory_clip.position = Vector2(view_container.size.x-8-_territory_width(),110)
 	territory_clip.size = Vector2(_territory_width(), view_container.size.y-118)
 	territory_panel.size = territory_clip.size
-	for grid: GridContainer in territory_details.find_children("FacilityGrid","GridContainer",true,false):grid.columns=maxi(4,int((_territory_width()-34)/59))
+	for grid: GridContainer in territory_details.find_children("FacilityGrid","GridContainer",true,false): grid.columns=maxi(1,int((_territory_width()-34)/(81 if grid.get_meta("levels",false) else 59)))
 	if territory_tween == null or not territory_tween.is_running():
 		territory_panel.position = Vector2(_territory_position(territory_collapsed), 0)
 		territory_handle.position = Vector2(_handle_position(territory_collapsed), territory_clip.position.y + 12)
@@ -2987,6 +3151,7 @@ func _hide_panel(panel: PanelContainer) -> void:
 	if panel == control_panel: _leave_construction_mode()
 	if panel == null: return
 	if panel == control_panel: _close_floating_panels()
+	if panel == control_panel and is_instance_valid(diplomacy_actions): diplomacy_actions.hide()
 	if panel == territory_panel: _preview_state(0)
 	if panel_tweens.has(panel): panel_tweens[panel].kill(); panel_tweens.erase(panel)
 	panel.hide()
@@ -3174,6 +3339,7 @@ func _space_background(parent: Control) -> TextureRect:
 
 func _show_feature(caption: String) -> void:
 	if screen != "playing": return
+	var switching := control_panel.visible and active_feature != caption
 	if active_feature == caption and control_panel.visible:
 		_leave_construction_mode()
 		active_feature = ""
@@ -3194,6 +3360,26 @@ func _show_feature(caption: String) -> void:
 		var politics := preload("res://scripts/political_panel.gd").new()
 		politics.configure(state, tag, _update_country_bar, self)
 		control_details.add_child(politics)
+	elif caption in ["Economy","Production"]:
+		control_heading.add_child(_label(str(state.countries[state.player_country]["name"]),14,UIStyle.MUTED_COLOR))
+		var economy_ui := preload("res://scripts/economy_panel.gd").new()
+		economy_ui.configure(state,state.player_country,"Production" if caption == "Production" else "Overview")
+		control_details.add_child(economy_ui)
+	elif caption == "Agenda":
+		control_heading.add_child(_label(str(state.countries[state.player_country]["name"]), 14, UIStyle.MUTED_COLOR))
+		var agenda_ui := preload("res://scripts/agenda_panel.gd").new()
+		agenda_ui.configure(state)
+		control_details.add_child(agenda_ui)
+	elif caption == "Trade":
+		var trade_ui := preload("res://scripts/trade_panel.gd").new()
+		trade_ui.configure(state, state.player_country)
+		control_details.add_child(trade_ui)
+	elif caption == "Society":
+		var tag: String = state.player_country
+		control_heading.add_child(_label(str(state.countries[tag]["name"]), 14, UIStyle.MUTED_COLOR))
+		var society_ui := preload("res://scripts/society_panel.gd").new()
+		society_ui.configure(state, tag, self)
+		control_details.add_child(society_ui)
 	elif caption == "Research":
 		var tag: String = state.player_country
 		control_heading.add_child(_label(str(state.countries[tag]["name"]), 14, UIStyle.MUTED_COLOR))
@@ -3207,6 +3393,7 @@ func _show_feature(caption: String) -> void:
 		map_picker.disabled = true
 		map_picker.text = "Construction"
 		org_picker.hide()
+		org_type_picker.hide()
 		relations_picker.hide()
 		inspection_active = false
 		state.selected_region = 0
@@ -3224,6 +3411,15 @@ func _show_feature(caption: String) -> void:
 		control_details.add_child(organizations_ui)
 	_reveal_panel(control_panel)
 	_position_panels()
+	if switching:
+		if panel_tweens.has(control_panel): panel_tweens[control_panel].kill()
+		control_panel.position.x = _panel_target(control_panel) - 90
+		control_panel.modulate.a = .45
+		var tween := create_tween().set_parallel(true)
+		panel_tweens[control_panel] = tween
+		tween.tween_property(control_panel, "position:x", _panel_target(control_panel), .2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+		tween.tween_property(control_panel, "modulate:a", 1.0, .16)
+		tween.finished.connect(func(): panel_tweens.erase(control_panel); _position_panels())
 	foundation.refresh_active_section()
 
 func _construction_click(id: int) -> void:
@@ -3236,6 +3432,12 @@ func _construction_click(id: int) -> void:
 		_set_status("Queued " + str(state.construction.catalog[construction_building]["name"]) + " · " + str(state.regions[sid]["name"]))
 	else: _set_status(reason)
 	_construction_changed()
+
+func _select_construction_building(key: String) -> void:
+	construction_building = key
+	_rebuild_palette()
+	var panel: Node = control_details.get_node_or_null("ConstructionPanel")
+	if panel != null: panel.refresh()
 
 func _construction_changed() -> void:
 	construction_seen_revision = state.construction.revision
@@ -3265,6 +3467,7 @@ func _leave_construction_mode() -> void:
 	map_picker.select(map_mode)
 	map_picker.text = map_picker.get_item_text(map_mode)
 	org_picker.visible = map_mode == 1
+	org_type_picker.visible = map_mode == 1
 	relations_picker.visible = map_mode == 7
 	_rebuild_palette()
 	overlay_layout_dirty = true

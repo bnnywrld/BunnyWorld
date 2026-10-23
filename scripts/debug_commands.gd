@@ -3,7 +3,7 @@ static func execute(state: WorldState, line: String) -> String:
 	var args := line.strip_edges().split(" ", false)
 	if args.is_empty(): return ""
 	var command := args[0].to_lower()
-	if command == "help": return "tag TAG | set FIELD VALUE [TAG] | add FIELD VALUE [TAG]\nFields: pp, stability, war_support, population, gdp, gdp_per_capita\noutlook western/emerging/nonaligned/salafist/nationalist [TAG]\ncosmetic NAME/none [TAG] | color R G B [TAG] | owner STATE TAG\nopinion FROM TO VALUE (-1000 to 1000)\nPercentages use 0–100. GDP and GDP/capita use USD.\nPerformance: perf status | perf start [frames] | perf stop | perf continuous | perf auto."
+	if command == "help": return "tag TAG | set FIELD VALUE [TAG] | add FIELD VALUE [TAG]\nFields: pp, stability, war_support, population, gdp, gdp_per_capita\noutlook western/multipolar/nonaligned/nationalist [TAG]\ncosmetic NAME/none [TAG] | color R G B [TAG] | owner STATE TAG\nopinion FROM TO VALUE (-1000 to 1000)\nPercentages use 0–100. GDP and GDP/capita use USD.\nPerformance: perf status | perf start [frames] | perf stop | perf continuous | perf auto."
 	if command == "tag":
 		if args.size() != 2 or not state.countries.has(args[1].to_upper()): return "Unknown country. Example: tag jap"
 		state.player_country = args[1].to_upper()
@@ -32,7 +32,7 @@ static func execute(state: WorldState, line: String) -> String:
 		var tag := args[2].to_upper() if args.size() == 3 else state.player_country
 		if not state.countries.has(tag): return "Unknown country."
 		if command == "outlook":
-			var choices := {"western":"Western Outlook", "emerging":"Emerging Outlook", "nonaligned":"Non-Aligned Outlook", "salafist":"Salafist Outlook", "nationalist":"Nationalist Outlook"}
+			var choices := {"western":"Western Outlook", "multipolar":"Multipolar Outlook", "nonaligned":"Non-Aligned Outlook", "nationalist":"Nationalist Outlook"}
 			if not choices.has(args[1].to_lower()): return "Unknown outlook. Use help."
 			state.countries[tag]["outlook"] = choices[args[1].to_lower()]
 		else:
@@ -60,6 +60,8 @@ static func execute(state: WorldState, line: String) -> String:
 			var share := remaining if i == regions.size() - 1 else mini(remaining, int(value * float(region["population"]) / total))
 			region["population"] = share
 			remaining -= share
+		state.construction.refresh_capacities()
+		state.employment.refresh()
 		return "Population updated."
 	var key: String = {"pp":"political_power", "political_power":"political_power", "stability":"stability", "war_support":"war_support", "gdp_per_capita":"gdp_per_capita_usd", "gdp":"gdp_per_capita_usd"}.get(field, "")
 	if key == "": return "Unknown field. Type help."

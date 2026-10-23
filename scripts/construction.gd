@@ -1,5 +1,5 @@
 extends RefCounted
-# Daily, player-only construction. No frame callbacks, workers or market simulation.
+# Daily, player-only construction. Staffing scales effective construction work; no market simulation.
 const MAX_FACTORIES := 10
 var owner: WeakRef
 var world: RefCounted:
@@ -31,7 +31,21 @@ func reset() -> void:
 		var used := shared_used(region["buildings"])
 		region["construction_slots"] = maxi(curve, used + maxi(4, ceili(used * .25)))
 		region["construction_gdp"] = 0.0
+		region["construction_output"] = {}
 	_changed(true)
+
+func refresh_capacities() -> void:
+	var changed := false
+	for sid: String in world.regions:
+		var region: Dictionary = world.regions[sid]
+		var current := int(region["construction_slots"])
+		var seed: Dictionary = world.database["regions"][sid]
+		var initial_curve := capacity(float(seed["area_km2"]), int(seed["population"]))
+		var initial_used := shared_used(seed["buildings"])
+		var headroom := maxi(0, initial_used + maxi(4, ceili(initial_used * .25)) - initial_curve)
+		var wanted := maxi(current, capacity(float(region["area_km2"]), int(region["population"])) + headroom)
+		if wanted > current: region["construction_slots"] = wanted; changed = true
+	if changed: _changed(true)
 
 static func capacity(area: float, population: int) -> int:
 	# Generous logarithmic curve: scarce room for tiny states, substantial room
@@ -51,9 +65,10 @@ func _ensure_reservations() -> void:
 	for job: Dictionary in queue:
 		var sid := str(int(job["state"]))
 		var key: String = job["building"]
-		pending_counts[sid] = int(pending_counts.get(sid,0)) + 1
-		pending_counts[sid+":"+key] = int(pending_counts.get(sid+":"+key,0)) + 1
-		if catalog[key]["shared"]: shared_counts[sid] = int(shared_counts.get(sid,0)) + 1
+		var count: int = 1 + job["next_levels"].size()
+		pending_counts[sid] = int(pending_counts.get(sid,0)) + count
+		pending_counts[sid+":"+key] = int(pending_counts.get(sid+":"+key,0)) + count
+		if catalog[key]["shared"]: shared_counts[sid] = int(shared_counts.get(sid,0)) + count
 	reservation_revision = map_revision
 
 func pending(sid: String, key: String = "") -> int:
@@ -97,7 +112,13 @@ func add(sid: String, key: String) -> bool:
 	var borrowed: float = price["cost"] - cash
 	stats["treasury_usd"] = maxf(0, float(stats.get("treasury_usd", 0))) - cash
 	stats["debt_usd"] = maxf(0, float(stats.get("debt_usd", 0))) + borrowed
-	queue.append({"id":next_id,"state":int(sid),"country":world.player_country,"building":key,"points":price["points"],"progress":0.0,"cash":cash,"borrowed":borrowed,"factories":MAX_FACTORIES})
+	world.economy.record_construction(world.player_country,price["cost"])
+	for job: Dictionary in queue:
+		if int(job["state"]) == int(sid) and job["building"] == key:
+			job["next_levels"].append({"points":price["points"], "cash":cash, "borrowed":borrowed})
+			_changed(true)
+			return true
+	queue.append({"id":next_id,"state":int(sid),"country":world.player_country,"building":key,"points":price["points"],"progress":0.0,"cash":cash,"borrowed":borrowed,"factories":MAX_FACTORIES,"next_levels":[]})
 	next_id += 1
 	_changed(true)
 	return true
@@ -129,7 +150,7 @@ func rate(job: Dictionary, factories: int) -> float:
 	var level := int(world.regions[str(int(job["state"]))]["buildings"].get("infrastructure", 0))
 	# Adapt MD's maximum infrastructure construction bonus (.75) to 10 levels.
 	var bonus := 1.0 if job["building"] == "infrastructure" else 1 + .075 * level
-	return factories * 4.0 * bonus
+	return factories * 4.0 * bonus * world.employment.national_fulfillment(job["country"], "industrial_complex")
 
 func gdp_gain(tag: String, key: String) -> float:
 	var productivity := maxf(0, float(world.countries[tag].get("starting_variables", {}).get("overall_productivity", 650))) / 1000.0
@@ -147,8 +168,17 @@ func advance_days(days: int) -> void:
 			var r: Dictionary = world.regions[str(int(job["state"]))]
 			var key: String = job["building"]
 			r["buildings"][key] = int(r["buildings"].get(key, 0)) + 1
-			r["construction_gdp"] += gdp_gain(job["country"], key)
-			queue.erase(job)
+			var output := gdp_gain(job["country"], key)
+			r["construction_gdp"] += output
+			r["construction_output"][key] = float(r["construction_output"].get(key, 0)) + output
+			if job["country"] == world.player_country:
+				world.completion_notice.emit("Construction completed", str(catalog[key]["name"]) + "\n" + str(r["name"]))
+			if job["next_levels"].is_empty(): queue.erase(job)
+			else:
+				var next: Dictionary = job["next_levels"].pop_front()
+				for field: String in ["points", "cash", "borrowed"]: job[field] = next[field]
+				job["progress"] = 0.0
+		if not completed.is_empty(): world.employment.refresh()
 		_changed(not completed.is_empty())
 		if queue.is_empty(): break
 
@@ -158,9 +188,14 @@ func cancel(id: int) -> bool:
 		var remainder := clampf(1 - float(job["progress"]) / float(job["points"]), 0, 1)
 		var stats: Dictionary = world.countries[job["country"]]["starting_stats"]
 		var borrowed: float = job["borrowed"] * remainder
+		var cash: float = job["cash"] * remainder
+		for level: Dictionary in job["next_levels"]:
+			borrowed += float(level["borrowed"])
+			cash += float(level["cash"])
 		var repay := minf(float(stats.get("debt_usd", 0)), borrowed)
 		stats["debt_usd"] = float(stats.get("debt_usd", 0)) - repay
-		stats["treasury_usd"] = float(stats.get("treasury_usd", 0)) + job["cash"] * remainder + borrowed - repay
+		stats["treasury_usd"] = float(stats.get("treasury_usd", 0)) + cash + borrowed - repay
+		world.economy.record_construction(job["country"],-cash-borrowed)
 		queue.erase(job)
 		_changed(true)
 		return true
@@ -198,9 +233,17 @@ func valid(saved: Variant, saved_regions: Dictionary, player: String) -> bool:
 	var ids := {}
 	var shared := {}
 	var levels := {}
+	var groups := {}
 	for sid: String in saved_regions:
 		var r: Dictionary = saved_regions[sid]
 		if not r.get("buildings") is Dictionary or not number(r.get("construction_slots"), 1e6, true) or not number(r.get("construction_gdp")): return false
+		if not r.get("construction_output") is Dictionary: return false
+		var recorded_output := 0.0
+		for key: Variant in r["construction_output"]:
+			if not key is String or not catalog.has(key) or not number(r["construction_output"][key]): return false
+			if int(r["buildings"].get(key, 0)) <= 0: return false
+			recorded_output += float(r["construction_output"][key])
+		if not is_equal_approx(recorded_output, float(r["construction_gdp"])): return false
 		for key: Variant in r["buildings"]:
 			if not key is String or not number(r["buildings"][key], 1e6, true): return false
 			if not catalog.has(key) and not world.database["regions"][sid]["buildings"].has(key): return false
@@ -219,9 +262,18 @@ func valid(saved: Variant, saved_regions: Dictionary, player: String) -> bool:
 		if not is_equal_approx(float(job["cash"]) + float(job["borrowed"]), float(catalog[key]["money_usd"])): return false
 		if catalog[key]["coastal"] and not coastal.has(sid): return false
 		var level_key: String = sid + ":" + key
-		levels[level_key] = int(levels.get(level_key, 0)) + 1
+		if groups.has(level_key) or not job.get("next_levels") is Array or job["next_levels"].size() >= limit(sid,key): return false
+		groups[level_key] = true
+		for level: Variant in job["next_levels"]:
+			if not level is Dictionary: return false
+			for field: String in ["points", "cash", "borrowed"]:
+				if not number(level.get(field)): return false
+			if float(level["points"]) < float(catalog[key]["points"]) or float(level["points"]) > float(catalog[key]["points"]) + float(catalog[key]["extra_points"]) * maxi(0,limit(sid,key)-1): return false
+			if not is_equal_approx(float(level["cash"]) + float(level["borrowed"]), float(catalog[key]["money_usd"])): return false
+		var count: int = 1 + job["next_levels"].size()
+		levels[level_key] = int(levels.get(level_key, 0)) + count
 		if int(saved_regions[sid]["buildings"].get(key, 0)) + int(levels[level_key]) > limit(sid, key): return false
-		if catalog[key]["shared"]: shared[sid] = int(shared.get(sid, 0)) + 1
+		if catalog[key]["shared"]: shared[sid] = int(shared.get(sid, 0)) + count
 		ids[job["id"]] = true
 	for sid: String in shared:
 		if shared_used(saved_regions[sid]["buildings"]) + int(shared[sid]) > int(saved_regions[sid]["construction_slots"]): return false

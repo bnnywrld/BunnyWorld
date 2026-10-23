@@ -30,17 +30,19 @@ def main():
   if not price: raise ValueError(key)
   network=key in ['infrastructure','internet_station','rail_terminal']
   data[key]={'name':name,'points':number(b,'base_cost'),'extra_points':number(b,'per_level_extra_cost'),'money_usd':float(price[1])*1e9,'max_level':10 if network else int(number(b,'state_max',1)),'shared':bool(re.search(r'shares_slots\s*=\s*yes',b)) and not network,'coastal':bool(re.search(r'only_costal\s*=\s*yes',b)),'gdp_base_billion':number(money_text,'@gdp_'+gdp_vars[key]+'_base_factor') if key in gdp_vars else GDP.get(key,0),'category':'Networks' if network else ('Economy' if key in GDP else 'State facilities')}
+ # BunnyWorld balance: server infrastructure, not an MD building definition.
+ data['data_center']={'name':'Data Center','points':36000,'extra_points':0,'money_usd':6e9,'max_level':20,'shared':True,'coastal':False,'gdp_base_billion':8,'category':'Economy','balance_source':'BunnyWorld provisional: $6B, 36k points, 10k employees, $8B annual base GDP before productivity/staffing. Energy demand awaits the energy system.'}
  # Only proper sea areas count: exclude lakes/reservoirs and source-ID water holes.
  p=np.asarray(Image.open(ROOT/'assets/province_ids.png').convert('RGB'),dtype=np.uint32);pid=p[:,:,0]+256*p[:,:,1]
  s=np.asarray(Image.open(ROOT/'assets/sea_ids.png').convert('RGB'),dtype=np.uint32);sid=s[:,:,0]+256*s[:,:,1]
- seas=json.loads((ROOT/'data/sea_regions.json').read_text());valid=[int(k) for k,v in seas.items() if not v.get('is_inland_water',False) and not v['name'].startswith('Inland Water')]
+ seas=json.loads((ROOT/'data/sea_regions.json').read_text(encoding='utf8'));valid=[int(k) for k,v in seas.items() if not v.get('is_inland_water',False) and not v['name'].startswith('Inland Water')]
  water=np.isin(sid,valid)&(pid==0)
  near=np.roll(water,1,1)|np.roll(water,-1,1)
  near[1:]|=water[:-1];near[:-1]|=water[1:]
  coastal_pids=np.unique(pid[near&(pid>0)&(pid<65535)])
- provinces=json.loads((ROOT/'data/provinces.json').read_text())
+ provinces=json.loads((ROOT/'data/provinces.json').read_text(encoding='utf8'))
  coast=sorted({int(provinces[str(int(p))]['region']) for p in coastal_pids if str(int(p)) in provinces})
  out={'source':{'file':path,'sha256':hashlib.sha256(raw).hexdigest(),'money_unit':'MD billion USD; pricing-model header','money_system_sha256':hashlib.sha256(money_raw).hexdigest(),'gdp':'00_money_system.txt base coefficients; neutral sector modifiers, full staffing; overall_productivity / 1000','railroads':'State-level rail network uses MD rail_terminal cost/output. Province routes deferred.'},'buildings':data,'coastal_states':coast,'factory_points_per_day':4.0}
- (ROOT/'data/construction.json').write_text(json.dumps(out,indent=2)+'\n')
+ (ROOT/'data/construction.json').write_text(json.dumps(out,indent=2)+'\n',encoding='utf8',newline='\n')
  print(len(data),'building types;',len(coast),'coastal states')
 if __name__=='__main__':main()

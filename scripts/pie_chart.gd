@@ -3,11 +3,12 @@ var counts: Dictionary = {}
 var colors: Dictionary = {}
 var hovered := ""
 const PALETTE := [Color("56c6b5"), Color("ddba72"), Color("729bd7"), Color("c784a9"), Color("91b875"), Color("bb906b"), Color("9386ca"), Color("d77e6c"), Color("738b99")]
-func configure(values: Dictionary) -> void:
+func configure(values: Dictionary, kind: String = "") -> void:
 	counts = values
 	var index := 0
 	for key: String in counts:
 		colors[key] = Color("647681") if key == "Unknown" or key == "Other / unspecified" else PALETTE[index % PALETTE.size()]
+		if kind == "religion": colors[key] = preload("res://scripts/religion_catalog.gd").color(key)
 		index += 1
 	custom_minimum_size = Vector2(86, 86)
 	mouse_filter = Control.MOUSE_FILTER_STOP
@@ -55,6 +56,6 @@ func _gui_input(event: InputEvent) -> void:
 			cursor += float(counts[key])/total*TAU
 			if angle <= cursor:
 				hovered = key
-				tooltip_text = "%s: %s people · %.1f%%" % [key, str(counts[key]), float(counts[key])/total*100]
+				tooltip_text = "%s: %s people · %.1f%%" % [key, preload("res://scripts/display_format.gd").people(int(counts[key])), float(counts[key])/total*100]
 				break
 	queue_redraw()

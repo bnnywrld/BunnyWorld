@@ -6,8 +6,9 @@ signal preparation_progress(completed: int,total: int)
 # landmark parts are baked into a single mesh per monument. No physics,
 # collision, individual shadows, annual regeneration, or building simulation.
 const EARTH_METERS := 6371000.0
-const SIZE_MULTIPLIER := 2.4
+const SIZE_MULTIPLIER := 2.1
 const DISPLAY_SCALE := 12.0 * SIZE_MULTIPLIER
+const AREA_SCALE := 0.9
 const BUILDING_CAP := 1600
 const CLUSTER_CAP := 76
 const Surface = preload("res://scripts/relief_surface.gd")
@@ -172,7 +173,9 @@ func _cluster(record: Dictionary) -> MultiMeshInstance3D:
 		var item: Array = record["instances"][i]
 		var width := float(item[2]) / EARTH_METERS * DISPLAY_SCALE * 1.4
 		var height := float(item[3]) / EARTH_METERS * DISPLAY_SCALE
-		var transform := _surface_transform(float(item[0]), float(item[1]), Vector3(width, height, width), float(item[4]))
+		var longitude := float(record["longitude"]) + wrapf(float(item[0])-float(record["longitude"]),-180,180) * AREA_SCALE
+		var latitude := lerpf(float(record["latitude"]),float(item[1]),AREA_SCALE)
+		var transform := _surface_transform(longitude, latitude, Vector3(width, height, width), float(item[4]))
 		transform.origin += transform.basis.y * .5
 		multimesh.set_instance_transform(i, transform)
 		multimesh.set_instance_color(i, colors[(i + int(record["id"])) % colors.size()])

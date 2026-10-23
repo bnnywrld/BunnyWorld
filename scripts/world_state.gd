@@ -1,8 +1,22 @@
 class_name WorldState
 extends RefCounted
 signal territory_changed(id: int,old_owner: String,new_owner: String)
+signal completion_notice(kind: String, text: String)
+signal campaign_changed
 
-const SAVE_VERSION := 23
+const SAVE_VERSION := 29
+const Economy = preload("res://scripts/economy.gd")
+var economy := Economy.new()
+const Agenda = preload("res://scripts/agenda.gd")
+var agenda := Agenda.new()
+var political_leaders: Dictionary = {}
+const Employment = preload("res://scripts/employment.gd")
+var employment := Employment.new()
+var state_economy: Dictionary = {}
+const Society = preload("res://scripts/society.gd")
+var society := Society.new()
+const Research = preload("res://scripts/research.gd")
+var research := Research.new()
 const Construction = preload("res://scripts/construction.gd")
 var construction := Construction.new()
 const OrganizationRules = preload("res://scripts/organization_rules.gd")
@@ -43,7 +57,14 @@ var political_power_modifiers: Dictionary = {}
 
 func initialize(data: Dictionary) -> void:
 	database = data
+	economy.initialize(self)
+	agenda.initialize(self)
+	political_leaders = JSON.parse_string(FileAccess.get_file_as_string("res://data/leaders_2000.json"))
 	construction.initialize(self)
+	research.initialize(self)
+	society.initialize(self)
+	employment.initialize(self)
+	state_economy = JSON.parse_string(FileAccess.get_file_as_string("res://data/state_economy_2000.json"))
 	government_starting_laws = JSON.parse_string(FileAccess.get_file_as_string("res://data/government_laws_2000.json"))["countries"]
 	relation_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/relations.json"))
 	province_database = JSON.parse_string(FileAccess.get_file_as_string("res://data/provinces.json"))
@@ -63,6 +84,9 @@ func reset() -> void:
 		if not countries[tag]["starting_stats"].has("political_power"):
 			countries[tag]["starting_stats"]["political_power"] = 100.0
 	regions = database["regions"].duplicate(true)
+	for sid: String in regions:
+		var seed: Dictionary = state_economy["states"][sid]
+		for field: String in ["resources", "cores", "claims"]: regions[sid][field] = seed[field].duplicate(true)
 	organizations = database["organizations"].duplicate(true)
 	OrganizationRules.seed(organizations)
 	provinces = province_database.duplicate(true)
@@ -80,6 +104,12 @@ func reset() -> void:
 	selected_region = 0
 	last_error = ""
 	construction.reset()
+	research.reset()
+	society.reset()
+	employment.refresh()
+	economy.reset()
+	agenda.reset()
+	campaign_changed.emit()
 
 func advance(delta: float) -> bool:
 	if paused:
@@ -96,7 +126,15 @@ func advance(delta: float) -> bool:
 		# Update once at crossed midnight(s), never once per rendered frame.
 		for tag: String in countries:
 			countries[tag]["starting_stats"]["political_power"] = political_power(tag) + elapsed_days * daily_political_power(tag)
-		construction.advance_days(elapsed_days)
+		var final_hour := hour
+		for boundary: int in range(previous_day+1,day+1):
+			hour = boundary*24
+			construction.advance_days(1)
+			research.advance_days(1)
+			agenda.advance_days(1)
+			society.advance_months()
+		hour = final_hour
+	society.advance_months()
 	return true
 
 func political_power(tag: String) -> float:
@@ -116,13 +154,8 @@ func daily_political_power(tag: String) -> float:
 func government_property(tag: String, key: String) -> String:
 	return str(government_properties.get(tag, {}).get(key, ""))
 
-func change_government_property(tag: String, key: String, value: String) -> bool:
-	if tag != player_country or not countries.has(tag) or not GovernmentRules.valid_choice(key, value): return false
-	if government_property(tag, key) == value or political_power(tag) < GovernmentRules.CHANGE_COST: return false
-	if not government_properties.has(tag): government_properties[tag] = {}
-	countries[tag]["starting_stats"]["political_power"] = political_power(tag) - GovernmentRules.CHANGE_COST
-	government_properties[tag][key] = value
-	return true
+func change_government_property(tag: String, key: String, value: String, affiliation: String = "") -> bool:
+	return agenda.propose(tag, key, value, affiliation)
 
 func date_dictionary() -> Dictionary:
 	return Time.get_datetime_dict_from_unix_time(scenario_epoch + hour * HOUR_SECONDS)
@@ -148,24 +181,31 @@ func gdp(tag: String) -> float:
 	var base := float(countries[tag].get("starting_stats", {}).get("gdp_per_capita_usd", 0))
 	var total := 0.0
 	for region: Dictionary in regions.values():
-		if region["owner"] == tag: total += base * int(region["population"]) + float(region.get("construction_gdp", 0))
-	return total
+		if region["owner"] == tag: total += base * int(region["population"]) + employment.gdp_output(str(int(region["id"])))
+	return economy.nominal_gdp(tag,total)
 
 func gdp_per_capita(tag: String) -> float:
 	return gdp(tag) / maxf(1, country_metrics(tag)["population"])
 
 func country_record(tag: String) -> Dictionary:
-	return countries.get(tag, database.get("country_registry", {}).get(tag, {}))
+	var record: Dictionary = countries.get(tag, database.get("country_registry", {}).get(tag, state_economy.get("country_records", {}).get(tag, {})))
+	if record.is_empty(): return {}
+	var outlook := Society.normalize_outlook(str(record.get("outlook", "Unspecified")))
+	if outlook == record.get("outlook"): return record
+	var normalized := record.duplicate()
+	normalized["outlook"] = outlook
+	return normalized
 
-func opinion_breakdown(from_tag: String, toward_tag: String) -> Array[Dictionary]:
+func opinion_breakdown(from_tag: String, toward_tag: String,at_hour: int = -1) -> Array[Dictionary]:
 	var result: Array[Dictionary] = []
 	if from_tag == toward_tag: return result
-	var months := float(hour) / (24.0 * 30.4375)
+	var sample_hour := hour if at_hour<0 else at_hour
+	var months := float(sample_hour) / (24.0 * 30.4375)
 	for id: String in relation_database.get("pairs", {}).get(from_tag + "|" + toward_tag, []):
 		var definition: Dictionary = relation_database["definitions"][id]
 		if definition["trade_only"]: continue
 		var expires := float(definition["expires_hour"])
-		if expires >= 0 and float(hour) >= expires: continue
+		if expires >= 0 and float(sample_hour) >= expires: continue
 		var initial := float(definition["value"])
 		var value := signf(initial) * maxf(0, absf(initial) - months * float(definition["decay_per_month"]))
 		if not is_zero_approx(value): result.append({"name": definition["name"], "value": value})
@@ -173,10 +213,10 @@ func opinion_breakdown(from_tag: String, toward_tag: String) -> Array[Dictionary
 	if not is_zero_approx(offset): result.append({"name": "Diplomatic adjustment", "value": offset})
 	return result
 
-func opinion(from_tag: String, toward_tag: String) -> float:
+func opinion(from_tag: String, toward_tag: String,at_hour: int = -1) -> float:
 	if from_tag == toward_tag: return 0.0
 	var total := 0.0
-	for entry: Dictionary in opinion_breakdown(from_tag, toward_tag): total += float(entry["value"])
+	for entry: Dictionary in opinion_breakdown(from_tag, toward_tag,at_hour): total += float(entry["value"])
 	return total
 
 func set_opinion(from_tag: String, toward_tag: String, value: float) -> bool:
@@ -224,6 +264,7 @@ func transfer_region(id: int, new_owner: String) -> bool:
 	var old_owner: String=regions[str(id)]["owner"]
 	if old_owner==new_owner:return true
 	regions[str(id)]["owner"] = new_owner
+	employment.refresh()
 	territory_changed.emit(id,old_owner,new_owner)
 	return true
 
@@ -231,7 +272,7 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 	last_error = ""
 	var region_state: Dictionary = {}
 	for sid: String in regions:
-		region_state[sid] = {"buildings": regions[sid]["buildings"], "construction_slots":regions[sid]["construction_slots"], "construction_gdp":regions[sid]["construction_gdp"], "owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
+		region_state[sid] = {"buildings": regions[sid]["buildings"], "construction_slots":regions[sid]["construction_slots"], "construction_gdp":regions[sid]["construction_gdp"], "construction_output":regions[sid]["construction_output"], "owner": regions[sid]["owner"], "population": regions[sid]["population"], "cores": regions[sid]["cores"], "claims": regions[sid]["claims"], "workforce": {"participation_rate":regions[sid]["workforce"]["participation_rate"],"unemployment_rate":regions[sid]["workforce"]["unemployment_rate"]}}
 	var national: Dictionary = {}
 	for tag: String in countries:
 		national[tag] = {"stats": countries[tag].get("starting_stats", {}), "outlook": countries[tag]["outlook"], "cosmetic": countries[tag].get("cosmetic", ""), "color_override": countries[tag].get("color_override", []), "government_properties":government_properties.get(tag, {}), "political_power_modifiers":political_power_modifiers.get(tag, {})}
@@ -241,8 +282,8 @@ func save_game(path: String, view: Dictionary, save_name: String = "") -> bool:
 	var payload := {"schema_version": SAVE_VERSION, "save_name": save_name, "scenario_id": database["scenario_id"],
 		"source_sha256": database["source"]["sha256"], "world_tension": world_tension, "tension_events": tension_events, "hour": hour, "speed": speed,
 		"selected_country": selected_country, "player_country": player_country, "selected_region": selected_region,
-		"construction":construction.export_state(), "relations": relation_offsets, "selected_province": selected_province, "selected_sea": selected_sea, "province_buildings": province_buildings, "national": national, "regions": region_state, "organizations": organizations, "view": view}
-	var serialized := JSON.stringify(payload)
+		"economy":economy.export_state(), "agenda":agenda.export_state(), "society":society.export_state(), "research":research.export_state(), "construction":construction.export_state(), "relations": relation_offsets, "selected_province": selected_province, "selected_sea": selected_sea, "province_buildings": province_buildings, "national": national, "regions": region_state, "organizations": organizations, "view": view}
+	var serialized := JSON.stringify(payload, "", true, true)
 	var envelope := JSON.stringify({"format": "BunnyWorldSave", "checksum": serialized.sha256_text(), "payload": serialized})
 	var full := ProjectSettings.globalize_path(path)
 	var err := DirAccess.make_dir_recursive_absolute(full.get_base_dir())
@@ -314,6 +355,8 @@ func load_game(path: String) -> Dictionary:
 		return _invalid("The saved clock or country is invalid.")
 	if not countries.has(payload.get("player_country")):
 		return _invalid("The saved player country is invalid.")
+	if not research.valid(payload.get("research"), str(payload["player_country"]), int(saved_hour)):
+		return _invalid("The saved research progress or assignments are invalid.")
 	var saved_regions: Variant = payload.get("regions")
 	if not saved_regions is Dictionary or saved_regions.size() != regions.size():
 		return _invalid("The saved states do not match this world.")
@@ -363,6 +406,8 @@ func load_game(path: String) -> Dictionary:
 		return _invalid("The saved zoom is invalid.")
 	if not _whole_number(view.get("map_mode"), 7) or not view.get("show_regions") is bool or not organizations.has(view.get("organization")):
 		return _invalid("The saved map mode is invalid.")
+	if view.get("organization_type", "all") != "all" and not OrganizationRules.TYPES.has(view.get("organization_type")): return _invalid("The saved organization filter is invalid.")
+	if not view.get("alliances_overview", false) is bool or (view.get("alliances_overview", false) and view.get("organization_type") != "security"): return _invalid("The saved alliance view is invalid.")
 	var saved_selected: Variant = payload.get("selected_region", 0)
 	if not _whole_number(saved_selected, 8191) or (int(saved_selected) != 0 and not regions.has(str(int(saved_selected)))):
 		return _invalid("The selected state is invalid.")
@@ -371,7 +416,7 @@ func load_game(path: String) -> Dictionary:
 		return _invalid("Saved country values are invalid.")
 	for tag: String in countries:
 		var entry: Variant = national.get(tag)
-		if not entry is Dictionary or not entry.get("stats") is Dictionary or not entry.get("cosmetic") is String or entry["cosmetic"].length() > 80 or entry.get("outlook") not in ["Western Outlook", "Emerging Outlook", "Non-Aligned Outlook", "Salafist Outlook", "Nationalist Outlook", "Unspecified"]:
+		if not entry is Dictionary or not entry.get("stats") is Dictionary or not entry.get("cosmetic") is String or entry["cosmetic"].length() > 80 or entry.get("outlook") not in ["Western Outlook", "Multipolar Outlook", "Non-Aligned Outlook", "Nationalist Outlook", "Unspecified"]:
 			return _invalid("Saved country values are invalid.")
 		var properties: Variant = entry.get("government_properties")
 		var modifiers: Variant = entry.get("political_power_modifiers")
@@ -387,6 +432,9 @@ func load_game(path: String) -> Dictionary:
 		for value: Variant in entry["stats"].values():
 			if not (value is int or value is float) or not is_finite(float(value)) or absf(float(value)) > 10000000000000000:
 				return _invalid("Saved statistics are invalid.")
+	if not society.valid(payload.get("society"), int(saved_hour), national): return _invalid("Saved society data is invalid.")
+	if not agenda.valid(payload.get("agenda"), str(payload["player_country"]), national, payload["society"]["nations"]): return _invalid("Saved agenda is invalid.")
+	if not economy.valid(payload.get("economy"),int(saved_hour)): return _invalid("Saved economy is invalid.")
 	var saved_province: Variant = payload.get("selected_province")
 	var saved_sea: Variant = payload.get("selected_sea")
 	if not _whole_number(saved_sea, 65535) or (int(saved_sea) != 0 and not sea_regions.has(str(int(saved_sea)))): return _invalid("The selected sea region is invalid.")
@@ -417,6 +465,7 @@ func load_game(path: String) -> Dictionary:
 		regions[sid]["buildings"] = saved_regions[sid]["buildings"].duplicate(true)
 		regions[sid]["construction_slots"] = int(saved_regions[sid]["construction_slots"])
 		regions[sid]["construction_gdp"] = float(saved_regions[sid]["construction_gdp"])
+		regions[sid]["construction_output"] = saved_regions[sid]["construction_output"].duplicate()
 		regions[sid]["owner"] = saved_regions[sid]["owner"]
 		regions[sid]["population"] = int(saved_regions[sid]["population"])
 		regions[sid]["cores"] = saved_regions[sid]["cores"].duplicate()
@@ -439,7 +488,13 @@ func load_game(path: String) -> Dictionary:
 	speed = int(payload["speed"])
 	selected_country = payload["selected_country"]
 	player_country = payload["player_country"]
+	research.import_state(payload["research"])
+	society.import_state(payload["society"])
+	agenda.import_state(payload["agenda"])
+	employment.refresh()
 	selected_region = int(saved_selected)
+	economy.import_state(payload["economy"])
 	paused = true
 	accumulator = 0.0
+	campaign_changed.emit()
 	return view

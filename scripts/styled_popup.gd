@@ -62,6 +62,7 @@ func _fit(preferred_size: Vector2) -> void:
 func _clamp_to_viewport() -> void:
 	if not visible: return
 	var bounds := get_viewport_rect().size
+	size = size.min(bounds - Vector2(24,24))
 	position = position.clamp(Vector2(12, 12), (bounds - size - Vector2(12, 12)).max(Vector2(12, 12)))
 
 func _input(event: InputEvent) -> void:

@@ -1,0 +1,267 @@
+{
+  "aliases": {
+    "Afro-Cuban traditions": "Afro-Cuban traditions",
+    "Alawite": "Alawite",
+    "Buddhist": "Buddhist",
+    "Cao Dai": "Cao Dai",
+    "Catholic": "Catholic",
+    "Chinese folk religion": "Chinese folk religion",
+    "Chondoist": "Chondoist",
+    "Christian (other)": "Christian (other)",
+    "Christian (unspecified)": "Christian (unspecified)",
+    "Druze": "Druze",
+    "Greek Catholic": "Catholic",
+    "Hindu": "Hindu",
+    "Hoa Hao": "Hoa Hao",
+    "Ismaili": "Shia",
+    "Jain": "Jain",
+    "Jewish": "Jewish",
+    "Kirat": "Kirat",
+    "Latter-day Saint": "Latter-day Saint",
+    "Maronite": "Catholic",
+    "Maya traditions": "Maya traditions",
+    "Muslim (unspecified)": "Muslim (unspecified)",
+    "Nonreligious": "Atheist",
+    "Orthodox": "Orthodox",
+    "Other / not stated": "Other / unspecified",
+    "Other / unspecified": "Other / unspecified",
+    "Other religions": "Other religions",
+    "Protestant": "Protestant",
+    "Shia": "Shia",
+    "Shia (Zaydi)": "Shia",
+    "Shinto / Buddhist": "Shinto / Buddhist",
+    "Sikh": "Sikh",
+    "Sunni": "Sunni",
+    "Taoist / folk": "Taoist / folk",
+    "Tibetan Buddhist": "Buddhist",
+    "Traditional / folk": "Traditional / folk",
+    "Unknown": "Unknown",
+    "Vietnamese folk religion": "Vietnamese folk religion",
+    "Yazidi": "Yazidi"
+  },
+  "catalog": {
+    "Afro-Cuban traditions": {
+      "name": "Afro-Cuban traditions",
+      "color": "c47272",
+      "selectable": true
+    },
+    "Alawite": {
+      "name": "Alawite",
+      "color": "728ac4",
+      "selectable": true
+    },
+    "Atheist": {
+      "name": "Atheist",
+      "color": "a6aab4",
+      "selectable": true
+    },
+    "Buddhist": {
+      "name": "Buddhist",
+      "color": "e0c55a",
+      "selectable": true
+    },
+    "Cao Dai": {
+      "name": "Cao Dai",
+      "color": "72c4b7",
+      "selectable": true
+    },
+    "Catholic": {
+      "name": "Catholic",
+      "color": "4f88d0",
+      "selectable": true
+    },
+    "Chinese folk religion": {
+      "name": "Chinese folk religion",
+      "color": "8672c4",
+      "selectable": true
+    },
+    "Chondoist": {
+      "name": "Chondoist",
+      "color": "75c472",
+      "selectable": true
+    },
+    "Christian (other)": {
+      "name": "Christian (other)",
+      "color": "c4728d",
+      "selectable": false
+    },
+    "Christian (unspecified)": {
+      "name": "Christian (unspecified)",
+      "color": "6b91af",
+      "selectable": false
+    },
+    "Druze": {
+      "name": "Druze",
+      "color": "bec472",
+      "selectable": true
+    },
+    "Hindu": {
+      "name": "Hindu",
+      "color": "ee9645",
+      "selectable": true
+    },
+    "Hoa Hao": {
+      "name": "Hoa Hao",
+      "color": "72c49b",
+      "selectable": true
+    },
+    "Jain": {
+      "name": "Jain",
+      "color": "c48372",
+      "selectable": true
+    },
+    "Jewish": {
+      "name": "Jewish",
+      "color": "6dcbd5",
+      "selectable": true
+    },
+    "Kirat": {
+      "name": "Kirat",
+      "color": "91c472",
+      "selectable": true
+    },
+    "Latter-day Saint": {
+      "name": "Latter-day Saint",
+      "color": "c472a9",
+      "selectable": true
+    },
+    "Maya traditions": {
+      "name": "Maya traditions",
+      "color": "72c1c4",
+      "selectable": true
+    },
+    "Muslim (unspecified)": {
+      "name": "Muslim (unspecified)",
+      "color": "7b9a82",
+      "selectable": false
+    },
+    "Orthodox": {
+      "name": "Orthodox",
+      "color": "8b78ca",
+      "selectable": true
+    },
+    "Other / unspecified": {
+      "name": "Other / unspecified",
+      "color": "647681",
+      "selectable": false
+    },
+    "Other religions": {
+      "name": "Other religions",
+      "color": "c67caf",
+      "selectable": false
+    },
+    "Protestant": {
+      "name": "Protestant",
+      "color": "83b9e6",
+      "selectable": true
+    },
+    "Shia": {
+      "name": "Shia",
+      "color": "227357",
+      "selectable": true
+    },
+    "Shinto / Buddhist": {
+      "name": "Shinto / Buddhist",
+      "color": "c472c4",
+      "selectable": false
+    },
+    "Sikh": {
+      "name": "Sikh",
+      "color": "dfad70",
+      "selectable": true
+    },
+    "Sunni": {
+      "name": "Sunni",
+      "color": "4fac78",
+      "selectable": true
+    },
+    "Taoist / folk": {
+      "name": "Taoist / folk",
+      "color": "7c72c4",
+      "selectable": true
+    },
+    "Traditional / folk": {
+      "name": "Traditional / folk",
+      "color": "a77a53",
+      "selectable": true
+    },
+    "Unknown": {
+      "name": "Unknown",
+      "color": "43505e",
+      "selectable": false
+    },
+    "Vietnamese folk religion": {
+      "name": "Vietnamese folk religion",
+      "color": "72b0c4",
+      "selectable": true
+    },
+    "Yazidi": {
+      "name": "Yazidi",
+      "color": "c4c172",
+      "selectable": true
+    }
+  },
+  "unresolved": [
+    {
+      "label": "Christian (other)",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 7,
+      "state_labels_present": true
+    },
+    {
+      "label": "Christian (unspecified)",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 64,
+      "state_labels_present": true
+    },
+    {
+      "label": "Muslim (unspecified)",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 71,
+      "state_labels_present": true
+    },
+    {
+      "label": "Other / not stated",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 1,
+      "state_labels_present": true
+    },
+    {
+      "label": "Other / unspecified",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 97,
+      "state_labels_present": true
+    },
+    {
+      "label": "Other religions",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 47,
+      "state_labels_present": true
+    },
+    {
+      "label": "Shinto / Buddhist",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 1,
+      "state_labels_present": true
+    },
+    {
+      "label": "Taoist / folk",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 1,
+      "state_labels_present": true
+    },
+    {
+      "label": "Traditional / folk",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 55,
+      "state_labels_present": true
+    },
+    {
+      "label": "Unknown",
+      "reason": "Broad/combined/unspecified source category retained; no branch split or atheist reassignment.",
+      "profiles": 0,
+      "state_labels_present": false
+    }
+  ],
+  "policy": "Nonreligious means Atheist for gameplay. Missing/unspecified values stay separate. Clear branch aliases merge by addition; all other distinct and syncretic categories are retained. Source profiles are unchanged."
+}

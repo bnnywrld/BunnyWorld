@@ -64,10 +64,11 @@ func build(main: Control) -> void:
 		feature_buttons[caption] = button
 		button.custom_minimum_size = Vector2(44,44)
 		toolbar.add_child(button)
-	var demographic_shortcut := icon_button("demographics", "Demographics · National profile", open_country_demographics)
+	var demographic_shortcut := icon_button("demographics", "Society · Population, attitudes and political support", open_country_demographics)
 	demographic_button = demographic_shortcut
 	demographic_shortcut.toggle_mode = true
-	demographic_shortcut.name = "NationalDemographicsShortcut"
+	demographic_shortcut.name = "Feature_society"
+	feature_buttons["Society"] = demographic_shortcut
 	demographic_shortcut.custom_minimum_size = Vector2(44,44)
 	toolbar.add_child(demographic_shortcut)
 	for entry: Array in [["production", "Production"], ["diplomacy", "Diplomacy"], ["trade", "Trade"], ["military", "Military"], ["intelligence", "Intelligence"], ["space", "Space Exploration"]]:
@@ -107,6 +108,11 @@ func build(main: Control) -> void:
 		cell.add_theme_constant_override("separation", 4)
 		cell.alignment = BoxContainer.ALIGNMENT_CENTER
 		var box: PanelContainer = preload("res://scripts/political_power_indicator.gd").new() if entry[0] == "political_power" else PanelContainer.new()
+		if entry[1] == "Population":
+			box.free()
+			box = preload("res://scripts/population_tooltip.gd").new()
+			box.set("world",host.state)
+			cell.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		if entry[0] == "political_power":
 			box.set("world", host.state)
 			cell.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -140,15 +146,9 @@ func build(main: Control) -> void:
 func refresh_active_section() -> void:
 	for caption: String in feature_buttons:
 		feature_buttons[caption].set_pressed_no_signal(host.control_panel.visible and host.active_feature == caption)
-	if demographic_button == null: return
-	var chart: Node = host.control_details.get_node_or_null("NationalDemographics")
-	demographic_button.set_pressed_no_signal(host.control_panel.visible and host.state.selected_country==host.state.player_country and chart != null and chart.visible)
 
 func open_country_demographics() -> void:
-	host.national_profile_expanded = true
-	host._show_country(host.state.player_country, false)
-	await host.get_tree().process_frame
-	host.control_details.get_parent().ensure_control_visible(host.control_details.get_node("NationalDemographics"))
+	host._show_feature("Society")
 
 func update_bar() -> void:
 	toolbar.visible = host.screen == "playing"
@@ -167,9 +167,11 @@ func update_bar() -> void:
 		if caption in ["GDP", "GDP per capita"] and pc != null: tip += "\nExact: $" + number(int(gdp if caption == "GDP" else pc)) + " USD"
 		if caption in ["Treasury","Debt"]:
 			var key := "treasury_usd" if caption == "Treasury" else "debt_usd"
-			tip += "\n" + ("$%s USD\nStarting balance plus construction payments/refunds; wider budget simulation comes later." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
-		elif caption in ["GDP","GDP per capita"]: tip += "\nStarting economy plus completed construction output. USD; wider economy simulation comes later."
-		elif caption == "Population": tip += "\nSum of currently owned State populations. Provinces are movement tiles and unique-building sites; population belongs to States."
+			tip += "\n" + ("$%s USD\nMonthly budget settlement plus upfront construction payments/refunds." % number(int(stats[key])) if stats.has(key) else "No supported starting declaration. Unknown is not zero.")
+		elif caption in ["GDP","GDP per capita"]: tip += "\nStarting economy, productivity, employment, inputs and completed construction. Nominal USD; Economy separates real output from inflation."
+		elif caption == "Population":
+			tip += "\nSum of currently owned State populations."
+			record["cell"].set("country",tag)
 		elif caption == "Political power":
 			record["cell"].set("country", tag)
 			tip += "\nDaily gain: %+.2f PP" % host.state.daily_political_power(tag)
@@ -285,7 +287,13 @@ func refresh_ledger() -> void:
 				label.custom_minimum_size = Vector2(WIDTHS[i],28)
 				label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
 				label.tooltip_text = CAPTIONS[i]+": "+str(value) if value != null else "Unavailable starting data"
-				line.add_child(label)
+				if key == "population":
+					var population_cell := preload("res://scripts/population_tooltip.gd").new()
+					population_cell.world=host.state;population_cell.country=row["tag"];population_cell.tooltip_text="Population"
+					population_cell.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
+					label.tooltip_text="";label.mouse_filter=Control.MOUSE_FILTER_IGNORE
+					population_cell.add_child(label);line.add_child(population_cell)
+				else: line.add_child(label)
 
 func _build_demographics() -> void:
 	demo_dialog = _modal("Demographics")
@@ -320,7 +328,10 @@ func render_demographics() -> void:
 	for child: Node in demo_content.get_children(): demo_content.remove_child(child); child.queue_free()
 	var entry: Dictionary = demographics.country_metrics(host.state,demo_tag) if demo_scope.selected == 0 else demographics.state_metrics(host.state,demo_states[demo_scope.selected-1])
 	demo_content.add_child(host._label(str(entry["scope"]),20,Color("e5c888")))
-	demo_content.add_child(host._label("Population: " + number(entry["population"]),14))
+	var population_cell := preload("res://scripts/population_tooltip.gd").new()
+	population_cell.world=host.state;population_cell.country=demo_tag;population_cell.state_id="" if demo_scope.selected==0 else str(demo_states[demo_scope.selected-1]);population_cell.tooltip_text="Population"
+	population_cell.add_theme_stylebox_override("panel",StyleBoxEmpty.new())
+	population_cell.add_child(host._label("Population: " + number(entry["population"]),14));demo_content.add_child(population_cell)
 	var grid := GridContainer.new()
 	grid.name = "DemographicCharts"
 	grid.columns = 2
@@ -344,13 +355,13 @@ func render_demographics() -> void:
 		page.add_child(host._label(captions[key],17,Color("e5c888")))
 		var denominator: int = metric["denominator"]
 		var denom := "All residents" if key in ["age","religion"] else ("Adults 25+" if key == "education" else "Working-age residents")
-		page.add_child(host._label("%s · %s" % [denom,number(denominator)],12))
+		page.add_child(host._label("%s · %s" % [denom,preload("res://scripts/display_format.gd").people(denominator)],12))
 		var row := HBoxContainer.new()
 		row.add_theme_constant_override("separation",10)
 		page.add_child(row)
 		var pie := Control.new()
 		pie.set_script(Pie)
-		pie.configure(metric["counts"])
+		pie.configure(metric["counts"], key)
 		pie.custom_minimum_size = Vector2(115,115)
 		pie.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		row.add_child(pie)
@@ -368,18 +379,11 @@ func render_demographics() -> void:
 			swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 			line.add_child(swatch)
 			var label: Label = host._label("%s · %.1f%%" % [category,float(count)/maxi(denominator,1)*100],12)
-			label.tooltip_text = number(count)+" people"
+			label.tooltip_text = preload("res://scripts/display_format.gd").people(count)+" people"
 			line.add_child(label)
 			legend.add_child(line)
 		if denominator == 0: page.add_child(host._label("Population breakdown unavailable",12))
 
-	var workforce_panel := PanelContainer.new()
-	workforce_panel.name = "WorkforceFigures"
-	workforce_panel.custom_minimum_size = Vector2(445,180)
-	var workforce := preload("res://scripts/workforce_panel.gd").new()
-	workforce.configure(entry["workforce"],demo_scope.selected>0)
-	workforce_panel.add_child(workforce)
-	grid.add_child(workforce_panel)
 
 func _build_tension() -> void:
 	tension_dialog = _modal("World Tension")

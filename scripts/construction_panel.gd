@@ -10,6 +10,7 @@ var page := 0
 var page_label: Label
 var selected_building: Label
 var last_revision := -1
+var manufactured_box: Label
 
 func configure(main: Control) -> void:
 	name = "ConstructionPanel"
@@ -17,6 +18,7 @@ func configure(main: Control) -> void:
 	model = host.state.construction
 	add_theme_constant_override("separation", 8)
 	summary = _label("", 13, Style.GOLD_COLOR)
+	summary.tooltip_text = "Civilian industries provide construction work in proportion to their staffing."
 	add_child(summary)
 	add_child(_label("Select a building, then click one of your states. Yellow stripes mark queued construction.", 12))
 	selected_info = _label("", 12)
@@ -28,6 +30,12 @@ func configure(main: Control) -> void:
 	var left := VBoxContainer.new()
 	left.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	columns.add_child(left)
+	var goods_frame := PanelContainer.new()
+	goods_frame.name = "ManufacturedGoods"
+	goods_frame.add_theme_stylebox_override("panel",Style.panel(Color("1d3947"),4,Style.GOLD_COLOR))
+	left.add_child(goods_frame)
+	manufactured_box = _label("",14,Style.GOLD_COLOR)
+	goods_frame.add_child(manufactured_box)
 	left.add_child(_label("CONSTRUCTION QUEUE", 13, Style.ACCENT_COLOR))
 	var pager := HBoxContainer.new()
 	left.add_child(pager)
@@ -44,7 +52,7 @@ func configure(main: Control) -> void:
 	left.add_child(scroll)
 	queue_rows = VBoxContainer.new()
 	queue_rows.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	queue_rows.add_theme_constant_override("separation", 8)
+	queue_rows.add_theme_constant_override("separation", 3)
 	scroll.add_child(queue_rows)
 	var right := VBoxContainer.new()
 	right.custom_minimum_size.x = 170
@@ -58,11 +66,13 @@ func configure(main: Control) -> void:
 		for key: String in model.catalog:
 			var data: Dictionary = model.catalog[key]
 			if data["category"] != category: continue
-			var button := _button(abbreviation(key), func(): host.construction_building = key; refresh())
+			var button := _button(abbreviation(key), func(): host._select_construction_building(key))
 			button.name = "Build_" + key
 			button.custom_minimum_size = Vector2(52, 40)
 			button.toggle_mode = true
 			button.tooltip_text = "%s\n%s · %s\nConstruction: %.0f points + %.0f per existing/queued level\nMaximum: %d per state%s\nAnnual GDP gain on completion: %s\nClick a state to queue one level." % [data["name"],money(data["money_usd"]),"Shared slot" if data["shared"] else "Separate slots",data["points"],data["extra_points"],data["max_level"]," · coastal only" if data["coastal"] else "",money(model.gdp_gain(host.state.player_country, key))]
+			var workers := int(host.state.state_economy["workers_per_level"].get(key, 0))
+			if workers > 0: button.tooltip_text += "\nEmployees required per level: " + preload("res://scripts/display_format.gd").people(workers) + "\nOutput scales with staffing. Existing unemployment is preserved."
 			grid.add_child(button)
 			building_buttons[key] = button
 	selected_building = _label("", 12, Style.GOLD_COLOR)
@@ -71,7 +81,7 @@ func configure(main: Control) -> void:
 	refresh()
 
 func abbreviation(key: String) -> String:
-	return {"industrial_complex":"CIV","arms_factory":"MIL","dockyard":"NAV","offices":"OFF","agriculture_district":"AGR","microchip_plant":"CHIP","composite_plant":"COMP","synthetic_refinery":"SYN","fossil_powerplant":"FOSS","nuclear_reactor":"NUC","renewable_energy_infra":"REN","infrastructure":"INF","internet_station":"NET","rail_terminal":"RAIL","air_base":"AIR","anti_air_building":"SAM","radar_station":"RAD","fuel_silo":"RES","rocket_site":"MSL","energy_infrastructure":"GRID","industrial_infrastructure":"CAP","enrichment_facility":"ENR"}.get(key, key.left(3).to_upper())
+	return {"data_center":"DATA","industrial_complex":"CIV","arms_factory":"MIL","dockyard":"NAV","offices":"OFF","agriculture_district":"AGR","microchip_plant":"CHIP","composite_plant":"COMP","synthetic_refinery":"SYN","fossil_powerplant":"FOSS","nuclear_reactor":"NUC","renewable_energy_infra":"REN","infrastructure":"INF","internet_station":"NET","rail_terminal":"RAIL","air_base":"AIR","anti_air_building":"SAM","radar_station":"RAD","fuel_silo":"RES","rocket_site":"MSL","energy_infrastructure":"GRID","industrial_infrastructure":"CAP","enrichment_facility":"ENR"}.get(key, key.left(3).to_upper())
 
 func _label(text: String, size: int = 12, color: Color = Style.MUTED_COLOR) -> Label:
 	var label := Style.label(text, size, color)
@@ -96,12 +106,15 @@ func refresh() -> void:
 	var factories: int = model.factory_count(host.state.player_country)
 	var goods: int = model.manufactured_factories()
 	summary.text = "Factories: %d total · %d construction · %d Manufactured Goods" % [factories, factories-goods, goods]
-	summary.tooltip_text = "Unassigned civilian industries produce Manufactured Goods. This is factory allocation only; production volumes, stockpiles, domestic demand and trade come with the economy. Maximum 10 factories per project."
+	summary.tooltip_text = "Maximum 10 factories per project. Construction is paid upfront. Factory work scales with staffing; output settles monthly."
+	var output: float = host.state.economy.ledger.get(host.state.player_country,{}).get("manufactured_goods",{}).get("produced",0)
+	manufactured_box.text = "MANUFACTURED GOODS\n%d civilian factories assigned\nLast settlement · %s MU" % [goods,preload("res://scripts/display_format.gd").people(roundi(output))]
 	var key: String = host.construction_building
 	for id: String in building_buttons: building_buttons[id].set_pressed_no_signal(id == key)
 	selected_building.text = str(model.catalog[key]["name"]) + "\n" + money(model.catalog[key]["money_usd"])
 	var sid: String = host.construction_state
 	selected_info.text = "Light green: more free slots · Dark green: fewer · Blue: no shared slots"
+	if key in ["infrastructure", "internet_station", "rail_terminal"]: selected_info.text = "Dark blue: level 0 → Gold: level 10 · Stripes: queued levels"
 	if host.state.regions.has(sid):
 		var r: Dictionary = host.state.regions[sid]
 		selected_info.text = "%s · %d/%d shared slots free · %s %d + %d queued / %d" % [r["name"], model.free_slots(sid),r["construction_slots"],model.catalog[key]["name"],r["buildings"].get(key,0),model.pending(sid,key),model.limit(sid,key)]
@@ -115,29 +128,43 @@ func refresh() -> void:
 		var state_id := str(int(job["state"]))
 		var frame := PanelContainer.new()
 		frame.name = "Project_%d" % id
-		frame.add_theme_stylebox_override("panel",Style.button(Color("132c3a")))
+		var compact_style := Style.button(Color("132c3a"))
+		compact_style.content_margin_top = 4
+		compact_style.content_margin_bottom = 4
+		frame.add_theme_stylebox_override("panel",compact_style)
 		queue_rows.add_child(frame)
 		var content := VBoxContainer.new()
-		content.add_theme_constant_override("separation", 4)
+		content.add_theme_constant_override("separation", 2)
 		frame.add_child(content)
-		content.add_child(_label(str(host.state.regions[state_id]["name"]), 13, Style.HEADING_COLOR))
-		content.add_child(_label(model.catalog[job["building"]]["name"], 12, Style.GOLD_COLOR))
+		var heading := Style.label("%s ×%d · %s" % [model.catalog[job["building"]]["name"], 1+job["next_levels"].size(), host.state.regions[state_id]["name"]], 12, Style.GOLD_COLOR)
+		heading.clip_text = true
+		heading.tooltip_text = heading.text
+		content.add_child(heading)
 		var bar := ProgressBar.new()
-		bar.custom_minimum_size.y = 16
+		bar.custom_minimum_size.y = 8
 		bar.value = float(job["progress"]) / float(job["points"]) * 100
-		bar.show_percentage = true
+		bar.show_percentage = false
 		content.add_child(bar)
 		var rate: float = model.rate(job, allocations[id])
 		var eta := "%d days" % ceili((float(job["points"])-float(job["progress"]))/rate) if rate>0 else "Waiting / paused"
 		bar.tooltip_text = "%.0f / %.0f construction points\n%.1f points/day · %s\nPaid %s upfront · cancel refund %s" % [job["progress"],job["points"],rate,eta,money(float(job["cash"])+float(job["borrowed"])),money((float(job["cash"])+float(job["borrowed"]))*(1-float(job["progress"])/float(job["points"])))]
-		content.add_child(_label(eta, 11))
+		var future_paid := 0.0
+		for level: Dictionary in job["next_levels"]: future_paid += float(level["cash"]) + float(level["borrowed"])
+		bar.tooltip_text += "\n%d more level(s), paid %s; fully refunded if cancelled.\nLevels finish sequentially; ETA is for the current level." % [job["next_levels"].size(), money(future_paid)]
 		var actions := HBoxContainer.new()
+		actions.add_theme_constant_override("separation", 2)
 		content.add_child(actions)
+		actions.add_child(_label(eta, 10))
 		actions.add_child(_button("−",func(): model.set_factories(id,int(job["factories"])-1); host._construction_changed()))
 		actions.add_child(_label("%d/%d" % [allocations[id],job["factories"]],12,Style.ACCENT_COLOR))
 		actions.add_child(_button("+",func(): model.set_factories(id,int(job["factories"])+1); host._construction_changed()))
 		actions.add_child(_button("↑",func(): model.move(id,-1); host._construction_changed()))
 		actions.add_child(_button("↓",func(): model.move(id,1); host._construction_changed()))
 		var cancel := _button("×",func(): model.cancel(id); host._construction_changed())
-		cancel.tooltip_text = "Cancel: refund the unfinished proportion; reverse corresponding borrowing first."
+		cancel.tooltip_text = "Cancel this group: refund the unfinished current level and all waiting levels; reverse corresponding borrowing first."
 		actions.add_child(cancel)
+		for action: Node in actions.get_children():
+			if action is Button:
+				action.custom_minimum_size = Vector2(22,22)
+				action.add_theme_font_size_override("font_size",11)
+				action.add_theme_stylebox_override("normal", Style.button(Color("142c3a")))

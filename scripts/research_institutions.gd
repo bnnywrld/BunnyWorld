@@ -1,5 +1,5 @@
 extends RefCounted
-# UI identities only. Derived deterministically; no simulation or saved research state.
+# Deterministic institution identities used as national research assignment slots.
 const KNOWN := {
 	"USA": ["Massachusetts Institute of Technology", "Stanford University", "California Institute of Technology", "Harvard University", "University of California, Berkeley", "Princeton University"],
 	"JAP": ["University of Tokyo", "Kyoto University", "Osaka University", "Tohoku University", "Tokyo Institute of Technology"],

@@ -1,0 +1,6 @@
+{
+  "annual_population_growth": 0.01,
+  "parliament_seats": 100,
+  "seat_support_threshold": 1.0,
+  "description": "Uniform default growth, compounded monthly. All demographic proportions remain fixed. No births/deaths split, aging, migration or policy effects yet."
+}

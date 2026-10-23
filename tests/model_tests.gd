@@ -65,6 +65,9 @@ func _initialize() -> void:
 	var inverse := state.opinion("CHI", "JAP")
 	check(state.opinion("JAP", "CHI") == -73, "directed opinion")
 	var path := "user://tests/model_roundtrip.json"
+	state.society.advance_months()
+	before_total = 0
+	for region: Dictionary in state.regions.values(): before_total += int(region["population"])
 	check(state.save_game(path, view), "save world")
 	state.reset()
 	var loaded := state.load_game(path)

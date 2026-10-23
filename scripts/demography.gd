@@ -2,6 +2,7 @@ class_name Demography
 extends RefCounted
 var data: Dictionary = {}
 var state_data: Dictionary = {}
+var workforce_age_cache := {}
 func _init() -> void:
 	data = JSON.parse_string(FileAccess.get_file_as_string("res://data/demographics.json"))
 	state_data = JSON.parse_string(FileAccess.get_file_as_string("res://data/state_demographics.json"))
@@ -28,6 +29,25 @@ static func allocate(total: int, shares: Dictionary) -> Dictionary:
 func profile(tag: String) -> Dictionary:
 	return data.get("profiles", {}).get(tag, {})
 
+func state_workforce(world: WorldState,sid: int) -> Dictionary:
+	# Monthly staffing needs age/workforce counts, not religion/education chart copies.
+	var region: Dictionary = world.regions[str(sid)]
+	var p: Dictionary = state_data.get("states",{}).get(str(sid),profile(str(region.get("demographic_profile",region["owner"]))))
+	var retirement := clampi(int(world.countries[region["owner"]].get("starting_stats",{}).get("retirement_age",p.get("retirement_age",65))),18,100)
+	var cache_key := str(sid)+":"+str(retirement)
+	if not workforce_age_cache.has(cache_key):
+		var shares := {"Underage":0.,"Working age":0.,"Retired":0.}
+		var ages: Array = p.get("age_single_year",[])
+		if ages.size()==101:
+			for age: int in ages.size(): shares["Underage" if age<18 else ("Working age" if age<retirement else "Retired")]+=float(ages[age])
+		else: shares={"Unknown":1.}
+		workforce_age_cache[cache_key]=shares
+	var working_age := int(allocate(int(region["population"]),workforce_age_cache[cache_key]).get("Working age",0))
+	var rates: Dictionary = region.get("workforce",p.get("workforce",{}))
+	var labor := clampi(roundi(working_age*float(rates.get("participation_rate",.6))),0,working_age)
+	var unemployed := clampi(roundi(labor*float(rates.get("unemployment_rate",.08))),0,labor)
+	return {"working_age":working_age,"labour_force":labor,"employed":labor-unemployed,"unemployed":unemployed,"outside_labour_force":working_age-labor}
+
 func state_metrics(world: WorldState, sid: int) -> Dictionary:
 	var region: Dictionary = world.regions.get(str(sid), {})
 	if region.is_empty(): return {}
@@ -52,6 +72,7 @@ func state_metrics(world: WorldState, sid: int) -> Dictionary:
 		var denominator := total
 		var shares: Dictionary = meta["shares"]
 		if key == "age": shares = age_shares
+		if key == "religion": shares = preload("res://scripts/religion_catalog.gd").shares(shares)
 		if key == "education": denominator = adult25
 		meta["shares"] = shares
 		meta["counts"] = allocate(denominator, shares)

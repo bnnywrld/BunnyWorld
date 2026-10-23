@@ -4,7 +4,7 @@ var pages: Dictionary = {}
 var order: Array[int] = []
 var hover_page: Texture2D
 func resolve_hover(tag: String, cosmetic: String, outlook: String) -> Texture2D:
-	var suffix: String = {"Western Outlook":"democratic", "Emerging Outlook":"communism", "Non-Aligned Outlook":"neutrality", "Salafist Outlook":"fascism", "Nationalist Outlook":"nationalist"}.get(outlook,"neutrality")
+	var suffix: String = {"Western Outlook":"democratic", "Multipolar Outlook":"communism", "Non-Aligned Outlook":"neutrality", "Nationalist Outlook":"nationalist"}.get(outlook,"neutrality")
 	var candidates: Array[String] = []
 	if not cosmetic.is_empty(): candidates.append_array([cosmetic+"_"+suffix,cosmetic])
 	candidates.append_array([tag+"_"+suffix,tag])
@@ -17,7 +17,7 @@ func resolve_hover(tag: String, cosmetic: String, outlook: String) -> Texture2D:
 		return result
 	return null
 func resolve(tag: String, cosmetic: String, outlook: String) -> Texture2D:
-	var suffix: String = {"Western Outlook":"democratic", "Emerging Outlook":"communism", "Non-Aligned Outlook":"neutrality", "Salafist Outlook":"fascism", "Nationalist Outlook":"nationalist"}.get(outlook, "neutrality")
+	var suffix: String = {"Western Outlook":"democratic", "Multipolar Outlook":"communism", "Non-Aligned Outlook":"neutrality", "Nationalist Outlook":"nationalist"}.get(outlook, "neutrality")
 	var candidates: Array[String] = []
 	if not cosmetic.is_empty(): candidates.append_array([cosmetic + "_" + suffix, cosmetic])
 	candidates.append_array([tag + "_" + suffix, tag])

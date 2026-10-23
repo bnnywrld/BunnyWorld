@@ -21,62 +21,62 @@ var previous_panels: Array[Rect2] = []
 var previous_mask := PackedByteArray()
 var last_distance := -1.0
 var ownership_key: Array = []
-const PATHS := {"JAP":[Vector2(132.1,34.4),Vector2(135.5,35.4),Vector2(138.7,37.1),Vector2(140.5,39.2)],"IND":[Vector2(104,-3.8),Vector2(112,-3.5),Vector2(120,-3)],"NRY":[Vector2(6.8,60.7),Vector2(11.1,64.2),Vector2(17.3,67.7)],"ENG":[Vector2(-1.3,51),Vector2(-2.7,54),Vector2(-4.3,57.5)]}
+
 func configure(main: Control) -> void:
  host=main;mouse_filter=Control.MOUSE_FILTER_IGNORE;clip_contents=true;preparation_runs+=1
  entries.clear()
  ownership_key = _ownership_snapshot()
- var graph: Dictionary={}
- var owned: Dictionary={}
- for key: String in host.state.regions:
-  graph[int(key)]=[]
-  var owner: String=host.state.regions[key]["owner"]
-  if not owned.has(owner):owned[owner]=[]
-  owned[owner].append(int(key))
- for p: Dictionary in host.state.provinces.values():
-  var sid:=int(p["region"])
-  for neighbor: int in p["neighbors"]:
-   var other:=int(host.state.provinces[str(neighbor)]["region"])
-   if sid!=other and host.state.regions[str(sid)]["owner"]==host.state.regions[str(other)]["owner"] and other not in graph[sid]:graph[sid].append(other)
+ var owned: Dictionary = {}
+ for sid: String in host.state.regions:
+  var tag: String = host.state.regions[sid]["owner"]
+  if not owned.has(tag): owned[tag] = []
+  owned[tag].append(int(sid))
  for tag: String in host.state.countries:
-  var country: Dictionary=host.state.countries[tag];var remaining: Array[int]=[]
-  for value: Variant in owned.get(tag,[]):remaining.append(int(value))
-  var best: Array=[];var area:=0.0
-  while not remaining.is_empty():
-   var component: Array=[remaining.pop_back()];var cursor:=0;var total:=0.0
-   while cursor<component.size():
-    var sid:=int(component[cursor]);cursor+=1;total+=float(host.state.regions[str(sid)].get("area_km2",0))
-    for other: int in graph[sid]:
-     if other in remaining:remaining.erase(other);component.append(other)
-   if total>area:area=total;best=component
-  if area<1200 or best.is_empty():continue
-  var center:=Vector3.ZERO
-  for sid: int in best:
-   var r: Dictionary=host.state.regions[str(sid)];center+=Surface.unit_point(Vector2(r["map_center"][0],r["map_center"][1]))*float(r["area_km2"])
-  center=center.normalized()
-  if owner_at(Surface.uv_of(center))!=tag:
-   var closest:=Vector3.ZERO;var distance:=INF
-   for sid: int in best:
-    var r: Dictionary=host.state.regions[str(sid)];var p:=Surface.unit_point(Vector2(r["map_center"][0],r["map_center"][1]))
-    if p.distance_squared_to(center)<distance:distance=p.distance_squared_to(center);closest=p
-   center=closest
-  var east:=Vector3(center.z,0,-center.x).normalized();var north:=center.cross(east).normalized();var xx:=0.0;var yy:=0.0;var xy:=0.0
-  for sid: int in best:
-   var r: Dictionary=host.state.regions[str(sid)];var d:=Surface.unit_point(Vector2(r["map_center"][0],r["map_center"][1]))-center;var weight:=float(r["area_km2"])
-   xx+=pow(d.dot(east),2)*weight;yy+=pow(d.dot(north),2)*weight;xy+=d.dot(east)*d.dot(north)*weight
-  var angle:=clampf(.5*atan2(2*xy,xx-yy),-1.1,1.1) if best.size()>1 else 0.0
-  var direction: Vector3=(east*cos(angle)+north*sin(angle)).normalized();var span:=clampf(sqrt(area)/6371*.90,.02,.8)
-  var path:=PackedVector3Array()
-  for i: int in 49:
-   var uv: Vector2
-   if PATHS.has(tag):
-    var nodes: Array=PATHS[tag];var t: float=float(i)/48*(nodes.size()-1);var j:=mini(int(t),nodes.size()-2);var ll: Vector2=nodes[j].lerp(nodes[j+1],t-j);uv=Vector2((ll.x+180)/360,(90-ll.y)/180)
-   else:
-    var t: float=(float(i)/48-.5)*span;uv=Surface.uv_of((center*cos(t)+direction*sin(t)).normalized())
-   path.append(host.relief_surface.point_at(uv)+Surface.unit_point(uv)*.00006)
-  entries.append({"tag":tag,"text":str(country["name"]).to_upper(),"area":area,"path":path,"anchor":path[24]})
+  var entry := _geographic_entry(tag, str(host.state.countries[tag]["name"]).to_upper(), owned.get(tag, []), false)
+  if not entry.is_empty(): entries.append(entry)
+ for oid: String in host.state.organizations:
+  var org: Dictionary = host.state.organizations[oid]
+  if org.get("type") != "security": continue
+  var states: Array = []
+  for tag: String in preload("res://scripts/organization_rules.gd").full_members(org): states.append_array(owned.get(tag, []))
+  var entry := _geographic_entry(oid, oid.to_upper(), states, true)
+  if not entry.is_empty(): entries.append(entry)
  entries.sort_custom(func(a:Dictionary,b:Dictionary):return a["area"]>b["area"])
  _build_geometry()
+func _geographic_entry(tag: String, text: String, states: Array, alliance: bool) -> Dictionary:
+ var center := Vector3.ZERO
+ var area := 0.0
+ var points: Array = []
+ for sid: int in states:
+  for pid: int in host.state.regions[str(sid)]["provinces"]:
+   var p: Dictionary = host.state.provinces[str(pid)]
+   var weight := float(p.get("area_km2", 0))
+   var point := Surface.unit_point(Vector2(p["map_center"][0], p["map_center"][1]))
+   center += point * weight
+   area += weight
+   points.append([point, weight])
+ if area < 1200 or center.length_squared() < .0000001: return {}
+ center = center.normalized()
+ var east := Vector3(center.z, 0, -center.x).normalized()
+ var north := center.cross(east).normalized()
+ var xx := 0.0
+ var yy := 0.0
+ var xy := 0.0
+ for item: Array in points:
+  var delta: Vector3 = item[0] - center
+  xx += pow(delta.dot(east), 2) * float(item[1])
+  yy += pow(delta.dot(north), 2) * float(item[1])
+  xy += delta.dot(east) * delta.dot(north) * float(item[1])
+ var angle := clampf(.5 * atan2(2*xy, xx-yy), -1.1, 1.1) if not alliance else 0.0
+ var direction := (east*cos(angle) + north*sin(angle)).normalized()
+ var span := clampf(sqrt(area)/6371*.90, .02, .8)
+ var path := PackedVector3Array()
+ for i: int in 49:
+  var t: float = (float(i)/48-.5)*span
+  var uv := Surface.uv_of((center*cos(t)+direction*sin(t)).normalized())
+  path.append(host.relief_surface.point_at(uv)+Surface.unit_point(uv)*.00006)
+ return {"tag":tag, "text":text, "area":area, "path":path, "anchor":path[24], "alliance":alliance}
+
 func owner_at(uv: Vector2) -> String:
  preparation_reads+=1
  var c: Color=host.map_rendering.pixel_at_uv(uv)
@@ -180,6 +180,11 @@ func _build_geometry() -> void:
 
 func update_view(force: bool = false) -> void:
  if host == null or label_mesh == null: return
+ var alliance_mode: bool = host.map_mode == 1 and host.alliances_overview
+ var mode_key := str(alliance_mode)
+ if mode_key != get_meta("mode", ""):
+  set_meta("mode", mode_key)
+  last_view = ""
  var enabled: bool = host.country_labels_enabled and host.screen != "menu" and host.distance >= 1.22
  label_mesh.visible = enabled
  if not enabled:
@@ -195,6 +200,9 @@ func update_view(force: bool = false) -> void:
  var panels: Array[Rect2] = []
  for panel: Control in [host.control_panel,host.right_panel,host.territory_clip,host.top_left_box,host.clock_box,host.map_box]:
   if panel.is_visible_in_tree() and not (panel==host.territory_clip and host.territory_collapsed): panels.append(panel.get_global_rect())
+ if is_instance_valid(host.diplomacy_actions) and host.diplomacy_actions.is_visible_in_tree():
+  for panel: Control in [host.diplomacy_actions.frame, host.diplomacy_actions.arrow]:
+   if panel.is_visible_in_tree(): panels.append(panel.get_global_rect())
  if not force and not last_view.is_empty() and previous_pose.is_equal_approx(host.planet.global_transform) and previous_camera.is_equal_approx(host.camera.global_transform) and previous_size==host.view_container.size and panels==previous_panels: return
  previous_pose = host.planet.global_transform
  previous_camera = host.camera.global_transform
@@ -208,6 +216,7 @@ func update_view(force: bool = false) -> void:
  mask.resize(256)
  var ratio: Vector2 = host.view_container.size/Vector2(host.world_view.size)
  for entry: Dictionary in entries:
+  if bool(entry.get("alliance", false)) != alliance_mode: continue
   var anchor: Vector3 = host.planet.global_transform*entry["anchor"]
   if host.camera.is_position_behind(anchor) or anchor.normalized().dot((host.camera.global_position-anchor).normalized()) < .25: continue
   var screen_height: float = entry["world_height"]*host.view_container.size.y/(2.0*tan(deg_to_rad(host.camera.fov)*.5)*maxf(.01,host.camera.global_position.distance_to(anchor)))
@@ -240,6 +249,8 @@ func _ownership_snapshot() -> Array:
  var signature: Array=[]
  for key: String in host.state.regions:signature.append(host.state.regions[key]["owner"])
  for tag: String in host.state.countries:signature.append(host.state.countries[tag]["name"])
+ for oid: String in host.state.organizations:
+  if host.state.organizations[oid].get("type") == "security": signature.append([oid, host.state.organizations[oid].get("members", []).duplicate(), host.state.organizations[oid].get("statuses", {}).duplicate()])
  return signature
 
 func refresh_if_changed() -> void:

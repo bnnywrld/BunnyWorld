@@ -60,7 +60,7 @@ uniform sampler2D construction_flags : filter_nearest;
 uniform bool show_regions = false;
 uniform float region_opacity = 0.0;
 
-// Cartographic style controls: shared defaults for game and sandbox.
+// Cartographic style controls.
 uniform float country_tint_close = 0.10;
 uniform float country_tint_far = 0.28;
 uniform float country_ribbon_strength = 0.42;
@@ -245,7 +245,7 @@ struct MapCoverage {
 	bool province_edge;
 };
 
-MapCoverage map_coverage(vec2 uv, float pid, float sid, float owner) {
+MapCoverage map_coverage(vec2 uv, float pid, float sid, float owner, bool empty_water) {
 	MapCoverage c;
 	c.tint = sid > .5 ? texture(colors, lookup(sid)).rgb : vec3(0.0);
 	c.country_hit = owner == selected_country && owner > .5 ? 1.0 : 0.0;
@@ -260,6 +260,11 @@ MapCoverage map_coverage(vec2 uv, float pid, float sid, float owner) {
 	c.national_edge = false;
 	c.state_edge = false;
 	c.province_edge = false;
+
+	// With zero land coverage and no source province, land highlights cannot
+	// contribute. Below -1000 px even the coastline glow underflows to zero.
+	// Keep the original path near shores, tiny islands and narrow passages.
+	if (empty_water) return c;
 
 	highp vec2 pixel = uv * map_resolution - 0.5;
 	vec2 cell = floor(pixel);
@@ -431,38 +436,6 @@ float patch_noise(vec2 p) {
 	vec2 i = floor(p), f = fract(p); f = f * f * (3.0 - 2.0 * f);
 	return mix(mix(patch_hash(i), patch_hash(i + vec2(1, 0)), f.x), mix(patch_hash(i + vec2(0, 1)), patch_hash(i + vec2(1, 1)), f.x), f.y);
 }
-vec3 varied_sample(float layer, vec2 uv, float phase, vec2 dx, vec2 dy) {
-	float i = floor(phase);
-	vec2 a = vec2(patch_hash(vec2(i, layer)), patch_hash(vec2(layer + 19.0, i))) * 37.0;
-	return textureGrad(terrain_materials, vec3(uv + a, layer), dx, dy).rgb;
-}
-vec3 material(float layer, vec3 position, vec3 phase, vec3 dx, vec3 dy) {
-	vec3 w = pow(abs(normalize(position)), vec3(6.0)); w /= max(.00001, w.x + w.y + w.z);
-	w = max(w - vec3(.025), vec3(0.0)); w /= w.x + w.y + w.z;
-	vec3 a = vec3(0.0), b = vec3(0.0), c = vec3(0.0);
-	if (w.x > .001) a = varied_sample(layer, position.yz, phase.x, dx.yz, dy.yz);
-	if (w.y > .001) b = varied_sample(layer, position.xz, phase.y, dx.xz, dy.xz);
-	if (w.z > .001) c = varied_sample(layer, position.xy, phase.z, dx.xy, dy.xy);
-	return a * w.x + b * w.y + c * w.z;
-}
-
-// --- HOI4 Overlay blend mode in gamma space ---
-vec3 to_gamma(vec3 c) {
-	return pow(max(c, vec3(0.0)), vec3(1.0 / 2.2));
-}
-vec3 to_linear(vec3 c) {
-	return pow(max(c, vec3(0.0)), vec3(2.2));
-}
-vec3 get_overlay(vec3 base_color, vec3 overlay_color, float amount) {
-	vec3 bg = to_gamma(base_color);
-	vec3 og = to_gamma(overlay_color);
-	vec3 res;
-	res.r = og.r < 0.5 ? (2.0 * og.r * bg.r) : (1.0 - 2.0 * (1.0 - og.r) * (1.0 - bg.r));
-	res.g = og.g < 0.5 ? (2.0 * og.g * bg.g) : (1.0 - 2.0 * (1.0 - og.g) * (1.0 - bg.g));
-	res.b = og.b < 0.5 ? (2.0 * og.b * bg.b) : (1.0 - 2.0 * (1.0 - og.b) * (1.0 - bg.b));
-	return mix(base_color, to_linear(clamp(res, vec3(0.0), vec3(1.0))), amount);
-}
-
 // --- Multi-biome sampling: authentic real-world biomes across every continent ---
 vec3 sample_biome(float layer, vec2 uv_coord, vec2 dx_coord, vec2 dy_coord, vec2 globe_uv, float meters, float coast_dist) {
 	int id = int(floor(layer + 0.5));
@@ -681,7 +654,7 @@ void fragment() {
 		water = mix(water, water * (1.0 + wave_diff * 0.40) + vec3(specular), (1.0 - land_coverage) * (physical_mode ? 1.0 : 0.40));
 
 		// Feature A: Shoreline wave surf & shallow turquoise water shelf (HOI4 coastal surf)
-		if (land_coverage < 0.98) {
+		if (land_coverage < 0.98 && (coast_value > 0.40 || coast_px > -9.0)) {
 			float surf_fade = smoothstep(1.75, 1.35, camera_distance);
 			float geo_shelf = smoothstep(0.40, 0.498, coast_value);
 			float px_shelf = smoothstep(9.0, 1.0, -coast_px) * smoothstep(2.0, 1.4, camera_distance);
@@ -728,10 +701,11 @@ void fragment() {
 		pid = nearest_province(uv);
 	}
 
-	vec4 rec = province_record(pid);
+	bool empty_water = pid < .5 && land_coverage == 0.0 && coast_px < -1000.0;
+	vec4 rec = empty_water ? vec4(0.0) : province_record(pid);
 	float region = rec.r + rec.g * 256.0;
 	float owner = rec.b + rec.a * 256.0;
-	MapCoverage coverage = map_coverage(uv, pid, region, owner);
+	MapCoverage coverage = map_coverage(uv, pid, region, owner, empty_water);
 	vec2 texel = 1.0 / map_resolution;
 	vec2 pixel = uv * map_resolution - .5;
 	vec2 origin = (floor(pixel) + .5) * texel;
@@ -741,8 +715,8 @@ void fragment() {
 
 	// Political surface colour
 	vec4 surface = vec4(water, 0.0);
-	if (!physical_mode && !information_mode && region > .5) surface = vec4(coverage.tint, 1.0);
-	else if (!physical_mode) {
+	if (land_coverage > 0.0 && !physical_mode && !information_mode && region > .5) surface = vec4(coverage.tint, 1.0);
+	else if (land_coverage > 0.0 && !physical_mode) {
 		vec4 c00 = color_at(mix(origin, uv - dx - dy, far_filter), water);
 		vec4 c10 = color_at(mix(origin + vec2(texel.x, 0), uv + dx - dy, far_filter), water);
 		vec4 c01 = color_at(mix(origin + vec2(0, texel.y), uv - dx + dy, far_filter), water);

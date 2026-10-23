@@ -1,0 +1,17 @@
+BunnyWorld leader portraits
+
+Original DDS graphics by the Millennium Dawn development team and contributors,
+converted without cropping/resizing from the official Millennium Dawn repository:
+https://github.com/MillenniumDawn/Millennium-Dawn
+Pinned source revision: e231ce3935a558f1d7baaa3c9bf15ef888cd3f04
+
+The upstream repository declares Creative Commons Attribution-ShareAlike 4.0
+International. The full license is retained in Millennium_Dawn_LICENSE.txt.
+Original upstream paths, Git blob IDs and source/output SHA-256 hashes
+are recorded in data/leader_portraits.json. Original DDS bytes are cached outside the checkout. PNG assets losslessly encode
+the decoded pixels, without resampling. UI display scales images to fit its panels.
+
+Reproduction: python tools/import_leader_portraits.py
+Starting leader names and office assignments come from the user's MD scenario
+archive; the pinned upstream image source supplies only matching graphics.
+No endorsement of BunnyWorld by the original authors or depicted people is implied.

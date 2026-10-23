@@ -1,0 +1,5374 @@
+{
+  "version": 1,
+  "source": {
+    "policy": "Build tunable BunnyWorld economy rules around current MD-derived building metadata.\nPrices and flow coefficients are gameplay calibration, not physical commodity statistics.\n",
+    "construction_sha256": "34025d35204e899f8c1e7b2e57b8f8ced4399f70564a772f8b71335afb3a0bbc",
+    "cropland": "Area-weighted cropland-family coverage from existing ESA CCI 2000 prepared terrain types; approximate potential, not historical food output.",
+    "terrain_sha256": "73d08d37f22205eeef008ffba3f5978fcc0570b0f381f3b1a41e738312e68f2a",
+    "province_ids_sha256": "0f9c8d7cf461b67282000f16cfabfcb777dcfe342fbafb82d50a13593861f314"
+  },
+  "agricultural_potential": {
+    "1": {
+      "cropland_share": 0.10449,
+      "cropland_km2": 843.971
+    },
+    "2": {
+      "cropland_share": 0.314195,
+      "cropland_km2": 18671.073
+    },
+    "3": {
+      "cropland_share": 0.114274,
+      "cropland_km2": 10615.878
+    },
+    "5": {
+      "cropland_share": 0.114796,
+      "cropland_km2": 10556.256
+    },
+    "6": {
+      "cropland_share": 0.805819,
+      "cropland_km2": 29515.123
+    },
+    "7": {
+      "cropland_share": 0.361751,
+      "cropland_km2": 2533.919
+    },
+    "9": {
+      "cropland_share": 0.079663,
+      "cropland_km2": 19198.049
+    },
+    "10": {
+      "cropland_share": 0.157745,
+      "cropland_km2": 1494.168
+    },
+    "11": {
+      "cropland_share": 0.709603,
+      "cropland_km2": 12706.25
+    },
+    "12": {
+      "cropland_share": 0.414739,
+      "cropland_km2": 4399.964
+    },
+    "13": {
+      "cropland_share": 0.000527,
+      "cropland_km2": 250.797
+    },
+    "14": {
+      "cropland_share": 0.000194,
+      "cropland_km2": 118.88
+    },
+    "15": {
+      "cropland_share": 0.000738,
+      "cropland_km2": 113.237
+    },
+    "16": {
+      "cropland_share": 0.000825,
+      "cropland_km2": 136.281
+    },
+    "17": {
+      "cropland_share": 0.001274,
+      "cropland_km2": 269.339
+    },
+    "18": {
+      "cropland_share": 0.000767,
+      "cropland_km2": 150.673
+    },
+    "19": {
+      "cropland_share": 0.579236,
+      "cropland_km2": 15217.685
+    },
+    "20": {
+      "cropland_share": 0.282313,
+      "cropland_km2": 19232.671
+    },
+    "21": {
+      "cropland_share": 0.547855,
+      "cropland_km2": 33772.921
+    },
+    "22": {
+      "cropland_share": 0.693795,
+      "cropland_km2": 8504.617
+    },
+    "23": {
+      "cropland_share": 0.135448,
+      "cropland_km2": 14770.302
+    },
+    "24": {
+      "cropland_share": 0.039881,
+      "cropland_km2": 8928.974
+    },
+    "25": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "26": {
+      "cropland_share": 0.071852,
+      "cropland_km2": 23984.881
+    },
+    "27": {
+      "cropland_share": 0.156363,
+      "cropland_km2": 27333.537
+    },
+    "28": {
+      "cropland_share": 0.053259,
+      "cropland_km2": 21617.792
+    },
+    "29": {
+      "cropland_share": 0.013198,
+      "cropland_km2": 10050.108
+    },
+    "30": {
+      "cropland_share": 0.049596,
+      "cropland_km2": 1101.547
+    },
+    "31": {
+      "cropland_share": 0.63486,
+      "cropland_km2": 286562.243
+    },
+    "32": {
+      "cropland_share": 0.434855,
+      "cropland_km2": 274720.315
+    },
+    "35": {
+      "cropland_share": 0.501711,
+      "cropland_km2": 6180.585
+    },
+    "36": {
+      "cropland_share": 0.365366,
+      "cropland_km2": 2373.016
+    },
+    "37": {
+      "cropland_share": 0.518136,
+      "cropland_km2": 4673.697
+    },
+    "54": {
+      "cropland_share": 0.642838,
+      "cropland_km2": 15302.384
+    },
+    "55": {
+      "cropland_share": 0.386348,
+      "cropland_km2": 1843.362
+    },
+    "56": {
+      "cropland_share": 0.603291,
+      "cropland_km2": 15372.796
+    },
+    "59": {
+      "cropland_share": 0.638056,
+      "cropland_km2": 10088.217
+    },
+    "60": {
+      "cropland_share": 0.001568,
+      "cropland_km2": 36.181
+    },
+    "61": {
+      "cropland_share": 0.533902,
+      "cropland_km2": 16043.053
+    },
+    "62": {
+      "cropland_share": 0.927449,
+      "cropland_km2": 40004.378
+    },
+    "63": {
+      "cropland_share": 0.984551,
+      "cropland_km2": 34707.279
+    },
+    "64": {
+      "cropland_share": 0.787801,
+      "cropland_km2": 26838.173
+    },
+    "65": {
+      "cropland_share": 0.585566,
+      "cropland_km2": 319.935
+    },
+    "66": {
+      "cropland_share": 0.655679,
+      "cropland_km2": 5136.676
+    },
+    "67": {
+      "cropland_share": 0.158941,
+      "cropland_km2": 1306.485
+    },
+    "68": {
+      "cropland_share": 0.730071,
+      "cropland_km2": 1774.508
+    },
+    "69": {
+      "cropland_share": 0.780245,
+      "cropland_km2": 9892.603
+    },
+    "70": {
+      "cropland_share": 0.289585,
+      "cropland_km2": 24444.733
+    },
+    "71": {
+      "cropland_share": 0.657758,
+      "cropland_km2": 20974.316
+    },
+    "72": {
+      "cropland_share": 0.460076,
+      "cropland_km2": 36435.773
+    },
+    "73": {
+      "cropland_share": 0.794829,
+      "cropland_km2": 71587.745
+    },
+    "74": {
+      "cropland_share": 0.798029,
+      "cropland_km2": 84398.137
+    },
+    "75": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "79": {
+      "cropland_share": 0.27687,
+      "cropland_km2": 11147.016
+    },
+    "80": {
+      "cropland_share": 0.276359,
+      "cropland_km2": 9019.195
+    },
+    "81": {
+      "cropland_share": 0.490401,
+      "cropland_km2": 19245.853
+    },
+    "82": {
+      "cropland_share": 0.63396,
+      "cropland_km2": 15879.82
+    },
+    "83": {
+      "cropland_share": 0.593625,
+      "cropland_km2": 16999.951
+    },
+    "84": {
+      "cropland_share": 0.466523,
+      "cropland_km2": 18627.939
+    },
+    "88": {
+      "cropland_share": 0.016095,
+      "cropland_km2": 5090.204
+    },
+    "89": {
+      "cropland_share": 0.10211,
+      "cropland_km2": 36959.872
+    },
+    "90": {
+      "cropland_share": 0.044708,
+      "cropland_km2": 18144.593
+    },
+    "98": {
+      "cropland_share": 0.050242,
+      "cropland_km2": 20085.036
+    },
+    "99": {
+      "cropland_share": 0.043426,
+      "cropland_km2": 7839.427
+    },
+    "100": {
+      "cropland_share": 0.490003,
+      "cropland_km2": 132152.349
+    },
+    "101": {
+      "cropland_share": 0.021949,
+      "cropland_km2": 4922.097
+    },
+    "102": {
+      "cropland_share": 0.084068,
+      "cropland_km2": 105156.958
+    },
+    "103": {
+      "cropland_share": 0.086282,
+      "cropland_km2": 13254.638
+    },
+    "104": {
+      "cropland_share": 0.010029,
+      "cropland_km2": 1427.586
+    },
+    "105": {
+      "cropland_share": 0.445508,
+      "cropland_km2": 158801.132
+    },
+    "106": {
+      "cropland_share": 0.579693,
+      "cropland_km2": 116152.972
+    },
+    "107": {
+      "cropland_share": 0.313682,
+      "cropland_km2": 30266.996
+    },
+    "108": {
+      "cropland_share": 0.00919,
+      "cropland_km2": 14422.491
+    },
+    "109": {
+      "cropland_share": 0.224606,
+      "cropland_km2": 53540.956
+    },
+    "110": {
+      "cropland_share": 0.240061,
+      "cropland_km2": 217855.086
+    },
+    "111": {
+      "cropland_share": 0.09138,
+      "cropland_km2": 30368.38
+    },
+    "112": {
+      "cropland_share": 0.250297,
+      "cropland_km2": 63372.601
+    },
+    "113": {
+      "cropland_share": 0.175301,
+      "cropland_km2": 26531.668
+    },
+    "114": {
+      "cropland_share": 0.27144,
+      "cropland_km2": 14521.729
+    },
+    "115": {
+      "cropland_share": 0.294601,
+      "cropland_km2": 16811.461
+    },
+    "116": {
+      "cropland_share": 0.284296,
+      "cropland_km2": 27945.928
+    },
+    "117": {
+      "cropland_share": 0.442193,
+      "cropland_km2": 12417.706
+    },
+    "118": {
+      "cropland_share": 0.389994,
+      "cropland_km2": 8627.158
+    },
+    "119": {
+      "cropland_share": 0.399148,
+      "cropland_km2": 225195.386
+    },
+    "120": {
+      "cropland_share": 0.300866,
+      "cropland_km2": 13901.14
+    },
+    "121": {
+      "cropland_share": 0.195588,
+      "cropland_km2": 9025.687
+    },
+    "122": {
+      "cropland_share": 0.698715,
+      "cropland_km2": 174968.493
+    },
+    "123": {
+      "cropland_share": 0.686347,
+      "cropland_km2": 235009.392
+    },
+    "124": {
+      "cropland_share": 0.471237,
+      "cropland_km2": 2753.161
+    },
+    "125": {
+      "cropland_share": 0.452458,
+      "cropland_km2": 263506.726
+    },
+    "126": {
+      "cropland_share": 0.191869,
+      "cropland_km2": 53744.866
+    },
+    "130": {
+      "cropland_share": 0.027908,
+      "cropland_km2": 1030.153
+    },
+    "131": {
+      "cropland_share": 0.333326,
+      "cropland_km2": 32424.797
+    },
+    "132": {
+      "cropland_share": 0.440002,
+      "cropland_km2": 56120.768
+    },
+    "133": {
+      "cropland_share": 0.02625,
+      "cropland_km2": 66.625
+    },
+    "134": {
+      "cropland_share": 0.064833,
+      "cropland_km2": 3141.927
+    },
+    "135": {
+      "cropland_share": 0.777913,
+      "cropland_km2": 27903.515
+    },
+    "136": {
+      "cropland_share": 0.617774,
+      "cropland_km2": 36683.278
+    },
+    "137": {
+      "cropland_share": 0.496878,
+      "cropland_km2": 42016.674
+    },
+    "138": {
+      "cropland_share": 0.207617,
+      "cropland_km2": 1341.739
+    },
+    "142": {
+      "cropland_share": 0.611174,
+      "cropland_km2": 3668.708
+    },
+    "143": {
+      "cropland_share": 0.6862,
+      "cropland_km2": 13199.073
+    },
+    "144": {
+      "cropland_share": 0.251962,
+      "cropland_km2": 40795.778
+    },
+    "145": {
+      "cropland_share": 0.116777,
+      "cropland_km2": 9030.559
+    },
+    "146": {
+      "cropland_share": 0.086151,
+      "cropland_km2": 19449.259
+    },
+    "147": {
+      "cropland_share": 0.011729,
+      "cropland_km2": 11283.334
+    },
+    "148": {
+      "cropland_share": 0.234034,
+      "cropland_km2": 153529.744
+    },
+    "149": {
+      "cropland_share": 0.371264,
+      "cropland_km2": 232655.972
+    },
+    "150": {
+      "cropland_share": 0.122086,
+      "cropland_km2": 73164.258
+    },
+    "151": {
+      "cropland_share": 0.065671,
+      "cropland_km2": 63323.039
+    },
+    "152": {
+      "cropland_share": 0.022878,
+      "cropland_km2": 34473.397
+    },
+    "153": {
+      "cropland_share": 0.055783,
+      "cropland_km2": 4187.066
+    },
+    "154": {
+      "cropland_share": 0.000371,
+      "cropland_km2": 178.767
+    },
+    "155": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "156": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "157": {
+      "cropland_share": 0.049404,
+      "cropland_km2": 3031.429
+    },
+    "158": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "159": {
+      "cropland_share": 0.565414,
+      "cropland_km2": 3943.39
+    },
+    "161": {
+      "cropland_share": 0.011091,
+      "cropland_km2": 2422.047
+    },
+    "162": {
+      "cropland_share": 0.009408,
+      "cropland_km2": 1141.008
+    },
+    "163": {
+      "cropland_share": 0.027783,
+      "cropland_km2": 4797.897
+    },
+    "164": {
+      "cropland_share": 0.012509,
+      "cropland_km2": 1354.517
+    },
+    "165": {
+      "cropland_share": 0.089116,
+      "cropland_km2": 4380.179
+    },
+    "166": {
+      "cropland_share": 0.737676,
+      "cropland_km2": 32102.644
+    },
+    "167": {
+      "cropland_share": 0.445668,
+      "cropland_km2": 21899.284
+    },
+    "168": {
+      "cropland_share": 0.358223,
+      "cropland_km2": 13801.208
+    },
+    "169": {
+      "cropland_share": 0.740503,
+      "cropland_km2": 73263.009
+    },
+    "170": {
+      "cropland_share": 0.19524,
+      "cropland_km2": 23606.54
+    },
+    "171": {
+      "cropland_share": 0.672472,
+      "cropland_km2": 66427.061
+    },
+    "172": {
+      "cropland_share": 0.450996,
+      "cropland_km2": 90840.156
+    },
+    "173": {
+      "cropland_share": 0.453782,
+      "cropland_km2": 105317.81
+    },
+    "174": {
+      "cropland_share": 0.034233,
+      "cropland_km2": 24395.783
+    },
+    "175": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "176": {
+      "cropland_share": 0.435945,
+      "cropland_km2": 7045.031
+    },
+    "177": {
+      "cropland_share": 0.055385,
+      "cropland_km2": 88105.695
+    },
+    "178": {
+      "cropland_share": 2.4e-05,
+      "cropland_km2": 26.486
+    },
+    "179": {
+      "cropland_share": 0.1598,
+      "cropland_km2": 141612.496
+    },
+    "180": {
+      "cropland_share": 0.178967,
+      "cropland_km2": 72565.933
+    },
+    "181": {
+      "cropland_share": 0.365283,
+      "cropland_km2": 140207.489
+    },
+    "182": {
+      "cropland_share": 0.398672,
+      "cropland_km2": 111323.4
+    },
+    "183": {
+      "cropland_share": 0.536141,
+      "cropland_km2": 101878.211
+    },
+    "184": {
+      "cropland_share": 0.528746,
+      "cropland_km2": 48347.191
+    },
+    "186": {
+      "cropland_share": 0.519343,
+      "cropland_km2": 123925.704
+    },
+    "187": {
+      "cropland_share": 0.467256,
+      "cropland_km2": 44999.098
+    },
+    "188": {
+      "cropland_share": 0.576784,
+      "cropland_km2": 20604.854
+    },
+    "189": {
+      "cropland_share": 0.328353,
+      "cropland_km2": 41916.656
+    },
+    "190": {
+      "cropland_share": 0.457548,
+      "cropland_km2": 49733.164
+    },
+    "191": {
+      "cropland_share": 0.853505,
+      "cropland_km2": 5883.578
+    },
+    "192": {
+      "cropland_share": 0.947929,
+      "cropland_km2": 83225.937
+    },
+    "193": {
+      "cropland_share": 0.929203,
+      "cropland_km2": 116215.499
+    },
+    "194": {
+      "cropland_share": 0.807206,
+      "cropland_km2": 73683.084
+    },
+    "195": {
+      "cropland_share": 0.65554,
+      "cropland_km2": 7592.21
+    },
+    "196": {
+      "cropland_share": 0.411886,
+      "cropland_km2": 7248.458
+    },
+    "197": {
+      "cropland_share": 0.631274,
+      "cropland_km2": 120477.752
+    },
+    "198": {
+      "cropland_share": 0.703802,
+      "cropland_km2": 57994.278
+    },
+    "199": {
+      "cropland_share": 0.644415,
+      "cropland_km2": 113043.111
+    },
+    "200": {
+      "cropland_share": 0.616161,
+      "cropland_km2": 130393.056
+    },
+    "201": {
+      "cropland_share": 0.264227,
+      "cropland_km2": 13773.01
+    },
+    "202": {
+      "cropland_share": 0.40877,
+      "cropland_km2": 84071.693
+    },
+    "203": {
+      "cropland_share": 0.000901,
+      "cropland_km2": 639.753
+    },
+    "204": {
+      "cropland_share": 0.531044,
+      "cropland_km2": 82843.84
+    },
+    "205": {
+      "cropland_share": 0.581562,
+      "cropland_km2": 97783.742
+    },
+    "206": {
+      "cropland_share": 0.841536,
+      "cropland_km2": 139789.045
+    },
+    "207": {
+      "cropland_share": 0.616396,
+      "cropland_km2": 114538.237
+    },
+    "208": {
+      "cropland_share": 0.791145,
+      "cropland_km2": 110526.808
+    },
+    "219": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "223": {
+      "cropland_share": 1.0,
+      "cropland_km2": 623.703
+    },
+    "225": {
+      "cropland_share": 0.000307,
+      "cropland_km2": 55.918
+    },
+    "226": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "227": {
+      "cropland_share": 0.048298,
+      "cropland_km2": 3487.72
+    },
+    "228": {
+      "cropland_share": 0.221285,
+      "cropland_km2": 26207.839
+    },
+    "229": {
+      "cropland_share": 0.057896,
+      "cropland_km2": 20255.162
+    },
+    "232": {
+      "cropland_share": 0.046517,
+      "cropland_km2": 9053.988
+    },
+    "233": {
+      "cropland_share": 0.206824,
+      "cropland_km2": 31050.588
+    },
+    "234": {
+      "cropland_share": 0.031505,
+      "cropland_km2": 9961.322
+    },
+    "235": {
+      "cropland_share": 0.03687,
+      "cropland_km2": 12164.697
+    },
+    "236": {
+      "cropland_share": 0.472599,
+      "cropland_km2": 69904.873
+    },
+    "239": {
+      "cropland_share": 0.207297,
+      "cropland_km2": 7388.105
+    },
+    "240": {
+      "cropland_share": 0.139935,
+      "cropland_km2": 6597.117
+    },
+    "253": {
+      "cropland_share": 0.385269,
+      "cropland_km2": 2455.043
+    },
+    "255": {
+      "cropland_share": 0.42465,
+      "cropland_km2": 11139.118
+    },
+    "256": {
+      "cropland_share": 0.526632,
+      "cropland_km2": 6505.998
+    },
+    "257": {
+      "cropland_share": 0.564599,
+      "cropland_km2": 12399.386
+    },
+    "258": {
+      "cropland_share": 0.675517,
+      "cropland_km2": 12397.976
+    },
+    "263": {
+      "cropland_share": 0.003562,
+      "cropland_km2": 38.215
+    },
+    "264": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "265": {
+      "cropland_share": 0.002536,
+      "cropland_km2": 2.393
+    },
+    "266": {
+      "cropland_share": 0.427295,
+      "cropland_km2": 9115.751
+    },
+    "267": {
+      "cropland_share": 0.363497,
+      "cropland_km2": 10602.563
+    },
+    "268": {
+      "cropland_share": 0.057734,
+      "cropland_km2": 13587.175
+    },
+    "269": {
+      "cropland_share": 0.080797,
+      "cropland_km2": 23742.234
+    },
+    "270": {
+      "cropland_share": 0.308367,
+      "cropland_km2": 3444.756
+    },
+    "271": {
+      "cropland_share": 0.341463,
+      "cropland_km2": 18697.305
+    },
+    "272": {
+      "cropland_share": 0.15111,
+      "cropland_km2": 35522.116
+    },
+    "274": {
+      "cropland_share": 0.228305,
+      "cropland_km2": 7328.319
+    },
+    "275": {
+      "cropland_share": 0.045735,
+      "cropland_km2": 21304.146
+    },
+    "276": {
+      "cropland_share": 0.288108,
+      "cropland_km2": 16503.056
+    },
+    "277": {
+      "cropland_share": 0.114602,
+      "cropland_km2": 17571.695
+    },
+    "278": {
+      "cropland_share": 0.154997,
+      "cropland_km2": 25087.053
+    },
+    "279": {
+      "cropland_share": 0.010695,
+      "cropland_km2": 152.4
+    },
+    "280": {
+      "cropland_share": 0.27829,
+      "cropland_km2": 17714.117
+    },
+    "281": {
+      "cropland_share": 0.02397,
+      "cropland_km2": 1950.718
+    },
+    "282": {
+      "cropland_share": 0.182301,
+      "cropland_km2": 19136.781
+    },
+    "283": {
+      "cropland_share": 0.022034,
+      "cropland_km2": 216.749
+    },
+    "284": {
+      "cropland_share": 0.069385,
+      "cropland_km2": 1770.394
+    },
+    "285": {
+      "cropland_share": 0.238213,
+      "cropland_km2": 527.999
+    },
+    "345": {
+      "cropland_share": 0.256607,
+      "cropland_km2": 2586.526
+    },
+    "346": {
+      "cropland_share": 0.175081,
+      "cropland_km2": 2686.307
+    },
+    "347": {
+      "cropland_share": 0.363668,
+      "cropland_km2": 5473.759
+    },
+    "348": {
+      "cropland_share": 0.104363,
+      "cropland_km2": 521.77
+    },
+    "349": {
+      "cropland_share": 0.378263,
+      "cropland_km2": 42821.325
+    },
+    "350": {
+      "cropland_share": 0.01233,
+      "cropland_km2": 3836.35
+    },
+    "351": {
+      "cropland_share": 0.029651,
+      "cropland_km2": 2798.958
+    },
+    "352": {
+      "cropland_share": 0.516933,
+      "cropland_km2": 79055.641
+    },
+    "353": {
+      "cropland_share": 0.551363,
+      "cropland_km2": 26985.726
+    },
+    "354": {
+      "cropland_share": 0.078075,
+      "cropland_km2": 3896.418
+    },
+    "355": {
+      "cropland_share": 0.070517,
+      "cropland_km2": 1776.126
+    },
+    "356": {
+      "cropland_share": 0.373549,
+      "cropland_km2": 122069.318
+    },
+    "357": {
+      "cropland_share": 0.010455,
+      "cropland_km2": 22.284
+    },
+    "358": {
+      "cropland_share": 0.293337,
+      "cropland_km2": 7282.889
+    },
+    "360": {
+      "cropland_share": 0.002043,
+      "cropland_km2": 195.807
+    },
+    "361": {
+      "cropland_share": 0.040889,
+      "cropland_km2": 2474.265
+    },
+    "362": {
+      "cropland_share": 0.284396,
+      "cropland_km2": 4994.981
+    },
+    "363": {
+      "cropland_share": 0.195256,
+      "cropland_km2": 534.294
+    },
+    "364": {
+      "cropland_share": 0.137867,
+      "cropland_km2": 11470.772
+    },
+    "365": {
+      "cropland_share": 0.078997,
+      "cropland_km2": 3704.714
+    },
+    "404": {
+      "cropland_share": 0.530017,
+      "cropland_km2": 6484.119
+    },
+    "405": {
+      "cropland_share": 0.40118,
+      "cropland_km2": 5400.859
+    },
+    "408": {
+      "cropland_share": 0.250577,
+      "cropland_km2": 23727.899
+    },
+    "409": {
+      "cropland_share": 0.508971,
+      "cropland_km2": 31755.741
+    },
+    "410": {
+      "cropland_share": 0.76329,
+      "cropland_km2": 26871.794
+    },
+    "411": {
+      "cropland_share": 0.749008,
+      "cropland_km2": 26989.348
+    },
+    "412": {
+      "cropland_share": 0.706167,
+      "cropland_km2": 3697.139
+    },
+    "413": {
+      "cropland_share": 0.679434,
+      "cropland_km2": 4154.893
+    },
+    "418": {
+      "cropland_share": 0.603703,
+      "cropland_km2": 10934.478
+    },
+    "419": {
+      "cropland_share": 0.423825,
+      "cropland_km2": 21454.685
+    },
+    "420": {
+      "cropland_share": 0.339155,
+      "cropland_km2": 6740.589
+    },
+    "421": {
+      "cropland_share": 0.264324,
+      "cropland_km2": 665.607
+    },
+    "422": {
+      "cropland_share": 0.627502,
+      "cropland_km2": 10405.008
+    },
+    "423": {
+      "cropland_share": 0.605155,
+      "cropland_km2": 29277.285
+    },
+    "424": {
+      "cropland_share": 0.54376,
+      "cropland_km2": 18619.007
+    },
+    "425": {
+      "cropland_share": 0.426,
+      "cropland_km2": 15164.928
+    },
+    "426": {
+      "cropland_share": 0.499091,
+      "cropland_km2": 14937.341
+    },
+    "427": {
+      "cropland_share": 0.676659,
+      "cropland_km2": 16352.162
+    },
+    "429": {
+      "cropland_share": 0.356226,
+      "cropland_km2": 283.017
+    },
+    "430": {
+      "cropland_share": 0.410628,
+      "cropland_km2": 8599.974
+    },
+    "431": {
+      "cropland_share": 0.571008,
+      "cropland_km2": 9136.886
+    },
+    "432": {
+      "cropland_share": 0.705259,
+      "cropland_km2": 14527.342
+    },
+    "433": {
+      "cropland_share": 0.277013,
+      "cropland_km2": 242.612
+    },
+    "434": {
+      "cropland_share": 0.555661,
+      "cropland_km2": 10281.458
+    },
+    "435": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "436": {
+      "cropland_share": 0.527829,
+      "cropland_km2": 10727.651
+    },
+    "437": {
+      "cropland_share": 0.451521,
+      "cropland_km2": 6642.788
+    },
+    "438": {
+      "cropland_share": 0.400668,
+      "cropland_km2": 13536.818
+    },
+    "439": {
+      "cropland_share": 0.227464,
+      "cropland_km2": 4727.854
+    },
+    "440": {
+      "cropland_share": 0.343174,
+      "cropland_km2": 6316.806
+    },
+    "441": {
+      "cropland_share": 0.434511,
+      "cropland_km2": 6704.831
+    },
+    "442": {
+      "cropland_share": 0.43261,
+      "cropland_km2": 4203.992
+    },
+    "443": {
+      "cropland_share": 0.296743,
+      "cropland_km2": 2805.134
+    },
+    "444": {
+      "cropland_share": 0.293147,
+      "cropland_km2": 1538.671
+    },
+    "445": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "446": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "447": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "451": {
+      "cropland_share": 0.105485,
+      "cropland_km2": 955.962
+    },
+    "452": {
+      "cropland_share": 0.291993,
+      "cropland_km2": 7988.078
+    },
+    "453": {
+      "cropland_share": 0.169228,
+      "cropland_km2": 28169.871
+    },
+    "454": {
+      "cropland_share": 0.318662,
+      "cropland_km2": 25698.989
+    },
+    "455": {
+      "cropland_share": 0.03907,
+      "cropland_km2": 2698.061
+    },
+    "457": {
+      "cropland_share": 0.003047,
+      "cropland_km2": 439.94
+    },
+    "458": {
+      "cropland_share": 0.2381,
+      "cropland_km2": 3409.971
+    },
+    "459": {
+      "cropland_share": 0.139251,
+      "cropland_km2": 2051.811
+    },
+    "460": {
+      "cropland_share": 0.633029,
+      "cropland_km2": 261.247
+    },
+    "461": {
+      "cropland_share": 0.803231,
+      "cropland_km2": 1654.894
+    },
+    "463": {
+      "cropland_share": 0.421571,
+      "cropland_km2": 828.675
+    },
+    "473": {
+      "cropland_share": 0.65431,
+      "cropland_km2": 10104.577
+    },
+    "474": {
+      "cropland_share": 0.781726,
+      "cropland_km2": 25154.007
+    },
+    "475": {
+      "cropland_share": 0.699549,
+      "cropland_km2": 17709.473
+    },
+    "476": {
+      "cropland_share": 0.784357,
+      "cropland_km2": 15138.249
+    },
+    "477": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "478": {
+      "cropland_share": 0.598569,
+      "cropland_km2": 1325.668
+    },
+    "479": {
+      "cropland_share": 0.698827,
+      "cropland_km2": 36853.659
+    },
+    "480": {
+      "cropland_share": 0.056652,
+      "cropland_km2": 24259.74
+    },
+    "481": {
+      "cropland_share": 0.707988,
+      "cropland_km2": 68353.591
+    },
+    "482": {
+      "cropland_share": 0.153927,
+      "cropland_km2": 8815.777
+    },
+    "483": {
+      "cropland_share": 0.531231,
+      "cropland_km2": 12558.642
+    },
+    "484": {
+      "cropland_share": 0.325435,
+      "cropland_km2": 67091.14
+    },
+    "485": {
+      "cropland_share": 0.038999,
+      "cropland_km2": 1542.823
+    },
+    "486": {
+      "cropland_share": 0.443494,
+      "cropland_km2": 93269.52
+    },
+    "487": {
+      "cropland_share": 0.733077,
+      "cropland_km2": 88275.538
+    },
+    "489": {
+      "cropland_share": 0.642264,
+      "cropland_km2": 12479.076
+    },
+    "499": {
+      "cropland_share": 0.043242,
+      "cropland_km2": 881.119
+    },
+    "500": {
+      "cropland_share": 0.022561,
+      "cropland_km2": 639.823
+    },
+    "501": {
+      "cropland_share": 0.111939,
+      "cropland_km2": 2856.647
+    },
+    "504": {
+      "cropland_share": 0.058689,
+      "cropland_km2": 1007.558
+    },
+    "505": {
+      "cropland_share": 0.021052,
+      "cropland_km2": 1102.812
+    },
+    "507": {
+      "cropland_share": 0.338411,
+      "cropland_km2": 6768.039
+    },
+    "508": {
+      "cropland_share": 0.355694,
+      "cropland_km2": 6296.943
+    },
+    "509": {
+      "cropland_share": 0.313568,
+      "cropland_km2": 5055.364
+    },
+    "510": {
+      "cropland_share": 0.01766,
+      "cropland_km2": 2422.636
+    },
+    "511": {
+      "cropland_share": 0.026127,
+      "cropland_km2": 766.352
+    },
+    "512": {
+      "cropland_share": 0.350536,
+      "cropland_km2": 13289.46
+    },
+    "513": {
+      "cropland_share": 0.201749,
+      "cropland_km2": 4904.032
+    },
+    "514": {
+      "cropland_share": 0.523417,
+      "cropland_km2": 4416.193
+    },
+    "516": {
+      "cropland_share": 0.73677,
+      "cropland_km2": 5381.467
+    },
+    "517": {
+      "cropland_share": 0.596969,
+      "cropland_km2": 5108.407
+    },
+    "518": {
+      "cropland_share": 0.434971,
+      "cropland_km2": 5989.233
+    },
+    "519": {
+      "cropland_share": 0.141866,
+      "cropland_km2": 595.088
+    },
+    "526": {
+      "cropland_share": 0.05206,
+      "cropland_km2": 373.707
+    },
+    "527": {
+      "cropland_share": 0.445249,
+      "cropland_km2": 9592.724
+    },
+    "528": {
+      "cropland_share": 0.179329,
+      "cropland_km2": 2733.599
+    },
+    "529": {
+      "cropland_share": 0.642016,
+      "cropland_km2": 12474.433
+    },
+    "530": {
+      "cropland_share": 0.447794,
+      "cropland_km2": 7246.043
+    },
+    "531": {
+      "cropland_share": 0.840141,
+      "cropland_km2": 13821.272
+    },
+    "532": {
+      "cropland_share": 0.51837,
+      "cropland_km2": 8192.8
+    },
+    "533": {
+      "cropland_share": 0.673137,
+      "cropland_km2": 15420.916
+    },
+    "534": {
+      "cropland_share": 0.605833,
+      "cropland_km2": 8289.291
+    },
+    "535": {
+      "cropland_share": 0.661274,
+      "cropland_km2": 8201.675
+    },
+    "536": {
+      "cropland_share": 0.78638,
+      "cropland_km2": 21487.048
+    },
+    "539": {
+      "cropland_share": 0.548451,
+      "cropland_km2": 14109.61
+    },
+    "540": {
+      "cropland_share": 0.209421,
+      "cropland_km2": 3015.817
+    },
+    "541": {
+      "cropland_share": 0.5807,
+      "cropland_km2": 11529.461
+    },
+    "542": {
+      "cropland_share": 0.405936,
+      "cropland_km2": 4134.616
+    },
+    "543": {
+      "cropland_share": 0.679267,
+      "cropland_km2": 9789.308
+    },
+    "544": {
+      "cropland_share": 0.715072,
+      "cropland_km2": 8662.551
+    },
+    "545": {
+      "cropland_share": 0.585671,
+      "cropland_km2": 13133.843
+    },
+    "546": {
+      "cropland_share": 0.15188,
+      "cropland_km2": 1823.865
+    },
+    "563": {
+      "cropland_share": 0.032818,
+      "cropland_km2": 868.613
+    },
+    "564": {
+      "cropland_share": 0.008913,
+      "cropland_km2": 373.799
+    },
+    "565": {
+      "cropland_share": 0.237154,
+      "cropland_km2": 4773.637
+    },
+    "566": {
+      "cropland_share": 0.152381,
+      "cropland_km2": 10550.882
+    },
+    "567": {
+      "cropland_share": 0.07165,
+      "cropland_km2": 6348.33
+    },
+    "568": {
+      "cropland_share": 0.263751,
+      "cropland_km2": 7497.392
+    },
+    "569": {
+      "cropland_share": 0.137982,
+      "cropland_km2": 66545.516
+    },
+    "570": {
+      "cropland_share": 0.178251,
+      "cropland_km2": 44693.837
+    },
+    "571": {
+      "cropland_share": 0.625298,
+      "cropland_km2": 276571.288
+    },
+    "572": {
+      "cropland_share": 0.485262,
+      "cropland_km2": 59918.612
+    },
+    "573": {
+      "cropland_share": 0.096696,
+      "cropland_km2": 70231.957
+    },
+    "574": {
+      "cropland_share": 0.066275,
+      "cropland_km2": 40409.378
+    },
+    "575": {
+      "cropland_share": 0.002746,
+      "cropland_km2": 18.923
+    },
+    "576": {
+      "cropland_share": 0.290412,
+      "cropland_km2": 54809.897
+    },
+    "577": {
+      "cropland_share": 0.215382,
+      "cropland_km2": 32967.171
+    },
+    "578": {
+      "cropland_share": 0.036726,
+      "cropland_km2": 4675.505
+    },
+    "579": {
+      "cropland_share": 0.395882,
+      "cropland_km2": 33242.676
+    },
+    "580": {
+      "cropland_share": 0.81803,
+      "cropland_km2": 16426.136
+    },
+    "581": {
+      "cropland_share": 0.006851,
+      "cropland_km2": 25.228
+    },
+    "590": {
+      "cropland_share": 0.512543,
+      "cropland_km2": 5662.052
+    },
+    "591": {
+      "cropland_share": 0.866905,
+      "cropland_km2": 5529.772
+    },
+    "592": {
+      "cropland_share": 0.703669,
+      "cropland_km2": 9726.299
+    },
+    "593": {
+      "cropland_share": 0.010247,
+      "cropland_km2": 187.427
+    },
+    "594": {
+      "cropland_share": 0.116885,
+      "cropland_km2": 11896.409
+    },
+    "595": {
+      "cropland_share": 0.18296,
+      "cropland_km2": 13547.427
+    },
+    "596": {
+      "cropland_share": 0.127633,
+      "cropland_km2": 2271.195
+    },
+    "597": {
+      "cropland_share": 0.195111,
+      "cropland_km2": 7817.696
+    },
+    "598": {
+      "cropland_share": 0.310298,
+      "cropland_km2": 24733.48
+    },
+    "599": {
+      "cropland_share": 0.060588,
+      "cropland_km2": 6537.921
+    },
+    "600": {
+      "cropland_share": 0.317504,
+      "cropland_km2": 3565.46
+    },
+    "601": {
+      "cropland_share": 0.401585,
+      "cropland_km2": 4131.105
+    },
+    "602": {
+      "cropland_share": 0.232702,
+      "cropland_km2": 6550.247
+    },
+    "603": {
+      "cropland_share": 0.357029,
+      "cropland_km2": 5536.118
+    },
+    "624": {
+      "cropland_share": 0.555263,
+      "cropland_km2": 4396.21
+    },
+    "625": {
+      "cropland_share": 0.192433,
+      "cropland_km2": 5952.977
+    },
+    "626": {
+      "cropland_share": 0.548121,
+      "cropland_km2": 39919.972
+    },
+    "627": {
+      "cropland_share": 0.580938,
+      "cropland_km2": 14079.164
+    },
+    "628": {
+      "cropland_share": 0.623646,
+      "cropland_km2": 13438.76
+    },
+    "629": {
+      "cropland_share": 0.765921,
+      "cropland_km2": 3542.58
+    },
+    "630": {
+      "cropland_share": 0.57772,
+      "cropland_km2": 7991.404
+    },
+    "631": {
+      "cropland_share": 0.336467,
+      "cropland_km2": 8174.634
+    },
+    "632": {
+      "cropland_share": 0.441731,
+      "cropland_km2": 1147.985
+    },
+    "633": {
+      "cropland_share": 0.78535,
+      "cropland_km2": 82.497
+    },
+    "634": {
+      "cropland_share": 0.08281,
+      "cropland_km2": 14172.46
+    },
+    "635": {
+      "cropland_share": 0.110072,
+      "cropland_km2": 17366.249
+    },
+    "636": {
+      "cropland_share": 0.166303,
+      "cropland_km2": 45338.213
+    },
+    "638": {
+      "cropland_share": 0.425483,
+      "cropland_km2": 51935.584
+    },
+    "639": {
+      "cropland_share": 0.003132,
+      "cropland_km2": 1583.436
+    },
+    "640": {
+      "cropland_share": 0.012262,
+      "cropland_km2": 2138.674
+    },
+    "641": {
+      "cropland_share": 0.225247,
+      "cropland_km2": 18483.843
+    },
+    "642": {
+      "cropland_share": 0.596827,
+      "cropland_km2": 36834.392
+    },
+    "643": {
+      "cropland_share": 0.717151,
+      "cropland_km2": 51661.06
+    },
+    "644": {
+      "cropland_share": 0.760856,
+      "cropland_km2": 69840.581
+    },
+    "645": {
+      "cropland_share": 0.000267,
+      "cropland_km2": 39.47
+    },
+    "646": {
+      "cropland_share": 0.592895,
+      "cropland_km2": 131.241
+    },
+    "647": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "648": {
+      "cropland_share": 0.028383,
+      "cropland_km2": 10450.885
+    },
+    "649": {
+      "cropland_share": 0.038389,
+      "cropland_km2": 8747.219
+    },
+    "650": {
+      "cropland_share": 0.016944,
+      "cropland_km2": 3134.702
+    },
+    "651": {
+      "cropland_share": 0.278234,
+      "cropland_km2": 22090.91
+    },
+    "652": {
+      "cropland_share": 0.470919,
+      "cropland_km2": 22761.296
+    },
+    "653": {
+      "cropland_share": 0.188509,
+      "cropland_km2": 23486.061
+    },
+    "654": {
+      "cropland_share": 0.494235,
+      "cropland_km2": 4173.786
+    },
+    "655": {
+      "cropland_share": 0.679163,
+      "cropland_km2": 19647.534
+    },
+    "656": {
+      "cropland_share": 0.370844,
+      "cropland_km2": 18467.57
+    },
+    "658": {
+      "cropland_share": 0.047697,
+      "cropland_km2": 8667.385
+    },
+    "659": {
+      "cropland_share": 0.042348,
+      "cropland_km2": 3198.339
+    },
+    "660": {
+      "cropland_share": 0.042705,
+      "cropland_km2": 10602.271
+    },
+    "661": {
+      "cropland_share": 0.030409,
+      "cropland_km2": 4618.358
+    },
+    "662": {
+      "cropland_share": 0.279751,
+      "cropland_km2": 40468.951
+    },
+    "663": {
+      "cropland_share": 0.13074,
+      "cropland_km2": 18695.731
+    },
+    "664": {
+      "cropland_share": 0.294913,
+      "cropland_km2": 29094.91
+    },
+    "665": {
+      "cropland_share": 0.019416,
+      "cropland_km2": 1483.061
+    },
+    "666": {
+      "cropland_share": 0.249503,
+      "cropland_km2": 52079.739
+    },
+    "667": {
+      "cropland_share": 0.171313,
+      "cropland_km2": 11223.025
+    },
+    "668": {
+      "cropland_share": 0.375992,
+      "cropland_km2": 100173.404
+    },
+    "670": {
+      "cropland_share": 0.161471,
+      "cropland_km2": 22474.308
+    },
+    "671": {
+      "cropland_share": 0.127263,
+      "cropland_km2": 23027.569
+    },
+    "673": {
+      "cropland_share": 1.0,
+      "cropland_km2": 59.692
+    },
+    "675": {
+      "cropland_share": 0.048479,
+      "cropland_km2": 214.966
+    },
+    "681": {
+      "cropland_share": 0.188239,
+      "cropland_km2": 32117.981
+    },
+    "682": {
+      "cropland_share": 0.086172,
+      "cropland_km2": 22576.914
+    },
+    "683": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "684": {
+      "cropland_share": 0.37572,
+      "cropland_km2": 179.787
+    },
+    "686": {
+      "cropland_share": 0.906729,
+      "cropland_km2": 7763.927
+    },
+    "687": {
+      "cropland_share": 0.883137,
+      "cropland_km2": 16236.411
+    },
+    "688": {
+      "cropland_share": 0.488074,
+      "cropland_km2": 13201.3
+    },
+    "689": {
+      "cropland_share": 0.754954,
+      "cropland_km2": 53259.825
+    },
+    "690": {
+      "cropland_share": 0.17979,
+      "cropland_km2": 2536.796
+    },
+    "691": {
+      "cropland_share": 0.059883,
+      "cropland_km2": 52405.96
+    },
+    "692": {
+      "cropland_share": 0.035151,
+      "cropland_km2": 23808.471
+    },
+    "693": {
+      "cropland_share": 0.006397,
+      "cropland_km2": 464.023
+    },
+    "694": {
+      "cropland_share": 0.121379,
+      "cropland_km2": 6891.098
+    },
+    "695": {
+      "cropland_share": 0.178329,
+      "cropland_km2": 9234.907
+    },
+    "696": {
+      "cropland_share": 0.064345,
+      "cropland_km2": 4648.042
+    },
+    "697": {
+      "cropland_share": 0.392036,
+      "cropland_km2": 21706.358
+    },
+    "698": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "699": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "706": {
+      "cropland_share": 0.059685,
+      "cropland_km2": 4726.443
+    },
+    "707": {
+      "cropland_share": 0.080008,
+      "cropland_km2": 9827.706
+    },
+    "708": {
+      "cropland_share": 0.14145,
+      "cropland_km2": 13949.008
+    },
+    "709": {
+      "cropland_share": 0.054444,
+      "cropland_km2": 9318.679
+    },
+    "710": {
+      "cropland_share": 0.195388,
+      "cropland_km2": 20272.582
+    },
+    "711": {
+      "cropland_share": 0.03801,
+      "cropland_km2": 5003.871
+    },
+    "712": {
+      "cropland_share": 0.250489,
+      "cropland_km2": 19935.084
+    },
+    "713": {
+      "cropland_share": 0.728384,
+      "cropland_km2": 1925.828
+    },
+    "714": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "715": {
+      "cropland_share": 0.037304,
+      "cropland_km2": 20739.202
+    },
+    "716": {
+      "cropland_share": 0.636249,
+      "cropland_km2": 2318.757
+    },
+    "717": {
+      "cropland_share": 0.379887,
+      "cropland_km2": 29445.321
+    },
+    "718": {
+      "cropland_share": 0.225545,
+      "cropland_km2": 32593.672
+    },
+    "719": {
+      "cropland_share": 0.019757,
+      "cropland_km2": 2847.298
+    },
+    "720": {
+      "cropland_share": 0.322087,
+      "cropland_km2": 39775.662
+    },
+    "721": {
+      "cropland_share": 0.025889,
+      "cropland_km2": 19963.872
+    },
+    "722": {
+      "cropland_share": 0.128061,
+      "cropland_km2": 5410.112
+    },
+    "723": {
+      "cropland_share": 0.452147,
+      "cropland_km2": 35608.626
+    },
+    "724": {
+      "cropland_share": 0.674734,
+      "cropland_km2": 70609.842
+    },
+    "725": {
+      "cropland_share": 0.429714,
+      "cropland_km2": 57038.367
+    },
+    "726": {
+      "cropland_share": 0.817462,
+      "cropland_km2": 174753.054
+    },
+    "727": {
+      "cropland_share": 0.481689,
+      "cropland_km2": 57742.332
+    },
+    "728": {
+      "cropland_share": 0.831636,
+      "cropland_km2": 54761.216
+    },
+    "729": {
+      "cropland_share": 0.795793,
+      "cropland_km2": 90072.647
+    },
+    "730": {
+      "cropland_share": 0.441998,
+      "cropland_km2": 41610.108
+    },
+    "731": {
+      "cropland_share": 0.261368,
+      "cropland_km2": 16416.96
+    },
+    "732": {
+      "cropland_share": 0.269833,
+      "cropland_km2": 3150.402
+    },
+    "733": {
+      "cropland_share": 0.198897,
+      "cropland_km2": 6560.313
+    },
+    "734": {
+      "cropland_share": 0.433584,
+      "cropland_km2": 5770.518
+    },
+    "735": {
+      "cropland_share": 0.551981,
+      "cropland_km2": 8477.152
+    },
+    "736": {
+      "cropland_share": 0.67147,
+      "cropland_km2": 12758.23
+    },
+    "737": {
+      "cropland_share": 0.183893,
+      "cropland_km2": 6411.917
+    },
+    "739": {
+      "cropland_share": 0.564391,
+      "cropland_km2": 4787.114
+    },
+    "740": {
+      "cropland_share": 0.861087,
+      "cropland_km2": 3627.8
+    },
+    "741": {
+      "cropland_share": 0.636224,
+      "cropland_km2": 2272.422
+    },
+    "742": {
+      "cropland_share": 0.158964,
+      "cropland_km2": 11302.48
+    },
+    "750": {
+      "cropland_share": 0.259292,
+      "cropland_km2": 248.832
+    },
+    "751": {
+      "cropland_share": 0.124972,
+      "cropland_km2": 71.657
+    },
+    "752": {
+      "cropland_share": 0.022141,
+      "cropland_km2": 3529.471
+    },
+    "753": {
+      "cropland_share": 0.01038,
+      "cropland_km2": 1270.757
+    },
+    "754": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "755": {
+      "cropland_share": 0.066298,
+      "cropland_km2": 1480.381
+    },
+    "756": {
+      "cropland_share": 0.009874,
+      "cropland_km2": 286.537
+    },
+    "757": {
+      "cropland_share": 0.003459,
+      "cropland_km2": 448.108
+    },
+    "758": {
+      "cropland_share": 0.001442,
+      "cropland_km2": 140.132
+    },
+    "759": {
+      "cropland_share": 0.00489,
+      "cropland_km2": 167.886
+    },
+    "761": {
+      "cropland_share": 0.540222,
+      "cropland_km2": 24749.452
+    },
+    "762": {
+      "cropland_share": 0.362907,
+      "cropland_km2": 9780.866
+    },
+    "763": {
+      "cropland_share": 0.030596,
+      "cropland_km2": 10693.631
+    },
+    "764": {
+      "cropland_share": 0.92423,
+      "cropland_km2": 46880.105
+    },
+    "765": {
+      "cropland_share": 0.495558,
+      "cropland_km2": 70118.954
+    },
+    "767": {
+      "cropland_share": 0.875313,
+      "cropland_km2": 756.768
+    },
+    "774": {
+      "cropland_share": 0.603869,
+      "cropland_km2": 3242.06
+    },
+    "775": {
+      "cropland_share": 0.152078,
+      "cropland_km2": 2543.905
+    },
+    "776": {
+      "cropland_share": 0.231747,
+      "cropland_km2": 5004.156
+    },
+    "777": {
+      "cropland_share": 0.428893,
+      "cropland_km2": 18376.416
+    },
+    "784": {
+      "cropland_share": 0.102453,
+      "cropland_km2": 26811.524
+    },
+    "785": {
+      "cropland_share": 0.3896,
+      "cropland_km2": 54740.579
+    },
+    "786": {
+      "cropland_share": 0.540463,
+      "cropland_km2": 19493.269
+    },
+    "787": {
+      "cropland_share": 0.565614,
+      "cropland_km2": 24160.128
+    },
+    "788": {
+      "cropland_share": 0.637801,
+      "cropland_km2": 12752.485
+    },
+    "789": {
+      "cropland_share": 0.45631,
+      "cropland_km2": 6469.91
+    },
+    "790": {
+      "cropland_share": 0.794023,
+      "cropland_km2": 23716.895
+    },
+    "791": {
+      "cropland_share": 0.735417,
+      "cropland_km2": 17078.268
+    },
+    "792": {
+      "cropland_share": 0.406964,
+      "cropland_km2": 7606.18
+    },
+    "793": {
+      "cropland_share": 0.313392,
+      "cropland_km2": 20383.418
+    },
+    "794": {
+      "cropland_share": 0.045842,
+      "cropland_km2": 1158.102
+    },
+    "795": {
+      "cropland_share": 0.450501,
+      "cropland_km2": 9365.292
+    },
+    "796": {
+      "cropland_share": 0.085963,
+      "cropland_km2": 11832.953
+    },
+    "797": {
+      "cropland_share": 0.019008,
+      "cropland_km2": 1576.438
+    },
+    "798": {
+      "cropland_share": 0.011393,
+      "cropland_km2": 1983.749
+    },
+    "800": {
+      "cropland_share": 0.105663,
+      "cropland_km2": 2593.894
+    },
+    "801": {
+      "cropland_share": 0.013112,
+      "cropland_km2": 913.16
+    },
+    "802": {
+      "cropland_share": 0.312943,
+      "cropland_km2": 7631.787
+    },
+    "803": {
+      "cropland_share": 0.023828,
+      "cropland_km2": 2155.969
+    },
+    "804": {
+      "cropland_share": 0.501571,
+      "cropland_km2": 11135.146
+    },
+    "805": {
+      "cropland_share": 0.525148,
+      "cropland_km2": 8187.093
+    },
+    "806": {
+      "cropland_share": 0.288372,
+      "cropland_km2": 8131.944
+    },
+    "807": {
+      "cropland_share": 0.037858,
+      "cropland_km2": 4185.517
+    },
+    "808": {
+      "cropland_share": 0.225734,
+      "cropland_km2": 3434.835
+    },
+    "809": {
+      "cropland_share": 0.304637,
+      "cropland_km2": 4069.945
+    },
+    "810": {
+      "cropland_share": 0.137627,
+      "cropland_km2": 17327.748
+    },
+    "811": {
+      "cropland_share": 0.027169,
+      "cropland_km2": 4983.602
+    },
+    "812": {
+      "cropland_share": 0.656205,
+      "cropland_km2": 13446.43
+    },
+    "813": {
+      "cropland_share": 0.601567,
+      "cropland_km2": 17538.741
+    },
+    "814": {
+      "cropland_share": 0.005462,
+      "cropland_km2": 697.143
+    },
+    "815": {
+      "cropland_share": 0.090511,
+      "cropland_km2": 1051.905
+    },
+    "816": {
+      "cropland_share": 0.160547,
+      "cropland_km2": 2312.157
+    },
+    "817": {
+      "cropland_share": 0.241608,
+      "cropland_km2": 1125.197
+    },
+    "845": {
+      "cropland_share": 0.593976,
+      "cropland_km2": 12613.435
+    },
+    "846": {
+      "cropland_share": 0.593679,
+      "cropland_km2": 9187.361
+    },
+    "847": {
+      "cropland_share": 0.563495,
+      "cropland_km2": 10086.255
+    },
+    "848": {
+      "cropland_share": 0.634903,
+      "cropland_km2": 12402.28
+    },
+    "849": {
+      "cropland_share": 0.621867,
+      "cropland_km2": 13187.838
+    },
+    "850": {
+      "cropland_share": 0.609148,
+      "cropland_km2": 14835.61
+    },
+    "851": {
+      "cropland_share": 0.354877,
+      "cropland_km2": 4916.611
+    },
+    "852": {
+      "cropland_share": 0.552573,
+      "cropland_km2": 13212.917
+    },
+    "853": {
+      "cropland_share": 0.748979,
+      "cropland_km2": 18565.501
+    },
+    "854": {
+      "cropland_share": 0.536525,
+      "cropland_km2": 10022.081
+    },
+    "855": {
+      "cropland_share": 0.728962,
+      "cropland_km2": 25383.724
+    },
+    "856": {
+      "cropland_share": 0.728362,
+      "cropland_km2": 13455.772
+    },
+    "857": {
+      "cropland_share": 0.732084,
+      "cropland_km2": 12988.088
+    },
+    "858": {
+      "cropland_share": 0.711248,
+      "cropland_km2": 20967.945
+    },
+    "859": {
+      "cropland_share": 0.649338,
+      "cropland_km2": 7228.648
+    },
+    "860": {
+      "cropland_share": 0.397597,
+      "cropland_km2": 11273.828
+    },
+    "861": {
+      "cropland_share": 0.407955,
+      "cropland_km2": 2148.187
+    },
+    "862": {
+      "cropland_share": 0.764944,
+      "cropland_km2": 13511.662
+    },
+    "863": {
+      "cropland_share": 0.497277,
+      "cropland_km2": 10467.545
+    },
+    "864": {
+      "cropland_share": 0.358031,
+      "cropland_km2": 6062.42
+    },
+    "865": {
+      "cropland_share": 0.048205,
+      "cropland_km2": 54.487
+    },
+    "866": {
+      "cropland_share": 0.512863,
+      "cropland_km2": 1685.034
+    },
+    "868": {
+      "cropland_share": 0.000983,
+      "cropland_km2": 370.678
+    },
+    "869": {
+      "cropland_share": 0.104252,
+      "cropland_km2": 16119.429
+    },
+    "870": {
+      "cropland_share": 0.017442,
+      "cropland_km2": 4023.2
+    },
+    "871": {
+      "cropland_share": 0.004969,
+      "cropland_km2": 1688.364
+    },
+    "872": {
+      "cropland_share": 0.015066,
+      "cropland_km2": 1326.081
+    },
+    "873": {
+      "cropland_share": 0.006121,
+      "cropland_km2": 637.242
+    },
+    "874": {
+      "cropland_share": 0.773525,
+      "cropland_km2": 13250.522
+    },
+    "875": {
+      "cropland_share": 0.002411,
+      "cropland_km2": 161.472
+    },
+    "876": {
+      "cropland_share": 0.001136,
+      "cropland_km2": 80.417
+    },
+    "878": {
+      "cropland_share": 0.039725,
+      "cropland_km2": 472.843
+    },
+    "880": {
+      "cropland_share": 0.179607,
+      "cropland_km2": 2430.936
+    },
+    "881": {
+      "cropland_share": 0.002307,
+      "cropland_km2": 16.051
+    },
+    "882": {
+      "cropland_share": 0.895371,
+      "cropland_km2": 77689.753
+    },
+    "883": {
+      "cropland_share": 0.658349,
+      "cropland_km2": 50929.813
+    },
+    "884": {
+      "cropland_share": 0.226642,
+      "cropland_km2": 11563.929
+    },
+    "886": {
+      "cropland_share": 0.106022,
+      "cropland_km2": 1748.84
+    },
+    "887": {
+      "cropland_share": 0.155864,
+      "cropland_km2": 3436.2
+    },
+    "888": {
+      "cropland_share": 0.006814,
+      "cropland_km2": 148.891
+    },
+    "889": {
+      "cropland_share": 0.447777,
+      "cropland_km2": 4930.358
+    },
+    "890": {
+      "cropland_share": 0.185045,
+      "cropland_km2": 4305.8
+    },
+    "891": {
+      "cropland_share": 0.976406,
+      "cropland_km2": 49665.405
+    },
+    "892": {
+      "cropland_share": 0.849767,
+      "cropland_km2": 176003.725
+    },
+    "893": {
+      "cropland_share": 0.831123,
+      "cropland_km2": 73175.5
+    },
+    "894": {
+      "cropland_share": 0.154287,
+      "cropland_km2": 8586.195
+    },
+    "897": {
+      "cropland_share": 0.954208,
+      "cropland_km2": 90681.12
+    },
+    "898": {
+      "cropland_share": 0.956912,
+      "cropland_km2": 230336.981
+    },
+    "901": {
+      "cropland_share": 0.737865,
+      "cropland_km2": 120290.234
+    },
+    "902": {
+      "cropland_share": 0.728192,
+      "cropland_km2": 114506.691
+    },
+    "904": {
+      "cropland_share": 0.900701,
+      "cropland_km2": 196004.694
+    },
+    "905": {
+      "cropland_share": 0.512827,
+      "cropland_km2": 1892.273
+    },
+    "906": {
+      "cropland_share": 0.784387,
+      "cropland_km2": 151689.872
+    },
+    "907": {
+      "cropland_share": 0.26684,
+      "cropland_km2": 10417.765
+    },
+    "908": {
+      "cropland_share": 0.803668,
+      "cropland_km2": 492.886
+    },
+    "909": {
+      "cropland_share": 0.845712,
+      "cropland_km2": 112102.892
+    },
+    "911": {
+      "cropland_share": 0.050055,
+      "cropland_km2": 561.254
+    },
+    "912": {
+      "cropland_share": 0.754946,
+      "cropland_km2": 58927.658
+    },
+    "913": {
+      "cropland_share": 0.695447,
+      "cropland_km2": 1049.125
+    },
+    "915": {
+      "cropland_share": 0.769946,
+      "cropland_km2": 185021.456
+    },
+    "916": {
+      "cropland_share": 0.63099,
+      "cropland_km2": 85094.921
+    },
+    "917": {
+      "cropland_share": 0.972084,
+      "cropland_km2": 42801.298
+    },
+    "918": {
+      "cropland_share": 0.80535,
+      "cropland_km2": 92755.073
+    },
+    "923": {
+      "cropland_share": 0.007952,
+      "cropland_km2": 535.827
+    },
+    "924": {
+      "cropland_share": 0.406094,
+      "cropland_km2": 842.062
+    },
+    "925": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "927": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "929": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "932": {
+      "cropland_share": 0.810728,
+      "cropland_km2": 8802.786
+    },
+    "933": {
+      "cropland_share": 0.111966,
+      "cropland_km2": 17989.217
+    },
+    "941": {
+      "cropland_share": 0.728296,
+      "cropland_km2": 17227.165
+    },
+    "942": {
+      "cropland_share": 0.004776,
+      "cropland_km2": 1784.811
+    },
+    "943": {
+      "cropland_share": 0.247526,
+      "cropland_km2": 23457.69
+    },
+    "944": {
+      "cropland_share": 0.292594,
+      "cropland_km2": 37895.504
+    },
+    "945": {
+      "cropland_share": 0.145719,
+      "cropland_km2": 24807.748
+    },
+    "946": {
+      "cropland_share": 0.109548,
+      "cropland_km2": 13835.427
+    },
+    "947": {
+      "cropland_share": 0.232187,
+      "cropland_km2": 24365.01
+    },
+    "948": {
+      "cropland_share": 0.127129,
+      "cropland_km2": 9617.62
+    },
+    "949": {
+      "cropland_share": 0.143951,
+      "cropland_km2": 18874.317
+    },
+    "950": {
+      "cropland_share": 0.113796,
+      "cropland_km2": 2080.074
+    },
+    "951": {
+      "cropland_share": 0.517932,
+      "cropland_km2": 1792.873
+    },
+    "952": {
+      "cropland_share": 0.140868,
+      "cropland_km2": 190.029
+    },
+    "953": {
+      "cropland_share": 0.002815,
+      "cropland_km2": 1565.552
+    },
+    "954": {
+      "cropland_share": 0.000448,
+      "cropland_km2": 55.785
+    },
+    "955": {
+      "cropland_share": 0.027938,
+      "cropland_km2": 3281.749
+    },
+    "956": {
+      "cropland_share": 0.00134,
+      "cropland_km2": 120.115
+    },
+    "957": {
+      "cropland_share": 0.012454,
+      "cropland_km2": 966.825
+    },
+    "958": {
+      "cropland_share": 0.111326,
+      "cropland_km2": 1928.018
+    },
+    "959": {
+      "cropland_share": 0.010891,
+      "cropland_km2": 1109.451
+    },
+    "960": {
+      "cropland_share": 0.007422,
+      "cropland_km2": 1078.895
+    },
+    "961": {
+      "cropland_share": 0.007125,
+      "cropland_km2": 1080.548
+    },
+    "962": {
+      "cropland_share": 0.018815,
+      "cropland_km2": 7112.194
+    },
+    "963": {
+      "cropland_share": 0.06542,
+      "cropland_km2": 3566.163
+    },
+    "964": {
+      "cropland_share": 0.031798,
+      "cropland_km2": 3863.26
+    },
+    "965": {
+      "cropland_share": 0.140602,
+      "cropland_km2": 10246.164
+    },
+    "966": {
+      "cropland_share": 0.464445,
+      "cropland_km2": 6766.241
+    },
+    "967": {
+      "cropland_share": 0.838384,
+      "cropland_km2": 20859.305
+    },
+    "968": {
+      "cropland_share": 0.274502,
+      "cropland_km2": 23608.32
+    },
+    "969": {
+      "cropland_share": 0.425838,
+      "cropland_km2": 11592.556
+    },
+    "970": {
+      "cropland_share": 0.617166,
+      "cropland_km2": 17702.86
+    },
+    "971": {
+      "cropland_share": 0.868863,
+      "cropland_km2": 18547.617
+    },
+    "973": {
+      "cropland_share": 0.668965,
+      "cropland_km2": 1053.883
+    },
+    "974": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "975": {
+      "cropland_share": 0.264864,
+      "cropland_km2": 15144.918
+    },
+    "976": {
+      "cropland_share": 0.718379,
+      "cropland_km2": 30512.134
+    },
+    "977": {
+      "cropland_share": 0.360253,
+      "cropland_km2": 27779.431
+    },
+    "978": {
+      "cropland_share": 0.745478,
+      "cropland_km2": 86535.98
+    },
+    "979": {
+      "cropland_share": 0.632471,
+      "cropland_km2": 27414.211
+    },
+    "980": {
+      "cropland_share": 0.906756,
+      "cropland_km2": 151987.883
+    },
+    "981": {
+      "cropland_share": 0.575218,
+      "cropland_km2": 45676.492
+    },
+    "982": {
+      "cropland_share": 0.5389,
+      "cropland_km2": 19559.505
+    },
+    "983": {
+      "cropland_share": 0.81593,
+      "cropland_km2": 618.407
+    },
+    "984": {
+      "cropland_share": 0.32326,
+      "cropland_km2": 11543.945
+    },
+    "985": {
+      "cropland_share": 0.765148,
+      "cropland_km2": 9467.603
+    },
+    "986": {
+      "cropland_share": 0.179904,
+      "cropland_km2": 2341.453
+    },
+    "987": {
+      "cropland_share": 0.418704,
+      "cropland_km2": 3322.396
+    },
+    "991": {
+      "cropland_share": 0.152404,
+      "cropland_km2": 1285.935
+    },
+    "992": {
+      "cropland_share": 0.084305,
+      "cropland_km2": 2104.528
+    },
+    "993": {
+      "cropland_share": 0.524476,
+      "cropland_km2": 18502.393
+    },
+    "996": {
+      "cropland_share": 0.00466,
+      "cropland_km2": 338.02
+    },
+    "997": {
+      "cropland_share": 0.091032,
+      "cropland_km2": 4813.649
+    },
+    "999": {
+      "cropland_share": 0.01566,
+      "cropland_km2": 1460.25
+    },
+    "1000": {
+      "cropland_share": 0.225157,
+      "cropland_km2": 12066.243
+    },
+    "1001": {
+      "cropland_share": 0.740964,
+      "cropland_km2": 56025.131
+    },
+    "1003": {
+      "cropland_share": 0.279707,
+      "cropland_km2": 4024.082
+    },
+    "1004": {
+      "cropland_share": 0.421445,
+      "cropland_km2": 5244.046
+    },
+    "1005": {
+      "cropland_share": 0.430795,
+      "cropland_km2": 3377.796
+    },
+    "1006": {
+      "cropland_share": 0.567893,
+      "cropland_km2": 1787.137
+    },
+    "1008": {
+      "cropland_share": 0.279357,
+      "cropland_km2": 13760.287
+    },
+    "1009": {
+      "cropland_share": 0.00234,
+      "cropland_km2": 338.358
+    },
+    "1010": {
+      "cropland_share": 0.00902,
+      "cropland_km2": 1152.169
+    },
+    "1011": {
+      "cropland_share": 0.109637,
+      "cropland_km2": 6716.63
+    },
+    "1012": {
+      "cropland_share": 0.650168,
+      "cropland_km2": 8725.465
+    },
+    "1013": {
+      "cropland_share": 0.398922,
+      "cropland_km2": 19976.451
+    },
+    "1014": {
+      "cropland_share": 0.608726,
+      "cropland_km2": 21518.665
+    },
+    "1015": {
+      "cropland_share": 0.92031,
+      "cropland_km2": 27766.007
+    },
+    "1016": {
+      "cropland_share": 0.90735,
+      "cropland_km2": 24846.925
+    },
+    "1017": {
+      "cropland_share": 0.873288,
+      "cropland_km2": 45557.649
+    },
+    "1018": {
+      "cropland_share": 0.870583,
+      "cropland_km2": 87379.929
+    },
+    "1019": {
+      "cropland_share": 0.058335,
+      "cropland_km2": 19253.749
+    },
+    "1020": {
+      "cropland_share": 0.056752,
+      "cropland_km2": 9566.624
+    },
+    "1021": {
+      "cropland_share": 0.066786,
+      "cropland_km2": 28805.29
+    },
+    "1022": {
+      "cropland_share": 0.10186,
+      "cropland_km2": 19208.627
+    },
+    "1023": {
+      "cropland_share": 0.053032,
+      "cropland_km2": 1918.783
+    },
+    "1024": {
+      "cropland_share": 0.015033,
+      "cropland_km2": 6533.639
+    },
+    "1025": {
+      "cropland_share": 0.074672,
+      "cropland_km2": 12254.373
+    },
+    "1026": {
+      "cropland_share": 0.140336,
+      "cropland_km2": 22320.423
+    },
+    "1027": {
+      "cropland_share": 0.698995,
+      "cropland_km2": 50238.363
+    },
+    "1028": {
+      "cropland_share": 0.479165,
+      "cropland_km2": 67642.592
+    },
+    "1029": {
+      "cropland_share": 0.430327,
+      "cropland_km2": 74761.724
+    },
+    "1030": {
+      "cropland_share": 0.625114,
+      "cropland_km2": 55491.78
+    },
+    "1031": {
+      "cropland_share": 0.625392,
+      "cropland_km2": 107124.513
+    },
+    "1032": {
+      "cropland_share": 0.789928,
+      "cropland_km2": 98663.402
+    },
+    "1033": {
+      "cropland_share": 0.875936,
+      "cropland_km2": 88175.625
+    },
+    "1034": {
+      "cropland_share": 0.134051,
+      "cropland_km2": 6057.956
+    },
+    "1035": {
+      "cropland_share": 0.73369,
+      "cropland_km2": 79294.947
+    },
+    "1036": {
+      "cropland_share": 0.001487,
+      "cropland_km2": 690.141
+    },
+    "1037": {
+      "cropland_share": 0.035714,
+      "cropland_km2": 2761.432
+    },
+    "1038": {
+      "cropland_share": 0.000507,
+      "cropland_km2": 364.866
+    },
+    "1039": {
+      "cropland_share": 5.4e-05,
+      "cropland_km2": 36.737
+    },
+    "1040": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1041": {
+      "cropland_share": 0.000683,
+      "cropland_km2": 2091.571
+    },
+    "1042": {
+      "cropland_share": 0.352943,
+      "cropland_km2": 763.711
+    },
+    "1043": {
+      "cropland_share": 0.005182,
+      "cropland_km2": 2259.648
+    },
+    "1044": {
+      "cropland_share": 0.019438,
+      "cropland_km2": 45047.039
+    },
+    "1045": {
+      "cropland_share": 0.113346,
+      "cropland_km2": 8282.796
+    },
+    "1046": {
+      "cropland_share": 0.00362,
+      "cropland_km2": 1692.323
+    },
+    "1048": {
+      "cropland_share": 0.517496,
+      "cropland_km2": 73673.93
+    },
+    "1049": {
+      "cropland_share": 0.074466,
+      "cropland_km2": 14415.493
+    },
+    "1050": {
+      "cropland_share": 0.00016,
+      "cropland_km2": 85.144
+    },
+    "1051": {
+      "cropland_share": 0.924031,
+      "cropland_km2": 22385.873
+    },
+    "1052": {
+      "cropland_share": 0.857834,
+      "cropland_km2": 29476.0
+    },
+    "1053": {
+      "cropland_share": 0.023117,
+      "cropland_km2": 7238.839
+    },
+    "1054": {
+      "cropland_share": 0.799075,
+      "cropland_km2": 51349.781
+    },
+    "1055": {
+      "cropland_share": 0.695437,
+      "cropland_km2": 24079.67
+    },
+    "1056": {
+      "cropland_share": 0.753532,
+      "cropland_km2": 32573.366
+    },
+    "1057": {
+      "cropland_share": 0.272883,
+      "cropland_km2": 25829.579
+    },
+    "1058": {
+      "cropland_share": 0.933068,
+      "cropland_km2": 22950.206
+    },
+    "1059": {
+      "cropland_share": 0.035452,
+      "cropland_km2": 26634.05
+    },
+    "1060": {
+      "cropland_share": 0.199356,
+      "cropland_km2": 11809.795
+    },
+    "1061": {
+      "cropland_share": 0.706132,
+      "cropland_km2": 18244.595
+    },
+    "1062": {
+      "cropland_share": 0.440192,
+      "cropland_km2": 12901.468
+    },
+    "1063": {
+      "cropland_share": 0.131951,
+      "cropland_km2": 7906.805
+    },
+    "1064": {
+      "cropland_share": 0.306602,
+      "cropland_km2": 9884.951
+    },
+    "1065": {
+      "cropland_share": 0.312264,
+      "cropland_km2": 9170.894
+    },
+    "1066": {
+      "cropland_share": 0.674844,
+      "cropland_km2": 26596.324
+    },
+    "1067": {
+      "cropland_share": 0.361524,
+      "cropland_km2": 8507.142
+    },
+    "1068": {
+      "cropland_share": 0.439302,
+      "cropland_km2": 32815.106
+    },
+    "1069": {
+      "cropland_share": 0.856749,
+      "cropland_km2": 21789.5
+    },
+    "1070": {
+      "cropland_share": 0.638706,
+      "cropland_km2": 11671.02
+    },
+    "1071": {
+      "cropland_share": 0.058037,
+      "cropland_km2": 8157.705
+    },
+    "1072": {
+      "cropland_share": 0.152548,
+      "cropland_km2": 8369.319
+    },
+    "1073": {
+      "cropland_share": 0.241768,
+      "cropland_km2": 20336.348
+    },
+    "1074": {
+      "cropland_share": 0.420034,
+      "cropland_km2": 18390.265
+    },
+    "1075": {
+      "cropland_share": 0.240292,
+      "cropland_km2": 678.381
+    },
+    "1076": {
+      "cropland_share": 0.373005,
+      "cropland_km2": 8676.205
+    },
+    "1077": {
+      "cropland_share": 0.238876,
+      "cropland_km2": 28580.698
+    },
+    "1078": {
+      "cropland_share": 0.422851,
+      "cropland_km2": 17657.745
+    },
+    "1079": {
+      "cropland_share": 0.001205,
+      "cropland_km2": 499.62
+    },
+    "1080": {
+      "cropland_share": 0.139085,
+      "cropland_km2": 21694.928
+    },
+    "1081": {
+      "cropland_share": 0.841767,
+      "cropland_km2": 43597.331
+    },
+    "1082": {
+      "cropland_share": 0.73222,
+      "cropland_km2": 48803.758
+    },
+    "1083": {
+      "cropland_share": 0.524102,
+      "cropland_km2": 4199.072
+    },
+    "1086": {
+      "cropland_share": 0.05494,
+      "cropland_km2": 349.225
+    },
+    "1111": {
+      "cropland_share": 0.299907,
+      "cropland_km2": 3252.35
+    },
+    "1112": {
+      "cropland_share": 0.556404,
+      "cropland_km2": 10089.862
+    },
+    "1113": {
+      "cropland_share": 0.060489,
+      "cropland_km2": 4110.367
+    },
+    "1114": {
+      "cropland_share": 0.020548,
+      "cropland_km2": 2590.884
+    },
+    "1115": {
+      "cropland_share": 0.005937,
+      "cropland_km2": 712.549
+    },
+    "1116": {
+      "cropland_share": 0.117601,
+      "cropland_km2": 8935.794
+    },
+    "1117": {
+      "cropland_share": 0.03554,
+      "cropland_km2": 5998.398
+    },
+    "1118": {
+      "cropland_share": 0.054862,
+      "cropland_km2": 3871.292
+    },
+    "1120": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1121": {
+      "cropland_share": 0.000245,
+      "cropland_km2": 0.199
+    },
+    "1122": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1123": {
+      "cropland_share": 0.357664,
+      "cropland_km2": 58033.418
+    },
+    "1124": {
+      "cropland_share": 0.379473,
+      "cropland_km2": 41790.891
+    },
+    "1125": {
+      "cropland_share": 0.375579,
+      "cropland_km2": 39838.267
+    },
+    "1126": {
+      "cropland_share": 0.000617,
+      "cropland_km2": 224.583
+    },
+    "1127": {
+      "cropland_share": 0.073195,
+      "cropland_km2": 21447.338
+    },
+    "1128": {
+      "cropland_share": 0.001338,
+      "cropland_km2": 438.788
+    },
+    "1129": {
+      "cropland_share": 0.190232,
+      "cropland_km2": 11394.792
+    },
+    "1130": {
+      "cropland_share": 0.425582,
+      "cropland_km2": 54740.718
+    },
+    "1131": {
+      "cropland_share": 0.600639,
+      "cropland_km2": 34459.719
+    },
+    "1132": {
+      "cropland_share": 0.305766,
+      "cropland_km2": 74665.482
+    },
+    "1133": {
+      "cropland_share": 0.021069,
+      "cropland_km2": 233.882
+    },
+    "1134": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1135": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1136": {
+      "cropland_share": 0.023263,
+      "cropland_km2": 754.506
+    },
+    "1137": {
+      "cropland_share": 0.32033,
+      "cropland_km2": 5606.414
+    },
+    "1138": {
+      "cropland_share": 0.004246,
+      "cropland_km2": 449.935
+    },
+    "1139": {
+      "cropland_share": 0.011298,
+      "cropland_km2": 671.398
+    },
+    "1140": {
+      "cropland_share": 0.020274,
+      "cropland_km2": 1976.43
+    },
+    "1141": {
+      "cropland_share": 0.078434,
+      "cropland_km2": 5156.68
+    },
+    "1142": {
+      "cropland_share": 0.244977,
+      "cropland_km2": 7962.852
+    },
+    "1143": {
+      "cropland_share": 0.24359,
+      "cropland_km2": 5773.376
+    },
+    "1144": {
+      "cropland_share": 0.394105,
+      "cropland_km2": 6149.798
+    },
+    "1145": {
+      "cropland_share": 0.274122,
+      "cropland_km2": 1042.228
+    },
+    "1146": {
+      "cropland_share": 0.159445,
+      "cropland_km2": 7177.219
+    },
+    "1147": {
+      "cropland_share": 0.008354,
+      "cropland_km2": 88.302
+    },
+    "1148": {
+      "cropland_share": 0.219319,
+      "cropland_km2": 1377.47
+    },
+    "1149": {
+      "cropland_share": 0.355934,
+      "cropland_km2": 1136.497
+    },
+    "1150": {
+      "cropland_share": 0.179477,
+      "cropland_km2": 3689.472
+    },
+    "1151": {
+      "cropland_share": 0.147056,
+      "cropland_km2": 9610.211
+    },
+    "1183": {
+      "cropland_share": 0.182426,
+      "cropland_km2": 9777.725
+    },
+    "1184": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1185": {
+      "cropland_share": 0.573694,
+      "cropland_km2": 13745.604
+    },
+    "1186": {
+      "cropland_share": 0.110015,
+      "cropland_km2": 10681.056
+    },
+    "1187": {
+      "cropland_share": 0.054237,
+      "cropland_km2": 5689.756
+    },
+    "1188": {
+      "cropland_share": 0.007106,
+      "cropland_km2": 300.075
+    },
+    "1189": {
+      "cropland_share": 0.004417,
+      "cropland_km2": 85.38
+    },
+    "1190": {
+      "cropland_share": 0.038216,
+      "cropland_km2": 645.695
+    },
+    "1191": {
+      "cropland_share": 0.033252,
+      "cropland_km2": 1802.518
+    },
+    "1192": {
+      "cropland_share": 0.027311,
+      "cropland_km2": 1566.764
+    },
+    "1193": {
+      "cropland_share": 0.034408,
+      "cropland_km2": 387.361
+    },
+    "1194": {
+      "cropland_share": 0.040186,
+      "cropland_km2": 2283.656
+    },
+    "1195": {
+      "cropland_share": 0.594831,
+      "cropland_km2": 23700.933
+    },
+    "1196": {
+      "cropland_share": 0.177815,
+      "cropland_km2": 22420.532
+    },
+    "1197": {
+      "cropland_share": 0.417635,
+      "cropland_km2": 9119.268
+    },
+    "1198": {
+      "cropland_share": 0.200648,
+      "cropland_km2": 12759.797
+    },
+    "1199": {
+      "cropland_share": 0.494698,
+      "cropland_km2": 8967.022
+    },
+    "1200": {
+      "cropland_share": 0.279892,
+      "cropland_km2": 3721.071
+    },
+    "1201": {
+      "cropland_share": 0.522852,
+      "cropland_km2": 14918.826
+    },
+    "1202": {
+      "cropland_share": 0.115968,
+      "cropland_km2": 7794.229
+    },
+    "1203": {
+      "cropland_share": 0.690697,
+      "cropland_km2": 2617.268
+    },
+    "1205": {
+      "cropland_share": 0.195607,
+      "cropland_km2": 20208.311
+    },
+    "1206": {
+      "cropland_share": 0.375066,
+      "cropland_km2": 65920.357
+    },
+    "1207": {
+      "cropland_share": 0.345538,
+      "cropland_km2": 27990.335
+    },
+    "1208": {
+      "cropland_share": 0.36778,
+      "cropland_km2": 69306.818
+    },
+    "1209": {
+      "cropland_share": 0.354279,
+      "cropland_km2": 11887.338
+    },
+    "1210": {
+      "cropland_share": 0.712932,
+      "cropland_km2": 16491.869
+    },
+    "1211": {
+      "cropland_share": 0.160913,
+      "cropland_km2": 345.305
+    },
+    "1212": {
+      "cropland_share": 0.266563,
+      "cropland_km2": 1595.893
+    },
+    "1213": {
+      "cropland_share": 0.023783,
+      "cropland_km2": 4241.054
+    },
+    "1214": {
+      "cropland_share": 0.005784,
+      "cropland_km2": 1675.574
+    },
+    "1215": {
+      "cropland_share": 0.999024,
+      "cropland_km2": 448.738
+    },
+    "1216": {
+      "cropland_share": 0.012392,
+      "cropland_km2": 966.837
+    },
+    "1217": {
+      "cropland_share": 0.449547,
+      "cropland_km2": 19104.301
+    },
+    "1218": {
+      "cropland_share": 0.711995,
+      "cropland_km2": 26879.82
+    },
+    "1240": {
+      "cropland_share": 0.027639,
+      "cropland_km2": 336.795
+    },
+    "1241": {
+      "cropland_share": 0.031079,
+      "cropland_km2": 1902.588
+    },
+    "1242": {
+      "cropland_share": 0.436086,
+      "cropland_km2": 33168.043
+    },
+    "1243": {
+      "cropland_share": 0.707321,
+      "cropland_km2": 27158.129
+    },
+    "1244": {
+      "cropland_share": 0.795141,
+      "cropland_km2": 43052.396
+    },
+    "1245": {
+      "cropland_share": 0.462059,
+      "cropland_km2": 17346.389
+    },
+    "1246": {
+      "cropland_share": 0.751122,
+      "cropland_km2": 23558.821
+    },
+    "1247": {
+      "cropland_share": 0.523378,
+      "cropland_km2": 10245.171
+    },
+    "1248": {
+      "cropland_share": 0.355857,
+      "cropland_km2": 7242.713
+    },
+    "1249": {
+      "cropland_share": 0.523846,
+      "cropland_km2": 15614.3
+    },
+    "1250": {
+      "cropland_share": 0.676578,
+      "cropland_km2": 18315.961
+    },
+    "1251": {
+      "cropland_share": 0.318913,
+      "cropland_km2": 4154.442
+    },
+    "1252": {
+      "cropland_share": 0.724014,
+      "cropland_km2": 5966.349
+    },
+    "1253": {
+      "cropland_share": 0.493371,
+      "cropland_km2": 6845.663
+    },
+    "1254": {
+      "cropland_share": 0.930596,
+      "cropland_km2": 30380.52
+    },
+    "1255": {
+      "cropland_share": 0.876921,
+      "cropland_km2": 23191.726
+    },
+    "1257": {
+      "cropland_share": 0.664074,
+      "cropland_km2": 14584.296
+    },
+    "1258": {
+      "cropland_share": 0.784488,
+      "cropland_km2": 18193.671
+    },
+    "1259": {
+      "cropland_share": 0.873229,
+      "cropland_km2": 27480.4
+    },
+    "1260": {
+      "cropland_share": 0.910527,
+      "cropland_km2": 16069.415
+    },
+    "1261": {
+      "cropland_share": 0.89111,
+      "cropland_km2": 15063.394
+    },
+    "1263": {
+      "cropland_share": 0.895839,
+      "cropland_km2": 22774.334
+    },
+    "1264": {
+      "cropland_share": 0.967099,
+      "cropland_km2": 25173.645
+    },
+    "1266": {
+      "cropland_share": 0.962037,
+      "cropland_km2": 23046.98
+    },
+    "1267": {
+      "cropland_share": 0.872582,
+      "cropland_km2": 23873.246
+    },
+    "1268": {
+      "cropland_share": 0.873633,
+      "cropland_km2": 17807.37
+    },
+    "1269": {
+      "cropland_share": 0.881827,
+      "cropland_km2": 12304.339
+    },
+    "1270": {
+      "cropland_share": 0.918536,
+      "cropland_km2": 27904.436
+    },
+    "1271": {
+      "cropland_share": 0.846883,
+      "cropland_km2": 16813.315
+    },
+    "1272": {
+      "cropland_share": 0.93296,
+      "cropland_km2": 22210.177
+    },
+    "1273": {
+      "cropland_share": 0.371878,
+      "cropland_km2": 610.984
+    },
+    "1274": {
+      "cropland_share": 0.904169,
+      "cropland_km2": 7376.882
+    },
+    "1276": {
+      "cropland_share": 0.911373,
+      "cropland_km2": 9051.18
+    },
+    "1277": {
+      "cropland_share": 0.773392,
+      "cropland_km2": 19987.235
+    },
+    "1278": {
+      "cropland_share": 0.648718,
+      "cropland_km2": 532.297
+    },
+    "1279": {
+      "cropland_share": 0.009364,
+      "cropland_km2": 4445.75
+    },
+    "1280": {
+      "cropland_share": 0.028405,
+      "cropland_km2": 8954.622
+    },
+    "1281": {
+      "cropland_share": 0.128183,
+      "cropland_km2": 27455.76
+    },
+    "1361": {
+      "cropland_share": 0.537797,
+      "cropland_km2": 32800.907
+    },
+    "1362": {
+      "cropland_share": 0.001009,
+      "cropland_km2": 140.28
+    },
+    "1363": {
+      "cropland_share": 0.025642,
+      "cropland_km2": 5529.023
+    },
+    "1364": {
+      "cropland_share": 0.278851,
+      "cropland_km2": 4538.293
+    },
+    "1372": {
+      "cropland_share": 0.039374,
+      "cropland_km2": 215.773
+    },
+    "1373": {
+      "cropland_share": 0.867406,
+      "cropland_km2": 44223.295
+    },
+    "1374": {
+      "cropland_share": 0.372195,
+      "cropland_km2": 17777.708
+    },
+    "1375": {
+      "cropland_share": 0.367525,
+      "cropland_km2": 19909.512
+    },
+    "1376": {
+      "cropland_share": 0.404667,
+      "cropland_km2": 20371.624
+    },
+    "1377": {
+      "cropland_share": 0.479606,
+      "cropland_km2": 10982.028
+    },
+    "1378": {
+      "cropland_share": 0.510047,
+      "cropland_km2": 7424.962
+    },
+    "1379": {
+      "cropland_share": 0.693606,
+      "cropland_km2": 11013.736
+    },
+    "1380": {
+      "cropland_share": 0.523158,
+      "cropland_km2": 25438.038
+    },
+    "1381": {
+      "cropland_share": 0.4487,
+      "cropland_km2": 16463.657
+    },
+    "1383": {
+      "cropland_share": 0.133025,
+      "cropland_km2": 2326.978
+    },
+    "1384": {
+      "cropland_share": 0.007464,
+      "cropland_km2": 1262.977
+    },
+    "1385": {
+      "cropland_share": 0.008547,
+      "cropland_km2": 548.514
+    },
+    "1386": {
+      "cropland_share": 0.08725,
+      "cropland_km2": 1185.945
+    },
+    "1387": {
+      "cropland_share": 0.185923,
+      "cropland_km2": 1712.418
+    },
+    "1388": {
+      "cropland_share": 0.003981,
+      "cropland_km2": 154.8
+    },
+    "1389": {
+      "cropland_share": 0.324696,
+      "cropland_km2": 6617.644
+    },
+    "1390": {
+      "cropland_share": 0.091067,
+      "cropland_km2": 965.606
+    },
+    "1391": {
+      "cropland_share": 0.049379,
+      "cropland_km2": 660.485
+    },
+    "1392": {
+      "cropland_share": 0.037645,
+      "cropland_km2": 650.568
+    },
+    "1393": {
+      "cropland_share": 0.003792,
+      "cropland_km2": 146.025
+    },
+    "1394": {
+      "cropland_share": 0.008025,
+      "cropland_km2": 137.668
+    },
+    "1395": {
+      "cropland_share": 0.064239,
+      "cropland_km2": 1273.119
+    },
+    "1396": {
+      "cropland_share": 0.038333,
+      "cropland_km2": 351.45
+    },
+    "1397": {
+      "cropland_share": 0.090606,
+      "cropland_km2": 713.279
+    },
+    "1398": {
+      "cropland_share": 0.056021,
+      "cropland_km2": 517.573
+    },
+    "1399": {
+      "cropland_share": 0.159529,
+      "cropland_km2": 32975.891
+    },
+    "1400": {
+      "cropland_share": 0.257918,
+      "cropland_km2": 26984.77
+    },
+    "1401": {
+      "cropland_share": 0.020704,
+      "cropland_km2": 5292.993
+    },
+    "1402": {
+      "cropland_share": 0.202701,
+      "cropland_km2": 35973.349
+    },
+    "1403": {
+      "cropland_share": 0.253652,
+      "cropland_km2": 45353.574
+    },
+    "1404": {
+      "cropland_share": 0.39125,
+      "cropland_km2": 21925.827
+    },
+    "1405": {
+      "cropland_share": 0.482737,
+      "cropland_km2": 73508.975
+    },
+    "1406": {
+      "cropland_share": 0.069817,
+      "cropland_km2": 178174.661
+    },
+    "1407": {
+      "cropland_share": 0.000259,
+      "cropland_km2": 354.002
+    },
+    "1408": {
+      "cropland_share": 0.09554,
+      "cropland_km2": 94767.848
+    },
+    "1409": {
+      "cropland_share": 0.010101,
+      "cropland_km2": 17659.624
+    },
+    "1410": {
+      "cropland_share": 0.254639,
+      "cropland_km2": 204758.748
+    },
+    "1412": {
+      "cropland_share": 0.442124,
+      "cropland_km2": 101288.78
+    },
+    "1413": {
+      "cropland_share": 0.096098,
+      "cropland_km2": 7000.447
+    },
+    "1414": {
+      "cropland_share": 0.166544,
+      "cropland_km2": 36.262
+    },
+    "1416": {
+      "cropland_share": 0.151091,
+      "cropland_km2": 356.863
+    },
+    "1417": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1418": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1419": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1420": {
+      "cropland_share": 0.130367,
+      "cropland_km2": 48.884
+    },
+    "1421": {
+      "cropland_share": 0.158754,
+      "cropland_km2": 1690.228
+    },
+    "1422": {
+      "cropland_share": 0.340816,
+      "cropland_km2": 8827.345
+    },
+    "1423": {
+      "cropland_share": 0.306471,
+      "cropland_km2": 4599.853
+    },
+    "1424": {
+      "cropland_share": 0.720394,
+      "cropland_km2": 285.533
+    },
+    "1426": {
+      "cropland_share": 0.614458,
+      "cropland_km2": 21103.034
+    },
+    "1427": {
+      "cropland_share": 0.446529,
+      "cropland_km2": 17880.966
+    },
+    "1428": {
+      "cropland_share": 0.850764,
+      "cropland_km2": 6620.543
+    },
+    "1429": {
+      "cropland_share": 0.741803,
+      "cropland_km2": 19883.142
+    },
+    "1430": {
+      "cropland_share": 0.734263,
+      "cropland_km2": 2933.926
+    },
+    "1431": {
+      "cropland_share": 0.301382,
+      "cropland_km2": 16029.806
+    },
+    "1432": {
+      "cropland_share": 0.49919,
+      "cropland_km2": 19330.636
+    },
+    "1433": {
+      "cropland_share": 0.617706,
+      "cropland_km2": 30408.556
+    },
+    "1434": {
+      "cropland_share": 0.476028,
+      "cropland_km2": 17472.874
+    },
+    "1435": {
+      "cropland_share": 0.844466,
+      "cropland_km2": 11452.081
+    },
+    "1436": {
+      "cropland_share": 0.785266,
+      "cropland_km2": 10858.339
+    },
+    "1437": {
+      "cropland_share": 0.721854,
+      "cropland_km2": 5598.191
+    },
+    "1438": {
+      "cropland_share": 0.824239,
+      "cropland_km2": 7075.189
+    },
+    "1439": {
+      "cropland_share": 0.579038,
+      "cropland_km2": 1284.416
+    },
+    "1440": {
+      "cropland_share": 0.012494,
+      "cropland_km2": 771.681
+    },
+    "1441": {
+      "cropland_share": 0.009969,
+      "cropland_km2": 134.468
+    },
+    "1442": {
+      "cropland_share": 0.001126,
+      "cropland_km2": 196.033
+    },
+    "1443": {
+      "cropland_share": 0.034922,
+      "cropland_km2": 5589.126
+    },
+    "1444": {
+      "cropland_share": 0.002002,
+      "cropland_km2": 909.24
+    },
+    "1445": {
+      "cropland_share": 0.077536,
+      "cropland_km2": 893.503
+    },
+    "1446": {
+      "cropland_share": 0.112585,
+      "cropland_km2": 1130.594
+    },
+    "1447": {
+      "cropland_share": 0.057303,
+      "cropland_km2": 1150.819
+    },
+    "1448": {
+      "cropland_share": 0.189247,
+      "cropland_km2": 450.019
+    },
+    "1449": {
+      "cropland_share": 0.001862,
+      "cropland_km2": 5.881
+    },
+    "1450": {
+      "cropland_share": 0.008306,
+      "cropland_km2": 312.754
+    },
+    "1451": {
+      "cropland_share": 0.00375,
+      "cropland_km2": 113.607
+    },
+    "1452": {
+      "cropland_share": 0.000736,
+      "cropland_km2": 6.549
+    },
+    "1453": {
+      "cropland_share": 0.024981,
+      "cropland_km2": 367.084
+    },
+    "1454": {
+      "cropland_share": 0.037027,
+      "cropland_km2": 816.664
+    },
+    "1455": {
+      "cropland_share": 0.109552,
+      "cropland_km2": 1613.085
+    },
+    "1456": {
+      "cropland_share": 0.576207,
+      "cropland_km2": 7437.708
+    },
+    "1457": {
+      "cropland_share": 0.46932,
+      "cropland_km2": 6499.774
+    },
+    "1458": {
+      "cropland_share": 0.260715,
+      "cropland_km2": 4804.305
+    },
+    "1459": {
+      "cropland_share": 0.306827,
+      "cropland_km2": 2702.583
+    },
+    "1460": {
+      "cropland_share": 0.019129,
+      "cropland_km2": 268.185
+    },
+    "1461": {
+      "cropland_share": 0.517372,
+      "cropland_km2": 8088.118
+    },
+    "1462": {
+      "cropland_share": 0.759421,
+      "cropland_km2": 11886.476
+    },
+    "1463": {
+      "cropland_share": 0.857338,
+      "cropland_km2": 16622.642
+    },
+    "1464": {
+      "cropland_share": 0.537938,
+      "cropland_km2": 10545.59
+    },
+    "1466": {
+      "cropland_share": 0.362654,
+      "cropland_km2": 4097.781
+    },
+    "1467": {
+      "cropland_share": 0.019362,
+      "cropland_km2": 780.606
+    },
+    "1468": {
+      "cropland_share": 0.397876,
+      "cropland_km2": 2648.455
+    },
+    "1469": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1470": {
+      "cropland_share": 0.036066,
+      "cropland_km2": 66.669
+    },
+    "1471": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1472": {
+      "cropland_share": 0.203644,
+      "cropland_km2": 325.423
+    },
+    "1473": {
+      "cropland_share": 0.666353,
+      "cropland_km2": 72.027
+    },
+    "1474": {
+      "cropland_share": 0.079218,
+      "cropland_km2": 146.768
+    },
+    "1475": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1476": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1477": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1478": {
+      "cropland_share": 0.244184,
+      "cropland_km2": 134.094
+    },
+    "1479": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1480": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1482": {
+      "cropland_share": 0.261126,
+      "cropland_km2": 146.408
+    },
+    "1483": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1484": {
+      "cropland_share": 0.962529,
+      "cropland_km2": 453.337
+    },
+    "1487": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1488": {
+      "cropland_share": 0.001932,
+      "cropland_km2": 32.697
+    },
+    "1489": {
+      "cropland_share": 0.206848,
+      "cropland_km2": 1.995
+    },
+    "1491": {
+      "cropland_share": 0.12459,
+      "cropland_km2": 11602.89
+    },
+    "1492": {
+      "cropland_share": 0.397151,
+      "cropland_km2": 14080.036
+    },
+    "1493": {
+      "cropland_share": 0.000729,
+      "cropland_km2": 60.351
+    },
+    "1494": {
+      "cropland_share": 0.771794,
+      "cropland_km2": 24526.79
+    },
+    "1495": {
+      "cropland_share": 0.658214,
+      "cropland_km2": 16832.771
+    },
+    "1496": {
+      "cropland_share": 0.46742,
+      "cropland_km2": 14920.195
+    },
+    "1497": {
+      "cropland_share": 0.076778,
+      "cropland_km2": 328.135
+    },
+    "1498": {
+      "cropland_share": 0.397305,
+      "cropland_km2": 11046.399
+    },
+    "1499": {
+      "cropland_share": 0.113797,
+      "cropland_km2": 1227.537
+    },
+    "1501": {
+      "cropland_share": 0.479748,
+      "cropland_km2": 20270.06
+    },
+    "1502": {
+      "cropland_share": 0.583119,
+      "cropland_km2": 26629.957
+    },
+    "1503": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1504": {
+      "cropland_share": 0.39075,
+      "cropland_km2": 10851.792
+    },
+    "1505": {
+      "cropland_share": 0.263713,
+      "cropland_km2": 4254.983
+    },
+    "1506": {
+      "cropland_share": 0.413506,
+      "cropland_km2": 14074.931
+    },
+    "1507": {
+      "cropland_share": 0.605603,
+      "cropland_km2": 26189.747
+    },
+    "1508": {
+      "cropland_share": 0.787264,
+      "cropland_km2": 25796.325
+    },
+    "1509": {
+      "cropland_share": 0.874488,
+      "cropland_km2": 25526.887
+    },
+    "1510": {
+      "cropland_share": 0.528844,
+      "cropland_km2": 16146.087
+    },
+    "1511": {
+      "cropland_share": 0.219706,
+      "cropland_km2": 326.115
+    },
+    "1512": {
+      "cropland_share": 0.369532,
+      "cropland_km2": 834.643
+    },
+    "1513": {
+      "cropland_share": 0.3668,
+      "cropland_km2": 1017.174
+    },
+    "1514": {
+      "cropland_share": 0.156819,
+      "cropland_km2": 118.502
+    },
+    "1515": {
+      "cropland_share": 0.054606,
+      "cropland_km2": 524.701
+    },
+    "1516": {
+      "cropland_share": 0.738079,
+      "cropland_km2": 28981.14
+    },
+    "1517": {
+      "cropland_share": 0.276866,
+      "cropland_km2": 7206.169
+    },
+    "1518": {
+      "cropland_share": 0.677938,
+      "cropland_km2": 8198.393
+    },
+    "1519": {
+      "cropland_share": 0.539165,
+      "cropland_km2": 17122.782
+    },
+    "1520": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1521": {
+      "cropland_share": 0.264393,
+      "cropland_km2": 6099.323
+    },
+    "1522": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1523": {
+      "cropland_share": 0.604824,
+      "cropland_km2": 7757.148
+    },
+    "1524": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1526": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1527": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1528": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1536": {
+      "cropland_share": 0.034284,
+      "cropland_km2": 4944.487
+    },
+    "1537": {
+      "cropland_share": 0.058012,
+      "cropland_km2": 6984.689
+    },
+    "1538": {
+      "cropland_share": 0.210972,
+      "cropland_km2": 15525.73
+    },
+    "1539": {
+      "cropland_share": 0.339184,
+      "cropland_km2": 12018.353
+    },
+    "1540": {
+      "cropland_share": 0.349686,
+      "cropland_km2": 3156.32
+    },
+    "1541": {
+      "cropland_share": 0.356517,
+      "cropland_km2": 3641.857
+    },
+    "1542": {
+      "cropland_share": 0.68359,
+      "cropland_km2": 4919.956
+    },
+    "1543": {
+      "cropland_share": 0.481557,
+      "cropland_km2": 4837.732
+    },
+    "1544": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1545": {
+      "cropland_share": 0.000891,
+      "cropland_km2": 1.195
+    },
+    "1546": {
+      "cropland_share": 0.306838,
+      "cropland_km2": 20083.508
+    },
+    "1547": {
+      "cropland_share": 0.182678,
+      "cropland_km2": 9065.151
+    },
+    "1548": {
+      "cropland_share": 0.158743,
+      "cropland_km2": 2201.634
+    },
+    "1549": {
+      "cropland_share": 0.735271,
+      "cropland_km2": 2438.333
+    },
+    "1550": {
+      "cropland_share": 0.495056,
+      "cropland_km2": 452.984
+    },
+    "1552": {
+      "cropland_share": 0.725285,
+      "cropland_km2": 544.822
+    },
+    "1553": {
+      "cropland_share": 0.673453,
+      "cropland_km2": 1042.418
+    },
+    "1554": {
+      "cropland_share": 0.261681,
+      "cropland_km2": 6718.461
+    },
+    "1555": {
+      "cropland_share": 0.409782,
+      "cropland_km2": 9138.453
+    },
+    "1556": {
+      "cropland_share": 0.172477,
+      "cropland_km2": 3696.083
+    },
+    "1557": {
+      "cropland_share": 0.256521,
+      "cropland_km2": 9120.308
+    },
+    "1558": {
+      "cropland_share": 0.232192,
+      "cropland_km2": 8053.217
+    },
+    "1559": {
+      "cropland_share": 0.301306,
+      "cropland_km2": 4072.505
+    },
+    "1560": {
+      "cropland_share": 0.268296,
+      "cropland_km2": 8357.478
+    },
+    "1561": {
+      "cropland_share": 0.298546,
+      "cropland_km2": 9348.721
+    },
+    "1562": {
+      "cropland_share": 0.261698,
+      "cropland_km2": 9943.627
+    },
+    "1563": {
+      "cropland_share": 0.412961,
+      "cropland_km2": 14080.262
+    },
+    "1564": {
+      "cropland_share": 0.189424,
+      "cropland_km2": 4533.94
+    },
+    "1565": {
+      "cropland_share": 0.244839,
+      "cropland_km2": 19781.935
+    },
+    "1566": {
+      "cropland_share": 0.325461,
+      "cropland_km2": 2119.801
+    },
+    "1568": {
+      "cropland_share": 0.151484,
+      "cropland_km2": 2903.442
+    },
+    "1569": {
+      "cropland_share": 0.597554,
+      "cropland_km2": 7417.041
+    },
+    "1570": {
+      "cropland_share": 0.554768,
+      "cropland_km2": 9765.061
+    },
+    "1571": {
+      "cropland_share": 0.491316,
+      "cropland_km2": 4287.219
+    },
+    "1572": {
+      "cropland_share": 0.587505,
+      "cropland_km2": 10541.488
+    },
+    "1573": {
+      "cropland_share": 0.451842,
+      "cropland_km2": 6008.011
+    },
+    "1574": {
+      "cropland_share": 0.422797,
+      "cropland_km2": 8156.025
+    },
+    "1575": {
+      "cropland_share": 0.698365,
+      "cropland_km2": 1542.058
+    },
+    "1577": {
+      "cropland_share": 0.001542,
+      "cropland_km2": 104.317
+    },
+    "1578": {
+      "cropland_share": 0.428714,
+      "cropland_km2": 5900.91
+    },
+    "1579": {
+      "cropland_share": 0.000636,
+      "cropland_km2": 268.102
+    },
+    "1580": {
+      "cropland_share": 0.001618,
+      "cropland_km2": 458.909
+    },
+    "1581": {
+      "cropland_share": 0.021472,
+      "cropland_km2": 1698.393
+    },
+    "1582": {
+      "cropland_share": 0.00209,
+      "cropland_km2": 412.855
+    },
+    "1583": {
+      "cropland_share": 0.008074,
+      "cropland_km2": 1181.62
+    },
+    "1584": {
+      "cropland_share": 0.00147,
+      "cropland_km2": 76.283
+    },
+    "1585": {
+      "cropland_share": 0.007508,
+      "cropland_km2": 348.771
+    },
+    "1586": {
+      "cropland_share": 0.056297,
+      "cropland_km2": 3261.385
+    },
+    "1587": {
+      "cropland_share": 0.061393,
+      "cropland_km2": 1835.975
+    },
+    "1588": {
+      "cropland_share": 0.194175,
+      "cropland_km2": 2890.632
+    },
+    "1589": {
+      "cropland_share": 0.281598,
+      "cropland_km2": 2747.805
+    },
+    "1590": {
+      "cropland_share": 0.004585,
+      "cropland_km2": 406.936
+    },
+    "1591": {
+      "cropland_share": 0.002728,
+      "cropland_km2": 314.333
+    },
+    "1592": {
+      "cropland_share": 0.003297,
+      "cropland_km2": 270.063
+    },
+    "1593": {
+      "cropland_share": 0.024775,
+      "cropland_km2": 1196.859
+    },
+    "1594": {
+      "cropland_share": 0.022552,
+      "cropland_km2": 1026.854
+    },
+    "1595": {
+      "cropland_share": 0.055864,
+      "cropland_km2": 4312.116
+    },
+    "1596": {
+      "cropland_share": 0.035759,
+      "cropland_km2": 1278.802
+    },
+    "1597": {
+      "cropland_share": 0.030292,
+      "cropland_km2": 2062.27
+    },
+    "1598": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1602": {
+      "cropland_share": 0.166363,
+      "cropland_km2": 35247.039
+    },
+    "1603": {
+      "cropland_share": 0.139143,
+      "cropland_km2": 29705.713
+    },
+    "1604": {
+      "cropland_share": 0.074894,
+      "cropland_km2": 833.082
+    },
+    "1605": {
+      "cropland_share": 0.024103,
+      "cropland_km2": 1330.398
+    },
+    "1607": {
+      "cropland_share": 0.507571,
+      "cropland_km2": 22061.601
+    },
+    "1608": {
+      "cropland_share": 0.589449,
+      "cropland_km2": 19106.981
+    },
+    "1609": {
+      "cropland_share": 0.643713,
+      "cropland_km2": 18383.749
+    },
+    "1610": {
+      "cropland_share": 0.739272,
+      "cropland_km2": 34173.58
+    },
+    "1611": {
+      "cropland_share": 0.702503,
+      "cropland_km2": 10889.673
+    },
+    "1612": {
+      "cropland_share": 0.614187,
+      "cropland_km2": 28254.269
+    },
+    "1613": {
+      "cropland_share": 0.298566,
+      "cropland_km2": 7164.992
+    },
+    "1614": {
+      "cropland_share": 0.215745,
+      "cropland_km2": 16.693
+    },
+    "1615": {
+      "cropland_share": 0.422555,
+      "cropland_km2": 14.425
+    },
+    "1616": {
+      "cropland_share": 0.496615,
+      "cropland_km2": 5063.068
+    },
+    "1617": {
+      "cropland_share": 0.263187,
+      "cropland_km2": 2009.412
+    },
+    "1618": {
+      "cropland_share": 0.499351,
+      "cropland_km2": 23940.367
+    },
+    "1619": {
+      "cropland_share": 0.353046,
+      "cropland_km2": 11423.312
+    },
+    "1620": {
+      "cropland_share": 0.636675,
+      "cropland_km2": 26638.915
+    },
+    "1621": {
+      "cropland_share": 0.575021,
+      "cropland_km2": 50872.698
+    },
+    "1622": {
+      "cropland_share": 0.30164,
+      "cropland_km2": 9273.943
+    },
+    "1623": {
+      "cropland_share": 0.582875,
+      "cropland_km2": 55059.116
+    },
+    "1624": {
+      "cropland_share": 0.432503,
+      "cropland_km2": 10064.575
+    },
+    "1625": {
+      "cropland_share": 0.426497,
+      "cropland_km2": 4931.596
+    },
+    "1626": {
+      "cropland_share": 0.140663,
+      "cropland_km2": 1529.527
+    },
+    "1627": {
+      "cropland_share": 0.240303,
+      "cropland_km2": 1318.452
+    },
+    "1628": {
+      "cropland_share": 0.123668,
+      "cropland_km2": 1110.922
+    },
+    "1629": {
+      "cropland_share": 0.655235,
+      "cropland_km2": 4004.936
+    },
+    "1630": {
+      "cropland_share": 0.601817,
+      "cropland_km2": 3208.144
+    },
+    "1631": {
+      "cropland_share": 0.611117,
+      "cropland_km2": 48503.466
+    },
+    "1632": {
+      "cropland_share": 0.362169,
+      "cropland_km2": 2880.371
+    },
+    "1647": {
+      "cropland_share": 0.44647,
+      "cropland_km2": 3275.878
+    },
+    "1648": {
+      "cropland_share": 0.399778,
+      "cropland_km2": 3583.683
+    },
+    "1649": {
+      "cropland_share": 0.455931,
+      "cropland_km2": 4853.85
+    },
+    "1650": {
+      "cropland_share": 0.13085,
+      "cropland_km2": 1379.026
+    },
+    "1651": {
+      "cropland_share": 0.864073,
+      "cropland_km2": 305.188
+    },
+    "1652": {
+      "cropland_share": 1.0,
+      "cropland_km2": 667.708
+    },
+    "1653": {
+      "cropland_share": 0.224827,
+      "cropland_km2": 11990.122
+    },
+    "1654": {
+      "cropland_share": 0.177163,
+      "cropland_km2": 8941.778
+    },
+    "1655": {
+      "cropland_share": 0.504279,
+      "cropland_km2": 26538.913
+    },
+    "1656": {
+      "cropland_share": 0.71398,
+      "cropland_km2": 14997.88
+    },
+    "1657": {
+      "cropland_share": 0.639283,
+      "cropland_km2": 35181.549
+    },
+    "1658": {
+      "cropland_share": 0.525826,
+      "cropland_km2": 14281.063
+    },
+    "1659": {
+      "cropland_share": 0.518629,
+      "cropland_km2": 13512.628
+    },
+    "1660": {
+      "cropland_share": 0.314598,
+      "cropland_km2": 1818.616
+    },
+    "1661": {
+      "cropland_share": 0.403172,
+      "cropland_km2": 1964.723
+    },
+    "1662": {
+      "cropland_share": 0.595009,
+      "cropland_km2": 14086.471
+    },
+    "1663": {
+      "cropland_share": 0.523074,
+      "cropland_km2": 37140.567
+    },
+    "1664": {
+      "cropland_share": 0.52592,
+      "cropland_km2": 27983.567
+    },
+    "1665": {
+      "cropland_share": 0.287946,
+      "cropland_km2": 5654.439
+    },
+    "1666": {
+      "cropland_share": 0.463071,
+      "cropland_km2": 7884.233
+    },
+    "1667": {
+      "cropland_share": 0.627802,
+      "cropland_km2": 19590.829
+    },
+    "1668": {
+      "cropland_share": 0.387688,
+      "cropland_km2": 13020.229
+    },
+    "1669": {
+      "cropland_share": 0.439896,
+      "cropland_km2": 16688.205
+    },
+    "1670": {
+      "cropland_share": 0.549609,
+      "cropland_km2": 39403.221
+    },
+    "1671": {
+      "cropland_share": 0.447385,
+      "cropland_km2": 20205.221
+    },
+    "1672": {
+      "cropland_share": 0.572567,
+      "cropland_km2": 23231.462
+    },
+    "1673": {
+      "cropland_share": 0.439936,
+      "cropland_km2": 17528.355
+    },
+    "1674": {
+      "cropland_share": 0.198153,
+      "cropland_km2": 34891.137
+    },
+    "1675": {
+      "cropland_share": 0.13264,
+      "cropland_km2": 28741.091
+    },
+    "1676": {
+      "cropland_share": 0.207175,
+      "cropland_km2": 77861.204
+    },
+    "1677": {
+      "cropland_share": 0.612426,
+      "cropland_km2": 109449.513
+    },
+    "1678": {
+      "cropland_share": 0.532497,
+      "cropland_km2": 113858.191
+    },
+    "1679": {
+      "cropland_share": 0.359477,
+      "cropland_km2": 52402.971
+    },
+    "1680": {
+      "cropland_share": 0.581737,
+      "cropland_km2": 61930.158
+    },
+    "1681": {
+      "cropland_share": 0.280852,
+      "cropland_km2": 32807.231
+    },
+    "1682": {
+      "cropland_share": 0.215161,
+      "cropland_km2": 27249.566
+    },
+    "1683": {
+      "cropland_share": 0.078574,
+      "cropland_km2": 1865.615
+    },
+    "1684": {
+      "cropland_share": 0.013119,
+      "cropland_km2": 318.724
+    },
+    "1685": {
+      "cropland_share": 0.033158,
+      "cropland_km2": 2905.407
+    },
+    "1686": {
+      "cropland_share": 0.01863,
+      "cropland_km2": 5489.059
+    },
+    "1687": {
+      "cropland_share": 0.131881,
+      "cropland_km2": 54384.154
+    },
+    "1688": {
+      "cropland_share": 0.020913,
+      "cropland_km2": 6595.094
+    },
+    "1689": {
+      "cropland_share": 0.234876,
+      "cropland_km2": 161735.215
+    },
+    "1690": {
+      "cropland_share": 0.000237,
+      "cropland_km2": 366.091
+    },
+    "1691": {
+      "cropland_share": 0.211969,
+      "cropland_km2": 26336.12
+    },
+    "1692": {
+      "cropland_share": 0.244516,
+      "cropland_km2": 30447.865
+    },
+    "1693": {
+      "cropland_share": 0.078277,
+      "cropland_km2": 10507.673
+    },
+    "1694": {
+      "cropland_share": 0.055037,
+      "cropland_km2": 8470.788
+    },
+    "1695": {
+      "cropland_share": 0.189684,
+      "cropland_km2": 29030.473
+    },
+    "1696": {
+      "cropland_share": 0.158678,
+      "cropland_km2": 12870.89
+    },
+    "1697": {
+      "cropland_share": 0.203825,
+      "cropland_km2": 26765.144
+    },
+    "1698": {
+      "cropland_share": 0.077857,
+      "cropland_km2": 8276.223
+    },
+    "1699": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1700": {
+      "cropland_share": 0.370928,
+      "cropland_km2": 10494.577
+    },
+    "1701": {
+      "cropland_share": 0.643212,
+      "cropland_km2": 3509.449
+    },
+    "1702": {
+      "cropland_share": 0.19262,
+      "cropland_km2": 3939.313
+    },
+    "1703": {
+      "cropland_share": 0.018307,
+      "cropland_km2": 240.797
+    },
+    "1704": {
+      "cropland_share": 0.00672,
+      "cropland_km2": 22.361
+    },
+    "1705": {
+      "cropland_share": 0.009082,
+      "cropland_km2": 203.844
+    },
+    "1706": {
+      "cropland_share": 0.099748,
+      "cropland_km2": 25217.743
+    },
+    "1707": {
+      "cropland_share": 0.131066,
+      "cropland_km2": 2498.755
+    },
+    "1708": {
+      "cropland_share": 0.028749,
+      "cropland_km2": 6159.031
+    },
+    "1709": {
+      "cropland_share": 0.069543,
+      "cropland_km2": 17568.11
+    },
+    "1710": {
+      "cropland_share": 0.016484,
+      "cropland_km2": 4715.599
+    },
+    "1711": {
+      "cropland_share": 0.135477,
+      "cropland_km2": 36481.218
+    },
+    "1712": {
+      "cropland_share": 0.345625,
+      "cropland_km2": 68045.197
+    },
+    "1713": {
+      "cropland_share": 0.441476,
+      "cropland_km2": 88892.295
+    },
+    "1714": {
+      "cropland_share": 0.517709,
+      "cropland_km2": 109677.523
+    },
+    "1715": {
+      "cropland_share": 0.245745,
+      "cropland_km2": 44448.977
+    },
+    "1716": {
+      "cropland_share": 0.867556,
+      "cropland_km2": 126142.365
+    },
+    "1717": {
+      "cropland_share": 0.388156,
+      "cropland_km2": 70054.415
+    },
+    "1718": {
+      "cropland_share": 0.479696,
+      "cropland_km2": 68875.724
+    },
+    "1719": {
+      "cropland_share": 0.807331,
+      "cropland_km2": 117749.534
+    },
+    "1720": {
+      "cropland_share": 0.222074,
+      "cropland_km2": 23224.067
+    },
+    "1721": {
+      "cropland_share": 0.24726,
+      "cropland_km2": 34033.384
+    },
+    "1722": {
+      "cropland_share": 0.191492,
+      "cropland_km2": 20961.487
+    },
+    "1723": {
+      "cropland_share": 0.06315,
+      "cropland_km2": 3957.03
+    },
+    "1724": {
+      "cropland_share": 0.774285,
+      "cropland_km2": 72474.107
+    },
+    "1725": {
+      "cropland_share": 0.365367,
+      "cropland_km2": 51.272
+    },
+    "1726": {
+      "cropland_share": 0.366549,
+      "cropland_km2": 62.965
+    },
+    "1727": {
+      "cropland_share": 1.0,
+      "cropland_km2": 4111.191
+    },
+    "1728": {
+      "cropland_share": 0.306524,
+      "cropland_km2": 257.438
+    },
+    "1729": {
+      "cropland_share": 0.211583,
+      "cropland_km2": 2166.741
+    },
+    "1730": {
+      "cropland_share": 0.811028,
+      "cropland_km2": 375.527
+    },
+    "1731": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1735": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1738": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1739": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1744": {
+      "cropland_share": 0.012354,
+      "cropland_km2": 507.34
+    },
+    "1745": {
+      "cropland_share": 0.118714,
+      "cropland_km2": 2940.7
+    },
+    "1746": {
+      "cropland_share": 0.323202,
+      "cropland_km2": 6846.573
+    },
+    "1747": {
+      "cropland_share": 0.050772,
+      "cropland_km2": 116.238
+    },
+    "1748": {
+      "cropland_share": 0.630384,
+      "cropland_km2": 443.242
+    },
+    "1749": {
+      "cropland_share": 0.845445,
+      "cropland_km2": 13455.221
+    },
+    "1750": {
+      "cropland_share": 0.897328,
+      "cropland_km2": 992.724
+    },
+    "1752": {
+      "cropland_share": 0.002462,
+      "cropland_km2": 420.218
+    },
+    "1754": {
+      "cropland_share": 0.269784,
+      "cropland_km2": 1268.022
+    },
+    "1759": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1763": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1765": {
+      "cropland_share": 0.00095,
+      "cropland_km2": 354.464
+    },
+    "1766": {
+      "cropland_share": 0.077907,
+      "cropland_km2": 958.752
+    },
+    "1767": {
+      "cropland_share": 0.896191,
+      "cropland_km2": 6100.952
+    },
+    "1768": {
+      "cropland_share": 0.018648,
+      "cropland_km2": 732.541
+    },
+    "1769": {
+      "cropland_share": 0.50322,
+      "cropland_km2": 9757.059
+    },
+    "1770": {
+      "cropland_share": 0.22631,
+      "cropland_km2": 4373.835
+    },
+    "1771": {
+      "cropland_share": 0.19978,
+      "cropland_km2": 4028.408
+    },
+    "1772": {
+      "cropland_share": 0.001498,
+      "cropland_km2": 23.975
+    },
+    "1773": {
+      "cropland_share": 0.077226,
+      "cropland_km2": 729.911
+    },
+    "1774": {
+      "cropland_share": 0.504205,
+      "cropland_km2": 9676.939
+    },
+    "1775": {
+      "cropland_share": 0.647185,
+      "cropland_km2": 7962.815
+    },
+    "1776": {
+      "cropland_share": 0.332957,
+      "cropland_km2": 9630.354
+    },
+    "1777": {
+      "cropland_share": 0.166932,
+      "cropland_km2": 14785.687
+    },
+    "1778": {
+      "cropland_share": 0.233506,
+      "cropland_km2": 20417.643
+    },
+    "1779": {
+      "cropland_share": 0.149892,
+      "cropland_km2": 18927.505
+    },
+    "1780": {
+      "cropland_share": 0.02502,
+      "cropland_km2": 6298.137
+    },
+    "1781": {
+      "cropland_share": 0.000976,
+      "cropland_km2": 177.547
+    },
+    "1782": {
+      "cropland_share": 0.378821,
+      "cropland_km2": 49500.107
+    },
+    "1783": {
+      "cropland_share": 0.313173,
+      "cropland_km2": 72621.88
+    },
+    "1784": {
+      "cropland_share": 0.138843,
+      "cropland_km2": 355.206
+    },
+    "1785": {
+      "cropland_share": 0.255484,
+      "cropland_km2": 6166.104
+    },
+    "1786": {
+      "cropland_share": 0.433207,
+      "cropland_km2": 14266.306
+    },
+    "1788": {
+      "cropland_share": 0.719562,
+      "cropland_km2": 28308.862
+    },
+    "1789": {
+      "cropland_share": 0.53054,
+      "cropland_km2": 19361.065
+    },
+    "1790": {
+      "cropland_share": 0.567489,
+      "cropland_km2": 41005.515
+    },
+    "1791": {
+      "cropland_share": 0.484109,
+      "cropland_km2": 12220.426
+    },
+    "1792": {
+      "cropland_share": 0.718743,
+      "cropland_km2": 16697.241
+    },
+    "1793": {
+      "cropland_share": 0.628102,
+      "cropland_km2": 25447.522
+    },
+    "1794": {
+      "cropland_share": 0.630744,
+      "cropland_km2": 37369.681
+    },
+    "1795": {
+      "cropland_share": 0.915362,
+      "cropland_km2": 36105.008
+    },
+    "1797": {
+      "cropland_share": 0.699998,
+      "cropland_km2": 3435.553
+    },
+    "1798": {
+      "cropland_share": 0.088887,
+      "cropland_km2": 4425.598
+    },
+    "1799": {
+      "cropland_share": 0.733735,
+      "cropland_km2": 1902.459
+    },
+    "1800": {
+      "cropland_share": 0.171174,
+      "cropland_km2": 2747.97
+    },
+    "1801": {
+      "cropland_share": 0.489996,
+      "cropland_km2": 10867.902
+    },
+    "1802": {
+      "cropland_share": 0.285161,
+      "cropland_km2": 5204.036
+    },
+    "1803": {
+      "cropland_share": 0.757571,
+      "cropland_km2": 13797.204
+    },
+    "1804": {
+      "cropland_share": 0.081228,
+      "cropland_km2": 1481.143
+    },
+    "1805": {
+      "cropland_share": 0.244083,
+      "cropland_km2": 48837.888
+    },
+    "1806": {
+      "cropland_share": 0.397714,
+      "cropland_km2": 60568.252
+    },
+    "1807": {
+      "cropland_share": 0.344863,
+      "cropland_km2": 66958.217
+    },
+    "1811": {
+      "cropland_share": 0.259016,
+      "cropland_km2": 4213.661
+    },
+    "1813": {
+      "cropland_share": 0.512807,
+      "cropland_km2": 38326.821
+    },
+    "1815": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1816": {
+      "cropland_share": 0.002012,
+      "cropland_km2": 132.813
+    },
+    "1817": {
+      "cropland_share": 0.349237,
+      "cropland_km2": 4354.434
+    },
+    "1818": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1819": {
+      "cropland_share": 0.258356,
+      "cropland_km2": 11026.862
+    },
+    "1822": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1823": {
+      "cropland_share": 0.0,
+      "cropland_km2": 0.0
+    },
+    "1824": {
+      "cropland_share": 0.036891,
+      "cropland_km2": 249.728
+    },
+    "1825": {
+      "cropland_share": 0.001298,
+      "cropland_km2": 193.858
+    },
+    "1826": {
+      "cropland_share": 0.423769,
+      "cropland_km2": 6488.581
+    },
+    "1827": {
+      "cropland_share": 0.646657,
+      "cropland_km2": 32104.136
+    },
+    "1828": {
+      "cropland_share": 0.171184,
+      "cropland_km2": 43251.837
+    },
+    "1829": {
+      "cropland_share": 0.566492,
+      "cropland_km2": 96452.277
+    },
+    "1830": {
+      "cropland_share": 0.780651,
+      "cropland_km2": 44791.377
+    },
+    "1831": {
+      "cropland_share": 0.623105,
+      "cropland_km2": 29668.896
+    },
+    "1832": {
+      "cropland_share": 0.783347,
+      "cropland_km2": 30457.286
+    },
+    "1833": {
+      "cropland_share": 0.942395,
+      "cropland_km2": 8205.626
+    },
+    "1834": {
+      "cropland_share": 0.897333,
+      "cropland_km2": 29957.648
+    },
+    "1835": {
+      "cropland_share": 0.43346,
+      "cropland_km2": 41837.341
+    },
+    "1836": {
+      "cropland_share": 0.037876,
+      "cropland_km2": 11152.335
+    },
+    "1837": {
+      "cropland_share": 0.183533,
+      "cropland_km2": 1197.734
+    },
+    "1838": {
+      "cropland_share": 0.590165,
+      "cropland_km2": 6263.292
+    },
+    "1839": {
+      "cropland_share": 0.919343,
+      "cropland_km2": 1826.172
+    },
+    "1840": {
+      "cropland_share": 0.818548,
+      "cropland_km2": 5176.26
+    },
+    "1841": {
+      "cropland_share": 0.165543,
+      "cropland_km2": 383.529
+    },
+    "1842": {
+      "cropland_share": 0.090937,
+      "cropland_km2": 787.76
+    },
+    "1843": {
+      "cropland_share": 0.739442,
+      "cropland_km2": 67110.249
+    },
+    "1845": {
+      "cropland_share": 0.823065,
+      "cropland_km2": 57614.643
+    },
+    "1846": {
+      "cropland_share": 0.627836,
+      "cropland_km2": 85761.373
+    },
+    "1847": {
+      "cropland_share": 0.605554,
+      "cropland_km2": 55331.548
+    },
+    "1848": {
+      "cropland_share": 0.881657,
+      "cropland_km2": 34471.078
+    },
+    "1849": {
+      "cropland_share": 0.629162,
+      "cropland_km2": 71134.795
+    },
+    "1850": {
+      "cropland_share": 0.143298,
+      "cropland_km2": 4068.077
+    },
+    "1851": {
+      "cropland_share": 0.614937,
+      "cropland_km2": 8309.533
+    },
+    "1852": {
+      "cropland_share": 0.334087,
+      "cropland_km2": 14427.886
+    },
+    "1853": {
+      "cropland_share": 0.775442,
+      "cropland_km2": 12601.435
+    },
+    "1854": {
+      "cropland_share": 0.479826,
+      "cropland_km2": 15823.719
+    },
+    "1855": {
+      "cropland_share": 0.219766,
+      "cropland_km2": 12459.392
+    },
+    "1856": {
+      "cropland_share": 0.198527,
+      "cropland_km2": 12526.502
+    },
+    "1857": {
+      "cropland_share": 0.074288,
+      "cropland_km2": 11026.803
+    }
+  },
+  "goods": {
+    "oil": {
+      "name": "Fossil Fuels",
+      "base_price_usd": 1000,
+      "gdp_demand_share": 0.045,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "steel": {
+      "name": "Steel",
+      "base_price_usd": 600,
+      "gdp_demand_share": 0.025,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "aluminium": {
+      "name": "Light Metals",
+      "base_price_usd": 1500,
+      "gdp_demand_share": 0.012,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "chromium": {
+      "name": "Precious Metals",
+      "base_price_usd": 50000,
+      "gdp_demand_share": 0.003,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "tungsten": {
+      "name": "Technology Metals",
+      "base_price_usd": 20000,
+      "gdp_demand_share": 0.006,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "rubber": {
+      "name": "Rubber",
+      "base_price_usd": 2000,
+      "gdp_demand_share": 0.004,
+      "unit": "standardized market bundle",
+      "capacity_unit": "RU; MD source capacity points"
+    },
+    "microchips": {
+      "name": "Microchips",
+      "base_price_usd": 10000,
+      "gdp_demand_share": 0.012,
+      "unit": "standardized market bundle",
+      "capacity_unit": "building production capacity"
+    },
+    "composites": {
+      "name": "Advanced Composites",
+      "base_price_usd": 8000,
+      "gdp_demand_share": 0.006,
+      "unit": "standardized market bundle",
+      "capacity_unit": "building production capacity"
+    },
+    "food": {
+      "name": "Food",
+      "base_price_usd": 12,
+      "gdp_demand_share": 0,
+      "unit": "person-month food basket",
+      "capacity_unit": "building production capacity"
+    },
+    "manufactured_goods": {
+      "name": "Manufactured Goods",
+      "base_price_usd": 10000,
+      "gdp_demand_share": 0.14,
+      "unit": "standardized market bundle",
+      "capacity_unit": "building production capacity"
+    }
+  },
+  "buildings": {
+    "industrial_complex": {
+      "workers": 206000,
+      "output": "manufactured_goods",
+      "output_capacity": 1,
+      "inputs": {
+        "steel": 0.08,
+        "aluminium": 0.03,
+        "rubber": 0.02,
+        "microchips": 0.02
+      },
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "arms_factory": {
+      "workers": 18800,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "dockyard": {
+      "workers": 18800,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "offices": {
+      "workers": 473000,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "agriculture_district": {
+      "workers": 188000,
+      "output": "food",
+      "output_capacity": 1,
+      "inputs": {
+        "oil": 0.03
+      },
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "microchip_plant": {
+      "workers": 37500,
+      "output": "microchips",
+      "output_capacity": 1,
+      "inputs": {
+        "tungsten": 0.06,
+        "chromium": 0.02
+      },
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "composite_plant": {
+      "workers": 37500,
+      "output": "composites",
+      "output_capacity": 1,
+      "inputs": {
+        "oil": 0.06,
+        "aluminium": 0.03
+      },
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "synthetic_refinery": {
+      "workers": 184000,
+      "output": "oil",
+      "output_capacity": 0.1,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "fossil_powerplant": {
+      "workers": 7500,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "nuclear_reactor": {
+      "workers": 115000,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "renewable_energy_infra": {
+      "workers": 22500,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "infrastructure": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "internet_station": {
+      "workers": 12000,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "rail_terminal": {
+      "workers": 15000,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "air_base": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "anti_air_building": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "radar_station": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "fuel_silo": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "rocket_site": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "energy_infrastructure": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "industrial_infrastructure": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "enrichment_facility": {
+      "workers": 0,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {},
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    },
+    "data_center": {
+      "workers": 10000,
+      "output": "",
+      "output_capacity": 0,
+      "inputs": {
+        "microchips": 0.015
+      },
+      "electricity_mw": null,
+      "technology_modifiers": {},
+      "operating_expense_share": 0.02
+    }
+  },
+  "price_monthly_limit": 0.025,
+  "price_response": 0.12,
+  "price_minimum_factor": 0.35,
+  "price_maximum_factor": 4.0,
+  "initial_supply_margin": 1.08,
+  "private_import_budget_gdp_share": 0.55,
+  "base_productivity_growth": 0.012,
+  "education_productivity_growth": 0.008,
+  "quality_adjustment": 0.02,
+  "quality_monthly_limit": 0.6,
+  "education_maintenance": [
+    1.0,
+    5.0
+  ],
+  "healthcare_maintenance": [
+    1.0,
+    7.0
+  ],
+  "health_growth_per_quality_point": 0.0001,
+  "food_stress_adjustment": 0.15,
+  "food_growth_penalty": 0.06,
+  "employment_adjustment": 0.12,
+  "frictional_unemployment": 0.02,
+  "budget": {
+    "population_tax": 22.0,
+    "corporate_tax": 22.0,
+    "military": 2.0,
+    "administration": 1.5,
+    "security": 1.0,
+    "education": 4.0,
+    "healthcare": 5.0,
+    "welfare": 3.5,
+    "research": 1.0
+  },
+  "budget_limits": {
+    "population_tax": 60.0,
+    "corporate_tax": 60.0,
+    "military": 15.0,
+    "administration": 8.0,
+    "security": 8.0,
+    "education": 10.0,
+    "healthcare": 15.0,
+    "welfare": 20.0,
+    "research": 5.0
+  },
+  "electricity": {
+    "active": false,
+    "generation": null,
+    "consumption": null,
+    "storage": null,
+    "connections": []
+  },
+  "computing": {
+    "active": false,
+    "capacity": null,
+    "allocations": {},
+    "technology_unlocks": []
+  }
+}

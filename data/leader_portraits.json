@@ -1,0 +1,2041 @@
+{
+  "repository": "https://github.com/MillenniumDawn/Millennium-Dawn",
+  "commit": "e231ce3935a558f1d7baaa3c9bf15ef888cd3f04",
+  "license": "CC-BY-SA-4.0; see licenses/Millennium_Dawn_LICENSE.txt",
+  "entries": {
+    "ABK:head_of_state": {
+      "name": "Vladislav Ardzinba",
+      "reference": "Vladislav_Ardzinba.dds",
+      "upstream_path": "gfx/leaders/ABK/Vladislav_Ardzinba.dds",
+      "git_blob": "4a739561495111b75ee225043029aebb6510b86d",
+      "asset": "res://assets/ui/leaders/4a739561495111b75ee225043029aebb6510b86d.png",
+      "sha256": "fdd105f5ea294be6c4f70e3d03e3c46c302bc9cb7f8b7009139537e372500851",
+      "source_sha256": "40bb4dfac9bc0c9a615c3ba6af62b9b41e9aed71223cfcfaaa1a829ddb9e30d0"
+    },
+    "ACE:head_of_state": {
+      "name": "Hasan di Toro",
+      "reference": "Hasan_Tiro.dds",
+      "upstream_path": "gfx/leaders/ACE/Hasan_Tiro.dds",
+      "git_blob": "7b0e3ad206a692aee196e69c0223951d7bff8daf",
+      "asset": "res://assets/ui/leaders/7b0e3ad206a692aee196e69c0223951d7bff8daf.png",
+      "sha256": "4409a6ce6d526e2aa0f2f7d0571a8dcc15eb3e292cd65df6f5015f09a590c377",
+      "source_sha256": "ccac38169fa18ed2b1b945be79db6b843539de210a106446c73ca14795b720ec"
+    },
+    "AFG:head_of_state": {
+      "name": "Ahmad Shah Massoud",
+      "reference": "gfx/leaders/AFG/Ahmad_Shah_Massoud.dds",
+      "upstream_path": "gfx/leaders/AFG/Ahmad_Shah_Massoud.dds",
+      "git_blob": "86d63b4e1fdebae3447ccbb8a0ed8119333b1c26",
+      "asset": "res://assets/ui/leaders/86d63b4e1fdebae3447ccbb8a0ed8119333b1c26.png",
+      "sha256": "28915efce405a943dae77f302999af4b9da0b6ca82e2f85f84465d75a3387e59",
+      "source_sha256": "f972b2bfc70540ccf74b4e48f28b39adf8646295101a1dd2006833db7ad28172"
+    },
+    "AFR:head_of_state": {
+      "name": "Maj. Johnny Koroma",
+      "reference": "johnny_koroma.dds",
+      "upstream_path": "gfx/leaders/AFR/johnny_koroma.dds",
+      "git_blob": "c112b633e564ac172dbcde7022ef22c8c4233551",
+      "asset": "res://assets/ui/leaders/c112b633e564ac172dbcde7022ef22c8c4233551.png",
+      "sha256": "a79c1d28aa0ec64270b8bbc61c1dd4ecfec1a4c3146fd16bff28932d0728b996",
+      "source_sha256": "0e32a60ab478abf948d68a35d8ab8d68718d3038c695e5eb5244dbc33e63a02b"
+    },
+    "AGL:head_of_state": {
+      "name": "Jose Eduardo dos Santos",
+      "reference": "ANG_Jose_Eduardo_dos_Santos.dds",
+      "upstream_path": "gfx/leaders/AGL/ANG_Jose_Eduardo_dos_Santos.dds",
+      "git_blob": "ef5dd6859e358824fe5019cb8048728fd2e64e24",
+      "asset": "res://assets/ui/leaders/ef5dd6859e358824fe5019cb8048728fd2e64e24.png",
+      "sha256": "171aaa245d5740ca691c4701add03048cc2b878176a96aaa9868fdfdf73e896c",
+      "source_sha256": "38a1e071b0712db0613bd1f9fc957513cf4dacf134af0c901b072fa768b840b4"
+    },
+    "AIA:head_of_state": {
+      "name": "Hassan Abdullahi al-Turki",
+      "reference": "gfx/leaders/AIA/AIA_Hassan_Turki.dds",
+      "upstream_path": "gfx/leaders/AIA/AIA_Hassan_Turki.dds",
+      "git_blob": "512d17aa07a5c0eaaed8c736e9c3de04231afb2c",
+      "asset": "res://assets/ui/leaders/512d17aa07a5c0eaaed8c736e9c3de04231afb2c.png",
+      "sha256": "38bd481afe526856626bc095c4964bb319bfb49d8cf61d0edeaf43d3d5404350",
+      "source_sha256": "cd170b36f316def439421ceee037b9449984f61cf5e8cfa2b31c4dffbf81f9e3"
+    },
+    "ALB:head_of_state": {
+      "name": "Ilir Meta",
+      "reference": "ilir_meta.dds",
+      "upstream_path": "gfx/leaders/ALB/ilir_meta.dds",
+      "git_blob": "a10019d0b6fb25649d5c35406db75044db852cc4",
+      "asset": "res://assets/ui/leaders/a10019d0b6fb25649d5c35406db75044db852cc4.png",
+      "sha256": "86fe705920c9c2e7cba1ade26ce0a51d72ecf706b6929728abf4d0772ee5f743",
+      "source_sha256": "188e14ff7676c1c999affb15cc92eedf9bc7ecbc2f5db834433169894c99d77b"
+    },
+    "ALG:head_of_state": {
+      "name": "Abdelaziz Bouteflika",
+      "reference": "ALG_Abdelaziz_Bouteflika.dds",
+      "upstream_path": "gfx/leaders/ALG/ALG_Abdelaziz_Bouteflika.dds",
+      "git_blob": "70df9aa44851088a3dd6331aa08f3c5f1ba92d03",
+      "asset": "res://assets/ui/leaders/70df9aa44851088a3dd6331aa08f3c5f1ba92d03.png",
+      "sha256": "60f7b8bed3ffffcd6a9bda6363b9e524c4c1c7f3bbe6e960f11d9c4339806e1a",
+      "source_sha256": "26a8212fe8a30571b50ce12784fa7e2b0405cbb426d7117d7cec7bc94b8d7991"
+    },
+    "ANT:head_of_government": {
+      "name": "Lester Bird",
+      "reference": "Lester_Bird.dds",
+      "upstream_path": "gfx/leaders/ANT/Lester_Bird.dds",
+      "git_blob": "184a0b1bb801e72c8e0e9f2fd9fbdc6904a5f29f",
+      "asset": "res://assets/ui/leaders/184a0b1bb801e72c8e0e9f2fd9fbdc6904a5f29f.png",
+      "sha256": "efdf26f52c9536cd2140da206e2b15922eaef68b1e84486b02b51fb9587f2da6",
+      "source_sha256": "c29f833e545ed2583255189aa52930d19d7e313c7b799900c2b2327cb9fc7bd0"
+    },
+    "ARG:head_of_state": {
+      "name": "Fernando de la Rua",
+      "reference": "Fernando_de_la_Rua.dds",
+      "upstream_path": "gfx/leaders/ARG/Fernando_de_la_Rua.dds",
+      "git_blob": "930611fd41c577de5022588bce48907e85a53ed6",
+      "asset": "res://assets/ui/leaders/930611fd41c577de5022588bce48907e85a53ed6.png",
+      "sha256": "a36673e3a7c5f69418840f90dd1f333e32da8d3b447f12b55c6553189bbc56bf",
+      "source_sha256": "f46d0d28f835c36cb11ed3b398c57fa8d14bc815a978ae8940445f42e84c20f0"
+    },
+    "ARM:head_of_state": {
+      "name": "Robert Kocharyan",
+      "reference": "Rober_Kocharyan.dds",
+      "upstream_path": "gfx/leaders/ARM/Rober_Kocharyan.dds",
+      "git_blob": "d1d44c60fe141ffe525911f17b46eedaa70c4641",
+      "asset": "res://assets/ui/leaders/d1d44c60fe141ffe525911f17b46eedaa70c4641.png",
+      "sha256": "3df827d8bcdbc5d35b979495c0504cc590465090bc442abe34eb2c4687c4a7d3",
+      "source_sha256": "2a3128932e3c2d5254eb0784e841723929203002865acacd7014a7973944db43"
+    },
+    "AST:head_of_government": {
+      "name": "tony_abbott",
+      "reference": "gfx/leaders/AST/tony_abbott_1.dds",
+      "upstream_path": "gfx/leaders/AST/tony_abbott_1.dds",
+      "git_blob": "f432f1ad25ced52bbd19023b9c821e1ef87a701e",
+      "asset": "res://assets/ui/leaders/f432f1ad25ced52bbd19023b9c821e1ef87a701e.png",
+      "sha256": "d7e0de5c78b7936289aa8954ceab1a34bcee8e136dee94047f6791f8d6b8abc1",
+      "source_sha256": "7079c64af53d62d28779c379bf32c1c45406efe27fcbbf7d75f14b3eae2a6bb7"
+    },
+    "AUS:head_of_government": {
+      "name": "Viktor Klima",
+      "reference": "Viktor_Klima.dds",
+      "upstream_path": "gfx/leaders/AUS/Viktor_Klima.dds",
+      "git_blob": "ee92c8c542a47e7c591d67e9e142d72ec5bfaf1e",
+      "asset": "res://assets/ui/leaders/ee92c8c542a47e7c591d67e9e142d72ec5bfaf1e.png",
+      "sha256": "e747ff99e3daa32ac25268b87ab67dd9af821ea4939cfc67f699d605fb528df8",
+      "source_sha256": "93c55b3ae3d0a94ca7c3a6f778b3303d2984e6edcaa32d8e9203d00b92185e72"
+    },
+    "AZE:head_of_state": {
+      "name": "Heydar Aliyev",
+      "reference": "Heydar_Aliyev.dds",
+      "upstream_path": "gfx/leaders/AZE/Heydar_Aliyev.dds",
+      "git_blob": "0752b43751e7cd06274d7686ec261aef9bd103a0",
+      "asset": "res://assets/ui/leaders/0752b43751e7cd06274d7686ec261aef9bd103a0.png",
+      "sha256": "5609b64eb9fb2021de233fb058141d67c16b396844f2e81c07bb769d0c588f96",
+      "source_sha256": "29844969a16a9732cbdb6ac977640f892a5b478cad7ca9c4542c3606a10d9a98"
+    },
+    "BAH:head_of_government": {
+      "name": "Hubert Ingraham",
+      "reference": "hubert_ingraham.dds",
+      "upstream_path": "gfx/leaders/BAH/hubert_ingraham.dds",
+      "git_blob": "5b47b9a8185f30f6b199498d122b22c9287d23d1",
+      "asset": "res://assets/ui/leaders/5b47b9a8185f30f6b199498d122b22c9287d23d1.png",
+      "sha256": "ed9bd04a9b829ba4a8f31beefe54d7e8dea5d4dd3e99232d450f30d9e9ef6470",
+      "source_sha256": "99541e4d40656d6ad1dc9b9b3ce3999309b444a682428f819ab0daa3aac4895c"
+    },
+    "BAN:head_of_government": {
+      "name": "Sheikh Hasina",
+      "reference": "BAN_Sheikh_Hasina.dds",
+      "upstream_path": "gfx/leaders/BAN/BAN_Sheikh_Hasina.dds",
+      "git_blob": "a89ead32ea0153a690f2f8bb9c781fc48652d9be",
+      "asset": "res://assets/ui/leaders/a89ead32ea0153a690f2f8bb9c781fc48652d9be.png",
+      "sha256": "eef913bfec6fce883f1e8c94da13fbd2720833808e0808bad43236c3e0806904",
+      "source_sha256": "82eee55d224170c9e2d5a9f9f6c0b461982f50c9dcf6675d49b765a4bc17ef08"
+    },
+    "BAR:head_of_government": {
+      "name": "Owen Arthur",
+      "reference": "owen_arthur.dds",
+      "upstream_path": "gfx/leaders/BAR/owen_arthur.dds",
+      "git_blob": "8c864fea39156d8695ad22df29b23d803f094df4",
+      "asset": "res://assets/ui/leaders/8c864fea39156d8695ad22df29b23d803f094df4.png",
+      "sha256": "6814e3c53e841883d2b29265666dc7130ce851aff269a69927a93e4420f1cfaa",
+      "source_sha256": "1d162d1b16d7d49eb6f8b9c79355cd053693bc31c201eadfeb17426e19865708"
+    },
+    "BEL:head_of_government": {
+      "name": "Guy Verhofstadt",
+      "reference": "Guy_Verhofstadt.dds",
+      "upstream_path": "gfx/leaders/BEL/Guy_Verhofstadt.dds",
+      "git_blob": "62983e7722a0df986ed898ddd2d0183e9d182082",
+      "asset": "res://assets/ui/leaders/62983e7722a0df986ed898ddd2d0183e9d182082.png",
+      "sha256": "718abd18349ccf60f90a802b81a04fb275fca6cda88f9ba9d49de7f94c5886ed",
+      "source_sha256": "478096d0cfd093294b2edc1225bd115dc4084af9161bc51d29f906c72096f946"
+    },
+    "BEN:head_of_state": {
+      "name": "Mathieu Kerekou",
+      "reference": "mathieu_kerekou.dds",
+      "upstream_path": "gfx/leaders/BEN/mathieu_kerekou.dds",
+      "git_blob": "c4c537eb17c0aec4541b38aba639747b98b30f7f",
+      "asset": "res://assets/ui/leaders/c4c537eb17c0aec4541b38aba639747b98b30f7f.png",
+      "sha256": "c803fa867e5bef33dac0b204ac42f883d6441ad3f3c9123b17c990308bc83e2d",
+      "source_sha256": "90c807641612fbd41a3fccc9e5bad687dc7c401fbe7360bfff992215ba658638"
+    },
+    "BFA:head_of_state": {
+      "name": "Blaise Compaore",
+      "reference": "blaise_compaore.dds",
+      "upstream_path": "gfx/leaders/BFA/blaise_compaore.dds",
+      "git_blob": "02f0181e984cd979a2b8876b443952544a090464",
+      "asset": "res://assets/ui/leaders/02f0181e984cd979a2b8876b443952544a090464.png",
+      "sha256": "9c7e00c1cfa6ec92292c865754ec038b48b7c6c9baa6aa7e912e11343b577569",
+      "source_sha256": "df85d1b36306c5b42a8c346fd3aafce7ea0898c5adce38f65933ceb4b9ec8083"
+    },
+    "BHR:head_of_state": {
+      "name": "Hamad bin Isa Al Khalifa",
+      "reference": "hamad_bin_Isa_Al_Khalifa.dds",
+      "upstream_path": "gfx/leaders/BHR/hamad_bin_Isa_Al_Khalifa.dds",
+      "git_blob": "1ad42e47c569dcf526a487988b069fb28432a14f",
+      "asset": "res://assets/ui/leaders/1ad42e47c569dcf526a487988b069fb28432a14f.png",
+      "sha256": "d83384aa0708c708cc9df5bd9bb63becb2f1c335d60371145a37b32385cb9ca8",
+      "source_sha256": "7b6b31b8cec601b23d7ddd0fcfbc301dd71f32b411f2f1d886565d89702e3bce"
+    },
+    "BHU:head_of_state": {
+      "name": "Jigme Singye Wangchuck",
+      "reference": "Jigme_Singye_Wangchuck.dds",
+      "upstream_path": "gfx/leaders/BHU/Jigme_Singye_Wangchuck.dds",
+      "git_blob": "61faea1bf7e19e72d616a1dccf0fb4866a9889ed",
+      "asset": "res://assets/ui/leaders/61faea1bf7e19e72d616a1dccf0fb4866a9889ed.png",
+      "sha256": "00d4e40deb2d15fe07b1d7703b6c4066bc1f2ca0775e44fb21ed5e816aea819c",
+      "source_sha256": "28648194c91b6d325117b48cba63ba933c834301193150b62894a928f9ea12ca"
+    },
+    "BLR:head_of_state": {
+      "name": "Alexander Lukashenko",
+      "reference": "alexander_lukashenko.dds",
+      "upstream_path": "gfx/leaders/BLR/alexander_lukashenko.dds",
+      "git_blob": "1968f02cb889c58353181acc5fbd405d4a1fb792",
+      "asset": "res://assets/ui/leaders/1968f02cb889c58353181acc5fbd405d4a1fb792.png",
+      "sha256": "fcf8b2ee19d891513d593eb1e0719a97e336eb73057eb55cd718c8369272f672",
+      "source_sha256": "43fce33cfc0dfb74fd9efcb819fdf4fd7c23b5ec530184301c3063c9ff810261"
+    },
+    "BLZ:head_of_government": {
+      "name": "Said Musa",
+      "reference": "said_musa.dds",
+      "upstream_path": "gfx/leaders/BLZ/said_musa.dds",
+      "git_blob": "27542bece5fc8528cc25d704627121acbfc70001",
+      "asset": "res://assets/ui/leaders/27542bece5fc8528cc25d704627121acbfc70001.png",
+      "sha256": "162618e098d11dc821ded0df4779052e7d99ab24bf815c07579c36a9dcd8a38d",
+      "source_sha256": "c3628df4f4aa873592db046586569ae3979673203b341fc9fc025273f9d41420"
+    },
+    "BOL:head_of_state": {
+      "name": "Hugo Banzer",
+      "reference": "hugo_banzer.dds",
+      "upstream_path": "gfx/leaders/BOL/hugo_banzer.dds",
+      "git_blob": "14b0da36045e82e6b4e7ca443897eb1f02d9ab12",
+      "asset": "res://assets/ui/leaders/14b0da36045e82e6b4e7ca443897eb1f02d9ab12.png",
+      "sha256": "b2ad420350b439dedb5876205191f4e64ff219dedfe1fc1a0d2b132fd2bf2aba",
+      "source_sha256": "3f9e602e383afad224c4b7adde497dbd8d72284b70abd1ed8253b930c9cebf4d"
+    },
+    "BOS:head_of_government": {
+      "name": "Alija Izetbegović",
+      "reference": "alija_izetbegovic.dds",
+      "upstream_path": "gfx/leaders/BOS/alija_izetbegovic.dds",
+      "git_blob": "8dcb10fc8910f9250e8e9073f61a1e69ad7efa2d",
+      "asset": "res://assets/ui/leaders/8dcb10fc8910f9250e8e9073f61a1e69ad7efa2d.png",
+      "sha256": "44256c3c5cd77ef0ea19f520ae4850d1dfec1e51d599845d63fba5461a355657",
+      "source_sha256": "0cd7187c55098e48b680379db1107447f7f35e32171a1bcdc31070811326e59b"
+    },
+    "BOT:head_of_government": {
+      "name": "Festus Mogae",
+      "reference": "festus_mogae.dds",
+      "upstream_path": "gfx/leaders/BOT/festus_mogae.dds",
+      "git_blob": "006ece0e036ce35d018f43e996cc5eec45f41251",
+      "asset": "res://assets/ui/leaders/006ece0e036ce35d018f43e996cc5eec45f41251.png",
+      "sha256": "1c22ef0435c212980cb3d82f545c6ec36c5cb6d0974d7f8eb4b07dd2baf6a081",
+      "source_sha256": "940405271c2feaecafb8ef38e43741964546a25b2c9da5f9d83ad53a811a668c"
+    },
+    "BRA:head_of_state": {
+      "name": "Fernando Henrique Cardoso",
+      "reference": "Fernando_Henrique_Cardoso.dds",
+      "upstream_path": "gfx/leaders/BRA/Fernando_Henrique_Cardoso.dds",
+      "git_blob": "bd5be5b06967ca74a45ebcc99f3a144859660ae7",
+      "asset": "res://assets/ui/leaders/bd5be5b06967ca74a45ebcc99f3a144859660ae7.png",
+      "sha256": "76316f649be83ea5730e0e268bfd6486abbf6dc58bc7c64e0c822b0c9caff670",
+      "source_sha256": "c3a4ba860663b18d5393ef650403b2353a493af70c86507204f67009ba4df0bd"
+    },
+    "BRM:head_of_state": {
+      "name": "Than Shwe",
+      "reference": "gfx/leaders/BRM/Than_Shwe.dds",
+      "upstream_path": "gfx/leaders/BRM/Than_Shwe.dds",
+      "git_blob": "42b641cd593256eea8f2753c7e8f5b49105b1398",
+      "asset": "res://assets/ui/leaders/42b641cd593256eea8f2753c7e8f5b49105b1398.png",
+      "sha256": "8422ff3df9dfae2aac0a8bae1d64e87db4b3b620425eb5fea5966d6177aa8ebb",
+      "source_sha256": "e133f6c6a0a693662fecca63b2057035b6d19b5020bcaaa21f18d48ce229a3a4"
+    },
+    "BRU:head_of_state": {
+      "name": "Hassanal Bolkiah",
+      "reference": "BRU_Hassanal_Bolkiah.dds",
+      "upstream_path": "gfx/leaders/BRU/BRU_Hassanal_Bolkiah.dds",
+      "git_blob": "0739c83a73c2f48eddf64edb715977d40a8d4572",
+      "asset": "res://assets/ui/leaders/0739c83a73c2f48eddf64edb715977d40a8d4572.png",
+      "sha256": "953ce56125622d95a7851b86b69b8eeb8c4b470bf080203e76e5c0b12314790d",
+      "source_sha256": "cf81280c74e78ba1f1e0df00d8ab70a8086b03b70f28ca1fcb942933ee9080a3"
+    },
+    "BUL:head_of_state": {
+      "name": "Petar Stoyanov",
+      "reference": "petar_stoyanov.dds",
+      "upstream_path": "gfx/leaders/BUL/petar_stoyanov.dds",
+      "git_blob": "7144c28dadab613186d0d1d4eb58797576980592",
+      "asset": "res://assets/ui/leaders/7144c28dadab613186d0d1d4eb58797576980592.png",
+      "sha256": "35c42b21c337abff15c348a9acf85c07254d89a2b135c60a399c4ba98c0ba389",
+      "source_sha256": "2ed810c18dd4697ed588cb2ea3d9600f79e52aba25ab013b750db447f1bbb856"
+    },
+    "BUR:head_of_state": {
+      "name": "Pierre Buyoya",
+      "reference": "pierre_buyoya.dds",
+      "upstream_path": "gfx/leaders/BUR/pierre_buyoya.dds",
+      "git_blob": "41b4c1589c13738e0c624d3a2f6680a918e34cdc",
+      "asset": "res://assets/ui/leaders/41b4c1589c13738e0c624d3a2f6680a918e34cdc.png",
+      "sha256": "deb4eed00eb503b02c9c0d4d7ff31f02dc61b3e765e42010fc5ea2f7302c9f95",
+      "source_sha256": "084d5dfd81587f1e028f52a43f1752a81cb3104bcedbc42ea1a9ef943d48330b"
+    },
+    "CAM:head_of_state": {
+      "name": "Paul Biya",
+      "reference": "Paul_Biya.dds",
+      "upstream_path": "gfx/leaders/CAM/Paul_Biya.dds",
+      "git_blob": "859cc78d93ec7f39699f8a3005e2a458b4a75248",
+      "asset": "res://assets/ui/leaders/859cc78d93ec7f39699f8a3005e2a458b4a75248.png",
+      "sha256": "dc7d85601c97130446c4545b45dbfc6d3f12ef44c96f23bfff800579cba97425",
+      "source_sha256": "fd633e1edc090aab71c9b97097c4a7fb6bcb58617aca093ad3cb4103aac4cfc5"
+    },
+    "CAN:head_of_government": {
+      "name": "Jean Chrétien",
+      "reference": "jean_chretien.dds",
+      "upstream_path": "gfx/leaders/CAN/jean_chretien.dds",
+      "git_blob": "f1050d64eae4762c57483ec69f1e36c072d4cf15",
+      "asset": "res://assets/ui/leaders/f1050d64eae4762c57483ec69f1e36c072d4cf15.png",
+      "sha256": "704046d1c17830aa88f8b8f87ea129a0fa6dda99ac6a2d92c480e9150ae1e8a0",
+      "source_sha256": "2c6b57ab1ae37ea13850d18158db4caeb2ff3d92a82aa56497f677465408e9f3"
+    },
+    "CAR:head_of_state": {
+      "name": "Ange-Félix Patassé",
+      "reference": "Ange_Felix_Patasse.dds",
+      "upstream_path": "gfx/leaders/CAR/Ange_Felix_Patasse.dds",
+      "git_blob": "1eea341f38cffce378dc850fc71b78c069792d74",
+      "asset": "res://assets/ui/leaders/1eea341f38cffce378dc850fc71b78c069792d74.png",
+      "sha256": "e6242985b3c8e556ea7a52084a33f6421d543a3a220a9e4fcb89f75c8fed713f",
+      "source_sha256": "bce52b059c055f805ee35c4cd2f5b4ba0873ca6a1f5571a1efa2325afc97251c"
+    },
+    "CBD:head_of_government": {
+      "name": "Hun Sen",
+      "reference": "CAB_Hun_Sen.dds",
+      "upstream_path": "gfx/leaders/CBD/CAB_Hun_Sen.dds",
+      "git_blob": "563e1cfc1000c9434cca7170f7cfcbc97adfc647",
+      "asset": "res://assets/ui/leaders/563e1cfc1000c9434cca7170f7cfcbc97adfc647.png",
+      "sha256": "5613d18ea81e0e820de6aac5f57713fe4c2b8d063a5e8058b7e5905118f24ccc",
+      "source_sha256": "2d1fc8b97a52cefeee4e3c54f6e492ab60c230cbf0527497145ec6cbc8702e92"
+    },
+    "CDI:head_of_state": {
+      "name": "Robert Guei",
+      "reference": "robert_guei.dds",
+      "upstream_path": "gfx/leaders/CDI/robert_guei.dds",
+      "git_blob": "77319755a8d207601b5631568d1ace638be8912c",
+      "asset": "res://assets/ui/leaders/77319755a8d207601b5631568d1ace638be8912c.png",
+      "sha256": "5bea77e56daf87d9e34dc57d3533786d309945684dcf78709c063549060700a6",
+      "source_sha256": "f88f3c02da62f16ee0e88371ed3e093945f658b304f83db66d771bc75eaaa23e"
+    },
+    "CHA:head_of_state": {
+      "name": "Idriss Déby",
+      "reference": "idriss_deby.dds",
+      "upstream_path": "gfx/leaders/CHA/idriss_deby.dds",
+      "git_blob": "fcd5d3d1d7415f7a65966405c490d959681e40e4",
+      "asset": "res://assets/ui/leaders/fcd5d3d1d7415f7a65966405c490d959681e40e4.png",
+      "sha256": "c62aca85988c6b5e4b12651c628154212be342828e6bddf0bff4ba81f969f001",
+      "source_sha256": "10fb4af54fbfc0d1923c8e98941a3a76b57713f5d001b86c498697b68057f701"
+    },
+    "CHE:head_of_state": {
+      "name": "Aslan Maskhadov",
+      "reference": "gfx/leaders/CHE/aslan_maskhadov.dds",
+      "upstream_path": "gfx/leaders/CHE/aslan_maskhadov.dds",
+      "git_blob": "cf109f552c6ed3c9be5d5496d13c91b2bff47968",
+      "asset": "res://assets/ui/leaders/cf109f552c6ed3c9be5d5496d13c91b2bff47968.png",
+      "sha256": "bd4908d68486a8e108423779050a8ba7db86d34801369ef2f099c9b65785f709",
+      "source_sha256": "53e3500f71b016e6c546ca435bfed00c4ddd879b514f691321ef81cde6c8c2b4"
+    },
+    "CHI:head_of_state": {
+      "name": "Jiang Zemin",
+      "reference": "Jiang_Zemin.dds",
+      "upstream_path": "gfx/leaders/CHI/Jiang_Zemin.dds",
+      "git_blob": "2299735dc4b762d7e1f181d3089df9c9d9baa8f2",
+      "asset": "res://assets/ui/leaders/2299735dc4b762d7e1f181d3089df9c9d9baa8f2.png",
+      "sha256": "89b370801fa9c3b5654db0b7eb7d172a528717ea5f7b3aecbc943a9552a58c2c",
+      "source_sha256": "3fa342ce85113acc75173761f4c4ab7d966d515e64514caedd5398da384a570e"
+    },
+    "CHL:head_of_state": {
+      "name": "Ricardo Lagos",
+      "reference": "ricardo_lagos.dds",
+      "upstream_path": "gfx/leaders/CHL/ricardo_lagos.dds",
+      "git_blob": "8b756812cdac69f3e229af9cf658356688fc1cbf",
+      "asset": "res://assets/ui/leaders/8b756812cdac69f3e229af9cf658356688fc1cbf.png",
+      "sha256": "8e13729d53d1199a737edd704f3fc65b073e106b296df0d62f7c2ecbab3139ae",
+      "source_sha256": "35e4a081f66abcc813b2f74cf1abe290b19c2239b34e74f2fa9b8598906daead"
+    },
+    "CNG:head_of_state": {
+      "name": "Denis Sassou Nguesso",
+      "reference": "denis_sassou_nguesso.dds",
+      "upstream_path": "gfx/leaders/CNG/denis_sassou_nguesso.dds",
+      "git_blob": "c606566679ab199be681746f1bed3595236ba6d6",
+      "asset": "res://assets/ui/leaders/c606566679ab199be681746f1bed3595236ba6d6.png",
+      "sha256": "c7d83761a789e945b0a4f74ebd2846d1ad96e9e9b22e327069378b36fa276236",
+      "source_sha256": "d8b4fc4b7235c830c4af889061fceaced65ca6e9cecb0d5e604bb8e525d7bba9"
+    },
+    "COL:head_of_state": {
+      "name": "Andres Pastrana Arango",
+      "reference": "andres_arango.dds",
+      "upstream_path": "gfx/leaders/COL/andres_arango.dds",
+      "git_blob": "18c14ed386fd5f6e72285a4da687044bf75d2350",
+      "asset": "res://assets/ui/leaders/18c14ed386fd5f6e72285a4da687044bf75d2350.png",
+      "sha256": "9d52a109b6ffc9a495b092ad19c413fe592e229f3298e87b3b2a486400a012b0",
+      "source_sha256": "8ca62b97a29bee22dfe8c7f64834b20bc32d83250abc64e203c41d1c1b427c22"
+    },
+    "COM:head_of_state": {
+      "name": "Azali Assoumani",
+      "reference": "Azali_Assoumani.dds",
+      "upstream_path": "gfx/leaders/COM/Azali_Assoumani.dds",
+      "git_blob": "4fb78b3b9daa69d1cc12974d9bb32fb0a1c03780",
+      "asset": "res://assets/ui/leaders/4fb78b3b9daa69d1cc12974d9bb32fb0a1c03780.png",
+      "sha256": "baf6722cecf86c9f18c70af528d3a07e0fb7391534fb0b9cbfd210fddca3c331",
+      "source_sha256": "fb8a88fb1f481566f69d4f1c12745251ac5abb73e6607e20dfcbc35d9665540d"
+    },
+    "COS:head_of_state": {
+      "name": "Miguel Ángel Rodríguez",
+      "reference": "miguel_rodriguez.dds",
+      "upstream_path": "gfx/leaders/COS/miguel_rodriguez.dds",
+      "git_blob": "c3cf1db0b676d30f5149e490ab066149f9a67bf0",
+      "asset": "res://assets/ui/leaders/c3cf1db0b676d30f5149e490ab066149f9a67bf0.png",
+      "sha256": "7b59c1882f21c870b208d4e26357dc07fee63a0e5dc8462cc29a7b34e881843a",
+      "source_sha256": "95880f9a8cbd0528f46c38a776bf4c0739f02c6e45efb80f9881327115126683"
+    },
+    "CRO:head_of_state": {
+      "name": "Stjepan Mesic",
+      "reference": "stjepan_mesic.dds",
+      "upstream_path": "gfx/leaders/CRO/stjepan_mesic.dds",
+      "git_blob": "d02002fe8e0b6bd5cd1b8e7fc17e7d16d8f4172b",
+      "asset": "res://assets/ui/leaders/d02002fe8e0b6bd5cd1b8e7fc17e7d16d8f4172b.png",
+      "sha256": "c23a5e1edb08d54b7929befdc9586314abfd473f6512bd7b35bb17c06c2e8e07",
+      "source_sha256": "10fc06ebce65fa8f25440fdaaa49b46ffec6fe61c09336e6bc954a59ab3459a5"
+    },
+    "CUB:head_of_state": {
+      "name": "Fidel Castro",
+      "reference": "fidel_castro.dds",
+      "upstream_path": "gfx/leaders/CUB/fidel_castro.dds",
+      "git_blob": "cc54d2ec49e0de5a580c8cfd904b1655af90f94f",
+      "asset": "res://assets/ui/leaders/cc54d2ec49e0de5a580c8cfd904b1655af90f94f.png",
+      "sha256": "8bfd83ec54e3c2d23200e9db96fdfc2534a2c4a325812e57addac08643e076d9",
+      "source_sha256": "865acd784b1dd9763e33b54759f88fbbc1486292163a54994e12f0d823ae254b"
+    },
+    "CYP:head_of_state": {
+      "name": "Glafcos Clerides",
+      "reference": "glafcos_clerides.dds",
+      "upstream_path": "gfx/leaders/CYP/glafcos_clerides.dds",
+      "git_blob": "0723d3c279f60ce18d7735d79e83aeb392878799",
+      "asset": "res://assets/ui/leaders/0723d3c279f60ce18d7735d79e83aeb392878799.png",
+      "sha256": "4ea1e5a93665362a6779e400169428a44808fe9d31248f8cdc0a4b4ddf940b8d",
+      "source_sha256": "8ef0fe9547cb0d1e8f3d9e6221e70d7e3dcc4cb89d47a476824970a71ef1e0b9"
+    },
+    "CZE:head_of_government": {
+      "name": "Václav Havel",
+      "reference": "vaclav_havel.dds",
+      "upstream_path": "gfx/leaders/CZE/vaclav_havel.dds",
+      "git_blob": "4d2e07dd1685bb9f1472da00be80faa4b6c55d43",
+      "asset": "res://assets/ui/leaders/4d2e07dd1685bb9f1472da00be80faa4b6c55d43.png",
+      "sha256": "799e7842362f917981c9c10c44db8dfce8ca74ed463d5d679ccd3f68552b1c10",
+      "source_sha256": "673feb7f90b85f12c0d2462959f399bc6752b6de8aa2ddd023111a99e57259f5"
+    },
+    "DEN:head_of_state": {
+      "name": "In-Need of Banking Reforms",
+      "reference": "gfx/interface/ideas/economy/GENERIC_protectionism.dds",
+      "upstream_path": "gfx/interface/ideas/economy/GENERIC_protectionism.dds",
+      "git_blob": "5ca9b9e28bc9bf190bbcb5ad98dbfd99ec03159b",
+      "asset": "res://assets/ui/leaders/5ca9b9e28bc9bf190bbcb5ad98dbfd99ec03159b.png",
+      "sha256": "1ad35d91d1d0e0bc3d90bc6b0b9286c9b84543afc0b278b781b8d9d15a5862e8",
+      "source_sha256": "40893326ce2aa55b9e4bbf63fae65f0ecb6642a7aaf9055efd9a01e7e06e21af"
+    },
+    "DEN:head_of_government": {
+      "name": "Poul Nyrup Rasmussen",
+      "reference": "Poul_Nyrup_Rasmussen.dds",
+      "upstream_path": "gfx/leaders/DEN/Poul_Nyrup_Rasmussen.dds",
+      "git_blob": "cbf5b3f32b7f6e101340d770c20fdeebabc3ef5a",
+      "asset": "res://assets/ui/leaders/cbf5b3f32b7f6e101340d770c20fdeebabc3ef5a.png",
+      "sha256": "cf163e820ab514420c2acb024ea08fe498fb4dce503175686d973223b6ff8553",
+      "source_sha256": "3f4518b44265280e5c8a888d15b7fe53468aa3be00da3326976eb7c6a20a151b"
+    },
+    "DJI:head_of_state": {
+      "name": "Ismail Omar Guelleh",
+      "reference": "ismail_omar_guelleh.dds",
+      "upstream_path": "gfx/leaders/DJI/ismail_omar_guelleh.dds",
+      "git_blob": "a16965215059048eb2b5d7643129e78cb98defd7",
+      "asset": "res://assets/ui/leaders/a16965215059048eb2b5d7643129e78cb98defd7.png",
+      "sha256": "1f29bf13fbd4c5fa952c0477de066fe005deab7a1c419ac521584140da193b1f",
+      "source_sha256": "4a91e19f377184566bb703b9d37f87dc71d8b363607e5d3173f3f3057674767c"
+    },
+    "DMI:head_of_government": {
+      "name": "Vernon Shaw",
+      "reference": "vernon_shaw.dds",
+      "upstream_path": "gfx/leaders/DMI/vernon_shaw.dds",
+      "git_blob": "2566df15ffda919b876dd90944b926c8d1794679",
+      "asset": "res://assets/ui/leaders/2566df15ffda919b876dd90944b926c8d1794679.png",
+      "sha256": "d62c234568e4fbbdf1dc8e678ee56f8a4a4666cec659fe75f6ede2b463f823d4",
+      "source_sha256": "947b1aeb095f981493032711cdb3ae2af563cb2e38573353eaf9eb3ee871183d"
+    },
+    "DOM:head_of_state": {
+      "name": "Leonel Fernández",
+      "reference": "leonel_fernandez.dds",
+      "upstream_path": "gfx/leaders/DOM/leonel_fernandez.dds",
+      "git_blob": "27bcb462281c30354293dd6c7b143992eb8f5453",
+      "asset": "res://assets/ui/leaders/27bcb462281c30354293dd6c7b143992eb8f5453.png",
+      "sha256": "550a8fd11faceef83bd1548d46e75664ba78afd23bf3d3f060ec81f4e0033627",
+      "source_sha256": "7cfc0b229ecca714a0fcd68bca260451c13a0614f2ee7015255795956171b6ca"
+    },
+    "DRC:head_of_state": {
+      "name": "Laurent-Désiré Kabila",
+      "reference": "DRC_Laurent_Desire_Kabila.dds",
+      "upstream_path": "gfx/leaders/DRC/DRC_Laurent_Desire_Kabila.dds",
+      "git_blob": "30d5ede7e7abb683e8d8fd42fb4292a904b98141",
+      "asset": "res://assets/ui/leaders/30d5ede7e7abb683e8d8fd42fb4292a904b98141.png",
+      "sha256": "b14067b6e9fe6739719b808933964d99e826b0b1fe1f3ed901cfbfa28e7418b6",
+      "source_sha256": "87dc045cb07f126d2ec1b0d8e9fb1be81f1190dd9a0171a3ac9361671f69f7b4"
+    },
+    "ECU:head_of_state": {
+      "name": "Jamil Mahuad",
+      "reference": "jamil_mahuad.dds",
+      "upstream_path": "gfx/leaders/ECU/jamil_mahuad.dds",
+      "git_blob": "0b39bbd1cd0f00cef02ab8ef81aeeaf81d62614b",
+      "asset": "res://assets/ui/leaders/0b39bbd1cd0f00cef02ab8ef81aeeaf81d62614b.png",
+      "sha256": "b8cf833ed402a0739eefed3541a43bf3ffa4631a12fa870ff5914d8685a2ac52",
+      "source_sha256": "dfea2496966fe3a0bae9428cb9be3e17d56412a45257e28fe066ee1247882890"
+    },
+    "EGU:head_of_state": {
+      "name": "Teodoro Obiang Nguema Mbasogo",
+      "reference": "teodoro_obiango_nguema_mbasogo.dds",
+      "upstream_path": "gfx/leaders/EGU/teodoro_obiango_nguema_mbasogo.dds",
+      "git_blob": "5753045264bde383bdb5322b34ad7167b1ac4094",
+      "asset": "res://assets/ui/leaders/5753045264bde383bdb5322b34ad7167b1ac4094.png",
+      "sha256": "0e6b5b7d4e8d5a807921c0a7da305aec88cceabaac67d3443adc67bdfa56f4b3",
+      "source_sha256": "ade97e25a740447ef2ae8b0e9ad7483e6971dc8ff3cd99b028cc383c61e70bc9"
+    },
+    "EGY:head_of_state": {
+      "name": "Hosni Mubarak",
+      "reference": "hosni_mubarak.dds",
+      "upstream_path": "gfx/leaders/EGY/hosni_mubarak.dds",
+      "git_blob": "e02a007de8f00cf8381369771ac0ff39211f1a19",
+      "asset": "res://assets/ui/leaders/e02a007de8f00cf8381369771ac0ff39211f1a19.png",
+      "sha256": "89cbca9f0c9bb08a3265c0fc0a7758606d60a49e38a227662958f3f7949ac7d9",
+      "source_sha256": "e92d1853fa7eac3019e341a47b6539a292a420aade0a885cdf2c8ab428516129"
+    },
+    "ELS:head_of_state": {
+      "name": "Francisco Flores Pérez",
+      "reference": "fracisco_perez.dds",
+      "upstream_path": "gfx/leaders/ELS/fracisco_perez.dds",
+      "git_blob": "eb254b59f48ed085ceca9d90430c86ed8e6f09a4",
+      "asset": "res://assets/ui/leaders/eb254b59f48ed085ceca9d90430c86ed8e6f09a4.png",
+      "sha256": "cc13e02bc7f3aa4d480024933aa38d4be448d33ce51f35862ddf77dcea8d8ee5",
+      "source_sha256": "3eb8d7dabb5a1434437df17087a9e3b643b21dfe8e13e73712a8ae03f17ee843"
+    },
+    "ENG:head_of_state": {
+      "name": "Elizabeth II",
+      "reference": "",
+      "upstream_path": "gfx/leaders/ENG/Elizabeth_II.dds",
+      "git_blob": "bbd17cd508f145cac9034c63b9732430447bcf3d",
+      "asset": "res://assets/ui/leaders/bbd17cd508f145cac9034c63b9732430447bcf3d.png",
+      "sha256": "024712329a13546ef585dac3f92cbc852ab9e9c0c35d2f499d0ff6ad38916ca0",
+      "source_sha256": "0aa6f56ef6af70021faf56fe0335c5afcd8214fa9ffe0105eb5f4596aca4f2ec"
+    },
+    "ENG:head_of_government": {
+      "name": "Tony Blair",
+      "reference": "tony_blair.dds",
+      "upstream_path": "gfx/leaders/ENG/tony_blair.dds",
+      "git_blob": "ae585e04c0ea1549f46597eb9ff32a49835809d1",
+      "asset": "res://assets/ui/leaders/ae585e04c0ea1549f46597eb9ff32a49835809d1.png",
+      "sha256": "2e64793251b86280131b98207c3976bc3d75f60fc787ea8cf76a7308f202caa4",
+      "source_sha256": "625852a5c711db33fb28e0726786650de6c558ff65e3af0c59371aa3ffe484e6"
+    },
+    "ERI:head_of_state": {
+      "name": "Isaias Afewerki",
+      "reference": "ERI_Isaias_Afwerki.dds",
+      "upstream_path": "gfx/leaders/ERI/ERI_Isaias_Afwerki.dds",
+      "git_blob": "b0a525e325605ab866307a317466762b0fb6388c",
+      "asset": "res://assets/ui/leaders/b0a525e325605ab866307a317466762b0fb6388c.png",
+      "sha256": "b8298fe236122ddba0f3a2095150fdef38f8a5dfd302cd441cc8bf53fb5667f5",
+      "source_sha256": "09b8f31eca1fc93d6b0f2bfaf00e893396717e9244231eeb0e02c732ec8e2fde"
+    },
+    "EST:head_of_government": {
+      "name": "Mart Laar",
+      "reference": "mart_laar.dds",
+      "upstream_path": "gfx/leaders/EST/mart_laar.dds",
+      "git_blob": "ab8242956127ee28f15e93e293ae4f9c970afdf4",
+      "asset": "res://assets/ui/leaders/ab8242956127ee28f15e93e293ae4f9c970afdf4.png",
+      "sha256": "1e338e77621466ceee999eac41675dc9481100643bcf01551f4293b48db0fe73",
+      "source_sha256": "bb7280ac96dd0cfafd068fc39e09eec7ff1667513b3725f94669fa1cc1571e73"
+    },
+    "ETH:head_of_state": {
+      "name": "Meles Zenawi",
+      "reference": "meles_zenawi.dds",
+      "upstream_path": "gfx/leaders/ETH/meles_zenawi.dds",
+      "git_blob": "018d1cc263265a4a558657df03d6ef5d80161464",
+      "asset": "res://assets/ui/leaders/018d1cc263265a4a558657df03d6ef5d80161464.png",
+      "sha256": "0526851dd2bc95a639476ca3f496a7a99b777a1b86ee98c42c241aa38eea29cc",
+      "source_sha256": "ba5ddf7dd153ac77e530ccc281bb076af377f243619a0b4dd063c2804b3f6987"
+    },
+    "FAO:head_of_government": {
+      "name": "Anfinn Kallsberg",
+      "reference": "Anfinn_kallsberg.dds",
+      "upstream_path": "gfx/leaders/FAO/Anfinn_kallsberg.dds",
+      "git_blob": "1607bb4103a29cf4feb43f505c11a05dc3d32331",
+      "asset": "res://assets/ui/leaders/1607bb4103a29cf4feb43f505c11a05dc3d32331.png",
+      "sha256": "74a0c27380d39a6330250ec455c80b3bbf100cf18377a48894080eb6326cbbb5",
+      "source_sha256": "57939d0df7e8a255ec0179c894f50635ed10306e8f486acdb9f29e8e6b60e2a8"
+    },
+    "FIJ:head_of_state": {
+      "name": "Mahendra Chaudhry",
+      "reference": "mahendra_chaudhry.dds",
+      "upstream_path": "gfx/leaders/FIJ/mahendra_chaudhry.dds",
+      "git_blob": "73970bfa807296739571749a7dc838ee1915c8ac",
+      "asset": "res://assets/ui/leaders/73970bfa807296739571749a7dc838ee1915c8ac.png",
+      "sha256": "adda020b83fe553b1f0d99b13b4bb265e33da234de44c30e3d93b86db19ff776",
+      "source_sha256": "7b08edab6f3857cc626ffc63a12bca858bad340244fbeb05de32cc57aba1bcc7"
+    },
+    "FIN:head_of_state": {
+      "name": "Paavo Lipponen",
+      "reference": "Paavo_Lipponen.dds",
+      "upstream_path": "gfx/leaders/FIN/Paavo_Lipponen.dds",
+      "git_blob": "2d8265bec199b68596fe0a7ab7e0153754b9b17c",
+      "asset": "res://assets/ui/leaders/2d8265bec199b68596fe0a7ab7e0153754b9b17c.png",
+      "sha256": "abf8dc473a2ef9d6807b9aafecff2d08ceec7c6e02f1a8c26e8a5a3884fe5065",
+      "source_sha256": "0d4da687132e294ff0b28311969475e324a0f22a88832dca0e8387a3971443ec"
+    },
+    "FRA:head_of_state": {
+      "name": "Jacques Chirac",
+      "reference": "jacques_chirac.dds",
+      "upstream_path": "gfx/leaders/FRA/jacques_chirac.dds",
+      "git_blob": "501e476156560429f70763d03d10ee3608619837",
+      "asset": "res://assets/ui/leaders/501e476156560429f70763d03d10ee3608619837.png",
+      "sha256": "05a5b5a5024ea9626ff008a9e507a3d53fed7aab1c5cb76bca7f7f9cc796e68d",
+      "source_sha256": "10874a71a21db77d6fe511af229679aca4ce56cf0bc6e8ccbe91850a59e04bbe"
+    },
+    "FYR:head_of_government": {
+      "name": "Ljubčo Georgievski",
+      "reference": "ljubo_georgievski.dds",
+      "upstream_path": "gfx/leaders/FYR/ljubo_georgievski.dds",
+      "git_blob": "ab3c5cccce3280543a6d10ddd810d0b25b7b02ee",
+      "asset": "res://assets/ui/leaders/ab3c5cccce3280543a6d10ddd810d0b25b7b02ee.png",
+      "sha256": "48dc962a0722cd74070f083bed0fab16158f58a0aed30a2c1e135c08329daa6d",
+      "source_sha256": "3de050f8021bd79512651a240da6d17404d6a132ef7b555e953ecb3b640ff640"
+    },
+    "GAB:head_of_state": {
+      "name": "Omar Bongo",
+      "reference": "omar_bongo.dds",
+      "upstream_path": "gfx/leaders/GAB/omar_bongo.dds",
+      "git_blob": "b123a250bc096b2debb9b0afcb285c5ae4831df6",
+      "asset": "res://assets/ui/leaders/b123a250bc096b2debb9b0afcb285c5ae4831df6.png",
+      "sha256": "ab8457ffe43d90051530c09c21519179400fc45703b5507727920e483ced9505",
+      "source_sha256": "a129cbfb40989a46fdba3532cb1a4e56c991390b1313e38bcd1eb91ba0be3fa4"
+    },
+    "GAH:head_of_state": {
+      "name": "Jerry Rawlings",
+      "reference": "jerry_rawlings.dds",
+      "upstream_path": "gfx/leaders/GAH/jerry_rawlings.dds",
+      "git_blob": "302fa1eb3ad398a8e4f5a9f785e00a02e88494b5",
+      "asset": "res://assets/ui/leaders/302fa1eb3ad398a8e4f5a9f785e00a02e88494b5.png",
+      "sha256": "949aeb277658afb7dbcd93be90899d8da42c24a130dcd2a3f89415104e84ce2a",
+      "source_sha256": "c37020193030295fa436a4b6e432718abc9424a0efd9c299b8878f2ab1d261da"
+    },
+    "GAM:head_of_state": {
+      "name": "Yahya Jammeh",
+      "reference": "Yahya_Jammeh.dds",
+      "upstream_path": "gfx/leaders/GAM/Yahya_Jammeh.dds",
+      "git_blob": "2dfa705e5d293f224860261f3d15cac43980129d",
+      "asset": "res://assets/ui/leaders/2dfa705e5d293f224860261f3d15cac43980129d.png",
+      "sha256": "15553a3e82973f9bd74258833d456dcdb11bdf47f070e0f841dce6413885a5b2",
+      "source_sha256": "48ed093ba5cf5b2ce1815b3e66d844669a744f2486015f2ac624028e76d4763e"
+    },
+    "GEO:head_of_state": {
+      "name": "Eduard Shevardnadze",
+      "reference": "eduard_shevardnadze.dds",
+      "upstream_path": "gfx/leaders/GEO/eduard_shevardnadze.dds",
+      "git_blob": "06fa8b71fd2ac86360f70973e06658c0a1724f31",
+      "asset": "res://assets/ui/leaders/06fa8b71fd2ac86360f70973e06658c0a1724f31.png",
+      "sha256": "fa01f46e69ab393032cb2838e2496925f143eaf520c214022a660beef5c9ba5f",
+      "source_sha256": "c8e65ac06c745f09cc5fa85c98e7f30697980ba7235b022fe37126ee3ccfc7b6"
+    },
+    "GER:head_of_government": {
+      "name": "Gerhard Schröder",
+      "reference": "Gerhard_Schroeder.dds",
+      "upstream_path": "gfx/leaders/GER/Gerhard_Schroeder.dds",
+      "git_blob": "0b565b0d1498132cda04d067ae2f7ab50127b0e3",
+      "asset": "res://assets/ui/leaders/0b565b0d1498132cda04d067ae2f7ab50127b0e3.png",
+      "sha256": "3a47ad805f32abc27ec3512bc97d9717f8e4a28a9f1b25f483d5da14f92fe00a",
+      "source_sha256": "8864df30b2e3c233b078d886913f9c0bada457401d5a0a5fc7f04fcc8ee77825"
+    },
+    "GRA:head_of_government": {
+      "name": "Keith Mitchell",
+      "reference": "Keith_Mitchel.dds",
+      "upstream_path": "gfx/leaders/GRA/Keith_Mitchel.dds",
+      "git_blob": "4591765dc76aa3643fe3142db007af86bc804e79",
+      "asset": "res://assets/ui/leaders/4591765dc76aa3643fe3142db007af86bc804e79.png",
+      "sha256": "a255e3ad8e553876d43a86ca5a3657f7526788921a9abca7fa6bd65aa9e94b0b",
+      "source_sha256": "b3c9f6a51db59b2848311ea695e768771b95337f477714062495cdc329f7f8ff"
+    },
+    "GRE:head_of_government": {
+      "name": "Costas Simitis",
+      "reference": "kostas_simitis.dds",
+      "upstream_path": "gfx/leaders/GRE/kostas_simitis.dds",
+      "git_blob": "d0e03ee485ba67ad650adbab3ac14820c23511f5",
+      "asset": "res://assets/ui/leaders/d0e03ee485ba67ad650adbab3ac14820c23511f5.png",
+      "sha256": "ba0336922777a28b212e355f17abae256c8be2197b4ecf2589b61879c2f25391",
+      "source_sha256": "f58a269ed4d278a6bf5d0cc57a74a2efad69abd07baf003042bb0420603a1512"
+    },
+    "GRN:head_of_government": {
+      "name": "Jonathan Motzfeldt",
+      "reference": "Jonathan_Motzfeldt.dds",
+      "upstream_path": "gfx/leaders/GRN/Jonathan_Motzfeldt.dds",
+      "git_blob": "fc70b4c5b9acdb679fd7e151cd9ff06dda6f3998",
+      "asset": "res://assets/ui/leaders/fc70b4c5b9acdb679fd7e151cd9ff06dda6f3998.png",
+      "sha256": "684c4d2a0ac30b8a967f4777789ab6c4bc4e1f3002038f9f0b013c47b77e8aaa",
+      "source_sha256": "05d4126ff5862b56149808c32b01df52ef098db056dd8757199c762ce04b9683"
+    },
+    "GUA:head_of_state": {
+      "name": "Alfonso Portillo",
+      "reference": "alfonso_portillo.dds",
+      "upstream_path": "gfx/leaders/GUA/alfonso_portillo.dds",
+      "git_blob": "2480b76ae6dffde7445bec029388a3e63bf854e2",
+      "asset": "res://assets/ui/leaders/2480b76ae6dffde7445bec029388a3e63bf854e2.png",
+      "sha256": "a8035f03804814564fa84793b5c77f1c53a10fa81079e14a9b6afa6ce9ed3178",
+      "source_sha256": "f614f3bb90a3b0c407aac2391d5a22238fea9929b95908b3585af99e5d920867"
+    },
+    "GUB:head_of_state": {
+      "name": "Malam Vacai Sanhá",
+      "reference": "Malam_Vacai_Sanha.dds",
+      "upstream_path": "gfx/leaders/GUB/Malam_Vacai_Sanha.dds",
+      "git_blob": "7d51abd6d76d80f87537f751579c6504e0dc7494",
+      "asset": "res://assets/ui/leaders/7d51abd6d76d80f87537f751579c6504e0dc7494.png",
+      "sha256": "a74babec1fd2a3e1d3b8fe92298982dd387332436a5e6925b35ebd061dbba3d0",
+      "source_sha256": "a2e1efd0fcc9badab822a49a36000a2a452ab96e8013b2e3d03857c6bed6b0d0"
+    },
+    "GUI:head_of_state": {
+      "name": "Lansana Conte",
+      "reference": "Lansana_Conte.dds",
+      "upstream_path": "gfx/leaders/GUI/Lansana_Conte.dds",
+      "git_blob": "760b099bb44cb007644aa5c8bb4e31754417f904",
+      "asset": "res://assets/ui/leaders/760b099bb44cb007644aa5c8bb4e31754417f904.png",
+      "sha256": "5afc96a2b0d15326298d6ada2a550f31dc5d0ee60977cf4cb0795460ecb40d13",
+      "source_sha256": "22bf0487a35981fc1df94810b3b87a70b9676fd30de7796c5838b617b0b4195b"
+    },
+    "GUY:head_of_government": {
+      "name": "Bharrat Jagdeo",
+      "reference": "bharrat_jagdeo.dds",
+      "upstream_path": "gfx/leaders/GUY/bharrat_jagdeo.dds",
+      "git_blob": "f226c1313f9cfcbe7ca04e422baa61430ca1dbde",
+      "asset": "res://assets/ui/leaders/f226c1313f9cfcbe7ca04e422baa61430ca1dbde.png",
+      "sha256": "4aa79ca4005af5ee54430704c1713d8a9ce0a75ebd997ce6c702ea404b4e5bbb",
+      "source_sha256": "956b04cc8eddb47a40724d69c862cc7a45e93117e4e1265337c98a8b4856128a"
+    },
+    "HAI:head_of_state": {
+      "name": "René Préval",
+      "reference": "rene_preval.dds",
+      "upstream_path": "gfx/leaders/HAI/rene_preval.dds",
+      "git_blob": "6a9701189979fbb2d31b6e32d128bdd43d9f084b",
+      "asset": "res://assets/ui/leaders/6a9701189979fbb2d31b6e32d128bdd43d9f084b.png",
+      "sha256": "e723cadcb60c2ac5b9cd1403ce59c11c9e212a70555884b05b5a815feeb97f66",
+      "source_sha256": "10127394ec47ab59fbcfa948dd7ab77a3eaa99cfef9b1cfd6953a5384eb3314b"
+    },
+    "HAM:head_of_state": {
+      "name": "Mohammed Dahlan",
+      "reference": "gfx/leaders/PAL/mohammed_dahlan.dds",
+      "upstream_path": "gfx/leaders/PAL/mohammed_dahlan.dds",
+      "git_blob": "23e3729667cea9064ca5ec5c85f8b6706faa510b",
+      "asset": "res://assets/ui/leaders/23e3729667cea9064ca5ec5c85f8b6706faa510b.png",
+      "sha256": "02112e919214d778c95922437928df492c50b1513425069ca65ed1c8850d6308",
+      "source_sha256": "0ac2354b6d699cd75fabd93d6dffdacadc9b9b7d4022ba0a8603ec5f8ef3d521"
+    },
+    "HEZ:head_of_state": {
+      "name": "Hassan Nasrallah",
+      "reference": "hassan_nasrallah.dds",
+      "upstream_path": "gfx/leaders/HEZ/hassan_nasrallah.dds",
+      "git_blob": "8fe88bb215e50479d9f0c1b0114dcf4fe4e0caf6",
+      "asset": "res://assets/ui/leaders/8fe88bb215e50479d9f0c1b0114dcf4fe4e0caf6.png",
+      "sha256": "77fe9df74fafce5d854ac26a6a89044522277f5fb5dbbe65c7924f85360398ed",
+      "source_sha256": "ad4fcdb3a0766e0953c76fee1c0767fd72718ec5ca2f885e909778d324fd9811"
+    },
+    "HKG:head_of_state": {
+      "name": "Tung Chee-hwa",
+      "reference": "tung_cheehwa.dds",
+      "upstream_path": "gfx/leaders/HKG/tung_cheehwa.dds",
+      "git_blob": "694e3b2edb9c1d38a2961b5f4ad7f75f7cd77f6d",
+      "asset": "res://assets/ui/leaders/694e3b2edb9c1d38a2961b5f4ad7f75f7cd77f6d.png",
+      "sha256": "a01cec1a671c1b7ac8b37ad41155da40185c2aef477cb108f6dbce04403eaa98",
+      "source_sha256": "89f13f34615d5921f1442bda7a671e72af0c4aa9bcb4cfed359e4d351f046c7f"
+    },
+    "HOL:head_of_government": {
+      "name": "Wim Kok",
+      "reference": "Wim_Kok.dds",
+      "upstream_path": "gfx/leaders/HOL/Wim_Kok.dds",
+      "git_blob": "400a51aefd74cf7b4ad107c05a73938e8dcfc908",
+      "asset": "res://assets/ui/leaders/400a51aefd74cf7b4ad107c05a73938e8dcfc908.png",
+      "sha256": "035d6b1fd87d8f7c0b8c3ec31b06d8bcd7435bc6365b15be165450820dfb773a",
+      "source_sha256": "c32f3295bb48a380abc55b5f4a81839bb45732342660f6ae09bcac6935c8a190"
+    },
+    "HON:head_of_state": {
+      "name": "Carlos Roberto Flores",
+      "reference": "carlos_flores.dds",
+      "upstream_path": "gfx/leaders/HON/carlos_flores.dds",
+      "git_blob": "4cbcee6ca1917afe7ccdfcc9cf2182c2c0323c26",
+      "asset": "res://assets/ui/leaders/4cbcee6ca1917afe7ccdfcc9cf2182c2c0323c26.png",
+      "sha256": "ec1539db36f018b8fc6b1d4f811acf2e82f1c1d0ec50160e4edae818aef96be5",
+      "source_sha256": "7f6637f1d2dfb4c1cd2994a5bc30229bdcc297a04df446a42190e61974709b11"
+    },
+    "HUN:head_of_government": {
+      "name": "Viktor Orban",
+      "reference": "Viktor_Orban.dds",
+      "upstream_path": "gfx/leaders/HUN/Viktor_Orban.dds",
+      "git_blob": "1af777690fec7aadb1abcfc7197b87e754b79ec8",
+      "asset": "res://assets/ui/leaders/1af777690fec7aadb1abcfc7197b87e754b79ec8.png",
+      "sha256": "8b4c2c78ce4e951f145ebf90859dff469b00143c81ebe94cfdf86e473d405187",
+      "source_sha256": "6f5e6621bc92fd04c42d074d33e464c12b50b091e5092c897b19137539a4d270"
+    },
+    "ICE:head_of_government": {
+      "name": "Davíð Oddsson",
+      "reference": "David_Oddsson.dds",
+      "upstream_path": "gfx/leaders/ICE/David_Oddsson.dds",
+      "git_blob": "3541b960776a6c04f462de4ff4cef46a1296d881",
+      "asset": "res://assets/ui/leaders/3541b960776a6c04f462de4ff4cef46a1296d881.png",
+      "sha256": "67602bb9c4f40961898f346e5a1118e857c4a1ae9c22f288339c47d16b6eee9a",
+      "source_sha256": "79acc0fa9db0a552f262735ddaef73c0dcae7dbc609bdab2dd9ebacc977c9874"
+    },
+    "IEK:head_of_state": {
+      "name": "Erfan Ali Abduleziz",
+      "reference": "erfan_ali_abduleziz.dds",
+      "upstream_path": "gfx/leaders/IEK/erfan_ali_abduleziz.dds",
+      "git_blob": "14ae6fedd0283ee18c53269c9f59572f336bfd64",
+      "asset": "res://assets/ui/leaders/14ae6fedd0283ee18c53269c9f59572f336bfd64.png",
+      "sha256": "2af9a2a4528ed20671e317bbbc38c293f374fb97659629900f9d8f05db971c8c",
+      "source_sha256": "6a07b62bce0951e2f4b65b628a67eba781e9320209165737a85140e746b236cc"
+    },
+    "IND:head_of_state": {
+      "name": "Abdurrahman Wahid",
+      "reference": "Abdurrahman_Wahid.dds",
+      "upstream_path": "gfx/leaders/IND/Abdurrahman_Wahid.dds",
+      "git_blob": "0ae7de9f9d4eba8f7ec9bff0865ebdbcfb109e1c",
+      "asset": "res://assets/ui/leaders/0ae7de9f9d4eba8f7ec9bff0865ebdbcfb109e1c.png",
+      "sha256": "48c6d18f48193fc45a99bfdc2b7db792d61d8708d4481f1f385ce668c9868e3a",
+      "source_sha256": "fcce64fb977e9bb4575f7985178379ed92fd8a6433ff20dac41a0d1064fc73b9"
+    },
+    "IRE:head_of_government": {
+      "name": "Bertie Ahern",
+      "reference": "bertie_ahern.dds",
+      "upstream_path": "gfx/leaders/IRE/bertie_ahern.dds",
+      "git_blob": "868908ad710a1ca91fb0a1bf6d4dd38f045ee881",
+      "asset": "res://assets/ui/leaders/868908ad710a1ca91fb0a1bf6d4dd38f045ee881.png",
+      "sha256": "2f69ec4d05856a01a8e394e1e5c4f89f492100b40f8e42b3ff10e273c7849fdf",
+      "source_sha256": "4d6d022dd9181d6d7fce6ddd460f6cc1076a565792d7311e4a32a536bfdfee8a"
+    },
+    "IRQ:head_of_state": {
+      "name": "Saddam Hussein",
+      "reference": "saddam_hussein.dds",
+      "upstream_path": "gfx/leaders/IRQ/saddam_hussein.dds",
+      "git_blob": "b72446f4d82f1e3775e92a9a0d0b189c371f0427",
+      "asset": "res://assets/ui/leaders/b72446f4d82f1e3775e92a9a0d0b189c371f0427.png",
+      "sha256": "351276dbc4ec9187ceb7f1df2fadb51072547b9a5f4db2a2171dd9ebcda3db48",
+      "source_sha256": "870e959a535225b2d5cece22d50d918beabed67f42c7b4d3a03dd263cea3e88a"
+    },
+    "ISR:head_of_government": {
+      "name": "Ehud Barak",
+      "reference": "barak_ehud.dds",
+      "upstream_path": "gfx/leaders/ISR/barak_ehud.dds",
+      "git_blob": "18daed507265637e81af2d77c1c0b4d8cdb54288",
+      "asset": "res://assets/ui/leaders/18daed507265637e81af2d77c1c0b4d8cdb54288.png",
+      "sha256": "8afdeb890c51bf152f3c96fe68b3a2e873b2c3c9b8c4b3179f2e62ab8f9af9ee",
+      "source_sha256": "8421a413a40ccb4303c916ceea7370dde2d08870e32d8cf1ba32ba554b8dd88e"
+    },
+    "ITA:head_of_government": {
+      "name": "Massimo D'Alema",
+      "reference": "massimo_alema.dds",
+      "upstream_path": "gfx/leaders/ITA/massimo_alema.dds",
+      "git_blob": "04fe0a468514a5617201af2b7370f46816bf75e4",
+      "asset": "res://assets/ui/leaders/04fe0a468514a5617201af2b7370f46816bf75e4.png",
+      "sha256": "9903c1e4cf6e7f7e02d462b33455916abb739a15f254ada241e059615f896694",
+      "source_sha256": "b102ad1570bdcca62f3df8636584ef33a6851ceb4e4ac01ff0d57daf4fd02d18"
+    },
+    "JAM:head_of_government": {
+      "name": "Percival James Patterson",
+      "reference": "percival_james_patterson.dds",
+      "upstream_path": "gfx/leaders/JAM/percival_james_patterson.dds",
+      "git_blob": "63f46f3966fb364d6c16b0518c78a0b39fc0cdf5",
+      "asset": "res://assets/ui/leaders/63f46f3966fb364d6c16b0518c78a0b39fc0cdf5.png",
+      "sha256": "6ec8dd1c507049a8fd434eb4dc45d961ad2fb1b03c8ee9cfd126f9ee8e54dfda",
+      "source_sha256": "c65cd09fe40af62d80fc71322df6d257b21293063ea1aec88ec3af5c6b91729b"
+    },
+    "JAP:head_of_state": {
+      "name": "Emperor Akihito",
+      "reference": "gfx/interface/ideas/japan/emperor_akihito.dds",
+      "upstream_path": "gfx/interface/ideas/japan/emperor_akihito.dds",
+      "git_blob": "83f5f6ac39d41c58acde24237dd2cc53829e21ff",
+      "asset": "res://assets/ui/leaders/83f5f6ac39d41c58acde24237dd2cc53829e21ff.png",
+      "sha256": "ba42d12765b559b886aea1a6be4c8cad8a220c3a3f58d4d530fb479e23419bd9",
+      "source_sha256": "23af5bba299bada23bf7f4d79cdf911d74ff3b66b9ad09306ec15dcf0cfa620b"
+    },
+    "JAP:head_of_government": {
+      "name": "Keizo Obuchi",
+      "reference": "Keizo_Obuchi.dds",
+      "upstream_path": "gfx/leaders/JAP/Keizo_Obuchi.dds",
+      "git_blob": "e799551f9c833b3429ccee9cbe31aed2a70c7943",
+      "asset": "res://assets/ui/leaders/e799551f9c833b3429ccee9cbe31aed2a70c7943.png",
+      "sha256": "b6925887b4a30be0c6e0fbf4a76f1c18f770c742e651058585ea1881c10e3ab1",
+      "source_sha256": "a34b8ca7dc6d49a3afe37cd8077090b42e3398659322dca99cf101918d9c5b79"
+    },
+    "JOR:head_of_government": {
+      "name": "Abdullah II",
+      "reference": "Western_Abdullah_II.dds",
+      "upstream_path": "gfx/leaders/JOR/Western_Abdullah_II.dds",
+      "git_blob": "ac6d89fc6aec6d8ee471d09d95dd3ddca74ed4dd",
+      "asset": "res://assets/ui/leaders/ac6d89fc6aec6d8ee471d09d95dd3ddca74ed4dd.png",
+      "sha256": "3526575bb272a5513a9da7e11c29230b5b8d3af9453c45e8856aaf6b9b918575",
+      "source_sha256": "17515b70488ccca1f33ceea050a7102ca53d3103406e2a76e2b4aa4d66738ac4"
+    },
+    "JUB:head_of_state": {
+      "name": "Barre Adan Shire Hiiraale",
+      "reference": "JUB_Barre_Adan_Shire_Hiiraale.dds",
+      "upstream_path": "gfx/leaders/JUB/JUB_Barre_Adan_Shire_Hiiraale.dds",
+      "git_blob": "e31c72a37275a9bc17b4545454632436b324b10d",
+      "asset": "res://assets/ui/leaders/e31c72a37275a9bc17b4545454632436b324b10d.png",
+      "sha256": "d77d29be1d0c2440c950c9bed5d5ee5ef9edc816f382482665de78dbcfc48288",
+      "source_sha256": "5c3ecedd453b3ac81eecd29ddb29b11d8cdcba4efdf0a19936de96d39bf8b208"
+    },
+    "KAC:head_of_state": {
+      "name": "Lamung Tu Jai",
+      "reference": "Lamung_Tu.dds",
+      "upstream_path": "gfx/leaders/KAC/Lamung_Tu.dds",
+      "git_blob": "747bd4a3311eb40567d09808dec5079b68af63e9",
+      "asset": "res://assets/ui/leaders/747bd4a3311eb40567d09808dec5079b68af63e9.png",
+      "sha256": "7babdd36eb9754bd2ee64a3669a04f179bb934a16e94e365fe9da8ed6e55dae1",
+      "source_sha256": "3d40a7b09462c55fe6da2b6cfc5ca99193f7872c03872316d177a54922298b11"
+    },
+    "KAR:head_of_state": {
+      "name": "Bo Mya",
+      "reference": "Bo_Mya.dds",
+      "upstream_path": "gfx/leaders/KAR/Bo_Mya.dds",
+      "git_blob": "a26ec90f27a0b99142cb532773982d2e014db3af",
+      "asset": "res://assets/ui/leaders/a26ec90f27a0b99142cb532773982d2e014db3af.png",
+      "sha256": "94bbe33dd07622a2cdf37f4232ace5428e8856df9129d43d321bfa84fd45038b",
+      "source_sha256": "53eee89e54eeb327c2056531afd9f383d9a33567fbb4280fe208d40c7dd15991"
+    },
+    "KAZ:head_of_state": {
+      "name": "Nursultan Nazarbayev",
+      "reference": "nursultan_nazabayev.dds",
+      "upstream_path": "gfx/leaders/KAZ/nursultan_nazabayev.dds",
+      "git_blob": "94e481ec001146bd21237b20455cca656b86621e",
+      "asset": "res://assets/ui/leaders/94e481ec001146bd21237b20455cca656b86621e.png",
+      "sha256": "a61a76a19fda918519664abc8589eb7bc83d5cfbad661cdb365a12081fdc08a6",
+      "source_sha256": "fd6f7da9227da65ce44c6268e18f084bc9c922a41f4938b1a140f676ffb0928d"
+    },
+    "KEN:head_of_state": {
+      "name": "Daniel arap Moi",
+      "reference": "Daniel_arap_Moi.dds",
+      "upstream_path": "gfx/leaders/KEN/Daniel_arap_Moi.dds",
+      "git_blob": "a2ccaf4d5f94b912fb5f81fdd254bfecc875fc48",
+      "asset": "res://assets/ui/leaders/a2ccaf4d5f94b912fb5f81fdd254bfecc875fc48.png",
+      "sha256": "974af7071762f35f530afdcae33bdb98bc50f783917682e537fdce578b7abd38",
+      "source_sha256": "2eca852aa0f3a8d82e055961c908d293ab819578895ecff6b8f357d18c955ffa"
+    },
+    "KOR:head_of_state": {
+      "name": "Kim Dae-jung",
+      "reference": "Kim_Dae-jung.dds",
+      "upstream_path": "gfx/leaders/KOR/Kim_Dae-jung.dds",
+      "git_blob": "cebbbe68124dac7dbdc8a093fd977071a3312104",
+      "asset": "res://assets/ui/leaders/cebbbe68124dac7dbdc8a093fd977071a3312104.png",
+      "sha256": "c4b110073f3aca01ecf6337936bdbb8f80794aa2653bb4f40d61a39c8ae319e3",
+      "source_sha256": "e2eea7c0468af070f2df36274def21fd263477ed5132760bc81a2c1130868d0c"
+    },
+    "KOS:head_of_state": {
+      "name": "Ibrahim Rugova",
+      "reference": "ibrahim_rugova.dds",
+      "upstream_path": "gfx/leaders/KOS/ibrahim_rugova.dds",
+      "git_blob": "a363f7395bfc2c0cda8065797199e531a197b826",
+      "asset": "res://assets/ui/leaders/a363f7395bfc2c0cda8065797199e531a197b826.png",
+      "sha256": "9f6de82471f15280e40954940ad3f76a65d293b670d32cda2d0f226a38066a1f",
+      "source_sha256": "843991fd4bb9ad3fbfe6aeb84bad1a2c2f48d01bae0c682ab43e5ae18389af51"
+    },
+    "KUR:head_of_state": {
+      "name": "Masoud Barzani",
+      "reference": "Masoud_Barzani.dds",
+      "upstream_path": "gfx/leaders/KUR/Masoud_Barzani.dds",
+      "git_blob": "448c457d80494902431cd5b21d7850898c2bad94",
+      "asset": "res://assets/ui/leaders/448c457d80494902431cd5b21d7850898c2bad94.png",
+      "sha256": "e0fc9dc4da727eee1db74df8f79952714d198971b56ea923c46fce89893de8e2",
+      "source_sha256": "75682d234894a56849ae90df5f8b8d873a0e067534a677c8615dab90acdd6aca"
+    },
+    "KUW:head_of_government": {
+      "name": "Jaber Al-Ahmad Al-Sabah",
+      "reference": "jaber_al_sabah.dds",
+      "upstream_path": "gfx/leaders/KUW/jaber_al_sabah.dds",
+      "git_blob": "443028169cb66ba645b245a9c3e052bf7c3e3a74",
+      "asset": "res://assets/ui/leaders/443028169cb66ba645b245a9c3e052bf7c3e3a74.png",
+      "sha256": "315dc5c8038d31b4a676d6557401639a5e8420d3bc05c9802cde3af11c668633",
+      "source_sha256": "b407c3e80ba3e9faee9b1d684bd12e6e451a5b75d719ad9b60da4e29678298ee"
+    },
+    "KYR:head_of_state": {
+      "name": "Askar Akayev",
+      "reference": "askar_akayev.dds",
+      "upstream_path": "gfx/leaders/KYR/askar_akayev.dds",
+      "git_blob": "25d009a29e81ecbb5145ff7a7a535c9afb97407c",
+      "asset": "res://assets/ui/leaders/25d009a29e81ecbb5145ff7a7a535c9afb97407c.png",
+      "sha256": "b93954a8320abf3ac00391c1199998feeaaa276a6e9da0cedebd4a3f55dcf919",
+      "source_sha256": "b7ca0f03d7bd955c02d124109830066dc85faec1e77a9b00bead79097845ca59"
+    },
+    "LAO:head_of_state": {
+      "name": "Khamtai Siphandon",
+      "reference": "Khamtai_Siphandon.dds",
+      "upstream_path": "gfx/leaders/LAO/Khamtai_Siphandon.dds",
+      "git_blob": "369f1e60fb2f24a6dd27c82367cb94ced8324921",
+      "asset": "res://assets/ui/leaders/369f1e60fb2f24a6dd27c82367cb94ced8324921.png",
+      "sha256": "d66789d889541f04db3b5ae2ca8e2862d15101bfccd3b0cccf13c89c1ccaeb23",
+      "source_sha256": "3eea43862689ca37236ea54a4863167d5bcaa560436657c88aecf2f5db3724b6"
+    },
+    "LAT:head_of_government": {
+      "name": "Vaira Vike Freiberga",
+      "reference": "vaira_freiberga.dds",
+      "upstream_path": "gfx/leaders/LAT/vaira_freiberga.dds",
+      "git_blob": "74cd2b4f25ddcbc8d5ecf02c66ac554c2ee1ca5a",
+      "asset": "res://assets/ui/leaders/74cd2b4f25ddcbc8d5ecf02c66ac554c2ee1ca5a.png",
+      "sha256": "c0b5c60ae6d9751926b0efee47aa462b68b1b1152a3b86b075dcdfe86a9f0650",
+      "source_sha256": "549f975ca1b1f84b9e5de36a8896536402ce7e611f026dec1d38f0814c5dcc23"
+    },
+    "LBA:head_of_state": {
+      "name": "Muammar Gaddafi",
+      "reference": "muammar_al_gaddafi.dds",
+      "upstream_path": "gfx/leaders/LBA/muammar_al_gaddafi.dds",
+      "git_blob": "b108357c77fc92b8cbf2b3fc4b28843e58f31fbd",
+      "asset": "res://assets/ui/leaders/b108357c77fc92b8cbf2b3fc4b28843e58f31fbd.png",
+      "sha256": "be832a480ccea46d1e038b7e09ce489ab416b07eab264867b2d0496e84e41d87",
+      "source_sha256": "06971c0ed38315b9398bceac2a74c752d160abe1f02b0a80bbf205764c576f61"
+    },
+    "LES:head_of_government": {
+      "name": "Pakalitha Mosisili",
+      "reference": "Pakalitha_Mosisili.dds",
+      "upstream_path": "gfx/leaders/LES/Pakalitha_Mosisili.dds",
+      "git_blob": "88f21d7ee8874ef1df8c14402a49466fa3534076",
+      "asset": "res://assets/ui/leaders/88f21d7ee8874ef1df8c14402a49466fa3534076.png",
+      "sha256": "8489debe687bfb1c5d77e45d5c44fab04fdb3fb7dd6496b5623591f8dcfe89de",
+      "source_sha256": "75d1ae928fd1fe85f1a27c5a8f55463195b7f03970376c24048480c1fceeb9d8"
+    },
+    "LIB:head_of_state": {
+      "name": "Charles Taylor",
+      "reference": "charles_taylor.dds",
+      "upstream_path": "gfx/leaders/LIB/charles_taylor.dds",
+      "git_blob": "59dd13e1c6606c2f99489dea625f31a098eebb2d",
+      "asset": "res://assets/ui/leaders/59dd13e1c6606c2f99489dea625f31a098eebb2d.png",
+      "sha256": "3078637f95e81140a7aeedef2d2eaf11f32b5a8a0b8bf374725db3cd6ec42200",
+      "source_sha256": "c0168841c52473352084d32eb3075cdc3e4c5a6b6ac69c64d0c7c374e962bf07"
+    },
+    "LIT:head_of_state": {
+      "name": "Valdas Adamkus",
+      "reference": "valdas_adamkus.dds",
+      "upstream_path": "gfx/leaders/LIT/valdas_adamkus.dds",
+      "git_blob": "84b39860418a0fa8efe064971f509abc1b390340",
+      "asset": "res://assets/ui/leaders/84b39860418a0fa8efe064971f509abc1b390340.png",
+      "sha256": "c70ae571796ef707712668e1c6e88bf313c8ad7e398366c6cbf81d00bb9407ce",
+      "source_sha256": "fec6357f096fb8677b1c48406db335bf2b51334bb3e6ca04a7e89d81a12d4c60"
+    },
+    "LUR:head_of_state": {
+      "name": "Sekou Conneh",
+      "reference": "Sekou_Conneh.dds",
+      "upstream_path": "gfx/leaders/LUR/Sekou_Conneh.dds",
+      "git_blob": "b379856ab695c8e544a4d2be6a2cc6256e4386d1",
+      "asset": "res://assets/ui/leaders/b379856ab695c8e544a4d2be6a2cc6256e4386d1.png",
+      "sha256": "cbfe722faa59b258ce04681e15f6fca4fc801bb72d3dd34dc326e5823debdc84",
+      "source_sha256": "12152cdb6610293cf2496c83fb49457f6901e429092a773d1e2b70c230970fd5"
+    },
+    "LUX:head_of_government": {
+      "name": "Jean-Claude Juncker",
+      "reference": "Jean-Claude_Juncker.dds",
+      "upstream_path": "gfx/leaders/LUX/Jean-Claude_Juncker.dds",
+      "git_blob": "a53a415648a1982883e781a5a0f7aeb33b23bff3",
+      "asset": "res://assets/ui/leaders/a53a415648a1982883e781a5a0f7aeb33b23bff3.png",
+      "sha256": "9efefebda233a74e57f16febdc3ee5e40e22721949900ea4c2d941dad9dea960",
+      "source_sha256": "e1d97a6de5c45c1555640c4db30a96335bef543b2e440edb0f26ced2b0e1b841"
+    },
+    "MAC:head_of_state": {
+      "name": "Edmund Ho",
+      "reference": "edmund_ho.dds",
+      "upstream_path": "gfx/leaders/MAC/edmund_ho.dds",
+      "git_blob": "0df899180454c788fc3c16e3d2b32ec9dba25e29",
+      "asset": "res://assets/ui/leaders/0df899180454c788fc3c16e3d2b32ec9dba25e29.png",
+      "sha256": "eb73a8c995ede8767a96e24583a174ba591f5ed23e4afbac2601d687d6ad78d2",
+      "source_sha256": "631dc49fdf357e82a227e887b8fb832f090ef99b145cd65b022a18437ce13990"
+    },
+    "MAD:head_of_state": {
+      "name": "Didier Ratsiraka",
+      "reference": "Didier_Ratsiraka.dds",
+      "upstream_path": "gfx/leaders/MAD/Didier_Ratsiraka.dds",
+      "git_blob": "f1c692caf14932f21a5311960f19195001422ba6",
+      "asset": "res://assets/ui/leaders/f1c692caf14932f21a5311960f19195001422ba6.png",
+      "sha256": "ba69dacca29f42825289fc15e8dabad13ca70f5dfe7937eef8ab8733b1c6f345",
+      "source_sha256": "cb5897d4925158980e8d56f360cc813d1402c308ec2e0f51b2bbbffc2edef4c6"
+    },
+    "MAL:head_of_state": {
+      "name": "Alpha Oumar Konaré",
+      "reference": "alpha_oumar_konare.dds",
+      "upstream_path": "gfx/leaders/MAL/alpha_oumar_konare.dds",
+      "git_blob": "5e52322eb155ba443e476553ff09f1c51125b4e6",
+      "asset": "res://assets/ui/leaders/5e52322eb155ba443e476553ff09f1c51125b4e6.png",
+      "sha256": "f1c874c4ec6cf51323d434097937084187a1e8d75ec5a5d8e56ccd8220b2ee85",
+      "source_sha256": "e48a38eed040fe3cc4c205cc7e3fa5eedcf059b417f5bebde03a4537848da7df"
+    },
+    "MAU:head_of_state": {
+      "name": "Maaouya Ould Sid Ahmed Taya",
+      "reference": "Maaouya_Ould_Sid_Ahmed_Taya.dds",
+      "upstream_path": "gfx/leaders/MAU/Maaouya_Ould_Sid_Ahmed_Taya.dds",
+      "git_blob": "dbe31c26aeceabfa6d44350ea28818063f1a1a03",
+      "asset": "res://assets/ui/leaders/dbe31c26aeceabfa6d44350ea28818063f1a1a03.png",
+      "sha256": "8b2262c8dbd461fcb3a58de2146837e0b5d13187954b7322479065c9605934ae",
+      "source_sha256": "e341390a4654f4cf89b361652c972fcdc8ba62d391e47249a61dbebc596d4796"
+    },
+    "MAY:head_of_government": {
+      "name": "Mahathir Mohamad",
+      "reference": "mahathir_mohamad.dds",
+      "upstream_path": "gfx/leaders/MAY/mahathir_mohamad.dds",
+      "git_blob": "7fdcf0e9e029355ceb18b3d0a9ac3add022e6d26",
+      "asset": "res://assets/ui/leaders/7fdcf0e9e029355ceb18b3d0a9ac3add022e6d26.png",
+      "sha256": "4f76fd19d185ec375819d2a7c859e5347028eb03eb1ffcfc34dd1a425c4e5fb5",
+      "source_sha256": "6cf1b07fcb1908818ea3620c4452da3d372e30622e3ce560fc7c7d45295f1732"
+    },
+    "MEX:head_of_state": {
+      "name": "Ernesto Zedillo",
+      "reference": "ernesto_zedillo.dds",
+      "upstream_path": "gfx/leaders/MEX/ernesto_zedillo.dds",
+      "git_blob": "faebc830ff3220e4d85b9c178ab35dad93c366ab",
+      "asset": "res://assets/ui/leaders/faebc830ff3220e4d85b9c178ab35dad93c366ab.png",
+      "sha256": "ed0e8b6c3da4c90ee54e1a79d188fffd0d8418f37f94f77fcefdfd0f376d8d18",
+      "source_sha256": "a8314c8dfc27c3357b8021fa0fb25ef557f8f5c28de8a680eb4d4c23b37aa7aa"
+    },
+    "MIC:head_of_state": {
+      "name": "Leo Falcam",
+      "reference": "leo_falcam.dds",
+      "upstream_path": "gfx/leaders/MIC/leo_falcam.dds",
+      "git_blob": "948949b54acf53c2df9fa341351b5a08bff03f34",
+      "asset": "res://assets/ui/leaders/948949b54acf53c2df9fa341351b5a08bff03f34.png",
+      "sha256": "a4acf8a9fa401622601dc0cd11bb742a7beacd1280afeb3a4739dfba7d178bb6",
+      "source_sha256": "aabf70234e9a840d090173fe282bab307989c9c20d0f9188a7515af4e6e219d9"
+    },
+    "MLC:head_of_state": {
+      "name": "Jean-Pierre Bemba",
+      "reference": "Jean_Pierre_Bemba.dds",
+      "upstream_path": "gfx/leaders/MLC/Jean_Pierre_Bemba.dds",
+      "git_blob": "cd7125a7028b29103c8900a7f37e9f561cf16820",
+      "asset": "res://assets/ui/leaders/cd7125a7028b29103c8900a7f37e9f561cf16820.png",
+      "sha256": "c6e9c772d3f6884fc2820a19738492fb511e7a3f57ac010c4c5e4a5d7b361c30",
+      "source_sha256": "ee97c9c62fde0171d14b5fa177f5e84fe1f7ce2b5d8020ec4de8750353e3b985"
+    },
+    "MLD:head_of_state": {
+      "name": "Maumoon Abdul Gayoom",
+      "reference": "maumoon_abdul_gayoom.dds",
+      "upstream_path": "gfx/leaders/MLD/maumoon_abdul_gayoom.dds",
+      "git_blob": "9e3007b1c44659efe11299c66dabff3886cd48eb",
+      "asset": "res://assets/ui/leaders/9e3007b1c44659efe11299c66dabff3886cd48eb.png",
+      "sha256": "92dd08627d1526463c851d8d4f7467b0a8871dbc7869ef3682740db2092bef0e",
+      "source_sha256": "a23c15e43edd561a2f61a669d153b0cb4659f403f4c3162cedb635c6c4dd13e2"
+    },
+    "MLT:head_of_government": {
+      "name": "Eddie Fenech Adami",
+      "reference": "eddie_fenech_adami.dds",
+      "upstream_path": "gfx/leaders/MLT/eddie_fenech_adami.dds",
+      "git_blob": "7ec7ac587fbc762fbd9b39b3ae3034ab7f87792f",
+      "asset": "res://assets/ui/leaders/7ec7ac587fbc762fbd9b39b3ae3034ab7f87792f.png",
+      "sha256": "1690e933282d2579726f1113ff12f195d7a5c90fba9780d154c1feabfed17b3a",
+      "source_sha256": "1cec2c5cc143c1149c47f99ddf8435db26ca8ca7c9bd06a2fb9457f276d367f4"
+    },
+    "MLV:head_of_state": {
+      "name": "Dumitru Braghis",
+      "reference": "dumitru_braghis.dds",
+      "upstream_path": "gfx/leaders/MLV/dumitru_braghis.dds",
+      "git_blob": "85cff7462cef05d26d7d6e6f9dc949ab4829d408",
+      "asset": "res://assets/ui/leaders/85cff7462cef05d26d7d6e6f9dc949ab4829d408.png",
+      "sha256": "0da2ca667b9299790a880c97e47b8c5ae89bfa2f2e25e71038a279672f062890",
+      "source_sha256": "62b7eb38ac8a26435681b063cf8274bbe07c2ab168c84e3eb638609f8bd1abec"
+    },
+    "MLW:head_of_state": {
+      "name": "Elson Bakili Muluzi",
+      "reference": "bakili_muluzi.dds",
+      "upstream_path": "gfx/leaders/MLW/bakili_muluzi.dds",
+      "git_blob": "2130bede811026908f6e45b6b4dd8dd265cca9c6",
+      "asset": "res://assets/ui/leaders/2130bede811026908f6e45b6b4dd8dd265cca9c6.png",
+      "sha256": "f326e603ff99c1d179ea3cbcd5502ac2c833f250f735cfccc69e4ae9eae3c37c",
+      "source_sha256": "733382073e6021466e4196d0209213be1d1ae8589a4acea1fa84151545bad7dc"
+    },
+    "MNT:head_of_state": {
+      "name": "Milo Dukanovic",
+      "reference": "Milo_Dukanovic.dds",
+      "upstream_path": "gfx/leaders/MNT/Milo_Dukanovic.dds",
+      "git_blob": "08b0c0d9ea55e76300edbdeab6b81ae284ae0a42",
+      "asset": "res://assets/ui/leaders/08b0c0d9ea55e76300edbdeab6b81ae284ae0a42.png",
+      "sha256": "2b8e546c311ca4449915b1358c0481e8f184f84a315ae2a0b2824d791cf0f8ff",
+      "source_sha256": "b5e267c2002d838db9fbd1a4c296057447eafce7ea84b215ff7c4fe31d1ca5b5"
+    },
+    "MON:head_of_state": {
+      "name": "Natsagiin Bagabandi",
+      "reference": "Natsagiin_Bagabandi.dds",
+      "upstream_path": "gfx/leaders/MON/Natsagiin_Bagabandi.dds",
+      "git_blob": "4ee21bcbeb49c7fe0763e43c69d7c27ea9b00c4c",
+      "asset": "res://assets/ui/leaders/4ee21bcbeb49c7fe0763e43c69d7c27ea9b00c4c.png",
+      "sha256": "9fe06a59b716bebb125129f3bb7f7834fd2c0b3e2177a04340e9acbf1015ccf0",
+      "source_sha256": "9187aadebdbd89e63631f26dc0aa98e0b83fc4b290ef5aa80fa08898d67d8e74"
+    },
+    "MOR:head_of_government": {
+      "name": "Abderrahmane Youssoufi",
+      "reference": "abderrahmane_youssoufi.dds",
+      "upstream_path": "gfx/leaders/MOR/abderrahmane_youssoufi.dds",
+      "git_blob": "8891ed3f34c05bac59cb055c2f4528f142274776",
+      "asset": "res://assets/ui/leaders/8891ed3f34c05bac59cb055c2f4528f142274776.png",
+      "sha256": "0c8a335d9426d75f08ad7bb4cb6648bc47583fead9cca0fdfacace337f1ddb56",
+      "source_sha256": "78e16ca95209688c93601fdf0a1ea6069400dfffa98ab165ed37cfbc5a83b689"
+    },
+    "MOZ:head_of_state": {
+      "name": "Joaquim Chissano",
+      "reference": "Joaquim_Chissano.dds",
+      "upstream_path": "gfx/leaders/MOZ/Joaquim_Chissano.dds",
+      "git_blob": "4450a7c39d75f217cac63d219134514a98a22320",
+      "asset": "res://assets/ui/leaders/4450a7c39d75f217cac63d219134514a98a22320.png",
+      "sha256": "36e61d20b08f14942693bf44876a0c028bd62184f713780709890f2ca0abc7f3",
+      "source_sha256": "b132bcb0f7f8131dc6c0019d2e6b13fa98d0b1bb0d95d105b4d86922aa41c827"
+    },
+    "MRT:head_of_government": {
+      "name": "Cassam Uteem",
+      "reference": "Cassa_Uteem.dds",
+      "upstream_path": "gfx/leaders/MRT/Cassa_Uteem.dds",
+      "git_blob": "2a120a8064afb42db5a8d7bc4a7cf1747a778f65",
+      "asset": "res://assets/ui/leaders/2a120a8064afb42db5a8d7bc4a7cf1747a778f65.png",
+      "sha256": "63d1cd784888574193e99d97f89acb654a37e921acced001273b9d3e410aa0b4",
+      "source_sha256": "23df6fc5a31f03bf4baf7ac2c6b4e0f2b4a6ad14d9739eff24e6a01114bff101"
+    },
+    "NAM:head_of_state": {
+      "name": "Sam Nujoma",
+      "reference": "Sam_Nujoma.dds",
+      "upstream_path": "gfx/leaders/NAM/Sam_Nujoma.dds",
+      "git_blob": "768f9826d660485aa7de7323335a013280c81649",
+      "asset": "res://assets/ui/leaders/768f9826d660485aa7de7323335a013280c81649.png",
+      "sha256": "26b8a6cb9e975d4c81996cb83f812ef37b9f8ea8fbd91c11d1a83b9cf15f090f",
+      "source_sha256": "f9524db9cb899758338ffe343fedfd4a8c9ecfaaea9604a8f42cd7a2f96b618d"
+    },
+    "NCY:head_of_state": {
+      "name": "Rauf Denktas",
+      "reference": "rauf_denktas.dds",
+      "upstream_path": "gfx/leaders/NCY/rauf_denktas.dds",
+      "git_blob": "82a4c16846d3a80ed0902f303f73fd39105992ba",
+      "asset": "res://assets/ui/leaders/82a4c16846d3a80ed0902f303f73fd39105992ba.png",
+      "sha256": "ebdbdbfb242eaf1bc8f5e421723234a649608cd6e19fcdb005cfbe1bcd9d15ba",
+      "source_sha256": "acb64f7792fcb31de97883ea3cb009ff47e928072b1a2a15344c6709042c15a5"
+    },
+    "NEP:head_of_government": {
+      "name": "King Birendra",
+      "reference": "Birendra_of_Nepal.dds",
+      "upstream_path": "gfx/leaders/NEP/Birendra_of_Nepal.dds",
+      "git_blob": "b265296ce8b21fa328d9b38b64ac7a3125d316fc",
+      "asset": "res://assets/ui/leaders/b265296ce8b21fa328d9b38b64ac7a3125d316fc.png",
+      "sha256": "6c578f9b99d133222f449bc6e7a35b7ee3e3a267d476993ce4c50f1781a48a25",
+      "source_sha256": "305e394588ea44ef5d7d3e507a008f27c8d4856d6b5592321e0665fcf5559acb"
+    },
+    "NGR:head_of_state": {
+      "name": "Mamadou Tandja",
+      "reference": "Mamadou_Tandja.dds",
+      "upstream_path": "gfx/leaders/NGR/Mamadou_Tandja.dds",
+      "git_blob": "bda756e1f06e95fb35c45733ac530d17da3d30be",
+      "asset": "res://assets/ui/leaders/bda756e1f06e95fb35c45733ac530d17da3d30be.png",
+      "sha256": "f4c42ba04d0bedb4ed5a63153bf4a9ac5f60e013b331268e0d4b14fec1a6372e",
+      "source_sha256": "e940aa233c02474047ca4ea48f973199f8e745f229469a5cc75ac8977198fd60"
+    },
+    "NIC:head_of_state": {
+      "name": "Arnoldo Aleman",
+      "reference": "arnoldo_aleman.dds",
+      "upstream_path": "gfx/leaders/NIC/arnoldo_aleman.dds",
+      "git_blob": "679154bc8e84201ec97b56cd992b78837cff775f",
+      "asset": "res://assets/ui/leaders/679154bc8e84201ec97b56cd992b78837cff775f.png",
+      "sha256": "25f9fc5f02152bc26a610a14cffa7c6358b044ed36e91d37018db8259f5efc04",
+      "source_sha256": "c3b5989b9db04b3e6ce50e92d5ce90f482bf31b84ec38491d2416ddd518b23db"
+    },
+    "NIG:head_of_state": {
+      "name": "Olusegun Obasanjo",
+      "reference": "olusegun_obasanjo.dds",
+      "upstream_path": "gfx/leaders/NIG/olusegun_obasanjo.dds",
+      "git_blob": "7aa7ae34c4e44af98fc9a54493d3c7e8454f458f",
+      "asset": "res://assets/ui/leaders/7aa7ae34c4e44af98fc9a54493d3c7e8454f458f.png",
+      "sha256": "915abd61e80969358352640fd8c898ee8df09b7e67ac447cc91306622c0e7f5e",
+      "source_sha256": "cef274225514803d8b4cdbed66fe64238706423c4e976c1a306ab0127f7ee94b"
+    },
+    "NKO:head_of_state": {
+      "name": "Kim Jong-il",
+      "reference": "Kim_Jong_il.dds",
+      "upstream_path": "gfx/leaders/NKO/Kim_Jong_il.dds",
+      "git_blob": "23915815ce3fb252f87e1967eb6aaf99dc4b26ca",
+      "asset": "res://assets/ui/leaders/23915815ce3fb252f87e1967eb6aaf99dc4b26ca.png",
+      "sha256": "49da7c6d657d12c7e10ce092554fa39239a7b24427afb3a5eab02a25c9328eda",
+      "source_sha256": "e2ad18d99f6489bc8b987e06a1e643aff7833231a8d27e36bca144911e0ee1e0"
+    },
+    "NKR:head_of_state": {
+      "name": "Arkadi Ghukasyan",
+      "reference": "Arkadi_Ghukasyan.dds",
+      "upstream_path": "gfx/leaders/NKR/Arkadi_Ghukasyan.dds",
+      "git_blob": "7785356021c175af77f203ea43c547a45f310e9f",
+      "asset": "res://assets/ui/leaders/7785356021c175af77f203ea43c547a45f310e9f.png",
+      "sha256": "ac3daef931d078cce8260bd4073b7a11773c06b0c896d5a05db4c7b356439e85",
+      "source_sha256": "9fce427cba53fe34e0f2c61f3930c3f9419e7288fd6d0dc880a69bad3cce4dde"
+    },
+    "NPM:head_of_state": {
+      "name": "Pushpa Kamal Dahal",
+      "reference": "Pushpa_Kamal_Dahal.dds",
+      "upstream_path": "gfx/leaders/NPM/Pushpa_Kamal_Dahal.dds",
+      "git_blob": "15ada2d263087b0935bbbb8b1c5c038358b2caf1",
+      "asset": "res://assets/ui/leaders/15ada2d263087b0935bbbb8b1c5c038358b2caf1.png",
+      "sha256": "bb09e27c8187ea9c09052afb0395362be7aee673cf1618155dab41e668cf1444",
+      "source_sha256": "79200f37057920e6bdd5c8c75a230a4d23f0aba2f612fe2a34cf8513cbe11710"
+    },
+    "NRY:head_of_government": {
+      "name": "Kjell Magne Bondevik",
+      "reference": "Kjell_Magne_Bondevik.dds",
+      "upstream_path": "gfx/leaders/NRY/Kjell_Magne_Bondevik.dds",
+      "git_blob": "d2c0c2fa5f1766c6cd6193d71ca0903af20c3f12",
+      "asset": "res://assets/ui/leaders/d2c0c2fa5f1766c6cd6193d71ca0903af20c3f12.png",
+      "sha256": "3b6fc9b458e179e2411617c678a38881c8ce6c5dcdf951d6987a9b1a3237d674",
+      "source_sha256": "748a3886bce18a3869029fbe40bccff36d4a3fab4512586766b02e5222437ac2"
+    },
+    "NZL:head_of_government": {
+      "name": "Helen Clark",
+      "reference": "helen_clark.dds",
+      "upstream_path": "gfx/leaders/NZL/helen_clark.dds",
+      "git_blob": "db9a38d0ab448b383ab14237d3d10438d703f2e1",
+      "asset": "res://assets/ui/leaders/db9a38d0ab448b383ab14237d3d10438d703f2e1.png",
+      "sha256": "8de4722d9ac3d352a925112bb8e50e22e9a99d222e3c7dafcf50acd5a7914132",
+      "source_sha256": "7602c4781eaec8e94798e8a362d7d2802819e17392a1e94b208699b1aa6f1602"
+    },
+    "OMA:head_of_state": {
+      "name": "Qaboos bin Said al Said",
+      "reference": "Qaboos_bin_Said_al_Said.dds",
+      "upstream_path": "gfx/leaders/OMA/Qaboos_bin_Said_al_Said.dds",
+      "git_blob": "e27d752727cd2d899ba1d489dba981968ed8f029",
+      "asset": "res://assets/ui/leaders/e27d752727cd2d899ba1d489dba981968ed8f029.png",
+      "sha256": "29981998f3799c03d61e461616d297145064024e97516c29e744b9de94ab4d7b",
+      "source_sha256": "b5ef758a96cb8aa74b7782525995e221647ae54cc3a0f8dd847eaafa0d7c7802"
+    },
+    "PAK:head_of_state": {
+      "name": "Pervez Musharraf",
+      "reference": "PAK_Pervez_Musharraf.dds",
+      "upstream_path": "gfx/leaders/PAK/PAK_Pervez_Musharraf.dds",
+      "git_blob": "8c87c376303a8c6e8bf0479839ae0ce7f16e1379",
+      "asset": "res://assets/ui/leaders/8c87c376303a8c6e8bf0479839ae0ce7f16e1379.png",
+      "sha256": "58d3ea67edd3f01145698680a6f8a7599115a265ba3765965591289dfd83b704",
+      "source_sha256": "ad6abe2637c2ac4d05af4e798fe324e285f5e4b425a9720ca704cfc840bfc882"
+    },
+    "PAL:head_of_state": {
+      "name": "Yasser Arafat",
+      "reference": "yassir_arafat.dds",
+      "upstream_path": "gfx/leaders/PAL/yassir_arafat.dds",
+      "git_blob": "525605ca4b77ef7b2ee5aad01c50adbd245e7b5b",
+      "asset": "res://assets/ui/leaders/525605ca4b77ef7b2ee5aad01c50adbd245e7b5b.png",
+      "sha256": "8e53b117b11854f36f91fa91a15fdcb0cb8ec93556c6a8ed9f1cd392c99e37ef",
+      "source_sha256": "a3a8a8e123d782cf7b4ccf194c7b736ff9510cfe7aabc7157c1af206bc4f7acc"
+    },
+    "PAN:head_of_state": {
+      "name": "Mireya Moscoso",
+      "reference": "mireya_moscoso.dds",
+      "upstream_path": "gfx/leaders/PAN/mireya_moscoso.dds",
+      "git_blob": "9087d86982cb966b22b7ba642f55557c8ecad5ca",
+      "asset": "res://assets/ui/leaders/9087d86982cb966b22b7ba642f55557c8ecad5ca.png",
+      "sha256": "7a1fafc025651dcfd69b17cd503a6e53c9c6a000b1eaa688839373c36ccae5d0",
+      "source_sha256": "787669d35d65f5be29b1733e6787b3fe99204b3e8f8f3c046ae76b0dd6941516"
+    },
+    "PAP:head_of_government": {
+      "name": "Mekere Morauta",
+      "reference": "Mekere_Morauta.dds",
+      "upstream_path": "gfx/leaders/PAP/Mekere_Morauta.dds",
+      "git_blob": "4a04ee2fcc828babd2b73a13053a5170016a9f96",
+      "asset": "res://assets/ui/leaders/4a04ee2fcc828babd2b73a13053a5170016a9f96.png",
+      "sha256": "9510687f1c04527b628e7133f4928a010e3d67c5ed958d6234d2b84546e66372",
+      "source_sha256": "32b63396bc3dcc0632121dcd1d2003fde035c6e8a7a8b4b853d3204357e2055d"
+    },
+    "PAR:head_of_state": {
+      "name": "Luis Ángel González Macchi",
+      "reference": "luis_macchi.dds",
+      "upstream_path": "gfx/leaders/PAR/luis_macchi.dds",
+      "git_blob": "c2f6f5bc012bdf9438a3c9ca7877e2a6c2ed2db5",
+      "asset": "res://assets/ui/leaders/c2f6f5bc012bdf9438a3c9ca7877e2a6c2ed2db5.png",
+      "sha256": "ba49d5f63d1e15b41db2f5e4920c3425ffc6bca6ef9712c1564a2388b6063935",
+      "source_sha256": "ee29909294c7a1b923cf2aa351109d60421cb87925021387d92d24416b3fa245"
+    },
+    "PER:head_of_state": {
+      "name": "Sayyid Ali Hosseini Khamenei",
+      "reference": "sayyid_ali_hosseini_khamenei.dds",
+      "upstream_path": "gfx/leaders/PER/sayyid_ali_hosseini_khamenei.dds",
+      "git_blob": "bfe94df3f9c4b066332a46c08464beda48c51a1c",
+      "asset": "res://assets/ui/leaders/bfe94df3f9c4b066332a46c08464beda48c51a1c.png",
+      "sha256": "c9448213e2cd42ce95bdb0a3ae283681e74d07181079a65b12310c6bc05cbd4f",
+      "source_sha256": "f6fea8716044c46190b9d6e191d99f68e25c356bcc67f4dccf0f2ff858bb9db2"
+    },
+    "PHI:head_of_state": {
+      "name": "Joseph Estrada",
+      "reference": "joseph_estrada.dds",
+      "upstream_path": "gfx/leaders/PHI/joseph_estrada.dds",
+      "git_blob": "6c8da2a08f3d2a1806716d3ceb12f2f39cb0dcec",
+      "asset": "res://assets/ui/leaders/6c8da2a08f3d2a1806716d3ceb12f2f39cb0dcec.png",
+      "sha256": "4f1a35b6887a87f01bb3bff4e21d0096e274d329c0359f77f715582a02c5bff8",
+      "source_sha256": "3a6f9116e19340f61bed153e14a53134afd557f8e8545571f0ef4edc99e08cc7"
+    },
+    "PMR:head_of_state": {
+      "name": "Igor Smirnov",
+      "reference": "igor_smirnov.dds",
+      "upstream_path": "gfx/leaders/PMR/igor_smirnov.dds",
+      "git_blob": "99e1beea6f4aad023dbeb9268c194f6faac06d66",
+      "asset": "res://assets/ui/leaders/99e1beea6f4aad023dbeb9268c194f6faac06d66.png",
+      "sha256": "3645b3026556fc885b10e9f31a53dab21c02e1bf7621178d63f8cdaebb4123c8",
+      "source_sha256": "a5634449a17f3433ef2a4174cd81cfd7bb1665efdc8687d3f6faccebfc91294d"
+    },
+    "POL:head_of_state": {
+      "name": "Jerzy Buzek",
+      "reference": "jerzy_buzek.dds",
+      "upstream_path": "gfx/leaders/POL/jerzy_buzek.dds",
+      "git_blob": "1e047d0b00e6d299521048fa4e41f94e4bf752fb",
+      "asset": "res://assets/ui/leaders/1e047d0b00e6d299521048fa4e41f94e4bf752fb.png",
+      "sha256": "74b79fa94655a25900834a1fdbbf344293d470e1377b96963c3b7b3dec11eb91",
+      "source_sha256": "f96d6281218d8e89409248d52388cc5c0b26122810bca914837033dd09f2390c"
+    },
+    "POR:head_of_state": {
+      "name": "António Guterres",
+      "reference": "POR_Antonio_Guterres.dds",
+      "upstream_path": "gfx/leaders/POR/POR_Antonio_Guterres.dds",
+      "git_blob": "954d514c4aa6da150ab23cf472f3e5eb637e6c58",
+      "asset": "res://assets/ui/leaders/954d514c4aa6da150ab23cf472f3e5eb637e6c58.png",
+      "sha256": "4ef44efa42cb3ef3d8b29cce90bcea2b782b9cd0c1965b25c563514f3705b1f1",
+      "source_sha256": "13fbf7c8e0b13b0436a30f026868141c108d634a336509a45eb17f1c5118fcee"
+    },
+    "PRU:head_of_state": {
+      "name": "Alberto Fujimori",
+      "reference": "alberto_fujimori.dds",
+      "upstream_path": "gfx/leaders/PRU/alberto_fujimori.dds",
+      "git_blob": "3557c616cc3e5fc78cf8a48365355163b2236b88",
+      "asset": "res://assets/ui/leaders/3557c616cc3e5fc78cf8a48365355163b2236b88.png",
+      "sha256": "30976835c7c24b81519cec7ae23be53a15c70233104ca0d8344583df039a7b3f",
+      "source_sha256": "de23f068148aec89257f94f3ebb2f01b7d02aac48fea588536d41709377cc67d"
+    },
+    "PUK:head_of_state": {
+      "name": "Jalal Talabani",
+      "reference": "jalal_talabani_war.dds",
+      "upstream_path": "gfx/leaders/PUK/jalal_talabani_war.dds",
+      "git_blob": "cb5294fdddf864b33c6b7f7e6c9f9823b454d812",
+      "asset": "res://assets/ui/leaders/cb5294fdddf864b33c6b7f7e6c9f9823b454d812.png",
+      "sha256": "7b246cafa22416ef0836c3d58babcf5054589f994381d8f76c1e5aaad7fecdf6",
+      "source_sha256": "912db484c4c64fc1a8386654e6d9c6a7fa2ae8b6438588f3518dd5f5d52a047e"
+    },
+    "PUN:head_of_state": {
+      "name": "Abdullahi Yusuf Ahmed",
+      "reference": "PUN_Abdullahi_Yusuf_Ahmed.dds",
+      "upstream_path": "gfx/leaders/PUN/PUN_Abdullahi_Yusuf_Ahmed.dds",
+      "git_blob": "226894385c58451c20a13625e0253e4c0879ed58",
+      "asset": "res://assets/ui/leaders/226894385c58451c20a13625e0253e4c0879ed58.png",
+      "sha256": "acb80b704c75821a11822616ef5d79270c903ace28f719a9c3dbf6b1b75afbe1",
+      "source_sha256": "c1290f98129c03d3677a81d114613652b149c5f23f2ec8c8e0376d9653770b97"
+    },
+    "QAT:head_of_state": {
+      "name": "Hamad bin Khalifa Al Thani",
+      "reference": "Hamad_bin_Khalifa_al-Thani.dds",
+      "upstream_path": "gfx/leaders/QAT/Hamad_bin_Khalifa_al-Thani.dds",
+      "git_blob": "72cb702f2177a5acf5a2ced607189c27239ab699",
+      "asset": "res://assets/ui/leaders/72cb702f2177a5acf5a2ced607189c27239ab699.png",
+      "sha256": "d215710a4a71184098be01608d74e6d1e2b43ed50538111fd05b6d638fb807f6",
+      "source_sha256": "7a60afcfe84a51978a55ad24ee399125e772c05643fd2acf5661ae1a89ba3320"
+    },
+    "RAJ:head_of_government": {
+      "name": "Atal Bihari Vajpayee",
+      "reference": "Atal_Bihari_Vajpayee.dds",
+      "upstream_path": "gfx/leaders/RAJ/Atal_Bihari_Vajpayee.dds",
+      "git_blob": "8241c5e3183058ec3654eb321d038732eefb6afc",
+      "asset": "res://assets/ui/leaders/8241c5e3183058ec3654eb321d038732eefb6afc.png",
+      "sha256": "a1f690d02f5dffa26e47845a756cee743564dddd852e682a9061f5fbc64d5861",
+      "source_sha256": "cb55ba3bb852e0b18836bd708d4431a69df1042a7bbaa38aa34402a6440f7fa3"
+    },
+    "RCD:head_of_state": {
+      "name": "Emile Ilunga",
+      "reference": "RCD_Emile_Ilunga.dds",
+      "upstream_path": "gfx/leaders/RCD/RCD_Emile_Ilunga.dds",
+      "git_blob": "f8b3a15bd87c2c91865ff3f882b6ab9616561ffb",
+      "asset": "res://assets/ui/leaders/f8b3a15bd87c2c91865ff3f882b6ab9616561ffb.png",
+      "sha256": "9a78b459ba6e65323078895835656c7a86cd517ea459ffc533febf37382d8b36",
+      "source_sha256": "086585eaab48449cddf9429c274705edb683e1092b251d321161899c03d2fe9f"
+    },
+    "ROM:head_of_state": {
+      "name": "Emil Constantinescu",
+      "reference": "emil_constantinescu.dds",
+      "upstream_path": "gfx/leaders/ROM/emil_constantinescu.dds",
+      "git_blob": "0c17616cd88099640f00340b5a5f4826e35f8dd8",
+      "asset": "res://assets/ui/leaders/0c17616cd88099640f00340b5a5f4826e35f8dd8.png",
+      "sha256": "e8179fc9aa2e86933f32942ba04ddd1e723b7a0804e2e291a60039dd9c05bac6",
+      "source_sha256": "4ede04b1a5d62e04011e1f58b872219f3caad5f4f858394f7b2b8277d61d1ca6"
+    },
+    "RWA:head_of_state": {
+      "name": "Paul Kagame",
+      "reference": "Paul_Kagame.dds",
+      "upstream_path": "gfx/leaders/RWA/Paul_Kagame.dds",
+      "git_blob": "ed10f5fdadaf088123d43c9cc6b9a3f57ba5ddb9",
+      "asset": "res://assets/ui/leaders/ed10f5fdadaf088123d43c9cc6b9a3f57ba5ddb9.png",
+      "sha256": "c353fff605c81bdaa3d48783288bbac583af88005cc25c8a43dcdf46ba0968c4",
+      "source_sha256": "a41d1285afad47ecc5ce9b7db0283c933e2dc24ae321a7fb611c047a89b45c51"
+    },
+    "SAF:head_of_government": {
+      "name": "Thabo Mbeki",
+      "reference": "thabo_mbeki.dds",
+      "upstream_path": "gfx/leaders/SAF/thabo_mbeki.dds",
+      "git_blob": "3a5d2b083409baafc241f318ce668885886d91ed",
+      "asset": "res://assets/ui/leaders/3a5d2b083409baafc241f318ce668885886d91ed.png",
+      "sha256": "037d59f837fc8d3f47015782e6cf72b81dda82570e160047d5215f6bd66966cb",
+      "source_sha256": "fc77dba3b7ea87eb4194d4e8cb359ae608878d0185811f84445fb6b5f55cdc42"
+    },
+    "SAM:head_of_government": {
+      "name": "Tuilaepa Malielegaoi",
+      "reference": "Tuilaepa_Malielegaoi.dds",
+      "upstream_path": "gfx/leaders/SAM/Tuilaepa_Malielegaoi.dds",
+      "git_blob": "b69a9ec06e6217b7829b4b93b799145f48f6dd7d",
+      "asset": "res://assets/ui/leaders/b69a9ec06e6217b7829b4b93b799145f48f6dd7d.png",
+      "sha256": "36b57dab95f1b93c3ee872fee7de712bd6498b1d4b4ce10125a2c6dcafe79e33",
+      "source_sha256": "72a5daee9418baab1d9f6e380c6d7e21f5186429cca9e2cb394bd80e7d99d953"
+    },
+    "SAO:head_of_state": {
+      "name": "Miguel Trovoada",
+      "reference": "miguel_trovoada.dds",
+      "upstream_path": "gfx/leaders/SAO/miguel_trovoada.dds",
+      "git_blob": "76d3789757eaeeafe2cf9612fe53e50490b2517e",
+      "asset": "res://assets/ui/leaders/76d3789757eaeeafe2cf9612fe53e50490b2517e.png",
+      "sha256": "441fccdbbec8c9e540e9c5fdbffc864f74fb25da32c0088c82d87bc366b04c9f",
+      "source_sha256": "bbace867bfafcb86a4cd438944cf752da1cea0379a49fddf3aa26cc978ad3864"
+    },
+    "SAU:head_of_state": {
+      "name": "Abdullah bin Abdulaziz Al-Saud",
+      "reference": "Abdullah_bin_Abdulaziz_Al-Saud.dds",
+      "upstream_path": "gfx/leaders/SAU/Abdullah_bin_Abdulaziz_Al-Saud.dds",
+      "git_blob": "56bf2323dccfd5782f1926b76335661b1be99fec",
+      "asset": "res://assets/ui/leaders/56bf2323dccfd5782f1926b76335661b1be99fec.png",
+      "sha256": "eb53bb7ae9a5a8e243beb4eb5567a329b3324965a4a4c0b1ceab0a0bc496f9c5",
+      "source_sha256": "fcc720e7cb1a1da334bebc40b55ae6c118d2781c032a86624a41b429dbb14a2e"
+    },
+    "SEN:head_of_state": {
+      "name": "Abdou Diouf",
+      "reference": "abdou_diouf.dds",
+      "upstream_path": "gfx/leaders/SEN/abdou_diouf.dds",
+      "git_blob": "b5cfc52c865b97e3dbd93a47a40f8051314864ee",
+      "asset": "res://assets/ui/leaders/b5cfc52c865b97e3dbd93a47a40f8051314864ee.png",
+      "sha256": "07e5d1e2f62f5dc39146e178b75735734ff874b0f064b0bb4a6f7374fcd6d22a",
+      "source_sha256": "f8b1f393f78e31d1161489ae6b54c8de1f99f30058245558798632be45a23730"
+    },
+    "SER:head_of_state": {
+      "name": "Slobodan Milošević",
+      "reference": "slobodan_milosevic.dds",
+      "upstream_path": "gfx/leaders/SER/slobodan_milosevic.dds",
+      "git_blob": "a4aa54cf65d363714befd550b940cf169b86682f",
+      "asset": "res://assets/ui/leaders/a4aa54cf65d363714befd550b940cf169b86682f.png",
+      "sha256": "225d254c0cf2866a5d62a9a864860ce1b2343a5872d903f3461942450a103ddb",
+      "source_sha256": "11ae11244b81138d4dd4b199a5f38aa3b37a55b60c6c1805929e57f1d89f4638"
+    },
+    "SEY:head_of_state": {
+      "name": "France-Albert René",
+      "reference": "France_Albert_Rene.dds",
+      "upstream_path": "gfx/leaders/SEY/France_Albert_Rene.dds",
+      "git_blob": "710f5cfbc758bd3b97b8a769c28adf41b64ea8bd",
+      "asset": "res://assets/ui/leaders/710f5cfbc758bd3b97b8a769c28adf41b64ea8bd.png",
+      "sha256": "72d831bdd6d93fa3dd903a8922d75c2ceda75ed730e7decf71873e1de5d9eef8",
+      "source_sha256": "e5f8dca2020ec85dc7204c0f869390994bf64d7f4017f770e451e8411bcee743"
+    },
+    "SHA:head_of_state": {
+      "name": "Mohamed Abdelaziz",
+      "reference": "Mohamed_Abdelaziz.dds",
+      "upstream_path": "gfx/leaders/SHA/Mohamed_Abdelaziz.dds",
+      "git_blob": "325fedac37a009a6ca2721cc08cf3710d9735f03",
+      "asset": "res://assets/ui/leaders/325fedac37a009a6ca2721cc08cf3710d9735f03.png",
+      "sha256": "2e9a6d00add18925a412e3821a72ee95520d9c9b99dadd8eb97e6255c4ba1ca5",
+      "source_sha256": "fa67dc3006c8e437a6538ca140f6c4daf6ee03aea49b14bb11bcd996b94fbeba"
+    },
+    "SHN:head_of_state": {
+      "name": "Yawd Serk",
+      "reference": "Yawd_Serk.dds",
+      "upstream_path": "gfx/leaders/SHN/Yawd_Serk.dds",
+      "git_blob": "14500c8502831a1b5e697a6e7e09b2016fc37dd3",
+      "asset": "res://assets/ui/leaders/14500c8502831a1b5e697a6e7e09b2016fc37dd3.png",
+      "sha256": "8b40e1c0175b63004c96cd3bbf70c90d0b1f6cd7b94c4e7eabb330de35526777",
+      "source_sha256": "a44deeefd4e1a874c4a53074e3712ed017c37491e734f21f30b4e479a7b3f485"
+    },
+    "SIA:head_of_government": {
+      "name": "Chuan Leekpai",
+      "reference": "Chuan_Leekpai.dds",
+      "upstream_path": "gfx/leaders/SIA/Chuan_Leekpai.dds",
+      "git_blob": "62712dc202a1dde665f5a77afe511a9e1216e2cd",
+      "asset": "res://assets/ui/leaders/62712dc202a1dde665f5a77afe511a9e1216e2cd.png",
+      "sha256": "cd7ba9ba3556e6bd387db48d0d2358b640369dec405bb8b9f8833fb90c36f646",
+      "source_sha256": "57bcfd2e5dd2e0e7781923feec68e3438be35abcd280b7cceb45a71d569d427d"
+    },
+    "SIE:head_of_state": {
+      "name": "Ahmad Tejan Kabbah",
+      "reference": "Ahmad_Tejan_Kabbah.dds",
+      "upstream_path": "gfx/leaders/SIE/Ahmad_Tejan_Kabbah.dds",
+      "git_blob": "0896fe5c654b5790646c8bbb43224246812396b7",
+      "asset": "res://assets/ui/leaders/0896fe5c654b5790646c8bbb43224246812396b7.png",
+      "sha256": "a075bb474cae85f384431c9a451ddbf21058e741d35ad994c312fbdf909f0e1a",
+      "source_sha256": "0f2b443fd01abfc83ddeae048014307c3f664abf74b2ffd41ae58cb0622a607f"
+    },
+    "SIN:head_of_government": {
+      "name": "Goh Chok Tong",
+      "reference": "Goh_Chok_Tong.dds",
+      "upstream_path": "gfx/leaders/SIN/Goh_Chok_Tong.dds",
+      "git_blob": "bf6fff72d1e2c77eb8a6eda00456523fd5a5e602",
+      "asset": "res://assets/ui/leaders/bf6fff72d1e2c77eb8a6eda00456523fd5a5e602.png",
+      "sha256": "625c4f51c62825c122a97d65468db619d5db7943b06491b6f2c8fde563d84d32",
+      "source_sha256": "27b33384f65654d4d1395d28152b94139b5bd5a0f951c264583f8c883a6c4986"
+    },
+    "SLO:head_of_government": {
+      "name": "Rudolf Schuster",
+      "reference": "rudolf_schuster.dds",
+      "upstream_path": "gfx/leaders/SLO/rudolf_schuster.dds",
+      "git_blob": "01936a28302408f848871a037c5a7412bc1499cd",
+      "asset": "res://assets/ui/leaders/01936a28302408f848871a037c5a7412bc1499cd.png",
+      "sha256": "ead4bd1156b9e17ae150e5f425dc6e9d26bafeb3119c69ca302ca0d9bc9e8e82",
+      "source_sha256": "fbfeaf3cc151fc5442ee71e3ab71e60da251bce982d114b8cdd59f94efee869d"
+    },
+    "SLV:head_of_government": {
+      "name": "Janez Drnovšek",
+      "reference": "SLV_Janez_Drnovšek.dds",
+      "upstream_path": "gfx/leaders/SLV/SLV_Janez_Drnovšek.dds",
+      "git_blob": "f7f45e289828e6a76dcd0019f589f91db4bf2a5e",
+      "asset": "res://assets/ui/leaders/f7f45e289828e6a76dcd0019f589f91db4bf2a5e.png",
+      "sha256": "432b2169d4a62e80e38aed574e848cc5e5fb87e0e98232b3be4062946a3de218",
+      "source_sha256": "b4dec8a6e644fca208f6c81dc6628da736d5bfb7ed3149ccf64925359432e6f6"
+    },
+    "SML:head_of_state": {
+      "name": "Mohamed Haji Ibrahim Egal",
+      "reference": "mohamed_haji_ibrahim_egal.dds",
+      "upstream_path": "gfx/leaders/SML/mohamed_haji_ibrahim_egal.dds",
+      "git_blob": "8cd3663a89b905a97d36129ec4104d332de946eb",
+      "asset": "res://assets/ui/leaders/8cd3663a89b905a97d36129ec4104d332de946eb.png",
+      "sha256": "1f7aeb3e7ade0afad59ccb8e7e1e20bf887671811a97ec78568d7648b83a4662",
+      "source_sha256": "501037b8483b6b6ca71521f94eb91a7a00001d809243ea045f001f8cdada902b"
+    },
+    "SNA:head_of_state": {
+      "name": "Hussein Farrah Aidid",
+      "reference": "SNA_Hussein_Farrah_Aidid.dds",
+      "upstream_path": "gfx/leaders/SNA/SNA_Hussein_Farrah_Aidid.dds",
+      "git_blob": "9c98764fdc45ebd469ea4962fbe28461e9343a8a",
+      "asset": "res://assets/ui/leaders/9c98764fdc45ebd469ea4962fbe28461e9343a8a.png",
+      "sha256": "2e46bb04676881529374ee1530c716a8f621dc654bb1fa47ed4d49e48adcdd5a",
+      "source_sha256": "c8b3e5bf443d3a142251a5b3039b9bf7f2a9dd78ccb06df81121bd3cd0caa37f"
+    },
+    "SOL:head_of_government": {
+      "name": "Bartholomew Ulufa'alu",
+      "reference": "Portrait_Bartholomew_Ulufalu.dds",
+      "upstream_path": "gfx/leaders/SOL/Portrait_Bartholomew_Ulufalu.dds",
+      "git_blob": "084452ab2b27de543ecd8a09723e494db71d683d",
+      "asset": "res://assets/ui/leaders/084452ab2b27de543ecd8a09723e494db71d683d.png",
+      "sha256": "10775d7cdeaa7a8680e746d0e612617b9856bed1d7570a114872750b48be063b",
+      "source_sha256": "39ae5d41ea957e88ac17219a164b21eeff24342a8ab9b05febe255af5098fd48"
+    },
+    "SOM:head_of_state": {
+      "name": "Ali Mahdi Muhammad",
+      "reference": "ali_mahdi_muhammad.dds",
+      "upstream_path": "gfx/leaders/SOM/ali_mahdi_muhammad.dds",
+      "git_blob": "ac17538055102e3e8a2a059e3daf0182cb0b83df",
+      "asset": "res://assets/ui/leaders/ac17538055102e3e8a2a059e3daf0182cb0b83df.png",
+      "sha256": "0d2d1c9bd3e54279e4ff07064dad8630bb7a1f86f666178a4db715f96edeb7cf",
+      "source_sha256": "c7dc13b69b8ed0fa0bd813665204fe849ccd3254da11d979f003854f0f7e144c"
+    },
+    "SOO:head_of_state": {
+      "name": "Lyudvig Chibirov",
+      "reference": "lyudvig_chibirov.dds",
+      "upstream_path": "gfx/leaders/SOO/lyudvig_chibirov.dds",
+      "git_blob": "7b9108dfff9a750948ca62ab29e68cd55c979003",
+      "asset": "res://assets/ui/leaders/7b9108dfff9a750948ca62ab29e68cd55c979003.png",
+      "sha256": "62234b04ef7ed9e87264ded754d796d6e333b3d975a18ee5105cecf0dd7398ee",
+      "source_sha256": "7dfac47a80a6706ca15699c8011ae2e10a218dc939a9aca3be922a010734eb26"
+    },
+    "SOV:head_of_state": {
+      "name": "Vladimir Putin",
+      "reference": "Vladimir_Putin.dds",
+      "upstream_path": "gfx/leaders/SOV/Vladimir_Putin.dds",
+      "git_blob": "b759d48d788471a5b2d324fd4e18d9c2e60b3956",
+      "asset": "res://assets/ui/leaders/b759d48d788471a5b2d324fd4e18d9c2e60b3956.png",
+      "sha256": "3884b56f11f9f6eaa23b8e290cf14eb2e2a95ace59e799cbe0b0911d0e208fa6",
+      "source_sha256": "f84da311100a757a05c87985a17b2e4645c9274202059843e7fd5557d304c41f"
+    },
+    "SPR:head_of_government": {
+      "name": "José María Aznar",
+      "reference": "jose_maria_aznar.dds",
+      "upstream_path": "gfx/leaders/SPR/jose_maria_aznar.dds",
+      "git_blob": "835bcfb0b7aa09644d421938c25c679479560e04",
+      "asset": "res://assets/ui/leaders/835bcfb0b7aa09644d421938c25c679479560e04.png",
+      "sha256": "a7ba828253e96205aad15b52eff50b134364c8469a2fd72d554afd86e131f5c1",
+      "source_sha256": "1263ef5d266ff5ee603c4014e4ebf0152192cce1a3a60311a050a88c402081fd"
+    },
+    "SRI:head_of_state": {
+      "name": "Chandrika Kumaratunga",
+      "reference": "Chandrika_Kumaratunga.dds",
+      "upstream_path": "gfx/leaders/SRI/Chandrika_Kumaratunga.dds",
+      "git_blob": "6c288a2ee4328f7e949ae93bb5625dbffe85bba9",
+      "asset": "res://assets/ui/leaders/6c288a2ee4328f7e949ae93bb5625dbffe85bba9.png",
+      "sha256": "b0aab50bffcd88c2af77a9a4181ece89c79a0003688813a7b72884d6398bd7d9",
+      "source_sha256": "f8520d28f41639de5afa2dee2d24f23b01f539c66643c22fa58b088843f99199"
+    },
+    "SSU:head_of_state": {
+      "name": "John Garang",
+      "reference": "SSU_John_Garang.dds",
+      "upstream_path": "gfx/leaders/SSU/SSU_John_Garang.dds",
+      "git_blob": "bac84861fa0726c0e8489fce29a69932f5c1b723",
+      "asset": "res://assets/ui/leaders/bac84861fa0726c0e8489fce29a69932f5c1b723.png",
+      "sha256": "1a6440aab2a2d003a762086a801c0454d69103f1cad61293fb7624e3ccb775e2",
+      "source_sha256": "c7fb7ce513674a54373d4aa03fa366038923dd50d4cee42bbf7d01748fc6856c"
+    },
+    "STK:head_of_government": {
+      "name": "Denzil Llewellyn Douglas",
+      "reference": "denzil_douglas.dds",
+      "upstream_path": "gfx/leaders/STK/denzil_douglas.dds",
+      "git_blob": "65f267b16cbc1045af8c1ad018a0f41cdd76bb4d",
+      "asset": "res://assets/ui/leaders/65f267b16cbc1045af8c1ad018a0f41cdd76bb4d.png",
+      "sha256": "51c0d207d4f2901e9edf474cf884ec819bec9aa2bc82bc2a42f4303cc58bad33",
+      "source_sha256": "3eec1bcb7efc9ae5aeeb982856e20c11e12a1ce5cc2db34bd5858a2ca022a31f"
+    },
+    "STL:head_of_government": {
+      "name": "Kenny Davis Anthony",
+      "reference": "kenny_anthony.dds",
+      "upstream_path": "gfx/leaders/STL/kenny_anthony.dds",
+      "git_blob": "5d70780215c7255c8b2bbbce99f0f55740b96b67",
+      "asset": "res://assets/ui/leaders/5d70780215c7255c8b2bbbce99f0f55740b96b67.png",
+      "sha256": "b4fdc66b9943f22e54f493fa019b9be99ce331380532e6eb02cfcc2db0256994",
+      "source_sha256": "eb1949425ce0fc5a0f383becef572702dbb90e62de767c66d0d678d57a32af21"
+    },
+    "STV:head_of_government": {
+      "name": "James Fitz-Allen Mitchell",
+      "reference": "james_mitchell.dds",
+      "upstream_path": "gfx/leaders/STV/james_mitchell.dds",
+      "git_blob": "f337c09850d50df9541b12c821e4e2d707aa81b9",
+      "asset": "res://assets/ui/leaders/f337c09850d50df9541b12c821e4e2d707aa81b9.png",
+      "sha256": "023c936140ed090e03f6f21a580a210b64a821dbf6b403b291c255a5ed364cc2",
+      "source_sha256": "e359b8145b36975c5689b4f4d3a1dde7b40070510fc55d62e91309db83b63a4b"
+    },
+    "SUD:head_of_state": {
+      "name": "Omar al-Bashir",
+      "reference": "Omar_al-Bashir.dds",
+      "upstream_path": "gfx/leaders/SUD/Omar_al-Bashir.dds",
+      "git_blob": "42340a87795d89ce5ebefd8ab14e5afc58c201e1",
+      "asset": "res://assets/ui/leaders/42340a87795d89ce5ebefd8ab14e5afc58c201e1.png",
+      "sha256": "64cc090be80f429420262b35139797a74737e8993501b4ec0298f16645da5d2f",
+      "source_sha256": "582543afb95e8d8b180f1e86e652d36a44a5f059808b134d00e412c982894d6c"
+    },
+    "SUR:head_of_state": {
+      "name": "Ronald Venetiaan",
+      "reference": "ronald_venetiaan.dds",
+      "upstream_path": "gfx/leaders/SUR/ronald_venetiaan.dds",
+      "git_blob": "84a580106690830455502bea3877ef2fa7baae87",
+      "asset": "res://assets/ui/leaders/84a580106690830455502bea3877ef2fa7baae87.png",
+      "sha256": "be18815f5b70ba34751b2a3954be4cccf8c45caf945236b09f9042ac1cbaf6f4",
+      "source_sha256": "32cda636f3403d65d7e97aaf5fab683bd727a416756e677df7020cc8a7da0010"
+    },
+    "SWA:head_of_state": {
+      "name": "Barnabas Sibusiso Dlamini",
+      "reference": "barnabas_sibusiso_dlamini.dds",
+      "upstream_path": "gfx/leaders/SWA/barnabas_sibusiso_dlamini.dds",
+      "git_blob": "806b5e110165c610b6e766a06c0238d3ef6bf625",
+      "asset": "res://assets/ui/leaders/806b5e110165c610b6e766a06c0238d3ef6bf625.png",
+      "sha256": "9c9366e9f4574ee32c3499da713130859a6b7574d8db8235981aecb1ecf375ec",
+      "source_sha256": "f4c20219414ea7d6076796c2ff2d7a3082638584eb90d70feeded5dc7a651e17"
+    },
+    "SWE:head_of_government": {
+      "name": "Göran Persson",
+      "reference": "Goran_Persson.dds",
+      "upstream_path": "gfx/leaders/SWE/Goran_Persson.dds",
+      "git_blob": "accbeda3106f5c523b85dc8f1e56e0881b1b54b5",
+      "asset": "res://assets/ui/leaders/accbeda3106f5c523b85dc8f1e56e0881b1b54b5.png",
+      "sha256": "e78877040afe2e801c44f78564ee1361642b1a9bd94111ec4e658e066676418d",
+      "source_sha256": "9758f8a35ebdd32b2a91a7fbda59024b5d77052b7cfeaea2b7f7506d65bd2297"
+    },
+    "SWI:head_of_government": {
+      "name": "Adolf Ogi",
+      "reference": "Adolf_Ogi.dds",
+      "upstream_path": "gfx/leaders/SWI/Adolf_Ogi.dds",
+      "git_blob": "b93c167b8dc5c3975f5504685cfd4e4b3deee854",
+      "asset": "res://assets/ui/leaders/b93c167b8dc5c3975f5504685cfd4e4b3deee854.png",
+      "sha256": "f8e5ca9f41c5a0a0829274b366219d3eb42adc38c354ac5792664382a89d161e",
+      "source_sha256": "4a7ffc9d90893f578ffc8995e562663d082dfe262ce3abe60c17f4325f1716e0"
+    },
+    "SWS:head_of_state": {
+      "name": "Hasan Muhammad Nur Shatigadud",
+      "reference": "SWS_Hasan_Muhammad_Nur_Shatigadud.dds",
+      "upstream_path": "gfx/leaders/SWS/SWS_Hasan_Muhammad_Nur_Shatigadud.dds",
+      "git_blob": "9284ccb1a99f6e3e244f0a1ee263928bb1eddf83",
+      "asset": "res://assets/ui/leaders/9284ccb1a99f6e3e244f0a1ee263928bb1eddf83.png",
+      "sha256": "ad66e002320e0396af5a599875d2f353acfbb310ea11a9a8d7ff3f2ead7051ba",
+      "source_sha256": "88f6d327d404016d25f80005761712082c5f46f612627d56ffe9cbd898a346db"
+    },
+    "SYR:head_of_state": {
+      "name": "Hafez al-Assad",
+      "reference": "Hafez_al-Assad.dds",
+      "upstream_path": "gfx/leaders/SYR/Hafez_al-Assad.dds",
+      "git_blob": "b83c01a6343678a9c210f7df407e6e0bc2067367",
+      "asset": "res://assets/ui/leaders/b83c01a6343678a9c210f7df407e6e0bc2067367.png",
+      "sha256": "b6025777543abe2df530c8e39854d02b7f524cedb3ebda53fc556ec4825d50ae",
+      "source_sha256": "8a22c6c3eee6deebde1bdf2f5d4a03803c8d34e5ac89ebdbd4cd497ca42312cf"
+    },
+    "TAI:head_of_state": {
+      "name": "Lee Teng-hui",
+      "reference": "Lee_Teng-hui.dds",
+      "upstream_path": "gfx/leaders/TAI/Lee_Teng-hui.dds",
+      "git_blob": "41074795ce3cc82358daecb61bae0449a6a71883",
+      "asset": "res://assets/ui/leaders/41074795ce3cc82358daecb61bae0449a6a71883.png",
+      "sha256": "6cf2765cee528f50fca2b3f0f5b91fea5af50c5c35d5d7c00c5550147f442f3a",
+      "source_sha256": "7607684d2843ec2a714d62c8a6b2637578bd243e89377936fe711e7350ac79d0"
+    },
+    "TAJ:head_of_state": {
+      "name": "Emomali Rahmonov",
+      "reference": "gfx/leaders/TAJ/emomali_rahmon_young.dds",
+      "upstream_path": "gfx/leaders/TAJ/emomali_rahmon_young.dds",
+      "git_blob": "d32792e4f6e477cd2fbc916a21a259fb7aad84f1",
+      "asset": "res://assets/ui/leaders/d32792e4f6e477cd2fbc916a21a259fb7aad84f1.png",
+      "sha256": "b49ab48d8992833e7793fa4fcff6aca957e0331b4bed43a0bc1dacba59537770",
+      "source_sha256": "b791772a9e7a940850982e0650f5aea254e2dd63811e1ff99d894f3bf4e71830"
+    },
+    "TAL:head_of_state": {
+      "name": "Mohammed Omar",
+      "reference": "Muhammed_Omar.dds",
+      "upstream_path": "gfx/leaders/TAL/Muhammed_Omar.dds",
+      "git_blob": "a07400a7e19fa6417102cae060db18f312ad8284",
+      "asset": "res://assets/ui/leaders/a07400a7e19fa6417102cae060db18f312ad8284.png",
+      "sha256": "2e23863bdd3d5dcd9eec6e4d95c55cc85dcc2c3e032927677b2055c71227079c",
+      "source_sha256": "8b889480cebd5733010f42cce01adb53bed75c517d582de88026bc52f9785538"
+    },
+    "TML:head_of_state": {
+      "name": "Velupillai Prabhakaran",
+      "reference": "gfx/leaders/SRI/TML_Velupillai_Prabhakaran.dds",
+      "upstream_path": "gfx/leaders/SRI/TML_Velupillai_Prabhakaran.dds",
+      "git_blob": "f191c91a95857a519281f1368f8dae2e7223100f",
+      "asset": "res://assets/ui/leaders/f191c91a95857a519281f1368f8dae2e7223100f.png",
+      "sha256": "832f685e0855a830fdf4bb0b7f3ce8d4667bcca8d90ed5e6d018a5e63dd1e453",
+      "source_sha256": "6730f27b89d11ddb24b8e286dbc53819711203fc49ebbc4ffe5c0807d587ff26"
+    },
+    "TNZ:head_of_state": {
+      "name": "Benjamin Mkapa",
+      "reference": "benjamin_mkapa.dds",
+      "upstream_path": "gfx/leaders/TNZ/benjamin_mkapa.dds",
+      "git_blob": "4a75dd8ff9d2b5e01d578fa433ca429ec0b4fc43",
+      "asset": "res://assets/ui/leaders/4a75dd8ff9d2b5e01d578fa433ca429ec0b4fc43.png",
+      "sha256": "101e3e3ce458837b9e7abddc3afbb1cf619aef0755f43e6c75515eab90a7eba2",
+      "source_sha256": "56052ae35ca6c38808a5dd2f9d1c466efb3a570f4b3f4b1606e3f203e5bc8dbc"
+    },
+    "TOG:head_of_state": {
+      "name": "Gnassingbe Eyadema",
+      "reference": "gnassingbe_eyadema.dds",
+      "upstream_path": "gfx/leaders/TOG/gnassingbe_eyadema.dds",
+      "git_blob": "93f0e548a91a69770975da67291110dc6cd87d62",
+      "asset": "res://assets/ui/leaders/93f0e548a91a69770975da67291110dc6cd87d62.png",
+      "sha256": "e0fed3accc8c240cfe330976b68f48c196753ea5b2a556186a345eab935e2ce9",
+      "source_sha256": "8f108805be111c72fa62aa2d25e60d3e74a302feb06065ca717c5abba023d53b"
+    },
+    "TON:head_of_government": {
+      "name": "Tāufa āhau Tupou IV",
+      "reference": "Tupou_IV.dds",
+      "upstream_path": "gfx/leaders/TON/Tupou_IV.dds",
+      "git_blob": "e721879a6e23fb81c8dcd44e5b0c18f0d50e00b0",
+      "asset": "res://assets/ui/leaders/e721879a6e23fb81c8dcd44e5b0c18f0d50e00b0.png",
+      "sha256": "30a0e7531c273cde1c3a9479c4588e90c50cfbffc138e3d266a6e4b875800963",
+      "source_sha256": "509aed4df3b589a727fd25cd1c3a9fcd6dd18c2a1f36dc0abdd43d6ad7c34e64"
+    },
+    "TRI:head_of_government": {
+      "name": "Basdeo Panday",
+      "reference": "basdeo_panday.dds",
+      "upstream_path": "gfx/leaders/TRI/basdeo_panday.dds",
+      "git_blob": "33beb6cb19c5fa4daca2760d71295750445ab81f",
+      "asset": "res://assets/ui/leaders/33beb6cb19c5fa4daca2760d71295750445ab81f.png",
+      "sha256": "abc005fa802e5d4ec533da6a8bf045358547430c85a098811f3414ab645d715e",
+      "source_sha256": "6e710b779ca1ff6de2e7186a797e10e5005d5799fa6255766fb5d90bbf3d8ca1"
+    },
+    "TRK:head_of_state": {
+      "name": "Saparmurat Niyazov",
+      "reference": "Saparmurat_Niyazov.dds",
+      "upstream_path": "gfx/leaders/TRK/Saparmurat_Niyazov.dds",
+      "git_blob": "7fecc64d22daf288ea5450c50d53ff560ded1c76",
+      "asset": "res://assets/ui/leaders/7fecc64d22daf288ea5450c50d53ff560ded1c76.png",
+      "sha256": "5c1379e14fe67b6acc5e05d856913acf636b2c8ec8fc7df1832026cf9f98eea1",
+      "source_sha256": "e0610fefb43b58ccd9fdff95fe3a743fee9b9d707beed3078ab767916631cb37"
+    },
+    "TUL:head_of_government": {
+      "name": "Ionatana Ionatana",
+      "reference": "Ionatana_Ionatana.dds",
+      "upstream_path": "gfx/leaders/TUL/Ionatana_Ionatana.dds",
+      "git_blob": "dd65bc2f67c881d17bda79d42c243df82167b163",
+      "asset": "res://assets/ui/leaders/dd65bc2f67c881d17bda79d42c243df82167b163.png",
+      "sha256": "149d3a59bff921ccbe023fe81d1a43a2b86aa4a1e86f810b870a13e53ea90906",
+      "source_sha256": "c8c78c77ff897a90d6f81b8ca6dee8c75cf0102c71f70c50ba4e400db03affca"
+    },
+    "TUN:head_of_state": {
+      "name": "Zine El Abidine Ben Ali",
+      "reference": "zine_ben_ali.dds",
+      "upstream_path": "gfx/leaders/TUN/zine_ben_ali.dds",
+      "git_blob": "69a16be7abeb1a80eb6dd06761900d75bb58edf2",
+      "asset": "res://assets/ui/leaders/69a16be7abeb1a80eb6dd06761900d75bb58edf2.png",
+      "sha256": "0b07cc3e8276781d8cdaa3937c70709fbf61619883cd60299d3ec9adac66cd1b",
+      "source_sha256": "df6faf478afbdd70354e58d364474f4de62c7e9e1334e451db6f9d3e5f4a9475"
+    },
+    "TUR:head_of_government": {
+      "name": "Bülent Ecevit",
+      "reference": "gfx/leaders/TUR/Bulent_Ecevit.dds",
+      "upstream_path": "gfx/leaders/TUR/Bulent_Ecevit.dds",
+      "git_blob": "d72e7aa26dc821bfb21257fa815a98aef425d245",
+      "asset": "res://assets/ui/leaders/d72e7aa26dc821bfb21257fa815a98aef425d245.png",
+      "sha256": "43a540f05d865cc12a8c68e7e0fef626c7adb683e3d10dfe188987526711f4fa",
+      "source_sha256": "ce162d2f2e59ce51f5e162c5f865d1e8f418d99bd2b28e33c2ccd3dc5832f998"
+    },
+    "UAE:head_of_state": {
+      "name": "Zayed bin Sultan Al Nahyan",
+      "reference": "zayed_bin_sultan_al_nahyan.dds",
+      "upstream_path": "gfx/leaders/UAE/zayed_bin_sultan_al_nahyan.dds",
+      "git_blob": "b182f74bce93094960395226157a817d763fda30",
+      "asset": "res://assets/ui/leaders/b182f74bce93094960395226157a817d763fda30.png",
+      "sha256": "9a2398028315cb0b092a1e38c33826ce11ccdb5d41e5c6368c8f2c41a2188ad5",
+      "source_sha256": "07a6050642513368db0ab93177bab11d2d9151c025e94cc5fb7c50dd724479e1"
+    },
+    "UGA:head_of_state": {
+      "name": "Yoweri Museveni",
+      "reference": "Yoweri_Museveni.dds",
+      "upstream_path": "gfx/leaders/UGA/Yoweri_Museveni.dds",
+      "git_blob": "2e9027b4ad395435c2c23673ce834e6435277af1",
+      "asset": "res://assets/ui/leaders/2e9027b4ad395435c2c23673ce834e6435277af1.png",
+      "sha256": "3a2c55b87df35fac4e4069141c0f5343b395efd20cf5363c08f1a1aa5ff907cf",
+      "source_sha256": "dd92c282493182c5ccd20d6037137bc74e7469291583c52274f5825edc55e959"
+    },
+    "UKR:head_of_state": {
+      "name": "Leonid Kuchma",
+      "reference": "gfx/leaders/UKR/Leonid_Kuchma.dds",
+      "upstream_path": "gfx/leaders/UKR/Leonid_Kuchma.dds",
+      "git_blob": "86e745b333d28baeeb95dfea7412fb61f62f16f9",
+      "asset": "res://assets/ui/leaders/86e745b333d28baeeb95dfea7412fb61f62f16f9.png",
+      "sha256": "132de4d014c2d7f3bad33706373286543b174863db8d48a93955a1e51270d95b",
+      "source_sha256": "924222df6eaccc6008abc346adf6dcfa9c0d39d227d03f371473ca585c7c760c"
+    },
+    "UNI:head_of_state": {
+      "name": "Jonas Savimbi",
+      "reference": "Jonas_Savimbi.dds",
+      "upstream_path": "gfx/leaders/UNI/Jonas_Savimbi.dds",
+      "git_blob": "215fec158e29783c90eb75674bff5cd6a38565ef",
+      "asset": "res://assets/ui/leaders/215fec158e29783c90eb75674bff5cd6a38565ef.png",
+      "sha256": "5f497ff15f4a5b7dbf29aee6ee844aa4e6e8402b0e1068572aa5a1fca08b2f4b",
+      "source_sha256": "79b1d21cc31bbdb1863bd0f0bd219563c1f63398a738c784be500489e63a9087"
+    },
+    "URG:head_of_state": {
+      "name": "Jorge Battle",
+      "reference": "jorge_batlle.dds",
+      "upstream_path": "gfx/leaders/URG/jorge_batlle.dds",
+      "git_blob": "eab268953187c57cef4d9d7342de8ecd0b710cc9",
+      "asset": "res://assets/ui/leaders/eab268953187c57cef4d9d7342de8ecd0b710cc9.png",
+      "sha256": "4590de94c511266b6e090d37d620e04d8ba758b7cc6de6d4974979cccaa48ae7",
+      "source_sha256": "e7501a280dba80d0b633659b30202fc9d80ca1840786ac8f73a03fb8e8e40c44"
+    },
+    "USA:head_of_state": {
+      "name": "Bill Clinton",
+      "reference": "bill_clinton.dds",
+      "upstream_path": "gfx/leaders/USA/bill_clinton.dds",
+      "git_blob": "4707e86c98d2637ab6de9e1138f8790ac437816f",
+      "asset": "res://assets/ui/leaders/4707e86c98d2637ab6de9e1138f8790ac437816f.png",
+      "sha256": "5bbe45b07b995e8cf9c37ab7c90475351e5b1b5b58597b2352ef596da08acc0d",
+      "source_sha256": "a0f3194b28fa6d21de40b569fa27030c4af92ddf6b127928fab4dec3cb96f973"
+    },
+    "UZB:head_of_state": {
+      "name": "Islam Karimov",
+      "reference": "Islam_Karimov.dds",
+      "upstream_path": "gfx/leaders/UZB/Islam_Karimov.dds",
+      "git_blob": "7ad718263949b3655313a0765b634a8ee738fd57",
+      "asset": "res://assets/ui/leaders/7ad718263949b3655313a0765b634a8ee738fd57.png",
+      "sha256": "7031a7eced3b33eb2bd4c2bdd0954d06d4b95f796de08bb82eb3d3cd354c8429",
+      "source_sha256": "d38dcc05f2b30e96748b13fc0195eb0a4a26cdfca3135a775ed8ba021da37f12"
+    },
+    "VAN:head_of_government": {
+      "name": "Barak Sope",
+      "reference": "Barak_Sope.dds",
+      "upstream_path": "gfx/leaders/VAN/Barak_Sope.dds",
+      "git_blob": "40ad99334ee65524949208cea635129e1c76fe6f",
+      "asset": "res://assets/ui/leaders/40ad99334ee65524949208cea635129e1c76fe6f.png",
+      "sha256": "d3d3d32f62cba96c09e642bafd6768b3a61750df6b5d34203195aaa987184de7",
+      "source_sha256": "3906247e525b3190c4981f7ab3edf3abdd7097e6cb1d1153e0fc9a1503dc4031"
+    },
+    "VEN:head_of_state": {
+      "name": "Hugo Chávez",
+      "reference": "hugo_chavez.dds",
+      "upstream_path": "gfx/leaders/VEN/hugo_chavez.dds",
+      "git_blob": "fbb96c9d5834df3bb2d8af7e6238dfbe4d3a2671",
+      "asset": "res://assets/ui/leaders/fbb96c9d5834df3bb2d8af7e6238dfbe4d3a2671.png",
+      "sha256": "8b2a0e4453288f60e121f1afd8ec738fbf9d48961134eb0d0349f33a2a265d79",
+      "source_sha256": "508532212390d8d07157065e659ed375a0366ed5023b08b82ccb059dae5bc933"
+    },
+    "VER:head_of_state": {
+      "name": "Antonio Mascarenhas Monteiro",
+      "reference": "Antonio_Mascarenhas_Monteiro.dds",
+      "upstream_path": "gfx/leaders/VER/Antonio_Mascarenhas_Monteiro.dds",
+      "git_blob": "8828d3be543287ac1b887b88869787fbeacf617a",
+      "asset": "res://assets/ui/leaders/8828d3be543287ac1b887b88869787fbeacf617a.png",
+      "sha256": "f7fa7f9c3bf6784d509b33b678cd9e87cea35441dcbf014dbf2d7b93b723dcbf",
+      "source_sha256": "4ce7f64cf4128c7bcb6178b8866261c37889e89d296a85ee5de6d5dd47b72547"
+    },
+    "VIE:head_of_state": {
+      "name": "Trân Đúc Luong",
+      "reference": "Tran_Duc_Luong.dds",
+      "upstream_path": "gfx/leaders/VIE/Tran_Duc_Luong.dds",
+      "git_blob": "9cbba0e3638fe6863dd81b9c64bb67e39f2836f2",
+      "asset": "res://assets/ui/leaders/9cbba0e3638fe6863dd81b9c64bb67e39f2836f2.png",
+      "sha256": "5702bf40d0d21c72d8fb4787986d31ba71cedd30f79bdea9cbdc42c8486d6cf9",
+      "source_sha256": "4d858df045a9795f36c46386551f808a0210d94dfb7eba04e0717b8d81a93ee3"
+    },
+    "WAA:head_of_state": {
+      "name": "Bao Youxiang",
+      "reference": "Bao_Youxiang.dds",
+      "upstream_path": "gfx/leaders/WAA/Bao_Youxiang.dds",
+      "git_blob": "10ba81bdcc968a22a1dc3f9b83ff1f6efdd8a03f",
+      "asset": "res://assets/ui/leaders/10ba81bdcc968a22a1dc3f9b83ff1f6efdd8a03f.png",
+      "sha256": "53c2bc461f37e5445ab687cba0833495e0a186a202abdcdd28b7d5cae0c209db",
+      "source_sha256": "0f1eef596ae5bd4d1aad54cdf4d0dcb32860ef558663057e969fb6fd5249df47"
+    },
+    "YEM:head_of_state": {
+      "name": "Ali Abdullah Saleh",
+      "reference": "ali_abdullah_saleh.dds",
+      "upstream_path": "gfx/leaders/YEM/ali_abdullah_saleh.dds",
+      "git_blob": "b0161b7ae164de32a13b683191dbcc6368399e4f",
+      "asset": "res://assets/ui/leaders/b0161b7ae164de32a13b683191dbcc6368399e4f.png",
+      "sha256": "083e0fd877286f68da05baec13ab344c9f455ef261f4fbe76481bfecd29df270",
+      "source_sha256": "e0777da29343fb53ac47963adc1b90bf81848055a3844d6441685d79969b8dd1"
+    },
+    "ZAM:head_of_state": {
+      "name": "Frederick Chiluba",
+      "reference": "Frederick_Chiluba.dds",
+      "upstream_path": "gfx/leaders/ZAM/Frederick_Chiluba.dds",
+      "git_blob": "c6cb441dbfa38cf78805df016447e2f6cbab9499",
+      "asset": "res://assets/ui/leaders/c6cb441dbfa38cf78805df016447e2f6cbab9499.png",
+      "sha256": "9496e2e47e9225a72684b3f92a5cdb5dd8a2fa35d60058eab0c9a10513cfce50",
+      "source_sha256": "5dbeb019c675a5f858dfe9ef65f5d0f27e1b8de1eb7d973696bcaf7b46202b72"
+    },
+    "ZIM:head_of_state": {
+      "name": "Robert Mugabe",
+      "reference": "Robert_Mugabe.dds",
+      "upstream_path": "gfx/leaders/ZIM/Robert_Mugabe.dds",
+      "git_blob": "bc0c9b3ec3b3ec58bf5dedd29bbe728565bf956f",
+      "asset": "res://assets/ui/leaders/bc0c9b3ec3b3ec58bf5dedd29bbe728565bf956f.png",
+      "sha256": "efb6164df169c8520b7e5a7039327a59de520139af4cda8ec8a99eae528c229d",
+      "source_sha256": "f5be2fb4ea2942fb5b95297f8152e9c286c939ed59b3cdb4941eabe157bd1c28"
+    },
+    "NAU:head_of_government": {
+      "name": "Rene Harris",
+      "reference": "Rene_Harris.dds",
+      "upstream_path": "gfx/leaders/NAU/Rene_Harris.dds",
+      "git_blob": "623960320d2761869e8d651b075bfbab1d365faf",
+      "asset": "res://assets/ui/leaders/623960320d2761869e8d651b075bfbab1d365faf.png",
+      "sha256": "d1f89573dbf1347b749e0c3414f9fd5534d02659a4badd60781be6b0641852d6",
+      "source_sha256": "e044d85d09fc98d2b2041b9b6b4e802807fe141da47f027b5ecdbb3307cb1358"
+    },
+    "TIM:head_of_state": {
+      "name": "Mari Alkatiri",
+      "reference": "mari_alkatiri.dds",
+      "upstream_path": "gfx/leaders/TIM/mari_alkatiri.dds",
+      "git_blob": "e5106d036286b4f6353bc3a3f54746a96c8f3e4e",
+      "asset": "res://assets/ui/leaders/e5106d036286b4f6353bc3a3f54746a96c8f3e4e.png",
+      "sha256": "f1cd32cc5aa79f64d30fef769f7f1a7f28d874bb0081448cde05f7e4dde4362a",
+      "source_sha256": "98dfe9034c08f3e1a8ff48653bdb6635985970de3e1a79066a2a41a1b8850c38"
+    }
+  }
+}

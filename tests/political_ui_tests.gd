@@ -24,7 +24,7 @@ func run() -> void:
 	var summary = game.control_details.get_node("PoliticalSummary")
 	var stats = game.control_details.get_node("CountrySummary")
 	check(summary.get_index() < stats.get_index(), "portraits/parliament above stats")
-	check(stats.columns == 3 and stats.get_child_count() == 6, "compact 3 by 2 stats")
+	check(stats.columns == 3 and stats.get_child_count() == 12, "compact national overview")
 	for label: Node in stats.find_children("*", "Label", true, false):
 		check("POLITICAL POWER" not in label.text, "no country PP stat")
 	check(summary.parliament.can_activate, "own parliament clickable")
@@ -39,7 +39,7 @@ func run() -> void:
 	check(game.control_panel.size.y <= 730, "government height fits its content")
 	check(panel.property_buttons.size() == 28, "all 28 law icon buttons")
 	check(Rules.CATEGORIES.size() == 6, "six law categories")
-	check(panel.government_type.text == "Semi-Presidential Republic", "government title derived from starting laws")
+	check(panel.government_type.text == "Presidential Republic", "government title derived from starting laws")
 	check(world.government_property("JAP", "form_of_government") == "Constitutional Monarchy", "Japan starts as constitutional monarchy")
 	check(world.government_property("USA", "executive") == "Presidential", "US starts with presidential executive")
 	check(world.government_property("ENG", "form_of_government") == "Constitutional Monarchy", "UK monarchy seeded")
@@ -51,8 +51,8 @@ func run() -> void:
 	var scroll: ScrollContainer = game.control_details.get_parent()
 	check(scroll.get_v_scroll_bar().max_value > scroll.size.y, "government vertically scrolls")
 	for button: Button in panel.property_buttons.values():
-		check(button.text.is_empty() and button.icon != null, "square icon-only law buttons")
-		check(button.size.x == button.size.y, "law buttons are square")
+		check(not button.text.is_empty() and button.icon != null, "named laws and current settings")
+		check(button.size.x > button.size.y, "law tiles are compact rows")
 	check(panel.find_children("*", "OptionButton", true, false).is_empty(), "no dropdown properties")
 	world.countries["POL"]["starting_stats"]["political_power"] = 350.0
 	panel.open_property(Rules.PROPERTIES[0])
@@ -61,6 +61,8 @@ func run() -> void:
 	check(panel.choice_buttons.size() == 3, "constitutional choices")
 	panel.choice_buttons["Constitutional Monarchy"].pressed.emit()
 	check(world.political_power("POL") == 250, "change deducts exactly 100 PP")
+	check(world.government_property("POL", "form_of_government") == "Republic", "queued reform does not apply instantly")
+	world.agenda.advance_days(30)
 	check(world.government_property("POL", "form_of_government") == "Constitutional Monarchy", "choice applied")
 	check(not panel.choice_dialog.visible, "choice closes window")
 	check(panel.government_type.text == "Constitutional Monarchy", "title refreshes after change")
@@ -72,14 +74,15 @@ func run() -> void:
 	check(not world.change_government_property("POL", "form_of_government", "invalid"), "invalid value rejected")
 	world.countries["POL"]["starting_stats"]["political_power"] = 99.5
 	panel.open_property(Rules.PROPERTIES[1])
-	check(panel.choice_buttons["Presidential"].disabled, "insufficient balance disabled")
-	panel.apply_choice("Presidential")
-	check(world.political_power("POL") == 99.5 and world.government_property("POL", "executive") == "Semi-Presidential", "insufficient PP never spent")
+	check(panel.choice_buttons["Parliamentary"].disabled, "insufficient balance disabled")
+	panel.apply_choice("Parliamentary")
+	check(world.political_power("POL") == 99.5 and world.government_property("POL", "executive") == "Presidential", "insufficient PP never spent")
 	world.countries["POL"]["starting_stats"]["political_power"] = 100.0
 	panel.refresh()
-	check(not panel.choice_buttons["Presidential"].disabled, "affordability refreshes")
-	panel.apply_choice("Presidential")
+	check(not panel.choice_buttons["Parliamentary"].disabled, "affordability refreshes")
+	panel.apply_choice("Parliamentary")
 	check(world.political_power("POL") == 0, "exact balance allowed")
+	world.agenda.advance_days(30)
 	var stats_before: Dictionary = world.countries["POL"]["starting_stats"].duplicate(true)
 	var modifiers_before: Dictionary = world.political_power_modifiers.duplicate(true)
 	for property: Dictionary in Rules.PROPERTIES:
@@ -90,10 +93,12 @@ func run() -> void:
 		check(panel.choice_dialog.position.x + panel.choice_dialog.size.x <= game.get_viewport_rect().size.x, "popup right edge fits")
 		check(panel.choice_dialog.position.y + panel.choice_dialog.size.y <= game.get_viewport_rect().size.y, "popup bottom edge fits")
 		for option: String in property["options"]:
-			world.countries["POL"]["starting_stats"]["political_power"] = 100
+			world.countries["POL"]["starting_stats"]["political_power"] = 1000
+			var cost := Rules.change_cost(property["key"], world.government_property("POL", property["key"]), option)
 			var same: bool = world.government_property("POL", property["key"]) == option
-			check(world.change_government_property("POL", property["key"], option) == not same, "every valid choice works")
-			check(world.political_power("POL") == (100 if same else 0), "all options use same default cost")
+			check(world.change_government_property("POL", property["key"], option, "Catholic" if property["key"] == "religion" else "") == not same, "every valid choice works")
+			check(world.political_power("POL") == (1000 if same else 1000-cost), "choice uses the displayed distance cost")
+			world.agenda.advance_days(10000)
 	panel.choice_dialog.hide()
 	for key: String in stats_before:
 		if key != "political_power": check(world.countries["POL"]["starting_stats"][key] == stats_before[key], "laws have no stat effects")

@@ -249,6 +249,18 @@
       "coastal": false,
       "gdp_base_billion": 0,
       "category": "State facilities"
+    },
+    "data_center": {
+      "name": "Data Center",
+      "points": 36000,
+      "extra_points": 0,
+      "money_usd": 6000000000.0,
+      "max_level": 20,
+      "shared": true,
+      "coastal": false,
+      "gdp_base_billion": 8,
+      "category": "Economy",
+      "balance_source": "BunnyWorld provisional: $6B, 36k points, 10k employees, $8B annual base GDP before productivity/staffing. Energy demand awaits the energy system."
     }
   },
   "coastal_states": [

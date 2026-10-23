@@ -1,5 +1,6 @@
 extends VBoxContainer
 const Pie = preload("res://scripts/pie_chart.gd")
+const Format = preload("res://scripts/display_format.gd")
 const KEYS := ["age", "religion", "education"]
 const CAPTIONS := ["Age", "Religion", "Education"]
 var entry: Dictionary = {}
@@ -50,8 +51,8 @@ func select_metric(key: String) -> void:
 	var metric: Dictionary = entry.get("metrics", {}).get(key, {"counts": {}, "denominator": 0})
 	var denominator := int(metric.get("denominator", 0))
 	var denom := "All residents" if key in ["age", "religion"] else ("Adults 25+" if key == "education" else "Working-age residents")
-	var context := label(("State estimate" if state_scope else "National") + " · " + denom)
-	context.tooltip_text = "%s · %s people\n%s" % [entry.get("scope", ""), denominator, str(metric.get("sources", metric.get("source", "")))+"\n"+str(metric.get("statuses",metric.get("status","")))]
+	var context := label(("State" if state_scope else "National") + " · " + denom)
+	context.tooltip_text = "%s · %s people" % [entry.get("scope", ""), Format.people(denominator)]
 	page.add_child(context)
 	var row := HBoxContainer.new()
 	row.add_theme_constant_override("separation", 5)
@@ -59,7 +60,7 @@ func select_metric(key: String) -> void:
 	var pie := Control.new()
 	pie.set_script(Pie)
 	pie.name = "Pie"
-	pie.configure(metric.get("counts", {}))
+	pie.configure(metric.get("counts", {}), key)
 	pie.custom_minimum_size = Vector2(86, 86)
 	pie.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 	row.add_child(pie)
@@ -75,7 +76,7 @@ func select_metric(key: String) -> void:
 	for category: String in categories:
 		var count := int(counts[category])
 		if count <= 0: continue
-		var description := "%s: %.1f%% · %s people" % [category, float(count) / maxi(denominator, 1) * 100, count]
+		var description := "%s: %.1f%% · %s people" % [category, float(count) / maxi(denominator, 1) * 100, Format.people(count)]
 		descriptions.append(description)
 		if displayed >= 5: continue
 		displayed += 1
@@ -86,7 +87,7 @@ func select_metric(key: String) -> void:
 		swatch.custom_minimum_size = Vector2(6, 6)
 		swatch.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 		line.add_child(swatch)
-		var text := label("%s · %.1f%%" % [category, float(count) / maxi(denominator, 1) * 100])
+		var text := label("%s · %.1f%% · %s" % [category, float(count) / maxi(denominator, 1) * 100, Format.people(count)])
 		text.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		text.clip_text = true
 		text.tooltip_text = description

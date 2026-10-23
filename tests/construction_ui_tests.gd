@@ -44,7 +44,7 @@ func run() -> void:
 	var ui = game.control_details.get_node("ConstructionPanel")
 	check(game.map_mode == 8 and game.active_feature=="Construction", "construction tab enters private mode")
 	check(game.map_picker.item_count==count and count==8 and game.map_picker.disabled, "private mode is not in general map picker")
-	check(ui.building_buttons.size()==22, "all approved state buildings selectable")
+	check(ui.building_buttons.size()==23, "all approved state buildings selectable")
 	check("Manufactured Goods" in ui.summary.text, "manufactured goods factory count shown")
 	await click(ui.building_buttons["infrastructure"])
 	check(game.construction_building=="infrastructure", "actual pointer selects building")
@@ -61,6 +61,7 @@ func run() -> void:
 	var r: Dictionary = game.state.regions[sid]
 	var old_slots := int(r["construction_slots"])
 	r["construction_slots"] = game.state.construction.shared_used(r["buildings"])
+	game._select_construction_building("industrial_complex")
 	game._rebuild_palette()
 	var blue: Color = game.palette_texture.get_image().get_pixel(int(sid),0)
 	check(blue.is_equal_approx(Color("286fba")), "full shared state is blue")

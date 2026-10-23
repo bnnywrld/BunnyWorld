@@ -78,7 +78,6 @@ const PROPERTIES := [
     "options": [
       "Parliamentary",
       "Presidential",
-      "Semi-Presidential",
       "Single Rule"
     ]
   },
@@ -127,13 +126,9 @@ const PROPERTIES := [
   },
   {
     "key": "religion",
-    "title": "Religious Freedom",
-    "help": "The legal position of religious belief and practice.",
-    "options": [
-      "Freedom of Religion",
-      "State Religion",
-      "Restricted Religion"
-    ]
+    "title": "Religion & State",
+    "help": "State policy toward religious institutions. Cultural Religion, State Religion and Theocracy require an associated faith. Funding, conversion, approval and compatibility effects are planned.",
+    "options": ["State Atheism", "Secular State", "Cultural Religion", "State Religion", "Theocracy"]
   },
   {
     "key": "marriage",
@@ -353,6 +348,17 @@ static func valid_choice(key: String, value: String) -> bool:
 		if property["key"] == key: return value in property["options"]
 	return false
 
+const UNORDERED := ["form_of_government", "executive", "election_rules"]
+static func steps(key: String, current: String, proposed: String) -> int:
+	if current == proposed: return 0
+	if key in UNORDERED: return 1
+	for property: Dictionary in PROPERTIES:
+		if property["key"] == key: return maxi(1, absi(property["options"].find(current) - property["options"].find(proposed)))
+	return 1
+
+static func change_cost(key: String, current: String, proposed: String) -> float:
+	return CHANGE_COST * pow(steps(key, current, proposed), 2)
+
 static func government_title(laws: Dictionary) -> String:
 	var form: String = laws.get("form_of_government", "Republic")
 	if form != "Republic": return form
@@ -361,6 +367,5 @@ static func government_title(laws: Dictionary) -> String:
 	if competition == "Closed Authoritarian Rule": return "Authoritarian Republic"
 	match laws.get("executive", "Presidential"):
 		"Parliamentary": return "Parliamentary Democracy"
-		"Semi-Presidential": return "Semi-Presidential Republic"
 		"Single Rule": return "Authoritarian Republic"
 	return "Presidential Republic"

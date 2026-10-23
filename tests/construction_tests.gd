@@ -16,7 +16,7 @@ func _initialize() -> void:
 	var model = state.construction
 	var sid := str(int(state.countries["GER"]["capital"]))
 	var region: Dictionary = state.regions[sid]
-	check(model.catalog.size() == 22, "22 MD state building types")
+	check(model.catalog.size() == 23 and model.catalog.has("data_center"), "22 MD types plus Data Center")
 	check(model.catalog["industrial_complex"]["points"] == 33150 and model.catalog["industrial_complex"]["money_usd"] == 7.5e9, "MD time and money costs are separate")
 	check(Build.capacity(1, 100) < Build.capacity(500, 50000), "tiny states have less capacity")
 	check(Build.capacity(500, 50000) < Build.capacity(100000, 5000000), "capacity grows with population/area")
@@ -58,6 +58,8 @@ func _initialize() -> void:
 		model.cancel(int(model.queue[0]["id"]))
 	region["construction_slots"] += 100
 	for i: int in 6: model.add(sid, "industrial_complex")
+	check(model.queue.size() == 1 and model.pending(sid,"industrial_complex") == 6, "repeat builds form one sequential group")
+	model.add(sid,"offices")
 	var allocated := 0
 	for count: int in model.allocations().values():
 		check(count <= 10, "project cap obeyed")
@@ -82,7 +84,8 @@ func _initialize() -> void:
 	state.paused = false
 	state.advance(0)
 	check(model.queue.is_empty() and int(region["buildings"]["offices"]) == offices+1, "building completes at daily simulation tick")
-	check(is_equal_approx(state.gdp("GER"),gdp+predicted), "completed building adds MD output exactly once")
+	predicted *= state.employment.fulfillment(sid, "offices")
+	check(is_equal_approx(state.gdp("GER"),gdp+predicted), "completed building adds staffing-scaled MD output exactly once")
 	model.advance_days(4)
 	check(is_equal_approx(state.gdp("GER"),gdp+predicted), "GDP is not repeatedly added")
 	var view := {"rotation":[0,0],"distance":2.0,"map_mode":0,"organization":"EU","show_regions":false,"inspection_active":false,"relations_reverse":false}

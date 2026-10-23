@@ -170,8 +170,8 @@ def import_world(archive: Path):
 
         tags = sorted({r['owner'] for r in regions.values() if r['owner']})
         countries = {}
-        outlooks = {'democratic': 'Western Outlook', 'communism': 'Emerging Outlook',
-                    'neutrality': 'Non-Aligned Outlook', 'fascism': 'Salafist Outlook',
+        outlooks = {'democratic': 'Western Outlook', 'communism': 'Multipolar Outlook',
+                    'neutrality': 'Non-Aligned Outlook', 'fascism': 'Unspecified',
                     'nationalist': 'Nationalist Outlook'}
         for cid, tag in enumerate(tags, 1):
             history = country_history.get(tag, Block([]))

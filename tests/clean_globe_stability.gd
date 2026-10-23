@@ -22,11 +22,14 @@ func run() -> void:
 	game._update_camera_pose()
 	game._update_view_uniforms()
 	var obsolete_surface := false
+	var globe: MeshInstance3D
 	for child: Node in game.planet.get_children():
 		if child is MeshInstance3D and child.material_override is StandardMaterial3D:
 			obsolete_surface = true
+		if child is MeshInstance3D and child.material_override == game.planet_material:
+			globe = child
 	check(not obsolete_surface, "no transparent legacy surface submitted")
-	check(game.display_coverage.coast_pack == null, "unused local coast pack stays closed")
+	check(globe != null, "single globe surface available for travel checks")
 	for uniform: String in ["boundary_hint", "boundary_pairs", "boundary_distance"]:
 		check(game.planet_material.get_shader_parameter(uniform) == null, "unused field not uploaded: " + uniform)
 	# Idle work must remain bounded while the actual application loop runs.
@@ -56,6 +59,34 @@ func run() -> void:
 		game._process(1.0 / 60.0)
 		check(is_equal_approx(game.planet_material.get_shader_parameter("camera_distance"), zoom), "zoom reaches shader")
 		check(game.show_regions == (zoom <= 1.65), "zoom updates region visibility")
+	# Preserve resident-resource and passage checks from retired detail-patch tests.
+	game._map_changed(6)
+	var mesh_id: int = globe.mesh.get_instance_id()
+	var texture_id: int = game.resident_terrain.texture.get_instance_id()
+	var scenery_builds: int = game.urban_scenery.mesh_builds
+	var travel_uploads: int = game.display_coverage.upload_count
+	check(game.resident_terrain.texture.get_layers() == 8, "eight resident material layers")
+	check(game.resident_terrain.texture.get_width() == (2048 if game.graphics_setting == 1 else 4096), "selected startup material quality")
+	game.distance = 1.03
+	for city: Vector2 in [Vector2(139.75,35.66),Vector2(121.5,31.2),Vector2(29,41),Vector2(14,37.5),Vector2(2.3,48.9),Vector2(121.5,31.2),Vector2(29,41),Vector2(-112,33.5),Vector2(87,28),Vector2(0,-80)]:
+		game.planet.rotation = Vector3(deg_to_rad(city.y), -deg_to_rad(city.x), 0)
+		game._process(1.0 / 60.0)
+		game.urban_scenery.update_view(game.camera, game.distance, true, .3)
+		check(globe.mesh.get_instance_id() == mesh_id, "travel retains globe mesh")
+		check(game.resident_terrain.texture.get_instance_id() == texture_id, "travel retains material textures")
+		check(game.urban_scenery.mesh_builds == scenery_builds, "travel builds no scenery meshes")
+		check(game.display_coverage.upload_count == travel_uploads, "travel uploads no coverage")
+		check(game.urban_scenery.visible_buildings <= game.urban_scenery.BUILDING_CAP, "bounded scenery during travel")
+	for passage: Dictionary in game.water_passages:
+		var point: Array = passage["coordinates"][passage["coordinates"].size() / 2]
+		var uv := Vector2((float(point[0]) + 180.0) / 360.0, (90.0 - float(point[1])) / 180.0)
+		check(game._water_passage_at(uv) == int(passage["ends"][0]), "passage CPU centreline")
+		game.planet.rotation = Vector3(deg_to_rad(float(point[1])), -deg_to_rad(float(point[0])), 0)
+		game.distance = 1.015
+		game._update_camera_pose()
+		var center := Vector2(game.world_view.size) * .5
+		check(game._region_at(center) == 0, "narrow passage is selectable water")
+		check(game._sea_at(center) == int(passage["ends"][0]), "narrow passage selects linked sea zone")
 	# Selection changes must wake culling even without camera movement.
 	game._show_sea(int(game.state.sea_regions.keys()[0]))
 	check(game.display_coverage.last_sea == game.state.selected_sea, "sea selection updates coverage")
